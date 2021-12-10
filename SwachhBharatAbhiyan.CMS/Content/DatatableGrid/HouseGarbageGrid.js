@@ -85,8 +85,18 @@
                 
                   "visible":true,
 
-                 "render": function (data, type, full, meta) {
-                     if (full["type1"] == "0") {
+                  "render": function (data, type, full, meta) {
+
+                           if(full["wastetype"] == "WW") {
+                               return "<div class='circle' style='height: 20px;width: 20px;background-color: #388e3c;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Wet Waste)";
+
+    }
+                     else if (full["wastetype"] == "DW") {
+                               return "<div class='circle' style='height: 20px;width: 20px;background-color: #173fc2;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Dry Waste)";
+
+    }
+
+                           else  if (full["type1"] == "0") {
                          return "<div class='circle' style='height: 20px;width: 20px;background-color: #f44336;border-radius: 50%;    vertical-align: middle;display: inline-flex;'></div> (Mixed Garbage)";
                      }
                      else if (full["type1"] == "1") {
@@ -97,6 +107,8 @@
                          return "<div class='circle' style='height: 20px;width: 20px;background-color: #fe9436;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Garbage not Received)";
                         
                      }
+
+                 
 
                      else   {
                          return "<div class='circle' style='height: 20px;width: 20px;background-color: #0086c3;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Garbage type not specified)";
@@ -111,7 +123,7 @@
               { "data": "Id", "name": "Id", "autoWidth": false },
               { "data": "attandDate", "name": "attandDate", "autoWidth": false },
               { "data": "Employee", "name": "Employee", "autoWidth": false }, 
-                 { "data": "type1", "name": "type1", "autoWidth": false },
+            { "data": "type1", "name": "type1", "autoWidth": false },
               { "data": "UserName", "name": "UserName", "autoWidth": false },
               { "data": "Address", "name": "Address", "autoWidth": false }, 
               { "data": "VehicleNumber", "autoWidth": false },
@@ -120,7 +132,8 @@
                { "data": "gpAfterImage", "name": "gpAfterImage", "autoWidth": false },
                { "data": "ReferanceId", "name": "ReferanceId", "autoWidth": false },
                  { "data": "batteryStatus", "name": "batteryStatus", "autoWidth": false },
-                  { "data": "gcDate", "name": "gcDate", "autoWidth": false },
+            { "data": "gcDate", "name": "gcDate", "autoWidth": false },
+            
 
         ]
     });

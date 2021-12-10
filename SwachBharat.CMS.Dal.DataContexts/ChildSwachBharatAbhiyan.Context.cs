@@ -18,10 +18,9 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-                 : base(SwachBharatAppConnection.GetConnectionString(AppId))
+               : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -48,12 +47,12 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<SS_1_4_QUESTION> SS_1_4_QUESTION { get; set; }
         public virtual DbSet<GramCleaningComplient> GramCleaningComplients { get; set; }
         public virtual DbSet<SS_1_7_ANSWER> SS_1_7_ANSWER { get; set; }
-        public virtual DbSet<Vw_MsgNotification> Vw_MsgNotification { get; set; }
-        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
         public virtual DbSet<Daily_Attendance> Daily_Attendance { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<WM_Garbage_Sales> WM_Garbage_Sales { get; set; }
         public virtual DbSet<HouseMaster> HouseMasters { get; set; }
+        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
+        public virtual DbSet<Vw_MsgNotification> Vw_MsgNotification { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
@@ -121,39 +120,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("userid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Collection_Count_Result>("SP_Collection_Count", fdateParameter, tdateParameter, useridParameter);
-        }
-    
-        public virtual ObjectResult<SP_GarbageCollection_Result> SP_GarbageCollection(Nullable<int> appId, Nullable<int> userid, Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate, Nullable<int> zoneId, Nullable<int> areaId, Nullable<int> wardNo)
-        {
-            var appIdParameter = appId.HasValue ?
-                new ObjectParameter("appId", appId) :
-                new ObjectParameter("appId", typeof(int));
-    
-            var useridParameter = userid.HasValue ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(int));
-    
-            var fdateParameter = fdate.HasValue ?
-                new ObjectParameter("fdate", fdate) :
-                new ObjectParameter("fdate", typeof(System.DateTime));
-    
-            var tdateParameter = tdate.HasValue ?
-                new ObjectParameter("tdate", tdate) :
-                new ObjectParameter("tdate", typeof(System.DateTime));
-    
-            var zoneIdParameter = zoneId.HasValue ?
-                new ObjectParameter("ZoneId", zoneId) :
-                new ObjectParameter("ZoneId", typeof(int));
-    
-            var areaIdParameter = areaId.HasValue ?
-                new ObjectParameter("AreaId", areaId) :
-                new ObjectParameter("AreaId", typeof(int));
-    
-            var wardNoParameter = wardNo.HasValue ?
-                new ObjectParameter("WardNo", wardNo) :
-                new ObjectParameter("WardNo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GarbageCollection_Result>("SP_GarbageCollection", appIdParameter, useridParameter, fdateParameter, tdateParameter, zoneIdParameter, areaIdParameter, wardNoParameter);
         }
     
         public virtual ObjectResult<SP_DumpYardDetails_Result> SP_DumpYardDetails()
@@ -351,6 +317,39 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("tdate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IdelTime_Result>("SP_IdelTime", userIdParameter, fdateParameter, tdateParameter);
+        }
+    
+        public virtual ObjectResult<SP_GarbageCollection_Result> SP_GarbageCollection(Nullable<int> appId, Nullable<int> userid, Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate, Nullable<int> zoneId, Nullable<int> areaId, Nullable<int> wardNo)
+        {
+            var appIdParameter = appId.HasValue ?
+                new ObjectParameter("appId", appId) :
+                new ObjectParameter("appId", typeof(int));
+    
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            var fdateParameter = fdate.HasValue ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(System.DateTime));
+    
+            var tdateParameter = tdate.HasValue ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(System.DateTime));
+    
+            var zoneIdParameter = zoneId.HasValue ?
+                new ObjectParameter("ZoneId", zoneId) :
+                new ObjectParameter("ZoneId", typeof(int));
+    
+            var areaIdParameter = areaId.HasValue ?
+                new ObjectParameter("AreaId", areaId) :
+                new ObjectParameter("AreaId", typeof(int));
+    
+            var wardNoParameter = wardNo.HasValue ?
+                new ObjectParameter("WardNo", wardNo) :
+                new ObjectParameter("WardNo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GarbageCollection_Result>("SP_GarbageCollection", appIdParameter, useridParameter, fdateParameter, tdateParameter, zoneIdParameter, areaIdParameter, wardNoParameter);
         }
     }
 }

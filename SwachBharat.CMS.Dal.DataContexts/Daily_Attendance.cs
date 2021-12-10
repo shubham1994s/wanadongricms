@@ -31,5 +31,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string batteryStatus { get; set; }
         public Nullable<int> totalKm { get; set; }
         public string OutbatteryStatus { get; set; }
+        public string EmployeeType { get; set; }
     }
 }

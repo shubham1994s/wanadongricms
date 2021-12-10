@@ -23,9 +23,10 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string locAddresss { get; set; }
         public string vehicleNumber { get; set; }
         public string note { get; set; }
+        public string batteryStatus { get; set; }
+        public string WasteType { get; set; }
         public string gpBeforImage { get; set; }
         public string gpAfterImage { get; set; }
         public Nullable<int> garbageType { get; set; }
-        public string batteryStatus { get; set; }
     }
 }
