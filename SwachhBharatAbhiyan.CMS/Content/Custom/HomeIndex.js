@@ -379,11 +379,13 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-
+    debugger;
     var not_coll = $('#not_coll').val();
     var mixed_coll = $('#mixed_coll').val();
     var bif_coll = $('#bif_coll').val();
     var not_spec_coll = $('#not_spec_coll').val();
+    var TotalDryWaste_coll = $('#TotalDryWaste_coll').val();
+    var TotalWetWaste_coll = $('#TotalWetWaste_coll').val();
 
     var tot_house_null_check = $('#tot_house_coll').val();
     var tot_house_coll;
@@ -398,11 +400,17 @@ $(document).ready(function () {
     var res_not_coll = not_coll * 100 / tot_house_coll;
     var res_not_spec_coll = not_spec_coll * 100 / tot_house_coll;
 
+    var res_TotalDryWaste_coll = TotalDryWaste_coll * 100 / tot_house_coll;
+    var res_TotalWetWaste_coll = TotalWetWaste_coll * 100 / tot_house_coll;
+
+
     var ary3 = []
     ary3.push({ v: bif_coll });
     ary3.push({ v: mixed_coll });
     ary3.push({ v: not_coll });
     ary3.push({ v: not_spec_coll });
+    ary3.push({ v: TotalDryWaste_coll });
+    ary3.push({ v: TotalWetWaste_coll });
 
 
     //console.log(ary3);
@@ -447,6 +455,9 @@ $(document).ready(function () {
                 { y: res_mixed_coll, label: "Mixed Garbage", hover_number: mixed_coll, color: '#f44336' },
                 { y: res_not_coll, label: "Garbage not received", hover_number: not_coll, color: '#fe9436' },
                 { y: res_not_spec_coll, label: "Garbage type not specified", hover_number: not_spec_coll, color: '#0086c3' },
+                {
+                    y: res_TotalDryWaste_coll, label: "Dry Waste Garbage", hover_number: TotalDryWaste_coll, color: '#0462EA' },
+                { y: res_TotalWetWaste_coll, label: "Wet Waste Garbage", hover_number: TotalWetWaste_coll, color: '#0D8E0F' },
             ],
         }]
     });
