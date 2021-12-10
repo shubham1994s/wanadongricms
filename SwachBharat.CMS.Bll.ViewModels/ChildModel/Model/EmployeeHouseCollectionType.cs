@@ -13,6 +13,10 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<int> Bifur { get; set; }
         public Nullable<int> NotCollected { get; set; }
         public Nullable<int> NotSpecidfied { get; set; }
+
+        public Nullable<int> DryWaste { get; set; }
+
+        public Nullable<int> WetWaste { get; set; }
         public string inTime { get; set; }
         public Nullable<int> Count { get; set; }
 

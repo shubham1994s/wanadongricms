@@ -2312,7 +2312,10 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         gcTarget = x.gcTarget,
                         NotSpecidfied = x.NotSpecidfied,
                         userId = x.userId,
-                        userName = x.userName
+                        userName = x.userName,
+                        DryWaste = x.DryWaste,
+                        WetWaste = x.WetWaste,
+
                     });
                 }
                 return obj.OrderBy(c => c.userName);

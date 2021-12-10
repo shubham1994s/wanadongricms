@@ -23,5 +23,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> Bifur { get; set; }
         public Nullable<int> NotCollected { get; set; }
         public Nullable<int> NotSpecidfied { get; set; }
+        public Nullable<int> DryWaste { get; set; }
+        public Nullable<int> WetWaste { get; set; }
     }
 }

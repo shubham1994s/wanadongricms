@@ -149,11 +149,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_HouseScanifyDetails_Result>("SP_HouseScanifyDetails");
         }
     
-        public virtual ObjectResult<SP_EmployeeHouseCollectionType_Result> SP_EmployeeHouseCollectionType()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeHouseCollectionType_Result>("SP_EmployeeHouseCollectionType");
-        }
-    
         public virtual ObjectResult<RPT_ONE_POINT_FOUR_SHOW_Result> RPT_ONE_POINT_FOUR_SHOW()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RPT_ONE_POINT_FOUR_SHOW_Result>("RPT_ONE_POINT_FOUR_SHOW");
@@ -350,6 +345,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("gcdate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TotalHouseCollection_Count_Result>("SP_TotalHouseCollection_Count", gcdateParameter);
+        }
+    
+        public virtual ObjectResult<SP_EmployeeHouseCollectionType_Result> SP_EmployeeHouseCollectionType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeHouseCollectionType_Result>("SP_EmployeeHouseCollectionType");
         }
     }
 }

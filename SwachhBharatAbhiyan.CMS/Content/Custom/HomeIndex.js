@@ -720,6 +720,8 @@ $(document).ready(function () {
             var not_coll = [];
             var mixed = [];
             var seg = [];
+            var dry = [];
+            var wet = [];
             var emp_tar = [];
             for (var i = 0; i < data.length; i++) {
                 // alert(data[i].inTime);
@@ -742,6 +744,8 @@ $(document).ready(function () {
                 not_coll.push({ y: data[i].NotCollected, label: 'Not Collected', color: '#fe9436', intime: data[i].inTime });
                 mixed.push({ y: data[i].MixedCount, label: 'Mixed', color: '#f44336', intime: data[i].inTime });
                 seg.push({ y: data[i].Bifur, label: 'Segregated', color: '#388e3c', intime: data[i].inTime });
+                dry.push({ y: data[i].DryWaste, label: 'Dry Waste', color: '#0462EA', intime: data[i].inTime });
+                wet.push({y: data[i].WetWaste, label: 'Wet Waste', color: '#0D8E0F', intime: data[i].inTime });
                 emp_tar.push({ y: parseInt(data[i].gcTarget), label: fname + lastname_firstchar, z: data[i].Count, intime: data[i].inTime });
                 // ary2.push({ y: parseInt(data[i].gcTarget), label: data[i].userName });
 
@@ -810,7 +814,30 @@ $(document).ready(function () {
                      toolTipContent: "InTime:{intime} <br>{label}:{y} ",
                      color: "#0086c3",
                      dataPoints: not_spec
-                 },
+               },
+
+               {
+                   //indexLabel: "#total",
+                   //indexLabelPlacement: "outside",
+                   //indexLabelPlacement: "outside",
+                   type: "stackedColumn",
+                   showInLegend: true,
+                   legendText: "Dry Waste",
+                   toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+                   color: "#0462EA",
+                   dataPoints: dry
+               },
+               {
+                   //indexLabel: "#total",
+                   //indexLabelPlacement: "outside",
+                   //indexLabelPlacement: "outside",
+                   type: "stackedColumn",
+                   showInLegend: true,
+                   legendText: "Wet Waste",
+                   toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+                   color: "#0D8E0F",
+                   dataPoints: wet
+               },
                      {
                          type: "line",
                          color: "#c0504d",
