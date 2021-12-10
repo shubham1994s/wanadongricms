@@ -88,11 +88,11 @@
                   "render": function (data, type, full, meta) {
 
                            if(full["wastetype"] == "WW") {
-                               return "<div class='circle' style='height: 20px;width: 20px;background-color: #388e3c;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Wet Waste)";
+                               return "<div class='circle' style='height: 20px;width: 20px;background-color: #0462EA;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Wet Waste)";
 
     }
                      else if (full["wastetype"] == "DW") {
-                               return "<div class='circle' style='height: 20px;width: 20px;background-color: #173fc2;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Dry Waste)";
+                               return "<div class='circle' style='height: 20px;width: 20px;background-color: #0D8E0F;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Dry Waste)";
 
     }
 
