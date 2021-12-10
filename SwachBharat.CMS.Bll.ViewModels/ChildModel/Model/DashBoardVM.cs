@@ -29,6 +29,10 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
 
         public Nullable<int> NotSpecified { get; set; }
 
+        public Nullable<int> TotalDryWaste { get; set; }
+
+        public Nullable<int> TotalWetWaste { get; set; }
+
 
         public int userId { get; set; }
         public string userName { get; set; }
