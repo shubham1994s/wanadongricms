@@ -42,5 +42,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string RFIDReaderId { get; set; }
         public Nullable<int> SourceId { get; set; }
         public string OutbatteryStatus { get; set; }
+        public string WasteType { get; set; }
     }
 }

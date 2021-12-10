@@ -44,6 +44,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Grid
         public string RFIDReaderId { get; set; }
         public Nullable<int> SourceId { get; set; }
 
+        public string wastetype { get; set; }
+
 
     }
 }

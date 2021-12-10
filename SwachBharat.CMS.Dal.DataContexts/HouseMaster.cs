@@ -32,5 +32,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string FCMID { get; set; }
         public Nullable<System.DateTime> lastModifiedEntry { get; set; }
         public string RFIDTagId { get; set; }
+        public string WasteType { get; set; }
     }
 }

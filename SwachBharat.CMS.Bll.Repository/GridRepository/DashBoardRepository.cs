@@ -1230,6 +1230,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     gpIdfk = x.gcId,
                     gpIdpk = x.gcId,
                     batteryStatus = x.batteryStatus,
+                    wastetype=x.WasteType,
 
 
                 }).OrderByDescending(c => c.gcDate).ToList().ToList();
