@@ -101,6 +101,8 @@ namespace SwachBharat.CMS.Bll.Services
                         model.NotCollected = houseCount.NotCollected;
                         model.DumpYardCount = data.TotalDump;
                         model.NotSpecified = houseCount.NotSpecified;
+                        model.TotalDryWaste = houseCount.TotalDryWaste;
+                        model.TotalWetWaste = houseCount.TotalWetWaste;
                         //model.TotalGcWeightCount = houseCount.TotalGcWeightCount;
                         //model.GcWeightCount = Convert.ToDouble(string.Format("{0:0.00}", houseCount.GcWeightCount));
                         //model.DryWeightCount =Convert.ToDouble(string.Format("{0:0.00}", houseCount.DryWeightCount));
