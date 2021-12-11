@@ -87,7 +87,7 @@
 
                   "render": function (data, type, full, meta) {
 
-                           if(full["wastetype"] == "DW1") {
+                            if(full["wastetype"] == "DW1") {
                                return "<div class='circle' style='height: 20px;width: 20px;background-color: #0462EA;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Dry Waste)";
 
     }

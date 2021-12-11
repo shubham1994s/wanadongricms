@@ -816,26 +816,26 @@ $(document).ready(function () {
                },
 
                //{
-               //    //indexLabel: "#total",
-               //    //indexLabelPlacement: "outside",
-               //    //indexLabelPlacement: "outside",
-               //    type: "stackedColumn",
-               //    showInLegend: true,
-               //    legendText: "Dry Waste",
-               //    toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-               //    color: "#0462EA",
-               //    dataPoints: dry
+               //    //indexlabel: "#total",
+               //    //indexlabelplacement: "outside",
+               //    //indexlabelplacement: "outside",
+               //    type: "stackedcolumn",
+               //    showinlegend: true,
+               //    legendtext: "dry waste",
+               //    tooltipcontent: "intime:{intime} <br>{label}:{y} ",
+               //    color: "#0462ea",
+               //    datapoints: dry
                //},
                //{
-               //    //indexLabel: "#total",
-               //    //indexLabelPlacement: "outside",
-               //    //indexLabelPlacement: "outside",
-               //    type: "stackedColumn",
-               //    showInLegend: true,
-               //    legendText: "Wet Waste",
-               //    toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+               //    //indexlabel: "#total",
+               //    //indexlabelplacement: "outside",
+               //    //indexlabelplacement: "outside",
+               //    type: "stackedcolumn",
+               //    showinlegend: true,
+               //    legendtext: "wet waste",
+               //    tooltipcontent: "intime:{intime} <br>{label}:{y} ",
                //    color: "#186634",
-               //    dataPoints: wet
+               //    datapoints: wet
                //},
                      {
                          type: "line",
