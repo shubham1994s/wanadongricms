@@ -384,8 +384,8 @@ $(document).ready(function () {
     var mixed_coll = $('#mixed_coll').val();
     var bif_coll = $('#bif_coll').val();
     var not_spec_coll = $('#not_spec_coll').val();
-    var TotalDryWaste_coll = $('#TotalDryWaste_coll').val();
-    var TotalWetWaste_coll = $('#TotalWetWaste_coll').val();
+   // var TotalDryWaste_coll = $('#TotalDryWaste_coll').val();
+   // var TotalWetWaste_coll = $('#TotalWetWaste_coll').val();
 
     var tot_house_null_check = $('#tot_house_coll').val();
     var tot_house_coll;
@@ -400,8 +400,8 @@ $(document).ready(function () {
     var res_not_coll = not_coll * 100 / tot_house_coll;
     var res_not_spec_coll = not_spec_coll * 100 / tot_house_coll;
 
-    var res_TotalDryWaste_coll = TotalDryWaste_coll * 100 / tot_house_coll;
-    var res_TotalWetWaste_coll = TotalWetWaste_coll * 100 / tot_house_coll;
+   // var res_TotalDryWaste_coll = TotalDryWaste_coll * 100 / tot_house_coll;
+    //var res_TotalWetWaste_coll = TotalWetWaste_coll * 100 / tot_house_coll;
 
 
     var ary3 = []
@@ -409,8 +409,8 @@ $(document).ready(function () {
     ary3.push({ v: mixed_coll });
     ary3.push({ v: not_coll });
     ary3.push({ v: not_spec_coll });
-    ary3.push({ v: TotalDryWaste_coll });
-    ary3.push({ v: TotalWetWaste_coll });
+    //ary3.push({ v: TotalDryWaste_coll });
+    //ary3.push({ v: TotalWetWaste_coll });
 
 
     //console.log(ary3);
@@ -455,9 +455,8 @@ $(document).ready(function () {
                 { y: res_mixed_coll, label: "Mixed Garbage", hover_number: mixed_coll, color: '#f44336' },
                 { y: res_not_coll, label: "Garbage not received", hover_number: not_coll, color: '#fe9436' },
                 { y: res_not_spec_coll, label: "Garbage type not specified", hover_number: not_spec_coll, color: '#0086c3' },
-                {
-                    y: res_TotalDryWaste_coll, label: "Dry Waste Garbage", hover_number: TotalDryWaste_coll, color: '#0462EA' },
-                { y: res_TotalWetWaste_coll, label: "Wet Waste Garbage", hover_number: TotalWetWaste_coll, color: '#0D8E0F' },
+               // { y: res_TotalDryWaste_coll, label: "Dry Waste Garbage", hover_number: TotalDryWaste_coll, color: '#0462EA' },
+                //{ y: res_TotalWetWaste_coll, label: "Wet Waste Garbage", hover_number: TotalWetWaste_coll, color: '#186634' },
             ],
         }]
     });
@@ -720,8 +719,8 @@ $(document).ready(function () {
             var not_coll = [];
             var mixed = [];
             var seg = [];
-            var dry = [];
-            var wet = [];
+            //var dry = [];
+            //var wet = [];
             var emp_tar = [];
             for (var i = 0; i < data.length; i++) {
                 // alert(data[i].inTime);
@@ -744,8 +743,8 @@ $(document).ready(function () {
                 not_coll.push({ y: data[i].NotCollected, label: 'Not Collected', color: '#fe9436', intime: data[i].inTime });
                 mixed.push({ y: data[i].MixedCount, label: 'Mixed', color: '#f44336', intime: data[i].inTime });
                 seg.push({ y: data[i].Bifur, label: 'Segregated', color: '#388e3c', intime: data[i].inTime });
-                dry.push({ y: data[i].DryWaste, label: 'Dry Waste', color: '#0462EA', intime: data[i].inTime });
-                wet.push({y: data[i].WetWaste, label: 'Wet Waste', color: '#0D8E0F', intime: data[i].inTime });
+                //dry.push({ y: data[i].DryWaste, label: 'Dry Waste', color: '#0462EA', intime: data[i].inTime });
+                //wet.push({y: data[i].WetWaste, label: 'Wet Waste', color: '#186634', intime: data[i].inTime });
                 emp_tar.push({ y: parseInt(data[i].gcTarget), label: fname + lastname_firstchar, z: data[i].Count, intime: data[i].inTime });
                 // ary2.push({ y: parseInt(data[i].gcTarget), label: data[i].userName });
 
@@ -816,28 +815,28 @@ $(document).ready(function () {
                      dataPoints: not_spec
                },
 
-               {
-                   //indexLabel: "#total",
-                   //indexLabelPlacement: "outside",
-                   //indexLabelPlacement: "outside",
-                   type: "stackedColumn",
-                   showInLegend: true,
-                   legendText: "Dry Waste",
-                   toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-                   color: "#0462EA",
-                   dataPoints: dry
-               },
-               {
-                   //indexLabel: "#total",
-                   //indexLabelPlacement: "outside",
-                   //indexLabelPlacement: "outside",
-                   type: "stackedColumn",
-                   showInLegend: true,
-                   legendText: "Wet Waste",
-                   toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-                   color: "#0D8E0F",
-                   dataPoints: wet
-               },
+               //{
+               //    //indexLabel: "#total",
+               //    //indexLabelPlacement: "outside",
+               //    //indexLabelPlacement: "outside",
+               //    type: "stackedColumn",
+               //    showInLegend: true,
+               //    legendText: "Dry Waste",
+               //    toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+               //    color: "#0462EA",
+               //    dataPoints: dry
+               //},
+               //{
+               //    //indexLabel: "#total",
+               //    //indexLabelPlacement: "outside",
+               //    //indexLabelPlacement: "outside",
+               //    type: "stackedColumn",
+               //    showInLegend: true,
+               //    legendText: "Wet Waste",
+               //    toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+               //    color: "#186634",
+               //    dataPoints: wet
+               //},
                      {
                          type: "line",
                          color: "#c0504d",
