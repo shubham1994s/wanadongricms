@@ -30,19 +30,44 @@
     .bg-blue {
         background: #189cdf;
     }
-    .username , .password {
-        font-size:14px;
-        color:#fff;
+    .username, .password {
+        font-size: 14px;
+        color: #fff;
+        font-weight: bold;
     }
     .btn-white {
         background:#fff;
     }
     .btn-colr {
-        color: #189cdf;
+        color: #189cdf !important;
         font-weight: bold !important;
+        font-weight: 600 !important;
     }
     input.input-material {
         border-radius: 10px;
+        margin-left: 66px;
+        width: 75%;
+        height: 34px;
+        background: #189cdf82;
+        padding: 10px 15px;
+    }
+    ::placeholder {
+        color: #fff;
+      
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #fff;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #fff;
+    }
+    input[type='submit'] {
+        font-weight: 600 !important;
+    }
+    input{
+        color: #fff !important;
     }
 </style>
 <body>
@@ -105,7 +130,7 @@
                                     @*<a id="login" href="index.html" class="btn btn-primary">Login</a>*@
 
                                     <div class="form-group">
-                                        <input class="btn btn-white btn-colr" align="center" style="margin:5px;width:90%;padding: 10px 36px;font-weight:600;border-radius:10px;position: absolute;left: 20px;" type="submit" id="login" value="LOGIN">
+                                        <input class="btn btn-white btn-colr" align="center" style="margin: 5px; margin-left: 125px; width: 40%; height: 34px; padding: 5px 36px;border-radius: 10px; position: absolute; left: 20px; " type="submit" id="login" value="LOGIN">
                                     </div>
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                                     @*<center><a href="#" class="forgot-pass">Forgot Password?</a></center>*@
