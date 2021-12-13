@@ -12,23 +12,23 @@ nav.side-navbar ul li a:hover {
     background: #189cdf !important;
 }
 nav.side-navbar {
-    background: #000000 !important;
+    background: #d8f1fe !important;
 }
  nav.side-navbar ul li a {
-        color: #fff !important;
+        color: #000 !important;
     }
     nav.side-navbar a[aria-expanded="true"] {
-        background: #000000 !important;
+        background: #189cdf !important;
     }
     nav.side-navbar ul li li a {
      
         background: #8a8e91 !important;
     }
 svg.svg3 g path {
-    fill: #ffffff !important;
+    fill: #000 !important;
 }
 svg.svg g g * {
-    fill: #ffffff !important;
+    fill: #000 !important;
 }
 .nav-tabs .tabid.active {
     color: #fff;
