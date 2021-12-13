@@ -117,7 +117,8 @@ namespace SwachhBharatAbhiyan.CMS
                     "~/Content/theme-assets/vendor/font-awesome/css/font-awesome.min.css",
                     "~/Content/theme-assets/css/fontastic.css",
                     "~/Content/theme-assets/css/style.default.css",
-                    "~/Content/theme-assets/css/custom.css"
+                    "~/Content/theme-assets/css/custom.css",
+                    "~/Content/theme-assets/css/MyCustom.css"
                 ));
 
 
@@ -137,7 +138,8 @@ namespace SwachhBharatAbhiyan.CMS
                     "~/Content/Datatable-assets/css/dataTables.bootstrap4.min.css",
                     "~/Content/Datatable-assets/css/responsive.bootstrap4.min.css",
                     "~/Content/css/datepicker/css/datepicker.css",
-                    "~/Content/css/index_style.css"
+                    "~/Content/css/index_style.css",
+                    "~/Content/theme-assets/css/MyCustom.css"
                 ));
             
             //Add/Edit page assets

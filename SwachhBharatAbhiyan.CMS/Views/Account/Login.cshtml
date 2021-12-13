@@ -28,10 +28,10 @@
         color: #189cdf;
     }
     .bg-blue {
-        background: #189cdf;
+        background: #189cdf !important;
     }
     .username, .password {
-        font-size: 14px;
+        font-size: 16px;
         color: #fff;
         font-weight: bold;
     }
@@ -48,8 +48,9 @@
         margin-left: 66px;
         width: 75%;
         height: 34px;
-        background: #189cdf82;
+        background: #62caffbf;
         padding: 10px 15px;
+        border-bottom: 0px solid #eee;
     }
     ::placeholder {
         color: #fff;
@@ -69,6 +70,15 @@
     input{
         color: #fff !important;
     }
+        input[type=text]:focus {
+            outline: 2px solid orange; /* oranges! yey */
+        }
+        input[type=password]:focus {
+            outline: 2px solid orange; /* oranges! yey */
+        }
+        input:-internal-autofill-selected {
+            background: #62caffbf !important;
+        }
 </style>
 <body>
 

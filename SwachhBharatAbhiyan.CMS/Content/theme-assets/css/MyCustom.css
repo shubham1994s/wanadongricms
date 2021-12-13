@@ -1,0 +1,46 @@
+﻿body {
+}
+
+.btn-primary {
+    background: #189cdf !important;
+}
+nav.navbar {
+    background: #189cdf !important;
+}
+
+nav.side-navbar ul li a:hover {
+    background: #189cdf !important;
+}
+nav.side-navbar {
+    background: #000000 !important;
+}
+ nav.side-navbar ul li a {
+        color: #fff !important;
+    }
+    nav.side-navbar a[aria-expanded="true"] {
+        background: #000000 !important;
+    }
+    nav.side-navbar ul li li a {
+     
+        background: #8a8e91 !important;
+    }
+svg.svg3 g path {
+    fill: #ffffff !important;
+}
+svg.svg g g * {
+    fill: #ffffff !important;
+}
+.nav-tabs .tabid.active {
+    color: #fff;
+    background-color: #189cdf !important;
+}
+.btn-success {
+    background-color: #189cdf !important;
+    border-color: #189cdf !important;
+}
+thead {
+   color: #189cdf !important;
+}
+header.page-header {
+    text-align:center;
+}
