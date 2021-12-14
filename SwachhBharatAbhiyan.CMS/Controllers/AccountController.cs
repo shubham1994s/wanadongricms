@@ -128,37 +128,40 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
+         
+                switch (result)
+                {
+
+                    case SignInStatus.Success:
+                        if (UserDetails != null)
+                        {
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                            var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
+                            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+
+                            string UserId = UserDetails.Id;
+                            string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
+                            string UserEmail = UserDetails.Email;
+                            string UserName = identity.Name;
+
+                            Logger.WriteInfoMessage("User  " + model.Email + " is successfully login with user id :" + UserId + " ,User Role : " + UserRole + " ,Email ID :" + UserEmail);
+
+                            AddSession(UserId, UserRole, UserEmail, UserName);
+
+                        }
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
           
-            switch (result)
-            {
-                
-                case SignInStatus.Success:
-                    if (UserDetails!=null)
-                    {
-                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                        var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
-                        AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
-
-                        string UserId = UserDetails.Id;
-                        string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
-                        string UserEmail = UserDetails.Email;
-                        string UserName = identity.Name;
-
-                        Logger.WriteInfoMessage("User  " + model.Email + " is successfully login with user id :" + UserId + " ,User Role : " + UserRole + " ,Email ID :" + UserEmail);
-
-                        AddSession(UserId, UserRole, UserEmail, UserName);
-
-                    }
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+        
+       
         }
 
         //
@@ -526,6 +529,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        private ActionResult RedirectToLiquid(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Liquid/LiquidHome");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
