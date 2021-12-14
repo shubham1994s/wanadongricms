@@ -60,6 +60,11 @@ namespace SwachhBharatAbhiyan.CMS.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        [Required]
+        [Display(Name = "Type")]
+        [EmailAddress]
+        public string Type { get; set; }
     }
 
     public class RegisterViewModel

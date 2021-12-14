@@ -16,6 +16,8 @@
             $('#selectnumber').html(district);
         }
     });
+
+    $('#selecttype').html('<option value=0>Select Monitoring Type</option><option value=S>Waste Collection Monitoring Technology</option><option value=SS>Street Sweeping Monitoring System</option><option value=L>Liquid Waste Cleaning Monitoring System</option>');
    
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
