@@ -173,6 +173,9 @@
     <Compile Include="HouseMaster.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
+    <Compile Include="LiquidWasteDetail.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="Location.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
@@ -294,6 +297,12 @@
     <Compile Include="SP_IdelTime_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_LiquidWasteDetails_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_StreetSweepDetails_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_TotalHouseCollection_Count_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
@@ -308,6 +317,9 @@
     </Compile>
     <Compile Include="state_districts.cs">
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StreetSweepingDetail.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="Subscription.cs">
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>

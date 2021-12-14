@@ -23,5 +23,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<bool> isActive { get; set; }
         public string bloodGroup { get; set; }
         public string gcTarget { get; set; }
+
+        public string EmployeeType { get; set; }
     }
 }

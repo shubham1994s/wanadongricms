@@ -243,6 +243,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Liquid\Controllers\LiquidHomeController.cs" />
+    <Compile Include="Areas\Liquid\Controllers\LiquidWasteController.cs" />
     <Compile Include="Areas\Liquid\LiquidAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -289,6 +291,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidWasteGrid.js" />
     <Content Include="Content\Account\AppyLogo.png" />
     <Content Include="Content\Account\epmapasd_logo.png" />
     <Content Include="Content\Account\login-back.PNG" />
@@ -495,6 +498,7 @@
     <Content Include="Content\DatatableGrid\SauchalayRegistrationGrid.js" />
     <Content Include="Content\DatatableGrid\scanifyDT.js" />
     <Content Include="Content\DatatableGrid\StateGrid.js" />
+    <Content Include="Content\DatatableGrid\StreetSweepGrid.js" />
     <Content Include="Content\DatatableGrid\TalukaGrid.js" />
     <Content Include="Content\DatatableGrid\VehicleTypeGrid.js" />
     <Content Include="Content\DatatableGrid\WardNumberGrid.js" />
@@ -1115,6 +1119,12 @@
     <Content Include="Content\Custom\fontawesome\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Custom\fontawesome\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Areas\Liquid\Views\web.config" />
+    <Content Include="Areas\Liquid\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Liquid\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidHome\Index.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidWaste\Index.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidWaste\AddLiquidWaste.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidWaste\MenuIndex.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
@@ -1335,9 +1345,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Liquid\Controllers\" />
     <Folder Include="Areas\Liquid\Model\" />
-    <Folder Include="Areas\Liquid\Views\Shared\" />
     <Folder Include="Content\css\datepicker\less\" />
     <Folder Include="Content\datepicker\less\" />
     <Folder Include="Content\images\svg\" />
