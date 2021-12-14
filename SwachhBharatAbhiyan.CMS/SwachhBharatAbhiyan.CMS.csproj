@@ -243,8 +243,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Solid\Controllers\SolidWasteController.cs" />
-    <Compile Include="Areas\Solid\SolidAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AttendenceController.cs" />
@@ -1115,10 +1113,6 @@
     <Content Include="Content\Custom\fontawesome\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Custom\fontawesome\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Custom\fontawesome\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Areas\Solid\Views\web.config" />
-    <Content Include="Areas\Solid\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Solid\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Solid\Views\SolidWaste\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
@@ -1339,8 +1333,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Solid\Data\" />
-    <Folder Include="Areas\Solid\Models\" />
     <Folder Include="Content\css\datepicker\less\" />
     <Folder Include="Content\datepicker\less\" />
     <Folder Include="Content\images\svg\" />
