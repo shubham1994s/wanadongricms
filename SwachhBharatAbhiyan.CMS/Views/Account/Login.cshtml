@@ -154,12 +154,15 @@
 
                                     <div class="form-group">
                                         <label for="type" class="username type">ICT BASE MONITORING TECHNOLOGY</label>
-                                        <select id="selecttype" class="form-control form-control form-control-sm input-material">
-                                            <option value="">Select Type</option>
-                                            <option value="0">Waste Collection Monitoring Technology</option>
-                                            <option value="1">Street sweeping Monitoring System</option>
-                                            <option value="2">Liquid Waste Cleaning Monitoring System</option>
-                                        </select>
+                                      
+                                        @Html.DropDownList("Type", new List<SelectListItem>
+                                         {
+                                           new SelectListItem { Text = "Select Type", Value = "0" },
+                                           new SelectListItem { Text = "Waste Collection Monitoring Technology", Value = "W" },
+                                           new SelectListItem { Text = "Street sweeping Monitoring System", Value = "S"},
+                                           new SelectListItem { Text = "Liquid Waste Cleaning Monitoring System", Value = "L"}
+                                           }, "Select", new { @class = "form-control form-control form-control-sm input-material" , @id = "Type"})
+                                        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" , style = "display:block;font-size:11px;margin-top:2px"})
                                     </div>
                                     
                                     <div class="form-group">
