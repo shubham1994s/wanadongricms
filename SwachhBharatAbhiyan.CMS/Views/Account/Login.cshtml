@@ -108,6 +108,9 @@
     option {
         width: 50%;
     }
+    .type {
+        font-size: 20px;
+    }
 </style>
 
 <body>
@@ -150,7 +153,7 @@
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom:-15px;display:block;font-size:12px;" })
 
                                     <div class="form-group">
-                                        <label for="type" class="username">ICT BASE MONITORING TECHNOLOGY</label>
+                                        <label for="type" class="username type">ICT BASE MONITORING TECHNOLOGY</label>
                                         <select id="selecttype" class="form-control form-control form-control-sm input-material">
                                             <option value="">Select Type</option>
                                             <option value="0">Waste Collection Monitoring Technology</option>
