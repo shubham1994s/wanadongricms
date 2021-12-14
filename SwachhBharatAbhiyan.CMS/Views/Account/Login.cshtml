@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
-@Styles.Render("~/Content/ThemeCss")
+    @Styles.Render("~/Content/ThemeCss")
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="/Content/images/img/sba.png" />
@@ -27,22 +27,27 @@
         background: #d8f1fe;
         color: #189cdf;
     }
+
     .bg-blue {
         background: #189cdf !important;
     }
+
     .username, .password {
         font-size: 16px;
         color: #fff;
         font-weight: bold;
     }
+
     .btn-white {
-        background:#fff;
+        background: #fff;
     }
+
     .btn-colr {
         color: #189cdf !important;
         font-weight: bold !important;
         font-weight: 600 !important;
     }
+
     input.input-material {
         border-radius: 10px;
         margin-left: 15%;
@@ -52,9 +57,9 @@
         padding: 10px 15px;
         border-bottom: 0px solid #eee;
     }
+
     ::placeholder {
         color: #fff;
-      
     }
 
     :-ms-input-placeholder { /* Internet Explorer 10-11 */
@@ -64,25 +69,33 @@
     ::-ms-input-placeholder { /* Microsoft Edge */
         color: #fff;
     }
+
     input[type='submit'] {
         font-weight: 600 !important;
     }
-    input{
+
+    input {
         color: #fff !important;
     }
+
         input[type=text]:focus {
             outline: 2px solid orange; /* oranges! yey */
         }
+
         input[type=password]:focus {
             outline: 2px solid orange; /* oranges! yey */
         }
+
         input:-internal-autofill-selected {
             background: #62caffbf !important;
         }
+
     label {
         margin-left: 15%;
     }
 </style>
+@Scripts.Render("~/Scripts/IndexScript")
+<script src="~/Content/DatatableGrid/AttendenceGrid.js"></script>
 <body>
 
     <div class="page login-page">
@@ -97,7 +110,7 @@
                                 <div class="content">
                                     <div class="logo">
                                         @*<img style="height:auto;width:auto;max-width:200px;" src="~/Content/images/img/app_icon_cms.png" />*@
-                                        <img style="height: auto; width: auto;width: 275px; max-width: 100%; " src="~/Content/images/New_Img/WCMT-Logo.png"/>
+                                        <img style="height: auto; width: auto;width: 275px; max-width: 100%; " src="~/Content/images/New_Img/WCMT-Logo.png" />
                                     </div>
                                 </div>
                                 <br>
@@ -121,6 +134,13 @@
                             <div class="form d-flex align-items-center">
                                 <div class="content">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom:-15px;display:block;font-size:12px;" })
+
+
+                                    <div class="form-group">
+                                        <label for="login-username" class="username">ICT BASE MONITORING TECHNOLOGY</label>
+                                        <select id="selecttype" class="form-control form-control form-control-sm input-material"></select>
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="login-username" class="username">USERNAME</label>
                                         @Html.TextBoxFor(m => m.Email, new { @class = "input-material", @id = "login-username", placeholder = "Username" })
