@@ -11,14 +11,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 
-namespace SwachhBharatAbhiyan.CMS.Controllers
+namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
 {
-    public class EmployeeController  : Controller
+    public class LiquidEmployeeController : Controller
     {
         // GET: Employee 
         IChildRepository childRepository;
         IMainRepository mainRepository;
-        public EmployeeController()
+        public LiquidEmployeeController()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -85,7 +85,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     emp.userProfileImage = image_Guid;
                 }
 
-                childRepository.SaveEmployee(emp,null);
+                childRepository.SaveEmployee(emp,"L");
                 return Redirect("Index");
             }
             else

@@ -182,12 +182,22 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     return gridRepository;
                     break;
                 case "ActiveEmployee":
-                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "1");
+                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "1","");
                     return gridRepository;
                     break;
-               
+
+                case "LiquidActiveEmployee":
+                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "1","L");
+                    return gridRepository;
+                    break;
+
                 case "NotActiveEmployee":
-                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "0");
+                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "0","");
+                    return gridRepository;
+                    break;
+
+                case "NotActiveLiquidEmployee":
+                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "0", "L");
                     return gridRepository;
                     break;
 
@@ -239,7 +249,12 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
               
                 case "Attendence":
-                    gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId,null);
+                    return gridRepository;
+                    break;
+
+                case "LiquidAttendence":
+                    gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId,"L");
                     return gridRepository;
                     break;
 

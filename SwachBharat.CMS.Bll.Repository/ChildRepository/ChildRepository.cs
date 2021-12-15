@@ -166,6 +166,11 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
            return screenService.GetEmployeeDetails(teamId);
         }
 
+        public EmployeeDetailsVM GetLiquidEmployeeById(int teamId)
+        {
+            return screenService.GetLiquidEmployeeDetails(teamId);
+        }
+
 
         public SBAAttendenceSettingsGridRow GetAttendenceEmployeeById(int teamId)
         {
@@ -177,9 +182,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             screenService.DeleteEmployeeDetails(teamId);
         }
 
-        public void SaveEmployee(EmployeeDetailsVM employee)
+        public void SaveEmployee(EmployeeDetailsVM employee,string Emptype)
         {
-            screenService.SaveEmployeeDetails(employee);
+            screenService.SaveEmployeeDetails(employee, Emptype);
         }
 
       public  void SaveAttendenceSettingsDetail(SBAAttendenceSettingsGridRow atten)

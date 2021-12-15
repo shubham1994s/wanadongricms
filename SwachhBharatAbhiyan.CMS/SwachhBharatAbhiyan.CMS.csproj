@@ -243,6 +243,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Liquid\Controllers\LiquidAttendenceController.cs" />
+    <Compile Include="Areas\Liquid\Controllers\LiquidEmployeeController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidHomeController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidWasteController.cs" />
     <Compile Include="Areas\Liquid\LiquidAreaRegistration.cs" />
@@ -291,6 +293,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\AttendenceGrid.js" />
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidWasteGrid.js" />
     <Content Include="Content\Account\AppyLogo.png" />
     <Content Include="Content\Account\epmapasd_logo.png" />
@@ -1125,6 +1130,17 @@
     <Content Include="Areas\Liquid\Views\LiquidWaste\Index.cshtml" />
     <Content Include="Areas\Liquid\Views\LiquidWaste\AddLiquidWaste.cshtml" />
     <Content Include="Areas\Liquid\Views\LiquidWaste\MenuIndex.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidEmployee\Index.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidEmployee\MenuIndex.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidEmployee\AddEmployeeDetails.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidEmployee\EmployeeSummaryIndex.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidEmployee\MenuEmployeeSummaryIndex.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidAttendence\HouseRoute.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidAttendence\Index.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidAttendence\Location.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidAttendence\MenuIndex.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidAttendence\UserAttendenceLocation.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidAttendence\UserRoute.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
@@ -1346,6 +1362,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Liquid\Model\" />
+    <Folder Include="Areas\Liquid\Views\Datable\" />
+    <Folder Include="Areas\Liquid\Views\Employee\" />
     <Folder Include="Content\css\datepicker\less\" />
     <Folder Include="Content\datepicker\less\" />
     <Folder Include="Content\images\svg\" />
