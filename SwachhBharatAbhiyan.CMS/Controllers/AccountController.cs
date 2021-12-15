@@ -15,6 +15,7 @@ using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.ViewModels;
 using System.Web.Security;
 using SwachBharat.CMS.Bll.ViewModels.MainModel;
+using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
@@ -25,6 +26,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IMainRepository mainrepository;
+
+       
         public AccountController()
         {
            // AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
@@ -93,7 +96,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                             Logger.WriteInfoMessage("User  " + model.Email + " is successfully login with user id :" + UserId + " ,User Role : " + UserRole + " ,Email ID :" + UserEmail);
 
-                            AddSession(UserId, UserRole, UserEmail, UserName);
+                            AddSession(UserId, UserRole, UserEmail, UserName,model.Type);
 
                         }
                         return RedirectToLocal(returnUrl);
@@ -106,6 +109,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                         ModelState.AddModelError("", "Invalid login attempt.");
                         return View(model);
                 }
+
+
             }
 
             ViewBag.ReturnUrl = returnUrl;
@@ -119,46 +124,128 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+           if (model.Type == "W")
             {
-                return View(model);
-            }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
-          
-            switch (result)
-            {
-                
-                case SignInStatus.Success:
-                    if (UserDetails!=null)
-                    {
-                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                        var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
-                        AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
-
-                        string UserId = UserDetails.Id;
-                        string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
-                        string UserEmail = UserDetails.Email;
-                        string UserName = identity.Name;
-
-                        Logger.WriteInfoMessage("User  " + model.Email + " is successfully login with user id :" + UserId + " ,User Role : " + UserRole + " ,Email ID :" + UserEmail);
-
-                        AddSession(UserId, UserRole, UserEmail, UserName);
-
-                    }
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                if (!ModelState.IsValid)
+                {
                     return View(model);
+                }
+
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
+
+
+                switch (result)
+                {
+
+                    case SignInStatus.Success:
+                        if (UserDetails != null)
+                        {
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                            var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
+                            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+
+                            string UserId = UserDetails.Id;
+                            string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
+                            string UserEmail = UserDetails.Email;
+                            string UserName = identity.Name;
+
+                            Logger.WriteInfoMessage("User  " + model.Email + " is successfully login with user id :" + UserId + " ,User Role : " + UserRole + " ,Email ID :" + UserEmail);
+
+                            AddSession(UserId, UserRole, UserEmail, UserName, model.Type);
+
+                        }
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+
+
+                }
+              
+
             }
+           else if (model.Type == "S")
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+
+                //   LoginViewModel Result= new LoginViewModel();
+                EmployeeVM Result = new EmployeeVM();
+                Result.ADUM_LOGIN_ID = model.Email;
+                Result.ADUM_PASSWORD = model.Password;
+                Result = mainrepository.LoginStreet(Result);
+
+                switch (Result.status)
+                {
+                    case "Success":
+
+                        AddSessionStreet(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
+                        Session["UserID"] = Result.ADUM_USER_CODE.ToString();
+                        Session["LoginId"] = Result.ADUM_LOGIN_ID.ToString();
+                        Session["UserProfile"] = Result;
+                        return RedirectToLocalStreet(returnUrl);
+
+                    case "LockedOut":
+                        return View("Lockout");
+                    case "RequiresVerification":
+
+                    case "Failure":
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+
+                }
+            }
+           else if (model.Type == "L")
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+
+             //   LoginViewModel Result= new LoginViewModel();
+                EmployeeVM Result = new EmployeeVM();
+                Result.ADUM_LOGIN_ID = model.Email;
+                Result.ADUM_PASSWORD = model.Password;
+                Result = mainrepository.Login(Result);
+
+                switch (Result.status)
+                {
+                    case "Success":
+
+                        AddSession(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
+                        Session["UserID"] = Result.ADUM_USER_CODE.ToString();
+                        Session["LoginId"] = Result.ADUM_LOGIN_ID.ToString();
+                        Session["UserProfile"] = Result;
+                        return RedirectToLocalLiquid(returnUrl);
+
+                    case "LockedOut":
+                        return View("Lockout");
+                    case "RequiresVerification":
+                   
+                    case "Failure":
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+
+                }
+
+            }
+
+           return View(model);
         }
 
         //
@@ -467,7 +554,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             FormsAuthentication.SignOut(); //you write this when you use FormsAuthentication
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AddSession(null,null,null,null);
+            AddSession(null,null,null,null,null);
             return RedirectToAction("Login", "Account");
         }
 
@@ -528,6 +615,25 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        private ActionResult RedirectToLocalLiquid(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Liquid/LiquidHome");
+        }
+
+        private ActionResult RedirectToLocalStreet(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Street/StreetHome");
+        }
+
+
         internal class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
@@ -560,11 +666,20 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         #region CustomChanges
         [NonAction]
-        private void AddSession(string UserId, string UserRole, string UserEmail, string UserName)
+        private void AddSession(string UserId, string UserRole, string UserEmail, string UserName, string usertype)
         {
             try
             {
-                int AppId = mainrepository.GetUserAppId(UserId);
+                int AppId = 0;
+                if(usertype=="W")
+                {
+                    AppId = mainrepository.GetUserAppId(UserId);
+                }
+                else
+                {
+                    AppId = mainrepository.GetUserAppIdL(usertype);
+                }
+                
                 if (AppId!=0)
                 {
                 AppDetailsVM ApplicationDetails = mainrepository.GetApplicationDetails(AppId);
@@ -622,7 +737,67 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
-       
+        private void AddSessionStreet(string UserId, string UserRole, string UserEmail, string UserName, string usertype)
+        {
+            try
+            {
+                int AppId = mainrepository.GetUserAppIdL(usertype);
+                if (AppId != 0)
+                {
+                    AppDetailsVM ApplicationDetails = mainrepository.GetApplicationDetails(AppId);
+                    string DB_Connect = mainrepository.GetDatabaseFromAppID(AppId);
+                    SessionHandler.Current.UserId = UserId;
+                    SessionHandler.Current.UserRole = UserRole;
+                    SessionHandler.Current.UserEmail = UserEmail;
+                    SessionHandler.Current.UserName = UserName;
+                    SessionHandler.Current.AppId = ApplicationDetails.AppId;
+                    SessionHandler.Current.AppName = ApplicationDetails.AppName;
+                    SessionHandler.Current.IsLoggedIn = true;
+                    SessionHandler.Current.Type = ApplicationDetails.Type;
+                    SessionHandler.Current.Latitude = ApplicationDetails.Latitude;
+                    SessionHandler.Current.Logitude = ApplicationDetails.Logitude;
+                    SessionHandler.Current.DB_Name = DB_Connect;
+                    SessionHandler.Current.YoccClientID = ApplicationDetails.YoccClientID;
+                    SessionHandler.Current.GramPanchyatAppID = ApplicationDetails.GramPanchyatAppID;
+                    SessionHandler.Current.YoccFeddbackLink = ApplicationDetails.YoccFeddbackLink;
+                    SessionHandler.Current.YoccDndLink = ApplicationDetails.YoccDndLink;
+                }
+                else
+                {
+                    SessionHandler.Current.UserId = null;
+                    SessionHandler.Current.UserRole = null;
+                    SessionHandler.Current.UserEmail = null;
+                    SessionHandler.Current.UserName = null;
+                    SessionHandler.Current.AppId = 0;
+                    SessionHandler.Current.AppName = null;
+                    SessionHandler.Current.IsLoggedIn = false;
+                    SessionHandler.Current.Type = null;
+                }
+                // if (SessionHandler.Current.Type.Trim() == "np")
+                // {
+                //     SessionHandler.Current.sessionType = "नगर पंचायत | Our Nagar Panchayat";
+                // }
+                // else
+                //if (SessionHandler.Current.Type.Trim() == "npp")
+                // {
+                //     SessionHandler.Current.sessionType = "नगरपरिषद | Municipal Council";
+                // }
+                // else
+                //     if (SessionHandler.Current.Type.Trim() == "gp")
+                // {
+                //     SessionHandler.Current.sessionType = "ग्रामपंचायत | Gram Panchayat";
+                // }
+                // else
+                // {
+                //     SessionHandler.Current.sessionType = "ग्रामपंचायत | Gram Panchayat";
+                // }
+
+            }
+            catch (Exception exception)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(exception);
+            }
+        }
         #endregion
 
     }

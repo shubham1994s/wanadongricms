@@ -58,5 +58,12 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<bool> IsActive { get; set; }
         public string YoccFeddbackLink { get; set; }
         public string YoccDndLink { get; set; }
+        public Nullable<int> LanguageId { get; set; }
+        public string MsgForBroadcast { get; set; }
+        public string MsgForNotSpecified { get; set; }
+        public string MsgForMixed { get; set; }
+        public string MsgForNotReceived { get; set; }
+        public string MsgForSegregated { get; set; }
+        public Nullable<bool> IsScanNear { get; set; }
     }
 }

@@ -119,6 +119,66 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             return mainService.GetUserAppId(UserId);
         }
 
+        public int GetUserAppIdL(string UserId)
+        {
+            return mainService.GetUserAppIdL(UserId);
+        }
+
+        public int GetUserAppIdSS(string UserId)
+        {
+            return mainService.GetUserAppIdSS(UserId);
+        }
+        public EmployeeVM Login(EmployeeVM _userinfo)
+        {
+            EmployeeVM _EmployeeVM = new EmployeeVM();
+            using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
+            {
+                var appUser = (db.AD_USER_MST_LIQUID.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD).SingleOrDefault());
+                if (appUser != null)
+                {
+                    _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
+                    
+                    _EmployeeVM.APP_ID = appUser.APP_ID;
+                    _EmployeeVM.ADUM_USER_NAME = appUser.ADUM_USER_NAME;
+                    _EmployeeVM.ADUM_USER_CODE = Convert.ToInt32(appUser.ADUM_USER_CODE);
+                    _EmployeeVM.status = "Success";
+
+                    return _EmployeeVM;
+                }
+                else
+                {
+                    _EmployeeVM.status = "Failure";
+                    return _EmployeeVM;
+                }
+            }
+        }
+
+        public EmployeeVM LoginStreet(EmployeeVM _userinfo)
+        {
+            EmployeeVM _EmployeeVM = new EmployeeVM();
+            using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
+            {
+                var appUser = (db.AD_USER_MST_STREET.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD).SingleOrDefault());
+                if (appUser != null)
+                {
+                    _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
+
+                    _EmployeeVM.APP_ID = appUser.APP_ID;
+                    _EmployeeVM.ADUM_USER_NAME = appUser.ADUM_USER_NAME;
+                    _EmployeeVM.ADUM_USER_CODE = Convert.ToInt32(appUser.ADUM_USER_CODE);
+                    _EmployeeVM.status = "Success";
+
+                    return _EmployeeVM;
+                }
+                else
+                {
+                    _EmployeeVM.status = "Failure";
+                    return _EmployeeVM;
+                }
+            }
+        }
+
+
         //Addedv By Saurabh (27 May 2019)
 
         public List<AppDetail> GetAppName()

@@ -62,6 +62,11 @@ namespace SwachhBharatAbhiyan.CMS.Models
         public bool RememberMe { get; set; }
 
         public string Type { get; set; }
+
+
+        
+
+
     }
 
     public class RegisterViewModel

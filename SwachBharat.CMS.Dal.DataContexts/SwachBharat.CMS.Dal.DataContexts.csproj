@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AD_USER_MST_LIQUID.cs">
+      <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AD_USER_MST_STREET.cs">
+      <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppConnection.cs">
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
@@ -126,7 +132,7 @@
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="GamePlayerDetail.cs">
-      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+      <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="Game_AnswerType.cs">
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
