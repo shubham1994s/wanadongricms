@@ -54,7 +54,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         }
 
         public ActionResult AddLiquidWaste(int teamId = -1)
-        {
+         {
             if (SessionHandler.Current.AppId != 0)
             {
                 LiquidWasteVM dump = childRepository.GetLiquidWasteId(teamId);
