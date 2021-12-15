@@ -108,11 +108,8 @@
     option {
         width: 50%;
     }
-    .type {
-        font-size: 20px;
-    }
 </style>
-
+<script src="~/Content/DatatableGrid/AttendenceGrid.js"></script>
 <body>
 
     <div class="page login-page">
@@ -151,7 +148,7 @@
                             <div class="form d-flex align-items-center">
                                 <div class="content">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom:-15px;display:block;font-size:12px;" })
-
+                                    
                                     <div class="form-group">
                                         <label for="type" class="username type">ICT BASE MONITORING TECHNOLOGY</label>
 
