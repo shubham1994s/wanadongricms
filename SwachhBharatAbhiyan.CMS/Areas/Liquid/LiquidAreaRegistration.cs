@@ -17,7 +17,9 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid
             context.MapRoute(
                 "Liquid_default",
                 "Liquid/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new {action = "Index", id = UrlParameter.Optional },
+                new { controller = "LiquidHome|LiquidWaste" },
+               new[] { "SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers" }
             );
         }
     }

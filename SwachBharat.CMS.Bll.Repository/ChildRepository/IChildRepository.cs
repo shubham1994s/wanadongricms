@@ -72,7 +72,17 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         DumpYardDetailsVM GetDumpYardById(int teamId);
 
+        StreetSweepVM GetStreetSweepId(int teamId);
+
+        LiquidWasteVM GetLiquidWasteId(int teamId);
+
         DumpYardDetailsVM SaveDumpYard(DumpYardDetailsVM data);
+
+     
+
+        StreetSweepVM SaveStreetSweep(StreetSweepVM data);
+
+        LiquidWasteVM SaveLiquidWastes(LiquidWasteVM data);
 
         #region HouseScanify
         // Added By Saurabh (27 May 2019)

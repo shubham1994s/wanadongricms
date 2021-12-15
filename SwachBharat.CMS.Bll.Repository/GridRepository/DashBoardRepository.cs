@@ -564,7 +564,9 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         userEmployeeNo = x.userEmployeeNo,
                         isActive = x.isActive.ToString(),
                         bloodGroup = x.bloodGroup,
-                        gcTarget = x.gcTarget
+                        gcTarget = x.gcTarget,
+                        EmployeeType = x.EmployeeType
+
 
 
                     }).Where(x => x.isActive == "True").ToList();
@@ -617,6 +619,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                              (string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
                                              (string.IsNullOrEmpty(c.bloodGroup) ? " " : c.bloodGroup) + " " +
                                              (string.IsNullOrEmpty(c.userAddress) ? " " : c.userAddress) + " " +
+                                              (string.IsNullOrEmpty(c.EmployeeType) ? " " : c.EmployeeType) + " " +
                                              (string.IsNullOrEmpty(c.userEmployeeNo) ? " " : c.userEmployeeNo)).ToUpper().Contains(SearchString.ToUpper())).ToList();
 
 
@@ -644,7 +647,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         userEmployeeNo = x.userEmployeeNo,
                         isActive = x.isActive.ToString(),
                         bloodGroup = x.bloodGroup,
-                        gcTarget = x.gcTarget
+                        gcTarget = x.gcTarget,
+                        EmployeeType=x.EmployeeType
 
 
                     }).Where(x => x.isActive == "False").ToList();
@@ -690,6 +694,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                              (string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
                                              (string.IsNullOrEmpty(c.bloodGroup) ? " " : c.bloodGroup) + " " +
                                              (string.IsNullOrEmpty(c.userAddress) ? " " : c.userAddress) + " " +
+                                                 (string.IsNullOrEmpty(c.EmployeeType) ? " " : c.EmployeeType) + " " +
                                              (string.IsNullOrEmpty(c.userEmployeeNo) ? " " : c.userEmployeeNo)).ToUpper().Contains(SearchString.ToUpper())).ToList();
                         data = model.ToList();
 
@@ -715,7 +720,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         userEmployeeNo = x.userEmployeeNo,
                         isActive = x.isActive.ToString(),
                         bloodGroup = x.bloodGroup,
-                        gcTarget = x.gcTarget
+                        gcTarget = x.gcTarget,
+                        EmployeeType=x.EmployeeType
 
 
                     }).ToList();
@@ -1230,7 +1236,6 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     gpIdfk = x.gcId,
                     gpIdpk = x.gcId,
                     batteryStatus = x.batteryStatus,
-                    wastetype=x.WasteType,
 
 
                 }).OrderByDescending(c => c.gcDate).ToList().ToList();
@@ -1591,6 +1596,94 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     Name = x.Name,
                     NameMar = x.NameMar,
                     Id = x.dyId,
+                    QrCode = ThumbnaiUrlCMS + x.Images.Trim(),
+                    Address = x.Address,
+                    ReferanceId = x.ReferanceId
+
+                }).ToList();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    //var model = data.Where(c => c.Area.ToString().Contains(SearchString)
+                    //|| c.Name.ToString().Contains(SearchString) || c.NameMar.ToString().Contains(SearchString) || c.ReferanceId.ToString().Contains(SearchString)
+
+                    //|| c.Area.Contains(SearchString) || c.NameMar.ToLower().ToString().Contains(SearchString) || c.Name.ToLower().ToString().Contains(SearchString) || c.ReferanceId.ToLower().ToString().Contains(SearchString)
+
+                    //|| c.Area.ToUpper().ToString().Contains(SearchString) || c.Name.ToUpper().ToString().Contains(SearchString)
+                    //|| c.NameMar.ToUpper().ToString().Contains(SearchString) || c.ReferanceId.ToUpper().ToString().Contains(SearchString)).ToList();
+
+                    var model = data.Where(c => ((string.IsNullOrEmpty(c.Area) ? " " : c.Area) + " " +
+                                      (string.IsNullOrEmpty(c.Name) ? " " : c.Name) + " " +
+                                      (string.IsNullOrEmpty(c.NameMar) ? " " : c.NameMar) + " " +
+                                      (string.IsNullOrEmpty(c.ReferanceId) ? " " : c.ReferanceId)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+
+
+                    data = model.ToList();
+                }
+                return data.OrderByDescending(c => c.Id).ToList();
+            }
+        }
+
+        public IEnumerable<SBAStreeSweepDetailsGridRow> GetStreetSweepData(long wildcard, string SearchString, int appId)
+        {
+            DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+            var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
+
+            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.DumpYardQRCode + "/";
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.SP_StreetSweepDetails().Select(x => new SBAStreeSweepDetailsGridRow
+                {
+
+                    Zone = x.Zone,
+                    Ward = x.Ward,
+                    Area = x.Area,
+                    Name = x.Name,
+                    NameMar = x.NameMar,
+                    Id = x.SSId,
+                    QrCode = ThumbnaiUrlCMS + x.Images.Trim(),
+                    Address = x.Address,
+                    ReferanceId = x.ReferanceId
+
+                }).ToList();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    //var model = data.Where(c => c.Area.ToString().Contains(SearchString)
+                    //|| c.Name.ToString().Contains(SearchString) || c.NameMar.ToString().Contains(SearchString) || c.ReferanceId.ToString().Contains(SearchString)
+
+                    //|| c.Area.Contains(SearchString) || c.NameMar.ToLower().ToString().Contains(SearchString) || c.Name.ToLower().ToString().Contains(SearchString) || c.ReferanceId.ToLower().ToString().Contains(SearchString)
+
+                    //|| c.Area.ToUpper().ToString().Contains(SearchString) || c.Name.ToUpper().ToString().Contains(SearchString)
+                    //|| c.NameMar.ToUpper().ToString().Contains(SearchString) || c.ReferanceId.ToUpper().ToString().Contains(SearchString)).ToList();
+
+                    var model = data.Where(c => ((string.IsNullOrEmpty(c.Area) ? " " : c.Area) + " " +
+                                      (string.IsNullOrEmpty(c.Name) ? " " : c.Name) + " " +
+                                      (string.IsNullOrEmpty(c.NameMar) ? " " : c.NameMar) + " " +
+                                      (string.IsNullOrEmpty(c.ReferanceId) ? " " : c.ReferanceId)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+
+
+                    data = model.ToList();
+                }
+                return data.OrderByDescending(c => c.Id).ToList();
+            }
+        }
+
+        public IEnumerable<SBALiquidWasteGridRow> GetLiquidWasteData(long wildcard, string SearchString, int appId)
+        {
+            DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+            var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
+
+            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.DumpYardQRCode + "/";
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.SP_LiquidWasteDetails().Select(x => new SBALiquidWasteGridRow
+                {
+
+                    Zone = x.Zone,
+                    Ward = x.Ward,
+                    Area = x.Area,
+                    Name = x.Name,
+                    NameMar = x.NameMar,
+                    Id = x.LWId,
                     QrCode = ThumbnaiUrlCMS + x.Images.Trim(),
                     Address = x.Address,
                     ReferanceId = x.ReferanceId
@@ -2312,10 +2405,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         gcTarget = x.gcTarget,
                         NotSpecidfied = x.NotSpecidfied,
                         userId = x.userId,
-                        userName = x.userName,
-                        DryWaste = x.DryWaste,
-                        WetWaste = x.WetWaste,
-
+                        userName = x.userName
                     });
                 }
                 return obj.OrderBy(c => c.userName);

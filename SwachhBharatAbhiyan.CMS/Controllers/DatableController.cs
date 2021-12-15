@@ -271,6 +271,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new DumpYardGridRepository(0, searchString, appId);
                     return gridRepository;
                     break;
+                case "StreetSweep":
+                    gridRepository = new StreetSweepGrid(0, searchString, appId);
+                    return gridRepository;
+                    break;
+
+                case "LiquidWaste":
+                    gridRepository = new LiquidWasteGridRepository(0, searchString, appId);
+                    return gridRepository;
+                    break;
 
                 case "DumpYardDetails":
                     gridRepository = new DumpYardCollectionGridRepository(0, searchString, fdate, tdate, userId, appId,param1,param2,param3);

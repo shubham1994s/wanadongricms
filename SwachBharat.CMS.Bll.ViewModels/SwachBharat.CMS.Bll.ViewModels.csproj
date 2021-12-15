@@ -63,6 +63,7 @@
     <Compile Include="ChildModel\Model\GarbagePointDetailsVM.cs" />
     <Compile Include="ChildModel\Model\HouseScanifyEmployeeDetailsVM.cs" />
     <Compile Include="ChildModel\Model\InfotainmentDetailsVW.cs" />
+    <Compile Include="ChildModel\Model\LiquidWasteVM.cs" />
     <Compile Include="ChildModel\Model\LocationVM.cs" />
     <Compile Include="ChildModel\Model\AreaVM.cs" />
     <Compile Include="ChildModel\Model\BaseVM.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="ChildModel\Model\SBALHouseLocationMapView.cs" />
     <Compile Include="ChildModel\Model\SBALHSUserLocationMapView.cs" />
     <Compile Include="ChildModel\Model\SBALUserLocationMapView.cs" />
+    <Compile Include="ChildModel\Model\StreetSweepVM.cs" />
     <Compile Include="ChildModel\Model\UserMasterVM.cs" />
     <Compile Include="ChildModel\Model\VehicleTypeVM.cs" />
     <Compile Include="ChildModel\Model\WardNumberVM.cs" />
@@ -95,8 +97,10 @@
     <Compile Include="Grid\SBAGarbagePointDetailsGridRow.cs" />
     <Compile Include="Grid\SBAHouseScanifyDetailsGridRow.cs" />
     <Compile Include="Grid\SBAHSAttendanceGrid.cs" />
+    <Compile Include="Grid\SBALiquidWasteGridRow.cs" />
     <Compile Include="Grid\SBALocationGridRow.cs" />
     <Compile Include="Grid\SBASauchalayDetailsGridRow.cs" />
+    <Compile Include="Grid\SBAStreeSweepDetailsGridRow.cs" />
     <Compile Include="Grid\SBAVehicleTypeGridRow.cs" />
     <Compile Include="Grid\GPBussniessDetailsGridRow.cs" />
     <Compile Include="Grid\SBAWardNumberGridRow.cs" />
