@@ -378,6 +378,7 @@ $(document).ready(function () {
 //Bifurcation Pie Chart
 
 
+
 $(document).ready(function () {
     debugger;
     var not_coll = $('#not_coll').val();
