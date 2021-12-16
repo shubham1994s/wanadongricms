@@ -297,6 +297,7 @@
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\AttendenceGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidGarbageGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidWasteGrid.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\custom.css" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\fontastic.css" />

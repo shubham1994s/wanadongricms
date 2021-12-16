@@ -247,7 +247,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new PGarbageCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
                     return gridRepository;
                     break;
-              
+
+                case "LiquidGarbage":
+                    gridRepository = new LGarbageCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
+                    return gridRepository;
+                    break;
                 case "Attendence":
                     gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId,null);
                     return gridRepository;

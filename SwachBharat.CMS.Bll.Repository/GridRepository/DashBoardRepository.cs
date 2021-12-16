@@ -1343,6 +1343,164 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
+
+        public IEnumerable<SBAGrabageCollectionGridRow> GetLiquidGarbageCollectionData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, int? param1, int? param2, int? param3)
+        {
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
+                string ThumbnaiUrlAPI = appDetails.baseImageUrl + appDetails.basePath + appDetails.Collection + "/";
+                List<SBAGrabageCollectionGridRow> data = new List<SBAGrabageCollectionGridRow>();
+                using (DevChildSwachhBharatNagpurEntities db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+
+
+
+                    var data1 = (from t1 in db.GarbageCollectionDetails.Where(g => g.gcType == 4 & g.gcDate >= fdate & g.gcDate <= tdate)
+                                 join t2 in db.UserMasters on t1.userId equals t2.userId
+                                 join gp in db.LiquidWasteDetails on t1.gpId equals gp.LWId into gpp
+                                 from t3 in gpp.DefaultIfEmpty()
+                                 join zm in db.ZoneMasters on t3.zoneId equals zm.zoneId into zm
+                                 from t4 in zm.DefaultIfEmpty()
+                                 join wm in db.WardNumbers on t3.wardId equals wm.Id into wm
+                                 from t5 in wm.DefaultIfEmpty()
+                                 join tm in db.TeritoryMasters on t3.areaId equals tm.Id into tm
+                                 from t6 in tm.DefaultIfEmpty()
+                                 where (t4.zoneId == param1 || param1 == 0 || param1 == null) && (t3.wardId == param2 || param2 == 0 || param2 == null) && (t3.areaId == param3 || param3 == 0 || param3 == null )
+
+                                 select new
+                                 {
+                                     t1.gcId,
+                                     t1.note,
+                                     t1.gpAfterImage,
+                                     t1.gpBeforImage,
+                                     t1.gcType,
+                                     t1.gpId,
+                                     t1.userId,
+                                     t1.gcDate,
+                                     t1.vehicleNumber,
+                                     t1.locAddresss,
+                                     t1.batteryStatus,
+                                     t1.Lat,
+                                     t1.Long,
+                                     t2.userName,
+                                     t3.ReferanceId,
+                                     t3.LWName,
+                                     t3.zoneId,
+                                     t3.wardId,
+                                     t3.areaId,
+                                     WardName = t5.WardNo,
+                                     AreaName = t6.Area,
+                                 }).ToList();
+
+
+
+                    //var data1 = (from GCD in db.GarbageCollectionDetails
+                    //             join _p1 in db.UserMasters on GCD.userId equals _p1.userId into _p1
+                    //             from p1 in _p1.DefaultIfEmpty()
+                    //             join _p2 in db.GarbagePointDetails on GCD.gpId equals _p2.gpId into _p2
+                    //             from p2 in _p2.DefaultIfEmpty()
+                    //             join _p3 in db.ZoneMasters on p2.zoneId equals _p3.zoneId into _p3
+                    //             from p3 in _p3.DefaultIfEmpty()
+                    //             join _p4 in db.WardNumbers on p2.wardId equals _p4.Id into _p4
+                    //             from p4 in _p4.DefaultIfEmpty()
+                    //             join _p5 in db.TeritoryMasters on p2.areaId equals _p5.Id into _p5
+                    //             from p5 in _p5.DefaultIfEmpty()
+                    //             where (GCD.gcType == 2 & GCD.gcDate >= fdate & GCD.gcDate <= tdate) && (p2.zoneId == param1 || param1 == 0 || param1 == null) && (p2.wardId == param2 || param2 == 0 || param2 == null) && (p2.areaId == param3 || param3 == 0 || param3 == null)
+                    //            && (p1 != null || p2 != null)
+                    //             select new
+                    //             {
+                    //                 GCD.gcId,GCD.note, GCD.gpAfterImage,GCD.gpBeforImage,GCD.gcType,GCD.gpId,GCD.userId,GCD.gcDate,GCD.vehicleNumber, GCD.locAddresss,
+                    //                 GCD.batteryStatus,GCD.Lat, GCD.Long,p1.userName,p2.ReferanceId, p2.gpName, p2.zoneId,p2.wardId,p2.areaId,WardName = p4.WardNo,
+                    //                 AreaName = p5.Area,
+                    //             }).ToList();
+                    if (userId > 0)
+                    {
+                        var model = data1.Where(c => c.userId == userId).ToList();
+
+                        data1 = model.ToList();
+                    }
+                    foreach (var x in data1)
+                    {
+                        //var gcdata = db.GarbageCollectionDetails.Where(c => c.gcId == item.Id).FirstOrDefault();
+                        //item.ReferanceId = db.GarbagePointDetails.Where(c => c.gpId == item.gpIdfk).FirstOrDefault().ReferanceId;
+                        //item.Employee = db.UserMasters.Where(c => c.userId == item.userId).FirstOrDefault().userName;
+                        //item.attandDate = Convert.ToDateTime(item.gcDate).ToString("dd/MM/yyyy hh:mm tt");
+                        //item.UserName = db.GarbagePointDetails.Where(c => c.gpId == item.gpIdfk).FirstOrDefault().gpName;
+                        //item.HouseNumber = checkNull(item.HouseNumber);
+                        //item.VehicleNumber = checkNull(item.VehicleNumber);
+                        //item.Note = checkNull(item.Note);
+                        //if (gcdata.Lat != null && gcdata.Long != "" && gcdata.Lat != "" && gcdata.Long != null)
+                        //{ item.Address = gcdata.locAddresss; }
+                        //else { item.Address = ""; }
+                        //item.Employee = checkNull(item.Employee);  
+                        //item.UserName = checkNull(item.UserName);
+                        //if ( item.gpAfterImage == "")
+                        //{ item.gpAfterImage = "/Images/default_not_upload.png"; }
+                        //else
+                        //{
+                        //    item.gpAfterImage = ThumbnaiUrlAPI + item.gpAfterImage.Trim();
+                        //}
+                        //if ( item.gpBeforImage == "")
+                        //{ item.gpBeforImage = "/Images/default_not_upload.png"; }
+                        //else
+                        //{ item.gpBeforImage = ThumbnaiUrlAPI + item.gpBeforImage.Trim(); }
+                        //item.UserName = checkNull(item.UserName);
+                        //item.HouseNumber = checkNull(item.HouseNumber);
+                        //item.VehicleNumber = checkNull(item.VehicleNumber);
+                        //item.Employee = checkNull(item.Employee);
+                        //item.Address = checkNull(item.Address);
+                        //item.Note = checkNull(item.Note);
+                        //item.ReferanceId = checkNull(item.ReferanceId);
+
+                        data.Add(new SBAGrabageCollectionGridRow
+                        {
+                            Id = x.gcId,
+                            Note = checkNull(x.note),
+                            gcType = x.gcType,
+                            //houseId = x.houseId,
+                            gpIdfk = x.gpId,
+                            userId = x.userId,
+                            gcDate = x.gcDate,
+                            VehicleNumber = checkNull(x.vehicleNumber),
+                            batteryStatus = x.batteryStatus,
+                            ReferanceId = checkNull(x.ReferanceId),
+                            Employee = checkNull(x.userName),
+                            attandDate = Convert.ToDateTime(x.gcDate).ToString("dd/MM/yyyy hh:mm tt"),
+                            UserName = checkNull(x.LWName),
+                            Lat = x.Lat,
+                            Long = x.Long,
+                            Address = checkNull(x.locAddresss).Replace("Unnamed Road,", ""),
+                            //gpAfterImage = (x.gpAfterImage == "" ? "/Images/default_not_upload.png" : ThumbnaiUrlAPI + x.gpAfterImage.Trim()),
+                            //gpBeforImage = (x.gpBeforImage == "" ? "/Images/default_not_upload.png" : ThumbnaiUrlAPI + x.gpBeforImage.Trim())
+
+                        });
+
+                        foreach (var item in data)
+                        {
+                            if (item.Lat != null && item.Long != "" && item.Lat != "" && item.Long != null)
+                            { item.Address = item.Address; }
+                            else { item.Address = ""; }
+                        }
+
+                    }
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.UserName) ? " " : c.UserName) + " " +
+                                      (string.IsNullOrEmpty(c.HouseNumber) ? " " : c.HouseNumber) + " " +
+                                      (string.IsNullOrEmpty(c.VehicleNumber) ? " " : c.VehicleNumber) + " " +
+                                      (string.IsNullOrEmpty(c.ReferanceId) ? " " : c.ReferanceId) + " " +
+                                      (string.IsNullOrEmpty(c.Address) ? " " : c.Address) + " " +
+                                      (string.IsNullOrEmpty(c.Employee) ? " " : c.Employee) + " " +
+                                      (string.IsNullOrEmpty(c.attandDate) ? " " : c.attandDate) + " " +
+                                      (string.IsNullOrEmpty(c.Note) ? " " : c.Note)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                        data = model.ToList();
+                    }
+
+                    return data.OrderByDescending(c => c.Id);
+                }
+            }
+        }
         public IEnumerable<SBAGrabageCollectionGridRow> GetDumpYardCollectionData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, int? param1, int? param2, int? param3)
         {
             {
