@@ -61,6 +61,8 @@ namespace SwachhBharatAbhiyan.CMS.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
 
+        [Required]
+        [Display(Name = "Select Type")]
         public string Type { get; set; }
 
 

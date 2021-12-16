@@ -122,6 +122,27 @@ namespace SwachhBharatAbhiyan.CMS
                 ));
 
 
+            //Liquid Theme Assets
+
+            bundles.Add(new StyleBundle("~/Liquid/Content/ThemeCss").Include(
+                 "~/Areas/Liquid/Content/theme-assets/vendor/bootstrap/css/bootstrap.min.css",
+                 "~/Areas/Liquid/Content/theme-assets/vendor/font-awesome/css/font-awesome.min.css",
+                 "~/Areas/Liquid/Content/theme-assets/css/fontastic.css",
+                 "~/Areas/Liquid/Content/theme-assets/css/style.default.css",
+                 "~/Areas/Liquid/Content/theme-assets/css/custom.css",
+                 "~/Areas/Liquid/Content/theme-assets/css/MyCustom.css"
+             ));
+
+            //Street Theme Assets
+
+            bundles.Add(new StyleBundle("~/Street/Content/ThemeCss").Include(
+                 "~/Areas/Street/Content/theme-assets/vendor/bootstrap/css/bootstrap.min.css",
+                 "~/Areas/Street/Content/theme-assets/vendor/font-awesome/css/font-awesome.min.css",
+                 "~/Areas/Street/Content/theme-assets/css/fontastic.css",
+                 "~/Areas/Street/Content/theme-assets/css/style.default.css",
+                 "~/Areas/Street/Content/theme-assets/css/custom.css",
+                 "~/Areas/Street/Content/theme-assets/css/MyCustom.css"
+             ));
 
             //Index Datatable assets
             bundles.Add(new ScriptBundle("~/Scripts/IndexScript").Include(
