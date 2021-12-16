@@ -245,6 +245,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidAttendenceController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidEmployeeController.cs" />
+    <Compile Include="Areas\Liquid\Controllers\LiquidGarbageController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidHomeController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidWasteController.cs" />
     <Compile Include="Areas\Liquid\LiquidAreaRegistration.cs" />
@@ -1567,6 +1568,8 @@
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\jquery.cookie\component.json" />
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\jquery.cookie\cookie.jquery.json" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\LiquidGarbageIndex.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\MenuLiquidGarbageIndex.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
@@ -1790,8 +1793,6 @@
     <Folder Include="Areas\Liquid\Content\theme-assets\vendor\font-awesome\less\" />
     <Folder Include="Areas\Liquid\Content\theme-assets\vendor\font-awesome\scss\" />
     <Folder Include="Areas\Liquid\Model\" />
-    <Folder Include="Areas\Liquid\Views\Datable\" />
-    <Folder Include="Areas\Liquid\Views\Employee\" />
     <Folder Include="Content\css\datepicker\less\" />
     <Folder Include="Content\datepicker\less\" />
     <Folder Include="Content\images\svg\" />
