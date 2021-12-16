@@ -24,11 +24,12 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> type { get; set; }
         public string batteryStatus { get; set; }
         public Nullable<decimal> Distnace { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<bool> IsOffline { get; set; }
         public string ReferanceID { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public string RFIDTagId { get; set; }
         public string RFIDReaderId { get; set; }
         public Nullable<int> SourceId { get; set; }
+        public string EmployeeType { get; set; }
     }
 }
