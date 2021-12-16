@@ -51,7 +51,7 @@ namespace SwachBharat.CMS.Bll.Services
 
         EmployeeDetailsVM GetEmployeeDetails(int teamId);
 
-        EmployeeDetailsVM GetLiquidEmployeeDetails(int teamId);
+      
 
         SBAAttendenceSettingsGridRow GetAttendenceEmployeeById(int teamId);
         void DeleteEmployeeDetails(int teamId);

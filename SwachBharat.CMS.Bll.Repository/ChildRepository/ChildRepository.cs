@@ -172,10 +172,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
            return screenService.GetEmployeeDetails(teamId);
         }
 
-        public EmployeeDetailsVM GetLiquidEmployeeById(int teamId)
-        {
-            return screenService.GetLiquidEmployeeDetails(teamId);
-        }
+        //public EmployeeDetailsVM GetLiquidEmployeeById(int teamId)
+        //{
+        //    return screenService.GetLiquidEmployeeDetails(teamId);
+        //}
 
 
         public SBAAttendenceSettingsGridRow GetAttendenceEmployeeById(int teamId)

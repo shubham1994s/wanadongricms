@@ -44,3 +44,6 @@ thead {
 header.page-header {
     text-align:center;
 }
+.svg_android {
+    background-image: url("../img/android.svg")
+}
