@@ -64,6 +64,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
                 return Redirect("/Account/Login");
         }
 
+
         [HttpPost]
         public ActionResult AddLiquidWaste(LiquidWasteVM LiquidWaste, HttpPostedFileBase filesUpload)
         {
