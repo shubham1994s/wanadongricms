@@ -633,6 +633,44 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public EmployeeDetailsVM GetLiquidEmployeeDetails(int teamId)
+        {
+            try
+            {
+                EmployeeDetailsVM type = new EmployeeDetailsVM();
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.UserProfile + "/";
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var Details = db.UserMaster_Liquid.Where(x => x.userId == teamId).FirstOrDefault();
+                    if (Details != null)
+                    {
+                        type = FillLiquidEmployeeViewModel(Details);
+                        if (type.userProfileImage != null && type.userProfileImage != "")
+                        {
+                            type.userProfileImage = ThumbnaiUrlCMS + type.userProfileImage.Trim();
+                        }
+                        else
+                        {
+                            type.userProfileImage = "/Images/default_not_upload.png";
+                        }
+                        return type;
+                    }
+                    else
+                    {
+                        type.userProfileImage = "/Images/add_image_square.png";
+                        return type;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public SBAAttendenceSettingsGridRow GetAttendenceEmployeeById(int teamId)
         {
@@ -682,7 +720,7 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
-        public void SaveEmployeeDetails(EmployeeDetailsVM data)
+        public void SaveEmployeeDetails(EmployeeDetailsVM data,string Emptype)
         {
             try
             {
@@ -709,13 +747,13 @@ namespace SwachBharat.CMS.Bll.Services
                             model.isActive = data.isActive;
                             model.bloodGroup = data.bloodGroup;
                             model.gcTarget = data.gcTarget;
-                            model.EmployeeType = data.EmployeeType;
+                            //model.EmployeeType = Emptype;
                             db.SaveChanges();
                         }
                     }
                     else
                     {
-                        var type = FillEmployeeDataModel(data);
+                        var type = FillEmployeeDataModel(data, Emptype);
                         db.UserMasters.Add(type);
                         db.SaveChanges();
                     }
@@ -906,7 +944,7 @@ namespace SwachBharat.CMS.Bll.Services
 
                     }
                                 
-                   var atten = db.Daily_Attendance.Where(c => c.daDate==EntityFunctions.TruncateTime(Details.datetime) && c.userId==Details.userId).FirstOrDefault();
+                   var atten = db.Daily_Attendance.Where(c => c.daDate==EntityFunctions.TruncateTime(Details.datetime) && c.userId==Details.userId ).FirstOrDefault();
                     if (Details != null)
                     {
                         SBALUserLocationMapView loc = new SBALUserLocationMapView();
@@ -1818,7 +1856,7 @@ namespace SwachBharat.CMS.Bll.Services
             model.modified = DateTime.Now;
             return model;
         }
-        private UserMaster FillEmployeeDataModel(EmployeeDetailsVM data)
+        private UserMaster FillEmployeeDataModel(EmployeeDetailsVM data , string Emptype)
         {
             UserMaster model = new UserMaster();
             model.userId = data.userId;
@@ -1833,7 +1871,7 @@ namespace SwachBharat.CMS.Bll.Services
             model.bloodGroup = data.bloodGroup;
             model.isActive = data.isActive;
             model.gcTarget = data.gcTarget;
-            model.EmployeeType = data.EmployeeType;
+            model.EmployeeType = Emptype;
             return model;
         }
 
@@ -2231,6 +2269,26 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
         private EmployeeDetailsVM FillEmployeeViewModel(UserMaster data)
+        {
+            EmployeeDetailsVM model = new EmployeeDetailsVM();
+            model.userId = data.userId;
+            model.userAddress = data.userAddress;
+            model.userLoginId = data.userLoginId;
+            model.userMobileNumber = data.userMobileNumber;
+            model.userName = data.userName;
+            model.userNameMar = data.userNameMar;
+            model.userPassword = data.userPassword;
+            model.userProfileImage = data.userProfileImage;
+            model.userEmployeeNo = data.userEmployeeNo;
+            model.imoNo = data.imoNo;
+            model.isActive = data.isActive;
+            model.bloodGroup = data.bloodGroup;
+            model.gcTarget = data.gcTarget;
+            model.EmployeeType = data.EmployeeType;
+            return model;
+        }
+
+        private EmployeeDetailsVM FillLiquidEmployeeViewModel(UserMaster_Liquid data)
         {
             EmployeeDetailsVM model = new EmployeeDetailsVM();
             model.userId = data.userId;

@@ -85,7 +85,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     emp.userProfileImage = image_Guid;
                 }
 
-                childRepository.SaveEmployee(emp);
+                childRepository.SaveEmployee(emp,null);
                 return Redirect("Index");
             }
             else

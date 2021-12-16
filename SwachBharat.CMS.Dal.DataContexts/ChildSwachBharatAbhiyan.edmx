@@ -358,6 +358,50 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.SS_1.4_QUESTI
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
           <Property Name="imoNo2" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="UserMaster_Liquid">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="500" />
+          <Property Name="userNameMar" Type="nvarchar" MaxLength="200" />
+          <Property Name="userLoginId" Type="nvarchar" MaxLength="200" />
+          <Property Name="userPassword" Type="nvarchar" MaxLength="100" />
+          <Property Name="userMobileNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="userAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="userProfileImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="userEmployeeNo" Type="nvarchar" MaxLength="250" />
+          <Property Name="userDesignation" Type="nvarchar(max)" />
+          <Property Name="imoNo" Type="nvarchar(max)" />
+          <Property Name="bloodGroup" Type="nvarchar" MaxLength="250" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="gcTarget" Type="varchar" MaxLength="250" />
+          <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
+          <Property Name="imoNo2" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserMaster_Street">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="500" />
+          <Property Name="userNameMar" Type="nvarchar" MaxLength="200" />
+          <Property Name="userLoginId" Type="nvarchar" MaxLength="200" />
+          <Property Name="userPassword" Type="nvarchar" MaxLength="100" />
+          <Property Name="userMobileNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="userAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="userProfileImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="userEmployeeNo" Type="nvarchar" MaxLength="250" />
+          <Property Name="userDesignation" Type="nvarchar(max)" />
+          <Property Name="imoNo" Type="nvarchar(max)" />
+          <Property Name="bloodGroup" Type="nvarchar" MaxLength="250" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="gcTarget" Type="varchar" MaxLength="250" />
+          <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
+          <Property Name="imoNo2" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="VehicleType">
           <Key>
             <PropertyRef Name="vtId" />
@@ -566,6 +610,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="StreetSweepingDetails" EntityType="Self.StreetSweepingDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeritoryMaster" EntityType="Self.TeritoryMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster_Liquid" EntityType="Self.UserMaster_Liquid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster_Street" EntityType="Self.UserMaster_Street" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WardNumber" EntityType="Self.WardNumber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WM_Garbage_Details" EntityType="Self.WM_Garbage_Details" Schema="dbo" store:Type="Tables" />

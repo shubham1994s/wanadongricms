@@ -16,10 +16,12 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository.Grid
 
         DashBoardRepository objRep = new DashBoardRepository();
 
-        public EmployeeGridRepository(long wildcard, string SearchString, int AppId, string isActive)
+        public EmployeeGridRepository(long wildcard, string SearchString, int AppId, string isActive, string Emptype)
         {
-            dataSet =  objRep.GetEmployeeDetailsData(wildcard, SearchString, AppId, isActive);
+            dataSet =  objRep.GetEmployeeDetailsData(wildcard, SearchString, AppId, isActive,Emptype);
         }
+
+       
 
         public string GetDataTabelJson(string sortColumn, string sortColumnDir, string draw, string length, string searchValue, string start)
         {
