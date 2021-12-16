@@ -12,6 +12,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<int> TodayAttandence { get; set; }
         public Nullable<int> TotalAttandence { get; set; }
         public Nullable<int> HouseCollection { get; set; }
+        public Nullable<int> LiquidCollection { get; set; }
+
+        public Nullable<int> StreetCollection { get; set; }
         public Nullable<int> PointCollection { get; set; }
         public Nullable<int> TotalComplaint { get; set; }
         public Nullable<int> DumpYardCount { get; set; }

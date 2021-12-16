@@ -303,7 +303,13 @@
     <Compile Include="SP_IdelTime_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_LiquidDashboard_Details_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_LiquidWasteDetails_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_StreetDashboard_Details_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_StreetSweepDetails_Result.cs">

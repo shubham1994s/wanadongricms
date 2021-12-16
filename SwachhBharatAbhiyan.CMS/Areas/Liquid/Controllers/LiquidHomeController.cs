@@ -36,8 +36,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
                 ViewBag.lat = SessionHandler.Current.Latitude;
                 ViewBag.lang = SessionHandler.Current.Logitude;
                 ViewBag.YoccFeddbackLink = SessionHandler.Current.YoccFeddbackLink;
-
-                var details = childRepository.GetDashBoardDetails();
+                TempData.Keep();
+                var details = childRepository.GetLiquidDashBoardDetails();
                 return View(details);
             }
             else
