@@ -22,7 +22,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         {
         }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -363,6 +362,16 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual ObjectResult<SP_StreetSweepDetails_Result> SP_StreetSweepDetails()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetSweepDetails_Result>("SP_StreetSweepDetails");
+        }
+    
+        public virtual ObjectResult<SP_LiquidDashboard_Details_Result> SP_LiquidDashboard_Details()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LiquidDashboard_Details_Result>("SP_LiquidDashboard_Details");
+        }
+    
+        public virtual ObjectResult<SP_StreetDashboard_Details_Result> SP_StreetDashboard_Details()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetDashboard_Details_Result>("SP_StreetDashboard_Details");
         }
     }
 }

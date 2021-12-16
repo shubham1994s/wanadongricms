@@ -14,6 +14,8 @@ namespace SwachBharat.CMS.Bll.Services
     public interface IScreenService
     {
         DashBoardVM GetDashBoardDetails();
+
+        DashBoardVM GetLiquidDashBoardDetails();
         string Address(string location);
         AreaVM GetAreaDetails(int teamId,string Name);
         void DeletAreaDetails(int teamId);

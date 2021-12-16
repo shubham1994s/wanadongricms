@@ -1125,6 +1125,7 @@
     <Content Include="Areas\Liquid\Views\LiquidWaste\Index.cshtml" />
     <Content Include="Areas\Liquid\Views\LiquidWaste\AddLiquidWaste.cshtml" />
     <Content Include="Areas\Liquid\Views\LiquidWaste\MenuIndex.cshtml" />
+    <Content Include="Areas\Liquid\Views\Shared\_LoginPartial.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
