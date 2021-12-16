@@ -34,7 +34,7 @@ namespace SwachBharat.CMS.Bll.Services
         HouseDetailsVM SaveHouseDetails(HouseDetailsVM data);
          void DeletHouseDetails(int teamId);
 
-        SBALUserLocationMapView GetLocationDetails(int teamId);
+        SBALUserLocationMapView GetLocationDetails(int teamId,string Emptype);
         List<SBALUserLocationMapView> GetAllUserLocation(string date);
 
         List<SBALUserLocationMapView> GetAdminLocation();

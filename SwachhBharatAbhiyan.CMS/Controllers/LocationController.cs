@@ -52,7 +52,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-            SBALUserLocationMapView loc = childRepository.GetLocation(teamId);
+            SBALUserLocationMapView loc = childRepository.GetLocation(teamId,null);
             return View(loc);
             }
             else
@@ -121,13 +121,13 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             else
                 return Redirect("/Account/Login");
     } 
-        public ActionResult UserList()
+        public ActionResult UserList(string rn)
         {
             if (SessionHandler.Current.AppId != 0)
             {
                 SBALUserLocationMapView obj = new SBALUserLocationMapView();
 
-                obj = childRepository.GetLocation(-1);
+                obj = childRepository.GetLocation(-1, rn);
                 return Json(obj.UserList, JsonRequestBehavior.AllowGet);
 
             }

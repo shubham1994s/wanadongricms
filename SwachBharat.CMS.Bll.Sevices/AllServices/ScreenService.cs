@@ -930,32 +930,32 @@ namespace SwachBharat.CMS.Bll.Services
 
 
         }
-        public SBALUserLocationMapView GetLocationDetails(int teamId)
+        public SBALUserLocationMapView GetLocationDetails(int teamId,string Emptype)
         {
             try
             {
                 using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                 {
-                    var Details = db.Locations.FirstOrDefault();
+                    var Details = db.Locations.Where(c =>c.EmployeeType == Emptype).FirstOrDefault();
 
-                 if(teamId>0)
+                    if (teamId>0)
                     { 
-                        Details = db.Locations.Where(c => c.locId == teamId).FirstOrDefault();
+                        Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType== Emptype).FirstOrDefault();
 
                     }
                                 
-                   var atten = db.Daily_Attendance.Where(c => c.daDate==EntityFunctions.TruncateTime(Details.datetime) && c.userId==Details.userId ).FirstOrDefault();
+                   var atten = db.Daily_Attendance.Where(c => c.daDate==EntityFunctions.TruncateTime(Details.datetime) && c.userId==Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                     if (Details != null)
                     {
                         SBALUserLocationMapView loc = new SBALUserLocationMapView();
-                     var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
+                     var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                         loc.userName = user.userName;
                         loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
                         loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
                         loc.address = checkNull(Details.address).Replace("Unnamed Road, ", "");
                         loc.lat = Details.lat;
                         loc.log = Details.@long;
-                        loc.UserList = ListUser();
+                        loc.UserList = ListUser(Emptype);
                         loc.userMobile = user.userMobileNumber;
                         loc.type = Convert.ToInt32(user.Type);
                         try { loc.vehcileNumber = atten.vehicleNumber; } catch { loc.vehcileNumber = ""; }
@@ -2070,14 +2070,14 @@ namespace SwachBharat.CMS.Bll.Services
 
             return Zone;
         }
-        public List<SelectListItem> ListUser()
+        public List<SelectListItem> ListUser(string Emptype)
         {
             var user = new List<SelectListItem>();
             SelectListItem itemAdd = new SelectListItem() { Text = "--Select Employee--", Value = "0" }; 
 
             try
             {
-                user = db.UserMasters.Where(c=> c.isActive == true).ToList()
+                user = db.UserMasters.Where(c=> c.isActive == true && c.EmployeeType== Emptype).ToList()
                     .Select(x => new SelectListItem
                     {
                         Text = x.userName,

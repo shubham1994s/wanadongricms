@@ -41,7 +41,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
          void DeletHouse(int teamId);
 
 
-        SBALUserLocationMapView GetLocation(int teamId);
+        SBALUserLocationMapView GetLocation(int teamId,string Emptype);
         List<SBALUserLocationMapView> GetAllUserLocation(string date);
         // for admin
         List<SBALUserLocationMapView> GetAdminLocation();
