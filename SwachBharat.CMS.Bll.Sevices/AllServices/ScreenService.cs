@@ -567,43 +567,7 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
-        public EmployeeDetailsVM GetLiquidEmployeeDetails(int teamId)
-        {
-            try
-            {
-                EmployeeDetailsVM type = new EmployeeDetailsVM();
-                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
-                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
-
-                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.UserProfile + "/";
-                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
-                {
-                    var Details = db.UserMaster_Liquid.Where(x => x.userId == teamId).FirstOrDefault();
-                    if (Details != null)
-                    {
-                        type = FillLiquidEmployeeViewModel(Details);
-                        if (type.userProfileImage != null && type.userProfileImage != "")
-                        {
-                            type.userProfileImage = ThumbnaiUrlCMS + type.userProfileImage.Trim();
-                        }
-                        else
-                        {
-                            type.userProfileImage = "/Images/default_not_upload.png";
-                        }
-                        return type;
-                    }
-                    else
-                    {
-                        type.userProfileImage = "/Images/add_image_square.png";
-                        return type;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+      
 
 
         public SBAAttendenceSettingsGridRow GetAttendenceEmployeeById(int teamId)
@@ -2309,25 +2273,25 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
 
-        private EmployeeDetailsVM FillLiquidEmployeeViewModel(UserMaster_Liquid data)
-        {
-            EmployeeDetailsVM model = new EmployeeDetailsVM();
-            model.userId = data.userId;
-            model.userAddress = data.userAddress;
-            model.userLoginId = data.userLoginId;
-            model.userMobileNumber = data.userMobileNumber;
-            model.userName = data.userName;
-            model.userNameMar = data.userNameMar;
-            model.userPassword = data.userPassword;
-            model.userProfileImage = data.userProfileImage;
-            model.userEmployeeNo = data.userEmployeeNo;
-            model.imoNo = data.imoNo;
-            model.isActive = data.isActive;
-            model.bloodGroup = data.bloodGroup;
-            model.gcTarget = data.gcTarget;
-            model.EmployeeType = data.EmployeeType;
-            return model;
-        }
+        //private EmployeeDetailsVM FillLiquidEmployeeViewModel(UserMaster_Liquid data)
+        //{
+        //    EmployeeDetailsVM model = new EmployeeDetailsVM();
+        //    model.userId = data.userId;
+        //    model.userAddress = data.userAddress;
+        //    model.userLoginId = data.userLoginId;
+        //    model.userMobileNumber = data.userMobileNumber;
+        //    model.userName = data.userName;
+        //    model.userNameMar = data.userNameMar;
+        //    model.userPassword = data.userPassword;
+        //    model.userProfileImage = data.userProfileImage;
+        //    model.userEmployeeNo = data.userEmployeeNo;
+        //    model.imoNo = data.imoNo;
+        //    model.isActive = data.isActive;
+        //    model.bloodGroup = data.bloodGroup;
+        //    model.gcTarget = data.gcTarget;
+        //    model.EmployeeType = data.EmployeeType;
+        //    return model;
+        //}
 
         private SBAAttendenceSettingsGridRow FillAttendenceEmployeeViewModel(Daily_Attendance data)
         {
@@ -4152,6 +4116,72 @@ namespace SwachBharat.CMS.Bll.Services
 
 
             return userLocation;
+        }
+
+        public DashBoardVM GetLiquidDashBoardDetails()
+        {
+            DashBoardVM model = new DashBoardVM();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+
+                    DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
+                    var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
+                    List<ComplaintVM> obj = new List<ComplaintVM>();
+                    //if (AppID==1)
+                    //{
+                    //    string json = new WebClient().DownloadString(appdetails.Grampanchayat_Pro + "/api/Get/Complaint?appId=1");
+                    //     obj = JsonConvert.DeserializeObject<List<ComplaintVM>>(json).Where(c => Convert.ToDateTime(c.createdDate2).ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy")).ToList();
+                    //}
+                    if (appdetails.GramPanchyatAppID != null)
+                    {
+                        string json = new WebClient().DownloadString(appdetails.Grampanchayat_Pro + "/api/Get/Complaint?appId=" + appdetails.GramPanchyatAppID);
+                        obj = JsonConvert.DeserializeObject<List<ComplaintVM>>(json).Where(c => Convert.ToDateTime(c.createdDate2).ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy")).ToList();
+                    }
+                    var data = db.SP_LiquidDashboard_Details().First();
+
+                    var date = DateTime.Today;
+                    var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
+                    if (data != null)
+                    {
+
+                        model.TodayAttandence = data.TodayAttandence;
+                        model.TotalAttandence = data.TotalAttandence;
+                        model.HouseCollection = data.TotalHouse;
+                        model.LiquidCollection = data.TotalLiquid;
+                        model.TotalComplaint = obj.Count();
+                        model.TotalHouseCount = houseCount.TotalHouseCount;
+                        model.MixedCount = houseCount.MixedCount;
+                        model.BifurgatedCount = houseCount.BifurgatedCount;
+                        model.NotCollected = houseCount.NotCollected;
+                        model.NotSpecified = houseCount.NotSpecified;
+                        //model.TotalGcWeightCount = houseCount.TotalGcWeightCount;
+                        //model.GcWeightCount = Convert.ToDouble(string.Format("{0:0.00}", houseCount.GcWeightCount));
+                        //model.DryWeightCount =Convert.ToDouble(string.Format("{0:0.00}", houseCount.DryWeightCount));
+                        //model.WetWeightCount =Convert.ToDouble(string.Format("{0:0.00}", houseCount.WetWeightCount));
+                        model.GcWeightCount = Convert.ToDouble(houseCount.GcWeightCount);
+                        model.DryWeightCount = Convert.ToDouble(houseCount.DryWeightCount);
+                        model.WetWeightCount = Convert.ToDouble(houseCount.WetWeightCount);
+                        model.TotalGcWeightCount = Convert.ToDouble(houseCount.TotalGcWeightCount);
+                        model.TotalDryWeightCount = Convert.ToDouble(houseCount.TotalDryWeightCount);
+                        model.TotalWetWeightCount = Convert.ToDouble(houseCount.TotalWetWeightCount);
+
+                        return model;
+                    }
+
+                    // String.Format("{0:0.00}", 123.4567); 
+
+                    else
+                    {
+                        return model;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return model;
+            }
         }
     }
 }
