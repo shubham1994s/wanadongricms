@@ -394,5 +394,39 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LSEmployeeSummary_Result>("SP_LSEmployeeSummary", fromParameter, toParameter, useridParameter, emptypeParameter);
         }
+    
+        public virtual ObjectResult<SP_IdelTimeLiquid_Result> SP_IdelTimeLiquid(Nullable<int> userId, Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var fdateParameter = fdate.HasValue ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(System.DateTime));
+    
+            var tdateParameter = tdate.HasValue ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IdelTimeLiquid_Result>("SP_IdelTimeLiquid", userIdParameter, fdateParameter, tdateParameter);
+        }
+    
+        public virtual ObjectResult<SP_IdelTimestreet_Result> SP_IdelTimestreet(Nullable<int> userId, Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var fdateParameter = fdate.HasValue ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(System.DateTime));
+    
+            var tdateParameter = tdate.HasValue ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IdelTimestreet_Result>("SP_IdelTimestreet", userIdParameter, fdateParameter, tdateParameter);
+        }
     }
 }

@@ -103,18 +103,18 @@
 });
 
 function test(id) {
-    window.location.href = "/Attendence/Location?daId="+id;
+    window.location.href = "/Liquid/LiquidAttendence/Location?daId="+id;
 };
 
 function user_route(id) {
-    window.location.href = "/Attendence/UserRoute?daId=" + id;
+    window.location.href = "/Liquid/LiquidAttendence/UserRoute?daId=" + id;
 };
 
 function house_route(id) {
-    window.location.href = "/Attendence/HouseRoute?daId=" + id;
+    window.location.href = "/Liquid/LiquidAttendence/HouseRoute?daId=" + id;
 };
 function map(a) {
-    window.location.href = "/Location/viewLocation?teamId=" + a;
+    window.location.href = "/Liquid/LiquidAttendence/viewLocation?teamId=" + a;
 
 };
 //////////////////////////////////////////////////////////////////////////////
