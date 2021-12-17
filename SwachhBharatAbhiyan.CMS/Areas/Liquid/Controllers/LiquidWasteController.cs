@@ -89,11 +89,11 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
                 readStream = new StreamReader(remoteStream);
                 //Creating Path to save image in folder
                 System.Drawing.Image img = System.Drawing.Image.FromStream(remoteStream);
-                string imgpath = Path.Combine(Server.MapPath(AppDetails.basePath + AppDetails.DumpYardQRCode), image_Guid);
-                var exists = System.IO.Directory.Exists(Server.MapPath(AppDetails.basePath + AppDetails.DumpYardQRCode));
+                string imgpath = Path.Combine(Server.MapPath(AppDetails.basePath + AppDetails.LiquidQRCode), image_Guid);
+                var exists = System.IO.Directory.Exists(Server.MapPath(AppDetails.basePath + AppDetails.LiquidQRCode));
                 if (!exists)
                 {
-                    System.IO.Directory.CreateDirectory(Server.MapPath(AppDetails.basePath + AppDetails.DumpYardQRCode));
+                    System.IO.Directory.CreateDirectory(Server.MapPath(AppDetails.basePath + AppDetails.LiquidQRCode));
                 }
                 img.Save(imgpath);
                 response.Close();

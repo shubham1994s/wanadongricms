@@ -41,6 +41,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
         public string PointPDF { get; set; }
         public string Grampanchayat_Pro { get; set; }
         public string DumpYardQRCode { get; set; }
+        public string LiquidQRCode { get; set; }
+        public string StreetQRCode { get; set; }
         public string DumpYardPDF { get; set; }
         public Nullable<bool> ReportEnable { get; set; }
 

@@ -425,10 +425,9 @@ namespace SwachBharat.CMS.Bll.Services
                 model.GramPanchyatAppID = data.GramPanchyatAppID;
                 model.YoccFeddbackLink = data.YoccFeddbackLink;
                 model.YoccDndLink = data.YoccDndLink;
-
-
-
-            return model;
+                model.LiquidQRCode = data.LiquidQRCode;
+                model.StreetQRCode = data.StreetQRCode;
+               return model;
         
         }
         private AppStateVM FillStatesViewModel(country_states data)
