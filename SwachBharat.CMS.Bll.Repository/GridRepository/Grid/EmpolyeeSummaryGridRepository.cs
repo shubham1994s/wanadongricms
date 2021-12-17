@@ -14,10 +14,11 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository.Grid
 
         DashBoardRepository objRep = new DashBoardRepository();
 
-        public EmpolyeeSummaryGridRepository(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
+        public EmpolyeeSummaryGridRepository(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string Emptype)
         {
-            dataset = objRep.GetEmployeeSummaryData(wildcard, SearchString, fdate, tdate, userId, appId);
+            dataset = objRep.GetEmployeeSummaryData(wildcard, SearchString, fdate, tdate, userId, appId, Emptype);
         }
+
 
         public string GetDataTabelJson(string sortColumn, string sortColumnDir, string draw, string length, string searchValue, string start)
         {

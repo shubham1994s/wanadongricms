@@ -43,5 +43,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> SourceId { get; set; }
         public string OutbatteryStatus { get; set; }
         public string WasteType { get; set; }
+        public string EmployeeType { get; set; }
     }
 }
