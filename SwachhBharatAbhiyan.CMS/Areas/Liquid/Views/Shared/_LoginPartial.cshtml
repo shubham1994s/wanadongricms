@@ -22,7 +22,7 @@
     }
 }
 
-@if (@TempData["status"] == "Success")
+else if (@TempData["status"] == "Success")
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
