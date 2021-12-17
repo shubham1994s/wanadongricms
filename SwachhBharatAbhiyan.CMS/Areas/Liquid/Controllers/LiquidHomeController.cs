@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
 {
+
     public class LiquidHomeController : Controller
     {
 
@@ -45,7 +46,16 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         }
 
 
-     
+        public ActionResult MenuIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                //TempData.Keep();
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
 
     }
 }

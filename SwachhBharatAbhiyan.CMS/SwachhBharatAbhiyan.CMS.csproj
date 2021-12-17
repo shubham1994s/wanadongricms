@@ -243,6 +243,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Liquid\Controllers\LiquidAccountController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidAndroidController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidAttendenceController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidEmployeeController.cs" />
@@ -301,6 +302,7 @@
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidGarbageGrid.js" />
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidIdealGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidWasteGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\Location.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\custom.css" />
@@ -1832,6 +1834,7 @@
     <Folder Include="Areas\Liquid\Content\theme-assets\vendor\font-awesome\less\" />
     <Folder Include="Areas\Liquid\Content\theme-assets\vendor\font-awesome\scss\" />
     <Folder Include="Areas\Liquid\Model\" />
+    <Folder Include="Areas\Liquid\Views\LiquidAccount\" />
     <Folder Include="Content\css\datepicker\less\" />
     <Folder Include="Content\datepicker\less\" />
     <Folder Include="Content\images\svg\" />

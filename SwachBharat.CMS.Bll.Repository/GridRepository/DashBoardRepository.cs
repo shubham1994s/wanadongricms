@@ -2187,6 +2187,69 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         }
 
 
+        public IEnumerable<SBAEmplyeeIdelGrid> GetIdelDataLiquid(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
+        {
+            List<SBAEmplyeeIdelGrid> obj = new List<SBAEmplyeeIdelGrid>();
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+
+
+                var data = db.SP_IdelTimeLiquid(userId, fdate, tdate).Where(c => c.IdelTime != null & c.IdelTime > 15).ToList().OrderByDescending(c => c.StartTime);
+
+                foreach (var x in data)
+                {
+                    TimeSpan spWorkMin = TimeSpan.FromMinutes(Convert.ToDouble(x.IdelTime));
+                    string workHours = spWorkMin.ToString(@"hh\:mm");
+
+                    string displayTime = Convert.ToDateTime(x.date).ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
+                    string time = Convert.ToDateTime(x.StartTime).ToString("HH:mm:ss");
+
+                    obj.Add(new SBAEmplyeeIdelGrid()
+                    {
+                        UserName = x.userName,
+                        Date = Convert.ToDateTime(x.date).ToString("dd/MM/yyyy"),
+                        StartTime = x.StartTime,
+                        EndTime = x.LastTime,
+                        StartAddress = checkNull(x.StartAddress).Replace("Unnamed Road, ", ""),
+                        EndAddress = checkNull(x.address).Replace("Unnamed Road, ", ""),
+                        IdelTime = workHours,
+                        userId = x.userId,
+                        startLat = x.StarLat,
+                        startLong = x.StartLog,
+                        EndLat = x.lat,
+                        EndLong = x.@long,
+                        daDateTIme = (displayTime + " " + time)
+
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    //var model = data.Where(c => c.userName.Contains(SearchString) || c.StartAddress.Contains(SearchString) || c.LastTime.Contains(SearchString) || c.address.Contains(SearchString) || c.StartTime.Contains(SearchString) || Convert.ToString(c.IdelTime).Contains(SearchString)
+
+                    //|| c.userName.ToLower().Contains(SearchString) || c.StartAddress.ToLower().Contains(SearchString) || c.address.ToLower().Contains(SearchString) || c.LastTime.ToLower().Contains(SearchString) || c.StartTime.ToLower().Contains(SearchString) || Convert.ToString(c.IdelTime).ToLower().Contains(SearchString)
+
+                    //   || c.userName.ToUpper().Contains(SearchString) || c.StartAddress.ToUpper().Contains(SearchString) || c.address.ToUpper().Contains(SearchString) || c.LastTime.ToUpper().Contains(SearchString) || c.StartTime.ToUpper().Contains(SearchString) || Convert.ToString(c.IdelTime).ToUpper().Contains(SearchString)).ToList();
+
+
+                    var model = obj.Where(c => ((c.UserName == null ? " " : c.UserName) + " " +
+                                                 (c.StartAddress == null ? " " : c.StartAddress) + " " +
+                                                 (c.EndTime == null ? " " : c.EndTime) + " " +
+                                                 (c.EndAddress == null ? "" : c.EndAddress) + " " +
+                                                 (c.StartTime == null ? " " : c.StartTime) + " " +
+                                                 (Convert.ToString(c.IdelTime) == null ? " " : Convert.ToString(c.IdelTime))).ToUpper().Contains(SearchString.ToUpper())).ToList();
+
+                    obj = model.ToList();
+                }
+                // data = model.OrderByDescending(c => c.DisplayTime).ToList();
+
+                //Address= checkNull(x.Address).Replace("Unnamed Road, ", ""),
+                //MyList.OrderBy(x => x.StartDate).ThenByDescending(x => x.EndDate);
+                //return obj;
+                return obj.OrderByDescending(c => c.daDateTIme).ToList();
+            }
+        }
+
         public IEnumerable<SBAGarbageCountDetails> GetGarbageCountData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
         {
             List<SBAGarbageCountDetails> obj = new List<SBAGarbageCountDetails>();
@@ -2361,7 +2424,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
             var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
 
-            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.DumpYardQRCode + "/";
+            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.LiquidQRCode + "/";
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
             {
                 var data = db.SP_LiquidWasteDetails().Select(x => new SBALiquidWasteGridRow
