@@ -55,9 +55,9 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string DumpYardPDF { get; set; }
         public Nullable<int> GramPanchyatAppID { get; set; }
         public Nullable<int> YoccClientID { get; set; }
-        public Nullable<bool> IsActive { get; set; }
         public string YoccFeddbackLink { get; set; }
         public string YoccDndLink { get; set; }
+        public Nullable<bool> IsActive { get; set; }
         public Nullable<int> LanguageId { get; set; }
         public string MsgForBroadcast { get; set; }
         public string MsgForNotSpecified { get; set; }
@@ -65,5 +65,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string MsgForNotReceived { get; set; }
         public string MsgForSegregated { get; set; }
         public Nullable<bool> IsScanNear { get; set; }
+        public string LiquidQRCode { get; set; }
+        public string StreetQRCode { get; set; }
     }
 }
