@@ -243,6 +243,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Liquid\Controllers\LiquidAccountController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidAndroidController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidAttendenceController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidEmployeeController.cs" />
@@ -1826,6 +1827,7 @@
     <Folder Include="Areas\Liquid\Content\theme-assets\vendor\font-awesome\less\" />
     <Folder Include="Areas\Liquid\Content\theme-assets\vendor\font-awesome\scss\" />
     <Folder Include="Areas\Liquid\Model\" />
+    <Folder Include="Areas\Liquid\Views\LiquidAccount\" />
     <Folder Include="Content\css\datepicker\less\" />
     <Folder Include="Content\datepicker\less\" />
     <Folder Include="Content\images\svg\" />
