@@ -2,7 +2,7 @@
     var UserId = $('#selectnumber').val();
     $.ajax({
         type: "post",
-        url: "/Location/UserList",
+        url: "/Location/UserList?rn=L",
         data: { userId: UserId },
         datatype: "json",
         traditional: true,
@@ -27,7 +27,7 @@
         //"pageLength": 10,
         width: 670,
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=EmployeeSummary",
+            "url": "/Datable/GetJqGridJson?rn=LiquidEmployeeSummary",
             "type": "POST",
             "datatype": "json"
         },

@@ -833,7 +833,7 @@ namespace SwachBharat.CMS.Bll.Services
         {
             try
             {
-                if (Emptype == "NULL")
+                if (Emptype== "NULL" || Emptype == null)
                 {
                     using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                     {

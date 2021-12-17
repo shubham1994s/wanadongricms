@@ -306,7 +306,13 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
 
                 case "EmployeeSummary":
-                    gridRepository = new EmpolyeeSummaryGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    gridRepository = new EmpolyeeSummaryGridRepository(0, searchString, fdate, tdate, userId, appId, null);
+                    return gridRepository;
+                    break;
+
+
+                case "LiquidEmployeeSummary":
+                    gridRepository = new EmpolyeeSummaryGridRepository(0, searchString, fdate, tdate, userId, appId, "L");
                     return gridRepository;
                     break;
 
