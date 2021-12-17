@@ -18,7 +18,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid
                 "Liquid_default",
                 "Liquid/{controller}/{action}/{id}",
                 new {action = "Index", id = UrlParameter.Optional },
-                new { controller = "LiquidHome|LiquidWaste|LiquidEmployee|LiquidAttendence|LiquidGarbage|LiquidAndroid|LiquidMainMaster" },
+                new { controller = "LiquidHome|LiquidWaste|LiquidEmployee|LiquidAttendence|LiquidGarbage|LiquidAndroid|LiquidMainMaster|LiquidAccount" },
                new[] { "SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers" }
             );
         }
