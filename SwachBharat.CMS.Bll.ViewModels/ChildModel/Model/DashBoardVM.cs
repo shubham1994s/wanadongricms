@@ -63,6 +63,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<int> WardNo { get; set; }
         public Nullable<int> AreaId { get; set; }
 
+        public Nullable<int> LiquidWasteCollection { get; set; }
+
 
     }
 }

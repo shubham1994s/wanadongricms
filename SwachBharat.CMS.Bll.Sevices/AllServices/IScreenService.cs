@@ -35,10 +35,10 @@ namespace SwachBharat.CMS.Bll.Services
          void DeletHouseDetails(int teamId);
 
         SBALUserLocationMapView GetLocationDetails(int teamId,string Emptype);
-        List<SBALUserLocationMapView> GetAllUserLocation(string date);
+        List<SBALUserLocationMapView> GetAllUserLocation(string date,string Emptype);
 
         List<SBALUserLocationMapView> GetAdminLocation();
-        List<SBALUserLocationMapView> GetUserWiseLocation(int userId,string date);
+        List<SBALUserLocationMapView> GetUserWiseLocation(int userId,string date, string Emptype);
         List<SBALUserLocationMapView> GetUserAttenLocation(int userId);
         List<SBALUserLocationMapView> GetUserAttenRoute(int userId);
 
@@ -105,6 +105,8 @@ namespace SwachBharat.CMS.Bll.Services
 
         //Added By Saurabh (2 July 2019)
         DashBoardVM GetHouseOnMapDetails();
+        DashBoardVM GetLiquidWasteDetails();
+        
         //Added By Neha (12 July 2019)
         List<SBAEmplyeeIdelGrid> GetIdleTimeRoute(int userId, string Date);
 

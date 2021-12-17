@@ -178,9 +178,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             switch (RepositoryName)
             {
                 case "Location":
-                    gridRepository = new LocationGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    gridRepository = new LocationGridRepository(0, searchString, fdate, tdate, userId, appId,null);
                     return gridRepository;
                     break;
+
+                case "LiquidLocation":
+                    gridRepository = new LocationGridRepository(0, searchString, fdate, tdate, userId, appId,"L");
+                    return gridRepository;
+                    break;
+
                 case "ActiveEmployee":
                     gridRepository = new EmployeeGridRepository(0, searchString, appId, "1","");
                     return gridRepository;

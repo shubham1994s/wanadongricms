@@ -394,5 +394,15 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LSEmployeeSummary_Result>("SP_LSEmployeeSummary", fromParameter, toParameter, useridParameter, emptypeParameter);
         }
+    
+        public virtual ObjectResult<LiquidCurrentAllUserLocationTest1_Result> LiquidCurrentAllUserLocationTest1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LiquidCurrentAllUserLocationTest1_Result>("LiquidCurrentAllUserLocationTest1");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_LiquidWaste_Count()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_LiquidWaste_Count");
+        }
     }
 }

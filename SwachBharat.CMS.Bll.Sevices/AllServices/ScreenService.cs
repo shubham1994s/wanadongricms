@@ -567,7 +567,7 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
-      
+
 
 
         public SBAAttendenceSettingsGridRow GetAttendenceEmployeeById(int teamId)
@@ -833,7 +833,7 @@ namespace SwachBharat.CMS.Bll.Services
         {
             try
             {
-                if (Emptype== "NULL" || Emptype == null)
+                if (Emptype == "NULL" || Emptype == null)
                 {
                     using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                     {
@@ -952,49 +952,136 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
-        public List<SBALUserLocationMapView> GetAllUserLocation(string date)
+        public List<SBALUserLocationMapView> GetAllUserLocation(string date, string Emptype)
         {
             List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
-            var data = db.CurrentAllUserLocationTest1().ToList();
-            foreach (var x in data)
+
+            if (Emptype == null)
             {
-                //string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
-                //string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
-                ////var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.daDate ==EntityFunctions.TruncateTime(x.datetime) && (c.endTime == null || c.endTime == ""))).FirstOrDefault();
-
-                //var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.endTime == null || c.endTime =="")).FirstOrDefault();
-
-                //if (atten != null)
-                //{
-                //    userLocation.Add(new SBALUserLocationMapView()
-                //    {
-                //        userId = Convert.ToInt32(x.userid),
-                //        userName = x.userName,
-                //        date = dat,
-                //        time = tim,
-                //        lat = x.lat,
-                //        log = x.@long,
-                //        address = Address(x.lat + "," + x.@long),
-                //        vehcileNumber = atten.vehicleNumber,
-                //        userMobile = x.userMobileNumber,
-                //    });
-                //}
-
-
-                userLocation.Add(new SBALUserLocationMapView()
+                var data = db.CurrentAllUserLocationTest1().ToList();
+                foreach (var x in data)
                 {
-                    userId = Convert.ToInt32(x.userid),
-                    userName = x.userName,
-                    date = Convert.ToDateTime(x.datt).ToString("dd/MM/yyyy"),
-                    time = Convert.ToDateTime(x.datt).ToString("hh:mm tt"),
-                    lat = x.lat,
-                    log = x.lang,
-                    address = checkNull(x.addr).Replace("Unnamed Road, ", ""),
-                    vehcileNumber = x.v,
-                    userMobile = x.mobile,
-                });
-            }
+                    //string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    //string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    ////var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.daDate ==EntityFunctions.TruncateTime(x.datetime) && (c.endTime == null || c.endTime == ""))).FirstOrDefault();
 
+                    //var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.endTime == null || c.endTime =="")).FirstOrDefault();
+
+                    //if (atten != null)
+                    //{
+                    //    userLocation.Add(new SBALUserLocationMapView()
+                    //    {
+                    //        userId = Convert.ToInt32(x.userid),
+                    //        userName = x.userName,
+                    //        date = dat,
+                    //        time = tim,
+                    //        lat = x.lat,
+                    //        log = x.@long,
+                    //        address = Address(x.lat + "," + x.@long),
+                    //        vehcileNumber = atten.vehicleNumber,
+                    //        userMobile = x.userMobileNumber,
+                    //    });
+                    //}
+
+
+                    userLocation.Add(new SBALUserLocationMapView()
+                    {
+                        userId = Convert.ToInt32(x.userid),
+                        userName = x.userName,
+                        date = Convert.ToDateTime(x.datt).ToString("dd/MM/yyyy"),
+                        time = Convert.ToDateTime(x.datt).ToString("hh:mm tt"),
+                        lat = x.lat,
+                        log = x.lang,
+                        address = checkNull(x.addr).Replace("Unnamed Road, ", ""),
+                        vehcileNumber = x.v,
+                        userMobile = x.mobile,
+                    });
+                }
+            }
+            else if (Emptype == "L")
+            {
+                var data = db.LiquidCurrentAllUserLocationTest1().ToList();
+                foreach (var x in data)
+                {
+                    //string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    //string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    ////var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.daDate ==EntityFunctions.TruncateTime(x.datetime) && (c.endTime == null || c.endTime == ""))).FirstOrDefault();
+
+                    //var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.endTime == null || c.endTime =="")).FirstOrDefault();
+
+                    //if (atten != null)
+                    //{
+                    //    userLocation.Add(new SBALUserLocationMapView()
+                    //    {
+                    //        userId = Convert.ToInt32(x.userid),
+                    //        userName = x.userName,
+                    //        date = dat,
+                    //        time = tim,
+                    //        lat = x.lat,
+                    //        log = x.@long,
+                    //        address = Address(x.lat + "," + x.@long),
+                    //        vehcileNumber = atten.vehicleNumber,
+                    //        userMobile = x.userMobileNumber,
+                    //    });
+                    //}
+
+
+                    userLocation.Add(new SBALUserLocationMapView()
+                    {
+                        userId = Convert.ToInt32(x.userid),
+                        userName = x.userName,
+                        date = Convert.ToDateTime(x.datt).ToString("dd/MM/yyyy"),
+                        time = Convert.ToDateTime(x.datt).ToString("hh:mm tt"),
+                        lat = x.lat,
+                        log = x.lang,
+                        address = checkNull(x.addr).Replace("Unnamed Road, ", ""),
+                        vehcileNumber = x.v,
+                        userMobile = x.mobile,
+                    });
+                }
+            }
+            else
+            {
+                var data = db.CurrentAllUserLocationTest1().ToList();
+                foreach (var x in data)
+                {
+                    //string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    //string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    ////var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.daDate ==EntityFunctions.TruncateTime(x.datetime) && (c.endTime == null || c.endTime == ""))).FirstOrDefault();
+
+                    //var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.endTime == null || c.endTime =="")).FirstOrDefault();
+
+                    //if (atten != null)
+                    //{
+                    //    userLocation.Add(new SBALUserLocationMapView()
+                    //    {
+                    //        userId = Convert.ToInt32(x.userid),
+                    //        userName = x.userName,
+                    //        date = dat,
+                    //        time = tim,
+                    //        lat = x.lat,
+                    //        log = x.@long,
+                    //        address = Address(x.lat + "," + x.@long),
+                    //        vehcileNumber = atten.vehicleNumber,
+                    //        userMobile = x.userMobileNumber,
+                    //    });
+                    //}
+
+
+                    userLocation.Add(new SBALUserLocationMapView()
+                    {
+                        userId = Convert.ToInt32(x.userid),
+                        userName = x.userName,
+                        date = Convert.ToDateTime(x.datt).ToString("dd/MM/yyyy"),
+                        time = Convert.ToDateTime(x.datt).ToString("hh:mm tt"),
+                        lat = x.lat,
+                        log = x.lang,
+                        address = checkNull(x.addr).Replace("Unnamed Road, ", ""),
+                        vehcileNumber = x.v,
+                        userMobile = x.mobile,
+                    });
+                }
+            }
             return userLocation;
         }
 
@@ -1024,7 +1111,7 @@ namespace SwachBharat.CMS.Bll.Services
         }
 
 
-        public List<SBALUserLocationMapView> GetUserWiseLocation(int userId, string date)
+        public List<SBALUserLocationMapView> GetUserWiseLocation(int userId, string date, string Emptype)
         {
             List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
             DateTime newdate = DateTime.Now.Date;
@@ -1034,39 +1121,101 @@ namespace SwachBharat.CMS.Bll.Services
             DateTime dt = DateTime.ParseExact(date, "d/M/yyyy", CultureInfo.InvariantCulture);
             // for both "1/1/2000" or "25/1/2000" formats
             //  string newString = dt.ToString("MM/dd/yyyy");
-
             //var dat1 = DateTime.ParseExact(date, "M/d/yyyy", CultureInfo.InvariantCulture);
 
-            var data = db.Locations.Where(c => c.userId == userId).ToList();
-
-            foreach (var x in data.Where(c => Convert.ToDateTime(c.datetime).Date == Convert.ToDateTime(dt)))
+            if (Emptype == null)
             {
-                string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
-                string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
-                var userName = db.UserMasters.Where(c => c.userId == userId).FirstOrDefault();
-                var atten = db.Daily_Attendance.Where(c => c.userId == x.userId && (c.daDate == EntityFunctions.TruncateTime(x.datetime))).FirstOrDefault();
-                string v = "";
-                //if (atten != null)
-                //{
-                //    v = atten.vehicleNumber;
-                //}
-                //else { v = ""; }
-
-                v = (string.IsNullOrEmpty(atten.vehicleNumber) ? "" : atten.vehicleNumber);
-
-                userLocation.Add(new SBALUserLocationMapView()
+                var data = db.Locations.Where(c => c.userId == userId && c.EmployeeType==null).ToList();
+                foreach (var x in data.Where(c => Convert.ToDateTime(c.datetime).Date == Convert.ToDateTime(dt)))
                 {
-                    userName = userName.userName,
-                    date = dat,
-                    time = tim,
-                    lat = x.lat,
-                    log = x.@long,
-                    address = checkNull(x.address).Replace("Unnamed Road, ", ""),
-                    vehcileNumber = v,
-                    userMobile = userName.userMobileNumber,
-                });
-            }
+                    string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    var userName = db.UserMasters.Where(c => c.userId == userId).FirstOrDefault();
+                    var atten = db.Daily_Attendance.Where(c => c.userId == x.userId && (c.daDate == EntityFunctions.TruncateTime(x.datetime))).FirstOrDefault();
+                    string v = "";
+                    //if (atten != null)
+                    //{
+                    //    v = atten.vehicleNumber;
+                    //}
+                    //else { v = ""; }
 
+                    v = (string.IsNullOrEmpty(atten.vehicleNumber) ? "" : atten.vehicleNumber);
+
+                    userLocation.Add(new SBALUserLocationMapView()
+                    {
+                        userName = userName.userName,
+                        date = dat,
+                        time = tim,
+                        lat = x.lat,
+                        log = x.@long,
+                        address = checkNull(x.address).Replace("Unnamed Road, ", ""),
+                        vehcileNumber = v,
+                        userMobile = userName.userMobileNumber,
+                    });
+                }
+            }
+            else if (Emptype == "L")
+            {
+                var data = db.Locations.Where(c => c.userId == userId && c.EmployeeType == "L").ToList();
+                foreach (var x in data.Where(c => Convert.ToDateTime(c.datetime).Date == Convert.ToDateTime(dt)))
+                {
+                    string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    var userName = db.UserMasters.Where(c => c.userId == userId).FirstOrDefault();
+                    var atten = db.Daily_Attendance.Where(c => c.userId == x.userId && (c.daDate == EntityFunctions.TruncateTime(x.datetime))).FirstOrDefault();
+                    string v = "";
+                    //if (atten != null)
+                    //{
+                    //    v = atten.vehicleNumber;
+                    //}
+                    //else { v = ""; }
+
+                    v = (string.IsNullOrEmpty(atten.vehicleNumber) ? "" : atten.vehicleNumber);
+
+                    userLocation.Add(new SBALUserLocationMapView()
+                    {
+                        userName = userName.userName,
+                        date = dat,
+                        time = tim,
+                        lat = x.lat,
+                        log = x.@long,
+                        address = checkNull(x.address).Replace("Unnamed Road, ", ""),
+                        vehcileNumber = v,
+                        userMobile = userName.userMobileNumber,
+                    });
+                }
+            }
+            else if (Emptype == "S")
+            {
+                var data = db.Locations.Where(c => c.userId == userId && c.EmployeeType == "S").ToList();
+                foreach (var x in data.Where(c => Convert.ToDateTime(c.datetime).Date == Convert.ToDateTime(dt)))
+                {
+                    string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    var userName = db.UserMasters.Where(c => c.userId == userId).FirstOrDefault();
+                    var atten = db.Daily_Attendance.Where(c => c.userId == x.userId && (c.daDate == EntityFunctions.TruncateTime(x.datetime))).FirstOrDefault();
+                    string v = "";
+                    //if (atten != null)
+                    //{
+                    //    v = atten.vehicleNumber;
+                    //}
+                    //else { v = ""; }
+
+                    v = (string.IsNullOrEmpty(atten.vehicleNumber) ? "" : atten.vehicleNumber);
+
+                    userLocation.Add(new SBALUserLocationMapView()
+                    {
+                        userName = userName.userName,
+                        date = dat,
+                        time = tim,
+                        lat = x.lat,
+                        log = x.@long,
+                        address = checkNull(x.address).Replace("Unnamed Road, ", ""),
+                        vehcileNumber = v,
+                        userMobile = userName.userMobileNumber,
+                    });
+                }
+            }
             return userLocation;
         }
 
@@ -1631,6 +1780,38 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+
+        public DashBoardVM GetLiquidWasteDetails()
+        {
+            DashBoardVM model = new DashBoardVM();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
+                    var data = db.SP_LiquidWaste_Count().First();
+                    if (data != null)
+                    {
+                     // model.LiquidWasteCollection = data;
+                        //model.HouseCollection = data.TotalHouseLatLongCount;
+                        //model.TotalScanHouseCount = data.TotalScanHouseCount;
+                        //model.MixedCount = data.MixedCount;
+                        //model.BifurgatedCount = data.BifurgatedCount;
+                        //model.NotCollected = data.NotCollected;
+                        //model.NotSpecified = data.NotSpecified;
+                        return model;
+                    }
+                    else
+                    {
+                        return model;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return model;
+            }
+        }
         #endregion
 
         #region Garbage Point Details

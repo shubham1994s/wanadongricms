@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SwachBharat.CMS.Dal.DataContexts; 
+using SwachBharat.CMS.Dal.DataContexts;
 using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
 using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.Repository.ChildRepository;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using SwachhBharatAbhiyan.CMS.Models;
 
-namespace SwachhBharatAbhiyan.CMS.Controllers
+namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
 {
-    public class LocationController : Controller
+    public class LiquidLocationController : Controller
     {
         IMainRepository mainRepository;
         IChildRepository childRepository;
-        public LocationController()
+        public LiquidLocationController()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -52,8 +52,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-            SBALUserLocationMapView loc = childRepository.GetLocation(teamId,null);
-            return View(loc);
+                SBALUserLocationMapView loc = childRepository.GetLocation(teamId, null);
+                return View(loc);
             }
             else
                 return Redirect("/Account/Login");
@@ -67,7 +67,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             else
                 return Redirect("/Account/Login");
         }
-         
+
         public ActionResult AllUserLocation()
         {
             if (SessionHandler.Current.AppId != 0)
@@ -79,7 +79,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             else
                 return Redirect("/Account/Login");
         }
-        public ActionResult LocatioList(string date,string userid)
+        public ActionResult LocatioList(string date, string userid)
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -87,40 +87,41 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 {
                     date = DateTime.Now.ToShortDateString();
                 }
-         
-            List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
-            obj = childRepository.GetAllUserLocation(date,null);
+
+                List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
+                obj = childRepository.GetAllUserLocation(date,"L");
                 // return Json(obj);
-                if ( userid != null && userid != "null" && userid != "-1")
+                if (userid != null && userid != "null" && userid != "-1")
                 {
                     obj = obj.Where(c => c.userId == Convert.ToInt32(userid)).ToList();
                 }
-            return Json(obj, JsonRequestBehavior.AllowGet);
+                return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
                 return Redirect("/Account/Login");
-        } 
-        public ActionResult UserWiseLocatioList(int userId,string date)
+        }
+        public ActionResult UserWiseLocatioList(int userId, string date)
         {
             if (SessionHandler.Current.AppId != 0)
             {
-             
-                if (date == null || date== "")
+
+                if (date == null || date == "")
                 {
                     date = DateTime.Now.ToShortDateString();
                 }
-                else {
+                else
+                {
                     date = date.ToString();
 
                 }
                 List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
-                obj = childRepository.GetUserWiseLocation(userId, date,null);
+                obj = childRepository.GetUserWiseLocation(userId, date,"L");
                 // return Json(obj);
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
                 return Redirect("/Account/Login");
-    } 
+        }
         public ActionResult UserList(string rn)
         {
             if (SessionHandler.Current.AppId != 0)
@@ -133,8 +134,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
             else
                 return Redirect("/Account/Login");
-        } 
-        public ActionResult UserCurrentLocation(int userId,string date)
+        }
+        public ActionResult UserCurrentLocation(int userId, string date)
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -143,14 +144,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     date = DateTime.Now.ToShortDateString();
                 }
                 List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
-                obj = childRepository.GetAllUserLocation(date,null).Where(c => c.userId == userId).ToList();
+                obj = childRepository.GetAllUserLocation(date,"L").Where(c => c.userId == userId).ToList();
                 // return Json(obj);
                 return Json(obj, JsonRequestBehavior.AllowGet);
 
             }
             else
                 return Redirect("/Account/Login");
-    }
+        }
 
         public ActionResult GetAddress(string location)
         {
@@ -166,7 +167,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect("/Account/Login");
         }
 
-        
+
         public ActionResult LocatioAdmin(string date, string userid)
         {
 
@@ -191,7 +192,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         public ActionResult Login(string courseID)
         {
 
-            
+
             return Json(courseID, JsonRequestBehavior.AllowGet);
         }
 
@@ -216,6 +217,21 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 ViewBag.AppName = SessionHandler.Current.AppName;
 
                 var details = childRepository.GetHouseOnMapDetails();
+                return View(details);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult AllLiquidWasteLocation()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                ViewBag.lat = SessionHandler.Current.Latitude;
+                ViewBag.lang = SessionHandler.Current.Logitude;
+                ViewBag.AppName = SessionHandler.Current.AppName;
+
+                var details = childRepository.GetLiquidWasteDetails();
                 return View(details);
             }
             else
@@ -297,20 +313,21 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         //        return Redirect("/Account/Login");
         //}
 
-        public ActionResult HouseLocationList(string date, string userid, string areaId, string wardNo, string SearchString,string garbageType,string filterType)
+        public ActionResult HouseLocationList(string date, string userid, string areaId, string wardNo, string SearchString, string garbageType, string filterType)
         {
             if (SessionHandler.Current.AppId != 0)
             {
                 int user;
                 int area;
                 int ward;
-                int ? GarbageType;
+                int? GarbageType;
                 int FilterType;
                 if (userid == "-1" || userid == "0" || userid == "null")
                 {
                     user = 0;
                 }
-                else {
+                else
+                {
                     user = Convert.ToInt32(userid);
                 }
 
@@ -318,28 +335,32 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 {
                     area = 0;
                 }
-                else {
+                else
+                {
                     area = Convert.ToInt32(areaId);
                 }
                 if (wardNo == "-1" || wardNo == "0" || wardNo == "null")
                 {
                     ward = 0;
                 }
-                else {
+                else
+                {
                     ward = Convert.ToInt32(wardNo);
                 }
                 if (garbageType == "-1" || garbageType == null)
                 {
                     GarbageType = null;
                 }
-                else {
+                else
+                {
                     GarbageType = Convert.ToInt32(garbageType);
                 }
                 if (filterType == "-1" || filterType == "0" || filterType == "null")
                 {
                     FilterType = 0;
                 }
-                else {
+                else
+                {
                     FilterType = Convert.ToInt32(filterType);
                 }
                 if (date == null || date == "")

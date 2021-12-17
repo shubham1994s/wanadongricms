@@ -42,10 +42,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
 
         SBALUserLocationMapView GetLocation(int teamId,string Emptype);
-        List<SBALUserLocationMapView> GetAllUserLocation(string date);
+        List<SBALUserLocationMapView> GetAllUserLocation(string date,string Emptype);
         // for admin
         List<SBALUserLocationMapView> GetAdminLocation();
-        List<SBALUserLocationMapView> GetUserWiseLocation(int id,string date);
+        List<SBALUserLocationMapView> GetUserWiseLocation(int id,string date,string Emptype);
         List<SBALUserLocationMapView> GetUserAttenLocation(int id);
         List<SBALUserLocationMapView> GetUserAttenRoute(int id);
 
@@ -118,6 +118,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         //Added By saurabh ( 02 July 2019)
         DashBoardVM GetHouseOnMapDetails();
+
+        DashBoardVM GetLiquidWasteDetails();
         //Added By Neha ( 12 July 2019)
         List<SBAEmplyeeIdelGrid> GetIdleTimeRoute(int userId, string Date);
         OnePoint4VM GetOnePointFourTotalCount(int ANS_ID);

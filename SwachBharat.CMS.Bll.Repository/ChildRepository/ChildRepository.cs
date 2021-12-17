@@ -117,9 +117,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetLocationDetails(teamId, Emptype);
         }
 
-        public List<SBALUserLocationMapView> GetAllUserLocation(string date)
+        public List<SBALUserLocationMapView> GetAllUserLocation(string date,string Emptype)
         {
-            return screenService.GetAllUserLocation(date);
+            return screenService.GetAllUserLocation(date, Emptype);
         }
 
         public List<SBALUserLocationMapView> GetAdminLocation()
@@ -128,9 +128,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         }
 
 
-        public List<SBALUserLocationMapView> GetUserWiseLocation(int userId,string date)
+        public List<SBALUserLocationMapView> GetUserWiseLocation(int userId,string date,string Emptype)
         {
-            return screenService.GetUserWiseLocation(userId,date);
+            return screenService.GetUserWiseLocation(userId,date, Emptype);
         }
 
         public List<SBALUserLocationMapView> GetUserAttenLocation(int userId)
@@ -325,6 +325,14 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetHouseOnMapDetails();
 
         }
+        
+        public DashBoardVM GetLiquidWasteDetails()
+        {
+            return screenService.GetLiquidWasteDetails();
+
+        }
+
+        
         // Addded By neha (12 July 2019)
         public List<SBAEmplyeeIdelGrid> GetIdleTimeRoute(int userId, string Date)
         {
