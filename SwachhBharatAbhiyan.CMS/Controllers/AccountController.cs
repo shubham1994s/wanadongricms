@@ -231,7 +231,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 switch (Result.status)
                 {
                     case "Success":
-
+                        Session["status"] = "Success";
                         TempData["status"] = "Success";
                         TempData["ADUM_USER_NAME"] = Result.ADUM_USER_NAME;
                         AddSession(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
