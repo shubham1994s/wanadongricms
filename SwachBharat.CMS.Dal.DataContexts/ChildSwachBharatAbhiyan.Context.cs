@@ -23,6 +23,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         }
 
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -433,6 +434,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual ObjectResult<Nullable<int>> SP_LiquidWaste_Count()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_LiquidWaste_Count");
+        }
+    
+        public virtual ObjectResult<LiquidCurrentAllUserLocationTest1_Result> LiquidCurrentAllUserLocationTest1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LiquidCurrentAllUserLocationTest1_Result>("LiquidCurrentAllUserLocationTest1");
         }
     }
 }
