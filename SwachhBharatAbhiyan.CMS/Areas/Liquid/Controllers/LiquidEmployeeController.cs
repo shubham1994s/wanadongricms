@@ -50,7 +50,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
                 return Redirect("/Account/Login");
         }
 
-
+        [HttpGet]
         public ActionResult AddEmployeeDetails(int teamId = -1)
         {
             if (SessionHandler.Current.AppId != 0)

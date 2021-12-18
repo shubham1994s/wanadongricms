@@ -2857,7 +2857,7 @@ namespace SwachBharat.CMS.Bll.Services
                 DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
                 var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
 
-                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.DumpYardQRCode + "/";
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.LiquidQRCode + "/";
                 LiquidWasteVM LiquidWaste = new LiquidWasteVM();
 
                 var Details = db.LiquidWasteDetails.Where(x => x.LWId == teamId).FirstOrDefault();

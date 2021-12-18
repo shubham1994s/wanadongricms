@@ -231,10 +231,10 @@ function PopImages(cel) {
     jQuery("#header_data").html(head);
 }
 function Edit(Id) {
-    window.location.href = "/Employee/AddEmployeeDetails?teamId=" + Id;
+    window.location.href = "/Liquid/LiquidEmployee/AddEmployeeDetails?teamId=" + Id;
 };
 function Delete(Id) {
-    window.location.href = "/Employee/DeleteEmployee?teamId=" + Id;
+    window.location.href = "/Liquid/LiquidEmployee/DeleteEmployee?teamId=" + Id;
 };
 
 
