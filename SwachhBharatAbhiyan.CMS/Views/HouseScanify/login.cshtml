@@ -20,6 +20,108 @@
     <link rel="shortcut icon" href="/Content/images/img/sba.png" />
 
 </head>
+
+<style>
+    .login-page .form-holder .info {
+        background: #d8f1fe;
+        color: #189cdf;
+    }
+
+    .bg-blue {
+        background: #189cdf !important;
+    }
+
+    .username, .password {
+        font-size: 16px;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .btn-white {
+        background: #fff;
+    }
+
+    .btn-colr {
+        color: #189cdf !important;
+        font-weight: bold !important;
+        font-weight: 600 !important;
+    }
+
+    input.input-material {
+        border-radius: 10px;
+        margin-left: 15%;
+        width: 75%;
+        height: 34px;
+        background: #62caffbf;
+        padding: 10px 15px;
+        border-bottom: 0px solid #eee;
+    }
+
+    select.input-material {
+        border-radius: 10px;
+        margin-left: 15%;
+        width: 75%;
+        height: 34px;
+        background: #62caffbf;
+        padding: 5px 15px;
+        border-bottom: 0px solid #eee;
+        color: #fff;
+    }
+
+    ::placeholder {
+        color: #fff;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #fff;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #fff;
+    }
+
+    input[type='submit'] {
+        font-weight: 600 !important;
+    }
+
+    input {
+        color: #fff !important;
+    }
+
+        input[type=text]:focus {
+            outline: 2px solid orange; /* oranges! yey */
+        }
+
+        input[type=password]:focus {
+            outline: 2px solid orange; /* oranges! yey */
+        }
+
+        input:-internal-autofill-selected {
+            background: #62caffbf !important;
+        }
+
+    label {
+        margin-left: 15%;
+    }
+
+    option {
+        width: 50%;
+    }
+    /* Change Autocomplete styles in Chrome*/
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        -webkit-text-fill-color: #fff;
+        -webkit-box-shadow: 0 0 0px 1000px #62caffbf inset;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+</style>
 <body>
 
     <div class="page login-page">
@@ -33,7 +135,7 @@
 
                                 <div class="content">
                                     <div class="logo">
-                                        <img style="height:auto;width:auto;max-width:200px;" src="~/Content/images/img/app_icon_cms.png" />
+                                        <img style="height:auto;width:auto;max-width:200px;" src="~/Content/images/New_Img/WCMT-Logo.png" />
                                     </div>
                                 </div>
                                 <br>
@@ -48,7 +150,7 @@
 
                     </div>
                     <!-- Form Panel    -->
-                    <div class="col-lg-6 bg-white">
+                    <div class="col-lg-6 bg-blue">
 
                         @using (Html.BeginForm("Login", "HouseScanify", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
                         {
@@ -57,8 +159,9 @@
                                 <div class="content">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom:-15px;display:block;font-size:12px;" })
                                     <div class="form-group">
+                                        <label for="login-username" class="username">User Name</label>
                                         @Html.TextBoxFor(m => m.Email, new { @class = "input-material", @id = "login-username" })
-                                        <label for="login-username" class="label-material">User Name</label>
+
                                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
                                     </div>
 
@@ -67,14 +170,15 @@
 
 
                                     <div class="form-group">
+                                        <label for="login-password" class="password">Password </label>
                                         @Html.PasswordFor(m => m.Password, new { @class = "input-material ", @id = "login-password" })
-                                        <label for="login-password" class="label-material">Password </label>
+
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
                                     </div>
                                     @*<a id="login" href="index.html" class="btn btn-primary">Login</a>*@
 
 
-                                    <input class="btn btn-primary" align="center" style="margin:5px;width:90%; padding: 10px 36px;font-weight:600; border-radius:4px 4px 4px 4px" type="submit" id="login" value="Login">
+                                    <input class="btn btn-white btn-colr" align="center" style="margin: 5px; margin-left: 30%; width: 40%; height: 34px; padding: 5px 15px;border-radius: 10px; position: absolute; left: 20px; " type="submit" id="login" value="LOGIN">
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                                     @*<center><a href="#" class="forgot-pass">Forgot Password?</a></center>*@
                                     @*<br><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>*@
