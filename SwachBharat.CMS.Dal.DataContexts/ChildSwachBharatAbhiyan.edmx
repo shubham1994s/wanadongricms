@@ -813,7 +813,16 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="userid" Mode="In" Type="Int32" />
             <Parameter Name="Emptype" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="LiquidCurrentAllUserLocationTest1" ReturnType="Collection(DevSwachhBharatNagpurModel.LiquidCurrentAllUserLocationTest1_Result)" />
+          <FunctionImport Name="SP_IdelTimeLiquid" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_IdelTimeLiquid_Result)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="fdate" Mode="In" Type="DateTime" />
+            <Parameter Name="tdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_IdelTimestreet" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_IdelTimestreet_Result)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="fdate" Mode="In" Type="DateTime" />
+            <Parameter Name="tdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="SP_LiquidWaste_Count" ReturnType="Collection(Int32)" />
          
         </EntityContainer>

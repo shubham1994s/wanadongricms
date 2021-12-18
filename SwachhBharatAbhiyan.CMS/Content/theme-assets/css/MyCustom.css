@@ -11,6 +11,9 @@ nav.navbar {
 nav.side-navbar ul li a:hover {
     background: #189cdf !important;
 }
+nav.side-navbar ul li.active > a {
+    background: #479cdf !important;
+}
 nav.side-navbar {
     background: #d8f1fe !important;
 }
