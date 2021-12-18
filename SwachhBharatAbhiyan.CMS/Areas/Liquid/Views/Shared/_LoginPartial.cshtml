@@ -23,7 +23,7 @@
     }
 }
 
-else if (@TempData["status"] == "Success")
+else if (@HttpContext.Current.Session["status"]  == "Success")
 {
     using (Html.BeginForm("LogOff", "LiquidAccount", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {

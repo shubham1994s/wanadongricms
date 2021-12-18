@@ -132,7 +132,7 @@
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="GamePlayerDetail.cs">
-      <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="Game_AnswerType.cs">
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
@@ -298,6 +298,12 @@
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_HouseScanify_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_IdelTimeLiquid_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_IdelTimestreet_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_IdelTime_Result.cs">
