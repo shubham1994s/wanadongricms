@@ -40,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -255,6 +256,7 @@
     <Compile Include="Areas\Liquid\LiquidAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AndroidController.cs" />
     <Compile Include="Controllers\AttendenceController.cs" />
     <Compile Include="Controllers\ComplaintController.cs" />
     <Compile Include="Controllers\DatableController.cs" />
@@ -1822,6 +1824,10 @@
     <Content Include="Views\HouseMaster\SaveBundelVisitingDryWet.cshtml" />
     <Content Include="Views\HouseMaster\SaveDryWet.cshtml" />
     <Content Include="Views\HouseMaster\SaveBundelWetWaste.cshtml" />
+    <Content Include="Views\Android\Nagpur.cshtml" />
+    <Content Include="Views\Android\Mulchera.cshtml" />
+    <Content Include="Views\Android\Index.cshtml" />
+    <Content Include="Views\Android\AndroidAPKMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

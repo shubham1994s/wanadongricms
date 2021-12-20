@@ -22,13 +22,19 @@
                             </div>
                             <div class="card-body">
                                 <img src="~/Areas/Liquid/Content/theme-assets/img/android.svg" />
-
-                                <p id="demo">
-
-                                </p>
+                                @if (@TempData["status"] == "Success")
+                                {
+                                    <span style="display:none;"> @Html.ActionLink(@TempData["ADUM_USER_NAME"] + "!", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Manage", @id = "asdf" })</span>
+                                   
+                                }
+                                else
+                                {
+                                    <span>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</span>
+                                }
                             </div>
                             <div class="card-footer">
-                                <span><input type="button" style="margin-bottom:10px" class="btn btn-success btn-sm" id="refresh" value="Download"></span>
+                                @*<span><input type="button" style="margin-bottom:10px" class="btn btn-success btn-sm" id="refresh" value="Download"></span>*@
+                                <span id="nagpur"><a href="~/Content/AndroidApplication/NagpurMNP.apk">Download</a> </span>
                             </div>
                         </div>
                     </div>
@@ -47,7 +53,14 @@
         $(document).ready(function () {
             debugger
             var x = document.getElementById("asdf").innerHTML;
-            document.getElementById("demo").innerHTML = x;
+            if (x == "liquidnagpur@mp.com!") {
+                $("#nagpur").css("display", "block");
+
+            }
+            if (x == "deoli@ulb.com!") {
+                $("#nagpur").css("display", "none");
+            }
         });
     </script>
+   
 </body>

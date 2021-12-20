@@ -47,3 +47,25 @@ header.page-header {
 .svg_android {
     background-image: url("../img/android.svg")
 }
+.my-card {
+    left: -12% !important;
+    top: 12px !important;
+}
+
+section.dashboard-counts .icon {
+    width: 80px !important;
+    height: 80px !important;
+    line-height: 90px !important;
+    text-align: center !important;
+    text-size-adjust: auto !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+    border-radius: 50%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+
+.pr-90 {
+    padding-right: 90px;
+}
