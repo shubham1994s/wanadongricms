@@ -326,6 +326,7 @@
     <Content Include="Areas\Liquid\Content\theme-assets\icons-reference\fonts\dashboard.svg" />
     <Content Include="Areas\Liquid\Content\theme-assets\icons-reference\icons-reference.html" />
     <Content Include="Areas\Liquid\Content\theme-assets\icons-reference\styles.css" />
+    <Content Include="Areas\Liquid\Content\theme-assets\img\136Logo.png" />
     <Content Include="Areas\Liquid\Content\theme-assets\img\avatar-1.jpg" />
     <Content Include="Areas\Liquid\Content\theme-assets\img\avatar-2.jpg" />
     <Content Include="Areas\Liquid\Content\theme-assets\img\avatar-3.jpg" />
