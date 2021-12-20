@@ -34,6 +34,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                TempData.Keep();
                 return View();
             }
             else

@@ -1,7 +1,13 @@
 ﻿body {
 }
 .login-page::before {
-    background: url(../img/Background.jpg) !important;
+    background: url(../img/1920_blank.png) !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    filter: blur(0px) !important;
+}
+.login-page .form-holder {
+    margin-bottom: -40px !important;
 }
 .btn-primary {
     background: #189cdf !important;
@@ -48,4 +54,24 @@ thead {
 }
 header.page-header {
     text-align:center;
+}
+.my-card {
+    left: -12% !important;
+    top: 12px !important;
+}
+section.dashboard-counts .icon {
+    width: 80px !important;
+    height: 80px !important;
+    line-height: 90px !important;
+    text-align: center !important;
+    text-size-adjust: auto !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+    border-radius: 50%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+.pr-25 {
+    padding-right:25px;
 }
