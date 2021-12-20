@@ -18,7 +18,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-                 : base(SwachBharatAppConnection.GetConnectionString(AppId))
+                  : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
 
@@ -431,14 +431,14 @@ namespace SwachBharat.CMS.Dal.DataContexts
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IdelTimestreet_Result>("SP_IdelTimestreet", userIdParameter, fdateParameter, tdateParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> SP_LiquidWaste_Count()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_LiquidWaste_Count");
-        }
-    
         public virtual ObjectResult<LiquidCurrentAllUserLocationTest1_Result> LiquidCurrentAllUserLocationTest1()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LiquidCurrentAllUserLocationTest1_Result>("LiquidCurrentAllUserLocationTest1");
+        }
+    
+        public virtual ObjectResult<SP_LWaste_Count_Result> SP_LWaste_Count()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LWaste_Count_Result>("SP_LWaste_Count");
         }
     }
 }

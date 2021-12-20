@@ -1789,11 +1789,11 @@ namespace SwachBharat.CMS.Bll.Services
                 using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                 {
                     DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
-                    var data = db.SP_LiquidWaste_Count().First();
+                    var data = db.SP_LWaste_Count().First();
                     if (data != null)
                     {
-                     // model.LiquidWasteCollection = data;
-                        //model.HouseCollection = data.TotalHouseLatLongCount;
+                      model.LiquidWasteCollection = data.TotalLiquidLatLongCount;
+                       model.LiquidWasteScanedHouse = data.TotalScanHouseCount;
                         //model.TotalScanHouseCount = data.TotalScanHouseCount;
                         //model.MixedCount = data.MixedCount;
                         //model.BifurgatedCount = data.BifurgatedCount;
