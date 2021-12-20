@@ -27,7 +27,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             return View();
         }
-        public ActionResult Mahadula()
+        public ActionResult Bhamragad()
         {
             return View();
         }

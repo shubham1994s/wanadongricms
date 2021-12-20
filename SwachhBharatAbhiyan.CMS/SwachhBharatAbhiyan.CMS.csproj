@@ -1828,6 +1828,8 @@
     <Content Include="Views\Android\Mulchera.cshtml" />
     <Content Include="Views\Android\Index.cshtml" />
     <Content Include="Views\Android\AndroidAPKMenu.cshtml" />
+    <Content Include="Views\Android\Etapalli.cshtml" />
+    <Content Include="Views\Android\Bhamragad.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
