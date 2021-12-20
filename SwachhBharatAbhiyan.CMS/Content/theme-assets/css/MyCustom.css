@@ -1,6 +1,8 @@
 ﻿body {
 }
-
+.login-page::before {
+    background: url(../img/Background.jpg) !important;
+}
 .btn-primary {
     background: #189cdf !important;
 }
