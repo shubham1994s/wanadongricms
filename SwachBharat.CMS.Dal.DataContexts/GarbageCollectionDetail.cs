@@ -44,5 +44,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string OutbatteryStatus { get; set; }
         public string WasteType { get; set; }
         public string EmployeeType { get; set; }
+        public Nullable<int> LWId { get; set; }
     }
 }
