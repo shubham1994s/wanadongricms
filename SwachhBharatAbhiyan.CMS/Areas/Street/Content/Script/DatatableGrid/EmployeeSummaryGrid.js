@@ -27,7 +27,7 @@
         //"pageLength": 10,
         width: 670,
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=LiquidEmployeeSummary",
+            "url": "/Datable/GetJqGridJson?rn=StreetEmployeeSummary",
             "type": "POST",
             "datatype": "json"
         },
@@ -70,14 +70,14 @@
 });
 
 function test(id) {
-    window.location.href = "/Attendence/Location?daId=" + id;
+    window.location.href = "/StreetAttendence/Location?daId=" + id;
 };
 
 function user_route(id) {
-    window.location.href = "/Attendence/UserRoute?daId=" + id;
+    window.location.href = "/StreetAttendence/UserRoute?daId=" + id;
 };
 function map(a) {
-    window.location.href = "/Location/viewLocation?teamId=" + a;
+    window.location.href = "/StreetLocation/viewLocation?teamId=" + a;
 
 };
 //////////////////////////////////////////////////////////////////////////////
