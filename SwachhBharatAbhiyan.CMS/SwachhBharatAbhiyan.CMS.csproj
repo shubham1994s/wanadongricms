@@ -934,6 +934,7 @@
     <Content Include="Content\css\prityy_photo\js\lightbox-plus-jquery.min.js" />
     <Content Include="Content\css\prityy_photo\js\lightbox.js" />
     <Content Include="Content\css\prityy_photo\js\lightbox.min.js" />
+    <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\select\css\bootstrap-multiselect.css" />
     <Content Include="Content\css\select\js\bootstrap-multiselect.js" />
     <Content Include="Content\css\report_style.css" />
