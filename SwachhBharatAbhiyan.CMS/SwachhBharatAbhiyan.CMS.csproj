@@ -255,7 +255,9 @@
     <Compile Include="Areas\Liquid\Controllers\LiquidWasteController.cs" />
     <Compile Include="Areas\Liquid\LiquidAreaRegistration.cs" />
     <Compile Include="Areas\Street\Controllers\StreetAccountController.cs" />
+    <Compile Include="Areas\Street\Controllers\StreetAttendenceController.cs" />
     <Compile Include="Areas\Street\Controllers\StreetHomeController.cs" />
+    <Compile Include="Areas\Street\Controllers\StreetSweepingController.cs" />
     <Compile Include="Areas\Street\StreetAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -727,6 +729,7 @@
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\popper.js\umd\popper-utils.min.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\popper.js\umd\popper.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\popper.js\umd\popper.min.js" />
+    <Content Include="Areas\Street\Content\Script\DatatableGrid\StreetSweepingGrid.js" />
     <Content Include="Areas\Street\Content\theme-assets\css\custom.css" />
     <Content Include="Areas\Street\Content\theme-assets\css\fontastic.css" />
     <Content Include="Areas\Street\Content\theme-assets\css\MyCustom.css" />
@@ -2168,6 +2171,12 @@
     <Content Include="Areas\Street\Content\theme-assets\vendor\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Areas\Street\Content\theme-assets\vendor\jquery.cookie\component.json" />
     <Content Include="Areas\Street\Content\theme-assets\vendor\jquery.cookie\cookie.jquery.json" />
+    <Content Include="Areas\Street\Views\StreetAttendence\MenuIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetAttendence\Index.cshtml" />
+    <Content Include="Areas\Street\Views\StreetAttendence\HouseRoute.cshtml" />
+    <Content Include="Areas\Street\Views\StreetAttendence\UserRoute.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\StreetSweepingIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\MenuStreetSweepingIndex.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
@@ -2398,7 +2407,6 @@
     <Folder Include="Areas\Liquid\Content\theme-assets\vendor\font-awesome\scss\" />
     <Folder Include="Areas\Liquid\Model\" />
     <Folder Include="Areas\Liquid\Views\LiquidAccount\" />
-    <Folder Include="Areas\Street\Content\Script\DatatableGrid\" />
     <Folder Include="Areas\Street\Content\theme-assets\vendor\font-awesome\less\" />
     <Folder Include="Areas\Street\Content\theme-assets\vendor\font-awesome\scss\" />
     <Folder Include="Areas\Street\Data\" />

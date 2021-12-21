@@ -25,7 +25,7 @@
 
 else if (@HttpContext.Current.Session["status"]  == "Success")
 {
-    using (Html.BeginForm("LogOff", "StreetAccount", FormMethod.Post, new { id = "logoutFormStreet", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "StreetAccount", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 

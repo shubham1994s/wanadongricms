@@ -3,7 +3,7 @@
     var UserId = $('#selectnumber').val();
     $.ajax({
         type: "post",
-        url: "/Location/UserList?rn=L",
+        url: "/Location/UserList?rn=S",
         data: { userId: UserId },
         datatype: "json",
         traditional: true,
@@ -29,7 +29,7 @@
         //"pageLength": 10,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=LiquidAttendence",
+            "url": "/Datable/GetJqGridJson?rn=StreetAttendence",
             "type": "POST",
             "datatype": "json"
         },
@@ -103,18 +103,18 @@
 });
 
 function test(id) {
-    window.location.href = "/Liquid/LiquidAttendence/Location?daId="+id;
+    window.location.href = "/Street/StreetAttendence/Location?daId="+id;
 };
 
 function user_route(id) {
-    window.location.href = "/Liquid/LiquidAttendence/UserRoute?daId=" + id;
+    window.location.href = "/Street/StreetAttendence/UserRoute?daId=" + id;
 };
 
 function house_route(id) {
-    window.location.href = "/Liquid/LiquidAttendence/HouseRoute?daId=" + id;
+    window.location.href = "/Street/StreetAttendence/HouseRoute?daId=" + id;
 };
 function map(a) {
-    window.location.href = "/Liquid/LiquidAttendence/viewLocation?teamId=" + a;
+    window.location.href = "/Street/StreetAttendence/viewLocation?teamId=" + a;
 
 };
 //////////////////////////////////////////////////////////////////////////////
