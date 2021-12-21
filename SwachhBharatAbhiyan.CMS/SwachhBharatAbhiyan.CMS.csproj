@@ -2177,6 +2177,8 @@
     <Content Include="Areas\Street\Views\StreetAttendence\UserRoute.cshtml" />
     <Content Include="Areas\Street\Views\StreetSweeping\StreetSweepingIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetSweeping\MenuStreetSweepingIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\EmployeeSummaryIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\MenuEmployeeSummaryIndex.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
