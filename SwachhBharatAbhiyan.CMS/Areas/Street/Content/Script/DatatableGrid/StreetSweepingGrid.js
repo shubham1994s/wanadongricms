@@ -124,6 +124,7 @@ function PopImages(cel) {
 function showInventoriesGrid() {
     Search();
 }
+};
 
 function Search() {
     var txt_fdate, txt_tdate, Client, UserId;
