@@ -284,8 +284,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     name = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ";
                 }
 
+
+               // //For Satana Only
+                //string src = AppDetails.baseImageUrlCMS + "/Content/images/icons/Nagpur_logo.png";
+                //string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;padding-top: 5px;background: #abd037;'> <img style='width:250px;height:86px;' src='" + src + "'/> </div> <div style='font-size: 14px;background: #abd037;'><b> House Id: " + details.ReferanceId + "</b> </div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:245px;height:245px;' src='" + details.dyQRCode + "'/> <p style='text-align:right;font-size: 10px;margin-right:20px;margin-top:0px'><b>" + details.ReferanceId + "</b></p></div></div>";
+
+
                 string src = AppDetails.baseImageUrlCMS + "/Content/images/img/app_icon_cms.png";
-                string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;margin-top: 8px;font-size:22px;background: #abd037;'> O </div> <div style='background: #abd037;;font-weight: bold;font-size: 18px;'> " + AppDetails.AppName + "</div><div style='font-size: 15px;background: #abd037;'> Dump Yard Id: " + details.ReferanceId + " </div><div style='height:10px;background: #abd037;'></div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:250px;height:250px;' src='" + details.dyQRCode + "'/> </div></div>";
+                string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;margin-top: 8px;font-size:22px;background: #abd037;'> O </div> <div style='background: #abd037;;font-weight: bold;font-size: 18px;'> " + AppDetails.AppName + "</div><div style='font-size: 15px;background: #abd037;'> Liquid Waste Id: " + details.ReferanceId + " </div><div style='height:10px;background: #abd037;'></div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:250px;height:250px;' src='" + details.dyQRCode + "'/> </div></div>";
 
 
                 // For Satana only

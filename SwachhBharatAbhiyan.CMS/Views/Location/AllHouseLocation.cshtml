@@ -108,7 +108,7 @@
 
 </style>
 
-<link rel="shortcut icon" href="/Content/images/img/sba.png" />
+<link rel="shortcut icon" href="~/Content/images/img/136Logo.png" />
 <title>House on Map</title>
 <fieldset>
     <meta charset="utf-8">
@@ -395,6 +395,7 @@
             });
                 //User Wise Location
             // All User On Map
+    
         function myMap() {
             var RadioValue = $("input[name='radio']:checked").val();
             if (RadioValue == 0) {
@@ -422,7 +423,7 @@
                         $("#googleMap").css("display", "block");
                         if (data.length == 0)
                             $('#\\#myModal').modal('show');
-
+                        debugger;
                         {
                             var map = new google.maps.Map(document.getElementById('googleMap'), {
                                 zoom: 12,

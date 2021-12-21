@@ -778,6 +778,79 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 }
             }
+            else if (isActive == "1" && emptype == "S")
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+
+                    var data = db.UserMasters.Select(x => new SBAEmployeeDetailsGridRow
+                    {
+                        userId = x.userId,
+                        userAddress = x.userAddress,
+                        userLoginId = x.userLoginId,
+                        userMobileNumber = x.userMobileNumber,
+                        userName = x.userName,
+                        userNameMar = x.userNameMar,
+                        userProfileImage = x.userProfileImage,
+                        userEmployeeNo = x.userEmployeeNo,
+                        isActive = x.isActive.ToString(),
+                        bloodGroup = x.bloodGroup,
+                        gcTarget = x.gcTarget,
+                        EmployeeType = x.EmployeeType
+
+
+                    }).Where(x => x.isActive == "True" && x.EmployeeType == "S").ToList();
+                    foreach (var item in data)
+                    {
+                        item.isActive = checkNull(item.isActive);
+                        if (item.bloodGroup == "0")
+                        {
+                            item.bloodGroup = "";
+                        }
+                        if (item.isActive == "True")
+                        {
+
+                            item.isActive = "Active";
+                        }
+                        else { item.isActive = "Not Active"; }
+                        item.userNameMar = checkNull(item.userNameMar);
+                        item.bloodGroup = checkNull(item.bloodGroup);
+                        if (item.userAddress == null && item.userAddress == "")
+                            item.userAddress = "";
+                        if (item.userMobileNumber == null && item.userMobileNumber == "")
+                            item.userMobileNumber = "";
+                        if (item.userName == null && item.userName == "")
+                            item.userName = "";
+                        if (item.userNameMar == null && item.userNameMar == "")
+                            item.userNameMar = "";
+                        if (item.userEmployeeNo == null && item.userEmployeeNo == "")
+                            item.userEmployeeNo = "";
+
+                        if (item.userProfileImage == null || item.userProfileImage == "")
+                        { item.userProfileImage = "/Images/default_not_upload.png"; }
+                        else
+                        {
+                            item.userProfileImage = ThumbnaiUrlCMS + item.userProfileImage.Trim();
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.userMobileNumber) ? " " : c.userMobileNumber) + " " +
+                                             (string.IsNullOrEmpty(c.userNameMar) ? " " : c.userNameMar) + " " +
+                                             (string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
+                                             (string.IsNullOrEmpty(c.bloodGroup) ? " " : c.bloodGroup) + " " +
+                                             (string.IsNullOrEmpty(c.userAddress) ? " " : c.userAddress) + " " +
+                                                 (string.IsNullOrEmpty(c.EmployeeType) ? " " : c.EmployeeType) + " " +
+                                             (string.IsNullOrEmpty(c.userEmployeeNo) ? " " : c.userEmployeeNo)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                        data = model.ToList();
+
+                    }
+                    return data.OrderByDescending(c => c.userId);
+
+                }
+            }
 
             else if (isActive == "0" && emptype == "L")
             {
@@ -801,6 +874,79 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
 
                     }).Where(x => x.isActive == "False" && x.EmployeeType == "L").ToList();
+                    foreach (var item in data)
+                    {
+                        item.isActive = checkNull(item.isActive);
+                        if (item.bloodGroup == "0")
+                        {
+                            item.bloodGroup = "";
+                        }
+                        if (item.isActive == "True")
+                        {
+
+                            item.isActive = "Active";
+                        }
+                        else { item.isActive = "Not Active"; }
+                        item.userNameMar = checkNull(item.userNameMar);
+                        item.bloodGroup = checkNull(item.bloodGroup);
+                        if (item.userAddress == null && item.userAddress == "")
+                            item.userAddress = "";
+                        if (item.userMobileNumber == null && item.userMobileNumber == "")
+                            item.userMobileNumber = "";
+                        if (item.userName == null && item.userName == "")
+                            item.userName = "";
+                        if (item.userNameMar == null && item.userNameMar == "")
+                            item.userNameMar = "";
+                        if (item.userEmployeeNo == null && item.userEmployeeNo == "")
+                            item.userEmployeeNo = "";
+
+                        if (item.userProfileImage == null || item.userProfileImage == "")
+                        { item.userProfileImage = "/Images/default_not_upload.png"; }
+                        else
+                        {
+                            item.userProfileImage = ThumbnaiUrlCMS + item.userProfileImage.Trim();
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.userMobileNumber) ? " " : c.userMobileNumber) + " " +
+                                             (string.IsNullOrEmpty(c.userNameMar) ? " " : c.userNameMar) + " " +
+                                             (string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
+                                             (string.IsNullOrEmpty(c.bloodGroup) ? " " : c.bloodGroup) + " " +
+                                             (string.IsNullOrEmpty(c.userAddress) ? " " : c.userAddress) + " " +
+                                                 (string.IsNullOrEmpty(c.EmployeeType) ? " " : c.EmployeeType) + " " +
+                                             (string.IsNullOrEmpty(c.userEmployeeNo) ? " " : c.userEmployeeNo)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                        data = model.ToList();
+
+                    }
+                    return data.OrderByDescending(c => c.userId);
+
+                }
+            }
+            else if (isActive == "0" && emptype == "S")
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+
+                    var data = db.UserMasters.Select(x => new SBAEmployeeDetailsGridRow
+                    {
+                        userId = x.userId,
+                        userAddress = x.userAddress,
+                        userLoginId = x.userLoginId,
+                        userMobileNumber = x.userMobileNumber,
+                        userName = x.userName,
+                        userNameMar = x.userNameMar,
+                        userProfileImage = x.userProfileImage,
+                        userEmployeeNo = x.userEmployeeNo,
+                        isActive = x.isActive.ToString(),
+                        bloodGroup = x.bloodGroup,
+                        gcTarget = x.gcTarget,
+                        EmployeeType = x.EmployeeType
+
+
+                    }).Where(x => x.isActive == "False" && x.EmployeeType == "S").ToList();
                     foreach (var item in data)
                     {
                         item.isActive = checkNull(item.isActive);
@@ -1001,7 +1147,79 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 }
             }
 
+            else if (emptype == "S")
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
 
+                    var data = db.UserMasters.Select(x => new SBAEmployeeDetailsGridRow
+                    {
+                        userId = x.userId,
+                        userAddress = x.userAddress,
+                        userLoginId = x.userLoginId,
+                        userMobileNumber = x.userMobileNumber,
+                        userName = x.userName,
+                        userNameMar = x.userNameMar,
+                        userProfileImage = x.userProfileImage,
+                        userEmployeeNo = x.userEmployeeNo,
+                        isActive = x.isActive.ToString(),
+                        bloodGroup = x.bloodGroup,
+                        gcTarget = x.gcTarget,
+                        EmployeeType = x.EmployeeType
+
+
+                    }).Where(x => x.EmployeeType == "S").ToList();
+                    foreach (var item in data)
+                    {
+                        item.isActive = checkNull(item.isActive);
+                        if (item.bloodGroup == "0")
+                        {
+                            item.bloodGroup = "";
+                        }
+                        if (item.isActive == "True")
+                        {
+
+                            item.isActive = "Active";
+                        }
+                        else { item.isActive = "Not Active"; }
+                        item.userNameMar = checkNull(item.userNameMar);
+                        item.bloodGroup = checkNull(item.bloodGroup);
+                        if (item.userAddress == null && item.userAddress == "")
+                            item.userAddress = "";
+                        if (item.userMobileNumber == null && item.userMobileNumber == "")
+                            item.userMobileNumber = "";
+                        if (item.userName == null && item.userName == "")
+                            item.userName = "";
+                        if (item.userNameMar == null && item.userNameMar == "")
+                            item.userNameMar = "";
+                        if (item.userEmployeeNo == null && item.userEmployeeNo == "")
+                            item.userEmployeeNo = "";
+
+                        if (item.userProfileImage == null || item.userProfileImage == "")
+                        { item.userProfileImage = "/Images/default_not_upload.png"; }
+                        else
+                        {
+                            item.userProfileImage = ThumbnaiUrlCMS + item.userProfileImage.Trim();
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.userMobileNumber) ? " " : c.userMobileNumber) + " " +
+                                             (string.IsNullOrEmpty(c.userNameMar) ? " " : c.userNameMar) + " " +
+                                             (string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
+                                             (string.IsNullOrEmpty(c.bloodGroup) ? " " : c.bloodGroup) + " " +
+                                             (string.IsNullOrEmpty(c.userAddress) ? " " : c.userAddress) + " " +
+                                                 (string.IsNullOrEmpty(c.EmployeeType) ? " " : c.EmployeeType) + " " +
+                                             (string.IsNullOrEmpty(c.userEmployeeNo) ? " " : c.userEmployeeNo)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                        data = model.ToList();
+
+                    }
+                    return data.OrderByDescending(c => c.userId);
+
+                }
+            }
             else
             {
                 using (var db = new DevChildSwachhBharatNagpurEntities(appId))
@@ -1219,6 +1437,100 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
 
                     var data1 = (from t1 in db.Locations.Where(l => l.datetime >= fdate && l.datetime <= tdate && l.EmployeeType == "L")
+                                 join t2 in db.UserMasters on t1.userId equals t2.userId
+                                 select new { t1.locId, t1.userId, t1.datetime, t1.address, t2.userName }).ToList();
+
+
+                    if (userId > 0)
+                    {
+                        var model = data1.Where(c => c.userId == userId).ToList();
+
+                        data1 = model.ToList();
+                    }
+
+                    foreach (var x in data1)
+                    {
+                        string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+
+                        string t = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+
+                        data.Add(new SBALocationGridRow
+                        {
+                            locId = x.locId,
+
+                            //userName = db.UserMasters.FirstOrDefault(c => c.userId == x.userId).userName,
+                            userId = Convert.ToInt32(x.userId),
+                            userName = x.userName,
+                            date = dat,
+                            time = t,// Convert.ToDateTime(x.datetime).ToString("hh:mm:ss"),
+                                     //string filtered = new string(original.SkipWhile(c => c == ';').ToArray());
+
+                            latlong = checkNull(x.address).Replace("Unnamed Road, ", ""),
+                            CompareDate = x.datetime,
+                        });
+
+
+                    }
+                    foreach (var item in data)
+                    {
+                        if (item.userName != null && item.userName == "")
+                            item.userName = "";
+                        item.latlong = checkNull(item.latlong);
+                        item.date = checkNull(item.date);
+                        item.time = checkNull(item.time);
+
+
+                    }
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+                        //var model = data.Where(c => c.userName.Contains(SearchString) || c.date.Contains(SearchString) || c.time.Contains(SearchString) || c.latlong.Contains(SearchString) 
+
+                        //|| c.userName.ToLower().Contains(SearchString) || c.date.ToLower().Contains(SearchString) || c.time.ToLower().Contains(SearchString) || c.latlong.ToLower().Contains(SearchString) 
+
+                        //|| c.userName.ToUpper().Contains(SearchString) || c.date.ToUpper().Contains(SearchString) || c.time.ToUpper().Contains(SearchString) || c.latlong.ToUpper().Contains(SearchString) 
+                        //).ToList();
+
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
+                                         (string.IsNullOrEmpty(c.date) ? " " : c.date) + " " +
+                                         (string.IsNullOrEmpty(c.time) ? " " : c.time) + " " +
+                                         (string.IsNullOrEmpty(c.latlong) ? " " : c.latlong)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+
+
+                        data = model.OrderByDescending(c => c.date).ToList().ToList();
+                    }
+                    //if (!string.IsNullOrEmpty(fdate.ToString()))
+                    //{
+
+                    //    DateTime? dt1 = null;
+                    //    if (!string.IsNullOrEmpty(tdate.ToString()))
+                    //    { dt1 = tdate; }
+                    //    else { dt1 = fdate; }
+                    //    data = data.Where(fullEntry => fullEntry.CompareDate >= fdate && fullEntry.CompareDate <= dt1).OrderByDescending(c => c.CompareDate).ToList();
+
+                    //}MyList.OrderBy(x => x.StartDate).ThenByDescending(x => x.EndDate);
+                    //if (userId > 0)
+                    //{
+                    //    var model = data.Where(c => c.userId == userId).ToList();
+
+                    //    data = model.ToList();
+                    //}
+                    return data.OrderByDescending(c => c.CompareDate).ToList().ToList(); ;
+                }
+            }
+            else if (Emptype == "S")
+            {
+                using (DevChildSwachhBharatNagpurEntities db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+                    List<SBALocationGridRow> data = new List<SBALocationGridRow>();
+                    //  var data = db.GarbageCollectionDetails.Where(x => x.gcType == 3 & x.gcDate >= fdate & x.gcDate <= tdate).Select(x => new SBAGrabageCollectionGridRow
+
+
+                    //var data1 = db.Locations.Where(l => l.datetime >= fdate && l.datetime <= tdate)
+                    //            .Join(db.UserMasters, u => u.userId, i => i.userId
+
+
+
+                    var data1 = (from t1 in db.Locations.Where(l => l.datetime >= fdate && l.datetime <= tdate && l.EmployeeType == "S")
                                  join t2 in db.UserMasters on t1.userId equals t2.userId
                                  select new { t1.locId, t1.userId, t1.datetime, t1.address, t2.userName }).ToList();
 
@@ -1565,7 +1877,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
 
 
-                    var data1 = (from t1 in db.GarbageCollectionDetails.Where(g => g.gcType == 4 & g.gcDate >= fdate & g.gcDate <= tdate)
+                    var data1 = (from t1 in db.GarbageCollectionDetails.Where(g => g.gcType == 4 & g.gcDate >= fdate & g.gcDate <= tdate & g.EmployeeType == "L")
                                  join t2 in db.UserMasters on t1.userId equals t2.userId
                                  join gp in db.LiquidWasteDetails on t1.gpId equals gp.LWId into gpp
                                  from t3 in gpp.DefaultIfEmpty()
@@ -1677,6 +1989,115 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                             Employee = checkNull(x.userName),
                             attandDate = Convert.ToDateTime(x.gcDate).ToString("dd/MM/yyyy hh:mm tt"),
                             UserName = checkNull(x.LWName),
+                            Lat = x.Lat,
+                            Long = x.Long,
+                            Address = checkNull(x.locAddresss).Replace("Unnamed Road,", ""),
+                            //gpAfterImage = (x.gpAfterImage == "" ? "/Images/default_not_upload.png" : ThumbnaiUrlAPI + x.gpAfterImage.Trim()),
+                            //gpBeforImage = (x.gpBeforImage == "" ? "/Images/default_not_upload.png" : ThumbnaiUrlAPI + x.gpBeforImage.Trim())
+
+                        });
+
+                        foreach (var item in data)
+                        {
+                            if (item.Lat != null && item.Long != "" && item.Lat != "" && item.Long != null)
+                            { item.Address = item.Address; }
+                            else { item.Address = ""; }
+                        }
+
+                    }
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.UserName) ? " " : c.UserName) + " " +
+                                      (string.IsNullOrEmpty(c.HouseNumber) ? " " : c.HouseNumber) + " " +
+                                      (string.IsNullOrEmpty(c.VehicleNumber) ? " " : c.VehicleNumber) + " " +
+                                      (string.IsNullOrEmpty(c.ReferanceId) ? " " : c.ReferanceId) + " " +
+                                      (string.IsNullOrEmpty(c.Address) ? " " : c.Address) + " " +
+                                      (string.IsNullOrEmpty(c.Employee) ? " " : c.Employee) + " " +
+                                      (string.IsNullOrEmpty(c.attandDate) ? " " : c.attandDate) + " " +
+                                      (string.IsNullOrEmpty(c.Note) ? " " : c.Note)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                        data = model.ToList();
+                    }
+
+                    return data.OrderByDescending(c => c.Id);
+                }
+            }
+        }
+        public IEnumerable<SBAGrabageCollectionGridRow> GetSSCollectionData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, int? param1, int? param2, int? param3)
+        {
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
+                string ThumbnaiUrlAPI = appDetails.baseImageUrl + appDetails.basePath + appDetails.Collection + "/";
+                List<SBAGrabageCollectionGridRow> data = new List<SBAGrabageCollectionGridRow>();
+                using (DevChildSwachhBharatNagpurEntities db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+
+
+
+                    var data1 = (from t1 in db.GarbageCollectionDetails.Where(g => g.gcType == 5 & g.gcDate >= fdate & g.gcDate <= tdate & g.EmployeeType == "S")
+                                 join t2 in db.UserMasters on t1.userId equals t2.userId
+                                 join gp in db.StreetSweepingDetails on t1.gpId equals gp.SSId into gpp
+                                 from t3 in gpp.DefaultIfEmpty()
+                                 join zm in db.ZoneMasters on t3.zoneId equals zm.zoneId into zm
+                                 from t4 in zm.DefaultIfEmpty()
+                                 join wm in db.WardNumbers on t3.wardId equals wm.Id into wm
+                                 from t5 in wm.DefaultIfEmpty()
+                                 join tm in db.TeritoryMasters on t3.areaId equals tm.Id into tm
+                                 from t6 in tm.DefaultIfEmpty()
+                                 where (t4.zoneId == param1 || param1 == 0 || param1 == null) && (t3.wardId == param2 || param2 == 0 || param2 == null) && (t3.areaId == param3 || param3 == 0 || param3 == null)
+
+                                 select new
+                                 {
+                                     t1.gcId,
+                                     t1.note,
+                                     t1.gpAfterImage,
+                                     t1.gpBeforImage,
+                                     t1.gcType,
+                                     t1.gpId,
+                                     t1.userId,
+                                     t1.gcDate,
+                                     t1.vehicleNumber,
+                                     t1.locAddresss,
+                                     t1.batteryStatus,
+                                     t1.Lat,
+                                     t1.Long,
+                                     t2.userName,
+                                     t3.ReferanceId,
+                                     t3.SSName,
+                                     t3.zoneId,
+                                     t3.wardId,
+                                     t3.areaId,
+                                     WardName = t5.WardNo,
+                                     AreaName = t6.Area,
+                                 }).ToList();
+
+
+
+                    if (userId > 0)
+                    {
+                        var model = data1.Where(c => c.userId == userId).ToList();
+
+                        data1 = model.ToList();
+                    }
+                    foreach (var x in data1)
+                    {
+                        
+
+                        data.Add(new SBAGrabageCollectionGridRow
+                        {
+                            Id = x.gcId,
+                            Note = checkNull(x.note),
+                            gcType = x.gcType,
+                            //houseId = x.houseId,
+                            gpIdfk = x.gpId,
+                            userId = x.userId,
+                            gcDate = x.gcDate,
+                            VehicleNumber = checkNull(x.vehicleNumber),
+                            batteryStatus = x.batteryStatus,
+                            ReferanceId = checkNull(x.ReferanceId),
+                            Employee = checkNull(x.userName),
+                            attandDate = Convert.ToDateTime(x.gcDate).ToString("dd/MM/yyyy hh:mm tt"),
+                            UserName = checkNull(x.SSName),
                             Lat = x.Lat,
                             Long = x.Long,
                             Address = checkNull(x.locAddresss).Replace("Unnamed Road,", ""),
@@ -2628,6 +3049,163 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
             }
             else if (Emptype == "L")
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+                    //if (userId == 0)
+                    //{
+                    //     userId = null; 
+                    //}
+                    //db.Database.CommandTimeout = 5000;
+                    db.Database.CommandTimeout = 500;
+                    var data = db.SP_LSEmployeeSummary(fdate, tdate, userId <= 0 ? null : userId, Emptype).ToList();
+                    // var data2 = data.OrderByDescending(c => c.Startdate).ThenByDescending(c => c.StartTime).ToList();
+                    //var data2 = data1.GroupBy(o => o.userId).Select(o => o.First()).AsEnumerable().ToList();
+
+                    foreach (var x in data)
+                    {
+                        //TimeSpan spWorkMin = TimeSpan.FromMinutes(Convert.ToDouble(x.IdelTime));
+                        //string workHours = spWorkMin.ToString(@"hh\:mm");
+
+                        string EndDate = "";
+                        if (x.Enddate == null)
+                        {
+                            EndDate = "";
+                        }
+                        else
+                        {
+                            EndDate = Convert.ToDateTime(x.Enddate).ToString("dd/MM/yyyy");
+                        }
+
+                        //DateTime time = Convert.ToDateTime(x.StartTime);
+                        string displayTime = Convert.ToDateTime(x.Startdate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+                        string time = Convert.ToDateTime(x.StartTime).ToString("HH:mm:ss");
+                        obj.Add(new SBAEmpolyeeSummaryGrid()
+                        {
+                            UserName = x.userName,
+                            userId = x.userId,
+                            // Date = Convert.ToDateTime(x.date).ToString("dd/MM/yyyy"),
+                            daDate = (x.Startdate == null ? "" : Convert.ToDateTime(x.Startdate).ToString("dd/MM/yyyy")),
+                            StartTime = x.StartTime,
+                            DaEndDate = EndDate,
+                            EndTime = x.EndTime,
+                            Totalhousecollection = (x.Totalhousecollection).ToString(),
+                            Totaldumpyard = (x.Totaldumpyard).ToString(),
+                            Totaldistance = string.Format("{0:0.0}", (x.Totaldistance)).ToString(),
+                            InBatteryStatus = x.InBatteryStatus,
+                            OutBatteryStatus = x.OutBatteryStatus,
+                            daDateTIme = (displayTime + " " + time)
+
+                            //daDateTIme = Convert.ToDateTime(x.Startdate + x.StartTime).ToString("dd/MM/yyyy hh:mm tt"),
+                            //DateTime startDate = Convert.ToDateTime(a + " " + Time1);
+
+                            //String.Format("{0:0.00}", 123.4567);
+                            //IdelTime = workHours
+                            //AnsDate = Convert.ToDateTime(x.AnsDate).ToString("dd/MM/yyyy hh:mm tt"),
+                        });
+                    }
+
+
+                    //if (Convert.ToDateTime(fdate).ToString("dd/MM/yyyy") == Convert.ToDateTime(DateTime.Now).ToString("dd/MM/yyyy"))
+                    //{
+                    //    data = data.Where(c => (c.daDate == fdate || c.daEndDate == fdate || c.endTime == "")).ToList();
+
+                    //    //data = data.GroupBy(o => o.userId).Select(o => o.First()).AsEnumerable().ToList();
+                    //}
+                    //else {
+
+                    //    var abc = data.Where(c => (c.daDate >= fdate && c.daDate <= tdate) || (c.daDate >= fdate && c.daDate <= tdate)).ToList();
+                    //}
+
+                    //foreach (var x in data)
+                    //{
+
+                    //    ///x.daDate = checkNull(x.daDate.tp);
+                    //    x.endLat = checkNull(x.endLat);
+                    //    x.endLong = checkNull(x.endLong);
+                    //    x.endTime = checkNull(x.endTime);
+                    //    x.startLat = checkNull(x.startLat);
+                    //    x.startLong = checkNull(x.startLong);
+                    //    x.startTime = checkNull(x.startTime);
+                    //    //x.vehicleNumber = checkNull(x.vehicleNumber);
+                    //    //x.daEndNote = checkNull(x.daEndNote);
+                    //    //x.daStartNote = checkNull(x.daStartNote);
+                    //    string endate = "";
+                    //    if (x.daEndDate == null)
+                    //    {
+                    //        endate = "";
+                    //    }
+                    //    else {
+                    //        endate = Convert.ToDateTime(x.daEndDate).ToString("dd/MM/yyyy");
+                    //    }
+                    //    obj.Add(new SBAAttendenceGrid()
+                    //    {
+                    //        daID = x.daID,
+                    //        userId = Convert.ToInt32(x.userId),
+                    //        userName = db.UserMasters.Where(c => c.userId == x.userId).FirstOrDefault().userName,
+                    //        daDate = Convert.ToDateTime(x.daDate).ToString("dd/MM/yyyy"),
+                    //        daEndDate = endate,
+                    //        startTime = x.startTime,
+                    //        endTime = x.endTime,
+                    //        startLat = x.startLat,
+                    //        startLong = x.startLong,
+                    //        endLat = x.startLong,
+                    //        endLong = x.endLong,
+                    //        vtId = vt,
+                    //        vehicleNumber = x.vehicleNumber,
+                    //        CompareDate = x.daDate,
+                    //    });
+                    //}
+
+                    //if (!string.IsNullOrEmpty(SearchString))
+                    //{
+                    //    var model = obj.Where(c => c.vehicleNumber.Contains(SearchString) || c.daDate.Contains(SearchString) || c.endTime.Contains(SearchString) || c.startLat.Contains(SearchString) || c.endLat.Contains(SearchString) || c.startTime.Contains(SearchString) || c.userName.Contains(SearchString) || c.vtId.Contains(SearchString)
+
+                    //    || c.vehicleNumber.ToLower().Contains(SearchString) || c.vtId.ToLower().Contains(SearchString) || c.daDate.ToLower().Contains(SearchString) || c.endTime.ToLower().Contains(SearchString) || c.startLat.ToLower().Contains(SearchString) || c.endLat.ToLower().Contains(SearchString) || c.startTime.ToLower().Contains(SearchString) || c.userName.ToLower().Contains(SearchString)).ToList();
+
+                    //    obj = model.ToList();
+                    //}
+
+                    //if (!string.IsNullOrEmpty(fdate.ToString()))
+                    //{
+                    //    DateTime? dt1 = null;
+                    //    if (!string.IsNullOrEmpty(tdate.ToString()))
+                    //    { dt1 = tdate; }
+                    //    else { dt1 = fdate; }
+                    //    obj = obj.Where(fullEntry => fullEntry.CompareDate >= fdate && fullEntry.CompareDate <= dt1).OrderByDescending(c => c.CompareDate).ToList();
+                    //}
+
+                    //comment by saurabh - 24 July 2019
+                    //if (userId > 0)
+                    //{
+                    //    var model = obj.Where(c => c.userId == userId).ToList();
+
+                    //    obj = model.ToList();
+                    //}
+                    //return obj.OrderByDescending(c => c.daID );
+
+
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+                        var model = obj.Where(c => c.daDate.Contains(SearchString) || c.UserName.Contains(SearchString)
+
+                        || c.daDate.ToLower().Contains(SearchString) || c.UserName.ToLower().Contains(SearchString)).ToList();
+
+                        obj = model.ToList();
+                    }
+
+                    if (userId > 0)
+                    {
+                        var model = obj.Where(c => c.userId == userId).ToList();
+
+                        obj = model.ToList();
+                    }
+                    //return obj.OrderByDescending(c => c.daID);
+                    var f = obj.OrderByDescending(c => DateTime.Parse(c.daDateTIme)).ToList();
+                    return f;
+                }
+            }
+            else if (Emptype == "S")
             {
                 using (var db = new DevChildSwachhBharatNagpurEntities(appId))
                 {
