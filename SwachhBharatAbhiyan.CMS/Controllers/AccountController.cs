@@ -186,17 +186,20 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 Result.ADUM_LOGIN_ID = model.Email;
                 Result.ADUM_PASSWORD = model.Password;
                 Result = mainrepository.LoginStreet(Result);
-                var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
+                //var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
                 switch (Result.status)
                 {
                     case "Success":
-                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                        var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
-                        AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
-                        string UserId = UserDetails.Id;
-                        string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
-                        string UserEmail = UserDetails.Email;
-                        string UserName = identity.Name;
+                        //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                        //var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
+                        //AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+                        //string UserId = UserDetails.Id;
+                        //string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
+                        //string UserEmail = UserDetails.Email;
+                        //string UserName = identity.Name;
+                        Session["status"] = "Success";
+                        TempData["status"] = "Success";
+                        TempData["ADUM_USER_NAME"] = Result.ADUM_USER_NAME;
                         AddSessionStreet(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
                         Session["UserID"] = Result.ADUM_USER_CODE.ToString();
                         Session["LoginId"] = Result.ADUM_LOGIN_ID.ToString();
