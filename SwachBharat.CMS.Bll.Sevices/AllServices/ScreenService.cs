@@ -4420,7 +4420,7 @@ namespace SwachBharat.CMS.Bll.Services
                     //    string json = new WebClient().DownloadString(appdetails.Grampanchayat_Pro + "/api/Get/Complaint?appId=" + appdetails.GramPanchyatAppID);
                     //    obj = JsonConvert.DeserializeObject<List<ComplaintVM>>(json).Where(c => Convert.ToDateTime(c.createdDate2).ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy")).ToList();
                     //}
-                    var data = db.SP_LiquidDashboard_Details().First();
+                    var data = db.SP_StreetDashboard_Details().First();
 
                     var date = DateTime.Today;
                     var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
@@ -4430,7 +4430,7 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TodayAttandence = data.TodayAttandence;
                         model.TotalAttandence = data.TotalAttandence;
                         model.HouseCollection = data.TotalHouse;
-                        model.LiquidCollection = data.TotalLiquid;
+                        model.StreetCollection = data.TotalStreet;
                         model.TotalComplaint = obj.Count();
                         model.TotalHouseCount = houseCount.TotalHouseCount;
                         model.MixedCount = houseCount.MixedCount;
