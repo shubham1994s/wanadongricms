@@ -9,18 +9,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
+
 
 namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
 {
-    public class StreetSweepingController : Controller
+    public class StreetEmployeeController : Controller
     {
-
-        IMainRepository mainRepository;
+        // GET: Employee 
         IChildRepository childRepository;
-
-
-        // GET: Liquid/LiquidHome
-        public StreetSweepingController()
+        IMainRepository mainRepository;
+        public StreetEmployeeController()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -30,10 +29,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             else
                 Redirect("/Account/Login");
         }
-        // GET: Liquid/LiquidWaste
 
-        // GET: Street/StreetSweeping
-        public ActionResult StreetSweepingIndex()
+        public ActionResult Index()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -42,7 +39,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             else
                 return Redirect("/Account/Login");
         }
-        public ActionResult MenuStreetSweepingIndex()
+
+        public ActionResult MenuIndex()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -53,59 +51,79 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 return Redirect("/Account/Login");
         }
 
-        public ActionResult MenuEntryDetails()
+        [HttpGet]
+        public ActionResult AddEmployeeDetails(int teamId = -1)
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-        public ActionResult EntryDetails()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-        public ActionResult MenuIdealtime()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-        public ActionResult Idealtime()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-      
-
-
-        //Add by neha 12 june 2019
-        public ActionResult IdleTime_Route()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                //ViewBag.userId = userId;
-                //ViewBag.Date = Date;
-                //return Json(userId, JsonRequestBehavior.AllowGet);
-                return View();
+                EmployeeDetailsVM house = childRepository.GetEmployeeById(teamId);
+                return View(house);
             }
             else
                 return Redirect("/Account/Login");
         }
 
+        [HttpPost]
+        public ActionResult AddEmployeeDetails(EmployeeDetailsVM emp, HttpPostedFileBase filesUpload)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                var AppDetails = mainRepository.GetApplicationDetails(SessionHandler.Current.AppId);
+                if (filesUpload != null)
+                {
 
+                    var guid = Guid.NewGuid().ToString().Split('-');
+                    string image_Guid = DateTime.Now.ToString("MMddyyyymmss") + "_" + guid[1] + ".jpg";
+
+                    //Converting  Url to image 
+
+                    string imagePath = Path.Combine(Server.MapPath(AppDetails.basePath + AppDetails.UserProfile), image_Guid);
+                    var exists = System.IO.Directory.Exists(Server.MapPath(AppDetails.basePath + AppDetails.UserProfile));
+                    if (!exists)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath(AppDetails.basePath + AppDetails.UserProfile));
+                    }
+                    filesUpload.SaveAs(imagePath);
+                    emp.userProfileImage = image_Guid;
+                }
+
+                childRepository.SaveEmployee(emp, "S");
+                return Redirect("Index");
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteEmployee(int teamId)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                childRepository.DeleteEmployee(teamId);
+                return Redirect("Index");
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+
+        public ActionResult EmployeeSummaryIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult MenuEmployeeSummaryIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
     }
 }
