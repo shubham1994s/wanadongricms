@@ -9,9 +9,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SwachBharat.CMS.Bll.Repository.ChildRepository;
-using SwachBharat.CMS.Bll.Repository.MainRepository;
-using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
 
 namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
 {
@@ -21,8 +18,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
         IMainRepository mainRepository;
         IChildRepository childRepository;
 
-        IChildRepository childRepository;
-        IMainRepository mainRepository;
+
         // GET: Liquid/LiquidHome
         public StreetSweepingController()
         {
@@ -93,13 +89,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             else
                 return Redirect("/Account/Login");
         }
-                img.Save(imgpath);
-                response.Close();
-                remoteStream.Close();
-                readStream.Close();
-                LiquidWaste.SSQRCode = image_Guid;
-
-                StreetSweepVM pointDetails = childRepository.SaveStreetSweep(LiquidWaste);
+      
 
 
         //Add by neha 12 june 2019

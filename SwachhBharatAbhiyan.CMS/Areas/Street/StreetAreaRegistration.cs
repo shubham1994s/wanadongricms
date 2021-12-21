@@ -18,7 +18,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street
                 "Street_default",
                 "Street/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new { controller = "StreetHome|StreetAccount|StreetAttendence|StreetSweeping" },
+                new { controller = "StreetHome|StreetAccount|StreetAttendence|StreetSweeping|StreetEmployee" },
                new[] { "SwachhBharatAbhiyan.CMS.Areas.Street.Controllers" }
             );
         }
