@@ -186,6 +186,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new LocationGridRepository(0, searchString, fdate, tdate, userId, appId,"L");
                     return gridRepository;
                     break;
+                case "StreetLocation":
+                    gridRepository = new LocationGridRepository(0, searchString, fdate, tdate, userId, appId, "S");
+                    return gridRepository;
+                    break;
 
                 case "ActiveEmployee":
                     gridRepository = new EmployeeGridRepository(0, searchString, appId, "1","");
@@ -196,6 +200,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new EmployeeGridRepository(0, searchString, appId, "1","L");
                     return gridRepository;
                     break;
+                case "StreetActiveEmployee":
+                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "1", "S");
+                    return gridRepository;
+                    break;
 
                 case "NotActiveEmployee":
                     gridRepository = new EmployeeGridRepository(0, searchString, appId, "0","");
@@ -204,6 +212,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                 case "NotActiveLiquidEmployee":
                     gridRepository = new EmployeeGridRepository(0, searchString, appId, "0", "L");
+                    return gridRepository;
+                    break;
+                case "NotActiveStreetEmployee":
+                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "0", "S");
                     return gridRepository;
                     break;
 
@@ -258,6 +270,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new LGarbageCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
                     return gridRepository;
                     break;
+                case "StreetSweeping":
+                    gridRepository = new SSCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
+                    return gridRepository;
+                    break;
                 case "Attendence":
                     gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId,null);
                     return gridRepository;
@@ -265,6 +281,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                 case "LiquidAttendence":
                     gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId,"L");
+                    return gridRepository;
+                    break;
+                case "StreetAttendence":
+                    gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId, "S");
                     return gridRepository;
                     break;
 

@@ -47,5 +47,6 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Grid
         public string wastetype { get; set; }
 
 
+
     }
 }
