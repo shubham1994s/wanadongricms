@@ -415,13 +415,15 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                childRepository.SaveArea(area);
+                childRepository.LiquidSaveArea(area);
                 return Redirect("AreaIndex");
             }
             else
                 return Redirect("/Account/Login");
 
         }
+
+       
 
         [HttpGet]
         public ActionResult DeleteArea(int teamId)
@@ -473,7 +475,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                childRepository.SaveWardNumber(area);
+                childRepository.LiquidSaveWardNumber(area);
                 return Redirect("WardIndex");
             }
             else

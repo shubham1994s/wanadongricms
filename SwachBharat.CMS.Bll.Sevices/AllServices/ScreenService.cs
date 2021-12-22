@@ -190,6 +190,38 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+
+        public void LiquidSaveAreaDetails(AreaVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.LWId > 0)
+                    {
+                        var model = db.TeritoryMasters.Where(x => x.Id == data.LWId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.Id = data.LWId;
+                            model.Area = data.LWName;
+                            model.AreaMar = data.LWNameMar;
+                            model.wardId = data.LWwardId;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var area = LiquidFillAreaDataModel(data);
+                        db.TeritoryMasters.Add(area);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public void DeletAreaDetails(int teamId)
         {
             try
@@ -332,6 +364,37 @@ namespace SwachBharat.CMS.Bll.Services
                     else
                     {
                         var type = FillWardDataModel(data);
+                        db.WardNumbers.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void LiquidSaveWardNumberDetails(WardNumberVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.LWId > 0)
+                    {
+                        var model = db.WardNumbers.Where(x => x.Id == data.LWId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.Id = data.LWId;
+                            model.WardNo = data.LWWardNo;
+                            model.zoneId = data.LWzoneId;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = LiquidFillWardDataModel(data);
                         db.WardNumbers.Add(type);
                         db.SaveChanges();
                     }
@@ -2091,6 +2154,17 @@ namespace SwachBharat.CMS.Bll.Services
 
             return model;
         }
+
+        private TeritoryMaster LiquidFillAreaDataModel(AreaVM data)
+        {
+            TeritoryMaster model = new TeritoryMaster();
+            model.Id = data.LWId;
+            model.Area = data.LWName;
+            model.AreaMar = data.LWNameMar;
+            model.wardId = data.LWwardId;
+
+            return model;
+        }
         private VehicleType FillVehicleDataModel(VehicleTypeVM data)
         {
             VehicleType model = new VehicleType();
@@ -2108,6 +2182,17 @@ namespace SwachBharat.CMS.Bll.Services
             model.zoneId = data.zoneId;
             return model;
         }
+
+
+        private WardNumber LiquidFillWardDataModel(WardNumberVM data)
+        {
+            WardNumber model = new WardNumber();
+            model.Id = data.LWId;
+            model.WardNo = data.LWWardNo;
+            model.zoneId = data.LWzoneId;
+            return model;
+        }
+
         private HouseMaster FillHouseDetailsDataModel(HouseDetailsVM data)
         {
             HouseMaster model = new HouseMaster();

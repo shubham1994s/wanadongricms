@@ -27,6 +27,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         void DeletArea(int teamId);
         void SaveArea(AreaVM area);
 
+        void LiquidSaveArea(AreaVM area);
+
 
         VehicleTypeVM GetVehicleType(int teamId);
         void DeletVehicleType(int teamId);
@@ -37,8 +39,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         void DeleteWardNumber(int teamId);
         void SaveWardNumber(WardNumberVM type);
 
+        void LiquidSaveWardNumber(WardNumberVM type);
 
-         HouseDetailsVM GetHouseById(int teamId);
+
+        HouseDetailsVM GetHouseById(int teamId);
          HouseDetailsVM SaveHouse(HouseDetailsVM data);
          void DeletHouse(int teamId);
 

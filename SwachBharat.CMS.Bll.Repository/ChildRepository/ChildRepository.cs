@@ -65,6 +65,15 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         }
 
 
+        public void LiquidSaveArea(AreaVM area)
+        {
+            if (area.Id <= 0)
+            {
+                area.Id = 0;
+            }
+            screenService.LiquidSaveAreaDetails(area);
+        }
+
         public VehicleTypeVM GetVehicleType(int teamId)
         {
             return screenService.GetVehicleTypeDetails(teamId);
@@ -97,8 +106,18 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
                 type.Id = 0;
             }
             screenService.SaveWardNumberDetails(type);
-        } 
-        
+        }
+
+
+        public void LiquidSaveWardNumber(WardNumberVM type)
+        {
+            if (type.LWId <= 0)
+            {
+                type.LWId = 0;
+            }
+            screenService.LiquidSaveWardNumberDetails(type);
+        }
+
 
         public HouseDetailsVM GetHouseById(int teamId)
         {
