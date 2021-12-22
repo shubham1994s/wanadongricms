@@ -2311,6 +2311,13 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="bin\SwachBharat.CMS.Dal.DataContexts.dll.config" />
     <Content Include="bin\SwachhBharatAbhiyan.CMS.dll.config" />
+    <Content Include="Areas\Street\Views\StreetLocation\MenuMapIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetLocation\AllUserLocation.cshtml" />
+    <Content Include="Areas\Street\Views\StreetLocation\ShowGrid.cshtml" />
+    <Content Include="Areas\Street\Views\StreetLocation\ViewLocation.cshtml" />
+    <Content Include="Areas\Street\Views\StreetLocation\MenuHouseMapIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetLocation\MenuIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetLocation\ViewLocation1.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />

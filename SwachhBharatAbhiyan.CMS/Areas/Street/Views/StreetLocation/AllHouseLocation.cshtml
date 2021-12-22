@@ -126,8 +126,8 @@
                         <img src="/Content/images/img/segregationImg/icn_house.png" class="media-object" />
                     </div>
                     <div class="media-body">
-                        <p class="media-heading" style="font-weight:600">Liquid Count</p>
-                        <p style="font-size:14px;margin:0px"><b>Total :</b> @Model.LiquidWasteCollection</p>
+                        <p class="media-heading" style="font-weight:600">Street Count</p>
+                        <p style="font-size:14px;margin:0px"><b>Total :</b> @Model.StreetWasteCollection</p>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="media-body">
                         <p class="media-heading" style="font-weight:600">Scanned Count</p>
-                        <p style="font-size:14px;margin:0px"><b>Total :</b> @Model.LiquidWasteScanedHouse</p>
+                        <p style="font-size:14px;margin:0px"><b>Total :</b> @Model.StreetWasteScanedHouse</p>
                     </div>
                 </div>
             </div>
@@ -181,23 +181,23 @@
         </div><br />
         <div class="row form" style="text-align:center;display:inline-flex">
             <label class="check-container">
-                All Liquid Waste
+                All Street Sweeping
                 <input type="radio" checked="checked" value="0" name="radio">
                 <span class="checkmark"></span>
             </label>
             <label class="check-container">
-                All with Scanned Liquid Waste
+                All with Scanned Street Sweeping
                 <input type="radio" value="1" name="radio">
                 <span class="checkmark"></span>
             </label>
             <label class="check-container">
-                Only Scanned Liquid Waste
+                Only Scanned Street Sweeping
                 <input type="radio" value="2" name="radio">
                 <span class="checkmark"></span>
             </label>
 
             <label class="check-container">
-                Only Without Scanned Liquid Waste
+                Only Without Scanned Street Sweeping
                 <input type="radio" value="3" name="radio">
                 <span class="checkmark"></span>
             </label>
@@ -258,7 +258,7 @@
                 <label>&nbsp;</label>
                 <div class="card" style="width: auto; border:1px solid #ff7676;margin-top:3px">
                     <div class="card-body" style="padding:8px">
-                        <p class="text-center" style="font-size:14px;margin:0px"><b>Total Scaned House :</b> @Model.LiquidWasteCollection</p>
+                        <p class="text-center" style="font-size:14px;margin:0px"><b>Total Scaned Street :</b> @Model.StreetWasteCollection</p>
                     </div>
                 </div>
             </div>
@@ -269,7 +269,7 @@
                 <div class="controls">
 
                     @*<label style="margin-top:7px">House  Id / House Owner Filter</label>*@
-                    <label style="margin-top:7px">Liquid Waste Id</label>
+                    <label style="margin-top:7px">Street Sweeping Id</label>
 
                     <input id="houseId_filter" class="form-control form-control-sm" type="text" />
                 </div>
@@ -377,7 +377,7 @@
 
                 $.ajax({
                     type: "post",
-                    url: "/Location/UserList?rn=L",
+                    url: "/StreetLocation/UserList?rn=S",
                     data: { stateId: $('#ddlState').val() },
                     datatype: "json",
                     traditional: true,
@@ -412,7 +412,7 @@
                 $.ajax({
                     type: "post",
                     //url: "/LiquidLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() +  "&garbageType=" + $("#seg_type").val() + "&FilterType=" + RadioValue,
-                    url: "/LiquidLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() + "&FilterType=" + RadioValue,
+                    url: "/StreetLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() + "&FilterType=" + RadioValue,
                     //url: "/Location/HouseLocationList",
                     datatype: "json",
                     traditional: true,
