@@ -1145,6 +1145,8 @@
     <Content Include="Areas\Street\Content\theme-assets\vendor\popper.js\umd\popper-utils.min.js" />
     <Content Include="Areas\Street\Content\theme-assets\vendor\popper.js\umd\popper.js" />
     <Content Include="Areas\Street\Content\theme-assets\vendor\popper.js\umd\popper.min.js" />
+    <Content Include="Areas\Street\Views\StreetSweeping\Index.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\MenuIndex.cshtml" />
     <Content Include="Content\Account\AppyLogo.png" />
     <Content Include="Content\Account\epmapasd_logo.png" />
     <Content Include="Content\Account\login-back.PNG" />
@@ -2177,8 +2179,12 @@
     <Content Include="Areas\Street\Views\StreetAttendence\Index.cshtml" />
     <Content Include="Areas\Street\Views\StreetAttendence\HouseRoute.cshtml" />
     <Content Include="Areas\Street\Views\StreetAttendence\UserRoute.cshtml" />
-    <Content Include="Areas\Street\Views\StreetSweeping\StreetSweepingIndex.cshtml" />
-    <Content Include="Areas\Street\Views\StreetSweeping\MenuStreetSweepingIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\AddEmployeeDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\EmployeeSummaryIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\Index.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\MenuEmployeeSummaryIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\MenuIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\AddStreetSweeping.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />

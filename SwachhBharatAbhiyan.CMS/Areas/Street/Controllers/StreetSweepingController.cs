@@ -15,10 +15,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
     public class StreetSweepingController : Controller
     {
 
-        IMainRepository mainRepository;
         IChildRepository childRepository;
-
-
+        IMainRepository mainRepository;
         // GET: Liquid/LiquidHome
         public StreetSweepingController()
         {
@@ -32,8 +30,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
         }
         // GET: Liquid/LiquidWaste
 
-        // GET: Street/StreetSweeping
-        public ActionResult StreetSweepingIndex()
+        public ActionResult Index()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -42,7 +39,9 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             else
                 return Redirect("/Account/Login");
         }
-        public ActionResult MenuStreetSweepingIndex()
+
+
+        public ActionResult MenuIndex()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -53,58 +52,63 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 return Redirect("/Account/Login");
         }
 
-        public ActionResult MenuEntryDetails()
+
+        public ActionResult AddStreetSweeping(int teamId = -1)
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                return View();
+                StreetSweepVM dump = childRepository.GetStreetSweepId(teamId);
+                return View(dump);
             }
             else
                 return Redirect("/Account/Login");
         }
-        public ActionResult EntryDetails()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-        public ActionResult MenuIdealtime()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-        public ActionResult Idealtime()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-      
 
 
-        //Add by neha 12 june 2019
-        public ActionResult IdleTime_Route()
+        [HttpPost]
+        public ActionResult AddStreetSweeping(StreetSweepVM LiquidWaste, HttpPostedFileBase filesUpload)
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                //ViewBag.userId = userId;
-                //ViewBag.Date = Date;
-                //return Json(userId, JsonRequestBehavior.AllowGet);
-                return View();
+                var AppDetails = mainRepository.GetApplicationDetails(SessionHandler.Current.AppId);
+                var guid = Guid.NewGuid().ToString().Split('-');
+                string image_Guid = DateTime.Now.ToString("MMddyyyymmss") + "_" + guid[1] + ".jpg";
+
+                //Converting  Url to image 
+                // var url = string.Format("http://api.qrserver.com/v1/create-qr-code/?data="+ point.ReferanceId);
+
+                var url = string.Format("https://chart.googleapis.com/chart?cht=qr&chl=" + LiquidWaste.ReferanceId + "&chs=160x160&chld=L|0");
+
+                WebResponse response = default(WebResponse);
+                Stream remoteStream = default(Stream);
+                StreamReader readStream = default(StreamReader);
+                WebRequest request = WebRequest.Create(url);
+                response = request.GetResponse();
+                remoteStream = response.GetResponseStream();
+                readStream = new StreamReader(remoteStream);
+                //Creating Path to save image in folder
+                System.Drawing.Image img = System.Drawing.Image.FromStream(remoteStream);
+                string imgpath = Path.Combine(Server.MapPath(AppDetails.basePath + AppDetails.StreetQRCode), image_Guid);
+                var exists = System.IO.Directory.Exists(Server.MapPath(AppDetails.basePath + AppDetails.StreetQRCode));
+                if (!exists)
+                {
+                    System.IO.Directory.CreateDirectory(Server.MapPath(AppDetails.basePath + AppDetails.StreetQRCode));
+                }
+                img.Save(imgpath);
+                response.Close();
+                remoteStream.Close();
+                readStream.Close();
+                LiquidWaste.SSQRCode = image_Guid;
+
+                StreetSweepVM pointDetails = childRepository.SaveStreetSweep(LiquidWaste);
+
+
+                return Redirect("Index");
             }
             else
                 return Redirect("/Account/Login");
         }
+
 
 
     }
