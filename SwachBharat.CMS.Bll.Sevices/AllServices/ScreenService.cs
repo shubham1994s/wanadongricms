@@ -3037,7 +3037,7 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     var id = db.LiquidWasteDetails.OrderByDescending(x => x.LWId).Select(x => x.LWId).FirstOrDefault();
                     int number = 1000;
-                    string refer = "LWSBA" + (number + id + 1);
+                    string refer = "LWCSBA" + (number + id + 1);
                     LiquidWaste.ReferanceId = refer;
                     LiquidWaste.LWQRCode = "/Images/QRcode.png";
                     LiquidWaste.WardList = ListWardNo();
@@ -4478,6 +4478,58 @@ namespace SwachBharat.CMS.Bll.Services
                         //model.GcWeightCount = Convert.ToDouble(string.Format("{0:0.00}", houseCount.GcWeightCount));
                         //model.DryWeightCount =Convert.ToDouble(string.Format("{0:0.00}", houseCount.DryWeightCount));
                         //model.WetWeightCount =Convert.ToDouble(string.Format("{0:0.00}", houseCount.WetWeightCount));
+                        model.GcWeightCount = Convert.ToDouble(houseCount.GcWeightCount);
+                        model.DryWeightCount = Convert.ToDouble(houseCount.DryWeightCount);
+                        model.WetWeightCount = Convert.ToDouble(houseCount.WetWeightCount);
+                        model.TotalGcWeightCount = Convert.ToDouble(houseCount.TotalGcWeightCount);
+                        model.TotalDryWeightCount = Convert.ToDouble(houseCount.TotalDryWeightCount);
+                        model.TotalWetWeightCount = Convert.ToDouble(houseCount.TotalWetWeightCount);
+
+                        return model;
+                    }
+
+                    // String.Format("{0:0.00}", 123.4567); 
+
+                    else
+                    {
+                        return model;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return model;
+            }
+        }
+
+        public DashBoardVM GetStreetDashBoardDetails()
+        {
+            DashBoardVM model = new DashBoardVM();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+
+                    DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
+                    var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
+                    List<ComplaintVM> obj = new List<ComplaintVM>();
+                    var data = db.SP_StreetDashboard_Details().First();
+
+                    var date = DateTime.Today;
+                    var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
+                    if (data != null)
+                    {
+
+                        model.TodayAttandence = data.TodayAttandence;
+                        model.TotalAttandence = data.TotalAttandence;
+                        model.HouseCollection = data.TotalHouse;
+                        model.StreetCollection = data.TotalStreet;
+                        model.TotalComplaint = obj.Count();
+                        model.TotalHouseCount = houseCount.TotalHouseCount;
+                        model.MixedCount = houseCount.MixedCount;
+                        model.BifurgatedCount = houseCount.BifurgatedCount;
+                        model.NotCollected = houseCount.NotCollected;
+                        model.NotSpecified = houseCount.NotSpecified;
                         model.GcWeightCount = Convert.ToDouble(houseCount.GcWeightCount);
                         model.DryWeightCount = Convert.ToDouble(houseCount.DryWeightCount);
                         model.WetWeightCount = Convert.ToDouble(houseCount.WetWeightCount);

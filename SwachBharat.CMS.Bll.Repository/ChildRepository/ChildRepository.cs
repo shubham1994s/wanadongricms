@@ -36,6 +36,13 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetLiquidDashBoardDetails();
 
         }
+
+        public DashBoardVM GetStreetDashBoardDetails()
+        {
+            return screenService.GetStreetDashBoardDetails();
+
+        }
+
         public string Address(string location)
         {
             return screenService.Address(location);

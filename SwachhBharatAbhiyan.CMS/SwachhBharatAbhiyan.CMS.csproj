@@ -318,6 +318,7 @@
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidIdealGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidWasteGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\Location.js" />
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\ZoneGrid.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\custom.css" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\fontastic.css" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\MyCustom.css" />
@@ -2187,7 +2188,9 @@
     <Content Include="Areas\Street\Views\StreetEmployee\EmployeeSummaryIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetGarbage\MenuIdealtime.cshtml" />
     <Content Include="Areas\Street\Views\StreetGarbage\Idealtime.cshtml" />
-    <Content Include="Areas\Street\Views\StreetLocation\AllHouseLocation.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\Idealtime.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\IdleTime_Route.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\MenuIdealtime.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />

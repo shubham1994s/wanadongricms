@@ -16,6 +16,8 @@ namespace SwachBharat.CMS.Bll.Services
         DashBoardVM GetDashBoardDetails();
 
         DashBoardVM GetLiquidDashBoardDetails();
+
+        DashBoardVM GetStreetDashBoardDetails();
         string Address(string location);
         AreaVM GetAreaDetails(int teamId,string Name);
         void DeletAreaDetails(int teamId);
