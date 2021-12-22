@@ -327,7 +327,9 @@
     <Compile Include="SP_LWaste_Count_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
-    <Compile Include="SP_SSEmployeeSummary_Result.cs" />
+    <Compile Include="SP_SSEmployeeSummary_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_StreetDashboard_Details_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>

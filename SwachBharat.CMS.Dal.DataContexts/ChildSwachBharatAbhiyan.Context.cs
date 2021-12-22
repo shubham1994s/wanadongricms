@@ -17,13 +17,10 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
-        
-
         public DevChildSwachhBharatNagpurEntities(int AppId)
-               : base(SwachBharatAppConnection.GetConnectionString(AppId))
+                : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -397,28 +394,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LSEmployeeSummary_Result>("SP_LSEmployeeSummary", fromParameter, toParameter, useridParameter, emptypeParameter);
         }
-
-        public virtual ObjectResult<SP_SSEmployeeSummary_Result> SP_SSEmployeeSummary(Nullable<System.DateTime> from, Nullable<System.DateTime> to, Nullable<int> userid, string emptype)
-        {
-            var fromParameter = from.HasValue ?
-                new ObjectParameter("from", from) :
-                new ObjectParameter("from", typeof(System.DateTime));
-
-            var toParameter = to.HasValue ?
-                new ObjectParameter("to", to) :
-                new ObjectParameter("to", typeof(System.DateTime));
-
-            var useridParameter = userid.HasValue ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(int));
-
-            var emptypeParameter = emptype != null ?
-                new ObjectParameter("Emptype", emptype) :
-                new ObjectParameter("Emptype", typeof(string));
-
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SSEmployeeSummary_Result>("SP_SSEmployeeSummary", fromParameter, toParameter, useridParameter, emptypeParameter);
-        }
-
+    
         public virtual ObjectResult<SP_IdelTimeLiquid_Result> SP_IdelTimeLiquid(Nullable<int> userId, Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate)
         {
             var userIdParameter = userId.HasValue ?
@@ -494,6 +470,27 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("FilterType", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LiquidWasteOnMapDetails_Result>("SP_LiquidWasteOnMapDetails", gcDateParameter, userIdParameter, zoneIdParameter, areaIdParameter, wardNoParameter, garbageTypeParameter, filterTypeParameter);
+        }
+    
+        public virtual ObjectResult<SP_SSEmployeeSummary_Result> SP_SSEmployeeSummary(Nullable<System.DateTime> from, Nullable<System.DateTime> to, Nullable<int> userid, string emptype)
+        {
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("from", from) :
+                new ObjectParameter("from", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            var emptypeParameter = emptype != null ?
+                new ObjectParameter("Emptype", emptype) :
+                new ObjectParameter("Emptype", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SSEmployeeSummary_Result>("SP_SSEmployeeSummary", fromParameter, toParameter, useridParameter, emptypeParameter);
         }
     }
 }
