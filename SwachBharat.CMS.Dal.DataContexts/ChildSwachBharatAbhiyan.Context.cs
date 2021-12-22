@@ -411,23 +411,24 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IdelTimeLiquid_Result>("SP_IdelTimeLiquid", userIdParameter, fdateParameter, tdateParameter);
         }
-    
-        public virtual ObjectResult<SP_IdelTimestreet_Result> SP_IdelTimestreet(Nullable<int> userId, Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate)
+
+        public virtual ObjectResult<SP_IdelTimeStreet_Result> SP_IdelTimestreet(Nullable<int> userId, Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("userId", userId) :
                 new ObjectParameter("userId", typeof(int));
-    
+
             var fdateParameter = fdate.HasValue ?
                 new ObjectParameter("fdate", fdate) :
                 new ObjectParameter("fdate", typeof(System.DateTime));
-    
+
             var tdateParameter = tdate.HasValue ?
                 new ObjectParameter("tdate", tdate) :
                 new ObjectParameter("tdate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IdelTimestreet_Result>("SP_IdelTimestreet", userIdParameter, fdateParameter, tdateParameter);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IdelTimeStreet_Result>("SP_IdelTimestreet", userIdParameter, fdateParameter, tdateParameter);
         }
+      
     
         public virtual ObjectResult<LiquidCurrentAllUserLocationTest1_Result> LiquidCurrentAllUserLocationTest1()
         {

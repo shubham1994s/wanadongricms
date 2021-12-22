@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "post",
-        url: "/Location/UserList?rn=L",
+        url: "/Location/UserList?rn=S",
         data: { userId: UserId, },
         datatype: "json",
         traditional: true,
@@ -38,7 +38,7 @@ $(document).ready(function () {
         "orderMulti": false, // for disable multiple column at once
         "pageLength": 10,
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=UserIdelLiquid",
+            "url": "/Datable/GetJqGridJson?rn=UserIdelStreet",
             "type": "POST",
             "datatype": "json"
         },

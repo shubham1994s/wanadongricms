@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/Content/css/responsive.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="/Content/images/img/136Logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
 </head>
 <style>
@@ -186,9 +187,9 @@
                             <div class="form d-flex align-items-center">
                                 <div class="content">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom:-15px;display:block;font-size:12px;" })
-
+                                    <h2 class="text-center" style=" margin-bottom: 5%; margin-top: -3%;">ICT BASE MONITORING TECHNOLOGY</h2>
                                     <div class="form-group">
-                                        <label for="type" class="username type">ICT BASE MONITORING TECHNOLOGY</label>
+                                        <label for="type" class="username type">SELECT TYPE</label>
 
 
                                         @Html.DropDownList("Type", new List<SelectListItem>
@@ -211,6 +212,7 @@
                                     <div class="form-group">
                                         <label for="login-password" class="password">PASSWORD </label>
                                         @Html.PasswordFor(m => m.Password, new { @class = "input-material ", @id = "login-password", placeholder = "Password" })
+                                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
                                         @*<label for="login-password" class="label-material">पासवर्ड </label>*@
                                         @*<label for="login-password" class="">Password </label>*@
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
@@ -290,4 +292,15 @@
                 }
             });
         </script>
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#login-password');
 
+    togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
