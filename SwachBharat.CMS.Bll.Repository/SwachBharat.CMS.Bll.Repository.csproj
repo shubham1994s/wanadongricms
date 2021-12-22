@@ -94,6 +94,7 @@
     <Compile Include="GridRepository\Grid\LGarbageCollectionGridRepository.cs" />
     <Compile Include="GridRepository\Grid\LiquidIdelGridRepository.cs" />
     <Compile Include="GridRepository\Grid\LiquidWasteGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\LiquidZoneGridRepository.cs" />
     <Compile Include="GridRepository\Grid\LocationGridRepository.cs" />
     <Compile Include="GridRepository\Grid\OnePointeightEditGridRepository.cs" />
     <Compile Include="GridRepository\Grid\OnePointeightGridRepository.cs" />

@@ -2187,6 +2187,9 @@
     <Content Include="Areas\Street\Views\StreetEmployee\EmployeeSummaryIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetGarbage\MenuIdealtime.cshtml" />
     <Content Include="Areas\Street\Views\StreetGarbage\Idealtime.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\Idealtime.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\IdleTime_Route.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\MenuIdealtime.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />

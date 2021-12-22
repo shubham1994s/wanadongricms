@@ -298,6 +298,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     return gridRepository;
                     break;
 
+                case "LiquidZoneDetail":
+                    gridRepository = new LiquidZoneGridRepository(0, searchString, appId);
+                    return gridRepository;
+                    break;
+
                 case "UserIdel":
                     gridRepository = new IdelGridRepository(0, searchString, fdate, tdate, userId, appId);
                     return gridRepository;

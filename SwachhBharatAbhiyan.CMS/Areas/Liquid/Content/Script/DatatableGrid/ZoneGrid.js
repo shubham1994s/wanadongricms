@@ -10,7 +10,7 @@
         "pageLength": 10,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=ZoneDetail",
+            "url": "/Datable/GetJqGridJson?rn=LiquidZoneDetail",
             "type": "POST",
             "datatype": "json"
         },
@@ -23,27 +23,28 @@
         }],
 
         "columns": [
-              { "data": "Id", "name": "Id", "autoWidth": false },
-              { "data": "Name", "name": "Name", "autoWidth": false },
-       { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="Edit(' + full["Id"] + ')" ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>'; }, "width": "10%" },
+            { "data": "LWzoneId", "name": "LWzoneId", "autoWidth": false },
+            { "data": "LWname", "name": "LWname", "autoWidth": false },
+            { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="Edit(' + full["LWzoneId"] + ')" ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>'; }, "width": "10%" },
        //<a  data-toggle="modal" style="cursor:pointer;margin-left:10px;" class="tooltip1" style="cursor:pointer" onclick="Delete(' + full["Id"] + ',' + full["Name"] + ')" ><i class="material-icons delete-icon">delete</i><span class="tooltiptext1">Delete</span> </a>
         ]
     });
 });
 
-function Edit(Id) {
+function Edit(LWzoneId) {
 
-    if (Id != null) {
-        var url = "/Liquid/LiquidMainMaster/AddZoneDetails?teamId=" + Id;
+    if (LWzoneId != null) {
+        debugger;
+        var url = "/Liquid/LiquidMainMaster/AddZoneDetails?teamId=" + LWzoneId;
         window.location.href = url;
     }
 };
 
-function Delete(Id) {
-    if (Id != null && Id != '') {
+function Delete(LWzoneId) {
+    if (LWzoneId != null && LWzoneId != '') {
 
         if (confirm("Do you want delete selected Area?")) {
-            var url = "/LiquidMainMaster/DeleteArea?teamId=" + Id;
+            var url = "/LiquidMainMaster/DeleteArea?teamId=" + LWzoneId;
             window.location.href = url;
         }
     }

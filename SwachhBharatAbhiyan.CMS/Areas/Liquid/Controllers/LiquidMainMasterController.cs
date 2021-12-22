@@ -553,8 +553,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
             {
                 ZoneMasterVM obj = new ZoneMasterVM();
                 ZoneVM zone = childRepository.GetZone(teamId);
-                obj.zoneId = zone.id;
-                obj.name = zone.name;
+                obj.LWzoneId = zone.id;
+                obj.LWname = zone.name;
 
                 return View(obj);
             }
@@ -566,8 +566,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         public ActionResult AddZoneDetails(ZoneMasterVM a)
         {
             ZoneVM area = new ZoneVM();
-            area.id = a.zoneId;
-            area.name = a.name;
+            area.id = a.LWzoneId;
+            area.name = a.LWname;
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository.SaveZone(area);
