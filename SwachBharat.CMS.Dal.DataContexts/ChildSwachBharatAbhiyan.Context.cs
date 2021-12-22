@@ -18,7 +18,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-               : base(SwachBharatAppConnection.GetConnectionString(AppId))
+                : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
 
@@ -47,7 +47,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<GramCleaningComplient> GramCleaningComplients { get; set; }
         public virtual DbSet<SS_1_7_ANSWER> SS_1_7_ANSWER { get; set; }
         public virtual DbSet<Daily_Attendance> Daily_Attendance { get; set; }
-        public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<WM_Garbage_Sales> WM_Garbage_Sales { get; set; }
         public virtual DbSet<HouseMaster> HouseMasters { get; set; }
         public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
@@ -55,6 +54,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<LiquidWasteDetail> LiquidWasteDetails { get; set; }
         public virtual DbSet<StreetSweepingDetail> StreetSweepingDetails { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<UserMaster> UserMasters { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
@@ -470,6 +470,27 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("FilterType", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LiquidWasteOnMapDetails_Result>("SP_LiquidWasteOnMapDetails", gcDateParameter, userIdParameter, zoneIdParameter, areaIdParameter, wardNoParameter, garbageTypeParameter, filterTypeParameter);
+        }
+    
+        public virtual ObjectResult<SP_SSEmployeeSummary_Result> SP_SSEmployeeSummary(Nullable<System.DateTime> from, Nullable<System.DateTime> to, Nullable<int> userid, string emptype)
+        {
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("from", from) :
+                new ObjectParameter("from", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            var emptypeParameter = emptype != null ?
+                new ObjectParameter("Emptype", emptype) :
+                new ObjectParameter("Emptype", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SSEmployeeSummary_Result>("SP_SSEmployeeSummary", fromParameter, toParameter, useridParameter, emptypeParameter);
         }
     }
 }

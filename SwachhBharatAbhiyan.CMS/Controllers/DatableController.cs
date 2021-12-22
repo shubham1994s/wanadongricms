@@ -347,6 +347,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     return gridRepository;
                     break;
 
+                case "StreetEmployeeSummary":
+                    gridRepository = new EmpolyeeSummaryGridRepository(0, searchString, fdate, tdate, userId, appId, "S");
+                    return gridRepository;
+                    break;
+
                 case "HouseScanify":
                     gridRepository = new HouseScanifyGridRepository(0, searchString, fdate, tdate, userId, appId);
                     return gridRepository;

@@ -617,6 +617,12 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Parameter Name="Emptype" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_LWaste_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_SSEmployeeSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="from" Type="date" Mode="In" />
+          <Parameter Name="to" Type="date" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="Emptype" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_StreetDashboard_Details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_StreetSweepDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_TotalHouseCollection_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -792,7 +798,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="tdate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="Daily_Attendance" EntityType="DevSwachhBharatNagpurModel.Daily_Attendance" />
-          <EntitySet Name="UserMasters" EntityType="DevSwachhBharatNagpurModel.UserMaster" />
           <EntitySet Name="WM_Garbage_Sales" EntityType="DevSwachhBharatNagpurModel.WM_Garbage_Sales" />
           <EntitySet Name="HouseMasters" EntityType="DevSwachhBharatNagpurModel.HouseMaster" />
           <EntitySet Name="GarbageCollectionDetails" EntityType="DevSwachhBharatNagpurModel.GarbageCollectionDetail" />
@@ -843,6 +848,13 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="WardNo" Mode="In" Type="Int32" />
             <Parameter Name="GarbageType" Mode="In" Type="Int32" />
             <Parameter Name="FilterType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="UserMasters" EntityType="DevSwachhBharatNagpurModel.UserMaster" />
+          <FunctionImport Name="SP_SSEmployeeSummary" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_SSEmployeeSummary_Result)">
+            <Parameter Name="from" Mode="In" Type="DateTime" />
+            <Parameter Name="to" Mode="In" Type="DateTime" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="Emptype" Mode="In" Type="String" />
           </FunctionImport>
          
         </EntityContainer>
@@ -1492,28 +1504,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="UserMaster">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="userNameMar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="userLoginId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="userPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="userMobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="userAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="userProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="userEmployeeNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="userDesignation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="imoNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="bloodGroup" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="isActive" Type="Boolean" />
-          <Property Name="gcTarget" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="imoNo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="WM_Garbage_Sales">
           <Key>
             <PropertyRef Name="ID" />
@@ -1818,6 +1808,43 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="DateTime" Name="gcDate" Nullable="true" />
           <Property Type="String" Name="LWLat" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="LWLong" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="userNameMar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="userLoginId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="userPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="userMobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="userAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="userProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userEmployeeNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="userDesignation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="imoNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="bloodGroup" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="gcTarget" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="imoNo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="SP_SSEmployeeSummary_Result">
+          <Property Type="Int32" Name="daID" Nullable="true" />
+          <Property Type="Int32" Name="userId" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="StartTime" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="EndTime" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Startdate" Nullable="true" />
+          <Property Type="DateTime" Name="Enddate" Nullable="true" />
+          <Property Type="String" Name="InBatteryStatus" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="OutBatteryStatus" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Totalhousecollection" Nullable="true" />
+          <Property Type="Decimal" Name="Totaldistance" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="Totaldumpyard" Nullable="true" />
+          <Property Type="Int64" Name="rownum" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2418,29 +2445,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserMasters">
-            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.UserMaster">
-              <MappingFragment StoreEntitySet="UserMaster">
-                <ScalarProperty Name="imoNo2" ColumnName="imoNo2" />
-                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
-                <ScalarProperty Name="gcTarget" ColumnName="gcTarget" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="bloodGroup" ColumnName="bloodGroup" />
-                <ScalarProperty Name="imoNo" ColumnName="imoNo" />
-                <ScalarProperty Name="userDesignation" ColumnName="userDesignation" />
-                <ScalarProperty Name="userEmployeeNo" ColumnName="userEmployeeNo" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="userProfileImage" ColumnName="userProfileImage" />
-                <ScalarProperty Name="userAddress" ColumnName="userAddress" />
-                <ScalarProperty Name="userMobileNumber" ColumnName="userMobileNumber" />
-                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
-                <ScalarProperty Name="userLoginId" ColumnName="userLoginId" />
-                <ScalarProperty Name="userNameMar" ColumnName="userNameMar" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WM_Garbage_Sales">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.WM_Garbage_Sales">
               <MappingFragment StoreEntitySet="WM_Garbage_Sales">
@@ -2802,6 +2806,48 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="gcDate" ColumnName="gcDate" />
                 <ScalarProperty Name="LWLat" ColumnName="LWLat" />
                 <ScalarProperty Name="LWLong" ColumnName="LWLong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="imoNo2" ColumnName="imoNo2" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="gcTarget" ColumnName="gcTarget" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="bloodGroup" ColumnName="bloodGroup" />
+                <ScalarProperty Name="imoNo" ColumnName="imoNo" />
+                <ScalarProperty Name="userDesignation" ColumnName="userDesignation" />
+                <ScalarProperty Name="userEmployeeNo" ColumnName="userEmployeeNo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="userProfileImage" ColumnName="userProfileImage" />
+                <ScalarProperty Name="userAddress" ColumnName="userAddress" />
+                <ScalarProperty Name="userMobileNumber" ColumnName="userMobileNumber" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userLoginId" ColumnName="userLoginId" />
+                <ScalarProperty Name="userNameMar" ColumnName="userNameMar" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_SSEmployeeSummary" FunctionName="DevSwachhBharatNagpurModel.Store.SP_SSEmployeeSummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.SP_SSEmployeeSummary_Result">
+                <ScalarProperty Name="daID" ColumnName="daID" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Startdate" ColumnName="Startdate" />
+                <ScalarProperty Name="Enddate" ColumnName="Enddate" />
+                <ScalarProperty Name="InBatteryStatus" ColumnName="InBatteryStatus" />
+                <ScalarProperty Name="OutBatteryStatus" ColumnName="OutBatteryStatus" />
+                <ScalarProperty Name="Totalhousecollection" ColumnName="Totalhousecollection" />
+                <ScalarProperty Name="Totaldistance" ColumnName="Totaldistance" />
+                <ScalarProperty Name="Totaldumpyard" ColumnName="Totaldumpyard" />
+                <ScalarProperty Name="rownum" ColumnName="rownum" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
