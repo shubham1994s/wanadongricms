@@ -731,7 +731,9 @@
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\popper.js\umd\popper.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\popper.js\umd\popper.min.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
+    <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\StreetGarbageGrid.js" />
+    <Content Include="Areas\Street\Content\Script\DatatableGrid\StreetIdealGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\StreetSweepingGrid.js" />
     <Content Include="Areas\Street\Content\theme-assets\css\custom.css" />
     <Content Include="Areas\Street\Content\theme-assets\css\fontastic.css" />
@@ -2180,6 +2182,10 @@
     <Content Include="Areas\Street\Views\StreetAttendence\UserRoute.cshtml" />
     <Content Include="Areas\Street\Views\StreetGarbage\StreetGarbageIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetGarbage\MenuStreetGarbageIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\MenuEmployeeSummaryIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\EmployeeSummaryIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetGarbage\MenuIdealtime.cshtml" />
+    <Content Include="Areas\Street\Views\StreetGarbage\Idealtime.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />

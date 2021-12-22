@@ -10,14 +10,11 @@ using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
 
 namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
 {
-    public class StreetGarbageController : Controller
+    public class StreetEmployeeController : Controller
     {
-        IMainRepository mainRepository;
         IChildRepository childRepository;
-
-
-        // GET: Liquid/LiquidHome
-        public StreetGarbageController()
+        IMainRepository mainRepository;
+        public StreetEmployeeController()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -27,28 +24,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             else
                 Redirect("/Account/Login");
         }
-        // GET: Street/StreetGarbage
-        public ActionResult StreetGarbageIndex()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-        public ActionResult MenuStreetGarbageIndex()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                TempData.Keep();
-                return View();
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-
-        public ActionResult MenuIdealtime()
+        // GET: Street/StreetEmployee
+        public ActionResult Index()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -58,7 +35,16 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 return Redirect("/Account/Login");
         }
 
-        public ActionResult Idealtime()
+        public ActionResult EmployeeSummaryIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult MenuEmployeeSummaryIndex()
         {
             if (SessionHandler.Current.AppId != 0)
             {

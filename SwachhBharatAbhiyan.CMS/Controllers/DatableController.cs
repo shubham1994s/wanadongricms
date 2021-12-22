@@ -307,6 +307,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new LiquidIdelGridRepository(0, searchString, fdate, tdate, userId, appId);
                     return gridRepository;
                     break;
+                case "UserIdelStreet":
+                    gridRepository = new StreetIdelGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    return gridRepository;
+                    break;
                 case "GarbageCount":
                     gridRepository = new GarbageCountGridRepository(0, searchString, fdate, tdate, userId, appId);
                     return gridRepository;
