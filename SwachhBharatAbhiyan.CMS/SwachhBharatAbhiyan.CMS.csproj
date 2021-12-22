@@ -315,6 +315,7 @@
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidIdealGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidWasteGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\Location.js" />
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\ZoneGrid.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\custom.css" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\fontastic.css" />
     <Content Include="Areas\Liquid\Content\theme-assets\css\MyCustom.css" />

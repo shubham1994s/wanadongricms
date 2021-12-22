@@ -20,6 +20,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         DashBoardVM GetDashBoardDetails();
 
         DashBoardVM GetLiquidDashBoardDetails();
+
+        DashBoardVM GetStreetDashBoardDetails();
         string Address(string location);
         AreaVM GetArea(int teamId,string name);
         void DeletArea(int teamId);

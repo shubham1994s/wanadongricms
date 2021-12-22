@@ -37,7 +37,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 ViewBag.lang = SessionHandler.Current.Logitude;
                 ViewBag.YoccFeddbackLink = SessionHandler.Current.YoccFeddbackLink;
                 TempData.Keep();
-                var details = childRepository.GetLiquidDashBoardDetails();
+                var details = childRepository.GetStreetDashBoardDetails();
                 return View(details);
             }
             else
