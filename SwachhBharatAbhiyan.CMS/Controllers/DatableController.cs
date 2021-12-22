@@ -270,7 +270,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new LGarbageCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
                     return gridRepository;
                     break;
-                case "StreetSweeping":
+                case "StreetGarbage":
                     gridRepository = new SSCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
                     return gridRepository;
                     break;
