@@ -2318,6 +2318,7 @@
     <Content Include="Areas\Street\Views\StreetLocation\MenuHouseMapIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetLocation\MenuIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetLocation\ViewLocation1.cshtml" />
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
@@ -2535,6 +2536,8 @@
     <Content Include="Views\Android\AndroidAPKMenu.cshtml" />
     <Content Include="Views\Android\Etapalli.cshtml" />
     <Content Include="Views\Android\Bhamragad.cshtml" />
+    <Content Include="Views\Android\Alandi.cshtml" />
+    <Content Include="Views\Android\Gadchiroli.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -35,5 +35,13 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             return View();
         }
+        public ActionResult Alandi()
+        {
+            return View();
+        }
+        public ActionResult Gadchiroli()
+        {
+            return View();
+        }
     }
 }
