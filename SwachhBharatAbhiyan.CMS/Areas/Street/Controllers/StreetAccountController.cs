@@ -80,7 +80,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AddSession(null, null, null, null);
             RouteData.Values.Remove("ReturnUrl");
-            //return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Account");
             return View();
         }
 

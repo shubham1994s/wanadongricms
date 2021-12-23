@@ -16,10 +16,13 @@ namespace SwachBharat.CMS.Bll.Services
         DashBoardVM GetDashBoardDetails();
 
         DashBoardVM GetLiquidDashBoardDetails();
+
+        DashBoardVM GetStreetDashBoardDetails();
         string Address(string location);
         AreaVM GetAreaDetails(int teamId,string Name);
         void DeletAreaDetails(int teamId);
         void SaveAreaDetails(AreaVM area);
+        void LiquidSaveAreaDetails(AreaVM area);
 
 
         VehicleTypeVM GetVehicleTypeDetails(int teamId);
@@ -28,7 +31,9 @@ namespace SwachBharat.CMS.Bll.Services
 
          WardNumberVM GetWardNumberDetails(int teamId,string name);
          void SaveWardNumberDetails(WardNumberVM data);
-         void DeletWardNumberDetails(int teamId);
+
+        void LiquidSaveWardNumberDetails(WardNumberVM data);
+        void DeletWardNumberDetails(int teamId);
 
         HouseDetailsVM GetHouseDetails(int teamId);
         HouseDetailsVM SaveHouseDetails(HouseDetailsVM data);

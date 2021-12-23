@@ -16,5 +16,13 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string NameMar { get; set; }
         public Nullable<int> wardId { get; set; }
 
+
+        public int LWId { get; set; }
+        [Remote("CheckAreaDetails", "LiquidMainMaster", HttpMethod = "POST", ErrorMessage = "Name already exists!", AdditionalFields = "LWId")]
+        public string LWName { get; set; }
+        [Remote("CheckAreaDetails", "LiquidMainMaster", HttpMethod = "POST", ErrorMessage = "Name already exists!", AdditionalFields = "LWId")]
+        public string LWNameMar { get; set; }
+        public Nullable<int> LWwardId { get; set; }
+
     }
 }

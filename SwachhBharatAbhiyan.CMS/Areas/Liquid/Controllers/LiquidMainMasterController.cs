@@ -415,13 +415,15 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                childRepository.SaveArea(area);
+                childRepository.LiquidSaveArea(area);
                 return Redirect("AreaIndex");
             }
             else
                 return Redirect("/Account/Login");
 
         }
+
+       
 
         [HttpGet]
         public ActionResult DeleteArea(int teamId)
@@ -473,7 +475,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                childRepository.SaveWardNumber(area);
+                childRepository.LiquidSaveWardNumber(area);
                 return Redirect("WardIndex");
             }
             else
@@ -553,8 +555,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
             {
                 ZoneMasterVM obj = new ZoneMasterVM();
                 ZoneVM zone = childRepository.GetZone(teamId);
-                obj.zoneId = zone.id;
-                obj.name = zone.name;
+                obj.LWzoneId = zone.id;
+                obj.LWname = zone.name;
 
                 return View(obj);
             }
@@ -566,8 +568,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         public ActionResult AddZoneDetails(ZoneMasterVM a)
         {
             ZoneVM area = new ZoneVM();
-            area.id = a.zoneId;
-            area.name = a.name;
+            area.id = a.LWzoneId;
+            area.name = a.LWname;
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository.SaveZone(area);

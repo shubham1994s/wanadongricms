@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace SwachBharat.CMS.Bll.Repository.GridRepository.Grid
 {
-     public class ZoneGridRepository : IDataTableRepository
+    public class LiquidZoneGridRepository : IDataTableRepository
     {
         DashBoardRepository objRep = new DashBoardRepository();
         IEnumerable<SBAZoneGridRow> dataset;
-        public ZoneGridRepository(long wildcard, string SearchString, int AppId)
+        public LiquidZoneGridRepository(long wildcard, string SearchString, int AppId)
         {
-            dataset = objRep.GetZoneData(wildcard, SearchString, AppId);
+            dataset = objRep.GetLiquidZoneData(wildcard, SearchString, AppId);
         }
 
         public string GetDataTabelJson(string sortColumn, string sortColumnDir, string draw, string length, string searchValue, string start)

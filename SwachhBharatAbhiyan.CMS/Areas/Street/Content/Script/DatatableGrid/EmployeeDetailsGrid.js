@@ -34,7 +34,7 @@ function Employee() {
         "pageLength": 10,
         destroy: true,
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=LiquidActiveEmployee",
+            "url": "/Datable/GetJqGridJson?rn=StreetActiveEmployee",
             "type": "POST",
             "datatype": "json"
         },
@@ -162,7 +162,7 @@ function NotActiveEmployee() {
         destroy: true,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=NotActiveLiquidEmployee",
+            "url": "/Datable/GetJqGridJson?rn=NotActiveStreetEmployee",
             "type": "POST",
             "datatype": "json"
         },
@@ -231,10 +231,10 @@ function PopImages(cel) {
     jQuery("#header_data").html(head);
 }
 function Edit(Id) {
-    window.location.href = "/Liquid/LiquidEmployee/AddEmployeeDetails?teamId=" + Id;
+    window.location.href = "/Street/StreetEmployee/AddEmployeeDetails?teamId=" + Id;
 };
 function Delete(Id) {
-    window.location.href = "/Liquid/LiquidEmployee/DeleteEmployee?teamId=" + Id;
+    window.location.href = "/Street/StreetEmployee/DeleteEmployee?teamId=" + Id;
 };
 
 

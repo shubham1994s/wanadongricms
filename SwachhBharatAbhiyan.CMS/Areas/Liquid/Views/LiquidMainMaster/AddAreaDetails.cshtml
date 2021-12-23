@@ -15,13 +15,13 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Id);
+    @Html.HiddenFor(model => model.LWId);
 
     <div class="container">
         <div class="row">
             <span class="backk">
 
-                <a href="@Url.Action("AreaIndex", "MainMaster")" id="btnBack" class="btn"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
+                <a href="@Url.Action("AreaIndex", "LiquidMainMaster")" id="btnBack" class="btn"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
             </span>
             <h1 class="add-edit-h1 title_change"> </h1>
             <div class="panel panel-warning col-sm-12 ">
@@ -38,8 +38,8 @@
                         @*@Html.Label("वार्ड / ward")*@
                         @Html.Label("Ward / Prabhag")
                         @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" href="AddWardDetails"> + Add Ward </a>*@
-                        @Html.DropDownListFor(model => model.wardId, Model.WardList, new { style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
-                        @Html.ValidationMessageFor(model => model.wardId, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.LWwardId, Model.WardList, new { style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
+                        @Html.ValidationMessageFor(model => model.LWwardId, "", new { @class = "text-danger" })
                         <span class="text-danger" id="err_ward"></span>
                         <span class="help-block with-errors"></span>
                     </div>
@@ -49,8 +49,8 @@
                         @*@Html.Label("नाव / Name")*@
                         @Html.Label("Name")
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", style = "font-family:Arial, FontAwesome", required = "required" })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.LWName, new { @class = "form-control", style = "font-family:Arial, FontAwesome", required = "required" })
+                        @Html.ValidationMessageFor(model => model.LWName, "", new { @class = "text-danger" })
                         <span class="text-danger" id="err_name"></span>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <span class="help-block with-errors"></span>
@@ -98,7 +98,7 @@
 }
 <script>
     $(document).ready(function () {
-        var id = $('#Id').val();
+        var id = $('#LWId').val();
         if (id > 0) {
             $('#buttonName').text("Save Changes");
             //$('.title_change').text("क्षेत्र तपशील सादर बदला / Edit Area Details");
@@ -111,10 +111,10 @@
     });
     $("#btnSubmit").click(function () {
         //alert("aa");
-        if ($.trim($("#Name").val()) == '') {
+        if ($.trim($("#LWName").val()) == '') {
             //$("#err_name").html("नाव आवश्यक आहे / Name is Required").delay(1500).show().fadeOut('slow');
             $("#err_name").html("Name is Required").delay(1500).show().fadeOut('slow');
-            $('#Name').focus();
+            $('#LWName').focus();
             return false;
         }
         //if ($.trim($("#NameMar").val()) == '') {
@@ -122,10 +122,10 @@
         //    $('#NameMar').focus();
         //    return false;
         //}
-        if ($.trim($("#wardId").val()) == "-1" || $.trim($("#wardId").val()) == "0") {
+        if ($.trim($("#LWwardId").val()) == "-1" || $.trim($("#LWwardId").val()) == "0") {
             //$("#err_ward").html("वार्ड क्रमांक आवश्यक आहे / Ward No. is Required").delay(1500).show().fadeOut('slow');
             $("#err_ward").html("Ward / Prabhag is Required").delay(1500).show().fadeOut('slow');
-            $('#wardId').focus();
+            $('#LWwardId').focus();
             return false;
         }
         return true;

@@ -2,7 +2,7 @@
     var UserId = $('#selectnumber').val();
     $.ajax({
         type: "post",
-        url: "/Location/UserList?rn=L",
+        url: "/StreetLocation/UserList?rn=S",
         data: { userId: UserId },
         datatype: "json",
         traditional: true,
@@ -16,6 +16,7 @@
         }
     });
     $("#demoGrid").DataTable({
+        //debugger;
         "sDom": "ltipr",
         "order": [[ 5, "desc" ]],
         "processing": true, // for show progress bar
@@ -25,7 +26,7 @@
        "pageLength": 10,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=LiquidLocation",
+            "url": "/Datable/GetJqGridJson?rn=StreetLocation",
             "type": "POST",
             "datatype": "json"
         },
@@ -59,12 +60,14 @@
 
 function test(a)
 {
-    window.location.href = "/Location/viewLocation?teamId="+a;
+  
+    window.location.href = "/Location/viewLocation?teamId=" + a ;
 };
 
 
 function map(a) {
-    window.location.href = "/Location/viewLocation?teamId=" + a;
+   
+    window.location.href = "/Location/viewLocation?teamId=" + a ;
 };
 
 //////////////////////////////////////////////////////////////////////////////

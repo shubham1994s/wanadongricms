@@ -330,6 +330,34 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 return data.OrderByDescending(c => c.Id);
             }
         }
+
+        public IEnumerable<SBAZoneGridRow> GetLiquidZoneData(long wildcard, string SearchString, int appId)
+        {
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.ZoneMasters.Select(x => new SBAZoneGridRow
+                {
+                    LWzoneId = x.zoneId,
+                    LWname = x.name,
+                }).ToList();
+                //  var result = data.SkipWhile(element => element.cId != element.reNewId); 
+                foreach (var item in data)
+                {
+
+                    if (item.LWname == null && item.LWname == "")
+                        item.LWname = "";
+                }
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    var model = data.Where(c => c.LWname.ToUpper().ToString().Contains(SearchString) || c.LWname.ToString().ToLower().ToString().Contains(SearchString) ||
+                     c.LWname.ToString().Contains(SearchString)).ToList();
+
+                    data = model.ToList();
+                }
+                return data.OrderByDescending(c => c.LWzoneId);
+            }
+        }
+
         public IEnumerable<SBAVehicleTypeGridRow> GetVehicleTypeData(long wildcard, string SearchString, int appId)
         {
             List<SBAVehicleTypeGridRow> obj = new List<SBAVehicleTypeGridRow>();
@@ -1992,8 +2020,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                             Lat = x.Lat,
                             Long = x.Long,
                             Address = checkNull(x.locAddresss).Replace("Unnamed Road,", ""),
-                            //gpAfterImage = (x.gpAfterImage == "" ? "/Images/default_not_upload.png" : ThumbnaiUrlAPI + x.gpAfterImage.Trim()),
-                            //gpBeforImage = (x.gpBeforImage == "" ? "/Images/default_not_upload.png" : ThumbnaiUrlAPI + x.gpBeforImage.Trim())
+                            gpAfterImage = (x.gpAfterImage == "" ? "/Images/default_not_upload.png" : x.gpAfterImage.Trim()),
+                            gpBeforImage = (x.gpBeforImage == "" ? "/Images/default_not_upload.png" : x.gpBeforImage.Trim())
 
                         });
 
@@ -2101,8 +2129,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                             Lat = x.Lat,
                             Long = x.Long,
                             Address = checkNull(x.locAddresss).Replace("Unnamed Road,", ""),
-                            //gpAfterImage = (x.gpAfterImage == "" ? "/Images/default_not_upload.png" : ThumbnaiUrlAPI + x.gpAfterImage.Trim()),
-                            //gpBeforImage = (x.gpBeforImage == "" ? "/Images/default_not_upload.png" : ThumbnaiUrlAPI + x.gpBeforImage.Trim())
+                            gpAfterImage = (x.gpAfterImage == "" ? "/Images/default_not_upload.png" :  x.gpAfterImage.Trim()),
+                            gpBeforImage = (x.gpBeforImage == "" ? "/Images/default_not_upload.png" :  x.gpBeforImage.Trim())
 
                         });
 

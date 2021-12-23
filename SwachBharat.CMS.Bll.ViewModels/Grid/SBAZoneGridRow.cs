@@ -11,5 +11,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
 
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public int LWzoneId { get; set; }
+        public string LWname { get; set; }
     }
 }
