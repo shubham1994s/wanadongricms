@@ -2318,6 +2318,9 @@
     <Content Include="Areas\Street\Views\StreetLocation\MenuHouseMapIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetLocation\MenuIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetLocation\ViewLocation1.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\MenuIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\Index.cshtml" />
+    <Content Include="Areas\Street\Views\StreetEmployee\AddEmployeeDetails.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
