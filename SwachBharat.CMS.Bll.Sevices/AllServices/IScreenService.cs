@@ -24,6 +24,8 @@ namespace SwachBharat.CMS.Bll.Services
         void SaveAreaDetails(AreaVM area);
         void LiquidSaveAreaDetails(AreaVM area);
 
+        void StreetSaveAreaDetails(AreaVM area);
+
 
         VehicleTypeVM GetVehicleTypeDetails(int teamId);
         void DeletVehicleTypeDetails(int teamId);
@@ -33,6 +35,9 @@ namespace SwachBharat.CMS.Bll.Services
          void SaveWardNumberDetails(WardNumberVM data);
 
         void LiquidSaveWardNumberDetails(WardNumberVM data);
+
+        void StreetSaveWardNumberDetails(WardNumberVM data);
+
         void DeletWardNumberDetails(int teamId);
 
         HouseDetailsVM GetHouseDetails(int teamId);
@@ -67,7 +72,11 @@ namespace SwachBharat.CMS.Bll.Services
         void SaveComplaintStatus(ComplaintVM employee);
 
         ZoneVM GetZone(int teamId);
+
+        ZoneVM StreetGetZone(int teamId);
         void SaveZone(ZoneVM employee);
+
+        void StreetSaveZone(ZoneVM employee);
         ZoneVM GetValidZone(string name,int zoneId);
 
         //Added By Saurabh
