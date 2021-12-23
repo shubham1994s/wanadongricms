@@ -18,5 +18,11 @@ namespace SwachhBharatAbhiyan.CMS.Models
         //   [Required(ErrorMessage = "Name is required.")]
         [Remote("CheckZoneDetails", "LiquidMainMaster", HttpMethod = "POST", ErrorMessage = "Name already exists!", AdditionalFields = "LWzoneId")]
         public string LWname { get; set; }
+
+
+        public int SSzoneId { get; set; }
+        //   [Required(ErrorMessage = "Name is required.")]
+        [Remote("CheckZoneDetails", "StreetMainMaster", HttpMethod = "POST", ErrorMessage = "Name already exists!", AdditionalFields = "SSzoneId")]
+        public string SSname { get; set; }
     }
 }

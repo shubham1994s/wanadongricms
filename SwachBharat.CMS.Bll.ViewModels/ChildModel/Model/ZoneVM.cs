@@ -15,5 +15,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public int id { get; set; }
         [Remote("CheckZoneDetails", "MainMaster", HttpMethod = "POST", ErrorMessage = "Name already exists!")]
         public string name { get; set; }
+
+        public int SSid { get; set; }
+        [Remote("CheckZoneDetails", "StreetMainMaster", HttpMethod = "POST", ErrorMessage = "Name already exists!")]
+        public string SSname { get; set; }
     }
 }

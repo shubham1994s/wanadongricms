@@ -23,5 +23,12 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
 
         public Nullable<int> LWzoneId { get; set; }
 
+
+        public int SSId { get; set; }
+        [Remote("CheckWardDetails", "StreetMainMaster", HttpMethod = "POST", ErrorMessage = "Name already exists!", AdditionalFields = "SSId")]
+        public string SSWardNo { get; set; }
+
+        public Nullable<int> SSzoneId { get; set; }
+
     }
 }
