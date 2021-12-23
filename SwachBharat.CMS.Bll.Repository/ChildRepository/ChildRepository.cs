@@ -74,6 +74,15 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             screenService.LiquidSaveAreaDetails(area);
         }
 
+        public void StreetSaveArea(AreaVM area)
+        {
+            if (area.Id <= 0)
+            {
+                area.Id = 0;
+            }
+            screenService.StreetSaveAreaDetails(area);
+        }
+
         public VehicleTypeVM GetVehicleType(int teamId)
         {
             return screenService.GetVehicleTypeDetails(teamId);
@@ -116,6 +125,15 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
                 type.LWId = 0;
             }
             screenService.LiquidSaveWardNumberDetails(type);
+        }
+
+        public void StreetSaveWardNumber(WardNumberVM type)
+        {
+            if (type.SSId <= 0)
+            {
+                type.SSId = 0;
+            }
+            screenService.StreetSaveWardNumberDetails(type);
         }
 
 
@@ -237,7 +255,12 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetZone(teamId);
         }
-       
+
+        public ZoneVM StreetGetZone(int teamId)
+        {
+            return screenService.StreetGetZone(teamId);
+        }
+
         public void SaveZone(ZoneVM type)
         {
             if (type.id <= 0)
@@ -245,6 +268,15 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
                 type.id = 0;
             }
             screenService.SaveZone(type);
+        }
+
+        public void StreetSaveZone(ZoneVM type)
+        {
+            if (type.id <= 0)
+            {
+                type.id = 0;
+            }
+            screenService.StreetSaveZone(type);
         }
         public ZoneVM GetValidZone(string name,int zoneId)
         {

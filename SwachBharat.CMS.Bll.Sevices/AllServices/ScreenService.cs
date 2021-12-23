@@ -222,6 +222,39 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+
+        public void StreetSaveAreaDetails(AreaVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.SSId > 0)
+                    {
+                        var model = db.TeritoryMasters.Where(x => x.Id == data.SSId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.Id = data.SSId;
+                            model.Area = data.SSName;
+                            model.AreaMar = data.SSNameMar;
+                            model.wardId = data.SSwardId;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var area = StreetFillAreaDataModel(data);
+                        db.TeritoryMasters.Add(area);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void DeletAreaDetails(int teamId)
         {
             try
@@ -395,6 +428,37 @@ namespace SwachBharat.CMS.Bll.Services
                     else
                     {
                         var type = LiquidFillWardDataModel(data);
+                        db.WardNumbers.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void StreetSaveWardNumberDetails(WardNumberVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.SSId > 0)
+                    {
+                        var model = db.WardNumbers.Where(x => x.Id == data.SSId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.Id = data.SSId;
+                            model.WardNo = data.SSWardNo;
+                            model.zoneId = data.SSzoneId;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = StreetFillWardDataModel(data);
                         db.WardNumbers.Add(type);
                         db.SaveChanges();
                     }
@@ -2165,6 +2229,17 @@ namespace SwachBharat.CMS.Bll.Services
 
             return model;
         }
+
+        private TeritoryMaster StreetFillAreaDataModel(AreaVM data)
+        {
+            TeritoryMaster model = new TeritoryMaster();
+            model.Id = data.SSId;
+            model.Area = data.SSName;
+            model.AreaMar = data.SSNameMar;
+            model.wardId = data.SSwardId;
+
+            return model;
+        }
         private VehicleType FillVehicleDataModel(VehicleTypeVM data)
         {
             VehicleType model = new VehicleType();
@@ -2190,6 +2265,15 @@ namespace SwachBharat.CMS.Bll.Services
             model.Id = data.LWId;
             model.WardNo = data.LWWardNo;
             model.zoneId = data.LWzoneId;
+            return model;
+        }
+
+        private WardNumber StreetFillWardDataModel(WardNumberVM data)
+        {
+            WardNumber model = new WardNumber();
+            model.Id = data.SSId;
+            model.WardNo = data.SSWardNo;
+            model.zoneId = data.SSzoneId;
             return model;
         }
 
@@ -2878,6 +2962,31 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+        public ZoneVM StreetGetZone(int teamId)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var Details = db.ZoneMasters.Where(x => x.zoneId == teamId).FirstOrDefault();
+                    if (Details != null)
+                    {
+                        ZoneVM obj = new ZoneVM();
+                        obj.id = Details.zoneId;
+                        obj.name = Details.name;
+                        return obj;
+                    }
+                    else
+                    {
+                        return new ZoneVM();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public void SaveZone(ZoneVM data)
         {
             try
@@ -2899,6 +3008,38 @@ namespace SwachBharat.CMS.Bll.Services
                         ZoneMaster obj = new ZoneMaster();
                         obj.name = data.name;
                         obj.zoneId = data.id;
+                        db.ZoneMasters.Add(obj);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void StreetSaveZone(ZoneVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.SSid > 0)
+                    {
+                        var model = db.ZoneMasters.Where(x => x.zoneId == data.SSid).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.zoneId = data.SSid;
+                            model.name = data.SSname;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        ZoneMaster obj = new ZoneMaster();
+                        obj.name = data.SSname;
+                        obj.zoneId = data.SSid;
                         db.ZoneMasters.Add(obj);
                         db.SaveChanges();
                     }

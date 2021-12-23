@@ -260,6 +260,8 @@
     <Compile Include="Areas\Street\Controllers\StreetGarbageController.cs" />
     <Compile Include="Areas\Street\Controllers\StreetHomeController.cs" />
     <Compile Include="Areas\Street\Controllers\StreetLocationController.cs" />
+    <Compile Include="Areas\Street\Controllers\StreetMainMasterController.cs" />
+    <Compile Include="Areas\Street\Controllers\StreetSweepingController.cs" />
     <Compile Include="Areas\Street\StreetAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -737,7 +739,6 @@
     <Content Include="Areas\Street\Content\Script\DatatableGrid\AttendenceGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
-    <Content Include="Areas\Street\Content\Script\DatatableGrid\LiquidWasteGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\Location.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\StreetGarbageGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\StreetIdealGrid.js" />
@@ -2325,6 +2326,33 @@
     <Content Include="Areas\Street\Views\StreetEmployee\MenuIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetEmployee\Index.cshtml" />
     <Content Include="Areas\Street\Views\StreetEmployee\AddEmployeeDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\AddStreetSweeping.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\Index.cshtml" />
+    <Content Include="Areas\Street\Views\StreetSweeping\MenuIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AddAreaDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AddDistrictDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AddStateDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AddTalukaDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AddVehicleDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AddWardDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AddZoneDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AreaIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AttendenceSettings.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\AttendenceSettingsDetail.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\DistrictIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\EditAttendenceSettingsDetail.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\MenuAreaIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\MenuDistrictIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\MenuStateIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\MenuTalukaIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\MenuVehicleIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\MenuWardIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\MenuZoneIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\StateIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\TalukaIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\VehicleIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\WardIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetMainMaster\ZoneIndex.cshtml" />
     <None Include="Properties\PublishProfiles\SwachBharatAbhiyan.CMS.pubxml" />
     <None Include="Properties\PublishProfiles\Swachbharta.pubxml" />
     <None Include="Properties\PublishProfiles\Testing.pubxml" />
@@ -2542,6 +2570,8 @@
     <Content Include="Views\Android\AndroidAPKMenu.cshtml" />
     <Content Include="Views\Android\Etapalli.cshtml" />
     <Content Include="Views\Android\Bhamragad.cshtml" />
+    <Content Include="Views\Android\Alandi.cshtml" />
+    <Content Include="Views\Android\Gadchiroli.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
