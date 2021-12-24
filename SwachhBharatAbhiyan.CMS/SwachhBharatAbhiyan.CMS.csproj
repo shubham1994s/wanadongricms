@@ -313,6 +313,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Liquid\Content\Custom\HomeIndex.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\AttendenceGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
@@ -734,6 +735,7 @@
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\popper.js\umd\popper-utils.min.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\popper.js\umd\popper.js" />
     <Content Include="Areas\Liquid\Content\theme-assets\vendor\popper.js\umd\popper.min.js" />
+    <Content Include="Areas\Street\Content\Custom\HomeIndex.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\AttendenceGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
