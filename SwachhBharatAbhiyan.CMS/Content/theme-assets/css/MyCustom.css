@@ -1,7 +1,7 @@
 ﻿body {
 }
 .login-page::before {
-    background: url(../img/1920_blank.png) !important;
+    background: url(../img/login-bg.png) !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     filter: blur(0px) !important;
@@ -74,4 +74,8 @@ section.dashboard-counts .icon {
 }
 .pr-25 {
     padding-right:25px;
+}
+.login-page .form-holder .form .form-group {
+    position: relative;
+    margin-bottom: 15px !important;
 }

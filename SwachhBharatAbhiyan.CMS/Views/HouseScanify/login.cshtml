@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="/Content/images/img/136Logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
 </head>
 
@@ -48,24 +49,25 @@
     }
 
     input.input-material {
-        border-radius: 10px;
+        border-radius: 20px;
         margin-left: 15%;
         width: 75%;
-        height: 34px;
-        background: #62caffbf;
+        height: 40px;
+        background: #fff;
         padding: 10px 15px;
         border-bottom: 0px solid #eee;
+        color: #bbb6b6;
     }
 
     select.input-material {
-        border-radius: 10px;
+        border-radius: 20px;
         margin-left: 15%;
         width: 75%;
-        height: 34px;
-        background: #62caffbf;
+        height: 40px;
+        background: #FFF;
         padding: 5px 15px;
         border-bottom: 0px solid #eee;
-        color: #fff;
+        color: #bbb6b6;
     }
 
     ::placeholder {
@@ -97,7 +99,7 @@
         }
 
         input:-internal-autofill-selected {
-            background: #62caffbf !important;
+            background: #fff !important;
         }
 
     label {
@@ -117,9 +119,75 @@
     select:-webkit-autofill,
     select:-webkit-autofill:hover,
     select:-webkit-autofill:focus {
-        -webkit-text-fill-color: #fff;
-        -webkit-box-shadow: 0 0 0px 1000px #62caffbf inset;
+        -webkit-text-fill-color: #bbb6b6;
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset;
         transition: background-color 5000s ease-in-out 0s;
+    }
+
+    .topright {
+        position: absolute;
+        top: 13%;
+        right: -5%;
+        font-size: 18px;
+    }
+
+        .topright img {
+            width: 70%;
+            border-radius: 10px;
+        }
+
+    .topcenter {
+        position: absolute;
+        top: 82%;
+        right: -40%;
+        font-size: 18px;
+    }
+
+        .topcenter img {
+            width: 71%;
+            border-radius: 10px;
+        }
+
+    select {
+        -moz-appearance: none; /* Firefox */
+        -webkit-appearance: none; /* Safari and Chrome */
+        appearance: none;
+        margin-bottom: 0px !important;
+    }
+
+    /*     select.round {
+            background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), radial-gradient(#ddd 70%, transparent 72%);
+            background-position: calc(100% - 31px) calc(1em + 2px), calc(100% - 26px) calc(1em + 2px), calc(100% - 1.5em) 0.5em;
+            background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+            background-repeat: no-repeat;
+        }
+
+            select.round:focus {
+                background-image: linear-gradient(45deg, white 50%, transparent 50%), linear-gradient(135deg, transparent 50%, white 50%), radial-gradient(gray 70%, transparent 72%);
+                background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, calc(100% - .5em) .5em;
+                background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+                background-repeat: no-repeat;
+                border-color: green;
+                outline: 0;
+            }
+*/
+    .select::after {
+        content: '\25BC';
+        position: absolute;
+        top: 20px;
+        right: 66px;
+        padding: 1em;
+        /* background-color: #34495e; */
+        transition: .25s all ease;
+        pointer-events: none;
+        width: 20px;
+        height: 20px;
+        color: #9a9b9d;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 0.1rem !important;
     }
 </style>
 <body>
@@ -158,6 +226,7 @@
                             <div class="form d-flex align-items-center">
                                 <div class="content">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom:-15px;display:block;font-size:12px;" })
+                                    <h2 class="text-center" style=" margin-bottom: 10%; margin-top: -30%;">ICT BASE MONITORING TECHNOLOGY</h2>
                                     <div class="form-group">
                                         <label for="login-username" class="username">User Name</label>
                                         @Html.TextBoxFor(m => m.Email, new { @class = "input-material", @id = "login-username" })
@@ -172,13 +241,13 @@
                                     <div class="form-group">
                                         <label for="login-password" class="password">Password </label>
                                         @Html.PasswordFor(m => m.Password, new { @class = "input-material ", @id = "login-password" })
-
+                                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer; color: #9a9b9d; "></i>
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
                                     </div>
                                     @*<a id="login" href="index.html" class="btn btn-primary">Login</a>*@
 
 
-                                    <input class="btn btn-white btn-colr" align="center" style="margin: 5px; margin-left: 30%; width: 40%; height: 34px; padding: 5px 15px;border-radius: 10px; position: absolute; left: 20px; " type="submit" id="login" value="LOGIN">
+                                    <input class="btn btn-white btn-colr" align="center" style="margin: 5px; margin-left: 30%;margin-top:40px; width: 40%; height: 34px; padding: 5px 15px;border-radius: 20px; position: absolute; left: 20px; " type="submit" id="login" value="LOGIN">
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                                     @*<center><a href="#" class="forgot-pass">Forgot Password?</a></center>*@
                                     @*<br><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>*@
@@ -188,6 +257,7 @@
                     </div>
 
                 </div>
+                <div class="topcenter"><img src="~/Content/theme-assets/img/Garbage Background/Bottom-Image.png" /></div>
             </div>
         </div>
         <div class="copyrights text-center">
@@ -234,3 +304,15 @@
             });
 </script>
 
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#login-password');
+
+    togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>

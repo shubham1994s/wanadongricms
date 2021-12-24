@@ -35,7 +35,7 @@
     }
 
     .username, .password {
-        font-size: 16px;
+        font-size: 12px;
         color: #fff;
         font-weight: bold;
     }
@@ -51,24 +51,25 @@
     }
 
     input.input-material {
-        border-radius: 10px;
+        border-radius: 20px;
         margin-left: 15%;
         width: 75%;
-        height: 34px;
-        background: #62caffbf;
+        height: 40px;
+        background: #fff;
         padding: 10px 15px;
         border-bottom: 0px solid #eee;
+        color: #bbb6b6;
     }
 
     select.input-material {
-        border-radius: 10px;
+        border-radius: 20px;
         margin-left: 15%;
         width: 75%;
-        height: 34px;
-        background: #62caffbf;
+        height: 40px;
+        background: #FFF;
         padding: 5px 15px;
         border-bottom: 0px solid #eee;
-        color: #fff;
+        color: #bbb6b6;
     }
 
     ::placeholder {
@@ -100,7 +101,7 @@
         }
 
         input:-internal-autofill-selected {
-            background: #62caffbf !important;
+            background: #fff !important;
         }
 
     label {
@@ -120,8 +121,8 @@
     select:-webkit-autofill,
     select:-webkit-autofill:hover,
     select:-webkit-autofill:focus {
-        -webkit-text-fill-color: #fff;
-        -webkit-box-shadow: 0 0 0px 1000px #62caffbf inset;
+        -webkit-text-fill-color: #bbb6b6;
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset;
         transition: background-color 5000s ease-in-out 0s;
     }
     .topright {
@@ -136,17 +137,56 @@
     }
     .topcenter {
         position: absolute;
-        top: 85%;
+        top: 82%;
         right: -40%;
         font-size: 18px;
     }
 
         .topcenter img {
-            width: 70%;
+            width: 71%;
             border-radius: 10px;
         }
 
-   
+    select {
+        -moz-appearance: none; /* Firefox */
+        -webkit-appearance: none; /* Safari and Chrome */
+        appearance: none;
+        margin-bottom: 0px !important;
+    }
+
+   /*     select.round {
+            background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), radial-gradient(#ddd 70%, transparent 72%);
+            background-position: calc(100% - 31px) calc(1em + 2px), calc(100% - 26px) calc(1em + 2px), calc(100% - 1.5em) 0.5em;
+            background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+            background-repeat: no-repeat;
+        }
+
+            select.round:focus {
+                background-image: linear-gradient(45deg, white 50%, transparent 50%), linear-gradient(135deg, transparent 50%, white 50%), radial-gradient(gray 70%, transparent 72%);
+                background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, calc(100% - .5em) .5em;
+                background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+                background-repeat: no-repeat;
+                border-color: green;
+                outline: 0;
+            }
+*/
+    .select::after {
+        content: '\25BC';
+        position: absolute;
+        top: 20px;
+        right: 66px;
+        padding: 1em;
+        /* background-color: #34495e; */
+        transition: .25s all ease;
+        pointer-events: none;
+        width: 20px;
+        height: 20px;
+        color: #9a9b9d;
+    }
+    label {
+        display: inline-block;
+        margin-bottom: 0.1rem !important;
+    }
 </style>
 <script src="~/Content/DatatableGrid/AttendenceGrid.js"></script>
 <body>
@@ -188,7 +228,7 @@
                                 <div class="content">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom:-15px;display:block;font-size:12px;" })
                                     <h2 class="text-center" style=" margin-bottom: 5%; margin-top: -3%;">ICT BASE MONITORING TECHNOLOGY</h2>
-                                    <div class="form-group">
+                                    <div class="form-group select">
                                         <label for="type" class="username type">SELECT TYPE</label>
 
 
@@ -212,7 +252,7 @@
                                     <div class="form-group">
                                         <label for="login-password" class="password">PASSWORD </label>
                                         @Html.PasswordFor(m => m.Password, new { @class = "input-material ", @id = "login-password", placeholder = "Password" })
-                                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                                        <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer; color: #9a9b9d; "></i>
                                         @*<label for="login-password" class="label-material">पासवर्ड </label>*@
                                         @*<label for="login-password" class="">Password </label>*@
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
@@ -220,7 +260,7 @@
                                     @*<a id="login" href="index.html" class="btn btn-primary">Login</a>*@
 
                                     <div class="form-group">
-                                        <input class="btn btn-white btn-colr" align="center" style="margin: 5px; margin-left: 30%; width: 40%; height: 34px; padding: 5px 15px;border-radius: 10px; position: absolute; left: 20px; " type="submit" id="login" value="LOGIN">
+                                        <input class="btn btn-white btn-colr" align="center" style="margin: 5px; margin-left: 30%;margin-top:18px; width: 40%; height: 34px; padding: 5px 15px;border-radius: 20px; position: absolute; left: 20px; " type="submit" id="login" value="LOGIN">
                                     </div>
                                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                                     @*<center><a href="#" class="forgot-pass">Forgot Password?</a></center>*@
@@ -231,7 +271,7 @@
                     </div>
 
                 </div>
-                <div class="topcenter"><img src="~/Content/theme-assets/img/Garbage Background/image_png.png"/></div>
+                <div class="topcenter"><img src="~/Content/theme-assets/img/Garbage Background/Bottom-Image.png"/></div>
             </div>
            
         </div>
