@@ -60,14 +60,14 @@
 
 function test(a)
 {
-  
-    window.location.href = "/Location/viewLocation?teamId=" + a ;
+    debugger;
+    window.location.href = "/Street/StreetLocation/viewLocation?teamId=" + a ;
 };
 
 
 function map(a) {
-   
-    window.location.href = "/Location/viewLocation?teamId=" + a ;
+    debugger;
+    window.location.href = "/Street/StreetLocation/viewLocation?teamId=" + a ;
 };
 
 //////////////////////////////////////////////////////////////////////////////
