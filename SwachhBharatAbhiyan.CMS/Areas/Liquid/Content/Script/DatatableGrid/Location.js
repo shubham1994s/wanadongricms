@@ -59,12 +59,13 @@
 
 function test(a)
 {
-    window.location.href = "/Location/viewLocation?teamId="+a;
+    debugger;
+    window.location.href = "/Liquid/LiquidLocation/viewLocation?teamId="+a;
 };
 
 
 function map(a) {
-    window.location.href = "/Location/viewLocation?teamId=" + a;
+    window.location.href = "/Liquid/LiquidLocation/viewLocation?teamId=" + a;
 };
 
 //////////////////////////////////////////////////////////////////////////////

@@ -1817,10 +1817,51 @@ namespace SwachBharat.CMS.Bll.Services
 
                     }
                 }
-                else
+
+            else if (Emptype == "S")
+            {
+                var data = db.SP_StreetSweepingOnMapDetails(Convert.ToDateTime(dt1), userid == -1 ? 0 : userid, zoneId, areaid, wardNo, GarbageType, FilterType).ToList();
+                foreach (var x in data)
                 {
 
+                    DateTime dt = DateTime.Parse(x.gcDate == null ? DateTime.Now.ToString() : x.gcDate.ToString());
+                    //string gcTime = x.gcDate.ToString();
+                    houseLocation.Add(new SBALHouseLocationMapView()
+                    {
+                        houseId = Convert.ToInt32(x.SSId),
+                        ReferanceId = x.ReferanceId,
+                        houseOwnerName = (x.SSName == null ? "" : x.SSName),
+                        //houseOwnerMobile = (x.houseOwnerMobile == null ? "" : x.houseOwnerMobile),
+                        houseAddress = checkNull(x.SSAddress).Replace("Unnamed Road, ", ""),
+                        gcDate = dt.ToString("dd-MM-yyyy"),
+                        gcTime = dt.ToString("h:mm tt"), // 7:00 AM // 12 hour clock
+                                                         //string gcTime = x.gcDate.ToString(),
+                                                         //gcTime = x.gcDate.ToString("hh:mm tt"),
+                                                         //myDateTime.ToString("HH:mm:ss")
+                        ///date = Convert.ToDateTime(x.datt).ToString("dd/MM/yyyy"),
+                        //time = Convert.ToDateTime(x.datt).ToString("hh:mm:ss tt"),
+                        houseLat = x.SSLat,
+                        houseLong = x.SSLong,
+                        // address = x.houseAddress,
+                        //vehcileNumber = x.v,
+                        //userMobile = x.mobile,
+                        garbageType = x.garbageType,
+                    });
+                }
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    // var abc = db.HouseMasters.ToList();
+                    var model = houseLocation.Where(c => c.houseOwnerName.Contains(SearchString) || c.ReferanceId.Contains(SearchString)
+                                                         || c.houseOwnerName.ToLower().Contains(SearchString) || c.ReferanceId.ToLower().Contains(SearchString)).ToList();
 
+                    houseLocation = model.ToList();
+
+                }
+            }
+
+
+            else
+                {
                     var data = db.SP_HouseOnMapDetails(Convert.ToDateTime(dt1), userid == -1 ? 0 : userid, zoneId, areaid, wardNo, GarbageType, FilterType).ToList();
                     foreach (var x in data)
                     {
@@ -2058,6 +2099,39 @@ namespace SwachBharat.CMS.Bll.Services
                     {
                         model.LiquidWasteCollection = data.TotalLiquidLatLongCount;
                         model.LiquidWasteScanedHouse = data.TotalScanHouseCount;
+                        //model.TotalScanHouseCount = data.TotalScanHouseCount;
+                        //model.MixedCount = data.MixedCount;
+                        //model.BifurgatedCount = data.BifurgatedCount;
+                        //model.NotCollected = data.NotCollected;
+                        //model.NotSpecified = data.NotSpecified;
+                        return model;
+                    }
+                    else
+                    {
+                        return model;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return model;
+            }
+        }
+
+
+        public DashBoardVM GetStreetSweepingDetails()
+        {
+            DashBoardVM model = new DashBoardVM();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
+                    var data = db.SP_SSweeping_Count().First();
+                    if (data != null)
+                    {
+                        model.StreetWasteCollection = data.TotalStreetLatLongCount;
+                        model.StreetWasteScanedHouse = data.TotalScanHouseCount;
                         //model.TotalScanHouseCount = data.TotalScanHouseCount;
                         //model.MixedCount = data.MixedCount;
                         //model.BifurgatedCount = data.BifurgatedCount;

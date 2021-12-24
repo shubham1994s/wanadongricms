@@ -18,7 +18,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-                : base(SwachBharatAppConnection.GetConnectionString(AppId))
+               : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
 
@@ -49,12 +49,12 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<Daily_Attendance> Daily_Attendance { get; set; }
         public virtual DbSet<WM_Garbage_Sales> WM_Garbage_Sales { get; set; }
         public virtual DbSet<HouseMaster> HouseMasters { get; set; }
-        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
         public virtual DbSet<Vw_MsgNotification> Vw_MsgNotification { get; set; }
         public virtual DbSet<LiquidWasteDetail> LiquidWasteDetails { get; set; }
         public virtual DbSet<StreetSweepingDetail> StreetSweepingDetails { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
+        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
@@ -491,6 +491,44 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("tdate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_IdelTimestreet_Result>("SP_IdelTimestreet", userIdParameter, fdateParameter, tdateParameter);
+        }
+    
+        public virtual ObjectResult<SP_SSweeping_Count_Result> SP_SSweeping_Count()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SSweeping_Count_Result>("SP_SSweeping_Count");
+        }
+    
+        public virtual ObjectResult<SP_StreetSweepingOnMapDetails_Result> SP_StreetSweepingOnMapDetails(Nullable<System.DateTime> gcDate, Nullable<int> userId, Nullable<int> zoneId, Nullable<int> areaId, Nullable<int> wardNo, Nullable<int> garbageType, Nullable<int> filterType)
+        {
+            var gcDateParameter = gcDate.HasValue ?
+                new ObjectParameter("gcDate", gcDate) :
+                new ObjectParameter("gcDate", typeof(System.DateTime));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var zoneIdParameter = zoneId.HasValue ?
+                new ObjectParameter("ZoneId", zoneId) :
+                new ObjectParameter("ZoneId", typeof(int));
+    
+            var areaIdParameter = areaId.HasValue ?
+                new ObjectParameter("AreaId", areaId) :
+                new ObjectParameter("AreaId", typeof(int));
+    
+            var wardNoParameter = wardNo.HasValue ?
+                new ObjectParameter("WardNo", wardNo) :
+                new ObjectParameter("WardNo", typeof(int));
+    
+            var garbageTypeParameter = garbageType.HasValue ?
+                new ObjectParameter("GarbageType", garbageType) :
+                new ObjectParameter("GarbageType", typeof(int));
+    
+            var filterTypeParameter = filterType.HasValue ?
+                new ObjectParameter("FilterType", filterType) :
+                new ObjectParameter("FilterType", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetSweepingOnMapDetails_Result>("SP_StreetSweepingOnMapDetails", gcDateParameter, userIdParameter, zoneIdParameter, areaIdParameter, wardNoParameter, garbageTypeParameter, filterTypeParameter);
         }
     }
 }

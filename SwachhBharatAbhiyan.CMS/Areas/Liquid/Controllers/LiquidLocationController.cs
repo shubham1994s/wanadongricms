@@ -33,6 +33,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                TempData.Keep();
                 return View();
             }
             else
@@ -42,6 +43,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                TempData.Keep();
                 return View();
             }
             else
@@ -52,7 +54,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                SBALUserLocationMapView loc = childRepository.GetLocation(teamId, null);
+                SBALUserLocationMapView loc = childRepository.GetLocation(teamId, "L");
+                TempData.Keep();
                 return View(loc);
             }
             else
@@ -62,6 +65,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                TempData.Keep();
                 return View();
             }
             else
@@ -72,6 +76,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                TempData.Keep();
                 ViewBag.lat = SessionHandler.Current.Latitude;
                 ViewBag.lang = SessionHandler.Current.Logitude;
                 return View();
