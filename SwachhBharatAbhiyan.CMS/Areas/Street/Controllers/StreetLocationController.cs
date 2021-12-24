@@ -38,6 +38,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
         }
 
         public ActionResult AllHouseLocation()
+        
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -45,7 +46,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 ViewBag.lang = SessionHandler.Current.Logitude;
                 ViewBag.AppName = SessionHandler.Current.AppName;
 
-                var details = childRepository.GetLiquidWasteDetails();
+                var details = childRepository.GetStreetSweepingDetails();
                 return View(details);
             }
             else

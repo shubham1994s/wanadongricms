@@ -135,6 +135,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         DashBoardVM GetHouseOnMapDetails();
 
         DashBoardVM GetLiquidWasteDetails();
+
+        DashBoardVM GetStreetSweepingDetails();
         //Added By Neha ( 12 July 2019)
         List<SBAEmplyeeIdelGrid> GetIdleTimeRoute(int userId, string Date);
         OnePoint4VM GetOnePointFourTotalCount(int ANS_ID);

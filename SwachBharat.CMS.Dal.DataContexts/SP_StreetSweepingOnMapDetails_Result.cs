@@ -10,11 +10,17 @@
 namespace SwachBharat.CMS.Dal.DataContexts
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ZoneMaster
+    public partial class SP_StreetSweepingOnMapDetails_Result
     {
-        public int zoneId { get; set; }
-        public string name { get; set; }
+        public Nullable<int> userId { get; set; }
+        public int SSId { get; set; }
+        public string ReferanceId { get; set; }
+        public string SSName { get; set; }
+        public string SSAddress { get; set; }
+        public Nullable<int> garbageType { get; set; }
+        public Nullable<int> gcDate { get; set; }
+        public string SSLat { get; set; }
+        public string SSLong { get; set; }
     }
 }

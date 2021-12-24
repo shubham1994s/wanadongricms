@@ -390,7 +390,13 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         }
 
-        
+        public DashBoardVM GetStreetSweepingDetails()
+        {
+            return screenService.GetStreetSweepingDetails();
+
+        }
+
+
         // Addded By neha (12 July 2019)
         public List<SBAEmplyeeIdelGrid> GetIdleTimeRoute(int userId, string Date)
         {

@@ -120,7 +120,9 @@ namespace SwachBharat.CMS.Bll.Services
         //Added By Saurabh (2 July 2019)
         DashBoardVM GetHouseOnMapDetails();
         DashBoardVM GetLiquidWasteDetails();
-        
+
+        DashBoardVM GetStreetSweepingDetails();
+
         //Added By Neha (12 July 2019)
         List<SBAEmplyeeIdelGrid> GetIdleTimeRoute(int userId, string Date);
 
