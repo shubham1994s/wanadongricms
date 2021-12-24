@@ -42,7 +42,7 @@
     <link href="~/Content/css/datepicker/css/datepicker.css" rel="stylesheet" />
     <link href="~/Content/css/index_style.css" rel="stylesheet" />
     <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
-        <a  style="margin-left:5px" class="btn btn-sm btn-success" href="~/Location/ShowGrid">Back</a>
+        <a  style="margin-left:5px" class="btn btn-sm btn-success" href="~/Liquid/LiquidLocation/ShowGrid">Back</a>
     </div>
 
 
@@ -56,6 +56,7 @@
     <script>
 
         function myMap() {
+            debugger;
             var myCenter = new google.maps.LatLng(@Model.lat,@Model.log);
             var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);

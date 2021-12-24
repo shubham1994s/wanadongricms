@@ -172,7 +172,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                SBALUserLocationMapView loc = childRepository.GetLocation(teamId, null);
+                SBALUserLocationMapView loc = childRepository.GetLocation(teamId, "S");
+                TempData.Keep();
                 return View(loc);
             }
             else
