@@ -19,7 +19,7 @@ using System.Globalization;
 
 namespace SwachBharat.CMS.Bll.Repository.GridRepository
 {
-    class LiquidDashBoardRepository
+ public  class LiquidDashBoardRepository
     {
 
         public IEnumerable<DashBoardVM> getEmployeeTargetData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)

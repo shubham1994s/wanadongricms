@@ -1,4 +1,5 @@
 ﻿using SwachBharat.CMS.Bll.Repository.ChildRepository;
+using SwachBharat.CMS.Bll.Repository.GridRepository;
 using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
@@ -71,7 +72,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
 
                 IEnumerable<DashBoardVM> obj;
 
-                DashBoardRepository objRep = new DashBoardRepository();
+                LiquidDashBoardRepository objRep = new LiquidDashBoardRepository();
 
                 obj = objRep.getEmployeeTargetData(0, "", fdate, tdate, Convert.ToInt32(userId), SessionHandler.Current.AppId);
                 return Json(obj, JsonRequestBehavior.AllowGet);
