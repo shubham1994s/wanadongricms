@@ -22,7 +22,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
  public  class LiquidDashBoardRepository
     {
 
-        public IEnumerable<DashBoardVM> getEmployeeTargetData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
+        public IEnumerable<DashBoardVM> getEmployeeLiquidTargetData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
         {
             List<DashBoardVM> obj = new List<DashBoardVM>();
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
@@ -46,6 +46,29 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     });
                 }
                 return obj;
+            }
+        }
+
+        public IEnumerable<EmployeeLiquidCollectionType> getEmployeeLiquidCollectionType(int appId)
+        {
+            List<EmployeeLiquidCollectionType> obj = new List<EmployeeLiquidCollectionType>();
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.SP_EmployeeLiquidCollectionType().ToList();
+
+                foreach (var x in data)
+                {
+                    obj.Add(new EmployeeLiquidCollectionType()
+                    {
+                        inTime = x.inTime,
+                        Count = x.Count,
+                        ToDate = x.TodayDate.ToString(),
+                        LiquidCollectionCount = x.LiquidCollectionCount,
+                        userId = x.userId,
+                        userName = x.userName
+                    });
+                }
+                return obj.OrderBy(c => c.userName);
             }
         }
     }

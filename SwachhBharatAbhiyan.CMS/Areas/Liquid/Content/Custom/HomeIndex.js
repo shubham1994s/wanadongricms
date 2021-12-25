@@ -452,8 +452,8 @@ $(document).ready(function () {
                 //{ y: res_not_coll, label: "कचरा मिळाला नाही", hover_number: not_coll, color: '#fe9436' },
                 //{ y: res_not_spec_coll, label: "वर्णन उपलब्ध नाही", hover_number: not_spec_coll, color: '#0086c3' },
 
-                 { y: res_bif_coll, label: "Segregated Garbage", hover_number: bif_coll, color: '#388e3c' },
-                { y: res_mixed_coll, label: "Mixed Garbage", hover_number: mixed_coll, color: '#f44336' },
+               /*  { y: res_bif_coll, label: "Segregated Garbage", hover_number: bif_coll, color: '#388e3c' },*/
+                { y: res_mixed_coll, label: "Liquid Collection Count", hover_number: mixed_coll, color: '#f44336' },
                 { y: res_not_coll, label: "Garbage not received", hover_number: not_coll, color: '#fe9436' },
                 { y: res_not_spec_coll, label: "Garbage type not specified", hover_number: not_spec_coll, color: '#0086c3' },
                // { y: res_TotalDryWaste_coll, label: "Dry Waste Garbage", hover_number: TotalDryWaste_coll, color: '#0462EA' },
@@ -496,7 +496,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "post",
-        url: "/Home/EmployeeTargetCount",
+        url: "/Liquid/LiquidHome/EmployeeTargetCount",
         //data: { userId: UserId, },
         datatype: "json",
         traditional: true,
@@ -710,7 +710,7 @@ $('#txt_fdate').focus(function () {
 $(document).ready(function () {
     $.ajax({
         type: "post",
-        url: "/Home/EmployeeHouseCollectionType",
+        url: "/Liquid/LiquidHome/EmployeeLiquidCollectionType",
         //data: { userId: UserId, },
         datatype: "json",
         traditional: true,
@@ -740,10 +740,10 @@ $(document).ready(function () {
                 //var fname = name.substring(0, name.indexOf(" "));
                 var fname = name.replace(/ .*/, ' ');
                 // alert(data[i]._Count)
-                not_spec.push({ y: data[i].NotSpecidfied, label: 'Not Specified', color: '#0086c3', intime: data[i].inTime });
-                not_coll.push({ y: data[i].NotCollected, label: 'Not Collected', color: '#fe9436', intime: data[i].inTime });
-                mixed.push({ y: data[i].MixedCount, label: 'Mixed', color: '#f44336', intime: data[i].inTime });
-                seg.push({ y: data[i].Bifur, label: 'Segregated', color: '#388e3c', intime: data[i].inTime });
+                //not_spec.push({ y: data[i].NotSpecidfied, label: 'Not Specified', color: '#0086c3', intime: data[i].inTime });
+                //not_coll.push({ y: data[i].NotCollected, label: 'Not Collected', color: '#fe9436', intime: data[i].inTime });
+                LiquidCollectionCount.push({ y: data[i].LiquidCollectionCount, label: 'Liquid Collection', color: '#f44336', intime: data[i].inTime });
+             /*   seg.push({ y: data[i].Bifur, label: 'Segregated', color: '#388e3c', intime: data[i].inTime });*/
                 //dry.push({ y: data[i].DryWaste, label: 'Dry Waste', color: '#0462EA', intime: data[i].inTime });
                 //wet.push({y: data[i].WetWaste, label: 'Wet Waste', color: '#186634', intime: data[i].inTime });
                 emp_tar.push({ y: parseInt(data[i].gcTarget), label: fname + lastname_firstchar, z: data[i].Count, intime: data[i].inTime });
@@ -774,47 +774,47 @@ $(document).ready(function () {
 
            data: [
 
+                 //{
+                 //    //indexLabel: "#total",
+                 //    //indexLabelPlacement: "outside",
+                 //    //indexLabelPlacement: "outside",
+                 //    type: "stackedColumn",
+                 //    showInLegend: true,
+                 //    legendText: "Segregated",
+                 //    toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+                 //    color: "#388e3c",
+                 //    dataPoints: seg
+                 //},
                  {
                      //indexLabel: "#total",
                      //indexLabelPlacement: "outside",
-                     //indexLabelPlacement: "outside",
                      type: "stackedColumn",
                      showInLegend: true,
-                     legendText: "Segregated",
-                     toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-                     color: "#388e3c",
-                     dataPoints: seg
-                 },
-                 {
-                     //indexLabel: "#total",
-                     //indexLabelPlacement: "outside",
-                     type: "stackedColumn",
-                     showInLegend: true,
-                     legendText: "Mixed",
+                   legendText: "LiquidCollectionCount",
                      toolTipContent: "InTime:{intime} <br>{label}:{y} ",
                      color: "#f44336",
-                     dataPoints: mixed
+                   dataPoints: LiquidCollectionCount
                  },
-                 {
-                     //indexLabel: "#total",
-                     //indexLabelPlacement: "outside",
-                     type: "stackedColumn",
-                     showInLegend: true,
-                     legendText: "NotCollected",
-                     toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-                     color: "#fe9436",
-                     dataPoints: not_coll
-                 },
-                 {
-                     indexLabel: "#total",
-                     indexLabelPlacement: "outside",
-                     type: "stackedColumn",
-                     showInLegend: true,
-                     legendText: "NotSpecified",
-                     toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-                     color: "#0086c3",
-                     dataPoints: not_spec
-               },
+               //  {
+               //      //indexLabel: "#total",
+               //      //indexLabelPlacement: "outside",
+               //      type: "stackedColumn",
+               //      showInLegend: true,
+               //      legendText: "NotCollected",
+               //      toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+               //      color: "#fe9436",
+               //      dataPoints: not_coll
+               //  },
+               //  {
+               //      indexLabel: "#total",
+               //      indexLabelPlacement: "outside",
+               //      type: "stackedColumn",
+               //      showInLegend: true,
+               //      legendText: "NotSpecified",
+               //      toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+               //      color: "#0086c3",
+               //      dataPoints: not_spec
+               //},
 
                //{
                //    //indexlabel: "#total",

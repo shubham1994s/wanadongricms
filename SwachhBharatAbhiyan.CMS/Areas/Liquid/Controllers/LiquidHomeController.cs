@@ -74,23 +74,23 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
 
                 LiquidDashBoardRepository objRep = new LiquidDashBoardRepository();
 
-                obj = objRep.getEmployeeTargetData(0, "", fdate, tdate, Convert.ToInt32(userId), SessionHandler.Current.AppId);
+                obj = objRep.getEmployeeLiquidTargetData(0, "", fdate, tdate, Convert.ToInt32(userId), SessionHandler.Current.AppId);
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
                 return Redirect("/Account/Login");
         }
 
-        public ActionResult EmployeeHouseCollectionType()
+        public ActionResult EmployeeLiquidCollectionType()
         {
             if (SessionHandler.Current.AppId != 0)
             {
 
-                IEnumerable<EmployeeHouseCollectionType> obj;
+                IEnumerable<EmployeeLiquidCollectionType> obj;
 
-                DashBoardRepository objRep = new DashBoardRepository();
+                LiquidDashBoardRepository objRep = new LiquidDashBoardRepository();
 
-                obj = objRep.getEmployeeHouseCollectionType(SessionHandler.Current.AppId);
+                obj = objRep.getEmployeeLiquidCollectionType(SessionHandler.Current.AppId);
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
