@@ -493,7 +493,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-
+    debugger;
     $.ajax({
         type: "post",
         url: "/Liquid/LiquidHome/EmployeeTargetCount",
@@ -708,6 +708,7 @@ $('#txt_fdate').focus(function () {
 
 // by neha 8 july 2019
 $(document).ready(function () {
+    debugger;
     $.ajax({
         type: "post",
         url: "/Liquid/LiquidHome/EmployeeLiquidCollectionType",
@@ -720,6 +721,7 @@ $(document).ready(function () {
             var not_coll = [];
             var mixed = [];
             var seg = [];
+            var LiquidCollectionCount = [];
             //var dry = [];
             //var wet = [];
             var emp_tar = [];
