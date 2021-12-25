@@ -57,5 +57,43 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
                 return Redirect("/Account/Login");
         }
 
+
+        public ActionResult EmployeeTargetCount(DateTime? fdate = null, DateTime? tdate = null, int userId = 0)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                if (fdate == null)
+                {
+                    string dt = DateTime.Now.ToString("MM/dd/yyyy");
+                    fdate = Convert.ToDateTime(dt + " " + "00:00:00");
+                    tdate = Convert.ToDateTime(dt + " " + "23:59:59");
+                }
+
+                IEnumerable<DashBoardVM> obj;
+
+                DashBoardRepository objRep = new DashBoardRepository();
+
+                obj = objRep.getEmployeeTargetData(0, "", fdate, tdate, Convert.ToInt32(userId), SessionHandler.Current.AppId);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult EmployeeHouseCollectionType()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+
+                IEnumerable<EmployeeHouseCollectionType> obj;
+
+                DashBoardRepository objRep = new DashBoardRepository();
+
+                obj = objRep.getEmployeeHouseCollectionType(SessionHandler.Current.AppId);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
     }
 }

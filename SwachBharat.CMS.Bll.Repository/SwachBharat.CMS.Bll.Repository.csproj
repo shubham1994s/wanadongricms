@@ -122,6 +122,7 @@
     <Compile Include="GridRepository\Grid\ZoneGridRepository.cs" />
     <Compile Include="GridRepository\IDataTableRepository.cs" />
     <Compile Include="GridRepository\IGridRepository.cs" />
+    <Compile Include="GridRepository\LiquidDashBoardRepository.cs" />
     <Compile Include="MainRepository\IMainRepository.cs" />
     <Compile Include="MainRepository\MainRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
