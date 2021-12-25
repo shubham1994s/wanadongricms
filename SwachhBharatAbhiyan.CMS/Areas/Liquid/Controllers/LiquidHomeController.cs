@@ -1,4 +1,5 @@
-﻿using SwachBharat.CMS.Bll.Repository.ChildRepository;
+﻿using Newtonsoft.Json;
+using SwachBharat.CMS.Bll.Repository.ChildRepository;
 using SwachBharat.CMS.Bll.Repository.GridRepository;
 using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
@@ -58,6 +59,25 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
                 return Redirect("/Account/Login");
         }
 
+        public ActionResult DashBoard()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                var details = childRepository.GetLiquidDashBoardDetails();
+
+                if (details != null)
+                {
+                    string jsonstr = JsonConvert.SerializeObject(details);
+                    return Json(jsonstr, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(null, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+                return Redirect("/Account/Login");
+        }
 
         public ActionResult EmployeeTargetCount(DateTime? fdate = null, DateTime? tdate = null, int userId = 0)
         {
