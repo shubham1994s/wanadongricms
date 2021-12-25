@@ -65,6 +65,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         ToDate = x.TodayDate.ToString(),
                         LiquidCollectionCount = x.LiquidCollectionCount,
                         userId = x.userId,
+                        gcTarget = x.gcTarget,
                         userName = x.userName
                     });
                 }
