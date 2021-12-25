@@ -329,7 +329,7 @@ $(document).ready(function () {
             }
             //console.log(ary);
             // console.log(ary2);
-
+            debugger;
             var chart = new CanvasJS.Chart("chartContainer", {
                 theme: "light1", // "light1", "ligh2", "dark1", "dark2"
                 animationEnabled: true,
@@ -382,7 +382,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     debugger;
     var not_coll = $('#not_coll').val();
-    var mixed_coll = $('#mixed_coll').val();
+    var mixed_coll = $('#TotalStreet_Coll').val();
     var bif_coll = $('#bif_coll').val();
     var not_spec_coll = $('#not_spec_coll').val();
    // var TotalDryWaste_coll = $('#TotalDryWaste_coll').val();
@@ -496,7 +496,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: "post",
-        url: "/Home/EmployeeTargetCount",
+        url: "/Street/StreetHome/EmployeeTargetCount",
         //data: { userId: UserId, },
         datatype: "json",
         traditional: true,
@@ -710,7 +710,7 @@ $('#txt_fdate').focus(function () {
 $(document).ready(function () {
     $.ajax({
         type: "post",
-        url: "/Home/EmployeeHouseCollectionType",
+        url: "/Street/StreetHome/EmployeeStreetCollectionType",
         //data: { userId: UserId, },
         datatype: "json",
         traditional: true,
@@ -720,6 +720,7 @@ $(document).ready(function () {
             var not_coll = [];
             var mixed = [];
             var seg = [];
+            var Street_Collection = [];
             //var dry = [];
             //var wet = [];
             var emp_tar = [];
@@ -735,15 +736,15 @@ $(document).ready(function () {
                 } else {
                     lastname_firstchar = lastname_array[1][0];
                 }
-                
 
+                 debugger;
                 //var fname = name.substring(0, name.indexOf(" "));
                 var fname = name.replace(/ .*/, ' ');
                 // alert(data[i]._Count)
-                not_spec.push({ y: data[i].NotSpecidfied, label: 'Not Specified', color: '#0086c3', intime: data[i].inTime });
-                not_coll.push({ y: data[i].NotCollected, label: 'Not Collected', color: '#fe9436', intime: data[i].inTime });
-                mixed.push({ y: data[i].MixedCount, label: 'Mixed', color: '#f44336', intime: data[i].inTime });
-                seg.push({ y: data[i].Bifur, label: 'Segregated', color: '#388e3c', intime: data[i].inTime });
+                //not_spec.push({ y: data[i].NotSpecidfied, label: 'Not Specified', color: '#0086c3', intime: data[i].inTime });
+                //not_coll.push({ y: data[i].NotCollected, label: 'Not Collected', color: '#fe9436', intime: data[i].inTime });
+                Street_Collection.push({ y: data[i].StreetCollectionCount, label: 'Street Collection', color: '#f44336', intime: data[i].inTime });
+               /* seg.push({ y: data[i].Bifur, label: 'Segregated', color: '#388e3c', intime: data[i].inTime });*/
                 //dry.push({ y: data[i].DryWaste, label: 'Dry Waste', color: '#0462EA', intime: data[i].inTime });
                 //wet.push({y: data[i].WetWaste, label: 'Wet Waste', color: '#186634', intime: data[i].inTime });
                 emp_tar.push({ y: parseInt(data[i].gcTarget), label: fname + lastname_firstchar, z: data[i].Count, intime: data[i].inTime });
@@ -774,47 +775,47 @@ $(document).ready(function () {
 
            data: [
 
+                 //{
+                 //    //indexLabel: "#total",
+                 //    //indexLabelPlacement: "outside",
+                 //    //indexLabelPlacement: "outside",
+                 //    type: "stackedColumn",
+                 //    showInLegend: true,
+                 //    legendText: "Segregated",
+                 //    toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+                 //    color: "#388e3c",
+                 //    dataPoints: seg
+                 //},
                  {
                      //indexLabel: "#total",
                      //indexLabelPlacement: "outside",
-                     //indexLabelPlacement: "outside",
                      type: "stackedColumn",
                      showInLegend: true,
-                     legendText: "Segregated",
-                     toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-                     color: "#388e3c",
-                     dataPoints: seg
-                 },
-                 {
-                     //indexLabel: "#total",
-                     //indexLabelPlacement: "outside",
-                     type: "stackedColumn",
-                     showInLegend: true,
-                     legendText: "Mixed",
+                     legendText: "StreetCollection",
                      toolTipContent: "InTime:{intime} <br>{label}:{y} ",
                      color: "#f44336",
-                     dataPoints: mixed
+                     dataPoints: Street_Collection
                  },
-                 {
-                     //indexLabel: "#total",
-                     //indexLabelPlacement: "outside",
-                     type: "stackedColumn",
-                     showInLegend: true,
-                     legendText: "NotCollected",
-                     toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-                     color: "#fe9436",
-                     dataPoints: not_coll
-                 },
-                 {
-                     indexLabel: "#total",
-                     indexLabelPlacement: "outside",
-                     type: "stackedColumn",
-                     showInLegend: true,
-                     legendText: "NotSpecified",
-                     toolTipContent: "InTime:{intime} <br>{label}:{y} ",
-                     color: "#0086c3",
-                     dataPoints: not_spec
-               },
+               //  {
+               //      //indexLabel: "#total",
+               //      //indexLabelPlacement: "outside",
+               //      type: "stackedColumn",
+               //      showInLegend: true,
+               //      legendText: "NotCollected",
+               //      toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+               //      color: "#fe9436",
+               //      dataPoints: not_coll
+               //  },
+               //  {
+               //      indexLabel: "#total",
+               //      indexLabelPlacement: "outside",
+               //      type: "stackedColumn",
+               //      showInLegend: true,
+               //      legendText: "NotSpecified",
+               //      toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+               //      color: "#0086c3",
+               //      dataPoints: not_spec
+               //},
 
                //{
                //    //indexlabel: "#total",
