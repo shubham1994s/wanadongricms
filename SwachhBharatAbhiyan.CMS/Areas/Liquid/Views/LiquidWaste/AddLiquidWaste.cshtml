@@ -135,7 +135,7 @@
                 <div class="">
                     <div class="form-group" style="margin-top:-25px;">
 
-                        <input class="btn" type="button" id="QRCOdeGenrate" value="Generate Scaniffy Code" />
+                        <input class="btn" type="button" id="LiquidQRCOdeGenrate" value="Generate Scaniffy Code" />
 
                         @*<a href="" id="QRCOdeGenrate"  style="display:none; width:150px"class="btn"><span class="glyphicon glyphicon-qrcodet"></span>Generate QR  </a>*@
                         <div class="progress" id="prog_bar" style="margin-top:10px;width: 54%;background-color:#dd8680; display:none;">
@@ -396,9 +396,10 @@
         return true;
     }
 
-    $("#QRCOdeGenrate").click(function () {
+    $("#LiquidQRCOdeGenrate").click(function () {
         debugger;
-        var bool = validation();
+
+            var bool = validation();
 
         if (bool == true) {
             //$("#err_generate").html("स्कॅनिफाय कोड व्युत्पन्न करा नंतर सेव करा / Generate Scaniffy code then save").delay(1).show().fadeOut('slow');
