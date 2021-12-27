@@ -1620,6 +1620,7 @@
     <Content Include="Content\theme-assets\img\avatar-5.jpg" />
     <Content Include="Content\theme-assets\img\avatar-6.jpg" />
     <Content Include="Content\theme-assets\img\bg.jpg" />
+    <Content Include="Content\theme-assets\img\Bottom-Image.png" />
     <Content Include="Content\theme-assets\img\favicon.ico" />
     <Content Include="Content\theme-assets\img\flags\16\AD.png" />
     <Content Include="Content\theme-assets\img\flags\16\AE.png" />
