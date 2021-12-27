@@ -1526,8 +1526,10 @@
     <Content Include="Content\images\img\app_icon_cms.png" />
     <Content Include="Content\images\img\ctpt_marker.png" />
     <Content Include="Content\images\img\house_icon.png" />
+    <Content Include="Content\images\img\house_icon.svg" />
     <Content Include="Content\images\img\icn_not_avialable.png" />
     <Content Include="Content\images\img\liquid_icon.png" />
+    <Content Include="Content\images\img\liquid_icon.svg" />
     <Content Include="Content\images\img\loader.jpg" />
     <Content Include="Content\images\img\loading.gif" />
     <Content Include="Content\images\img\marker.gif" />
@@ -1541,6 +1543,7 @@
     <Content Include="Content\images\img\segregationImg\icn_segregated_garbage.png" />
     <Content Include="Content\images\img\segregationImg\Thumbs.db" />
     <Content Include="Content\images\img\street_icon.png" />
+    <Content Include="Content\images\img\street_icon.svg" />
     <Content Include="Content\images\iphone.png" />
     <Content Include="Content\images\item-1.png" />
     <Content Include="Content\images\item-2.png" />
@@ -1620,6 +1623,7 @@
     <Content Include="Content\theme-assets\img\avatar-5.jpg" />
     <Content Include="Content\theme-assets\img\avatar-6.jpg" />
     <Content Include="Content\theme-assets\img\bg.jpg" />
+    <Content Include="Content\theme-assets\img\Bottom-Image.png" />
     <Content Include="Content\theme-assets\img\favicon.ico" />
     <Content Include="Content\theme-assets\img\flags\16\AD.png" />
     <Content Include="Content\theme-assets\img\flags\16\AE.png" />
