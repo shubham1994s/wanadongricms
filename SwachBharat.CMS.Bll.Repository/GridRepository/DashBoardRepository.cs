@@ -2891,7 +2891,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
             var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
 
-            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.DumpYardQRCode + "/";
+            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.StreetQRCode + "/";
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
             {
                 var data = db.SP_StreetSweepDetails().Select(x => new SBAStreeSweepDetailsGridRow
