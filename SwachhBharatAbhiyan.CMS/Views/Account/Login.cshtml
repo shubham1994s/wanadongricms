@@ -69,19 +69,19 @@
         background: #FFF;
         padding: 5px 15px;
         border-bottom: 0px solid #eee;
-        color: #bbb6b6;
+        color: #bbb6b6 ;
     }
 
     ::placeholder {
-        color: #fff;
+        color: #bbb6b6;
     }
 
     :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: #fff;
+        color: #bbb6b6;
     }
 
     ::-ms-input-placeholder { /* Microsoft Edge */
-        color: #fff;
+        color: #bbb6b6;
     }
 
     input[type='submit'] {
@@ -89,7 +89,7 @@
     }
 
     input {
-        color: #bbb6b6 !important;
+        color: #000 !important;
     }
 
         input[type=text]:focus {
@@ -103,6 +103,9 @@
         input:-internal-autofill-selected {
             background: #fff !important;
         }
+    .blacktext {
+        color: #000000 !important;
+    }
 
     label {
         margin-left: 15%;
@@ -121,7 +124,7 @@
     select:-webkit-autofill,
     select:-webkit-autofill:hover,
     select:-webkit-autofill:focus {
-        -webkit-text-fill-color: #bbb6b6;
+        -webkit-text-fill-color: #000;
         -webkit-box-shadow: 0 0 0px 1000px #fff inset;
         transition: background-color 5000s ease-in-out 0s;
     }
@@ -343,4 +346,10 @@
         // toggle the eye slash icon
         this.classList.toggle('fa-eye-slash');
     });
+</script>
+<script>
+    var select = document.getElementById('Type');
+    select.onchange = function () {
+        select.className = 'input-material blacktext';
+    }
 </script>

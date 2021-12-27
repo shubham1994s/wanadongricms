@@ -91,13 +91,15 @@
         padding-right: 30px;
     }
 
-   
+    .share-dialog {
+        display:none;
+    }
 
 
-        .share-dialog.is-open {
-            display: block;
-            z-index: 2;
-        }
+    .share-dialog.is-open {
+        display: block;
+        z-index: 2;
+    }
 
     header {
         display: flex;
@@ -419,13 +421,15 @@
         const shareButton = document.querySelector('.share-button');
         const shareDialog = document.querySelector('.share-dialog');
         const closeButton = document.querySelector('.close-button');
+        const title1 = document.title;
+        const url1 = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
 
         shareButton.addEventListener('click', event => {
             debugger;
             if (navigator.share) {
                 navigator.share({
-                    title: 'Share APK File',
-                    url: window.location.href
+                    title: title1,
+                    url: url1
                 }).then(() => {
                     console.log('Thanks for sharing!');
                 })
@@ -439,6 +443,7 @@
             shareDialog.classList.remove('is-open');
         });
     </script>
+
 </body>
 
 
