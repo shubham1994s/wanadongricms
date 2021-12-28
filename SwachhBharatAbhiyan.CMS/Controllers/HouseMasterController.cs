@@ -239,8 +239,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     owner = "_ _ _ _ _ _ _ _ _ _ _ _";
 
                 }
-                string src = AppDetails.baseImageUrlCMS + "/Content/images/img/app_icon_cms.png";
-                string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;margin-top: 8px;font-size:22px;background: #abd037;'> O </div> <div style='background: #abd037;;font-weight: bold;font-size: 18px;'> " + AppDetails.AppName + "</div><div style='font-size: 15px;background: #abd037;'> House Id: " + details.ReferanceId + " </div><div style='height:10px;background: #abd037;'></div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:250px;height:250px;' src='" + details.houseQRCode + "'/> </div></div>";
+                //string src = AppDetails.baseImageUrlCMS + "/Content/images/img/app_icon_cms.png";
+                //string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;margin-top: 8px;font-size:22px;background: #abd037;'> O </div> <div style='background: #abd037;;font-weight: bold;font-size: 18px;'> " + AppDetails.AppName + "</div><div style='font-size: 15px;background: #abd037;'> House Id: " + details.ReferanceId + " </div><div style='height:10px;background: #abd037;'></div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:250px;height:250px;' src='" + details.houseQRCode + "'/> </div></div>";
+
+                string src = AppDetails.baseImageUrlCMS + "/Content/images/icons/Nagpur_logo.png";
+
+                //For Satana Only
+                string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;padding-top: 5px;background: #abd037;'> <img style='width:250px;height:86px;' src='" + src + "'/> </div> <div style='font-size: 14px;background: #abd037;'><b> House Id: " + details.ReferanceId + "</b> </div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:245px;height:245px;' src='" + details.houseQRCode + "'/></div></div>";
+
+
                 using (MemoryStream stream = new System.IO.MemoryStream())
                 {
                     StringReader sr = new StringReader(GridHtml);
