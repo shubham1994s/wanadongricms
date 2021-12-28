@@ -62,6 +62,7 @@ function myMap2() {
             bounds = new google.maps.LatLngBounds();
             var marker, i;
             // Get Addres
+            debugger;
             for (i = 0; i < data.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(data[i].lat, data[i].log),
