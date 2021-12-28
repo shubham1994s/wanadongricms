@@ -57,7 +57,7 @@ function myMap2() {
                 center: new google.maps.LatLng(data[0].lat, data[0].log),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
-
+            debugger;
             var infowindow = new google.maps.InfoWindow();
             bounds = new google.maps.LatLngBounds();
             var marker, i;
@@ -69,7 +69,7 @@ function myMap2() {
 
                     icon: {
                         labelOrigin: new google.maps.Point(16, 65),
-                        url: "../Content/images/img/marker24.png"
+                        url: "../../Areas/Street/Content/images/img/marker24.png"
                     },
                     label: {
                         text: data[i].userName,
@@ -147,7 +147,7 @@ function myMapHouse() {
 
                         icon: {
                             labelOrigin: new google.maps.Point(16, 65),
-                            url: "../Content/images/img/segregationImg/icn_mixed_garbage.png"
+                            url: "../../Areas/Street/Content/images/img/segregationImg/icn_mixed_garbage.png"
                         },
                         label: {
                             //text: data[i].userName,
@@ -176,7 +176,7 @@ function myMapHouse() {
 
                         icon: {
                             labelOrigin: new google.maps.Point(16, 65),
-                            url: "../Content/images/img/segregationImg/icn_segregated_garbage.png"
+                            url: "../../Areas/Street/Content/images/img/segregationImg/icn_segregated_garbage.png"
                         },
                         label: {
                             //text: data[i].userName,
@@ -205,7 +205,7 @@ function myMapHouse() {
 
                         icon: {
                             labelOrigin: new google.maps.Point(16, 65),
-                            url: "../Content/images/img/segregationImg/icn_garbage_not_recevied.png"
+                            url: "../../Areas/Street/Content/images/img/segregationImg/icn_garbage_not_recevied.png"
                         },
                         label: {
                             //text: data[i].userName,
@@ -234,7 +234,7 @@ function myMapHouse() {
 
                         icon: {
                             labelOrigin: new google.maps.Point(16, 65),
-                            url: "../Content/images/img/segregationImg/icn_not_specified.png"
+                            url: "../../Areas/Street/Content/images/img/segregationImg/icn_not_specified.png"
                         },
                         label: {
                             //text: data[i].userName,
@@ -263,7 +263,7 @@ function myMapHouse() {
 
                         icon: {
                             labelOrigin: new google.maps.Point(16, 65),
-                            url: "../Content/images/img/segregationImg/icn_house.png"
+                            url: "../../Areas/Street/Content/images/img/segregationImg/icn_house.png"
                         },
                         label: {
                             //text: data[i].userName,
