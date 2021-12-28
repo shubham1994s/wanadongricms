@@ -17,11 +17,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
-        public DevChildSwachhBharatNagpurEntities(int AppId)
+       public DevChildSwachhBharatNagpurEntities(int AppId)
                : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
-        }
-
+        }   
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -529,6 +529,50 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("FilterType", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetSweepingOnMapDetails_Result>("SP_StreetSweepingOnMapDetails", gcDateParameter, userIdParameter, zoneIdParameter, areaIdParameter, wardNoParameter, garbageTypeParameter, filterTypeParameter);
+        }
+    
+        public virtual ObjectResult<SP_LiquidEmployeeTarget_Result> SP_LiquidEmployeeTarget(Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate, Nullable<int> userid)
+        {
+            var fdateParameter = fdate.HasValue ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(System.DateTime));
+    
+            var tdateParameter = tdate.HasValue ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(System.DateTime));
+    
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LiquidEmployeeTarget_Result>("SP_LiquidEmployeeTarget", fdateParameter, tdateParameter, useridParameter);
+        }
+    
+        public virtual ObjectResult<SP_StreetEmployeeTarget_Result> SP_StreetEmployeeTarget(Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate, Nullable<int> userid)
+        {
+            var fdateParameter = fdate.HasValue ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(System.DateTime));
+    
+            var tdateParameter = tdate.HasValue ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(System.DateTime));
+    
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetEmployeeTarget_Result>("SP_StreetEmployeeTarget", fdateParameter, tdateParameter, useridParameter);
+        }
+    
+        public virtual ObjectResult<SP_EmployeeLiquidCollectionType_Result> SP_EmployeeLiquidCollectionType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeLiquidCollectionType_Result>("SP_EmployeeLiquidCollectionType");
+        }
+    
+        public virtual ObjectResult<SP_EmployeeStreetCollectionType_Result> SP_EmployeeStreetCollectionType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeStreetCollectionType_Result>("SP_EmployeeStreetCollectionType");
         }
     }
 }

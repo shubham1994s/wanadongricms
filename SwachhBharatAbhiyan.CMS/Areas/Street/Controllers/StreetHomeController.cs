@@ -1,4 +1,5 @@
 ﻿using SwachBharat.CMS.Bll.Repository.ChildRepository;
+using SwachBharat.CMS.Bll.Repository.GridRepository;
 using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
@@ -51,6 +52,44 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             {
                 //TempData.Keep();
                 return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult EmployeeTargetCount(DateTime? fdate = null, DateTime? tdate = null, int userId = 0)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                if (fdate == null)
+                {
+                    string dt = DateTime.Now.ToString("MM/dd/yyyy");
+                    fdate = Convert.ToDateTime(dt + " " + "00:00:00");
+                    tdate = Convert.ToDateTime(dt + " " + "23:59:59");
+                }
+
+                IEnumerable<DashBoardVM> obj;
+
+                StreetDashBoardRepository objRep = new StreetDashBoardRepository();
+
+                obj = objRep.getEmployeeStreetTargetData(0, "", fdate, tdate, Convert.ToInt32(userId), SessionHandler.Current.AppId);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult EmployeeStreetCollectionType()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+
+                IEnumerable<EmployeeStreetCollectionType> obj;
+
+                StreetDashBoardRepository objRep = new StreetDashBoardRepository();
+
+                obj = objRep.getEmployeeStreetCollectionType(SessionHandler.Current.AppId);
+                return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
                 return Redirect("/Account/Login");

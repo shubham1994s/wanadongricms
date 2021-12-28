@@ -1,4 +1,6 @@
-﻿using SwachBharat.CMS.Bll.Repository.ChildRepository;
+﻿using Newtonsoft.Json;
+using SwachBharat.CMS.Bll.Repository.ChildRepository;
+using SwachBharat.CMS.Bll.Repository.GridRepository;
 using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
@@ -57,5 +59,62 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
                 return Redirect("/Account/Login");
         }
 
+        public ActionResult DashBoard()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                var details = childRepository.GetLiquidDashBoardDetails();
+
+                if (details != null)
+                {
+                    string jsonstr = JsonConvert.SerializeObject(details);
+                    return Json(jsonstr, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(null, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult EmployeeTargetCount(DateTime? fdate = null, DateTime? tdate = null, int userId = 0)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                if (fdate == null)
+                {
+                    string dt = DateTime.Now.ToString("MM/dd/yyyy");
+                    fdate = Convert.ToDateTime(dt + " " + "00:00:00");
+                    tdate = Convert.ToDateTime(dt + " " + "23:59:59");
+                }
+
+                IEnumerable<DashBoardVM> obj;
+
+                LiquidDashBoardRepository objRep = new LiquidDashBoardRepository();
+
+                obj = objRep.getEmployeeLiquidTargetData(0, "", fdate, tdate, Convert.ToInt32(userId), SessionHandler.Current.AppId);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult EmployeeLiquidCollectionType()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+
+                IEnumerable<EmployeeLiquidCollectionType> obj;
+
+                LiquidDashBoardRepository objRep = new LiquidDashBoardRepository();
+
+                obj = objRep.getEmployeeLiquidCollectionType(SessionHandler.Current.AppId);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
     }
 }

@@ -91,13 +91,15 @@
         padding-right: 30px;
     }
 
-   
+    .share-dialog {
+        display:none;
+    }
 
 
-        .share-dialog.is-open {
-            display: block;
-            z-index: 2;
-        }
+    .share-dialog.is-open {
+        display: block;
+        z-index: 2;
+    }
 
     header {
         display: flex;
@@ -319,7 +321,45 @@
         <a href="#"><i class="fa fa-chevron-up"></i></a>
     </div>
     <!-- back to top -->
- 
+    <div class="share-dialog">
+        <header>
+            <h3 class="dialog-title">Share this pen</h3>
+            <button class="close-button"><svg><use href="#close"></use></svg></button>
+        </header>
+        <div class="targets">
+            <a class="button">
+                <svg>
+                    <use href="#facebook"></use>
+                </svg>
+                <span>Facebook</span>
+            </a>
+
+            <a class="button">
+                <svg>
+                    <use href="#twitter"></use>
+                </svg>
+                <span>Twitter</span>
+            </a>
+
+            <a class="button">
+                <svg>
+                    <use href="#linkedin"></use>
+                </svg>
+                <span>LinkedIn</span>
+            </a>
+
+            <a class="button">
+                <svg>
+                    <use href="#email"></use>
+                </svg>
+                <span>Email</span>
+            </a>
+        </div>
+        <div class="link">
+            <div class="pen-url">https://codepen.io/ayoisaiah/pen/YbNazJ</div>
+            <button class="copy-link">Copy Link</button>
+        </div>
+    </div>
 
     <svg class="hidden">
         <defs>
@@ -381,12 +421,15 @@
         const shareButton = document.querySelector('.share-button');
         const shareDialog = document.querySelector('.share-dialog');
         const closeButton = document.querySelector('.close-button');
+        const title1 = document.title;
+        const url1 = document.querySelector('link[rel=canonical]') ? document.querySelector('link[rel=canonical]').href : document.location.href;
 
         shareButton.addEventListener('click', event => {
+            debugger;
             if (navigator.share) {
                 navigator.share({
-                    title: 'Share APK File',
-                    url: window.location.href
+                    title: title1,
+                    url: url1
                 }).then(() => {
                     console.log('Thanks for sharing!');
                 })
@@ -400,6 +443,7 @@
             shareDialog.classList.remove('is-open');
         });
     </script>
+
 </body>
 
 

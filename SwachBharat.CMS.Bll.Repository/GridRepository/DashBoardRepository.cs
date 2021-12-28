@@ -2020,8 +2020,10 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                             Lat = x.Lat,
                             Long = x.Long,
                             Address = checkNull(x.locAddresss).Replace("Unnamed Road,", ""),
-                            gpAfterImage = (x.gpAfterImage == "" ? "/Images/default_not_upload.png" : x.gpAfterImage.Trim()),
-                            gpBeforImage = (x.gpBeforImage == "" ? "/Images/default_not_upload.png" : x.gpBeforImage.Trim())
+                            //gpBeforImage = x.gpBeforImage,
+                            //gpAfterImage = x.gpAfterImage,
+                            gpAfterImage = (x.gpAfterImage == ""  || x.gpAfterImage is null ? "/Images/default_not_upload.png" : x.gpAfterImage.Trim()),
+                            gpBeforImage = (x.gpBeforImage == "" || x.gpBeforImage is null ? "/Images/default_not_upload.png" : x.gpBeforImage.Trim())
 
                         });
 
@@ -2129,8 +2131,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                             Lat = x.Lat,
                             Long = x.Long,
                             Address = checkNull(x.locAddresss).Replace("Unnamed Road,", ""),
-                            gpAfterImage = (x.gpAfterImage == "" ? "/Images/default_not_upload.png" :  x.gpAfterImage.Trim()),
-                            gpBeforImage = (x.gpBeforImage == "" ? "/Images/default_not_upload.png" :  x.gpBeforImage.Trim())
+                            gpAfterImage = (x.gpAfterImage == "" || x.gpAfterImage is null ? "/Images/default_not_upload.png" :  x.gpAfterImage.Trim()),
+                            gpBeforImage = (x.gpBeforImage == "" || x.gpAfterImage is null ? "/Images/default_not_upload.png" :  x.gpBeforImage.Trim())
 
                         });
 
@@ -2891,7 +2893,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
             var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
 
-            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.DumpYardQRCode + "/";
+            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.StreetQRCode + "/";
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
             {
                 var data = db.SP_StreetSweepDetails().Select(x => new SBAStreeSweepDetailsGridRow
