@@ -3337,7 +3337,7 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     var id = db.LiquidWasteDetails.OrderByDescending(x => x.LWId).Select(x => x.LWId).FirstOrDefault();
                     int number = 1000;
-                    string refer = "LWCSBA" + (number + id + 1);
+                    string refer = "LWSBA" + (number + id + 1);
                     LiquidWaste.ReferanceId = refer;
                     LiquidWaste.LWQRCode = "/Images/QRcode.png";
                     LiquidWaste.WardList = ListWardNo();
