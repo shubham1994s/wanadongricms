@@ -72,5 +72,21 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<int> StreetWasteScanedHouse { get; set; }
         public Nullable<int> LiquidCollectionCount { get; set; }
 
+
+
+        public Nullable<double> LWTotalGcWeightCount { get; set; }
+        public Nullable<double> LWTotalDryWeightCount { get; set; }
+        public Nullable<double> LWTotalWetWeightCount { get; set; }
+        public Nullable<double> LWGcWeightCount { get; set; }
+        public Nullable<double> LWDryWeightCount { get; set; }
+        public Nullable<double> LWWetWeightCount { get; set; }
+
+        public Nullable<double> SSTotalGcWeightCount { get; set; }
+        public Nullable<double> SSTotalDryWeightCount { get; set; }
+        public Nullable<double> SSTotalWetWeightCount { get; set; }
+        public Nullable<double> SSGcWeightCount { get; set; }
+        public Nullable<double> SSDryWeightCount { get; set; }
+        public Nullable<double> SSWetWeightCount { get; set; }
+
     }
 }
