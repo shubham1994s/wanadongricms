@@ -86,7 +86,7 @@ namespace SwachBharat.CMS.Bll.Services
         StreetSweepVM GetStreetSweepDetails(int teamId);
 
         LiquidWasteVM GetLiquidWasteDetails(int teamId);
-        DumpYardDetailsVM SaveDumpYardtDetails(DumpYardDetailsVM data);
+        DumpYardDetailsVM SaveDumpYardtDetails(DumpYardDetailsVM data,string Emptype);
 
         StreetSweepVM SaveStreetSweepDetails(StreetSweepVM data);
 
