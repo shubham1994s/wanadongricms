@@ -20,16 +20,17 @@ using System.Text.RegularExpressions;
 using SwachBharat.CMS.Dal.DataContexts;
 using GramPanchayat.API.Bll.ViewModels.ChildModel.Model;
 using System.Collections.Generic;
-namespace SwachhBharatAbhiyan.CMS.Controllers
+
+namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
 {
-    public class DumpYardController : Controller
+    public class LiquidDumpYardController : Controller
     {
         // GET: DumpYard
 
-           IChildRepository childRepository;
-           IMainRepository mainRepository;
+        IChildRepository childRepository;
+        IMainRepository mainRepository;
 
-        public DumpYardController()
+        public LiquidDumpYardController()
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -105,7 +106,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 readStream.Close();
                 dumpYard.dyQRCode = image_Guid;
 
-                DumpYardDetailsVM pointDetails = childRepository.SaveDumpYard(dumpYard,null);
+                DumpYardDetailsVM pointDetails = childRepository.SaveDumpYard(dumpYard,"L");
 
 
                 return Redirect("Index");
@@ -142,7 +143,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 for (int i = 1; i <= zone.id; i++)
                 {
                     int number = 1000;
-                    string refer = "DYSBA" + (number + n + i);
+                    string refer = "LWSBA" + (number + n + i); 
                     dumpYard.ReferanceId = refer;
 
                     dumpYard.dyId = 0;
@@ -176,7 +177,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     readStream.Close();
                     dumpYard.dyQRCode = image_Guid;
                     dumpYard.ReferanceId = dumpYard.ReferanceId;
-                    DumpYardDetailsVM dumpYardDetails = childRepository.SaveDumpYard(dumpYard,null);
+                    DumpYardDetailsVM dumpYardDetails = childRepository.SaveDumpYard(dumpYard,"L");
 
                     // generate pdf
                     string Filename = "";
@@ -285,7 +286,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 }
 
 
-               // //For Satana Only
+                // //For Satana Only
                 //string src = AppDetails.baseImageUrlCMS + "/Content/images/icons/Nagpur_logo.png";
                 //string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;padding-top: 5px;background: #abd037;'> <img style='width:250px;height:86px;' src='" + src + "'/> </div> <div style='font-size: 14px;background: #abd037;'><b> House Id: " + details.ReferanceId + "</b> </div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:245px;height:245px;' src='" + details.dyQRCode + "'/> <p style='text-align:right;font-size: 10px;margin-right:20px;margin-top:0px'><b>" + details.ReferanceId + "</b></p></div></div>";
 
@@ -339,7 +340,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 {
                     Filename = name + "(" + cdatetime + ").pdf";
                 }
-                else {
+                else
+                {
                     Filename = ReferanceId + "(" + cdatetime + ").pdf";
                     name = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ";
                 }

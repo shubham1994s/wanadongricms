@@ -48,6 +48,63 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 return Redirect("/Account/Login");
         }
 
+        public ActionResult PointGarbageIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult MenuPointGarbageIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult DumpYardIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                var details = childRepository.GetDashBoardDetails();
+                return View(details);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult MenuDumpYardIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult MenuEntryDetails()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult EntryDetails()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
         public ActionResult MenuIdealtime()
         {
             if (SessionHandler.Current.AppId != 0)
@@ -62,6 +119,19 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult IdleTime_Route()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                //ViewBag.userId = userId;
+                //ViewBag.Date = Date;
+                //return Json(userId, JsonRequestBehavior.AllowGet);
                 return View();
             }
             else

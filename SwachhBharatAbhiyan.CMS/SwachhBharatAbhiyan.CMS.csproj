@@ -252,6 +252,7 @@
     <Compile Include="Areas\Liquid\Controllers\LiquidAccountController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidAndroidController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidAttendenceController.cs" />
+    <Compile Include="Areas\Liquid\Controllers\LiquidDumpYardController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidEmployeeController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidGarbageController.cs" />
     <Compile Include="Areas\Liquid\Controllers\LiquidHomeController.cs" />
@@ -261,6 +262,7 @@
     <Compile Include="Areas\Liquid\LiquidAreaRegistration.cs" />
     <Compile Include="Areas\Street\Controllers\StreetAccountController.cs" />
     <Compile Include="Areas\Street\Controllers\StreetAttendenceController.cs" />
+    <Compile Include="Areas\Street\Controllers\StreetDumpYardController.cs" />
     <Compile Include="Areas\Street\Controllers\StreetEmployeeController.cs" />
     <Compile Include="Areas\Street\Controllers\StreetGarbageController.cs" />
     <Compile Include="Areas\Street\Controllers\StreetHomeController.cs" />
@@ -440,6 +442,8 @@
     <Content Include="Areas\Liquid\Content\images\user-image11.png" />
     <Content Include="Areas\Liquid\Content\images\user.png" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\AttendenceGrid.js" />
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\DumpYardDetailGrid.js" />
+    <Content Include="Areas\Liquid\Content\Script\DatatableGrid\DumpYardGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
     <Content Include="Areas\Liquid\Content\Script\DatatableGrid\LiquidGarbageGrid.js" />
@@ -988,6 +992,7 @@
     <Content Include="Areas\Street\Content\images\user-image11.png" />
     <Content Include="Areas\Street\Content\images\user.png" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\AttendenceGrid.js" />
+    <Content Include="Areas\Street\Content\Script\DatatableGrid\DumpYardGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\Location.js" />
@@ -2313,6 +2318,18 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Street\Content\images\img\segregationImg\Thumbs.db" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\Thumbs.db" />
+    <Content Include="Areas\Liquid\Views\LiquidDumpYard\SaveBundel.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidDumpYard\AddDumpYardDetails.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidDumpYard\Index.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidDumpYard\MenuIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetDumpYard\AddDumpYardDetails.cshtml" />
+    <Content Include="Areas\Street\Views\StreetDumpYard\Index.cshtml" />
+    <Content Include="Areas\Street\Views\StreetDumpYard\MenuIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetDumpYard\SaveBundel.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\DumpYardIndex.cshtml" />
+    <Content Include="Areas\Liquid\Views\LiquidGarbage\MenuDumpYardIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetGarbage\DumpYardIndex.cshtml" />
+    <Content Include="Areas\Street\Views\StreetGarbage\MenuDumpYardIndex.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
