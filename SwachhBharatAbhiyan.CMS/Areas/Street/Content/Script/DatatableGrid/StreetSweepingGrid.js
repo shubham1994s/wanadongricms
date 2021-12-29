@@ -49,7 +49,7 @@
 });
 
 function DownloadQRCode(Id) {
-    window.location.href = "/DumpYard/Export?id=" + Id;
+    window.location.href = "/Street/StreetSweeping/Export?id=" + Id;
 };
 
 function Edit(Id) {
