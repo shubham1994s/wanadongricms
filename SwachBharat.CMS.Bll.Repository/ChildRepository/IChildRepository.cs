@@ -95,7 +95,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         LiquidWasteVM GetLiquidWasteId(int teamId);
 
-        DumpYardDetailsVM SaveDumpYard(DumpYardDetailsVM data);
+        DumpYardDetailsVM SaveDumpYard(DumpYardDetailsVM data,string Emptype);
 
      
 

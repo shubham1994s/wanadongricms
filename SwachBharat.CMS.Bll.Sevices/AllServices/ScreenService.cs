@@ -976,7 +976,8 @@ namespace SwachBharat.CMS.Bll.Services
                         if (Details != null)
                         {
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
-                            var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                            //var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                            var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType==null).FirstOrDefault();
                             loc.userName = user.userName;
                             loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
                             loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
@@ -2417,7 +2418,7 @@ namespace SwachBharat.CMS.Bll.Services
 
         // Added By Saurabh
 
-        private DumpYardDetail FillDumpYardDetailsDataModel(DumpYardDetailsVM data)
+        private DumpYardDetail FillDumpYardDetailsDataModel(DumpYardDetailsVM data,string Emptype)
         {
             DumpYardDetail model = new DumpYardDetail();
             model.areaId = data.areaId;
@@ -2432,6 +2433,7 @@ namespace SwachBharat.CMS.Bll.Services
             model.dyQRCode = data.dyQRCode;
             model.ReferanceId = data.ReferanceId;
             model.lastModifiedDate = DateTime.Now;
+            model.EmployeeType = Emptype;
             return model;
         }
 
@@ -3353,7 +3355,7 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
-        public DumpYardDetailsVM SaveDumpYardtDetails(DumpYardDetailsVM data)
+        public DumpYardDetailsVM SaveDumpYardtDetails(DumpYardDetailsVM data,string Emptype)
         {
             try
             {
@@ -3375,12 +3377,13 @@ namespace SwachBharat.CMS.Bll.Services
                             model.dyQRCode = data.dyQRCode;
                             model.ReferanceId = data.ReferanceId;
                             model.lastModifiedDate = DateTime.Now;
+                            //model.EmployeeType = data.EmployeType;
                             db.SaveChanges();
                         }
                     }
                     else
                     {
-                        var type = FillDumpYardDetailsDataModel(data);
+                        var type = FillDumpYardDetailsDataModel(data, Emptype);
                         db.DumpYardDetails.Add(type);
                         db.SaveChanges();
                     }

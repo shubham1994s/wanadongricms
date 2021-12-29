@@ -20,5 +20,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string ReferanceId { get; set; }
         public string dyAddress { get; set; }
         public Nullable<System.DateTime> lastModifiedDate { get; set; }
+
+        public string EmployeType { get; set; }
     }
 }

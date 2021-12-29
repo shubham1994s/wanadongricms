@@ -17,18 +17,16 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
-       public DevChildSwachhBharatNagpurEntities(int AppId)
-               : base(SwachBharatAppConnection.GetConnectionString(AppId))
+        public DevChildSwachhBharatNagpurEntities(int AppId)
+                : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
-        }   
-    
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<GarbagePointDetail> GarbagePointDetails { get; set; }
-        public virtual DbSet<DumpYardDetail> DumpYardDetails { get; set; }
         public virtual DbSet<Qr_Employee_Daily_Attendance> Qr_Employee_Daily_Attendance { get; set; }
         public virtual DbSet<GamePlayerDetail> GamePlayerDetails { get; set; }
         public virtual DbSet<Qr_Location> Qr_Location { get; set; }
@@ -55,6 +53,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
+        public virtual DbSet<DumpYardDetail> DumpYardDetails { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {

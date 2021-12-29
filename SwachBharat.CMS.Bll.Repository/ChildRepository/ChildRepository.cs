@@ -299,13 +299,13 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetLiquidWasteDetails(teamId);
         }
 
-        public DumpYardDetailsVM SaveDumpYard(DumpYardDetailsVM data)
+        public DumpYardDetailsVM SaveDumpYard(DumpYardDetailsVM data,string Emptype)
         {
             if (data.dyId <= 0)
             {
                 data.dyId = 0;
             }
-            DumpYardDetailsVM dd = screenService.SaveDumpYardtDetails(data);
+            DumpYardDetailsVM dd = screenService.SaveDumpYardtDetails(data, Emptype);
             return dd;
         }
         public LiquidWasteVM SaveLiquidWastes(LiquidWasteVM data)
