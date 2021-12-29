@@ -1,4 +1,7 @@
-﻿using SwachBharat.CMS.Bll.Repository.ChildRepository;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using SwachBharat.CMS.Bll.Repository.ChildRepository;
 using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
@@ -7,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -105,6 +109,80 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
 
 
                 return Redirect("Index");
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult Export(int id)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+
+                var AppDetails = mainRepository.GetApplicationDetails(SessionHandler.Current.AppId);
+                string Filename = "", owner = "";
+
+                var details = childRepository.GetStreetSweepId(id);
+                string cdatetime = DateTime.Now.ToString("_ddmmyyyyhhmmss");
+
+                if (details.SSName != null)
+                {
+                    Filename = Regex.Replace(details.SSName, @"\s+", "") + cdatetime + ".pdf";
+                    owner = details.SSName;
+                }
+                else
+                {
+                    Filename = Regex.Replace(details.SSId.ToString(), @"\s+", "") + cdatetime + ".pdf";
+                    owner = "_ _ _ _ _ _ _ _ _ _ _ _";
+
+                }
+                string GridHtml = "";
+                //string src = AppDetails.baseImageUrlCMS + "/Content/images/img/app_icon_cms.png";
+                //string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;margin-top: 8px;font-size:22px;background: #abd037;'> O </div> <div style='background: #abd037;;font-weight: bold;font-size: 18px;'> " + AppDetails.AppName + "</div><div style='font-size: 15px;background: #abd037;'> House Id: " + details.ReferanceId + " </div><div style='height:10px;background: #abd037;'></div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:250px;height:250px;' src='" + details.houseQRCode + "'/> </div></div>";
+
+
+
+                string src = AppDetails.baseImageUrlCMS + "/Content/images/icons/Nagpur_logo.png";
+                //For Satana Only
+
+                string top_img_new = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/Top_image.png";
+                string slogan_new = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/slogan.png";
+                string round = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/round.png";
+
+                //string top_img_new = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/Top_image.png";
+                //string slogan_new = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/slogan.png";
+                //string round = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/round.png";
+
+                GridHtml = "<div style='width:100%;height: 100%;background:#ffffff;border : 2px solid #4fa30a;'><div style='float:left;width:7%;padding-top:110px;padding-left:8px;'><img src='" + round + "' style = 'width:20px;height:20px;margin-left:5px;'/></div><div style='float:left;width:58%;padding-left:16px;padding-top:7px;'><img src='" + details.SSQRCode + "' style = 'width:20px;height:20px;'/></div><div style='float:left;width:83%;padding-left:5px;padding-top:10px;padding-bottom:6px;'><div style='padding-left:5px;'><img style='width:150px;height:95px;' src='" + top_img_new + "'/></div><div style='text-align: center;font-weight: 900;padding-bottom:3px;'>&nbsp;&nbsp;&nbsp;<span style='color:#000000;text-align: center;font-size: 16px'>Street Id </span><br/><span style='color:#000000;text-align: center;font-size: 21px'>" + details.ReferanceId + "</span></div><div style='padding-left:5px;'><img src='" + slogan_new + "' style='width: 150px; height:49px;'/><br/></div></div><div style='float:left;width:3%;padding-top:110px;padding-left:22px;text-align:center;'><img src='" + round + "' style = 'width:20px;height:20px;'/></div></div>";
+
+
+
+                using (MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    StringReader sr = new StringReader(GridHtml);
+
+                    var pgSize = new iTextSharp.text.Rectangle(324, 180);
+                    Document pdfDoc = new Document(pgSize, 1f, 1f, 1f, 1f);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+                    var content = writer.DirectContent;
+                    var pageBorderRect = new Rectangle(pdfDoc.PageSize);
+
+                    pageBorderRect.Left += pdfDoc.LeftMargin;
+                    pageBorderRect.Right -= pdfDoc.RightMargin;
+                    pageBorderRect.Top -= pdfDoc.TopMargin;
+                    pageBorderRect.Bottom += pdfDoc.BottomMargin;
+
+                    content.SetColorStroke(BaseColor.BLACK);
+                    content.SetLineWidth(5);
+                    content.Rectangle(pageBorderRect.Left, pageBorderRect.Bottom, pageBorderRect.Width, pageBorderRect.Height);
+                    content.Stroke();
+                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                    pdfDoc.Close();
+
+
+                    return File(stream.ToArray(), "application/pdf", Filename);
+                }
             }
             else
                 return Redirect("/Account/Login");

@@ -3230,7 +3230,7 @@ namespace SwachBharat.CMS.Bll.Services
                 DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
                 var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
 
-                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.DumpYardQRCode + "/";
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.StreetQRCode + "/";
                 StreetSweepVM StreetSweep = new StreetSweepVM();
 
                 var Details = db.StreetSweepingDetails.Where(x => x.SSId == teamId).FirstOrDefault();
