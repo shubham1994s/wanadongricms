@@ -26,5 +26,17 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<decimal> TotalGcWeightCount { get; set; }
         public Nullable<decimal> TotalDryWeightCount { get; set; }
         public Nullable<decimal> TotalWetWeightCount { get; set; }
+        public decimal LWGcWeightCount { get; set; }
+        public decimal LWDryWeightCount { get; set; }
+        public decimal LWWetWeightCount { get; set; }
+        public Nullable<decimal> LWTotalGcWeightCount { get; set; }
+        public Nullable<decimal> LWTotalDryWeightCount { get; set; }
+        public Nullable<decimal> LWTotalWetWeightCount { get; set; }
+        public decimal SSGcWeightCount { get; set; }
+        public decimal SSDryWeightCount { get; set; }
+        public decimal SSWetWeightCount { get; set; }
+        public Nullable<decimal> SSTotalGcWeightCount { get; set; }
+        public Nullable<decimal> SSTotalDryWeightCount { get; set; }
+        public Nullable<decimal> SSTotalWetWeightCount { get; set; }
     }
 }
