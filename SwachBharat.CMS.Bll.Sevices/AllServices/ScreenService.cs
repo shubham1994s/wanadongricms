@@ -988,9 +988,10 @@ namespace SwachBharat.CMS.Bll.Services
 
                         }
 
-                        var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                        //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
                         if (Details != null)
                         {
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
                             //var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
                             var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType==null).FirstOrDefault();
@@ -1063,9 +1064,10 @@ namespace SwachBharat.CMS.Bll.Services
 
                         }
 
-                        var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                        //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                         if (Details != null)
                         {
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
                             var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                             loc.userName = user.userName;
@@ -1100,9 +1102,10 @@ namespace SwachBharat.CMS.Bll.Services
 
                         }
 
-                        var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                        //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                         if (Details != null)
                         {
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
                             var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                             loc.userName = user.userName;
@@ -4803,6 +4806,7 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalGcWeightCount = Convert.ToDouble(houseCount.TotalGcWeightCount);
                         model.TotalDryWeightCount = Convert.ToDouble(houseCount.TotalDryWeightCount);
                         model.TotalWetWeightCount = Convert.ToDouble(houseCount.TotalWetWeightCount);
+                        model.DumpYardCount = data.TotalDump;
 
                         return model;
                     }
@@ -4855,6 +4859,7 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalGcWeightCount = Convert.ToDouble(houseCount.TotalGcWeightCount);
                         model.TotalDryWeightCount = Convert.ToDouble(houseCount.TotalDryWeightCount);
                         model.TotalWetWeightCount = Convert.ToDouble(houseCount.TotalWetWeightCount);
+                        model.DumpYardCount = data.TotalDump;
 
                         return model;
                     }
