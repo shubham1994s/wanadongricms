@@ -390,13 +390,13 @@ $(document).ready(function () {
    // var tot_house_null_check = $('#tot_house_coll').val();
 
 
-    var tot_house_null_check = $('#TotalStreet_Count').val();
+    var tot_house_null_check = $('#TotalStreetProperty_Count').val();
     var TotalStreet_Count = $('#TotalStreet_Count').val();
     var tot_house_coll;
     if (tot_house_null_check == 0) {
         tot_house_coll = null;
     } else {
-        tot_house_coll = $('#TotalStreet_Count').val();
+        tot_house_coll = $('#TotalStreetProperty_Count').val();
     }
 
    // var res_mixed_coll = mixed_coll * 100 / tot_house_coll;
@@ -408,6 +408,8 @@ $(document).ready(function () {
    // //var res_TotalWetWaste_coll = TotalWetWaste_coll * 100 / tot_house_coll;
 
     var res_TotalStreet_Count = TotalStreet_Count * 100 / tot_house_coll;
+    var res_TotalStreetProperty_Count1 = tot_house_coll - TotalStreet_Count;
+    var res_TotalStreetProperty_Count = res_TotalStreetProperty_Count1 * 100 / tot_house_coll
 
 
     var ary3 = []
@@ -419,6 +421,7 @@ $(document).ready(function () {
     ////ary3.push({ v: TotalWetWaste_coll });
 
     ary3.push({ v: res_TotalStreet_Count });
+    ary3.push({ v: res_TotalStreetProperty_Count });
 
 
     //console.log(ary3);
@@ -466,7 +469,8 @@ $(document).ready(function () {
                //// { y: res_TotalDryWaste_coll, label: "Dry Waste Garbage", hover_number: TotalDryWaste_coll, color: '#0462EA' },
                // //{ y: res_TotalWetWaste_coll, label: "Wet Waste Garbage", hover_number: TotalWetWaste_coll, color: '#186634' },
 
-                { y: res_TotalStreet_Count, label: "Liquid Waste", hover_number: TotalStreet_Count, color: '#0086c3' },
+                { y: res_TotalStreet_Count, label: "Liquid Waste Scan", hover_number: TotalStreet_Count, color: '#0086c3' },
+                { y: res_TotalStreetProperty_Count, label: "Not Scan", hover_number: res_TotalStreetProperty_Count1, color: '#f44336' },
                 
             ],
         }]

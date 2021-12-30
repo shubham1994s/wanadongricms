@@ -192,34 +192,37 @@
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
 
 <input value="@Model.TotalHouseCount" type="hidden" id="tot_house_coll" />
-    <input value="@Model.MixedCount" type="hidden" id="mixed_coll" />
-    <input value="@Model.BifurgatedCount" type="hidden" id="bif_coll" />
-    <input value="@Model.NotCollected" type="hidden" id="not_coll" />
-    <input value="@Model.NotSpecified" type="hidden" id="not_spec_coll" />
-    <input value="@Model.TotalDryWaste" type="hidden" id="TotalDryWaste_coll" />
-    <input value="@Model.TotalWetWaste" type="hidden" id="TotalWetWaste_coll" />
-    <input value="@Model.StreetCollection" type="hidden" id="TotalStreet_Coll" />
-
-@*<input value="12" type="hidden" id="tot_house_coll" />
 <input value="@Model.MixedCount" type="hidden" id="mixed_coll" />
-<input value="2" type="hidden" id="bif_coll" />
-<input value="2" type="hidden" id="not_coll" />
-<input value="2" type="hidden" id="not_spec_coll" />
+<input value="@Model.BifurgatedCount" type="hidden" id="bif_coll" />
+<input value="@Model.NotCollected" type="hidden" id="not_coll" />
+<input value="@Model.NotSpecified" type="hidden" id="not_spec_coll" />
 <input value="@Model.TotalDryWaste" type="hidden" id="TotalDryWaste_coll" />
 <input value="@Model.TotalWetWaste" type="hidden" id="TotalWetWaste_coll" />
-<input value="2" type="hidden" id="TotalStreet_Coll" />*@
+<input value="@Model.StreetCollection" type="hidden" id="TotalStreet_Coll" />
+
+@*<input value="12" type="hidden" id="tot_house_coll" />
+    <input value="@Model.MixedCount" type="hidden" id="mixed_coll" />
+    <input value="2" type="hidden" id="bif_coll" />
+    <input value="2" type="hidden" id="not_coll" />
+    <input value="2" type="hidden" id="not_spec_coll" />
+    <input value="@Model.TotalDryWaste" type="hidden" id="TotalDryWaste_coll" />
+    <input value="@Model.TotalWetWaste" type="hidden" id="TotalWetWaste_coll" />
+    <input value="2" type="hidden" id="TotalStreet_Coll" />*@
 
 <input value="@Model.TotalStreetCount" type="hidden" id="TotalStreet_Count" />
+    <input value="@Model.TotalStreetPropertyCount" type="hidden" id="TotalStreetProperty_Count" />
+@*<input value="2" type="hidden" id="TotalStreet_Count" />
+<input value="20" type="hidden" id="TotalStreetProperty_Count" />*@
 
 
 @*dump data*@
-@*<input value="@Model.SSGcWeightCount" type="hidden" id="tot_dump_count" />
-    <input value="@Model.SSDryWeightCount" type="hidden" id="dry_count" />
-    <input value="@Model.SSWetWeightCount" type="hidden" id="wet_count" />*@
+<input value="@Model.SSGcWeightCount" type="hidden" id="tot_dump_count" />
+<input value="@Model.SSDryWeightCount" type="hidden" id="dry_count" />
+<input value="@Model.SSWetWeightCount" type="hidden" id="wet_count" />
 
-<input value="4" type="hidden" id="tot_dump_count" />
-<input value="2" type="hidden" id="dry_count" />
-<input value="2" type="hidden" id="wet_count" />
+@*<input value="4" type="hidden" id="tot_dump_count" />
+    <input value="2" type="hidden" id="dry_count" />
+    <input value="2" type="hidden" id="wet_count" />*@
 
 <input type="hidden" id="txt_fdate" class="datepicker form-control form-control-sm" type="text" />
 
@@ -502,7 +505,7 @@
                             : @Model.TotalHouseCount</span>*@
                         <h3 class="h4" style="width:35%"> Street Sweeping</h3><span style="font-size:14px;font-weight:700;width:65%;text-align:right">
                             Total Street Sweeping Collection
-                            : @Model.TotalHouseCount
+                            : @Model.TotalStreetCount
                         </span>
                     </div>
                     <div class="card-body">
@@ -524,7 +527,7 @@
                 <div class="bar-chart-example card">
                     <div class="card-header d-flex align-items-center">
                         @*<h3 class="h4" style="width:50%">डंप यार्ड तपशील</h3><span style="font-size:14px;font-weight:700;width:50%;text-align:right">एकुण वजन: @Model.TotalGcWeightCount Ton</span>*@
-                        <h3 class="h4" style="width:35%">Dump Yard Details</h3><span style="font-size:14px;font-weight:700;width:65%;text-align:right">Total weight: 4 Ton</span>
+                        <h3 class="h4" style="width:35%">Dump Yard Details</h3><span style="font-size:14px;font-weight:700;width:65%;text-align:right">Total weight: @Model.SSGcWeightCount Ton</span>
                     </div>
                     <div class="card-body">
                         <div style="position:relative ;height: 200px; width: 100%;">

@@ -38,5 +38,9 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<decimal> SSTotalGcWeightCount { get; set; }
         public Nullable<decimal> SSTotalDryWeightCount { get; set; }
         public Nullable<decimal> SSTotalWetWeightCount { get; set; }
+        public Nullable<int> TotalLiquidCount { get; set; }
+        public Nullable<int> TotalStreetCount { get; set; }
+        public Nullable<int> TotalLiquidPropertyCount { get; set; }
+        public Nullable<int> TotalStreetPropertyCount { get; set; }
     }
 }

@@ -4807,6 +4807,10 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalDryWeightCount = Convert.ToDouble(houseCount.TotalDryWeightCount);
                         model.TotalWetWeightCount = Convert.ToDouble(houseCount.TotalWetWeightCount);
                         model.DumpYardCount = data.TotalDump;
+                        model.TotalLiquidCount = houseCount.TotalLiquidCount;
+                        model.TotalStreetCount = houseCount.TotalStreetCount;
+                        model.TotalLiquidPropertyCount = houseCount.TotalLiquidPropertyCount;
+                        model.TotalStreetPropertyCount = houseCount.TotalStreetPropertyCount;
 
                         return model;
                     }
@@ -4860,6 +4864,15 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalDryWeightCount = Convert.ToDouble(houseCount.TotalDryWeightCount);
                         model.TotalWetWeightCount = Convert.ToDouble(houseCount.TotalWetWeightCount);
                         model.DumpYardCount = data.TotalDump;
+                        model.TotalLiquidCount = houseCount.TotalLiquidCount;
+                        model.TotalStreetCount = houseCount.TotalStreetCount;
+                        model.TotalStreetPropertyCount = houseCount.TotalStreetPropertyCount;
+                        model.TotalLiquidPropertyCount = houseCount.TotalLiquidPropertyCount;
+                        //model.TotalStreetCount = 1;
+                        //model.TotalStreetPropertyCount = 50;
+                      
+
+
 
                         return model;
                     }
