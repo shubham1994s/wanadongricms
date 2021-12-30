@@ -18,9 +18,10 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-                : base(SwachBharatAppConnection.GetConnectionString(AppId))
+                 : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -355,16 +356,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetSweepDetails_Result>("SP_StreetSweepDetails");
         }
     
-        public virtual ObjectResult<SP_LiquidDashboard_Details_Result> SP_LiquidDashboard_Details()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LiquidDashboard_Details_Result>("SP_LiquidDashboard_Details");
-        }
-    
-        public virtual ObjectResult<SP_StreetDashboard_Details_Result> SP_StreetDashboard_Details()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetDashboard_Details_Result>("SP_StreetDashboard_Details");
-        }
-    
         public virtual ObjectResult<SP_LSEmployeeSummary_Result> SP_LSEmployeeSummary(Nullable<System.DateTime> from, Nullable<System.DateTime> to, Nullable<int> userid, string emptype)
         {
             var fromParameter = from.HasValue ?
@@ -573,6 +564,16 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("gcdate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TotalHouseCollection_Count_Result>("SP_TotalHouseCollection_Count", gcdateParameter);
+        }
+    
+        public virtual ObjectResult<SP_LiquidDashboard_Details_Result> SP_LiquidDashboard_Details()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LiquidDashboard_Details_Result>("SP_LiquidDashboard_Details");
+        }
+    
+        public virtual ObjectResult<SP_StreetDashboard_Details_Result> SP_StreetDashboard_Details()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetDashboard_Details_Result>("SP_StreetDashboard_Details");
         }
     }
 }

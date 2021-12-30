@@ -17,5 +17,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> TotalAttandence { get; set; }
         public Nullable<int> TotalHouse { get; set; }
         public Nullable<int> TotalLiquid { get; set; }
+        public Nullable<int> TotalDump { get; set; }
     }
 }
