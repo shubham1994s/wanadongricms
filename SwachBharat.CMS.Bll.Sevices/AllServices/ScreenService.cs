@@ -4870,7 +4870,7 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalLiquidPropertyCount = houseCount.TotalLiquidPropertyCount;
                         //model.TotalStreetCount = 1;
                         //model.TotalStreetPropertyCount = 50;
-                      
+
 
 
 

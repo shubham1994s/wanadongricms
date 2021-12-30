@@ -469,7 +469,7 @@ $(document).ready(function () {
                //// { y: res_TotalDryWaste_coll, label: "Dry Waste Garbage", hover_number: TotalDryWaste_coll, color: '#0462EA' },
                // //{ y: res_TotalWetWaste_coll, label: "Wet Waste Garbage", hover_number: TotalWetWaste_coll, color: '#186634' },
 
-                { y: res_TotalStreet_Count, label: "Liquid Waste Scan", hover_number: TotalStreet_Count, color: '#0086c3' },
+                { y: res_TotalStreet_Count, label: "Street Sweep Scan", hover_number: TotalStreet_Count, color: '#0086c3' },
                 { y: res_TotalStreetProperty_Count, label: "Not Scan", hover_number: res_TotalStreetProperty_Count1, color: '#f44336' },
                 
             ],
