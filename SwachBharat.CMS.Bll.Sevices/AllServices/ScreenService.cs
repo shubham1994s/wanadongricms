@@ -4819,7 +4819,7 @@ namespace SwachBharat.CMS.Bll.Services
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return model;
             }

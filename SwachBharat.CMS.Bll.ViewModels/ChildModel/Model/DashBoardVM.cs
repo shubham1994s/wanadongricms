@@ -20,6 +20,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<int> DumpYardCount { get; set; }
 
         public Nullable<int> TotalHouseCount { get; set; }
+        public Nullable<int> TotalLiquidCount { get; set; }
+        public Nullable<int> TotalStreetCount { get; set; }
         public Nullable<int> MixedCount { get; set; }
         public Nullable<int> BifurgatedCount { get; set; }
         public Nullable<int> NotCollected { get; set; }
