@@ -3682,6 +3682,15 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalDump = data.TotalDump;
                         model.TotalDumpUpdated = data.TotalDumpUpdated;
                         model.TotalDumpUpdated_CurrentDay = data.TotalDumpUpdated_CurrentDay;
+
+                        model.TotalLiquid = data.TotalLiquid;
+                        model.TotalLiquidUpdated = data.TotalLiquidUpdated;
+                        model.TotalLiquidUpdated_CurrentDay = data.TotalLiquidUpdated_CurrentDay;
+
+                        model.TotalStreet = data.TotalStreet;
+                        model.TotalStreetUpdated = data.TotalStreetUpdated;
+                        model.TotalStreetUpdated_CurrentDay = data.TotalStreetUpdated_CurrentDay;
+
                         return model;
                     }
 

@@ -21,6 +21,16 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<int> TotalDumpUpdated { get; set; }
         public Nullable<int> TotalDumpUpdated_CurrentDay { get; set; }
 
+
+        public Nullable<int> TotalLiquid { get; set; }
+        public Nullable<int> TotalLiquidUpdated { get; set; }
+        public Nullable<int> TotalLiquidUpdated_CurrentDay { get; set; }
+
+
+        public Nullable<int> TotalStreet { get; set; }
+        public Nullable<int> TotalStreetUpdated { get; set; }
+        public Nullable<int> TotalStreetUpdated_CurrentDay { get; set; }
+
     }
 
 }

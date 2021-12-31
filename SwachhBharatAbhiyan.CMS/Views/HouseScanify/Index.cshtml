@@ -30,15 +30,15 @@
                 <h4 id="ulb_name" class="text-center" style="padding-left:14px;"></h4>
             </div>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="card" style="width: 18rem; border-color:#ff7676">
                         <div class="card-body" style="padding:10px">
                             <p class="card-title text-center" style="font-size:16px">Household Collection</p>
-                            <p class="card-text text-center" ><b>Total :</b> @Model.TotalHouse <span class="card-text">|<b> Updated : </b>@Model.TotalHouseUpdated |<b> Today : </b>@Model.TotalHouseUpdated_CurrentDay</span></p>
+                            <p class="card-text text-center"><b>Total :</b> @Model.TotalHouse <span class="card-text">|<b> Updated : </b>@Model.TotalHouseUpdated |<b> Today : </b>@Model.TotalHouseUpdated_CurrentDay</span></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4" hidden="hidden">
                     <div class="card" style="width: 18rem;border-color:#54e69d">
                         <div class="card-body" style="padding:10px">
                             <p class="card-title text-center" style="font-size:16px">Garbage Point Collection</p>
@@ -46,7 +46,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
+
+                <div class="col-sm-3">
+                    <div class="card" style="width: 18rem;border-color:#54e69d">
+                        <div class="card-body" style="padding:10px">
+                            <p class="card-title text-center" style="font-size:16px">Liquid Waste Collection</p>
+                            <p class="card-text text-center"><b>Total :</b> @Model.TotalLiquid <span class="card-text">|<b> Updated : </b>@Model.TotalLiquidUpdated |<b> Today : </b>@Model.TotalLiquidUpdated_CurrentDay</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card" style="width: 18rem; border-color:#ff7676">
+                        <div class="card-body" style="padding:10px">
+                            <p class="card-title text-center" style="font-size:16px">Street Sweep Collection</p>
+                            <p class="card-text text-center"><b>Total :</b> @Model.TotalStreet <span class="card-text">|<b> Updated : </b>@Model.TotalStreetUpdated |<b> Today : </b>@Model.TotalStreetUpdated_CurrentDay</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
                     <div class="card" style="width: 18rem;border-color:#54c4d8">
                         <div class="card-body" style="padding:10px">
                             <p class="card-title text-center" style="font-size:16px">Dump Yard Details</p>
