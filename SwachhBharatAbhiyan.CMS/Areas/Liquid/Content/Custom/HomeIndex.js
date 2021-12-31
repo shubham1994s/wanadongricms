@@ -579,27 +579,34 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
+    debugger;
+    
 
-    var dry_count = $('#dry_count').val();
-    var wet_count = $('#wet_count').val();
-    var tot_dump_null_check = $('#tot_dump_count').val();
-    var tot_dump_count;
-    if (tot_dump_null_check == 0) {
-        tot_dump_count = null;
+
+    var tot_house_null_check = $('#TotalLiquidProperty_Count').val();
+    var TotalLiquid_Count = $('#TotalLiquid_Count').val();
+    var tot_house_coll;
+    if (tot_house_null_check == 0) {
+        tot_house_coll = null;
     } else {
-        tot_dump_count = $('#tot_dump_count').val();
+        tot_house_coll = $('#TotalLiquidProperty_Count').val();
     }
 
-    var res_dry_count = parseFloat(dry_count) * 100 / parseFloat(tot_dump_count);
-    var res_wet_count = parseFloat(wet_count) * 100 / parseFloat(tot_dump_count);
+    
+    var res_TotalLiquid_Count = TotalLiquid_Count * 100 / tot_house_coll;
+    var res_TotalLiquidProperty_Count1 = tot_house_coll - TotalLiquid_Count;
+    var res_TotalLiquidProperty_Count = res_TotalLiquidProperty_Count1 * 100 / tot_house_coll
+
 
     var ary3 = []
-    ary3.push({ v: dry_count });
-    ary3.push({ v: wet_count });
+    
+
+    ary3.push({ v: res_TotalLiquid_Count });
+    ary3.push({ v: res_TotalLiquidProperty_Count });
 
 
     //console.log(ary3);
-    var chart = new CanvasJS.Chart("chartContainerPieDump", {
+    var chart = new CanvasJS.Chart("chartContainerPie", {
         theme: "light2",
         animationEnabled: true,
         title: {
@@ -612,12 +619,12 @@ $(document).ready(function () {
             //fontSize: 16
         }],
         toolTip: {
-            content: "In Numbers {hover_number} Ton",
+            content: "In Numbers {hover_number}",
         },
         legend: {
-            maxWidth: 180,
-            itemWidth: 75,
-            fontSize: 12,
+            maxWidth: 300,
+            itemWidth: 60,
+            fontSize: 14,
             // horizontalAlign: "right", // left, center ,right 
             //verticalAlign: "center",
         },
@@ -631,12 +638,9 @@ $(document).ready(function () {
             yValueFormatString: "###0.0\"%\"",
             click: explodePie,
             dataPoints: [
-                //{ y: res_dry_count, label: "एकुण वजन (सुका कचरा)", hover_number: dry_count, color: '#0086c3' },
-                //{ y: res_wet_count, label: "एकुण वजन (ओला कचरा)", hover_number: wet_count, color: '#01ad35' },
 
-                 { y: res_dry_count, label: "Total Weight (Dry Waste)", hover_number: dry_count, color: '#0086c3' },
-                { y: res_wet_count, label: "Total Weight (Wet Waste)", hover_number: wet_count, color: '#01ad35' },
-
+                { y: res_TotalLiquid_Count, label: "Liquid Waste Scan", hover_number: TotalLiquid_Count, color: '#0086c3' },
+                { y: res_TotalLiquidProperty_Count, label: "Not Scan", hover_number: res_TotalLiquidProperty_Count1, color: '#f44336' },
 
             ],
         }]
@@ -644,7 +648,7 @@ $(document).ready(function () {
     showDefaultText(chart, "No Data available");
     chart.render();
     function showDefaultText(chart, text) {
-        var isEmpty = !(tot_dump_count && chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
+        var isEmpty = !(tot_house_coll && chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
 
 
 
@@ -665,6 +669,7 @@ $(document).ready(function () {
                 e.dataSeries.dataPoints[i].exploded = false;
         }
     }
+
 
 });
 
