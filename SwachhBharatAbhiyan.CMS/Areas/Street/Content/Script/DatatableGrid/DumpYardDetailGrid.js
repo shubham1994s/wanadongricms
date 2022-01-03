@@ -27,7 +27,7 @@
         "pageLength": 10,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=LiquidDumpYardDetails",
+            "url": "/Datable/GetJqGridJson?rn=StreetDumpYardDetails",
             "type": "POST",
             "datatype": "json"
         },

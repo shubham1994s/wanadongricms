@@ -992,6 +992,7 @@
     <Content Include="Areas\Street\Content\images\user-image11.png" />
     <Content Include="Areas\Street\Content\images\user.png" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\AttendenceGrid.js" />
+    <Content Include="Areas\Street\Content\Script\DatatableGrid\DumpYardDetailGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\DumpYardGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Areas\Street\Content\Script\DatatableGrid\EmployeeSummaryGrid.js" />
