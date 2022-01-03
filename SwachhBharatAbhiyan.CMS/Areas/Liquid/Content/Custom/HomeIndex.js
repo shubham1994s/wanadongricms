@@ -38,7 +38,7 @@ function myMap2() {
     $("#googleMap").css("display", "none");
     $.ajax({
         type: "post",
-        url: "/Location/LocatioList?date=" + $('#txt_fdate').val(),
+        url: "/Liquid/LiquidLocation/LocatioList?date=" + $('#txt_fdate').val(),
         datatype: "json",
         traditional: true,
         success: function (data) {
