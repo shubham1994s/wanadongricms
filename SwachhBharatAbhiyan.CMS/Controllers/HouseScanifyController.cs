@@ -47,7 +47,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 ViewBag.AppId = appid;
                 return View(details);
             }
-            return View();
+            else
+                return Redirect("/HouseScanify/Login");
         }
 
         public ActionResult AttendenceIndex()
