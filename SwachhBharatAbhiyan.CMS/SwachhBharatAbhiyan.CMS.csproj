@@ -1782,6 +1782,7 @@
     <Content Include="Content\images\img\house_icon.png" />
     <Content Include="Content\images\img\house_icon.svg" />
     <Content Include="Content\images\img\icn_not_avialable.png" />
+    <Content Include="Content\images\img\ictsbm2.png" />
     <Content Include="Content\images\img\liquid_icon.png" />
     <Content Include="Content\images\img\liquid_icon.svg" />
     <Content Include="Content\images\img\loader.jpg" />
