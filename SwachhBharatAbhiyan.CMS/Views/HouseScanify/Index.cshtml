@@ -18,6 +18,9 @@
     #demoGrid_filter {
         display: none;
     }
+    nav.side-navbar ul li a {
+        padding: 10px 10px !important;
+    }
 </style>
 <body>
     <input type="hidden" value="@ViewBag.AppId" id="appid" />
@@ -31,7 +34,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="card" style="width: 18rem; border-color:#ff7676">
+                    <div class="card" style="width: 105%; border-color: #ff7676">
                         <div class="card-body" style="padding:10px">
                             <p class="card-title text-center" style="font-size:16px">Household Collection</p>
                             <p class="card-text text-center"><b>Total :</b> @Model.TotalHouse <span class="card-text">|<b> Updated : </b>@Model.TotalHouseUpdated |<b> Today : </b>@Model.TotalHouseUpdated_CurrentDay</span></p>
@@ -39,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4" hidden="hidden">
-                    <div class="card" style="width: 18rem;border-color:#54e69d">
+                    <div class="card" style="border-color:#54e69d">
                         <div class="card-body" style="padding:10px">
                             <p class="card-title text-center" style="font-size:16px">Garbage Point Collection</p>
                             <p class="card-text text-center"><b>Total :</b> @Model.TotalPoint <span class="card-text">|<b> Updated : </b>@Model.TotalPointUpdated |<b> Today : </b>@Model.TotalPointUpdated_CurrentDay</span></p>
@@ -48,7 +51,7 @@
                 </div>
 
                 <div class="col-sm-3">
-                    <div class="card" style="width: 18rem;border-color:#54e69d">
+                    <div class="card" style="border-color:#54e69d">
                         <div class="card-body" style="padding:10px">
                             <p class="card-title text-center" style="font-size:16px">Liquid Waste Collection</p>
                             <p class="card-text text-center"><b>Total :</b> @Model.TotalLiquid <span class="card-text">|<b> Updated : </b>@Model.TotalLiquidUpdated |<b> Today : </b>@Model.TotalLiquidUpdated_CurrentDay</span></p>
@@ -56,7 +59,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <div class="card" style="width: 18rem; border-color:#ff7676">
+                    <div class="card" style=" border-color:#ff7676">
                         <div class="card-body" style="padding:10px">
                             <p class="card-title text-center" style="font-size:16px">Street Sweep Collection</p>
                             <p class="card-text text-center"><b>Total :</b> @Model.TotalStreet <span class="card-text">|<b> Updated : </b>@Model.TotalStreetUpdated |<b> Today : </b>@Model.TotalStreetUpdated_CurrentDay</span></p>
@@ -65,7 +68,7 @@
                 </div>
 
                 <div class="col-sm-3">
-                    <div class="card" style="width: 18rem;border-color:#54c4d8">
+                    <div class="card" style="border-color:#54c4d8">
                         <div class="card-body" style="padding:10px">
                             <p class="card-title text-center" style="font-size:16px">Dump Yard Details</p>
                             <p class="card-text text-center"><b>Total :</b> @Model.TotalDump <span class="card-text">|<b> Updated : </b>@Model.TotalDumpUpdated</span> |<b> Today : </b>@Model.TotalDumpUpdated_CurrentDay</span></p>
