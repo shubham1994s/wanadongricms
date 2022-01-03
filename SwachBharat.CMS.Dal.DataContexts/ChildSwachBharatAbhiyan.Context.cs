@@ -18,7 +18,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-               : base(SwachBharatAppConnection.GetConnectionString(AppId))
+                  : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
 
@@ -573,6 +573,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual ObjectResult<SP_HouseScanifyDetails_Result> SP_HouseScanifyDetails()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_HouseScanifyDetails_Result>("SP_HouseScanifyDetails");
+        }
+    
+        public virtual ObjectResult<StreetCurrentAllUserLocationTest1_Result> StreetCurrentAllUserLocationTest1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StreetCurrentAllUserLocationTest1_Result>("StreetCurrentAllUserLocationTest1");
         }
     }
 }

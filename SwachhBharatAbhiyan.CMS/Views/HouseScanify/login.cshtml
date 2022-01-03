@@ -122,7 +122,7 @@
     select:-webkit-autofill,
     select:-webkit-autofill:hover,
     select:-webkit-autofill:focus {
-        -webkit-text-fill-color: #bbb6b6;
+        -webkit-text-fill-color: #000;
         -webkit-box-shadow: 0 0 0px 1000px #fff inset;
         transition: background-color 5000s ease-in-out 0s;
     }
@@ -232,7 +232,7 @@
                                     <h2 class="text-center" style=" margin-bottom: 10%; margin-top: -30%;">ICT BASED MONITORING TECHNOLOGY</h2>
                                     <div class="form-group">
                                         <label for="login-username" class="username">User Name</label>
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "input-material", @id = "login-username" })
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "input-material", @id = "login-username", placeholder = "Username" })
 
                                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
                                     </div>
@@ -243,7 +243,7 @@
 
                                     <div class="form-group">
                                         <label for="login-password" class="password">Password </label>
-                                        @Html.PasswordFor(m => m.Password, new { @class = "input-material ", @id = "login-password" })
+                                        @Html.PasswordFor(m => m.Password, new { @class = "input-material ", @id = "login-password", placeholder = "Password" })
                                         <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer; color: #9a9b9d; "></i>
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
                                     </div>

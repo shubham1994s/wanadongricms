@@ -1225,34 +1225,33 @@ namespace SwachBharat.CMS.Bll.Services
                     });
                 }
             }
+
+            else if (Emptype == "S")
+            {
+                var data = db.StreetCurrentAllUserLocationTest1().ToList();
+                foreach (var x in data)
+                {
+                    
+                    userLocation.Add(new SBALUserLocationMapView()
+                    {
+                        userId = Convert.ToInt32(x.userid),
+                        userName = x.userName,
+                        date = Convert.ToDateTime(x.datt).ToString("dd/MM/yyyy"),
+                        time = Convert.ToDateTime(x.datt).ToString("hh:mm tt"),
+                        lat = x.lat,
+                        log = x.lang,
+                        address = checkNull(x.addr).Replace("Unnamed Road, ", ""),
+                        vehcileNumber = x.v,
+                        userMobile = x.mobile,
+                    });
+                }
+            }
             else
             {
                 var data = db.CurrentAllUserLocationTest1().ToList();
                 foreach (var x in data)
                 {
-                    //string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
-                    //string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
-                    ////var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.daDate ==EntityFunctions.TruncateTime(x.datetime) && (c.endTime == null || c.endTime == ""))).FirstOrDefault();
-
-                    //var atten = db.Daily_Attendance.Where(c => c.userId == x.userid && (c.endTime == null || c.endTime =="")).FirstOrDefault();
-
-                    //if (atten != null)
-                    //{
-                    //    userLocation.Add(new SBALUserLocationMapView()
-                    //    {
-                    //        userId = Convert.ToInt32(x.userid),
-                    //        userName = x.userName,
-                    //        date = dat,
-                    //        time = tim,
-                    //        lat = x.lat,
-                    //        log = x.@long,
-                    //        address = Address(x.lat + "," + x.@long),
-                    //        vehcileNumber = atten.vehicleNumber,
-                    //        userMobile = x.userMobileNumber,
-                    //    });
-                    //}
-
-
+                  
                     userLocation.Add(new SBALUserLocationMapView()
                     {
                         userId = Convert.ToInt32(x.userid),

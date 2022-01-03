@@ -369,6 +369,9 @@
     <Compile Include="state_districts.cs">
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
+    <Compile Include="StreetCurrentAllUserLocationTest1_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="StreetSweepingDetail.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
