@@ -204,9 +204,13 @@
 
 
 @*dump data*@
-<input value="@Model.GcWeightCount" type="hidden" id="tot_dump_count" />
-<input value="@Model.DryWeightCount" type="hidden" id="dry_count" />
-<input value="@Model.WetWeightCount" type="hidden" id="wet_count" />
+<input value="@Model.LWGcWeightCount" type="hidden" id="tot_dump_count" />
+    <input value="@Model.LWDryWeightCount" type="hidden" id="dry_count" />
+    <input value="@Model.LWWetWeightCount" type="hidden" id="wet_count" />
+@*<input value="4" type="hidden" id="tot_dump_count" />
+    <input value="2" type="hidden" id="dry_count" />
+    <input value="2" type="hidden" id="wet_count" />*@
+
 
 <input type="hidden" id="txt_fdate" class="datepicker form-control form-control-sm" type="text" />
 
@@ -510,7 +514,7 @@
                 <div class="bar-chart-example card">
                     <div class="card-header d-flex align-items-center">
                         @*<h3 class="h4" style="width:50%">डंप यार्ड तपशील</h3><span style="font-size:14px;font-weight:700;width:50%;text-align:right">एकुण वजन: @Model.TotalGcWeightCount Ton</span>*@
-                        <h3 class="h4" style="width:35%">Liquid Waste Details</h3><span style="font-size:14px;font-weight:700;width:65%;text-align:right">Total weight: @Model.GcWeightCount Ton</span>
+                        <h3 class="h4" style="width:35%">Liquid Waste Details</h3><span style="font-size:14px;font-weight:700;width:65%;text-align:right">Total weight: @Model.LWGcWeightCount Ton</span>
                     </div>
                     <div class="card-body">
                         <div style="position:relative ;height: 200px; width: 100%;">

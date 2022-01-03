@@ -673,10 +673,98 @@ $(document).ready(function () {
 
 });
 
+$(document).ready(function () {
+    debugger;
+    var dry_count = $('#dry_count').val();
+    var wet_count = $('#wet_count').val();
+    var tot_dump_null_check = $('#tot_dump_count').val();
+    var tot_dump_count;
+    if (tot_dump_null_check == 0) {
+        tot_dump_count = null;
+    } else {
+        tot_dump_count = $('#tot_dump_count').val();
+    }
+
+    var res_dry_count = parseFloat(dry_count) * 100 / parseFloat(tot_dump_count);
+    var res_wet_count = parseFloat(wet_count) * 100 / parseFloat(tot_dump_count);
+
+    var ary3 = []
+    ary3.push({ v: dry_count });
+    ary3.push({ v: wet_count });
+
+
+    //console.log(ary3);
+    var chart = new CanvasJS.Chart("chartContainerPieDump", {
+        theme: "light2",
+        animationEnabled: true,
+        title: {
+            //text: "विलगिकरण प्रकार ",
+            fontSize: 24,
+            padding: 10
+        },
+        subtitles: [{
+            //text: "United Kingdom, 2016",
+            //fontSize: 16
+        }],
+        toolTip: {
+            content: "In Numbers {hover_number} Ton",
+        },
+        legend: {
+            maxWidth: 180,
+            itemWidth: 75,
+            fontSize: 12,
+            // horizontalAlign: "right", // left, center ,right 
+            //verticalAlign: "center",
+        },
+        data: [{
+            type: "pie",
+            indexLabelFontSize: 12,
+            showInLegend: true,
+            legendText: "{hover_number}",
+            radius: 60,
+            indexLabel: "{label} - {y}",
+            yValueFormatString: "###0.0\"%\"",
+            click: explodePie,
+            dataPoints: [
+                //{ y: res_dry_count, label: "एकुण वजन (सुका कचरा)", hover_number: dry_count, color: '#0086c3' },
+                //{ y: res_wet_count, label: "एकुण वजन (ओला कचरा)", hover_number: wet_count, color: '#01ad35' },
+
+                { y: res_dry_count, label: "Total Weight (Dry Waste)", hover_number: dry_count, color: '#0086c3' },
+                { y: res_wet_count, label: "Total Weight (Wet Waste)", hover_number: wet_count, color: '#01ad35' },
+
+
+            ],
+        }]
+    });
+    showDefaultText(chart, "No Data available");
+    chart.render();
+    function showDefaultText(chart, text) {
+        var isEmpty = !(tot_dump_count && chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
 
 
 
-        var date = new Date();
+        if (isEmpty) {
+            chart.options.subtitles.push({
+                text: text,
+                verticalAlign: 'center',
+            });
+            (chart.options.data[0].dataPoints = []);
+        }
+
+
+
+    }
+    function explodePie(e) {
+        for (var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+            if (i !== e.dataPointIndex)
+                e.dataSeries.dataPoints[i].exploded = false;
+        }
+    }
+
+});
+
+
+  var date = new Date();
 
 var day = date.getDate();
 var month = date.getMonth() + 1;
