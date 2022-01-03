@@ -113,6 +113,7 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalWetWeightCount = Convert.ToDouble(houseCount.TotalWetWeightCount);
 
                         //For Liquid Waste
+
                         model.LWGcWeightCount = Convert.ToDouble(houseCount.LWGcWeightCount);
                         model.LWDryWeightCount = Convert.ToDouble(houseCount.LWDryWeightCount);
                         model.LWWetWeightCount = Convert.ToDouble(houseCount.LWWetWeightCount);
@@ -4821,6 +4822,13 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalLiquidPropertyCount = houseCount.TotalLiquidPropertyCount;
                         model.TotalStreetPropertyCount = houseCount.TotalStreetPropertyCount;
 
+                        //model.LWGcWeightCount = 4;
+                        //model.LWDryWeightCount = 1;
+                        //model.LWWetWeightCount = 3;
+                        model.LWGcWeightCount = Convert.ToDouble(houseCount.LWGcWeightCount);
+                        model.LWDryWeightCount = Convert.ToDouble(houseCount.LWDryWeightCount);
+                        model.LWWetWeightCount = Convert.ToDouble(houseCount.LWWetWeightCount);
+
                         return model;
                     }
 
@@ -4879,6 +4887,12 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalLiquidPropertyCount = houseCount.TotalLiquidPropertyCount;
                         //model.TotalStreetCount = 1;
                         //model.TotalStreetPropertyCount = 50;
+                        //model.SSGcWeightCount = 4;
+                        //model.SSDryWeightCount = 1;
+                        //model.SSWetWeightCount = 3;
+                        model.SSGcWeightCount = Convert.ToDouble(houseCount.SSGcWeightCount);
+                        model.SSDryWeightCount = Convert.ToDouble(houseCount.SSDryWeightCount);
+                        model.SSWetWeightCount = Convert.ToDouble(houseCount.SSWetWeightCount);
 
 
 
