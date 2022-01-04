@@ -110,6 +110,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                TempData.Keep();
                 return View();
             }
             else
@@ -119,6 +120,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                TempData.Keep();
                 return View();
             }
             else
@@ -133,6 +135,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
                 //ViewBag.userId = userId;
                 //ViewBag.Date = Date;
                 //return Json(userId, JsonRequestBehavior.AllowGet);
+                TempData.Keep();
                 return View();
             }
             else
