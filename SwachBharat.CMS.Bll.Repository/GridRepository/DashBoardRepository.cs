@@ -2225,6 +2225,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                  }).ToList();
 
                     if (userId > 0)
+
                     {
                         var model = data1.Where(c => c.userId == userId).ToList();
 
