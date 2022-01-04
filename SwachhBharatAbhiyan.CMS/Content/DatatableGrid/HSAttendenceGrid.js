@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+    debugger;
     $.get("/houseScanify/GetAppNames", null, house);
 
     function house(data) {
@@ -37,7 +37,7 @@
 
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
-        "order": [[7, "desc"]],
+        "order": [[11, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -56,11 +56,11 @@
             "visible": false,
             "searchable": false
         },
-        {
-            "targets": [7],
-            "visible": false,
-            "searchable": false
-        }
+        //{
+        //    "targets": [9],
+        //    "visible": false,
+        //    "searchable": false
+        //}
         ],
 
 
@@ -71,10 +71,14 @@
               { "data": "startTime", "name": "startTime", "autoWidth": true },
               { "data": "endDate", "name": "endDate", "autoWidth": true },
               { "data": "endTime", "name": "endTime", "autoWidth": true }, 
-              { "data": "HouseCount", "name": "HouseCount", "autoWidth": true },
-              { "data": "daDateTIme", "name": "daDateTIme", "autoWidth": true },
+          /*  { "data": "HouseCount", "name": "HouseCount", "autoWidth": true },*/
+            { "data": "LiquidCount", "name": "LiquidCount", "autoWidth": true },
+          
+            { "data": "daDateTIme", "name": "daDateTIme", "autoWidth": true },
+            { "data": "LiquidCount", "name": "LiquidCount", "autoWidth": true },
+            { "data": "StreetCount", "name": "StreetCount", "autoWidth": true },
               { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="user_route(' + full["qrEmpDaId"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
-
+          
               //{ "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["qrEmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>'; }, "width": "10%" },
 
 

@@ -108,8 +108,10 @@ $(document).ready(function () {
               //{ "data": "StartDate", "name": "StartDate", "autoWidth": true },
               //{ "data": "StartTime", "name": "StartTime", "autoWidth": true },
               //{ "data": "EndTime", "name": "EndTime", "autoWidth": true },
-              { "data": "HouseCount", "name": "HouseCount", "autoWidth": true },
-              { "data": "PointCount", "name": "PointCount", "autoWidth": true },
+            { "data": "HouseCount", "name": "HouseCount", "autoWidth": true },
+            { "data": "LiquidCount", "name": "LiquidCount", "autoWidth": true },
+            { "data": "StreetCount", "name": "StreetCount", "autoWidth": true },
+             // { "data": "PointCount", "name": "PointCount", "autoWidth": true },
               { "data": "DumpCount", "name": "DumpCount", "autoWidth": true },
               { "data": "qrEmpAddress", "name": "qrEmpAddress", "autoWidth": true },
 

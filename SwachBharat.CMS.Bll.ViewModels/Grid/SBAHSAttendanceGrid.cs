@@ -25,6 +25,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public Nullable<DateTime> CompareDate { get; set; }
 
         public int HouseCount { get; set; }
+        public int LiquidCount { get; set; }
+        public int StreetCount { get; set; }
         public string daDateTIme { get; set; }
     }
 }

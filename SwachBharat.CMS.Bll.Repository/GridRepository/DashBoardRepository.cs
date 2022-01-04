@@ -3909,6 +3909,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseCount = x.HouseCount,
                     PointCount = x.PointCount,
                     DumpCount = x.DumpCount,
+                    LiquidCount=x.LiquidCount,
+                    StreetCount=x.StreetCount,
                     //StartDate = (string.IsNullOrEmpty(x.StartDate.ToString()) ? "" : Convert.ToDateTime(x.StartDate).ToString("dd/MM/yyyy")) + " " + x.StartTime,
                     //StartDate = (x.StartDate == null ? "" : Convert.ToDateTime(x.StartDate).ToString("dd/MM/yyyy")) + " " + x.StartTime,
                     // EndDate = (x.EndDate == null ? " " : Convert.ToDateTime(x.EndDate).ToString("dd/MM/yyyy")) + " " +  x.EndTime,
@@ -4029,6 +4031,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     DateTime startDate = Convert.ToDateTime(a + " " + Time1);
                     DateTime endDate = Convert.ToDateTime(b + " " + Time2);
                     var houseCount = db.HouseMasters.Where(c => c.modified >= startDate && c.modified <= endDate && c.userId == x.qrEmpId).Count();
+                    var liquidCount = db.LiquidWasteDetails.Where(c => c.lastModifiedDate >= startDate && c.lastModifiedDate <= endDate && c.LWId == x.qrEmpId).Count();
+                    var streetCount = db.StreetSweepingDetails.Where(c => c.lastModifiedDate >= startDate && c.lastModifiedDate <= endDate && c.SSId == x.qrEmpId).Count();
                     ///x.daDate = checkNull(x.daDate.tp);
                     //x.endLat = checkNull(x.endLat);
                     //x.endLong = checkNull(x.endLong);
@@ -4065,6 +4069,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         endNote = checkNull(x.endNote),
                         CompareDate = x.startDate,
                         HouseCount = houseCount,
+                        LiquidCount=liquidCount,
+                        StreetCount= streetCount,
                         daDateTIme = (displayTime1 + " " + sTime)
 
 

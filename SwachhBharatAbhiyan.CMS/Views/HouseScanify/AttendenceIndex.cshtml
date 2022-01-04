@@ -8,8 +8,8 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 
 @Scripts.Render("~/Scripts/IndexScript")
-<script src="~/Content/DatatableGrid/HSAttendenceGrid.js"></script>
 
+<script src="~/Content/DatatableGrid/HSAttendenceGrid.js"></script>
 <body>
     <input type="hidden" value="@ViewBag.AppId" id="appid" />
 
@@ -69,8 +69,12 @@
                             <th> End Date</th>
                             <th> End Time</th>
                             <th> House Count</th>
+
                             <th> daDateTIme</th>
+                            <th> Liquid Count</th>
+                            <th> Street Count</th>
                             <th data-sortable="false">Employee Route</th>
+
                             @*<th> Action</th>*@
                         </tr>
                     </thead>

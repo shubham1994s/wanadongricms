@@ -20,6 +20,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Grid
         public Nullable<System.DateTime> lastModifyDate { get; set; }
 
         public Nullable<int> HouseCount { get; set; }
+
+        public Nullable<int> LiquidCount { get; set; }
+        public Nullable<int> StreetCount { get; set; }
         public Nullable<int> DumpCount { get; set; }
         public Nullable<int> PointCount { get; set; }
 
