@@ -345,6 +345,16 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     return gridRepository;
                     break;
 
+                case "LiquidDumpYardDetails":
+                    gridRepository = new LiquidDumpYardCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
+                    return gridRepository;
+                    break;
+
+                case "StreetDumpYardDetails":
+                    gridRepository = new StreetDumpYardCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
+                    return gridRepository;
+                    break;
+
                 case "EmployeeSummary":
                     gridRepository = new EmpolyeeSummaryGridRepository(0, searchString, fdate, tdate, userId, appId, null);
                     return gridRepository;
