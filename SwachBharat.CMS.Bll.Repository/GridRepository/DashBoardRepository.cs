@@ -4031,8 +4031,9 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     DateTime startDate = Convert.ToDateTime(a + " " + Time1);
                     DateTime endDate = Convert.ToDateTime(b + " " + Time2);
                     var houseCount = db.HouseMasters.Where(c => c.modified >= startDate && c.modified <= endDate && c.userId == x.qrEmpId).Count();
-                    var liquidCount = db.LiquidWasteDetails.Where(c => c.lastModifiedDate >= startDate && c.lastModifiedDate <= endDate && c.LWId == x.qrEmpId).Count();
-                    var streetCount = db.StreetSweepingDetails.Where(c => c.lastModifiedDate >= startDate && c.lastModifiedDate <= endDate && c.SSId == x.qrEmpId).Count();
+                    var liquidCount = db.LiquidWasteDetails.Where(c => c.lastModifiedDate >= startDate && c.lastModifiedDate <= endDate && c.userId == x.qrEmpId).Count();
+                    var streetCount = db.StreetSweepingDetails.Where(c => c.lastModifiedDate >= startDate && c.lastModifiedDate <= endDate && c.userId == x.qrEmpId).Count();
+                    var dumpyardcount = db.DumpYardDetails.Where(c => c.lastModifiedDate >= startDate && c.lastModifiedDate <= endDate && c.userId == x.qrEmpId).Count();
                     ///x.daDate = checkNull(x.daDate.tp);
                     //x.endLat = checkNull(x.endLat);
                     //x.endLong = checkNull(x.endLong);
@@ -4071,6 +4072,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         HouseCount = houseCount,
                         LiquidCount=liquidCount,
                         StreetCount= streetCount,
+                        DumpYardCount=dumpyardcount,
                         daDateTIme = (displayTime1 + " " + sTime)
 
 
