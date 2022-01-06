@@ -24,5 +24,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string HouseAddress { get; set; }
         public int type { get; set; }
 
+        public string WasteType { get; set; }
+        public string gpBeforImage { get; set; }
+        public string gpAfterImage{ get; set; }
+
     }     
 }

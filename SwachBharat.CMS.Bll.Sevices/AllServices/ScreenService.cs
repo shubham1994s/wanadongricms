@@ -1706,6 +1706,9 @@ namespace SwachBharat.CMS.Bll.Services
                         string dat = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy");
                         string tim = Convert.ToDateTime(d.gcDate).ToString("hh:mm tt");
                         var house = db.HouseMasters.Where(c => c.houseId == d.houseId).FirstOrDefault();
+                        
+                  
+
                         userLocation.Add(new SBALUserLocationMapView()
                         {
                             userName = userName.userName,
@@ -1720,7 +1723,10 @@ namespace SwachBharat.CMS.Bll.Services
                             HouseId = house.ReferanceId,
                             HouseAddress = (house.houseAddress == null ? "" : house.houseAddress.Replace("Unnamed Road, ", "")),
                             HouseOwnerName = house.houseOwner,
-                            OwnerMobileNo = house.houseOwnerMobile
+                            OwnerMobileNo = house.houseOwnerMobile,
+                            WasteType = d.garbageType.ToString(),
+                            gpBeforImage = d.gpBeforImage,
+                            gpAfterImage = d.gpAfterImage
                         });
 
                     }
