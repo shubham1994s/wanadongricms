@@ -19,6 +19,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string userMobile { get; set; }
 
         public string HouseId { get; set; }
+        public string DyId { get; set; }
         public string HouseOwnerName { get; set; }
         public string OwnerMobileNo { get; set; }
         public string HouseAddress { get; set; }
@@ -27,6 +28,14 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string WasteType { get; set; }
         public string gpBeforImage { get; set; }
         public string gpAfterImage{ get; set; }
+        public string DryWaste { get; set; }
+        public string WetWaste { get; set; }
+        public string TotWaste { get; set; }
+        public string DumpAddress { get; set; }
+        public string DumpYardName { get; set; }
+        
+        
+        
 
     }     
 }

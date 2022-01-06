@@ -44,7 +44,7 @@
             "searchable": false
         },
          {
-             "targets": [8],
+             "targets": [7],
              "visible": true,
 
              "render": function (data, type, full, meta) {
@@ -61,7 +61,7 @@
              },
          },
              {
-                 "targets": [9],
+                 "targets": [8],
                  "visible": true,
 
                  "render": function (data, type, full, meta) {
@@ -75,6 +75,14 @@
                          return "<img alt='Photo Not Found' onclick='noImageNotification()' src='/Images/default_not_upload.png' style='height:35px;width:35px;cursor:pointer;'></img>";
                      }
                  },
+             },
+             {
+                 "targets": [9],
+                 "visible": true,
+                 "searchable": true,
+                 render(v) {
+                     return Number(v).toFixed(2)
+                 }
              },
              {
                  "targets": [10],
@@ -91,15 +99,8 @@
                  render(v) {
                      return Number(v).toFixed(2)
                  }
-             },
-             {
-                 "targets": [12],
-                 "visible": true,
-                 "searchable": true,
-                 render(v) {
-                     return Number(v).toFixed(2)
-                 }
-             },
+                },
+
 
         ],
 
@@ -111,13 +112,13 @@
               { "data": "UserName", "name": "UserName", "autoWidth": false },
               { "data": "Address", "name": "Address", "autoWidth": false },
               { "data": "VehicleNumber", "autoWidth": false },
-              { "data": "Note", "autoWidth": false },
-                { "data": "gpBeforImage", "name": "gpBeforImage", "autoWidth": false },
-                  { "data": "gpAfterImage", "gpAfterImage": "Address", "autoWidth": false },
+              { "data": "gpBeforImage", "name": "gpBeforImage", "autoWidth": false },
+              { "data": "gpAfterImage", "gpAfterImage": "Address", "autoWidth": false },
               { "data": "totalGcWeight", "name": "totalGcWeight", "autoWidth": false },
               { "data": "totalDryWeight", "name": "totalDryWeight", "autoWidth": false },
               { "data": "totalWetWeight", "name": "totalWetWeight", "autoWidth": false },
               { "data": "gcDate", "name": "gcDate", "autoWidth": false },
+              //{ "data": "Note", "autoWidth": false },
 
             //  { "data": "Status", "title": "Status", "autoWidth": false },
 

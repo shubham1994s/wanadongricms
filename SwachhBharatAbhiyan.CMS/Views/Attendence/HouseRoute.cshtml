@@ -28,6 +28,9 @@
         line-height: 30px;
         padding-left: 10px;
     }
+    .gm-style-iw {
+        width: 300px;
+    }
 
     #play_id {
         left: 87%;
@@ -115,7 +118,7 @@
     <input type="hidden" value="@ViewBag.lat" id="deflat" />
     <input type="hidden" value="@ViewBag.lang" id="deflang" />
     <script>
-        
+
         function myMap() {
 
 
@@ -128,7 +131,7 @@
                 controlUI.style.cursor = 'pointer';
                 controlUI.style.marginBottom = '22px';
                 controlUI.style.marginTop = '5px';
-               // controlUI.style.textAlign = 'center';
+                // controlUI.style.textAlign = 'center';
                 controlDiv.appendChild(controlUI);
 
                 // Set CSS for the control interior.
@@ -171,7 +174,7 @@
             var industries = $("#HdnIndustries").val();
             var geocoder = new google.maps.Geocoder();
             $.ajax({
-                
+
                 type: "post",
                 url: "/Attendence/HouseRouteData?daId=" + industries,
                 datatype: "json",
@@ -186,8 +189,7 @@
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         });
 
-                    }else
-                    {
+                    } else {
                         debugger;
                         var mapOptions = {
                             center: new google.maps.LatLng(markers[0].lat, markers[0].log),
@@ -227,28 +229,44 @@
                             var data = markers[i]
                             if (data.type == 1) {
                                 (function (marker, data) {
-                                     if (data.WasteType == "0") {
-                                         col = '|f44336|000000'
+                                    if (data.WasteType == "0") {
+                                        col = '|f44336|000000'
                                     }
                                     else if (data.WasteType == "1") {
-                                         col = '|388e3c|000000'
+                                        col = '|388e3c|000000'
                                     }
                                     else if (data.WasteType == "2") {
-                                         col = '|fe9436|000000'
+                                        col = '|fe9436|000000'
                                     }
                                 })(marker, data);
                             }
+                            if (data.HouseId != null) {
+                                var a = i + 1;
+                                // Get Address from server
+                                var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                lat_lng.push(myLatlng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    map: map,
+                                    title: data.Username,
+                                    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                });
+                            }
 
-                            var a = i + 1;
-                            // Get Address from server
-                            var myLatlng = new google.maps.LatLng(data.lat, data.log);
-                            lat_lng.push(myLatlng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                map: map,
-                                title: data.Username,
-                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
-                            });
+                            else if (data.DyId != null) {
+                                var a = "D";
+                                // Get Address from server
+                                var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                lat_lng.push(myLatlng);
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    map: map,
+                                    title: data.Username,
+                                  
+                                    icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'
+
+                                });
+                            }
 
 
                             latlngbounds.extend(marker.position);
@@ -257,6 +275,7 @@
                             if (data.type == 1) {
 
                                 (function (marker, data) {
+                                    debugger;
                                     if (data.HouseOwnerName == null) {
                                         data.HouseOwnerName = 'Not Available';
                                     }
@@ -287,13 +306,24 @@
                                     if (data.gpAfterImage == null) {
                                         data.gpAfterImage = "https://img.icons8.com/ios/50/000000/add-image.png"
                                     }
+                                    if (data.HouseId != null) {
+                                        google.maps.event.addListener(marker, "click", function (e) {
+                                            infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></p><p><b>After Image:</b><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                            infoWindow.open(map, marker);
 
-                                    google.maps.event.addListener(marker, "click", function (e) {
-                                        infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><img alt="Photo Not Found"  src=" '+ data.gpBeforImage +' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></p><p><b>After Image:</b><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-                                        infoWindow.open(map, marker);
+                                            //animateCircle(poly,9);
+                                        });
 
-                                        //animateCircle(poly,9);
-                                    });
+                                    }
+                                    else if (data.DyId != null) {
+                                        google.maps.event.addListener(marker, "click", function (e) {
+                                            infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + data.DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                            infoWindow.open(map, marker);
+
+                                            //animateCircle(poly,9);
+                                        });
+                                    }
+                                  
 
                                 })(marker, data);
 
@@ -424,7 +454,10 @@
         }
 
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap" type="text/javascript"></script>
+   
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap" type="text/javascript"></script>
+
 </fieldset>
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
 
