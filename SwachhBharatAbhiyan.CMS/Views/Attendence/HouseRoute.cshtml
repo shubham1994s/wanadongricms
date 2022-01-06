@@ -171,6 +171,7 @@
             var industries = $("#HdnIndustries").val();
             var geocoder = new google.maps.Geocoder();
             $.ajax({
+                
                 type: "post",
                 url: "/Attendence/HouseRouteData?daId=" + industries,
                 datatype: "json",
@@ -178,6 +179,7 @@
                 success: function (m) {
                     markers = m;
                     if (markers.length == 0) {
+                        debugger;
                         var map = new google.maps.Map(document.getElementById('googleMap'), {
                             zoom: 10,
                             center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
@@ -186,6 +188,7 @@
 
                     }else
                     {
+                        debugger;
                         var mapOptions = {
                             center: new google.maps.LatLng(markers[0].lat, markers[0].log),
                             zoom: 10,
@@ -222,6 +225,19 @@
 
 
                             var data = markers[i]
+                            if (data.type == 1) {
+                                (function (marker, data) {
+                                     if (data.WasteType == "0") {
+                                         col = '|f44336|000000'
+                                    }
+                                    else if (data.WasteType == "1") {
+                                         col = '|388e3c|000000'
+                                    }
+                                    else if (data.WasteType == "2") {
+                                         col = '|fe9436|000000'
+                                    }
+                                })(marker, data);
+                            }
 
                             var a = i + 1;
                             // Get Address from server
@@ -231,7 +247,7 @@
                                 position: myLatlng,
                                 map: map,
                                 title: data.Username,
-                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|FF0000|000000'
+                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
                             });
 
 
@@ -253,9 +269,27 @@
                                     if (data.vehcileNumber == null) {
                                         data.vehcileNumber = '';
                                     }
+                                    if (data.WasteType == null) {
+                                        data.WasteType = '';
+                                    }
+                                    else if (data.WasteType == "0") {
+                                        data.WasteType = "Mixed Garbage"
+                                    }
+                                    else if (data.WasteType == "1") {
+                                        data.WasteType = "Segregated Garbage"
+                                    }
+                                    else if (data.WasteType == "2") {
+                                        data.WasteType = "Garbage not Received"
+                                    }
+                                    if (data.gpBeforImage == null) {
+                                        data.gpBeforImage = "https://img.icons8.com/ios/50/000000/add-image.png"
+                                    }
+                                    if (data.gpAfterImage == null) {
+                                        data.gpAfterImage = "https://img.icons8.com/ios/50/000000/add-image.png"
+                                    }
 
                                     google.maps.event.addListener(marker, "click", function (e) {
-                                        infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                        infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><img alt="Photo Not Found"  src=" '+ data.gpBeforImage +' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></p><p><b>After Image:</b><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
                                         infoWindow.open(map, marker);
 
                                         //animateCircle(poly,9);
