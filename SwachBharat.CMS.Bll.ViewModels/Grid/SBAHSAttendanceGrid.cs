@@ -28,5 +28,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public int LiquidCount { get; set; }
         public int StreetCount { get; set; }
         public string daDateTIme { get; set; }
+
+        public int DumpYardCount { get; set; }
     }
 }

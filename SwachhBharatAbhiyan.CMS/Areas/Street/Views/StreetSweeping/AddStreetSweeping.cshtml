@@ -451,16 +451,17 @@
 </script>
 <script>
     $(document).ready(function () {
+        debugger;
         $('#Download1').click(function () {
             if ($.trim($("#SSName").val()) != '') {
 
                 var name = $("#SSName").val();
                 var Refid = $("#n").val();
-                window.location.href = "/DumpYard/GenratePDF?name=" + name + "&ReferanceId=" + Refid;
+                window.location.href = "../../Street/StreetSweeping/GenratePDF?name=" + name + "&ReferanceId=" + Refid;
             } else {
                 var name = $("#SSName").val();
                 var Refid = $("#n").val();
-                window.location.href = "/DumpYard/GenratePDF?name=" + name + "&ReferanceId=" + Refid;
+                window.location.href = "../../Street/StreetSweeping/GenratePDF?name=" + name + "&ReferanceId=" + Refid;
             }
         })
     });

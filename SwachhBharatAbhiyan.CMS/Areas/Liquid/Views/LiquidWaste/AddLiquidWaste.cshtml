@@ -240,7 +240,7 @@
 
 
 
-        var id = $('#SSId').val();
+        var id = $('#LWId').val();
 
         if (id > 0) {
             $('#Download1').show();
@@ -326,7 +326,7 @@
     });
 </script>
 <script type="text/javascript">
-    $("#SSName").keypress(function (e) {
+    $("#LWName").keypress(function (e) {
         //if the letter is not digit then display error and don't type anything
         if (!(e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 44)) {
             //display error message
@@ -342,7 +342,7 @@
             return false;
         } else {
             //alert($("#FileUpload_Preview img").attr('src'));
-            $("#SSName").change(function () {
+            $("#LWName").change(function () {
                 //alert("Sdsadsa");
                 //$("#FileUpload_Preview img").attr('src') === "/Images/QRcode.png";
                 $("#FileUpload_Preview img").attr("src", "/Images/QRcode.png");
@@ -422,7 +422,7 @@
                 move();
             }
         }
-        $("#SSName").change(function () {
+        $("#LWName").change(function () {
             //alert("Sdsadsa");
             //$("#FileUpload_Preview img").attr('src') === "/Images/QRcode.png";
             $("#FileUpload_Preview img").attr("src", "/Images/QRcode.png");
@@ -454,15 +454,15 @@
 <script>
     $(document).ready(function () {
         $('#Download1').click(function () {
-            if ($.trim($("#SSName").val()) != '') {
+            if ($.trim($("#LWName").val()) != '') {
 
-                var name = $("#SSName").val();
+                var name = $("#LWName").val();
                 var Refid = $("#n").val();
-                window.location.href = "/DumpYard/GenratePDF?name=" + name + "&ReferanceId=" + Refid;
+                window.location.href = "/LiquidWaste/GenratePDF?name=" + name + "&ReferanceId=" + Refid;
             } else {
-                var name = $("#SSName").val();
+                var name = $("#LWName").val();
                 var Refid = $("#n").val();
-                window.location.href = "/DumpYard/GenratePDF?name=" + name + "&ReferanceId=" + Refid;
+                window.location.href = "/LiquidWaste/GenratePDF?name=" + name + "&ReferanceId=" + Refid;
             }
         })
     });
