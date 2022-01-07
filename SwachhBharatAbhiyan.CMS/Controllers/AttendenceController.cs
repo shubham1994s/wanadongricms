@@ -99,6 +99,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         public ActionResult HouseRoute(int daId)
         {
+
             if (SessionHandler.Current.AppId != 0)
             {
                 ViewBag.daId = daId;
