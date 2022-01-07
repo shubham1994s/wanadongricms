@@ -176,6 +176,84 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         //    else
         //        return Redirect("/Account/Login");
         //}
+        [HttpPost]
+        public ActionResult AreaList()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                HouseDetailsVM obj = new HouseDetailsVM();
+
+                obj = childRepository.GetHouseById(-1);
+                return Json(obj.AreaList, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        [HttpPost]
+        public ActionResult WardList()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                HouseDetailsVM obj = new HouseDetailsVM();
+
+                obj = childRepository.GetHouseById(-1);
+                return Json(obj.WardList, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        [HttpPost]
+        public ActionResult ZoneList()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                HouseDetailsVM obj = new HouseDetailsVM();
+
+                obj = childRepository.GetHouseById(-1);
+                return Json(obj.ZoneList, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        [HttpPost]
+        public ActionResult LoadWardNoList(int ZoneId)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                HouseDetailsVM obj = new HouseDetailsVM();
+                try
+                {
+                    obj.WardList = childRepository.LoadListWardNo(ZoneId);
+                }
+                catch (Exception ex) { throw ex; }
+
+                return Json(obj.WardList, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+
+        }
+
+        [HttpPost]
+        public ActionResult LoadAreaList(int WardNo)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                HouseDetailsVM obj = new HouseDetailsVM();
+                try
+                {
+                    obj.AreaList = childRepository.LoadListArea(WardNo);
+                }
+                catch (Exception ex) { throw ex; }
+
+                return Json(obj.AreaList, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+
+        }
+
 
 
     }
