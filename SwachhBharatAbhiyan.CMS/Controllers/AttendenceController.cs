@@ -106,7 +106,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 ViewBag.lat = SessionHandler.Current.Latitude;
                 ViewBag.lang = SessionHandler.Current.Logitude;
                 SBALUserLocationMapView obj = new SBALUserLocationMapView();
-                obj = childRepository.GetHouseByIdforMap(-1);          
+                obj = childRepository.GetHouseByIdforMap(-1, daId);          
                 return View(obj);
             }
             else
@@ -114,7 +114,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         }
 
-        public ActionResult HouseRouteData(int daId)
+        public ActionResult HouseRouteData(int daId,int areaid)
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -179,52 +179,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         //    else
         //        return Redirect("/Account/Login");
         //}
-        [HttpPost]
-        public ActionResult AreaList()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                HouseDetailsVM obj = new HouseDetailsVM();
+       
 
-                obj = childRepository.GetHouseById(-1);
-                return Json(obj.AreaList, JsonRequestBehavior.AllowGet);
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-
-        [HttpPost]
-        public ActionResult WardList()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                HouseDetailsVM obj = new HouseDetailsVM();
-
-                obj = childRepository.GetHouseById(-1);
-                return Json(obj.WardList, JsonRequestBehavior.AllowGet);
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-        [HttpPost]
-        public ActionResult ZoneList()
-        {
-            if (SessionHandler.Current.AppId != 0)
-            {
-                SBALUserLocationMapView obj = new SBALUserLocationMapView();
-
-                obj = childRepository.GetHouseByIdforMap(-1);
-                //ViewBag.zonelist = obj.ZoneList;
-                //ViewBag.ZoneId = obj.ZoneId;
-
-                TempData["zonelist"] = obj.ZoneList;
-                TempData["ZoneId"] = obj.ZoneId;
-                return Json(obj.ZoneList, JsonRequestBehavior.AllowGet);
-            }
-            else
-                return Redirect("/Account/Login");
-        }
-        [HttpPost]
+      
         public ActionResult LoadWardNoList(int ZoneId)
         {
             if (SessionHandler.Current.AppId != 0)
