@@ -93,6 +93,11 @@
     }
 </style>
 <div class="container ">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4><span id="name"></span><span>House Route</span></h4>
+        </div>
+    </div>
 
     <div class="row" style="margin-top:5px">
         <div class="col-sm-3"></div>
@@ -271,7 +276,8 @@
                         var mapOptions = {
                             center: new google.maps.LatLng(markers[0].lat, markers[0].log),
                             zoom: 20,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+                            rotateControl: true
                         };
                         var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
 
@@ -279,6 +285,7 @@
                         var centerControlDivPause = document.createElement('div');
                         var centerControl = new CenterControl(centerControlDiv, map);
                         var centerControlPause = new CenterControlPause(centerControlDivPause, map);
+                        
 
                         centerControlDiv.index = 1;
                         centerControlDivPause.index = 1;
@@ -361,13 +368,19 @@
                                 // Get Address from server
                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
                                 lat_lng.push(myLatlng);
+                                var mUrl = "../Content/images/img/segregationImg/Dump_Yard_marker.png";
                                 var marker = new google.maps.Marker({
                                     position: myLatlng,
                                     map: map,
                                     title: data.Username,
 
-                                    icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'
-
+                                   /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                                   /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                                   /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                                    icon: {
+                                        // labelOrigin: new google.maps.Point(16, 65),
+                                        url: mUrl
+                                    }
                                 });
                             }
 
@@ -411,7 +424,7 @@
                                     }
                                     if (data.HouseId != null) {
                                         google.maps.event.addListener(marker, "click", function (e) {
-                                            infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                            infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b><span id="emp_name" class="a">' + data.userName + '</span></p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
                                             infoWindow.open(map, marker);
 
                                             //animateCircle(poly,9);
@@ -481,22 +494,28 @@
                         //***********ROUTING****************//
                         var car = "M17.402,0H5.643C2.526,0,0,3.467,0,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759c3.116,0,5.644-2.527,5.644-5.644 V6.584C23.044,3.467,20.518,0,17.402,0z M22.057,14.188v11.665l-2.729,0.351v-4.806L22.057,14.188z M20.625,10.773 c-1.016,3.9-2.219,8.51-2.219,8.51H4.638l-2.222-8.51C2.417,10.773,11.3,7.755,20.625,10.773z M3.748,21.713v4.492l-2.73-0.349 V14.502L3.748,21.713z M1.018,37.938V27.579l2.73,0.343v8.196L1.018,37.938z M2.575,40.882l2.218-3.336h13.771l2.219,3.336H2.575z M19.328,35.805v-7.872l2.729-0.355v10.048L19.328,35.805z";
 
-                        /*old*/ 
+                        var truck = "M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+
+                        var truck2 = "M8,10.6c1.7-2.9,4-4.8,7.6-4.8c34,0.1,68,0.1,102,0.1c0,22.8,0,45.5,0,68.3 c0, 5.1, 1.6, 6.8, 6.6, 6.8c18.5, 0, 37, 0, 55.5, 0c4.5, 0, 6 - 1.5, 6 - 6c0 - 23, 0 - 46.1, 0 - 69.1c22.4, 0, 44.8, 0, 67.2, 0c0, 45.1, 0, 90.3, 0, 135.4 c - 1.6, 0.1 - 3.2, 0.2 - 4.8, 0.2c - 14.9, 0 - 29.8, 0 - 44.7, 0c - 2, 0 - 4.1 - 0.2 - 5.7, 1.3c - 1.8, 1.8 - 2.9, 3.8 - 1.9, 6.4c1.1, 3.2, 3.5, 4.4, 6.8, 4.4 c16.8, 0, 33.5, 0.1, 50.3, 0.1c0, 7.6, 0, 15.3, 0, 22.9c - 14, 0 - 27.9, 0.1 - 41.9, 0.1c - 3.1, 0 - 6.1 - 0.1 - 9.2, 0.1c - 3.5, 0.2 - 6.5, 2.8 - 6.3, 5.9 c0.1, 3.5, 2, 5.7, 5.5, 6.3c1.4, 0.2, 2.9, 0.3, 4.4, 0.3c15.8, 0.1, 31.7, 0.1, 47.5, 0.1c0, 8.8, 0, 17.7, 0, 26.5c - 1.7, 0 - 3.5, 0.1 - 5.2, 0.1 c - 45.7, 0 - 91.5, 0.1 - 137.2, 0.1c - 1.4 - 1.7 - 2.8 - 3.6 - 4.3 - 5.2c - 7.4 - 8 - 16.7 - 11.9 - 27.4 - 11.5c - 12.5, 0.4 - 22.3, 6.3 - 29.3, 16.7 c - 13.8 - 0.1 - 27.6 - 0.1 - 41.4 - 0.2C8, 147.7, 8, 79.1, 8, 10.6z"
+                        var mUrl = "../Content/images/img/segregationImg/icn_house.png";
+
+                        /*old*/
                         //var lineSymbol = {
                         //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                         //    scale: 5,
-                        //    strokeColor: '#ffffff',
+                        //    strokeColor: '#17e36f',
                         //};
                         /*new*/
 
                         var lineSymbol = {
                             path: car,
-                            scale: .7,
+                            scale: .5,
                             strokeColor: 'black',
                             strokeWeight: .10,
                             fillOpacity: 1,
                             fillColor: '#ed281a',
                             offset: '2%',
+                            transform: 'rotate(20 deg)',
                             anchor: new google.maps.Point(10, 25)
                         };
 
@@ -576,8 +595,11 @@
 
     </script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap" type="text/javascript"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap3" type="text/javascript"></script>
+
+ 
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyDC1bURZcQZ-I__gSCjm4g0GWauNHW52Ow&callback=myMap" type="text/javascript"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyDC1bURZcQZ-I__gSCjm4g0GWauNHW52Ow&callback=myMap3" type="text/javascript"></script>
 
     @*<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=myMap"></script>*@
 
