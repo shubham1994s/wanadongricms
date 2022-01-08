@@ -1757,6 +1757,7 @@
     <Content Include="Content\images\icons\01_strip.png" />
     <Content Include="Content\images\icons\background.png" />
     <Content Include="Content\images\icons\background2.png" />
+    <Content Include="Content\images\icons\dump.jpg" />
     <Content Include="Content\images\icons\gandhi.png" />
     <Content Include="Content\images\icons\gandhi_slogan.png" />
     <Content Include="Content\images\icons\gila_sukha.png" />
@@ -1792,6 +1793,7 @@
     <Content Include="Content\images\img\marker24.png" />
     <Content Include="Content\images\img\sba.png" />
     <Content Include="Content\images\img\segregationImg\CMS_AppLink.png" />
+    <Content Include="Content\images\img\segregationImg\Dump_Yard_marker.png" />
     <Content Include="Content\images\img\segregationImg\icn_garbage_not_recevied.png" />
     <Content Include="Content\images\img\segregationImg\icn_house.png" />
     <Content Include="Content\images\img\segregationImg\icn_mixed_garbage.png" />
