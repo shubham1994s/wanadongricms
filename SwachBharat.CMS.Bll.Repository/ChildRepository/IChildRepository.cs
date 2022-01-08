@@ -47,7 +47,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
 
         HouseDetailsVM GetHouseById(int teamId);
-         HouseDetailsVM SaveHouse(HouseDetailsVM data);
+
+        SBALUserLocationMapView GetHouseByIdforMap(int teamId);
+        HouseDetailsVM SaveHouse(HouseDetailsVM data);
          void DeletHouse(int teamId);
 
 

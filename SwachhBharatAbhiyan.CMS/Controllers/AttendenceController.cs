@@ -105,7 +105,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 ViewBag.daId = daId;
                 ViewBag.lat = SessionHandler.Current.Latitude;
                 ViewBag.lang = SessionHandler.Current.Logitude;
-                return View();
+                SBALUserLocationMapView obj = new SBALUserLocationMapView();
+                obj = childRepository.GetHouseByIdforMap(-1);          
+                return View(obj);
             }
             else
                 return Redirect("/Account/Login");
@@ -116,10 +118,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                
+              
                 List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
                 obj = childRepository.GetHouseAttenRoute(daId);
                 // return Json(obj);
+               
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
@@ -208,9 +211,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                HouseDetailsVM obj = new HouseDetailsVM();
+                SBALUserLocationMapView obj = new SBALUserLocationMapView();
 
-                obj = childRepository.GetHouseById(-1);
+                obj = childRepository.GetHouseByIdforMap(-1);
+                //ViewBag.zonelist = obj.ZoneList;
+                //ViewBag.ZoneId = obj.ZoneId;
+
+                TempData["zonelist"] = obj.ZoneList;
+                TempData["ZoneId"] = obj.ZoneId;
                 return Json(obj.ZoneList, JsonRequestBehavior.AllowGet);
             }
             else
