@@ -62,7 +62,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SBALUserLocationMapView> GetUserAttenRoute(int id);
 
         //Added By Saurabh (11 July 2019)
-        List<SBALUserLocationMapView> GetHouseAttenRoute(int id);
+        List<SBALUserLocationMapView> GetHouseAttenRoute(int id,int areaid);
         GarbagePointDetailsVM GetGarbagePointById(int teamId);
         GarbagePointDetailsVM SaveGarbagePoint(GarbagePointDetailsVM data);
         void DeletGarbagePoint(int teamId);
