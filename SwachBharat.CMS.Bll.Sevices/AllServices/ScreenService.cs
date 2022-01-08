@@ -598,7 +598,7 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
-        public SBALUserLocationMapView GetHouseByIdforMap(int teamId)
+        public SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId)
         {
             try
             {
@@ -612,6 +612,11 @@ namespace SwachBharat.CMS.Bll.Services
                 if (Details != null)
                 {
                     house = FillHouseDetailsViewModelforMap(Details);
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId).FirstOrDefault();
+                    house.userName = user.userName;
                     if (house.houseQRCode != null && house.houseQRCode != "")
                     {
                         HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(ThumbnaiUrlCMS + house.houseQRCode.Trim());
@@ -641,33 +646,16 @@ namespace SwachBharat.CMS.Bll.Services
                     house.ZoneList = ListZone();
                     return house;
                 }
-                else if (teamId == -2)
-                {
-                    var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
-                    int number = 1000;
-                    string refer = "HPSBA" + (number + id + 1);
-                    house.ReferanceId = refer;
-                    house.houseQRCode = "/Images/QRcode.png";
-                    //house.WardList = ListWardNo();
-                    //house.AreaList = ListArea();
-
-                    var WWWW = new List<SelectListItem>();
-                    SelectListItem itemAdd = new SelectListItem() { Text = "Select Ward / Prabhag", Value = "0" };
-                    WWWW.Insert(0, itemAdd);
-
-                    var ARRR = new List<SelectListItem>();
-                    SelectListItem itemAddARR = new SelectListItem() { Text = "Select Area", Value = "0" };
-                    ARRR.Insert(0, itemAddARR);
-
-
-                    house.WardList = WWWW;
-                    house.AreaList = ARRR;
-                    house.ZoneList = ListZone();
-                    house.houseId = 0;
-                    return house;
-                }
+               
+            
                 else
                 {
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId).FirstOrDefault();
+                    house.userName = user.userName;
+
                     var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
                     int number = 1000;
                     string refer = "HPSBA" + (number + id + 1);
@@ -680,6 +668,7 @@ namespace SwachBharat.CMS.Bll.Services
                     return house;
                 }
 
+             
             }
             catch (Exception ex)
             {
