@@ -25,6 +25,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string HouseAddress { get; set; }
         public int type { get; set; }
 
+      
+
+
         public string WasteType { get; set; }
         public string gpBeforImage { get; set; }
         public string gpAfterImage{ get; set; }
@@ -33,9 +36,30 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string TotWaste { get; set; }
         public string DumpAddress { get; set; }
         public string DumpYardName { get; set; }
-        
-        
-        
+
+        public int houseId { get; set; }
+        public Nullable<int> AreaId { get; set; }
+        public Nullable<int> WardNo { get; set; }
+        public Nullable<int> ZoneId { get; set; }
+        public string houseNumber { get; set; }
+        public string houseOwnerMar { get; set; }
+        public string houseOwner { get; set; }
+        public string houseMobile { get; set; }
+        public string houseAddress { get; set; }
+        public string houseLat { get; set; }
+        public string houseLong { get; set; }
+        public string houseQRCode { get; set; }
+        public string ReferanceId { get; set; }
+        public string JavascriptToRun { get; set; }
+        public string areaName { get; set; }
+        public string wardName { get; set; }
+
+        public string SerielNo { get; set; }
+
+      
+
+
+
 
     }     
 }

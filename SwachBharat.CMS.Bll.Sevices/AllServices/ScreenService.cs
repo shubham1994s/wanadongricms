@@ -597,6 +597,84 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+
+        public SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId)
+        {
+            try
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.HouseQRCode + "/";
+                SBALUserLocationMapView house = new SBALUserLocationMapView();
+
+                var Details = db.HouseMasters.Where(x => x.houseId == teamId).FirstOrDefault();
+                if (Details != null)
+                {
+                    house = FillHouseDetailsViewModelforMap(Details);
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId).FirstOrDefault();
+                    house.userName = user.userName;
+                    if (house.houseQRCode != null && house.houseQRCode != "")
+                    {
+                        HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(ThumbnaiUrlCMS + house.houseQRCode.Trim());
+                        HttpWebResponse httpRes = null;
+                        try
+                        {
+                            httpRes = (HttpWebResponse)httpReq.GetResponse(); // Error 404 right here,
+                            if (httpRes.StatusCode == HttpStatusCode.NotFound)
+                            {
+                                house.houseQRCode = "/Images/default_not_upload.png";
+                            }
+                            else
+                            {
+                                house.houseQRCode = ThumbnaiUrlCMS + house.houseQRCode.Trim();
+                            }
+                        }
+                        catch (Exception e) { house.houseQRCode = "/Images/default_not_upload.png"; }
+
+                    }
+                    else
+                    {
+                        house.houseQRCode = "/Images/default_not_upload.png";
+                    }
+
+                    house.WardList = LoadListWardNo(Convert.ToInt32(house.ZoneId)); //ListWardNo();
+                    house.AreaList = LoadListArea(Convert.ToInt32(house.WardNo)); //ListArea();
+                    house.ZoneList = ListZone();
+                    return house;
+                }
+               
+            
+                else
+                {
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId).FirstOrDefault();
+                    house.userName = user.userName;
+
+                    var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "HPSBA" + (number + id + 1);
+                    house.ReferanceId = refer;
+                    house.houseQRCode = "/Images/QRcode.png";
+                    house.WardList = ListWardNo();
+                    house.AreaList = ListArea();
+                    house.ZoneList = ListZone();
+                    house.houseId = id;
+                    return house;
+                }
+
+             
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public HouseDetailsVM SaveHouseDetails(HouseDetailsVM data)
         {
             try
@@ -1726,8 +1804,10 @@ namespace SwachBharat.CMS.Bll.Services
                                 OwnerMobileNo = house.houseOwnerMobile,
                                 WasteType = d.garbageType.ToString(),
                                 gpBeforImage = d.gpBeforImage,
-                                gpAfterImage = d.gpAfterImage
-                            });
+                                gpAfterImage = d.gpAfterImage,
+                                ZoneList=ListZone(),
+                          
+                        });
                         }
                       else if (d.dyId != null)
                         {
@@ -1753,20 +1833,24 @@ namespace SwachBharat.CMS.Bll.Services
                                 gpAfterImage = d.gpAfterImage,
                                 DryWaste = d.totalDryWeight.ToString(),
                                 WetWaste = d.totalWetWeight.ToString(),
-                                TotWaste = d.totalGcWeight.ToString()
+                                TotWaste = d.totalGcWeight.ToString(),
+                                ZoneList = ListZone(),
+
                             });
                         }
 
+
+                      
+
+
                      
-
-
-                    
 
                     }
                     break;
                 }
 
             }
+          
 
 
 
@@ -2816,6 +2900,53 @@ namespace SwachBharat.CMS.Bll.Services
         {
 
             HouseDetailsVM model = new HouseDetailsVM();
+            model.houseId = data.houseId;
+            model.WardNo = data.WardNo;
+            model.AreaId = data.AreaId;
+            model.ZoneId = data.ZoneId;
+            model.houseOwner = data.houseOwner;
+            model.houseOwnerMar = data.houseOwnerMar;
+            model.houseAddress = data.houseAddress;
+            model.houseMobile = data.houseOwnerMobile;
+            model.houseNumber = data.houseNumber;
+            model.houseQRCode = data.houseQRCode;
+            model.houseLat = data.houseLat;
+            model.houseLong = data.houseLong;
+            model.ReferanceId = data.ReferanceId;
+            using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+            {
+                if (data.AreaId > 0)
+                {
+                    model.areaName = db.TeritoryMasters.Where(c => c.Id == data.AreaId).FirstOrDefault().Area;
+                }
+                else
+                {
+                    model.areaName = "";
+                }
+
+
+                if (data.WardNo > 0)
+                {
+                    model.wardName = db.WardNumbers.Where(c => c.Id == data.WardNo).FirstOrDefault().WardNo;
+                }
+                else
+                {
+                    model.wardName = "";
+                }
+
+
+
+
+            }
+
+            return model;
+        }
+
+
+        private SBALUserLocationMapView FillHouseDetailsViewModelforMap(HouseMaster data)
+        {
+
+            SBALUserLocationMapView model = new SBALUserLocationMapView();
             model.houseId = data.houseId;
             model.WardNo = data.WardNo;
             model.AreaId = data.AreaId;
