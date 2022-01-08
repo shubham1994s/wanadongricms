@@ -106,8 +106,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 ViewBag.lat = SessionHandler.Current.Latitude;
                 ViewBag.lang = SessionHandler.Current.Logitude;
                 SBALUserLocationMapView obj = new SBALUserLocationMapView();
-                obj = childRepository.GetHouseByIdforMap(-1);          
-                return View(obj);
+
+                obj = childRepository.GetHouseByIdforMap(-1);
+                ViewBag.zonelist = obj.ZoneList;
+                ViewBag.ZoneId = "0";
+
+                //TempData["zonelist"] = obj.ZoneList;
+                //TempData["ZoneId"] = obj.ZoneId;
+                //TempData.Keep();
+                return View();
             }
             else
                 return Redirect("/Account/Login");
