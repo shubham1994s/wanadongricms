@@ -54,7 +54,7 @@ namespace SwachBharat.CMS.Bll.Services
         List<SBALUserLocationMapView> GetUserAttenRoute(int userId);
 
         //Added By Saurabh(11 July 2019)
-        List<SBALUserLocationMapView> GetHouseAttenRoute(int userId);
+        List<SBALUserLocationMapView> GetHouseAttenRoute(int userId,int areaid);
 
         GarbagePointDetailsVM GetGarbagePointDetails(int teamId);
         GarbagePointDetailsVM SaveGarbagePointDetails(GarbagePointDetailsVM data);

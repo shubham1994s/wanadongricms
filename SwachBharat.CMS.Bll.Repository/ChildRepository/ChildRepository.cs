@@ -192,9 +192,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         }
 
         //Added By Saurabh(11 July 2019)
-        public List<SBALUserLocationMapView> GetHouseAttenRoute(int daId)
+        public List<SBALUserLocationMapView> GetHouseAttenRoute(int daId,int areaid)
         {
-            return screenService.GetHouseAttenRoute(daId);
+            return screenService.GetHouseAttenRoute(daId,areaid);
         }
 
         public GarbagePointDetailsVM GetGarbagePointById(int teamId)
