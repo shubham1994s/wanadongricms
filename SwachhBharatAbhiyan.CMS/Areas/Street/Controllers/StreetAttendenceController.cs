@@ -112,13 +112,13 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
 
         }
 
-        public ActionResult HouseRouteData(int daId)
+        public ActionResult HouseRouteData(int daId,int areaid)
         {
             if (SessionHandler.Current.AppId != 0)
             {
 
                 List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
-                obj = childRepository.GetHouseAttenRoute(daId);
+                obj = childRepository.GetHouseAttenRoute(daId, areaid);
                 // return Json(obj);
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
