@@ -141,6 +141,11 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetHouseDetails(teamId);
         }
+
+        public SBALUserLocationMapView GetHouseByIdforMap(int teamId)
+        {
+            return screenService.GetHouseByIdforMap(teamId);
+        }
         public HouseDetailsVM SaveHouse(HouseDetailsVM data)
         {
             if (data.houseId <= 0)
