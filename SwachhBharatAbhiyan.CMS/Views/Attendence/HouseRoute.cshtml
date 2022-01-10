@@ -114,14 +114,62 @@
             </div>
         </div>
 
+
+
+
+
         <div class="row">
-            <div class="col col-md-12 text-center">
-                <h4 style="font-weight: 700;"><span>@Html.Label(Model.userName)</span>   <span>House Route</span> </h4>
+            <div class="col-md-2"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @*@Html.HiddenFor(Model=>Model.ZoneList.ToList(), new { Value = @ViewBag.zonelist })
+        @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
+                    @Html.Label("झोन / Zone")
+                    @Html.Label("Zone")
+                    @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopZone()"> + Add Zone </a>*@
+                    <div class="input-group time">
+                        @Html.DropDownListFor(model => model.ZoneId, Model.ZoneList, new { style = "font-family:Arial, FontAwesome;padding: 0px !important ;", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
+                        </div>
+                        <span class="text-danger" id="err_zone"></span>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    @Html.Label("वार्ड क्रमांक / Ward No")
+                    @*@Html.Label("Ward / Prabhag")*@
+                    @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopWard()"> + Add Ward </a>*@
+                    <div class="input-group time">
+                        @Html.DropDownListFor(model => model.WardNo, Model.WardList, new { style = "font-family:Arial, FontAwesome;padding: 0px !important ;", @class = "form-control RequiredInput validate[required] RequiredInput" })
+                        @*@Html.ValidationMessageFor(model => model.WardNo, "", new { @class = "text-danger" })*@
+                        </div>
+                        <span class="text-danger" id="err_ward"></span>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.Label("क्षेत्र / Area")
+                    @Html.Label("Area")
+                    @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopArea()"> + Add Area </a>*@
+                    <div class="input-group time">
+                        @Html.DropDownListFor(model => model.AreaId, Model.AreaList, new { style = "font-family:Arial, FontAwesome;padding: 0px !important ;", @class = "form-control RequiredInput validate[required] RequiredInput" })
+                        @Html.ValidationMessageFor(model => model.AreaId, "", new { @class = "text-danger" })
+                        </div>
+                        <span class="text-danger" id="err_area"></span>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+
+            <div class="col-md-1">
+                <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
+                    <a style="margin-top:22px;color:#fff;" class="btn btn-sm btn-success" onclick="AreaSearch()">Search</a>
+                </div>
             </div>
         </div>
-
         <div class="row" style="margin-top:5px">
-            <div class="col-sm-3"></div>
+            <div class="col-sm-2"></div>
             <div class="col-sm-3">
                 <div class="form-group">
                     <label for="">From Pin</label>
@@ -148,14 +196,14 @@
             <div class="col-sm-1">
 
                 <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
-                    <a style="margin-top:22px" class="btn btn-sm btn-success" onclick="Search()">Search</a>
+                    <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="Search()">Search</a>
                 </div>
 
             </div>
             <div class="col-sm-1">
 
                 <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
-                    <a style="margin-top:22px" class="btn btn-sm btn-success" onclick="Reset()">Reset</a>
+                    <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="Reset()">Reset</a>
                 </div>
 
             </div>
@@ -166,55 +214,6 @@
             </div>
 
         </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    @*@Html.HiddenFor(Model=>Model.ZoneList.ToList(), new { Value = @ViewBag.zonelist })
-                    @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
-                    @Html.Label("झोन / Zone")
-                    @Html.Label("Zone")
-                    @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopZone()"> + Add Zone </a>*@
-
-                    @Html.DropDownListFor(model => model.ZoneId, Model.ZoneList, new { style = "font-family:Arial, FontAwesome;padding: 0px !important ;", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
-
-                    <span class="text-danger" id="err_zone"></span>
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-
-                <div class="form-group">
-                    @Html.Label("वार्ड क्रमांक / Ward No")
-                    @*@Html.Label("Ward / Prabhag")*@
-                    @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopWard()"> + Add Ward </a>*@
-
-                    @Html.DropDownListFor(model => model.WardNo, Model.WardList, new { style = "font-family:Arial, FontAwesome;padding: 0px !important ;", @class = "form-control RequiredInput validate[required] RequiredInput" })
-                    @*@Html.ValidationMessageFor(model => model.WardNo, "", new { @class = "text-danger" })*@
-                    <span class="text-danger" id="err_ward"></span>
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    @Html.Label("क्षेत्र / Area")
-                    @Html.Label("Area")
-                    @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopArea()"> + Add Area </a>*@
-
-                    @Html.DropDownListFor(model => model.AreaId, Model.AreaList, new { style = "font-family:Arial, FontAwesome;padding: 0px !important ;", @class = "form-control RequiredInput validate[required] RequiredInput" })
-                    @Html.ValidationMessageFor(model => model.AreaId, "", new { @class = "text-danger" })
-                    <span class="text-danger" id="err_area"></span>
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
-                    <a style="margin-top:22px" class="btn btn-sm btn-success" onclick="AreaSearch()">Search</a>
-                </div>
-            </div>
-        </div>
-
     </div>
     <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
         <a style="margin-left:5px" class="btn btn-sm btn-success" href="/Attendence/Index">Back</a>
@@ -224,7 +223,7 @@
     <div class="container ">
         <div class="row">
 
-            <div class="col-10 bg-white has-shadow" id="googleMap" style="width:auto; height:600px"></div>
+            <div class="col-12 bg-white has-shadow" id="googleMap" style="width:auto; height:600px"></div>
             <div class="col-sm-2"></div>
         </div>
     </div>
@@ -327,6 +326,9 @@
             var to = "";
             document.getElementById("frompin").value = "";
             document.getElementById("topin").value = "";
+            document.getElementById("ZoneId").value = "0";
+            document.getElementById("WardNo").value = "0";
+            document.getElementById("AreaId").value = "0";
             myMap(from, to)
         }
         function myMap() {
@@ -344,6 +346,7 @@
                 controlUI.style.cursor = 'pointer';
                 controlUI.style.marginBottom = '22px';
                 controlUI.style.marginTop = '5px';
+                controlUI.style.marginLeft = '30%';
                 // controlUI.style.textAlign = 'center';
                 controlDiv.appendChild(controlUI);
 
@@ -423,7 +426,7 @@
                         centerControlDivPause.index = 1;
                         //centerControlDiv.style.left = '90%';
                         centerControlDiv.id = "play_id";
-                        centerControlDivPause.style.left = '80%';
+                        centerControlDivPause.style.left = '90%';
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
 
