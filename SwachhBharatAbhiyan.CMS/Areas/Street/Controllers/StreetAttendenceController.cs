@@ -105,7 +105,9 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 ViewBag.daId = daId;
                 ViewBag.lat = SessionHandler.Current.Latitude;
                 ViewBag.lang = SessionHandler.Current.Logitude;
-                return View();
+                SBALUserLocationMapView obj = new SBALUserLocationMapView();
+                obj = childRepository.GetHouseByIdforMap(-1, daId);
+                return View(obj);
             }
             else
                 return Redirect("/Account/Login");
