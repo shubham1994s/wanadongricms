@@ -208,6 +208,11 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetLiquidAttenRoute(daId, areaid);
         }
 
+        public List<SBALUserLocationMapView> GetStreetAttenRoute(int daId, int areaid)
+        {
+            return screenService.GetStreetAttenRoute(daId, areaid);
+        }
+
         public GarbagePointDetailsVM GetGarbagePointById(int teamId)
         {
             return screenService.GetGarbagePointDetails(teamId);
