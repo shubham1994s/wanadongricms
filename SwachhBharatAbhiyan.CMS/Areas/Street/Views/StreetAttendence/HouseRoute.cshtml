@@ -421,17 +421,81 @@
 
 
                             var data = markers[i]
+                            if (data.type == 1) {
+                                (function (marker, data) {
+                                    if (data.WasteType == "5") {
+                                        col = '|f542e6|FFFFFF'
+                                    }
+                                })(marker, data);
+                            }
+                            if (data.HouseId != null) {
+                                var a = i + 1;
+                                if (from == "" && to == "") {
+                                    // Get Address from server
+                                    var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                    lat_lng.push(myLatlng);
+                                    var marker = new google.maps.Marker({
+                                        position: myLatlng,
+                                        map: map,
+                                        title: data.Username,
+                                        icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                    });
+                                }
+                                else {
+                                    if (a >= from && a <= to) {
+                                        // Get Address from server
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        lat_lng.push(myLatlng);
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng,
+                                            map: map,
+                                            title: data.Username,
+                                            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                        });
+                                    }
+                                    else {
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        //lat_lng.push(myLatlng);
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng
+                                        });
+                                    }
+                                }
 
-                            var a = i + 1;
-                            // Get Address from server
-                            var myLatlng = new google.maps.LatLng(data.lat, data.log);
-                            lat_lng.push(myLatlng);
-                            var marker = new google.maps.Marker({
-                                position: myLatlng,
-                                map: map,
-                                title: data.Username,
-                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|FF0000|000000'
-                            });
+
+
+                            }
+                            else if (data.DyId != null) {
+                                var a = "D";
+                                // Get Address from server
+                                var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                lat_lng.push(myLatlng);
+                                var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Dump_Yard_marker.png";
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    map: map,
+                                    title: data.Username,
+
+                                    /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                                    /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                                    /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                                    icon: {
+                                        // labelOrigin: new google.maps.Point(16, 65),
+                                        url: mUrl
+                                    }
+                                });
+                            }
+
+                            //var a = i + 1;
+                            //// Get Address from server
+                            //var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                            //lat_lng.push(myLatlng);
+                            //var marker = new google.maps.Marker({
+                            //    position: myLatlng,
+                            //    map: map,
+                            //    title: data.Username,
+                            //    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|FF0000|000000'
+                            //});
 
 
                             latlngbounds.extend(marker.position);
@@ -453,13 +517,29 @@
                                         data.vehcileNumber = '';
                                     }
 
-                                    google.maps.event.addListener(marker, "click", function (e) {
-                                        infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-                                        infoWindow.open(map, marker);
+                                    if (data.gpBeforImage == null) {
+                                        data.gpBeforImage = "https://img.icons8.com/ios/50/000000/add-image.png"
+                                    }
+                                    if (data.gpAfterImage == null) {
+                                        data.gpAfterImage = "https://img.icons8.com/ios/50/000000/add-image.png"
+                                    }
 
-                                        //animateCircle(poly,9);
-                                    });
+                                    if (data.HouseId != null) {
+                                        google.maps.event.addListener(marker, "click", function (e) {
+                                            infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>Street Sweeping Details:</b></h5><p><b>Street Sweeping-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Street Sweeping Address:</b>' + data.HouseAddress + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                            infoWindow.open(map, marker);
 
+                                            //animateCircle(poly,9);
+                                        });
+                                    }
+                                    else if (data.DyId != null) {
+                                        google.maps.event.addListener(marker, "click", function (e) {
+                                            infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + data.DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                            infoWindow.open(map, marker);
+
+                                            //animateCircle(poly,9);
+                                        });
+                                    }
                                 })(marker, data);
 
 
@@ -511,10 +591,33 @@
                         map.fitBounds(latlngbounds);
 
                         //***********ROUTING****************//
+                        //var lineSymbol = {
+                        //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                        //    scale: 5,
+                        //    strokeColor: '#388e3c',
+                        //};
+
+                        //***********ROUTING****************//
+                        var car = "M17.402,0H5.643C2.526,0,0,3.467,0,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759c3.116,0,5.644-2.527,5.644-5.644 V6.584C23.044,3.467,20.518,0,17.402,0z M22.057,14.188v11.665l-2.729,0.351v-4.806L22.057,14.188z M20.625,10.773 c-1.016,3.9-2.219,8.51-2.219,8.51H4.638l-2.222-8.51C2.417,10.773,11.3,7.755,20.625,10.773z M3.748,21.713v4.492l-2.73-0.349 V14.502L3.748,21.713z M1.018,37.938V27.579l2.73,0.343v8.196L1.018,37.938z M2.575,40.882l2.218-3.336h13.771l2.219,3.336H2.575z M19.328,35.805v-7.872l2.729-0.355v10.048L19.328,35.805z";
+
+                        /*old*/
+                        //var lineSymbol = {
+                        //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                        //    scale: 5,
+                        //    strokeColor: '#17e36f',
+                        //};
+                        /*new*/
+
                         var lineSymbol = {
-                            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                            scale: 5,
-                            strokeColor: '#388e3c',
+                            path: car,
+                            scale: .5,
+                            strokeColor: 'black',
+                            strokeWeight: .10,
+                            fillOpacity: 1,
+                            fillColor: '#ed281a',
+                            offset: '2%',
+                            transform: 'rotate(20 deg)',
+                            anchor: new google.maps.Point(10, 25)
                         };
 
                         //Initialize the Path Array

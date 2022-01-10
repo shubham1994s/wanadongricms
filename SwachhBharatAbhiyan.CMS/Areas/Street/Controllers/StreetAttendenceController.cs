@@ -120,7 +120,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             {
 
                 List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
-                obj = childRepository.GetHouseAttenRoute(daId, areaid);
+                obj = childRepository.GetStreetAttenRoute(daId, areaid);
                 // return Json(obj);
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
