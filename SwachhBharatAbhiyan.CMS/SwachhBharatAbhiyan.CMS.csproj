@@ -1655,6 +1655,7 @@
     <Content Include="Content\Custom\fontawesome\css\font-awesome.min.css" />
     <Content Include="Content\Custom\fontawesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Custom\fontawesome\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Custom\Heremap.js" />
     <Content Include="Content\Custom\HomeIndex.js" />
     <Content Include="Content\Custom\innerAddPlaces.js" />
     <Content Include="Content\Custom\innerEditPlaces.js" />
