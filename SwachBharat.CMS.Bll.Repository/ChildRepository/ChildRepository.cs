@@ -146,6 +146,12 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetHouseByIdforMap(teamId, daId);
         }
+
+        public SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType)
+        {
+            return screenService.GetLiquidByIdforMap(teamId, daId, EmpType);
+        }
+
         public HouseDetailsVM SaveHouse(HouseDetailsVM data)
         {
             if (data.houseId <= 0)
@@ -195,6 +201,11 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         public List<SBALUserLocationMapView> GetHouseAttenRoute(int daId,int areaid)
         {
             return screenService.GetHouseAttenRoute(daId,areaid);
+        }
+
+        public List<SBALUserLocationMapView> GetLiquidAttenRoute(int daId, int areaid)
+        {
+            return screenService.GetLiquidAttenRoute(daId, areaid);
         }
 
         public GarbagePointDetailsVM GetGarbagePointById(int teamId)

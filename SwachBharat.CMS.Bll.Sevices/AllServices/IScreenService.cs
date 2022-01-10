@@ -42,6 +42,7 @@ namespace SwachBharat.CMS.Bll.Services
 
         HouseDetailsVM GetHouseDetails(int teamId);
         SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId);
+        SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType);
         HouseDetailsVM SaveHouseDetails(HouseDetailsVM data);
          void DeletHouseDetails(int teamId);
 
@@ -55,6 +56,8 @@ namespace SwachBharat.CMS.Bll.Services
 
         //Added By Saurabh(11 July 2019)
         List<SBALUserLocationMapView> GetHouseAttenRoute(int userId,int areaid);
+
+        List<SBALUserLocationMapView> GetLiquidAttenRoute(int userId, int areaid);
 
         GarbagePointDetailsVM GetGarbagePointDetails(int teamId);
         GarbagePointDetailsVM SaveGarbagePointDetails(GarbagePointDetailsVM data);

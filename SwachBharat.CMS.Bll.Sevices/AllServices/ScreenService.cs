@@ -675,6 +675,85 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+
+        public SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType)
+        {
+            try
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.HouseQRCode + "/";
+                SBALUserLocationMapView house = new SBALUserLocationMapView();
+
+                var Details = db.HouseMasters.Where(x => x.houseId == teamId).FirstOrDefault();
+                if (Details != null)
+                {
+                   
+                    house = FillHouseDetailsViewModelforMap(Details);
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId & x.EmployeeType== EmpType).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId & x.EmployeeType == EmpType).FirstOrDefault();
+                    house.userName = user.userName;
+                    if (house.houseQRCode != null && house.houseQRCode != "")
+                    {
+                        HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(ThumbnaiUrlCMS + house.houseQRCode.Trim());
+                        HttpWebResponse httpRes = null;
+                        try
+                        {
+                            httpRes = (HttpWebResponse)httpReq.GetResponse(); // Error 404 right here,
+                            if (httpRes.StatusCode == HttpStatusCode.NotFound)
+                            {
+                                house.houseQRCode = "/Images/default_not_upload.png";
+                            }
+                            else
+                            {
+                                house.houseQRCode = ThumbnaiUrlCMS + house.houseQRCode.Trim();
+                            }
+                        }
+                        catch (Exception e) { house.houseQRCode = "/Images/default_not_upload.png"; }
+
+                    }
+                    else
+                    {
+                        house.houseQRCode = "/Images/default_not_upload.png";
+                    }
+
+                    house.WardList = LoadListWardNo(Convert.ToInt32(house.ZoneId)); //ListWardNo();
+                    house.AreaList = LoadListArea(Convert.ToInt32(house.WardNo)); //ListArea();
+                    house.ZoneList = ListZone();
+                    return house;
+                }
+
+
+                else
+                {
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId).FirstOrDefault();
+                    house.userName = user.userName;
+
+                    var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "HPSBA" + (number + id + 1);
+                    house.ReferanceId = refer;
+                    house.houseQRCode = "/Images/QRcode.png";
+                    house.WardList = ListWardNo();
+                    house.AreaList = ListArea();
+                    house.ZoneList = ListZone();
+                    house.houseId = id;
+                    return house;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public HouseDetailsVM SaveHouseDetails(HouseDetailsVM data)
         {
             try
@@ -1920,6 +1999,195 @@ namespace SwachBharat.CMS.Bll.Services
 
             }
           
+
+
+
+            return userLocation;
+        }
+
+        public List<SBALUserLocationMapView> GetLiquidAttenRoute(int daId, int areaid)
+        {
+            List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
+            DateTime newdate = DateTime.Now.Date;
+            var datt = newdate;
+            var att = db.Daily_Attendance.Where(c => c.daID == daId).FirstOrDefault();
+            string Time = att.startTime;
+            DateTime date = DateTime.Parse(Time, System.Globalization.CultureInfo.CurrentCulture);
+            string t = date.ToString("hh:mm:ss tt");
+            string dt = Convert.ToDateTime(att.daDate).ToString("MM/dd/yyyy");
+            DateTime? fdate = Convert.ToDateTime(dt + " " + t);
+            DateTime? edate;
+            if (att.endTime == "" | att.endTime == null)
+            {
+                edate = DateTime.Now;
+            }
+            else
+            {
+                string Time2 = att.endTime;
+                DateTime date2 = DateTime.Parse(Time2, System.Globalization.CultureInfo.CurrentCulture);
+                string t2 = date2.ToString("hh:mm:ss tt");
+                string dt2 = Convert.ToDateTime(att.daEndDate).ToString("MM/dd/yyyy");
+                edate = Convert.ToDateTime(dt2 + " " + t2);
+            }
+            var data = db.Locations.Where(c => c.userId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == 1).OrderByDescending(a => a.datetime).ToList();
+
+            foreach (var x in data)
+            {
+                if (x.type == 1)
+                {
+
+                    // string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    //string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    var userName = db.UserMasters.Where(c => c.userId == att.userId).FirstOrDefault();
+                    //var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & c.houseId != null) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).FirstOrDefault();
+
+                    //var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & c.houseId != null) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcDate).ToList();//.ToList();
+
+                    var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & (c.LWId != null || c.dyId != null)) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcId).ToList();//.ToList();
+
+
+                    foreach (var d in gcd)
+                    {
+                        //DateTime dt = DateTime.Parse(x.gcDate == null ? DateTime.Now.ToString() : x.gcDate.ToString());
+                        string dat = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy");
+                        string tim = Convert.ToDateTime(d.gcDate).ToString("hh:mm tt");
+                        if (d.LWId != null)
+                        {
+                            if (areaid != 0)
+                            {
+                                var house = db.LiquidWasteDetails.Where(c => c.LWId == d.LWId & c.areaId == areaid).FirstOrDefault();
+                                if (house != null)
+                                {
+                                    userLocation.Add(new SBALUserLocationMapView()
+                                    {
+                                        userName = userName.userName,
+                                        date = dat,
+                                        time = tim,
+                                        lat = d.Lat,
+                                        log = d.Long,
+                                        address = x.address,
+                                        vehcileNumber = att.vehicleNumber,
+                                        userMobile = userName.userMobileNumber,
+                                        type = Convert.ToInt32(x.type),
+                                        HouseId = house.ReferanceId,
+                                        HouseAddress = (house.LWAddreLW == null ? "" : house.LWAddreLW.Replace("Unnamed Road, ", "")),
+                                        HouseOwnerName = house.LWName,
+                                        //OwnerMobileNo = house.houseOwnerMobile,
+                                        WasteType = d.gcType.ToString(),
+                                        gpBeforImage = d.gpBeforImage,
+                                        gpAfterImage = d.gpAfterImage,
+                                        ZoneList = ListZone(),
+
+                                    });
+                                }
+
+                            }
+                            else
+                            {
+                                var house = db.LiquidWasteDetails.Where(c => c.LWId == d.LWId).FirstOrDefault();
+                                userLocation.Add(new SBALUserLocationMapView()
+                                {
+                                    userName = userName.userName,
+                                    date = dat,
+                                    time = tim,
+                                    lat = d.Lat,
+                                    log = d.Long,
+                                    address = x.address,
+                                    vehcileNumber = att.vehicleNumber,
+                                    userMobile = userName.userMobileNumber,
+                                    type = Convert.ToInt32(x.type),
+                                    HouseId = house.ReferanceId,
+                                    HouseAddress = (house.LWAddreLW == null ? "" : house.LWAddreLW.Replace("Unnamed Road, ", "")),
+                                    HouseOwnerName = house.LWName,
+                                    //OwnerMobileNo = house.houseOwnerMobile,
+                                    WasteType = d.gcType.ToString(),
+                                    gpBeforImage = d.gpBeforImage,
+                                    gpAfterImage = d.gpAfterImage,
+                                    ZoneList = ListZone(),
+
+                                });
+                            }
+
+
+                        }
+                        if (d.dyId != null)
+                        {
+                            if (areaid != 0)
+                            {
+                                var dump = db.DumpYardDetails.Where(c => c.dyId == d.dyId & c.areaId == areaid).FirstOrDefault();
+                                if (dump != null)
+                                {
+                                    userLocation.Add(new SBALUserLocationMapView()
+                                    {
+                                        userName = userName.userName,
+                                        date = dat,
+                                        time = tim,
+                                        lat = d.Lat,
+                                        log = d.Long,
+                                        address = x.address,
+                                        vehcileNumber = att.vehicleNumber,
+                                        userMobile = userName.userMobileNumber,
+                                        type = Convert.ToInt32(x.type),
+                                        DyId = dump.ReferanceId,
+                                        DumpAddress = (dump.dyAddress == null ? "" : dump.dyAddress.Replace("Unnamed Road, ", "")),
+                                        DumpYardName = dump.dyName,
+                                        OwnerMobileNo = dump.dyNameMar,
+                                        WasteType = d.garbageType.ToString(),
+                                        gpBeforImage = d.gpBeforImage,
+                                        gpAfterImage = d.gpAfterImage,
+                                        DryWaste = d.totalDryWeight.ToString(),
+                                        WetWaste = d.totalWetWeight.ToString(),
+                                        TotWaste = d.totalGcWeight.ToString(),
+                                        ZoneList = ListZone(),
+
+                                    });
+                                }
+
+                            }
+                            else
+                            {
+                                var dump = db.DumpYardDetails.Where(c => c.dyId == d.dyId).FirstOrDefault();
+                                userLocation.Add(new SBALUserLocationMapView()
+                                {
+                                    userName = userName.userName,
+                                    date = dat,
+                                    time = tim,
+                                    lat = d.Lat,
+                                    log = d.Long,
+                                    address = x.address,
+                                    vehcileNumber = att.vehicleNumber,
+                                    userMobile = userName.userMobileNumber,
+                                    type = Convert.ToInt32(x.type),
+                                    DyId = dump.ReferanceId,
+                                    DumpAddress = (dump.dyAddress == null ? "" : dump.dyAddress.Replace("Unnamed Road, ", "")),
+                                    DumpYardName = dump.dyName,
+                                    OwnerMobileNo = dump.dyNameMar,
+                                    WasteType = d.garbageType.ToString(),
+                                    gpBeforImage = d.gpBeforImage,
+                                    gpAfterImage = d.gpAfterImage,
+                                    DryWaste = d.totalDryWeight.ToString(),
+                                    WetWaste = d.totalWetWeight.ToString(),
+                                    TotWaste = d.totalGcWeight.ToString(),
+                                    ZoneList = ListZone(),
+
+                                });
+                            }
+
+
+                        }
+
+
+
+
+
+
+
+                    }
+                    break;
+                }
+
+            }
+
 
 
 
