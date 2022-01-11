@@ -388,11 +388,13 @@
     <Content Include="Areas\Liquid\Content\images\img\marker24.png" />
     <Content Include="Areas\Liquid\Content\images\img\sba.png" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\CMS_AppLink.png" />
+    <Content Include="Areas\Liquid\Content\images\img\segregationImg\Dump_Yard_marker.png" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\icn_garbage_not_recevied.png" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\icn_house.png" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\icn_mixed_garbage.png" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\icn_not_specified.png" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\icn_segregated_garbage.png" />
+    <Content Include="Areas\Liquid\Content\images\img\segregationImg\Liquid_Waste_marker.png" />
     <Content Include="Areas\Liquid\Content\images\img\street_icon.png" />
     <Content Include="Areas\Liquid\Content\images\img\street_icon.svg" />
     <Content Include="Areas\Liquid\Content\images\iphone.png" />
@@ -938,6 +940,7 @@
     <Content Include="Areas\Street\Content\images\img\marker24.png" />
     <Content Include="Areas\Street\Content\images\img\sba.png" />
     <Content Include="Areas\Street\Content\images\img\segregationImg\CMS_AppLink.png" />
+    <Content Include="Areas\Street\Content\images\img\segregationImg\Dump_Yard_marker.png" />
     <Content Include="Areas\Street\Content\images\img\segregationImg\icn_garbage_not_recevied.png" />
     <Content Include="Areas\Street\Content\images\img\segregationImg\icn_house.png" />
     <Content Include="Areas\Street\Content\images\img\segregationImg\icn_mixed_garbage.png" />
