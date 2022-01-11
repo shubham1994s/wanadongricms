@@ -76,7 +76,9 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
             if (SessionHandler.Current.AppId != 0)
             {
                 ViewBag.daId = daId;
-                return View();
+                SBALUserLocationMapView obj = new SBALUserLocationMapView();
+                obj = childRepository.GetHouseByIdforMap(-1, daId);
+                return View(obj);
             }
             else
                 return Redirect("/Account/Login");
