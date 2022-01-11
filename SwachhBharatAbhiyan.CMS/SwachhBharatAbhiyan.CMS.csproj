@@ -394,6 +394,7 @@
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\icn_mixed_garbage.png" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\icn_not_specified.png" />
     <Content Include="Areas\Liquid\Content\images\img\segregationImg\icn_segregated_garbage.png" />
+    <Content Include="Areas\Liquid\Content\images\img\segregationImg\Liquid_Waste_marker.png" />
     <Content Include="Areas\Liquid\Content\images\img\street_icon.png" />
     <Content Include="Areas\Liquid\Content\images\img\street_icon.svg" />
     <Content Include="Areas\Liquid\Content\images\iphone.png" />
