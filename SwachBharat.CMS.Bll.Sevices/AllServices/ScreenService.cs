@@ -1871,6 +1871,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 {
                                     userLocation.Add(new SBALUserLocationMapView()
                                     {
+                                        userId = userName.userId,
                                         userName = userName.userName,
                                         date = dat,
                                         time = tim,
@@ -1898,6 +1899,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 var house = db.HouseMasters.Where(c => c.houseId == d.houseId).FirstOrDefault();
                                 userLocation.Add(new SBALUserLocationMapView()
                                 {
+                                    userId = userName.userId,
                                     userName = userName.userName,
                                     date = dat,
                                     time = tim,
@@ -1930,6 +1932,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 {
                                     userLocation.Add(new SBALUserLocationMapView()
                                     {
+                                        userId = userName.userId,
                                         userName = userName.userName,
                                         date = dat,
                                         time = tim,
@@ -1960,6 +1963,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 var dump = db.DumpYardDetails.Where(c => c.dyId == d.dyId).FirstOrDefault();
                                 userLocation.Add(new SBALUserLocationMapView()
                                 {
+                                    userId = userName.userId,
                                     userName = userName.userName,
                                     date = dat,
                                     time = tim,
