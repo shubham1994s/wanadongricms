@@ -561,7 +561,7 @@
                                         }
                                     }
                                     else if (fromtime != "" && totime != "") {
-                                        if (data.datetime >= fromtime) {
+                                        if (data.datetime >= fromtime && data.datetime <= totime) {
                                             // Get Address from server
                                             var myLatlng = new google.maps.LatLng(data.lat, data.log);
                                             lat_lng.push(myLatlng);
@@ -846,9 +846,7 @@
             }
 
             $(document).ready(function () {
-                $(".jquery-date-time-picker").datetimepicker({
-                    format: "m/d/y hh:mm:ss"
-                });
+                $(".jquery-date-time-picker").datetimepicker();
             });
         </script>
     <script>
