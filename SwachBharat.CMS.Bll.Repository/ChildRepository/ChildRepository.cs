@@ -572,7 +572,12 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetUserTimeWiseRoute(date,fTime, tTime, userId);
         }
 
-     
+        public List<SBALUserLocationMapView> GetHouseTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null)
+        {
+            return screenService.GetHouseTimeWiseRoute(date, fTime, tTime, userId);
+        }
+
+
     }
 }
 

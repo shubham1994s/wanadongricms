@@ -184,5 +184,7 @@ namespace SwachBharat.CMS.Bll.Services
 
         List<SBAEmplyeeIdelGrid> GetIdelTimeNotification();
         List<SBALUserLocationMapView> GetUserTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null);
+
+        List<SBALUserLocationMapView> GetHouseTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null);
     }
 }
