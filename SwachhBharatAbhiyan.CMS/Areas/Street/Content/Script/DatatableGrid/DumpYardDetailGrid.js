@@ -19,7 +19,7 @@
 
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
-        "order": [[13, "desc"]],
+        "order": [[12, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -39,12 +39,12 @@
             "searchable": false
         },
         {
-            "targets": [13],
+            "targets": [12],
             "visible": false,
             "searchable": false
         },
          {
-             "targets": [8],
+             "targets": [7],
              "visible": true,
 
              "render": function (data, type, full, meta) {
@@ -60,7 +60,7 @@
              },
          },
              {
-                 "targets": [9],
+                 "targets": [8],
                  "visible": true,
 
                  "render": function (data, type, full, meta) {
@@ -91,14 +91,14 @@
                      return Number(v).toFixed(2)
                  }
              },
-             {
-                 "targets": [12],
-                 "visible": true,
-                 "searchable": true,
-                 render(v) {
-                     return Number(v).toFixed(2)
-                 }
-             },
+             //{
+             //    "targets": [12],
+             //    "visible": true,
+             //    "searchable": true,
+             //    render(v) {
+             //        return Number(v).toFixed(2)
+             //    }
+             //},
 
         ],
 
@@ -110,7 +110,7 @@
               { "data": "UserName", "name": "UserName", "autoWidth": false },
               { "data": "Address", "name": "Address", "autoWidth": false },
               { "data": "VehicleNumber", "autoWidth": false },
-              { "data": "Note", "autoWidth": false },
+            /*  { "data": "Note", "autoWidth": false },*/
                 { "data": "gpBeforImage", "name": "gpBeforImage", "autoWidth": false },
                   { "data": "gpAfterImage", "gpAfterImage": "Address", "autoWidth": false },
               { "data": "totalGcWeight", "name": "totalGcWeight", "autoWidth": false },
