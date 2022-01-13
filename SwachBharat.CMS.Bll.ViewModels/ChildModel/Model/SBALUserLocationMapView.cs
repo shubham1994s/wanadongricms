@@ -10,6 +10,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
     {
         public int userId { get; set; }
         public string userName { get; set; }
+        public string datetime { get; set; }
         public string date { get; set; }
         public string time { get; set; }
         public string lat { get; set; }
