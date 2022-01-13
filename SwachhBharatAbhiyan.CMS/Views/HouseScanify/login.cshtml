@@ -272,35 +272,24 @@
                                     <h4 class="text-center" style=" margin-bottom: 5%; margin-top: 2%;color:#000;">ICT BASED MONITORING TECHNOLOGY</h4>
                                 </div>
                                 <div class="card-body bg-blue">
-                                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                                    @using (Html.BeginForm("Login", "HouseScanify", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         <div class="form d-flex align-items-center">
                                             <div class="content">
                                                 @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom:-15px;display:block;font-size:12px;" })
                                                 <h3 class="text-center" style=" margin-bottom: 5%; margin-top: -3%; font-weight: 800;">BIGV ADMIN LOGIN</h3>
-                                                <div class="form-group select">
-                                                    @Html.DropDownList("Type", new List<SelectListItem>
-                                                     {
-                                                       new SelectListItem { Text = "Waste Collection Monitoring Technology", Value = "W" },
-                                                       new SelectListItem { Text = "Street sweeping Monitoring System", Value = "S"},
-                                                       new SelectListItem { Text = "Liquid Waste Cleaning Monitoring System", Value = "L"}
-                                                       }, "Select Type", new { @class = "input-material", @id = "Type" })
-                                                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
-                                                </div>
+                                             
 
                                                 <div class="form-group">
                                                     @Html.TextBoxFor(m => m.Email, new { @class = "input-material", @id = "login-username", placeholder = "Username" })
-                                                    @*<label for="login-username" class="label-material">यूजर नेम</label>*@
-                                                    @*<label for="login-username" class="">User Name</label>*@
+
                                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
                                                 </div>
 
                                                 <div class="form-group">
                                                     @Html.PasswordFor(m => m.Password, new { @class = "input-material ", @id = "login-password", placeholder = "Password" })
-                                                    <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; margin-right: 10px; cursor: pointer; color: #9a9b9d; "></i>
-                                                    @*<label for="login-password" class="label-material">पासवर्ड </label>*@
-                                                    @*<label for="login-password" class="">Password </label>*@
+                                                    <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer; color: #9a9b9d; "></i>
                                                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
                                                 </div>
                                                 @*<a id="login" href="index.html" class="btn btn-primary">Login</a>*@
