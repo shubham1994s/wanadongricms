@@ -120,11 +120,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
-              
+
                 List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
                 obj = childRepository.GetHouseAttenRoute(daId, areaid);
                 // return Json(obj);
-               
+
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
@@ -133,6 +133,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
         public ActionResult UserTimeWiseRouteData(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null)
+        
         {
             if (SessionHandler.Current.AppId != 0)
             {
