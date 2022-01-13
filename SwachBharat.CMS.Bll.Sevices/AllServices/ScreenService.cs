@@ -2065,7 +2065,7 @@ namespace SwachBharat.CMS.Bll.Services
                                     userLocation.Add(new SBALUserLocationMapView()
                                     {
                                         userName = userName.userName,
-                                        datetime = Convert.ToDateTime(d.gcDate).ToString("MM/dd/yy h:m:s"),
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd h:m"),
                                         date = dat,
                                         time = tim,
                                         lat = d.Lat,
@@ -2093,7 +2093,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 userLocation.Add(new SBALUserLocationMapView()
                                 {
                                     userName = userName.userName,
-                                    datetime = Convert.ToDateTime(d.gcDate).ToString("MM/dd/yy h:m:s"),
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd h:m"),
                                     date = dat,
                                     time = tim,
                                     lat = d.Lat,
@@ -2126,7 +2126,7 @@ namespace SwachBharat.CMS.Bll.Services
                                     userLocation.Add(new SBALUserLocationMapView()
                                     {
                                         userName = userName.userName,
-                                        datetime = Convert.ToDateTime(d.gcDate).ToString("MM/dd/yy h:m:s"),
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd h:m"),
                                         date = dat,
                                         time = tim,
                                         lat = d.Lat,
@@ -2157,7 +2157,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 userLocation.Add(new SBALUserLocationMapView()
                                 {
                                     userName = userName.userName,
-                                    datetime = Convert.ToDateTime(d.gcDate).ToString("MM/dd/yy h:m:s"),
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd h:m"),
                                     date = dat,
                                     time = tim,
                                     lat = d.Lat,
