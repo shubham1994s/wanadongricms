@@ -19,7 +19,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string SSName { get; set; }
         public string SSAddress { get; set; }
         public Nullable<int> garbageType { get; set; }
-        public Nullable<int> gcDate { get; set; }
+        public Nullable<System.DateTime> gcDate { get; set; }
         public string SSLat { get; set; }
         public string SSLong { get; set; }
     }
