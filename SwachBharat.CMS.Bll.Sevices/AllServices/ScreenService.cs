@@ -5460,6 +5460,71 @@ namespace SwachBharat.CMS.Bll.Services
             return userLocation;
         }
 
+        public List<SBALUserLocationMapView> GetHouseTimeWiseRoute(string adate = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null)
+        {
+            DateTime dateTime = new DateTime();
+            var dateAndTime = DateTime.Now;
+            var date = dateAndTime.Date;
+
+            DateTime firstdate = DateTime.ParseExact(adate,
+                                         "dd/MM/yyyy",
+                                         CultureInfo.InvariantCulture);
+
+            var firstDateString = firstdate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+           
+            string ft = Convert.ToDateTime(fTime).ToString("HH:mm:ss");
+            string tt = Convert.ToDateTime(tTime).ToString("HH:mm:ss");
+            DateTime fdate = Convert.ToDateTime(firstDateString + " " + ft);
+            DateTime tdate = Convert.ToDateTime(firstDateString + " " + tt);
+
+            //var data = db.Locations.Where(c => c.userId == userId & c.datetime >= fdate & c.datetime <= tdate & c.type == 1).ToList();
+            var data = db.GarbageCollectionDetails.Where(c => c.userId == userId & c.gcDate >= fdate & c.gcDate <= tdate).ToList();
+            List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
+            foreach (var x in data)
+            {
+                string dat = Convert.ToDateTime(x.gcDate).ToString("dd/MM/yyyy");
+                string tim = Convert.ToDateTime(x.gcDate).ToString("hh:mm tt");
+                var userName = db.UserMasters.Where(c => c.userId == userId).FirstOrDefault();
+                var house=db.HouseMasters.Where(h=>h.houseId == x.houseId).FirstOrDefault();
+                var d = db.GarbageCollectionDetails.Where(a => a.houseId == house.houseId).FirstOrDefault();
+                userLocation.Add(new SBALUserLocationMapView()
+                {
+                    //userName = userName.userName,
+                    //date = dat,
+                    //time = tim,
+                    //lat = x.lat,
+                    //log = x.@long,
+                    //address = checkNull(x.address).Replace("Unnamed Road, ", ""),
+                    //userMobile = userName.userMobileNumber,
+                    //// type = Convert.ToInt32(x.type),
+                    ///
+                    userId = userName.userId,
+                    userName = userName.userName,
+                    date = dat,
+                    time = tim,
+                    lat = d.Lat,
+                    log = d.Long,
+                    address = house.houseAddress,
+                    //vehcileNumber = att.vehicleNumber,
+                    userMobile = userName.userMobileNumber,
+                    type = 1,
+                    HouseId = house.ReferanceId,
+                    HouseAddress = (house.houseAddress == null ? "" : house.houseAddress.Replace("Unnamed Road, ", "")),
+                    HouseOwnerName = house.houseOwner,
+                    OwnerMobileNo = house.houseOwnerMobile,
+                    WasteType = d.garbageType.ToString(),
+                   gpBeforImage = d.gpBeforImage,
+                   gpAfterImage = d.gpAfterImage,
+                    ZoneList = ListZone(),
+
+                });
+
+            }
+
+
+            return userLocation;
+        }
+
         public DashBoardVM GetLiquidDashBoardDetails()
         {
             DashBoardVM model = new DashBoardVM();

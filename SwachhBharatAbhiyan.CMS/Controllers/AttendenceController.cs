@@ -146,6 +146,20 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         }
 
+        public ActionResult HouseTimeWiseRouteData(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                List<SBALUserLocationMapView> obj = new List<SBALUserLocationMapView>();
+                obj = childRepository.GetHouseTimeWiseRoute(date, fTime, tTime, userId);
+                // return Json(obj);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+
+        }
+
 
 
         //public ActionResult AttendanceCount(DateTime? fdate = null, DateTime? tdate = null, int userId = 0)
@@ -181,9 +195,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         //    else
         //        return Redirect("/Account/Login");
         //}
-       
 
-      
+
+
         public ActionResult LoadWardNoList(int ZoneId)
         {
             if (SessionHandler.Current.AppId != 0)
