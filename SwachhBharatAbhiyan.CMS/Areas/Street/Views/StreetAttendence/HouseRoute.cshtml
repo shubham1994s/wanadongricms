@@ -501,6 +501,8 @@
                         var infoWindow = new google.maps.InfoWindow();
                         var lat_lng = new Array();
                         var latlngbounds = new google.maps.LatLngBounds();
+                        var lastmarker = markers.length;
+
                         for (i = 0; i < markers.length; i++) {
 
 
@@ -515,6 +517,16 @@
                             }
                             if (data.HouseId != null) {
                                 var a = i + 1;
+                                if (a == 1) {
+                                    temicon = "../../Areas/Street/Content/images/img/segregationImg/Start-Point.png";
+                                }
+                                else if (a == lastmarker) {
+                                    temicon = "../../Areas/Street/Content/images/img/segregationImg/End_Point.png";
+                                }
+                                else {
+                                    temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                }
+
                                 if (fromtime == "" && totime == "") {
 
 
@@ -526,7 +538,10 @@
                                             position: myLatlng,
                                             map: map,
                                             title: data.Username,
-                                            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: temicon
+                                            }
                                         });
                                     }
                                     else {
@@ -538,7 +553,10 @@
                                                 position: myLatlng,
                                                 map: map,
                                                 title: data.Username,
-                                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                                icon: {
+                                                    // labelOrigin: new google.maps.Point(16, 65),
+                                                    url: temicon
+                                                }
                                             });
                                         }
                                         else {
@@ -559,7 +577,10 @@
                                             position: myLatlng,
                                             map: map,
                                             title: data.Username,
-                                            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: temicon
+                                            }
                                         });
                                     }
                                     else {
@@ -578,18 +599,21 @@
                                         position: myLatlng,
                                         map: map,
                                         title: data.Username,
-                                        icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                        icon: {
+                                            // labelOrigin: new google.maps.Point(16, 65),
+                                            url: temicon
+                                        }
                                     });
                                 }
 
 
                             }
-                            else if (data.DyId != null) {
+                            else if (data.SSId != null) {
                                 var a = "D";
                                 // Get Address from server
                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
                                 lat_lng.push(myLatlng);
-                                var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Dump_Yard_marker.png";
+                                var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Street_Sweep.png";
                                 var marker = new google.maps.Marker({
                                     position: myLatlng,
                                     map: map,

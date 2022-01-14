@@ -293,6 +293,7 @@
             });
         }
         function myMap() {
+            debugger;
 
             var from = document.getElementById("frompin").value;
             var to = document.getElementById("topin").value;
@@ -356,8 +357,8 @@
                 traditional: true,
                 success: function (m) {
                     // alert(m[0].date);
-                    $("#route_date").val(m[0].date);
-                    $("#userid").val(m[0].userId);
+                    //$("#route_date").val(m[0].date);
+                    //$("#userid").val(m[0].userId);
 
                     if (isSearch == 1) {
                         markers = searchData;
@@ -393,9 +394,13 @@
                         animateCircle(poly, 7);
                     });
 
+                    debugger;
+
                     var infoWindow = new google.maps.InfoWindow();
                     var lat_lng = new Array();
                     var latlngbounds = new google.maps.LatLngBounds();
+                    var lastmarker = markers.length;
+
 
                     for (i = 0; i < markers.length; i++) {
 
@@ -403,6 +408,15 @@
 
                         var data = markers[i]
                         var a = i + 1;
+                        if (a == 1) {
+                            temicon = "../../Areas/Liquid/Content/images/img/segregationImg/Start-Point.png";
+                        }
+                        else if (a == lastmarker) {
+                            temicon = "../../Areas/Liquid/Content/images/img/segregationImg/End_Point.png";
+                        }
+                        else {
+                            temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|0F7017|000000'
+                        }
                         // Get Address from server
 
                         //var myLatlng = new google.maps.LatLng(data.lat, data.log);
@@ -421,7 +435,10 @@
                                 position: myLatlng,
                                 map: map,
                                 title: data.Username,
-                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|0F7017|000000'
+                                icon: {
+                                    // labelOrigin: new google.maps.Point(16, 65),
+                                    url: temicon
+                                }
                             });
                         }
                         else {
@@ -432,7 +449,10 @@
                                     position: myLatlng,
                                     map: map,
                                     title: data.Username,
-                                    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|0F7017|000000'
+                                    icon: {
+                                        // labelOrigin: new google.maps.Point(16, 65),
+                                        url: temicon
+                                    }
                                 });
                             }
                             else {
@@ -499,25 +519,25 @@
 
                     //Old
 
-                    //var lineSymbol = {
-                    //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                    //    scale: 5,
-                    //    strokeColor: '#388e3c',
-                    //};
+                    var lineSymbol = {
+                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                        scale: 5,
+                        strokeColor: '#388e3c',
+                    };
 
                     //New
 
-                    var lineSymbol = {
-                        path: car,
-                        scale: .5,
-                        strokeColor: 'black',
-                        strokeWeight: .10,
-                        fillOpacity: 1,
-                        fillColor: '#ed281a',
-                        offset: '2%',
-                        transform: 'rotate(20 deg)',
-                        anchor: new google.maps.Point(10, 25)
-                    };
+                    //var lineSymbol = {
+                    //    path: car,
+                    //    scale: .5,
+                    //    strokeColor: 'black',
+                    //    strokeWeight: .10,
+                    //    fillOpacity: 1,
+                    //    fillColor: '#ed281a',
+                    //    offset: '2%',
+                    //    transform: 'rotate(20 deg)',
+                    //    anchor: new google.maps.Point(10, 25)
+                    //};
 
                     //Initialize the Path Array
                     var path = new google.maps.MVCArray();
@@ -590,7 +610,6 @@
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap" type="text/javascript"></script>
-
 
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js'></script>

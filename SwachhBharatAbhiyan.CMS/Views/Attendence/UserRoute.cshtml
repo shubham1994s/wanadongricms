@@ -398,6 +398,7 @@
                     var infoWindow = new google.maps.InfoWindow();
                     var lat_lng = new Array();
                     var latlngbounds = new google.maps.LatLngBounds();
+                    var lastmarker = markers.length - 1;
 
                     for (i = 0; i < markers.length; i++) {
 
@@ -405,6 +406,15 @@
 
                         var data = markers[i]
                         var a = i + 1;
+                        if (a == 1) {
+                            temicon = "../Content/images/img/segregationImg/Start-Point.png";
+                        }
+                        else if (a == lastmarker) {
+                            temicon = "../Content/images/img/segregationImg/End_Point.png";
+                        }
+                        else {
+                            temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|FF0000|000000'
+                        }
                         // Get Address from server
                         if (from == "" && to == "") {
                             var myLatlng = new google.maps.LatLng(data.lat, data.log);
@@ -413,7 +423,10 @@
                                 position: myLatlng,
                                 map: map,
                                 title: data.Username,
-                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|FF0000|000000'
+                                icon: {
+                                    // labelOrigin: new google.maps.Point(16, 65),
+                                    url: temicon
+                                }
                             });
                         }
                         else {
@@ -424,7 +437,10 @@
                                     position: myLatlng,
                                     map: map,
                                     title: data.Username,
-                                    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|FF0000|000000'
+                                    icon: {
+                                        // labelOrigin: new google.maps.Point(16, 65),
+                                        url: temicon
+                                    }
                                 });
                             }
                             else {
@@ -492,25 +508,25 @@
 
                     //Old
 
-                    //var lineSymbol = {
-                    //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                    //    scale: 5,
-                    //    strokeColor: '#388e3c',
-                    //};
+                    var lineSymbol = {
+                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                        scale: 5,
+                        strokeColor: '#388e3c',
+                    };
 
                     //New
 
-                    var lineSymbol = {
-                        path: car,
-                        scale: .5,
-                        strokeColor: 'black',
-                        strokeWeight: .10,
-                        fillOpacity: 1,
-                        fillColor: '#ed281a',
-                        offset: '2%',
-                        transform: 'rotate(20 deg)',
-                        anchor: new google.maps.Point(10, 25)
-                    };
+                    //var lineSymbol = {
+                    //    path: car,
+                    //    scale: .5,
+                    //    strokeColor: 'black',
+                    //    strokeWeight: .10,
+                    //    fillOpacity: 1,
+                    //    fillColor: '#ed281a',
+                    //    offset: '2%',
+                    //    transform: 'rotate(20 deg)',
+                    //    anchor: new google.maps.Point(10, 25)
+                    //};
 
                     //Initialize the Path Array
                     var path = new google.maps.MVCArray();

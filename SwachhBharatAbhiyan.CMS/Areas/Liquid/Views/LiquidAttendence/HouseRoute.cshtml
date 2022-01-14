@@ -477,7 +477,8 @@
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         });
 
-                    } else {
+                    }
+                    else {
                         var mapOptions = {
                             center: new google.maps.LatLng(markers[0].lat, markers[0].log),
                             zoom: 10,
@@ -509,6 +510,8 @@
                         var infoWindow = new google.maps.InfoWindow();
                         var lat_lng = new Array();
                         var latlngbounds = new google.maps.LatLngBounds();
+                        var lastmarker = markers.length;
+
                         for (i = 0; i < markers.length; i++) {
 
 
@@ -524,6 +527,15 @@
                             }
                             if (data.HouseId != null) {
                                 var a = i + 1;
+                                if (a == 1) {
+                                    temicon = "../../Areas/Liquid/Content/images/img/segregationImg/Start-Point.png";
+                                }
+                                else if (a == lastmarker) {
+                                    temicon = "../../Areas/Liquid/Content/images/img/segregationImg/End_Point.png";
+                                }
+                                else {
+                                    temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                }
                                 if (fromtime == "" && totime == "") {
 
 
@@ -535,7 +547,10 @@
                                             position: myLatlng,
                                             map: map,
                                             title: data.Username,
-                                            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: temicon
+                                            }
                                         });
                                     }
                                     else {
@@ -547,7 +562,10 @@
                                                 position: myLatlng,
                                                 map: map,
                                                 title: data.Username,
-                                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                                icon: {
+                                                    // labelOrigin: new google.maps.Point(16, 65),
+                                                    url: temicon
+                                                }
                                             });
                                         }
                                         else {
@@ -568,7 +586,10 @@
                                             position: myLatlng,
                                             map: map,
                                             title: data.Username,
-                                            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: temicon
+                                            }
                                         });
                                     }
                                     else {
@@ -587,18 +608,21 @@
                                         position: myLatlng,
                                         map: map,
                                         title: data.Username,
-                                        icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                        icon: {
+                                            // labelOrigin: new google.maps.Point(16, 65),
+                                            url: temicon
+                                        }
                                     });
                                 }
 
 
                             }
-                            else if (data.DyId != null) {
+                            else if (data.LWId != null) {
                                 var a = "D";
                                 // Get Address from server
                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
                                 lat_lng.push(myLatlng);
-                                var mUrl = "../../Areas/Liquid/Content/images/img/segregationImg/Dump_Yard_marker.png";
+                                var mUrl = "../../Areas/Liquid/Content/images/img/segregationImg/Liquidwaste_Marker.png";
                                 var marker = new google.maps.Marker({
                                     position: myLatlng,
                                     map: map,

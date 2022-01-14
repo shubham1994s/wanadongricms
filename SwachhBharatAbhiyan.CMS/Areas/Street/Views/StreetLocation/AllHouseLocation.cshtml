@@ -113,6 +113,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="~/Content/css/datepicker/css/datepicker.css" rel="stylesheet" />
+    <link href="/Areas/Street/Content/theme-assets/css/MyCustom.css" rel="stylesheet">
     <link href="~/Content/css/index_style.css" rel="stylesheet" />
 
     <div class="container">
@@ -350,10 +351,10 @@
                     $('#selectWard').html(district);
                 }
             });
-            $('input[type=radio][name=radio]').change(function() {
+            $('input[type=radio][name=radio]').change(function () {
                 myMap();
             })
-           // for loading ward wise area
+            // for loading ward wise area
             $('#selectWard').change(function () {
                 var selectedText = $(this).find("option:selected").text();
                 var selectedValue = $(this).val();
@@ -375,24 +376,24 @@
 
             });
 
-                $.ajax({
-                    type: "post",
-                    url: "/StreetLocation/UserList?rn=S",
-                    data: { stateId: $('#ddlState').val() },
-                    datatype: "json",
-                    traditional: true,
-                    success: function (data) {
-                        district = '<option value="-1">Select Employee</option>';
-                        for (var i = 0; i < data.length; i++) {
-                            district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
-                        }
-                        //district = district + '</select>';
-                        $('#selectnumber').html(district);
+            $.ajax({
+                type: "post",
+                url: "/StreetLocation/UserList?rn=S",
+                data: { stateId: $('#ddlState').val() },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    district = '<option value="-1">Select Employee</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
                     }
-                });
+                    //district = district + '</select>';
+                    $('#selectnumber').html(district);
+                }
             });
-                //User Wise Location
-            // All User On Map
+        });
+        //User Wise Location
+        // All User On Map
         function myMap() {
             var RadioValue = $("input[name='radio']:checked").val();
             if (RadioValue == 0) {
@@ -407,143 +408,141 @@
                 $('#selectnumber').prop('disabled', false);
                 $('#seg_type').prop('disabled', false);
             }
-                $("#wait").css("display", "block");
-                $("#googleMap").css("display", "none");
-                $.ajax({
-                    type: "post",
-                    //url: "/LiquidLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() +  "&garbageType=" + $("#seg_type").val() + "&FilterType=" + RadioValue,
-                    url: "/StreetLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() + "&FilterType=" + RadioValue,
-                    //url: "/Location/HouseLocationList",
-                    datatype: "json",
-                    traditional: true,
-                    success: function (data) {
-                        $("#wait").css("display", "none");
-                        $("#googleMap").css("display", "block");
-                        if (data.length == 0)
-                            $('#\\#myModal').modal('show');
-                        debugger;
-                        {
-                            var map = new google.maps.Map(document.getElementById('googleMap'), {
-                                zoom: 12,
-                                center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
-                                mapTypeId: google.maps.MapTypeId.ROADMAP
-                            });
-
-                        }
+            $("#wait").css("display", "block");
+            $("#googleMap").css("display", "none");
+            $.ajax({
+                type: "post",
+                //url: "/LiquidLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() +  "&garbageType=" + $("#seg_type").val() + "&FilterType=" + RadioValue,
+                url: "/StreetLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() + "&FilterType=" + RadioValue,
+                //url: "/Location/HouseLocationList",
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    $("#wait").css("display", "none");
+                    $("#googleMap").css("display", "block");
+                    if (data.length == 0)
+                        $('#\\#myModal').modal('show');
+                    debugger;
+                    {
                         var map = new google.maps.Map(document.getElementById('googleMap'), {
-
-                            center: new google.maps.LatLng(data[0].houseLat, data[0].houseLong),
+                            zoom: 12,
+                            center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         });
 
-                        var infowindow = new google.maps.InfoWindow();
-                        bounds = new google.maps.LatLngBounds();
-                        var marker, i;
-                       // alert(data.length);
-                        // Get Addres
-                        var gar_type;
-                        for (i = 0; i < data.length; i++)
+                    }
+                    var map = new google.maps.Map(document.getElementById('googleMap'), {
 
-                        {
-                            if (data[i].houseOwnerName == null ) {
-                                data[i].houseOwnerName = 'Not Available';
-                            }
-                            if ( data[i].houseOwnerMobile == null ) {
-                                data[i].houseOwnerMobile = '';
-                            }
-                            if (data[i].houseAddress == null) {
-                                data[i].houseAddress = '';
-                            }
-                            gar_type = data[i].garbageType
+                        center: new google.maps.LatLng(data[0].houseLat, data[0].houseLong),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
 
-                 /*          var mUrl = "http://localhost:34557/Content/images/img/segregationImg/icn_house.png";*/
-                            var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Street_Sweepper_marker.png";
-                            switch (gar_type) {
-
-                                case 0:
-                                      mUrl =  "../../Areas/Street/Content/images/img/segregationImg/icn_mixed_garbage.png"
-                                    break;
-                                case 1:
-                                    mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_segregated_garbage.png"
-                                    break;
-                                case 2:
-                                    mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_garbage_not_recevied.png"
-                                    break;
-                                case 3:
-                                    mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_not_specified.png"
-                                    break;
-                            }
-
-
-                            marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(data[i].houseLat, data[i].houseLong),
-                                map: map,
-
-                                icon: {
-                                    // labelOrigin: new google.maps.Point(16, 65),
-                                    url: mUrl
-                                }
-
-                            });
-
-                            //loc = new google.maps.LatLng(data[i].houseLat, data[i].houseLong);
-                            loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-
-                            bounds.extend(loc);
-
-                            if (gar_type != null) {
-                                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                                    return function () {
-                                        var poptext = '<div class=infowindow style="max-width:190px"> <h3>' + data[i].houseOwnerName + '</h3><p><b>Street Id: </b>' + data[i].ReferanceId + '</p>';
-                                        if (data[i].houseOwnerMobile != '') {
-                                            poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
-                                        }
-                                        if (data[i].houseAddress != '') {
-                                            poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '<p>';
-                                        }
-                                        poptext = poptext + '<b>Date: </b>' + data[i].gcDate + '</p><div style="height:auto; width:150px"><p><b>Time: </b>' + data[i].gcTime + '</p></div></div>';
-                                        infowindow.setContent(poptext);
-                                        infowindow.open(map, marker);
-                                    }
-                                })(marker, i));
-                            } else {
-                                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                                    return function () {
-                                        var poptext = '<div class=infowindow style="max-width:190px"> <h3>' + data[i].houseOwnerName + '</h3><p><b>Street Id: </b>' + data[i].ReferanceId + '</p>'
-                                        if (data[i].houseOwnerMobile != '') {
-                                            poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
-                                        }
-                                        if (data[i].houseAddress != '') {
-                                            poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '</p>';
-                                        }
-                                        poptext = poptext + '</div>';
-                                        infowindow.setContent(poptext);
-                                        infowindow.open(map, marker);
-                                    }
-                                })(marker, i));
-                            }
-
-
+                    var infowindow = new google.maps.InfoWindow();
+                    bounds = new google.maps.LatLngBounds();
+                    var marker, i;
+                    // alert(data.length);
+                    // Get Addres
+                    var gar_type;
+                    for (i = 0; i < data.length; i++) {
+                        if (data[i].houseOwnerName == null) {
+                            data[i].houseOwnerName = 'Not Available';
                         }
-                        map.fitBounds(bounds);
-                        map.panToBounds(bounds);
+                        if (data[i].houseOwnerMobile == null) {
+                            data[i].houseOwnerMobile = '';
+                        }
+                        if (data[i].houseAddress == null) {
+                            data[i].houseAddress = '';
+                        }
+                        gar_type = data[i].garbageType
+
+                        /*          var mUrl = "http://localhost:34557/Content/images/img/segregationImg/icn_house.png";*/
+                        var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Street_Sweepper_marker.png";
+                        switch (gar_type) {
+
+                            case 0:
+                                mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_mixed_garbage.png"
+                                break;
+                            case 1:
+                                mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_segregated_garbage.png"
+                                break;
+                            case 2:
+                                mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_garbage_not_recevied.png"
+                                break;
+                            case 3:
+                                mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_not_specified.png"
+                                break;
+                        }
+
+
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(data[i].houseLat, data[i].houseLong),
+                            map: map,
+
+                            icon: {
+                                // labelOrigin: new google.maps.Point(16, 65),
+                                url: mUrl
+                            }
+
+                        });
+
+                        //loc = new google.maps.LatLng(data[i].houseLat, data[i].houseLong);
+                        loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+
+                        bounds.extend(loc);
+
+                        if (gar_type != null) {
+                            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                return function () {
+                                    var poptext = '<div class=infowindow style="max-width:190px"> <h3>' + data[i].houseOwnerName + '</h3><p><b>Street Id: </b>' + data[i].ReferanceId + '</p>';
+                                    if (data[i].houseOwnerMobile != '') {
+                                        poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+                                    }
+                                    if (data[i].houseAddress != '') {
+                                        poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '<p>';
+                                    }
+                                    poptext = poptext + '<b>Date: </b>' + data[i].gcDate + '</p><div style="height:auto; width:150px"><p><b>Time: </b>' + data[i].gcTime + '</p></div></div>';
+                                    infowindow.setContent(poptext);
+                                    infowindow.open(map, marker);
+                                }
+                            })(marker, i));
+                        } else {
+                            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                return function () {
+                                    var poptext = '<div class=infowindow style="max-width:190px"> <h3>' + data[i].houseOwnerName + '</h3><p><b>Street Id: </b>' + data[i].ReferanceId + '</p>'
+                                    if (data[i].houseOwnerMobile != '') {
+                                        poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+                                    }
+                                    if (data[i].houseAddress != '') {
+                                        poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '</p>';
+                                    }
+                                    poptext = poptext + '</div>';
+                                    infowindow.setContent(poptext);
+                                    infowindow.open(map, marker);
+                                }
+                            })(marker, i));
+                        }
+
 
                     }
+                    map.fitBounds(bounds);
+                    map.panToBounds(bounds);
 
-                });
-            }
+                }
+
+            });
+        }
 
 
 
 
         function Search() {
             $("#houseId_filter").val("");
-                myMap();
-            }
+            myMap();
+        }
 
         function Search_string() {
-                myMap();
-            }
+            myMap();
+        }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap" type="text/javascript"></script>
 </fieldset>
