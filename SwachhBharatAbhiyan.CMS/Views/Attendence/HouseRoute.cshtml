@@ -126,11 +126,11 @@
 
 
                 <div class="row">
-                    <div class="col-md-2"></div>
+                    <div class="col-md-1"></div>
                     <div class="col-md-3">
                         <div class="form-group">
                             @*@Html.HiddenFor(Model=>Model.ZoneList.ToList(), new { Value = @ViewBag.zonelist })
-                                @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
+                @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
                             @Html.Label("झोन / Zone")
                             @Html.Label("Zone")
                             @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopZone()"> + Add Zone </a>*@
@@ -173,6 +173,13 @@
                         <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
                             <a style="margin-top:22px;color:#fff;" class="btn btn-sm btn-success" onclick="AreaSearch()">Search</a>
                         </div>
+                    </div>
+                    <div class="col-sm-1">
+
+                        <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
+                            <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="Reset()">Reset</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
