@@ -1138,21 +1138,21 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                     {
-                        var Details = db.Locations.Where(c => c.EmployeeType == null).FirstOrDefault();
+                        //var Details = db.Locations.Where(c => c.EmployeeType == null).FirstOrDefault();
+                        var Details = db.Locations.FirstOrDefault();
 
                         if (teamId > 0)
                         {
-                            Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == null).FirstOrDefault();
-
+                            //Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == null).FirstOrDefault();
+                            Details = db.Locations.Where(c => c.locId == teamId).FirstOrDefault();
                         }
-
-                        //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
                         if (Details != null)
                         {
-                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                            //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
                             //var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
-                            var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType==null).FirstOrDefault();
+                            var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
                             loc.userName = user.userName;
                             loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
                             loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
@@ -1177,19 +1177,21 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                     {
-                        var Details = db.Locations.Where(c => c.EmployeeType == Emptype).FirstOrDefault();
+                        //var Details = db.Locations.Where(c => c.EmployeeType == Emptype).FirstOrDefault();
+                        var Details = db.Locations.FirstOrDefault();
 
                         if (teamId > 0)
                         {
-                            Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == Emptype).FirstOrDefault();
-
+                           // Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == Emptype).FirstOrDefault();
+                            Details = db.Locations.Where(c => c.locId == teamId).FirstOrDefault();
                         }
 
-                        var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                         if (Details != null)
                         {
+                            //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
-                            var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                            var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
                             loc.userName = user.userName;
                             loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
                             loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
@@ -1214,20 +1216,22 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                     {
-                        var Details = db.Locations.Where(c => c.EmployeeType == Emptype).FirstOrDefault();
+                        //var Details = db.Locations.Where(c => c.EmployeeType == Emptype).FirstOrDefault();
+                        var Details = db.Locations.FirstOrDefault();
 
                         if (teamId > 0)
                         {
-                            Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == Emptype).FirstOrDefault();
+                            //Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == Emptype).FirstOrDefault();
+                            Details = db.Locations.Where(c => c.locId == teamId).FirstOrDefault();
 
                         }
 
-                        //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                         if (Details != null)
                         {
-                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                            //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
-                            var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                            var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
                             loc.userName = user.userName;
                             loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
                             loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
@@ -1256,16 +1260,17 @@ namespace SwachBharat.CMS.Bll.Services
 
                         if (teamId > 0)
                         {
-                            Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == Emptype).FirstOrDefault();
+                            //Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == Emptype).FirstOrDefault();
+                            Details = db.Locations.Where(c => c.locId == teamId).FirstOrDefault();
 
                         }
 
-                        //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                         if (Details != null)
                         {
-                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                            //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
-                            var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
+                            var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
                             loc.userName = user.userName;
                             loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
                             loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
