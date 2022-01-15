@@ -273,9 +273,9 @@
                                                 @Html.DropDownList("Type", new List<SelectListItem>
                                                  {
                                                    new SelectListItem { Text = "Waste Collection Monitoring Technology", Value = "W" },
-                                                   new SelectListItem { Text = "Street sweeping Monitoring System", Value = "S"},
-                                                   new SelectListItem { Text = "Liquid Waste Cleaning Monitoring System", Value = "L"}
-                                                   }, "Select Type", new { @class = "input-material", @id = "Type" })
+                                                   new SelectListItem { Text = "Street Sweeping Point Monitoring System", Value = "S"},
+                                                   new SelectListItem { Text = "Liquid Waste Cleaning Point Monitoring System", Value = "L"}
+                                                   }, "Select Admin Type", new { @class = "input-material", @id = "Type" })
                                                 @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger", style = "display:block;font-size:11px;margin-top:2px" })
                                             </div>
 
