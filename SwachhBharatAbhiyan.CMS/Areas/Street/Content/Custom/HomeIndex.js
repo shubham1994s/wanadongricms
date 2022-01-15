@@ -334,7 +334,7 @@ $(document).ready(function () {
                 theme: "light1", // "light1", "ligh2", "dark1", "dark2"
                 animationEnabled: true,
                 axisY: {
-                    title: "Street Sweep Collection",
+                    title: "Street Sweeping Point",
                 },
                 title: {
                     // text: "घर संकलन"
@@ -784,7 +784,7 @@ $(document).ready(function () {
                interval: 1
            },
            axisY: {
-               title: "Street Sweep Collection",
+               title: "Street Sweeping Point",
            },
 
            data: [
