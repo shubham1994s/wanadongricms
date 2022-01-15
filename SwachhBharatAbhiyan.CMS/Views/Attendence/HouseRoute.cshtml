@@ -37,6 +37,15 @@
         left: 87%;
     }
 
+    #myRadioGroup{
+        text-align:center;
+    }
+
+    #filter1, #filter2, #filter3{
+        margin-top:3%;
+        margin-bottom:3%;
+    }
+
     @@media only screen and (max-width: 1240px) {
         #play_id {
             left: 74%;
@@ -118,10 +127,10 @@
         </div>
 
         <div id="myRadioGroup">
-            <input type="radio" name="filter" checked="checked" value="1" />Zone/Ward/Area
+            <input type="radio" name="filter" checked="checked" value="1" />Search By Zone/Ward/Area
 
-            <input type="radio" name="filter" value="2" />Pin
-            <input type="radio" name="filter" value="3" />Time
+            <input type="radio" name="filter" value="2" />Search By Pin No
+            <input type="radio" name="filter" value="3" />Search By Date Time
             <div id="filter1" class="desc">
 
 
@@ -1222,7 +1231,7 @@
                 }
 
             });
-            myMapBox();
+       
         }
 
 

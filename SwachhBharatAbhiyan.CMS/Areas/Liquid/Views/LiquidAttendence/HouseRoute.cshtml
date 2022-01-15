@@ -33,6 +33,15 @@
         left: 87%;
     }
 
+    #myRadioGroup {
+        text-align: center;
+    }
+
+    #filter1, #filter2, #filter3 {
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
     @@media only screen and (max-width: 1240px) {
         #play_id {
             left: 74%;
@@ -617,7 +626,7 @@
 
 
                             }
-                            else if (data.dyId != null) {
+                            else if (data.DyId != null) {
                                 var a = "D";
                                 // Get Address from server
                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
