@@ -1804,6 +1804,7 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     userId = userName.userId,
                     userName = userName.userName,
+                    datetime = Convert.ToDateTime(x.datetime).ToString("yyyy/MM/dd HH:mm"),
                     date = dat,
                     time = tim,
                     lat = x.lat,
