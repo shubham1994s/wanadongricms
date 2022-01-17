@@ -1804,7 +1804,7 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     userId = userName.userId,
                     userName = userName.userName,
-                    datetime = Convert.ToDateTime(x.datetime).ToString("yyyy/MM/dd HH:mm"),
+                    datetime = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy HH:mm"),
                     date = dat,
                     time = tim,
                     lat = x.lat,
@@ -1879,7 +1879,7 @@ namespace SwachBharat.CMS.Bll.Services
                                     {
                                         userId = userName.userId,
                                         userName = userName.userName,
-                                        datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                         date = dat,
                                         time = tim,
                                         lat = d.Lat,
@@ -1908,7 +1908,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 {
                                     userId = userName.userId,
                                     userName = userName.userName,
-                                    datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                     date = dat,
                                     time = tim,
                                     lat = d.Lat,
@@ -1942,7 +1942,7 @@ namespace SwachBharat.CMS.Bll.Services
                                     {
                                         userId = userName.userId,
                                         userName = userName.userName,
-                                        datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                         date = dat,
                                         time = tim,
                                         lat = d.Lat,
@@ -1974,7 +1974,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 {
                                     userId = userName.userId,
                                     userName = userName.userName,
-                                    datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                     date = dat,
                                     time = tim,
                                     lat = d.Lat,
@@ -2075,7 +2075,7 @@ namespace SwachBharat.CMS.Bll.Services
                                     userLocation.Add(new SBALUserLocationMapView()
                                     {
                                         userName = userName.userName,
-                                        datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                         date = dat,
                                         time = tim,
                                         lat = d.Lat,
@@ -2103,7 +2103,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 userLocation.Add(new SBALUserLocationMapView()
                                 {
                                     userName = userName.userName,
-                                    datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                     date = dat,
                                     time = tim,
                                     lat = d.Lat,
@@ -2136,7 +2136,7 @@ namespace SwachBharat.CMS.Bll.Services
                                     userLocation.Add(new SBALUserLocationMapView()
                                     {
                                         userName = userName.userName,
-                                        datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                         date = dat,
                                         time = tim,
                                         lat = d.Lat,
@@ -2167,7 +2167,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 userLocation.Add(new SBALUserLocationMapView()
                                 {
                                     userName = userName.userName,
-                                    datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                     date = dat,
                                     time = tim,
                                     lat = d.Lat,
@@ -2268,7 +2268,7 @@ namespace SwachBharat.CMS.Bll.Services
                                     userLocation.Add(new SBALUserLocationMapView()
                                     {
                                         userName = userName.userName,
-                                        datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                         date = dat,
                                         time = tim,
                                         lat = d.Lat,
@@ -2296,7 +2296,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 userLocation.Add(new SBALUserLocationMapView()
                                 {
                                     userName = userName.userName,
-                                    datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                     date = dat,
                                     time = tim,
                                     lat = d.Lat,
@@ -2329,7 +2329,7 @@ namespace SwachBharat.CMS.Bll.Services
                                     userLocation.Add(new SBALUserLocationMapView()
                                     {
                                         userName = userName.userName,
-                                        datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                         date = dat,
                                         time = tim,
                                         lat = d.Lat,
@@ -2360,7 +2360,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 userLocation.Add(new SBALUserLocationMapView()
                                 {
                                     userName = userName.userName,
-                                    datetime = Convert.ToDateTime(d.gcDate).ToString("yyyy/MM/dd HH:mm"),
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy HH:mm"),
                                     date = dat,
                                     time = tim,
                                     lat = d.Lat,

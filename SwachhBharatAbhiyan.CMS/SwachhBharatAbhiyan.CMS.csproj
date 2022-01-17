@@ -1728,6 +1728,7 @@
     <Content Include="Content\DatatableGrid\ZoneGrid.js" />
     <Content Include="Content\datepicker\css\datepicker.css" />
     <Content Include="Content\datepicker\js\datepicker.js" />
+    <Content Include="Content\DatetimePicker\datetimepicker.full.min.js" />
     <Content Include="Content\DealsDay\Index.css" />
     <Content Include="Content\ImageSizeValidation\ImageSizeValidation.js" />
     <Content Include="Content\images\011320160335_67ec.jpg" />
