@@ -2216,6 +2216,7 @@
     <Content Include="Content\theme-assets\js\charts-home.js" />
     <Content Include="Content\theme-assets\js\front.js" />
     <Content Include="Content\theme-assets\js\icons_load.js" />
+    <Content Include="Content\theme-assets\js\MyCustom.js" />
     <Content Include="Content\theme-assets\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Content\theme-assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Content\theme-assets\vendor\bootstrap\css\bootstrap-reboot.css" />
