@@ -24,7 +24,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<int> TotalStreetCount { get; set; }
         public Nullable<int> TotalStreetPropertyCount { get; set; }
         public Nullable<int> TotalLiquidPropertyCount { get; set; }
-       
+
+        public Nullable<int> TotalHousePropertyCount { get; set; }
+        public Nullable<int> TotalDumpPropertyCount { get; set; }
         public Nullable<int> MixedCount { get; set; }
         public Nullable<int> BifurgatedCount { get; set; }
         public Nullable<int> NotCollected { get; set; }
