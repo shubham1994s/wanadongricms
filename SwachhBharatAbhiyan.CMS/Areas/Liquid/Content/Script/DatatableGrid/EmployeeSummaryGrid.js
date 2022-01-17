@@ -39,12 +39,12 @@
                 "searchable": false
             },
             {
-                "targets": [10],
+                "targets": [9],
                 "visible": false,
                 "searchable": false
             },
             {
-                "targets": [11],
+                "targets": [10],
                 "visible": false,
                 "searchable": false
             },
@@ -57,7 +57,7 @@
             { "data": "DaEndDate", "name": "daEndDate", "autoWidth": true },
             { "data": "EndTime", "name": "endTime", "autoWidth": true },
             { "data": "Totalhousecollection", "name": "Totalhousecollection", "autoWidth": true },
-            { "data": "Totaldumpyard", "name": "totaldumpyard", "autoWidth": true },
+            //{ "data": "Totaldumpyard", "name": "totaldumpyard", "autoWidth": true },
             { "data": "InBatteryStatus", "name": "InBatteryStatus", "autoWidth": true },
             { "data": "OutBatteryStatus", "name": "OutBatteryStatus", "autoWidth": true },
             { "data": "Totaldistance", "name": "Totaldistance", "autoWidth": true },
