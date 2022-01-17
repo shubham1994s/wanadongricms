@@ -127,10 +127,10 @@
         </div>
 
         <div id="myRadioGroup">
-            <input type="radio" name="filter" checked="checked" value="1" />Search By Zone/Ward/Area
+            <spn style="font-weight: bold; font-size: 16px;">Search By :</spn>  <input type="radio" name="filter" checked="checked" value="1" style="margin-left: 1%;"/> Zone/Ward/Area
 
-            <input type="radio" name="filter" value="2" />Search By Pin No
-            <input type="radio" name="filter" value="3" />Search By Date Time
+            <input type="radio" name="filter" value="2" style="margin-left: 1%;"/> Pin No
+            <input type="radio" name="filter" value="3" style="margin-left: 1%;"/> Date Time
             <div id="filter1" class="desc">
 
 
@@ -1012,23 +1012,73 @@
 
                             else if (data.DyId != null) {
                                 var a = "D";
-                                // Get Address from server
-                                var myLatlng = new google.maps.LatLng(data.lat, data.log);
-                                lat_lng.push(myLatlng);
-                                var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
-                                var marker = new google.maps.Marker({
-                                    position: myLatlng,
-                                    map: map,
-                                    title: data.Username,
+                                if (fromtime == "" && totime == "") {
+                                    // Get Address from server
+                                    var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                    lat_lng.push(myLatlng);
+                                    var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
+                                    var marker = new google.maps.Marker({
+                                        position: myLatlng,
+                                        map: map,
+                                        title: data.Username,
 
-                                    /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
-                                    /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
-                                    /* icon: '-/Content/Images/Icon/dump.jpg'*/
-                                    icon: {
-                                        // labelOrigin: new google.maps.Point(16, 65),
-                                        url: mUrl
+                                        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                                        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                                        /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                                        icon: {
+                                            // labelOrigin: new google.maps.Point(16, 65),
+                                            url: mUrl
+                                        }
+                                    });
+                                }
+                                else if (fromtime != "" && totime != "") {
+                                    if (data.datetime >= fromtime && data.datetime <= totime) {
+                                        // Get Address from server
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        lat_lng.push(myLatlng);
+                                        var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng,
+                                            map: map,
+                                            title: data.Username,
+
+                                            /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                                            /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                                            /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: mUrl
+                                            }
+                                        });
                                     }
-                                });
+                                    else {
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        //lat_lng.push(myLatlng);
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng
+                                        });
+                                    }
+                                }
+                                else {
+                                    // Get Address from server
+                                    var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                    lat_lng.push(myLatlng);
+                                    var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
+                                    var marker = new google.maps.Marker({
+                                        position: myLatlng,
+                                        map: map,
+                                        title: data.Username,
+
+                                        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                                        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                                        /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                                        icon: {
+                                            // labelOrigin: new google.maps.Point(16, 65),
+                                            url: mUrl
+                                        }
+                                    });
+                                }
+                            
                             }
 
 
@@ -1246,6 +1296,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.min.js"></script>
 
+    @*<script src="~/Content/DatetimePicker/datetimepicker.full.min.js"></script>*@
+
     <script>
         /*
               Ajax GET requests.
@@ -1276,7 +1328,9 @@
         }
 
         $(document).ready(function () {
-            $(".jquery-date-time-picker").datetimepicker();
+            $(".jquery-date-time-picker").datetimepicker({
+                format:'d/m/Y H:i',
+            });
         });
     </script>
     <script>

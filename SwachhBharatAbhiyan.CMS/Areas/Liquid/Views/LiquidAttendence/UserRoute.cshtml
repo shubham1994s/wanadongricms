@@ -168,8 +168,9 @@
 
 <div id="myRadioGroup">
 
-    <input type="radio" name="filter" value="1" />Search By Pin No
-    <input type="radio" name="filter" value="2" />Search By Date Time
+    <spn style="font-weight: bold; font-size: 16px;">Search By :</spn> <input type="radio" name="filter" value="1" style="margin-left: 1%;"/> Pin No
+    <input type="radio" name="filter" value="2" style="margin-left: 1%;"/> Date Time
+
     <div id="filter1" class="desc">
         <div class="row" style="margin-top:5px">
             <div class="col-sm-2"></div>
@@ -827,7 +828,7 @@
 
         $(document).ready(function () {
             $(".jquery-date-time-picker").datetimepicker({
-                format: 'd/m/Y H:m',
+                format: 'd/m/Y H:i',
             });
         });
     </script>

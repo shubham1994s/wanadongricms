@@ -117,10 +117,10 @@
         </div>
 
         <div id="myRadioGroup">
-            <input type="radio" name="filter" checked="checked" value="1" />Zone/Ward/Area
+            <spn style="font-weight: bold; font-size: 16px;">Search By :</spn>  <input type="radio" name="filter" checked="checked" value="1" style="margin-left: 1%;" /> Zone/Ward/Area
 
-            <input type="radio" name="filter" value="2" />Pin
-            <input type="radio" name="filter" value="3" />Time
+            <input type="radio" name="filter" value="2" style="margin-left: 1%;" /> Pin No
+            <input type="radio" name="filter" value="3" style="margin-left: 1%;" /> Date Time
 
             <div id="filter1" class="desc">
                 <div class="row">
@@ -128,7 +128,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             @*@Html.HiddenFor(Model=>Model.ZoneList.ToList(), new { Value = @ViewBag.zonelist })
-                                @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
+                        @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
                             @Html.Label("झोन / Zone")
                             @Html.Label("Zone")
                             @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopZone()"> + Add Zone </a>*@
@@ -617,26 +617,26 @@
 
 
                             }
-                            else if (data.DyId != null) {
-                                var a = "D";
-                                // Get Address from server
-                                var myLatlng = new google.maps.LatLng(data.lat, data.log);
-                                lat_lng.push(myLatlng);
-                                var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Street_Sweep.png";
-                                var marker = new google.maps.Marker({
-                                    position: myLatlng,
-                                    map: map,
-                                    title: data.Username,
+                            //else if (data.DyId != null) {
+                            //    var a = "D";
+                            //    // Get Address from server
+                            //    var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                            //    lat_lng.push(myLatlng);
+                            //    var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Street_Sweep.png";
+                            //    var marker = new google.maps.Marker({
+                            //        position: myLatlng,
+                            //        map: map,
+                            //        title: data.Username,
 
-                                    /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
-                                    /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
-                                    /* icon: '-/Content/Images/Icon/dump.jpg'*/
-                                    icon: {
-                                        // labelOrigin: new google.maps.Point(16, 65),
-                                        url: mUrl
-                                    }
-                                });
-                            }
+                            //        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                            //        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                            //        /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                            //        icon: {
+                            //            // labelOrigin: new google.maps.Point(16, 65),
+                            //            url: mUrl
+                            //        }
+                            //    });
+                            //}
 
                             //var a = i + 1;
                             //// Get Address from server
@@ -880,7 +880,7 @@
 
         $(document).ready(function () {
             $(".jquery-date-time-picker").datetimepicker({
-                format: 'd/m/Y H:m',
+                format: 'd/m/Y H:i',
             });
         });
     </script>
