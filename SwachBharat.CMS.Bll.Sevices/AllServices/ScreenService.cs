@@ -111,6 +111,8 @@ namespace SwachBharat.CMS.Bll.Services
                         model.TotalGcWeightCount = Convert.ToDouble(houseCount.TotalGcWeightCount);
                         model.TotalDryWeightCount = Convert.ToDouble(houseCount.TotalDryWeightCount);
                         model.TotalWetWeightCount = Convert.ToDouble(houseCount.TotalWetWeightCount);
+                        model.TotalHousePropertyCount = Convert.ToInt32(houseCount.TotalHousePropertyCount);
+                        model.TotalDumpPropertyCount = Convert.ToInt32(houseCount.TotalDumpPropertyCount);
 
                         //For Liquid Waste
 
