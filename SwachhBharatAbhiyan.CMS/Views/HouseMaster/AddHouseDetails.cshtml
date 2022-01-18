@@ -388,6 +388,7 @@
     $(document).ready(function () {
         debugger;
                 $('form').each(function () { this.reset() });
+       
 
                 $('#ZoneId').change(function () {
                     var selectedText = $(this).find("option:selected").text();
@@ -685,7 +686,30 @@
                     });
 
 
+        }
+        debugger;
+        var selectedText = $("#WardNo").find("option:selected").text();
+        var selectedValue = $("#WardNo").val();
+
+        $.ajax({
+            type: "post",
+            url: "/HouseMaster/LoadAreaList?",
+            data: { WardNo: $('#WardNo').val() },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                var district;
+                for (var i = 0; i < data.length; i++) {
+                   /* area = area + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';*/
+
+                    if (data[i].Value == $('#WardNo').val()) {
+                        district = district + '<option value=' + data[i].Value + ' selected>' + data[i].Text + '</option>';
+                    } else { district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>'; }
+                }
+                $('#AreaId').html(district);
+              
             }
+        });
 
             $("#houseMobile").keypress(function (e) {
                 //if the letter is not digit then display error and don't type anything
