@@ -139,7 +139,7 @@ select option{
     height: 56px !important;
 }
 
-@media only screen and (max-width: 340px) {
+/*@media only screen and (max-width: 340px) {
     .d-flex-cus {
         display: block !important;
     }
@@ -153,4 +153,4 @@ select option{
         max-width: 100%;
         width: 100%;
     }
-}
+}*/
