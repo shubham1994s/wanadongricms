@@ -897,13 +897,8 @@
                         var infoWindow = new google.maps.InfoWindow();
                         var lat_lng = new Array();
                         var latlngbounds = new google.maps.LatLngBounds();
-                        if (data.DyId != null) {
-                            var lastmarker = markers.length - 1;
-                        }
-                        else {
-                            var lastmarker = markers.length;
-                        }
-                        var lastmarker = markers.length - 1;
+                      
+                      
                       
                         for (i = 0; i < markers.length; i++) {
 
@@ -922,6 +917,13 @@
                                         col = '|fe9436|000000'
                                     }
                                 })(marker, data);
+
+                                if (data.DyId != null) {
+                                    var lastmarker = markers.length - 1;
+                                }
+                                else {
+                                    var lastmarker = markers.length;
+                                }
                             }
                             if (data.HouseId != null) {
                                 debugger;
