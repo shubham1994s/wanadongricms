@@ -3937,7 +3937,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 //    data = model.ToList();
                 //}
-                return data.OrderByDescending(c => c.HouseCount);
+                return data.OrderByDescending(c => c.LiquidCount).OrderByDescending(c=>c.HouseCount).OrderByDescending(c=>c.StreetCount);
             }
         }
 
