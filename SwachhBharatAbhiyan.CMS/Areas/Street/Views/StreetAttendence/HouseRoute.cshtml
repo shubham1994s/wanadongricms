@@ -112,7 +112,7 @@
     <div class="container " role="form">
         <div class="row">
             <div class="col col-md-12 text-center">
-                <h4 style="font-weight: 700;"><span>@Html.Label(Model.userName)</span>   <span>Street Sweeping Point Route</span> </h4>
+                <h4 style="font-weight: 700;"><span id="username" style="display:none;">@Model.userName</span> <span id="demo"></span>  <span>House Route</span> </h4>
             </div>
         </div>
 
@@ -128,7 +128,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             @*@Html.HiddenFor(Model=>Model.ZoneList.ToList(), new { Value = @ViewBag.zonelist })
-                        @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
+                                @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
                             @Html.Label("झोन / Zone")
                             @Html.Label("Zone")
                             @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopZone()"> + Add Zone </a>*@
@@ -284,7 +284,7 @@
         <div class="row">
 
             <div class="col-12 bg-white has-shadow" id="googleMap" style="width:auto; height:600px"></div>
-           
+
         </div>
     </div>
     @*<input type="hidden" value="21.1458" id="deflat" />
@@ -893,6 +893,15 @@
                 $("#filter" + test).show();
             });
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+            debugger;
+            var x = document.getElementById("username").innerHTML;
+            var tem = x.charAt(0).toUpperCase() + x.slice(1);
+            document.getElementById("demo").innerHTML = tem;
+        });
+
     </script>
 </fieldset>
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
