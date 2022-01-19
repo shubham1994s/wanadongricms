@@ -14,9 +14,9 @@
 //        };
 
 
-document.getElementById("btnSubmit").onclick = function () {
-    //disable
-    this.disabled = true;
+//document.getElementById("btnSubmit").onclick = function () {
+//    //disable
+//    this.disabled = true;
 
-    //do some validation stuff
-}
+//    //do some validation stuff
+//}
