@@ -2308,6 +2308,7 @@
     <Content Include="Content\TimePicker\css\timepicker.css" />
     <Content Include="Content\TimePicker\index.html" />
     <Content Include="Content\TimePicker\js\timepicker.js" />
+    <Content Include="Content\turf\turf.min.js" />
     <Content Include="Content\ui.jqgrid.css" />
     <Content Include="DisplayReports.aspx" />
     <Content Include="Images\052120180915_1a70.jpg" />

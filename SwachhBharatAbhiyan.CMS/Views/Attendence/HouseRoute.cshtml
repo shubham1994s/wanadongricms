@@ -130,7 +130,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             @*@Html.HiddenFor(Model=>Model.ZoneList.ToList(), new { Value = @ViewBag.zonelist })
-                @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
+                                @Html.HiddenFor(Model => Model.ZoneId, new { Value = @ViewBag.ZoneId })*@
                             @Html.Label("झोन / Zone")
                             @Html.Label("Zone")
                             @*<a class="pull-right add_popup_clear" style="color:#3ab59e;text-decoration:underline!important;cursor:pointer" onclick="PopZone()"> + Add Zone </a>*@
@@ -301,10 +301,11 @@
             <div class="col-sm-2"></div>
         </div>
     </div>
-    <div class="container ">
+    <div class="container">
         <div class="row">
 
             <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width:auto; height:600px"></div>
+
             <div id="mapBoxMenu">
                 <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked">
                 <!-- See a list of Mapbox-hosted public styles at -->
@@ -318,7 +319,12 @@
                 <label for="streets-v11">streets</label>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors">
                 <label for="outdoors-v11">outdoors</label>
+                <div class="overlay">
+                    <button id="replay">Play</button>
+                    <button id="pauseAnim" style="margin-left: 92%; margin-top: -52%;">Pause</button>
+                </div>
             </div>
+           
             <div class="col-sm-2"></div>
         </div>
     </div>
@@ -333,6 +339,8 @@
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/0.0.124/turf.min.js" integrity="sha512-jpnZ8xGKbS7L9S6d5fk/zDVgF6OoVKLMoEliLxf24BRX+orWhxqJuUcoM+vGmOaozS9dD9ABjQZKAgjjcwTndA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+    <script src="~/Content/turf/turf.min.js"></script>
     <style>
         .mapBoxMarker {
             background-image: url('../Content/images/img/marker24.png');
@@ -358,10 +366,32 @@
             font-family: 'Open Sans', sans-serif;
         }
     </style>
-    
+    <style>
+        .overlay {
+            position: absolute;
+            top: 6px;
+            left: 105%;
+        }
+
+            .overlay button {
+                font: 600 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+                background-color: #3386c0;
+                color: #fff;
+                display: inline-block;
+                margin: 0;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                border-radius: 3px;
+            }
+
+                .overlay button:hover {
+                    background-color: #4ea0da;
+                }
+    </style>
     <script>
         function myMapBox() {
-
+            var ajaxCount = 0;
             debugger;
             var from = document.getElementById("frompin").value;
             var to = document.getElementById("topin").value;
@@ -371,7 +401,6 @@
 
                 if (data.type == 1) {
 
-                    debugger;
                     if (data.HouseOwnerName == null) {
                         data.HouseOwnerName = 'Not Available';
                     }
@@ -439,7 +468,7 @@
                     markers = m;
                     if (markers.length == 0) {
                         debugger;
-                        var map = new mapboxgl.Map({
+                        var mapBox = new mapboxgl.Map({
                             container: 'mapBoxMap', // container ID
                             style: 'mapbox://styles/mapbox/streets-v11', // style URL
                             center: [defLang, defLat], // starting position [lng, lat]
@@ -448,7 +477,7 @@
 
                     } else {
                         debugger;
-                        var map = new mapboxgl.Map({
+                        var mapBox = new mapboxgl.Map({
                             container: 'mapBoxMap', // container ID
                             style: 'mapbox://styles/mapbox/streets-v11', // style URL
                             center: [markers[0].log, markers[0].lat], // starting position [lng, lat]
@@ -458,6 +487,7 @@
 
 
                         var col;
+                        var dumpCordinates = [];
                         for (var i = 0; i < markers.length; i++) {
 
 
@@ -480,7 +510,6 @@
 
 
                             if (data.HouseId != null) {
-                                debugger;
                                 var a = i + 1;
                                 if (from == "" && to == "") {
                                     const el = document.createElement('div');
@@ -493,7 +522,7 @@
                                                 .setHTML(getPopupHtml(data)
                                                 )
                                         )
-                                        .addTo(map);
+                                        .addTo(mapBox);
 
                                 }
                                 else {
@@ -508,14 +537,14 @@
                                                     .setHTML(getPopupHtml(data)
                                                     )
                                             )
-                                            .addTo(map);
+                                            .addTo(mapBox);
 
                                     }
                                     else {
                                         const el = document.createElement('div');
                                         new mapboxgl.Marker(el)
                                             .setLngLat([data.log, data.lat])
-                                            .addTo(map);
+                                            .addTo(mapBox);
                                     }
                                 }
 
@@ -524,7 +553,7 @@
                             }
 
                             else if (data.DyId != null) {
-
+                                dumpCordinates = [data.log, data.lat];
                                 const el = document.createElement('div');
                                 el.className = 'mapBoxMarker';
                                 el.style.backgroundImage = "url(" + "../Content/images/img/segregationImg/Dump_Yard_marker.png" + ")";
@@ -535,7 +564,7 @@
                                             .setHTML(getPopupHtml(data)
                                             )
                                     )
-                                    .addTo(map);
+                                    .addTo(mapBox);
 
 
                             }
@@ -545,43 +574,256 @@
 
 
                         }
+                        let counter = 0;
+                        let steps = 0;
+                        var pathCordinates = [];
+                        var returnPathCord = [];
                         debugger;
-                        for (var k = 0; k < markers.length - 1; k++) {
-                            //if (map.getSource('route' + k)) {
-                            //    map.removeSource('route' + k);
-                            //}
-                            //    debugger;
-                            //    var start = [markers[k].log, markers[k].lat];
-                            //    var end = [markers[k + 1].log, markers[k + 1].lat];
-                            //    // make an initial directions request that
-                            //    // starts and ends at the same location
-                            //    getRoute(start, end, k);
+                        
+
+                        //for (var k = 0; k < markers.length - 1; k++) {
+                        //    //if (map.getSource('route' + k)) {
+                        //    //    map.removeSource('route' + k);
+                        //    //}
+                        //    //    debugger;
+                        //    //    var start = [markers[k].log, markers[k].lat];
+                        //    //    var end = [markers[k + 1].log, markers[k + 1].lat];
+                        //    //    // make an initial directions request that
+                        //    //    // starts and ends at the same location
+                        //    //    getRoute(start, end, k);
 
 
 
-                            if (map.getSource('route' + k)) {
-                                map.removeSource('route' + k);
-                            }
+                        //    if (map.getSource('route' + k)) {
+                        //        map.removeSource('route' + k);
+                        //    }
 
-                            var b = k + 1;
-                            if (from == "" || to == "") {
-                                var start = [markers[k].log, markers[k].lat];
-                                var end = [markers[k + 1].log, markers[k + 1].lat];
-                                // make an initial directions request that
-                                // starts and ends at the same location
-                                getRoute(start, end, k);
+                        //    var b = k + 1;
+                        //    if (from == "" || to == "") {
+                        //        var start = [markers[k].log, markers[k].lat];
+                        //        var end = [markers[k + 1].log, markers[k + 1].lat];
+                        //        // make an initial directions request that
+                        //        // starts and ends at the same location
+                        //        getRoute(start, end, k);
 
-                            }
-                            else {
-                                if (b >= from && b < to) {
-                                    var start = [markers[k].log, markers[k].lat];
-                                    var end = [markers[k + 1].log, markers[k + 1].lat];
-                                    // make an initial directions request that
-                                    // starts and ends at the same location
-                                    getRoute(start, end, k);
+                        //    }
+                        //    else {
+                        //        if (b >= from && b < to) {
+                        //            var start = [markers[k].log, markers[k].lat];
+                        //            var end = [markers[k + 1].log, markers[k + 1].lat];
+                        //            // make an initial directions request that
+                        //            // starts and ends at the same location
+                        //            getRoute(start, end, k);
+
+                        //        }
+                        //    }
+                        //}
+                        debugger;
+                        // A single point that animates along the route.
+                        // Coordinates are initially set to origin.
+                        
+
+
+                        debugger;
+                        mapBox.on('load', () => {
+                            mapBox.loadImage('../Content/images/img/send.png', (error, image) => {
+                                if (error) throw error;
+                                mapBox.addImage('rout-icon', image, { 'sdf': false, pixelRatio: 20 });
+                            });
+                                
+                            var origin = [];
+                            for (var m = 0; m < markers.length - 1; m++) {
+                                var c = m + 1;
+                                if (from == "" || to == "") {
+                                    origin = [markers[0].log, markers[0].lat];
+                                }
+                                else {
+                                    if (c >= from && c < to) {
+                                        origin = [markers[from -1].log, markers[from - 1].lat];
+                                    }
                                 }
                             }
-                        }
+
+                            debugger;
+                            var point = {
+                                'type': 'FeatureCollection',
+                                'features': [
+                                    {
+                                        'type': 'Feature',
+                                        'properties': {},
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': origin
+                                        }
+                                    }
+                                ]
+                            };
+
+                            mapBox.addSource('point', {
+                                'type': 'geojson',
+                                'data': point
+                            });
+
+
+
+                            //mapBox.addLayer({
+                            //    'id': 'point',
+                            //    'source': 'point',
+                            //    'type': 'symbol',
+                            //    'layout': {
+                            //        // This icon is a part of the Mapbox Streets style.
+                            //        // To view all images available in a Mapbox style, open
+                            //        // the style in Mapbox Studio and click the "Images" tab.
+                            //        // To add a new image to the style at runtime see
+                            //        // https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+                            //        //'icon-image': 'airport-15',
+
+                            //        'icon-image': 'rout-icon',
+                            //        //'icon-rotate': 90,
+                            //        'icon-rotate': ['get', 'bearing'],
+                            //        'icon-rotation-alignment': 'map',
+                            //        'icon-allow-overlap': true,
+                            //        'icon-ignore-placement': true
+                            //    }
+                            //});
+
+                            var k = 0;
+                            var start;
+                            var end
+                            let interval = setInterval(function () {
+                                if (ajaxCount == 0) {
+
+                                    var b = k + 1;
+                                    if (from == "" || to == "") {
+                                        if (k < markers.length - 1) {
+                                            start = [markers[k].log, markers[k].lat];
+                                            end = [markers[k + 1].log, markers[k + 1].lat];
+                                            // make an initial directions request that
+                                            // starts and ends at the same location
+                                            getRoute(start, end, k);
+                                        }
+
+                                    }
+                                    else {
+                                        if (b >= from && b < to) {
+                                            if (k < markers.length - 1) {
+                                                start = [markers[k].log, markers[k].lat];
+                                                end = [markers[k + 1].log, markers[k + 1].lat];
+                                                // make an initial directions request that
+                                                // starts and ends at the same location
+                                                getRoute(start, end, k);
+                                            }
+                                        }
+                                    }
+                                    
+                                    debugger;
+                                    if (k == markers.length - 1) {
+                                        debugger;
+                                        getRoute(end, dumpCordinates, k);
+                                    }
+                                    debugger;
+                                    k++;
+                                }
+                                debugger;
+                                console.log('a ' + ajaxCount + ' k ' + k);
+                                if (k >= markers.length + 1 && ajaxCount == 0) {
+                                    debugger;
+                                    clearInterval(interval);
+                                    mapBox.addLayer({
+                                        'id': 'point',
+                                        'source': 'point',
+                                        'type': 'symbol',
+                                        'layout': {
+                                            // This icon is a part of the Mapbox Streets style.
+                                            // To view all images available in a Mapbox style, open
+                                            // the style in Mapbox Studio and click the "Images" tab.
+                                            // To add a new image to the style at runtime see
+                                            // https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+                                            //'icon-image': 'airport-15',
+
+                                            'icon-image': 'rout-icon',
+                                            //'icon-rotate': 90,
+                                            'icon-rotate': ['get', 'bearing'],
+                                            'icon-rotation-alignment': 'map',
+                                            'icon-allow-overlap': true,
+                                            'icon-ignore-placement': true
+                                        }
+                                    });
+
+                                    //getRoute(end, dumpCordinates, k);
+                                }
+                            }, 1);
+
+                            var requestAnimateId = 0;
+                            document.getElementById('replay').addEventListener('click', () => {
+                                
+                                if (requestAnimateId != 0) {
+                                    animate();
+                                } else {
+                                // Set the coordinates of the original point back to origin
+                                point.features[0].geometry.coordinates = pathCordinates[0];
+
+                                // Update the source layer
+                                mapBox.getSource('point').setData(point);
+
+                                // Reset the counter
+                                counter = 0;
+
+                                // Restart the animation
+                                    animate(counter);
+                                }
+                            });
+                            document.getElementById('pauseAnim').addEventListener('click', () => {
+                                debugger;
+                                if (requestAnimateId) {
+                                    window.cancelAnimationFrame(requestAnimateId);
+                                    requestAnimateId = undefined;
+                                }
+                            });
+                            function animate() {
+                                steps = pathCordinates.length;
+                                const start =
+                                    pathCordinates[
+                                    counter >= steps ? counter - 1 : counter
+                                    ];
+                                const end =
+                                    pathCordinates[
+                                    counter >= steps ? counter : counter + 1
+                                    ];
+                                if (!start || !end) {
+                                    requestAnimateId = 0;
+                                    return;
+                                }
+                                    
+
+                                // Update point geometry to a new position based on counter denoting
+                                // the index to access the arc
+                                point.features[0].geometry.coordinates =
+                                    pathCordinates[counter];
+
+                                // Calculate the bearing to ensure the icon is rotated to match the route arc
+                                // The bearing is calculated between the current point and the next point, except
+                                // at the end of the arc, which uses the previous point and the current point
+                                point.features[0].properties.bearing = turf.bearing(
+                                    turf.point(start),
+                                    turf.point(end)
+                                );
+
+                                // Update the source with this new data
+                                mapBox.getSource('point').setData(point);
+
+                                // Request the next frame of animation as long as the end has not been reached
+                                if (counter < steps) {
+                                    requestAnimateId = requestAnimationFrame(animate);
+                                    //setTimeout(animate,1);
+
+                                }
+
+                                counter = counter + 1;
+                            }
+                        });
+
+                        debugger;
                     }
 
 
@@ -591,23 +833,84 @@
                     for (const input of inputs) {
                         input.onclick = (layer) => {
                             const layerId = layer.target.id;
-                            map.setStyle('mapbox://styles/mapbox/' + layerId);
+                            mapBox.setStyle('mapbox://styles/mapbox/' + layerId);
+
                         };
                     }
-
                     // create a function to make a directions request
-                    async function getRoute(start, end, i) {
+                    function getRoute1(start, end, i) {
                         debugger;
                         // make a directions request using cycling profile
                         // an arbitrary start will always be the same
                         // only the end or destination will change
+
+                        $.ajax({
+                            type: "get",
+                            traditional: true,
+                            dataType: "json",
+                            async: false,
+                            url: `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&steps=false&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+                            success: function (d) {
+                                debugger;
+                                const json = JSON.stringify(d);
+                                const data = json.routes[0];
+                                const route = data.geometry.coordinates;
+                                const geojson = {
+                                    type: 'Feature',
+                                    properties: {},
+                                    geometry: {
+                                        type: 'LineString',
+                                        coordinates: route
+                                    }
+                                };
+
+                                //if the route already exists on the map, we'll reset it using setData
+                                if (map.getSource('route' + i)) {
+                                    map.getSource('route' + i).setData(geojson);
+                                }
+                                // otherwise, we'll make a new request
+                                else {
+                                    map.addLayer({
+                                        id: 'route' + i,
+                                        type: 'line',
+                                        source: {
+                                            type: 'geojson',
+                                            data: geojson
+                                        },
+                                        layout: {
+                                            'line-join': 'round',
+                                            'line-cap': 'round'
+                                        },
+                                        paint: {
+                                            'line-color': '#3887be',
+                                            'line-width': 5,
+                                            'line-opacity': 0.75
+                                        }
+                                    });
+                                }
+
+                                return route;
+                            }
+                        });
+                        // add turn instructions here at the end
+
+
+                    }
+                    async function getRoute(start, end, i) {
+                        
+                        // make a directions request using cycling profile
+                        // an arbitrary start will always be the same
+                        // only the end or destination will change
+                        ajaxCount++;
                         const query = await fetch(
                             `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&steps=false&geometries=geojson&access_token=${mapboxgl.accessToken}`,
                             { method: 'GET' }
                         );
                         const json = await query.json();
+                        debugger;
                         const data = json.routes[0];
                         const route = data.geometry.coordinates;
+                        
                         const geojson = {
                             type: 'Feature',
                             properties: {},
@@ -616,15 +919,55 @@
                                 coordinates: route
                             }
                         };
+                        debugger;
+                        for (var l = 0; l < route.length; l++) {
+                            if (l < route.length - 1) {
 
+                                var line = turf.lineString([route[l], route[l + 1]]);
+                                var options = { units: 'kilometers' };
 
+                                var point1 = {
+                                    "type": "Feature",
+                                    "properties": {},
+                                    "geometry": {
+                                        "type": "Point",
+                                        "coordinates": route[l]
+                                    }
+                                };
+                                var point2 = {
+                                    "type": "Feature",
+                                    "properties": {},
+                                    "geometry": {
+                                        "type": "Point",
+                                        "coordinates": route[l + 1]
+                                    }
+                                };
+                                var units = "kilometers";
+                                var distanceInMeter = Math.trunc((turf.distance(point1, point2, units)) * 1000);
+                                for (var n = 0; n < distanceInMeter; n=n+15) {
+                                    var along = turf.along(line, n/1000, options);
+                                    pathCordinates.push(along.geometry.coordinates);
+                                }
+                                
+
+                                
+                                
+                            } else {
+                                pathCordinates.push(route[l]);
+                            }
+                            //pathCordinates.push(route[l]);
+                            //pathCordinates.push(route[l]);
+                            //pathCordinates.push(route[l]);
+
+                        }
+                        debugger;
                         //if the route already exists on the map, we'll reset it using setData
-                        if (map.getSource('route' + i)) {
-                            map.getSource('route' + i).setData(geojson);
+                        if (mapBox.getSource('route' + i)) {
+                            mapBox.getSource('route' + i).setData(geojson);
                         }
                         // otherwise, we'll make a new request
                         else {
-                            map.addLayer({
+                            mapBox.addLayer({
                                 id: 'route' + i,
                                 type: 'line',
                                 source: {
@@ -643,6 +986,8 @@
                             });
                         }
                         // add turn instructions here at the end
+                        ajaxCount--;
+
                     }
 
 
