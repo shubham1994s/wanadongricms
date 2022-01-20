@@ -63,31 +63,6 @@
                 </div>
             </div>
             <div class="col-md-6">
-                @*<div class="form-group">
-                        @Html.Label("नाव मराठी / Name Marathi")
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(model => model.SSNameMar, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
-                        @Html.ValidationMessageFor(model => model.SSNameMar, "", new { @class = "text-danger" })
-                        <span class="text-danger" id="err_name_mar"></span>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <span class="help-block with-errors"></span>
-                    </div>*@
-
-                <div class="form-group">
-                    @*@Html.Label("पत्ता / Address")*@
-                    @Html.Label("Address")
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(model => model.SSAddress, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
-                    @Html.ValidationMessageFor(model => model.SSAddress, "", new { @class = "text-danger" })
-                    <span class="text-danger" id="err_address"></span>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
                 <div class="form-group">
                     @*@Html.Label("झोन / Zone")*@
                     @Html.Label("Zone")
@@ -95,8 +70,13 @@
                     <span class="text-danger" id="err_zone"></span>
                     <span class="help-block with-errors"></span>
                 </div>
+
             </div>
 
+
+        </div>
+
+        <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     @*@Html.Label("वार्ड क्रमांक / Ward No")*@
@@ -107,8 +87,6 @@
                     <span class="help-block with-errors"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
 
             <div class="col-md-6">
                 <div class="form-group">
@@ -117,6 +95,43 @@
                     @Html.ValidationMessageFor(model => model.areaId, "", new { @class = "text-danger" })
                     <span class="text-danger" id="err_area"></span>
                     <span class="help-block with-errors"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @*<div class="form-group">
+                        @Html.Label("नाव मराठी / Name Marathi")
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.SSNameMar, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
+                        @Html.ValidationMessageFor(model => model.SSNameMar, "", new { @class = "text-danger" })
+                        <span class="text-danger" id="err_name_mar"></span>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <span class="help-block with-errors"></span>
+                    </div>*@
+
+                @*<div class="form-group">
+                        @Html.Label("Address")
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.SSAddress, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
+                        @Html.ValidationMessageFor(model => model.SSAddress, "", new { @class = "text-danger" })
+                        <span class="text-danger" id="err_address"></span>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <span class="help-block with-errors"></span>
+                    </div>*@
+                <div class="form-group extra-height-for-textarea">
+                    @Html.Label("Address")
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.SSAddress, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
+                    @Html.ValidationMessageFor(model => model.SSAddress, "", new { @class = "text-danger" })
+                    <span class="text-danger" id="err_address"></span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @*@Html.Label("रेफरेन्स आई डी / Reference Id")*@
+                    @Html.Label("Reference Id")
+                    <input type="text" value="@Model.ReferanceId" id="n" readonly="readonly" />
                 </div>
             </div>
             <div class="col-md-4">
@@ -189,7 +204,7 @@
         debugger;
         $('form').each(function () { this.reset() });
 
-       
+
         $('#ZoneId').change(function () {
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
@@ -253,14 +268,14 @@
             //    return false;
             //});
 
-        $('#buttonName').text("Save Changes");
-        //$('.title_change').text("डंप यार्ड तपशील सादर बदला / Edit Dump Yard Details");
+            $('#buttonName').text("Save Changes");
+            //$('.title_change').text("डंप यार्ड तपशील सादर बदला / Edit Dump Yard Details");
             $('.title_change').text("Edit Street Sweeping Details");
-    } else {
-        $('#buttonName').text("Save");
-        //$('.title_change').text("डंप यार्ड तपशील सादर करा / Add  Dump Yard Details");
-        $('.title_change').text("Add  Street Sweeping Details");
-    }
+        } else {
+            $('#buttonName').text("Save");
+            //$('.title_change').text("डंप यार्ड तपशील सादर करा / Add  Dump Yard Details");
+            $('.title_change').text("Add  Street Sweeping Details");
+        }
     });
 </script>
 
@@ -334,92 +349,13 @@
             return false;
         }
     });
-        $("#btnSubmit").click(function () {
-            var bool = validation();
+    $("#btnSubmit").click(function () {
+        var bool = validation();
 
-            if (bool == false) {
-                return false;
-            } else {
-                //alert($("#FileUpload_Preview img").attr('src'));
-                $("#SSName").change(function () {
-                    //alert("Sdsadsa");
-                    //$("#FileUpload_Preview img").attr('src') === "/Images/QRcode.png";
-                    $("#FileUpload_Preview img").attr("src", "/Images/QRcode.png");
-                    $("input #filesUpload").attr("src", "/Images/QRcode.png");
-                    $('#Download1').hide();
-                    return false;
-                });
-
-                if ($("#FileUpload_Preview img").attr('src') == "/Images/QRcode.png") {
-                    //$("#err_generate").html("स्कॅनिफाय कोड व्युत्पन्न करा नंतर सेव करा / Generate Scaniffy code then save").delay(1500).show().fadeOut('slow');
-                    $("#err_generate").html("Generate Scaniffy code then save").delay(1500).show().fadeOut('slow');
-                    return false;
-                }
-
-                return true;
-            }
-        });
-        function validation() {
-
-
-
-            //if ($.trim($("#SSName").val()) == '') {
-            //    $("#err_name").html("नाव आवश्यक आहे / Name is Required").delay(1500).show().fadeOut('slow');
-            //    $('#SSName').focus();
-            //    return false;
-            //}
-            //if ($.trim($("#ZoneId").val()) == "-1" || $.trim($("#ZoneId").val()) == "0") {
-            //    $("#err_zone").html("झोन आवश्यक आहे / Zone is Required").delay(1500).show().fadeOut('slow');
-            //    $('#ZoneId').focus();
-            //    return false;
-            //}
-
-            //if ($.trim($("#WardNo").val()) == "-1" || $.trim($("#WardNo").val()) == "0") {
-            //    $("#err_ward").html("वार्ड आवश्यक आहे / Ward is Required").delay(1500).show().fadeOut('slow');
-            //    $('#WardNo').focus();
-            //    return false;
-            //}
-
-            //if ($.trim($("#areaId").val()) == "-1" || $.trim($("#areaId").val()) == "0") {
-            //    $("#err_area").html("क्षेत्र आवश्यक आहे / Area is Required").delay(1500).show().fadeOut('slow');
-            //    $('#areaId').focus();
-            //    return false;
-            //}
-
-            //if ($.trim($("#gpAddress").val()) == '') {
-            //    $("#err_address").html("पत्ता आवश्यक आहे / Address is Required").delay(1500).show().fadeOut('slow');
-            //    $('#gpAddress').focus();
-            //    return false;
-            //}
-
-
-            return true;
-        }
-
-        $("#QRCOdeGenrate").click(function () {
-
-            var bool = validation();
-
-            if (bool == true) {
-                //$("#err_generate").html("स्कॅनिफाय कोड व्युत्पन्न करा नंतर सेव करा / Generate Scaniffy code then save").delay(1).show().fadeOut('slow');
-                $("#err_generate").html("Generate Scaniffy code then save").delay(1).show().fadeOut('slow');
-                $('#prog_bar').css("display", "block");
-                $("#prog_bar").delay(3000).show().fadeOut('slow');
-
-                //genrate QRCode image
-                var a = $('#n').val();
-                if (a != null && a != "") {
-                    var src_qr = 'https://api.qrserver.com/v1/create-qr-code/?data=' + a
-                    $("#FileUpload_Preview img").attr("src", src_qr);
-                    $("input #filesUpload").attr("src", src_qr);
-
-                    // cpde end
-                    $('#btnSubmit').prop('disabled', false);
-                    //   $('#QRCOdeGenrate').css('display', 'none');
-                    $('#Download1').show();
-                    move();
-                }
-            }
+        if (bool == false) {
+            return false;
+        } else {
+            //alert($("#FileUpload_Preview img").attr('src'));
             $("#SSName").change(function () {
                 //alert("Sdsadsa");
                 //$("#FileUpload_Preview img").attr('src') === "/Images/QRcode.png";
@@ -429,24 +365,103 @@
                 return false;
             });
 
+            if ($("#FileUpload_Preview img").attr('src') == "/Images/QRcode.png") {
+                //$("#err_generate").html("स्कॅनिफाय कोड व्युत्पन्न करा नंतर सेव करा / Generate Scaniffy code then save").delay(1500).show().fadeOut('slow');
+                $("#err_generate").html("Generate Scaniffy code then save").delay(1500).show().fadeOut('slow');
+                return false;
+            }
 
+            return true;
+        }
+    });
+    function validation() {
+
+
+
+        //if ($.trim($("#SSName").val()) == '') {
+        //    $("#err_name").html("नाव आवश्यक आहे / Name is Required").delay(1500).show().fadeOut('slow');
+        //    $('#SSName').focus();
+        //    return false;
+        //}
+        //if ($.trim($("#ZoneId").val()) == "-1" || $.trim($("#ZoneId").val()) == "0") {
+        //    $("#err_zone").html("झोन आवश्यक आहे / Zone is Required").delay(1500).show().fadeOut('slow');
+        //    $('#ZoneId').focus();
+        //    return false;
+        //}
+
+        //if ($.trim($("#WardNo").val()) == "-1" || $.trim($("#WardNo").val()) == "0") {
+        //    $("#err_ward").html("वार्ड आवश्यक आहे / Ward is Required").delay(1500).show().fadeOut('slow');
+        //    $('#WardNo').focus();
+        //    return false;
+        //}
+
+        //if ($.trim($("#areaId").val()) == "-1" || $.trim($("#areaId").val()) == "0") {
+        //    $("#err_area").html("क्षेत्र आवश्यक आहे / Area is Required").delay(1500).show().fadeOut('slow');
+        //    $('#areaId').focus();
+        //    return false;
+        //}
+
+        //if ($.trim($("#gpAddress").val()) == '') {
+        //    $("#err_address").html("पत्ता आवश्यक आहे / Address is Required").delay(1500).show().fadeOut('slow');
+        //    $('#gpAddress').focus();
+        //    return false;
+        //}
+
+
+        return true;
+    }
+
+    $("#QRCOdeGenrate").click(function () {
+
+        var bool = validation();
+
+        if (bool == true) {
+            //$("#err_generate").html("स्कॅनिफाय कोड व्युत्पन्न करा नंतर सेव करा / Generate Scaniffy code then save").delay(1).show().fadeOut('slow');
+            $("#err_generate").html("Generate Scaniffy code then save").delay(1).show().fadeOut('slow');
+            $('#prog_bar').css("display", "block");
+            $("#prog_bar").delay(3000).show().fadeOut('slow');
+
+            //genrate QRCode image
+            var a = $('#n').val();
+            if (a != null && a != "") {
+                var src_qr = 'https://api.qrserver.com/v1/create-qr-code/?data=' + a
+                $("#FileUpload_Preview img").attr("src", src_qr);
+                $("input #filesUpload").attr("src", src_qr);
+
+                // cpde end
+                $('#btnSubmit').prop('disabled', false);
+                //   $('#QRCOdeGenrate').css('display', 'none');
+                $('#Download1').show();
+                move();
+            }
+        }
+        $("#SSName").change(function () {
+            //alert("Sdsadsa");
+            //$("#FileUpload_Preview img").attr('src') === "/Images/QRcode.png";
+            $("#FileUpload_Preview img").attr("src", "/Images/QRcode.png");
+            $("input #filesUpload").attr("src", "/Images/QRcode.png");
+            $('#Download1').hide();
+            return false;
         });
 
 
-        function move() {
-            var elem = document.getElementById("myBar");
-            var width = 40;
-            var id = setInterval(frame, 10);
-            function frame() {
-                if (width >= 100) {
-                    clearInterval(id);
-                } else {
-                    width++;
-                    elem.style.width = width + '%';
-                    elem.innerHTML = width * 1 + '%';
-                }
+    });
+
+
+    function move() {
+        var elem = document.getElementById("myBar");
+        var width = 40;
+        var id = setInterval(frame, 10);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                elem.innerHTML = width * 1 + '%';
             }
         }
+    }
 
 </script>
 <script>
