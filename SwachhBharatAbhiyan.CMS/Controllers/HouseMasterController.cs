@@ -257,13 +257,13 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     //string leftbottomimg = AppDetails.baseImageUrlCMS + "/Content/images/icons/left_outdoor.png";
                     //string dry_wet_new = AppDetails.baseImageUrlCMS + "/Content/images/icons/Khapa/dry&wet.png";
 
-                    //string top_img_new = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/Top_image.png";
-                    //string slogan_new = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/slogan.png";
-                    //string round = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/round.png";
+                    string top_img_new = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/Top_image.png";
+                    string slogan_new = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/slogan.png";
+                    string round = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/round.png";
 
-                    string top_img_new = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/Top_image.png";
-                    string slogan_new = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/slogan.png";
-                    string round = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/round.png";
+                    //string top_img_new = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/Top_image.png";
+                    //string slogan_new = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/slogan.png";
+                    //string round = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/round.png";
 
                     GridHtml = "<div style='width:100%;height: 100%;background:#ffffff;border : 2px solid #4fa30a;'><div style='float:left;width:7%;padding-top:110px;padding-left:8px;'><img src='" + round + "' style = 'width:20px;height:20px;margin-left:5px;'/></div><div style='float:left;width:58%;padding-left:16px;padding-top:7px;'><img src='" + details.houseQRCode + "' style = 'width:20px;height:20px;'/></div><div style='float:left;width:83%;padding-left:5px;padding-top:10px;padding-bottom:6px;'><div style='padding-left:5px;'><img style='width:150px;height:95px;' src='" + top_img_new + "'/></div><div style='text-align: center;font-weight: 900;padding-bottom:3px;'>&nbsp;&nbsp;&nbsp;<span style='color:#000000;text-align: center;font-size: 16px'>House Id</span><br/><span style='color:#000000;text-align: center;font-size: 21px'>" + details.ReferanceId + "</span></div><div style='padding-left:5px;'><img src='" + slogan_new + "' style='width: 150px; height:49px;'/><br/></div></div><div style='float:left;width:3%;padding-top:110px;padding-left:22px;text-align:center;'><img src='" + round + "' style = 'width:20px;height:20px;'/></div></div>";
                 }
