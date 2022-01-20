@@ -33,6 +33,15 @@
         left: 87%;
     }
 
+    #myRadioGroup {
+        text-align: center;
+    }
+
+    #filter1, #filter2, #filter3 {
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
     @@media only screen and (max-width: 1240px) {
         #play_id {
             left: 74%;
@@ -102,14 +111,14 @@
     <div class="container " role="form">
         <div class="row">
             <div class="col col-md-12 text-center">
-                <h4 style="font-weight: 700;"><span>@Html.Label(Model.userName)</span>   <span>Liquid Waste Route</span> </h4>
+                <h4 style="font-weight: 700;"><span id="username" style="display:none;">@Model.userName</span> <span id="demo"></span>  <span>House Route</span> </h4>
             </div>
         </div>
         <div id="myRadioGroup">
-            <input type="radio" name="filter" checked="checked" value="1" />Zone/Ward/Area
+            <spn style="font-weight: bold; font-size: 16px;">Search By :</spn>  <input type="radio" name="filter" checked="checked" value="1" style="margin-left: 1%;" /> Zone/Ward/Area
 
-            <input type="radio" name="filter" value="2" />Pin
-            <input type="radio" name="filter" value="3" />Time
+            <input type="radio" name="filter" value="2" style="margin-left: 1%;" /> Pin No
+            <input type="radio" name="filter" value="3" style="margin-left: 1%;" /> Date Time
 
             <div id="filter1" class="desc">
                 <div class="row">
@@ -477,7 +486,8 @@
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         });
 
-                    } else {
+                    }
+                    else {
                         var mapOptions = {
                             center: new google.maps.LatLng(markers[0].lat, markers[0].log),
                             zoom: 10,
@@ -509,6 +519,8 @@
                         var infoWindow = new google.maps.InfoWindow();
                         var lat_lng = new Array();
                         var latlngbounds = new google.maps.LatLngBounds();
+                        var lastmarker = markers.length;
+
                         for (i = 0; i < markers.length; i++) {
 
 
@@ -524,6 +536,15 @@
                             }
                             if (data.HouseId != null) {
                                 var a = i + 1;
+                                if (a == 1) {
+                                    temicon = "../../Areas/Liquid/Content/images/img/segregationImg/Start-Point.png";
+                                }
+                                else if (a == lastmarker) {
+                                    temicon = "../../Areas/Liquid/Content/images/img/segregationImg/End_Point.png";
+                                }
+                                else {
+                                    temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                }
                                 if (fromtime == "" && totime == "") {
 
 
@@ -535,7 +556,10 @@
                                             position: myLatlng,
                                             map: map,
                                             title: data.Username,
-                                            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: temicon
+                                            }
                                         });
                                     }
                                     else {
@@ -547,7 +571,10 @@
                                                 position: myLatlng,
                                                 map: map,
                                                 title: data.Username,
-                                                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                                icon: {
+                                                    // labelOrigin: new google.maps.Point(16, 65),
+                                                    url: temicon
+                                                }
                                             });
                                         }
                                         else {
@@ -568,7 +595,10 @@
                                             position: myLatlng,
                                             map: map,
                                             title: data.Username,
-                                            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: temicon
+                                            }
                                         });
                                     }
                                     else {
@@ -587,32 +617,35 @@
                                         position: myLatlng,
                                         map: map,
                                         title: data.Username,
-                                        icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+                                        icon: {
+                                            // labelOrigin: new google.maps.Point(16, 65),
+                                            url: temicon
+                                        }
                                     });
                                 }
 
 
                             }
-                            else if (data.DyId != null) {
-                                var a = "D";
-                                // Get Address from server
-                                var myLatlng = new google.maps.LatLng(data.lat, data.log);
-                                lat_lng.push(myLatlng);
-                                var mUrl = "../../Areas/Liquid/Content/images/img/segregationImg/Dump_Yard_marker.png";
-                                var marker = new google.maps.Marker({
-                                    position: myLatlng,
-                                    map: map,
-                                    title: data.Username,
+                            //else if (data.DyId != null) {
+                            //    var a = "D";
+                            //    // Get Address from server
+                            //    var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                            //    lat_lng.push(myLatlng);
+                            //    var mUrl = "../../Areas/Liquid/Content/images/img/segregationImg/Liquidwaste_Marker.png";
+                            //    var marker = new google.maps.Marker({
+                            //        position: myLatlng,
+                            //        map: map,
+                            //        title: data.Username,
 
-                                    /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
-                                    /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
-                                    /* icon: '-/Content/Images/Icon/dump.jpg'*/
-                                    icon: {
-                                        // labelOrigin: new google.maps.Point(16, 65),
-                                        url: mUrl
-                                    }
-                                });
-                            }
+                            //        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                            //        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                            //        /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                            //        icon: {
+                            //            // labelOrigin: new google.maps.Point(16, 65),
+                            //            url: mUrl
+                            //        }
+                            //    });
+                            //}
 
                             //var a = i + 1;
                             //// Get Address from server
@@ -645,10 +678,10 @@
                                         data.vehcileNumber = '';
                                     }
                                     if (data.gpBeforImage == null) {
-                                        data.gpBeforImage = "https://img.icons8.com/ios/50/000000/add-image.png"
+                                        data.gpBeforImage = "/Images/default_not_upload.png"
                                     }
                                     if (data.gpAfterImage == null) {
-                                        data.gpAfterImage = "https://img.icons8.com/ios/50/000000/add-image.png"
+                                        data.gpAfterImage = "/Images/default_not_upload.png"
                                     }
                                     if (data.HouseId != null) {
                                         google.maps.event.addListener(marker, "click", function (e) {
@@ -658,14 +691,14 @@
                                             //animateCircle(poly,9);
                                         });
                                     }
-                                    else if (data.DyId != null) {
-                                        google.maps.event.addListener(marker, "click", function (e) {
-                                            infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + data.DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-                                            infoWindow.open(map, marker);
+                                    //else if (data.DyId != null) {
+                                    //    google.maps.event.addListener(marker, "click", function (e) {
+                                    //        infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + data.DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                    //        infoWindow.open(map, marker);
 
-                                            //animateCircle(poly,9);
-                                        });
-                                    }
+                                    //        //animateCircle(poly,9);
+                                    //    });
+                                    //}
                                 })(marker, data);
 
 
@@ -809,7 +842,7 @@
         }
 
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap" type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDywSnWh8pKWPa5o5Ws8cI0_SgN6M27TjQ&callback=myMap" type="text/javascript"></script>
 
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -845,7 +878,9 @@
         }
 
         $(document).ready(function () {
-            $(".jquery-date-time-picker").datetimepicker();
+            $(".jquery-date-time-picker").datetimepicker({
+                format: 'd/m/Y H:i',
+            });
         });
     </script>
     <script>
@@ -857,6 +892,15 @@
                 $("#filter" + test).show();
             });
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+            debugger;
+            var x = document.getElementById("username").innerHTML;
+            var tem = x.charAt(0).toUpperCase() + x.slice(1);
+            document.getElementById("demo").innerHTML = tem;
+        });
+
     </script>
 </fieldset>
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>

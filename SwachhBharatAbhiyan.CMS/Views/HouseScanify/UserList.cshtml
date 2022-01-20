@@ -51,7 +51,7 @@
                         <!-- Navbar Header-->
                         <div class="navbar-header">
                             <!-- Navbar Brand --><a href="#" class="navbar-brand">
-                                <div class="brand-text brand-big"><span><img style="height:40px;width:50px;" src="~/Content/images/img/action_icon.svg" /> </span><strong> Garbage Collection Van</strong></div>
+                                <div class="brand-text brand-big"><span><img style="height:40px;width:50px;" src="~/Content/images/img/action_icon.svg" /> </span><strong> House / Liquid / Street Scanify</strong></div>
                                 <div class="brand-text brand-small"><strong><img style="height:40px;width:50px;" src="~/Content/images/img/action_icon.svg" /> </strong></div>
                             </a>
                             <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
@@ -115,8 +115,8 @@
         };
 
         $(document).ready(function () {
-           // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
-         
+            // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
+            debugger;
             var appid = $('#appid').val();
                 $.get("/houseScanify/GetAppNames", null, house);
             function house(data) {
@@ -131,12 +131,12 @@
 
                 for (var i = 0; i < data.length; i++) {
                     res += "<li class='' ><a style='cursor:pointer' class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
-                    //if (data[i].TotalHouseUpdated_CurrentDay != 0 || data[i].TotalPointUpdated_CurrentDay != 0 || data[i].TotalDumpUpdated_CurrentDay != 0) {
-                    //    res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
-                    //}
-                    if (AppId_New == data[i].AppId) {
-                          res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+                    if (data[i].TotalHouseUpdated_CurrentDay != 0 || data[i].TotalPointUpdated_CurrentDay != 0 || data[i].TotalDumpUpdated_CurrentDay != 0) {
+                        res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
                     }
+                    //if (AppId_New == data[i].AppId) {
+                    //      res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+                    //}
                     res += "</a></li>";
                 }
 

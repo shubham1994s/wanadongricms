@@ -55,7 +55,9 @@ function Edit(Id) {
     //alert("Aa");
     if (Id != null) {
         var url = "/HouseMaster/AddHouseDetails?teamId=" + Id;
+       
         window.location.href = url;
+     
     }
 };
 

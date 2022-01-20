@@ -134,11 +134,7 @@
         box-shadow: none !important
     }
 
-    .w-56 {
-        width: 56px !important;
-        height: 56px !important
-    }
-
+   
     .gd-success {
         color: #fff;
         border: none;
@@ -291,10 +287,10 @@
             </div>*@
         <!--Start New Card-->
         <div class="row w-100">
-            <div class="col col-xs-12" onclick="location.href = '/Attendence/MenuIndex';" style="cursor:pointer">
+            <div class="col-lg-4 col-md-6 col-sm-12" onclick="location.href = '/Attendence/MenuIndex';" style="cursor:pointer" id="worker">
                 <div class="card flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
                     <div class="card-body">
-                        <div class="d-flex align-items-center text-hover-success">
+                        <div class="d-flex align-items-center text-hover-success d-flex-cus">
                             <div class="avatar w-56 m-2 no-shadow gd-success worsvg">
                                 @*<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up">
                                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
@@ -310,10 +306,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col col-xs-12" onclick="location.href = '/GarbageCollection/MenuHouseGarbageIndex';" style="cursor:pointer">
+            <div class="col-lg-4 col-md-6 col-sm-12" onclick="location.href = '/GarbageCollection/MenuHouseGarbageIndex';" style="cursor:pointer" id="house">
                 <div class="card flex bg-light-green" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
                     <div class="card-body">
-                        <div class="d-flex align-items-center text-hover-success">
+                        <div class="d-flex align-items-center text-hover-success d-flex-cus">
                             <div class="avatar w-56 m-2 no-shadow gd-success housesvg">
                                 @*<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up">
                                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
@@ -323,16 +319,16 @@
                             </div>
                             <div class="px-4 flex">
                                 <div>Household Collection</div>
-                                <div class="text-white mt-2 outfont">@Model.HouseCollection</div>
+                                <div class="text-white mt-2 outfont">@Model.HouseCollection / @Model.TotalHousePropertyCount</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col col-xs-12" onclick="location.href = '/GarbageCollection/MenuDumpYardIndex';" style="cursor:pointer">
+            <div class="col-lg-4 col-md-6 col-sm-12" onclick="location.href = '/GarbageCollection/MenuDumpYardIndex';" style="cursor:pointer" id="dump">
                 <div class="card flex bg-cyan" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
                     <div class="card-body">
-                        <div class="d-flex align-items-center text-hover-success">
+                        <div class="d-flex align-items-center text-hover-success d-flex-cus">
                             <div class="avatar w-56 m-2 no-shadow gd-success dumpsvg">
                                 @*<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up">
                                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
@@ -342,16 +338,16 @@
                             </div>
                             <div class="px-4 flex">
                                 <div>Dump Yard Trips</div>
-                                <div class="text-white mt-2 outfont">@Model.DumpYardCount</div>
+                                <div class="text-white mt-2 outfont">@Model.DumpYardCount / @Model.TotalDumpPropertyCount</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col col-xs-12 custom_col_hide" onclick="location.href = '/Complaint/MenuIndex';" style="cursor:pointer;" id="clns">
+            <div class="col-lg-4 col-md-6 col-sm-12 custom_col_hide" onclick="location.href = '/Complaint/MenuIndex';" style="cursor:pointer;" id="clns">
                 <div class="card flex bg-purpal" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
                     <div class="card-body">
-                        <div class="d-flex align-items-center text-hover-success">
+                        <div class="d-flex align-items-center text-hover-success d-flex-cus">
                             <div class="avatar w-56 m-2 no-shadow gd-success cleansvg">
                                 @*<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up">
                                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
@@ -619,7 +615,7 @@
 
     </div>
 </section>
-<section class="dashboard-counts no-padding-bottom" style="padding:0px;">
+<section class="dashboard-counts no-padding-bottom" style="padding:0px;" hidden="hidden">
     <div id="home" class="container tab-pane active" onload="myMapBox()">
         <div class="row bg-white" style="position:relative; height:680px;padding-top:15px;">
 
@@ -682,7 +678,7 @@
     }
 </style>
 <script>
-    
+
     function myMapBox() {
         debugger;
         var defLat = $('#deflat').val();
@@ -759,8 +755,11 @@
 @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC1bURZcQZ-I__gSCjm4g0GWauNHW52Ow&callback=myMap" type="text/javascript"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC1bURZcQZ-I__gSCjm4g0GWauNHW52Ow&callback=myMap3" type="text/javascript"></script>*@
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap" type="text/javascript"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap3" type="text/javascript"></script>
+@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap" type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap3" type="text/javascript"></script>*@
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap" type="text/javascript"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap3" type="text/javascript"></script>
 
 <!-- Dashboard Header Section    -->
 <script src="~/Content/Custom/HomeIndex.js"></script>

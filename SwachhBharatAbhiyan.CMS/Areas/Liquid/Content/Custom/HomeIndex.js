@@ -334,7 +334,7 @@ $(document).ready(function () {
                 theme: "light1", // "light1", "ligh2", "dark1", "dark2"
                 animationEnabled: true,
                 axisY: {
-                    title: "Liquid Waste Collection",
+                    title: "Liquid Waste Cleaning Point",
                 },
                 title: {
                     // text: "घर संकलन"
@@ -864,7 +864,7 @@ $(document).ready(function () {
                interval: 1
            },
            axisY: {
-               title: "Liquid Waste Collection",
+               title: "Liquid Waste Cleaning Point",
            },
 
            data: [

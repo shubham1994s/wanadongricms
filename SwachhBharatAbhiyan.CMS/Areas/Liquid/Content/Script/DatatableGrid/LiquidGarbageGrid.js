@@ -90,7 +90,7 @@
               { "data": "gpBeforImage", "name": "gpBeforImage", "autoWidth": false },
               { "data": "gpAfterImage", "gpAfterImage": "Address", "autoWidth": false },
               { "data": "gcDate", "name": "gcDate", "autoWidth": false },
-            //  { "data": "Status", "title": "Status", "autoWidth": false },
+            { "data": "batteryStatus", "title": "batteryStatus", "autoWidth": false },
      
         ]
     });

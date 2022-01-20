@@ -24,7 +24,7 @@ $(document).ready(function () {
     $("#demoGrid").DataTable({
         buttons: [
 
-            { extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: 'Ghanta Gadi Ideal time Report', text: 'Export to Excel', },
+            { extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: 'Street Sweeping Point Time Report', text: 'Export to Excel', },
         ],
         //"sDom": "ltipr",
         dom: 'lBfrtip',

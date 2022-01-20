@@ -1907,7 +1907,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                     var data1 = (from t1 in db.GarbageCollectionDetails.Where(g => g.gcType == 4 & g.gcDate >= fdate & g.gcDate <= tdate & g.EmployeeType == "L")
                                  join t2 in db.UserMasters on t1.userId equals t2.userId
-                                 join gp in db.LiquidWasteDetails on t1.gpId equals gp.LWId into gpp
+                                 join gp in db.LiquidWasteDetails on t1.LWId equals gp.LWId into gpp
                                  from t3 in gpp.DefaultIfEmpty()
                                  join zm in db.ZoneMasters on t3.zoneId equals zm.zoneId into zm
                                  from t4 in zm.DefaultIfEmpty()
@@ -2066,7 +2066,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                     var data1 = (from t1 in db.GarbageCollectionDetails.Where(g => g.gcType == 5 & g.gcDate >= fdate & g.gcDate <= tdate & g.EmployeeType == "S")
                                  join t2 in db.UserMasters on t1.userId equals t2.userId
-                                 join gp in db.StreetSweepingDetails on t1.gpId equals gp.SSId into gpp
+                                 join gp in db.StreetSweepingDetails on t1.SSId equals gp.SSId into gpp
                                  from t3 in gpp.DefaultIfEmpty()
                                  join zm in db.ZoneMasters on t3.zoneId equals zm.zoneId into zm
                                  from t4 in zm.DefaultIfEmpty()
@@ -3937,7 +3937,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 //    data = model.ToList();
                 //}
-                return data.OrderByDescending(c => c.HouseCount);
+                return data.OrderByDescending(c => c.LiquidCount).OrderByDescending(c=>c.HouseCount).OrderByDescending(c=>c.StreetCount);
             }
         }
 
