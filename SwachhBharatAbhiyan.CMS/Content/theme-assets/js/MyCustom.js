@@ -20,3 +20,13 @@
 
 //    //do some validation stuff
 //}
+
+
+//20/01/2022
+
+
+function disableButton(btn) {
+    debugger;
+    document.getElementById(btn.id).disabled = true;
+    //alert("Button has been disabled.");
+}

@@ -100,6 +100,15 @@
     #floating-panel {
         margin-left: -10px;
     }
+   /* .xdsoft_datepicker{
+        display:none !important;
+    }
+    .xdsoft_timepicker{
+        width:170px !important;
+    }
+    .xdsoft_prev, .xdsoft_next {
+        margin-left: 40% !important;
+    }*/
 </style>
 
 @Styles.Render("~/Content/IndexCSS")
@@ -123,6 +132,7 @@
         <div class="row">
             <div class="col col-md-12 text-center">
                 <h4 style="font-weight: 700;"><span id="username" style="display:none;">@Model.userName</span> <span id="demo"></span>  <span>House Route</span> </h4>
+                <h4 style="font-weight: 700;"><span id="date" style="display:none;"></span><span id="demo2"></span></h4>
             </div>
         </div>
 
@@ -814,7 +824,7 @@
             }
 
             function CenterControlPause(controlDivPause, map) {
-
+                debugger;
                 // Set CSS for the control border.
                 var controlUIPause = document.createElement('div');
 
@@ -882,15 +892,18 @@
                         centerControlDivPause.index = 1;
                         //centerControlDiv.style.left = '90%';
                         centerControlDiv.id = "play_id";
+                        centerControlDivPause.id = "pause";
                         centerControlDivPause.style.left = '90%';
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
 
                         centerControlDiv.addEventListener('click', function () {
+                            debugger;
                             animateCircle(poly, 17);
                         });
 
                         centerControlDivPause.addEventListener('click', function () {
+                            debugger;
                             animateCircle(poly, 7);
                         });
 
@@ -924,6 +937,8 @@
                                 else {
                                     var lastmarker = markers.length;
                                 }
+
+                                document.getElementById("date").innerHTML = data.date;
                             }
                             if (data.HouseId != null) {
                                 debugger;
@@ -1337,14 +1352,21 @@
         }
 
         $(document).ready(function () {
+            debugger;
+            var u_date = document.getElementById("date").innerHTML;
+            document.getElementById("demo2").innerHTML = u_date ;
             $(".jquery-date-time-picker").datetimepicker({
-                format:'d/m/Y H:i',
+               
+                format: 'd/m/Y H:i',
+                defaultDate: u_date,
+                step: 15
             });
         });
     </script>
     <script>
         $(document).ready(function () {
             $("input[name$='filter']").click(function () {
+
                 var test = $(this).val();
 
                 $("div.desc").hide();
@@ -1354,7 +1376,8 @@
     </script>
     <script>
         $(document).ready(function () {
-        debugger;
+            debugger;
+           
             var x = document.getElementById("username").innerHTML;
             var tem = x.charAt(0).toUpperCase() + x.slice(1);
             document.getElementById("demo").innerHTML = tem;
