@@ -857,7 +857,7 @@
 
         }
         $("#QRCOdeGenrate").click(function () {
-
+            debugger;
             var bool = validation();
 
             if (bool == true) {
@@ -869,7 +869,9 @@
                 //genrate QRCode image
                 var a = $('#n').val();
                 if (a != null && a != "") {
-                    var src_qr = 'https://api.qrserver.com/v1/create-qr-code/?data=' + a
+                   /* var src_qr = 'https://api.qrserver.com/v1/create-qr-code/?data=' + a*/
+                    var src_qr = 'https://chart.googleapis.com/chart?cht=qr&chl=' + a + "&chs=160x160&chld=L|0"
+                   
 
                     $("#FileUpload_Preview img").attr("src", src_qr);
                     $("input #filesUpload").attr("src", src_qr);
