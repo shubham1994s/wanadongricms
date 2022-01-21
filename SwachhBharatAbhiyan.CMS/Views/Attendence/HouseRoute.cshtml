@@ -410,12 +410,37 @@
                 }*/
     </style>
     <script>
+        //function convertFromStringToDate(responseDate) {
+        //    let dateComponents = responseDate.split(' ');
+        //    let datePieces = dateComponents[0].split("/");
+        //    let timePieces = dateComponents[1].split(":");
+        //    return (new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
+        //        timePieces[0], timePieces[1], '00'))
+        //}
         function convertFromStringToDate(responseDate) {
+            var now = new Date();
             let dateComponents = responseDate.split(' ');
-            let datePieces = dateComponents[0].split("/");
-            let timePieces = dateComponents[1].split(":");
-            return (new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
-                timePieces[0], timePieces[1], '00'))
+            if (dateComponents.length == 1) {
+                let timePieces = dateComponents[0].split(":");
+                now.setHours(timePieces[0]);
+                now.setMinutes(timePieces[1]);
+                now.setSeconds(0);
+            } else if (dateComponents.length == 2) {
+                let timePieces = dateComponents[0].split(":");
+                let hours = timePieces[0];
+                let min = timePieces[1];
+                let modifier = dateComponents[1]
+                if (hours === '12') {
+                    hours = '00';
+                }
+                if (modifier === 'PM') {
+                    hours = parseInt(hours, 10) + 12;
+                }
+                now.setHours(hours);
+                now.setMinutes(min);
+                now.setSeconds(0);
+            }
+            return now;
         }
         function myMapBox() {
             var ajaxCount = 0;
@@ -653,6 +678,7 @@
 
                                 }
                                 else if (fromtime != "" && totime != "") {
+                                    debugger;
                                     if (convertFromStringToDate(data.datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(data.datetime) <= convertFromStringToDate(totime)) {
                                         temicon = "../Content/images/img/segregationImg/Dumpyard_marker.png";
                                         dumpCordinates = [data.log, data.lat];
@@ -877,7 +903,7 @@
                                         }
                                     } else if (fromtime != "" && totime != "") {
                                         if (k < markers.length) {
-                                            if (convertFromStringToDate(markers[k].datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(markers[k].datetime) <= convertFromStringToDate(totime)) {
+                                            if (convertFromStringToDate(markers[k].datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(markers[k].datetime) <= convertFromStringToDate(totime) && convertFromStringToDate(markers[k + 1].datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(markers[k + 1].datetime) <= convertFromStringToDate(totime)) {
                                                 if (k < markers.length - 1) {
                                                     start = [markers[k].log, markers[k].lat];
                                                     end = [markers[k + 1].log, markers[k + 1].lat];
