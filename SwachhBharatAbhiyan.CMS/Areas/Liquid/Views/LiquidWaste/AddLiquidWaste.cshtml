@@ -63,31 +63,6 @@
                 </div>
             </div>
             <div class="col-md-6">
-                @*<div class="form-group">
-                        @Html.Label("नाव मराठी / Name Marathi")
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(model => model.SSNameMar, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
-                        @Html.ValidationMessageFor(model => model.SSNameMar, "", new { @class = "text-danger" })
-                        <span class="text-danger" id="err_name_mar"></span>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <span class="help-block with-errors"></span>
-                    </div>*@
-
-                <div class="form-group">
-                    @*@Html.Label("पत्ता / Address")*@
-                    @Html.Label("Address")
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(model => model.LWAddress, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
-                    @Html.ValidationMessageFor(model => model.LWAddress, "", new { @class = "text-danger" })
-                    <span class="text-danger" id="err_address"></span>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
                 <div class="form-group">
                     @*@Html.Label("झोन / Zone")*@
                     @Html.Label("Zone")
@@ -95,8 +70,11 @@
                     <span class="text-danger" id="err_zone"></span>
                     <span class="help-block with-errors"></span>
                 </div>
-            </div>
 
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     @*@Html.Label("वार्ड क्रमांक / Ward No")*@
@@ -107,8 +85,6 @@
                     <span class="help-block with-errors"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
 
             <div class="col-md-6">
                 <div class="form-group">
@@ -119,6 +95,51 @@
                     <span class="help-block with-errors"></span>
                 </div>
             </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+               
+
+
+                @*<div class="form-group">
+            @Html.Label("नाव मराठी / Name Marathi")
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(model => model.SSNameMar, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
+            @Html.ValidationMessageFor(model => model.SSNameMar, "", new { @class = "text-danger" })
+            <span class="text-danger" id="err_name_mar"></span>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <span class="help-block with-errors"></span>
+        </div>*@
+
+                @*<div class="form-group extra-height-for-textarea">
+            @Html.Label("Address")
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(model => model.LWAddress, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
+            @Html.ValidationMessageFor(model => model.LWAddress, "", new { @class = "text-danger" })
+            <span class="text-danger" id="err_address"></span>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <span class="help-block with-errors"></span>
+        </div>*@
+
+                <div class="form-group extra-height-for-textarea">
+                    @Html.Label("Address")
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.LWAddress, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
+                    @Html.ValidationMessageFor(model => model.LWAddress, "", new { @class = "text-danger" })
+                    <span class="text-danger" id="err_address"></span>
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    @*@Html.Label("रेफरेन्स आई डी / Reference Id")*@
+                    @Html.Label("Reference Id")
+                    <input type="text" value="@Model.ReferanceId" id="n" readonly="readonly" />
+                </div>
+            </div>
+
             <div class="col-md-4">
                 @*<label for="Select_Image">स्कॅनिफाय कोड  / Scaniffy Code </label>*@
                 <div class="form-group textarea">
