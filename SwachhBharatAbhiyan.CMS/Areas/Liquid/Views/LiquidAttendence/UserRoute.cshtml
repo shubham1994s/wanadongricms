@@ -315,7 +315,11 @@
             var fromtime = document.getElementById("fromtime").value;
             var totime = document.getElementById("totime").value;
             if (fromtime == "" || totime == "") {
-                $("#err_time2").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
+                $("#err_time2").html("From Time and To Time is required").delay(3000).show().fadeOut('slow');
+                return false;
+            }
+            else if (fromtime >= totime) {
+                $("#err_time2").html("Please Select From Time Less Than To Time").delay(3000).show().fadeOut('slow');
                 return false;
             }
             else {
