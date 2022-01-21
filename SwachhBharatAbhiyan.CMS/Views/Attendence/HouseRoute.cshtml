@@ -100,7 +100,7 @@
     #floating-panel {
         margin-left: -10px;
     }
-   /* .xdsoft_datepicker{
+    .xdsoft_datepicker{
         display:none !important;
     }
     .xdsoft_timepicker{
@@ -108,7 +108,7 @@
     }
     .xdsoft_prev, .xdsoft_next {
         margin-left: 40% !important;
-    }*/
+    }
 </style>
 
 @Styles.Render("~/Content/IndexCSS")
@@ -1357,14 +1357,10 @@
             document.getElementById("demo2").innerHTML = u_date ;
             $(".jquery-date-time-picker").datetimepicker({
                
-                format: 'd/m/Y H:i',
-                defaultDate: u_date,
+                format: 'H:i',
                 step: 15
             });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
+
             $("input[name$='filter']").click(function () {
 
                 var test = $(this).val();
@@ -1372,16 +1368,31 @@
                 $("div.desc").hide();
                 $("#filter" + test).show();
             });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            debugger;
-           
+
             var x = document.getElementById("username").innerHTML;
             var tem = x.charAt(0).toUpperCase() + x.slice(1);
             document.getElementById("demo").innerHTML = tem;
         });
+    </script>
+    <script>
+        //$(document).ready(function () {
+        //    $("input[name$='filter']").click(function () {
+
+        //        var test = $(this).val();
+
+        //        $("div.desc").hide();
+        //        $("#filter" + test).show();
+        //    });
+        //});
+    </script>
+    <script>
+        //$(document).ready(function () {
+        //    debugger;
+           
+        //    var x = document.getElementById("username").innerHTML;
+        //    var tem = x.charAt(0).toUpperCase() + x.slice(1);
+        //    document.getElementById("demo").innerHTML = tem;
+        //});
       
     </script>
 </fieldset>
