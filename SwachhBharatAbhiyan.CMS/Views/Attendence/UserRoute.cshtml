@@ -865,8 +865,15 @@
                                 { method: 'GET' }
                             );
                             const json = await query.json();
-                            const address = json.features[0].place_name;
-                            addressArray.push(address);
+                            debugger;
+                            if (json.features.length == 0) {
+                                addressArray.push("Address Not Available");
+                            }
+                            else {
+                                const address = json.features[0].place_name;
+                                addressArray.push(address);
+                            }
+                            
                             ajaxCount--;
 
                         }
