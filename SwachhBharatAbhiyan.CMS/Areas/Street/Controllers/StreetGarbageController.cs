@@ -1,12 +1,14 @@
-﻿using System;
+﻿using SwachBharat.CMS.Bll.Repository.GridRepository;
+using SwachBharat.CMS.Bll.Repository.ChildRepository;
+using SwachBharat.CMS.Bll.Repository.MainRepository;
+using SwachBharat.CMS.Bll.ViewModels.Grid;
+using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
+using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SwachBharat.CMS.Bll.Repository.ChildRepository;
-using SwachBharat.CMS.Bll.Repository.MainRepository;
-using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
-using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
 
 namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
 {
@@ -133,6 +135,27 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 //ViewBag.Date = Date;
                 //return Json(userId, JsonRequestBehavior.AllowGet);
                 return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+
+        public ActionResult IdelTimeNotification()
+        {
+            if (SessionHandler.Current.AppId != 0)
+
+            {
+                List<SBAEmplyeeIdelGrid> obj = new List<SBAEmplyeeIdelGrid>();
+                obj = childRepository.GetStreetIdelTimeNotification();
+
+                //List<SBAEmplyeeIdelGrid> obj = new List<SBAEmplyeeIdelGrid>()
+                //{
+                //     new SBAEmplyeeIdelGrid() { UserName = " sad", StartTime = "50", EndTime = "1", IdelTime = "00:22" },
+                //       new SBAEmplyeeIdelGrid() { UserName = " gfhfh", StartTime = "50", EndTime = "1", IdelTime = "00:22" },
+                //   //........................ and so on
+                //};
+                return Json(obj, JsonRequestBehavior.AllowGet);
             }
             else
                 return Redirect("/Account/Login");
