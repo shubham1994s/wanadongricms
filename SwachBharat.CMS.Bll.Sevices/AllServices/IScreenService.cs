@@ -183,6 +183,10 @@ namespace SwachBharat.CMS.Bll.Services
         List<LogVM> GetLogString();
 
         List<SBAEmplyeeIdelGrid> GetIdelTimeNotification();
+
+        List<SBAEmplyeeIdelGrid> GetLiquidIdelTimeNotification();
+
+        List<SBAEmplyeeIdelGrid> GetStreetIdelTimeNotification();
         List<SBALUserLocationMapView> GetUserTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null);
 
         List<SBALUserLocationMapView> GetHouseTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null);
