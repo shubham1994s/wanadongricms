@@ -35,6 +35,7 @@
 
     #play_id {
         left: 87%;
+        width: 5%;
     }
 
     #myRadioGroup {
@@ -320,7 +321,7 @@
             <div class="col-sm-2"></div>
         </div>
     </div>
-    <div class="container " style="display:none;">
+    <div class="container " >
         <div class="row">
 
             <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width:auto; height:600px"></div>
@@ -1463,7 +1464,7 @@
                         centerControlDivPause.index = 1;
                         //centerControlDiv.style.left = '90%';
                         centerControlDiv.id = "play_id";
-                        centerControlDivPause.id = "pause";
+                        centerControlDivPause.id = "pause_id";
                         centerControlDivPause.style.left = '90%';
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
