@@ -288,6 +288,7 @@
     <input type="hidden" value='@Request.QueryString["daId"]' id='HdnIndustries' />
     <input type="hidden" value='' id='route_date' />
     <input type="hidden" value='' id='userid' />
+
     <div class="container ">
         <div class="row">
 
@@ -297,7 +298,7 @@
     </div>
 
 
-    <div class="container "  style="display:none;">
+    <div class="container "  style="display:block;">
         <div class="row">
 
             <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width:auto; height:600px"></div>
@@ -594,122 +595,11 @@
                             }
 
 
-                            //else if (data.DyId != null) {
-                            //    var a = "D";
-                            //    if (fromtime == "" || totime == "") {
-
-                            //        temicon = "../Content/images/img/segregationImg/Dumpyard_marker.png";
-                            //        dumpCordinates = [data.log, data.lat];
-                            //        const el = document.createElement('div');
-                            //        el.className = 'mapBoxMarker';
-                            //        el.style.backgroundImage = "url(" + temicon + ")";
-                            //        new mapboxgl.Marker(el)
-                            //            .setLngLat([data.log, data.lat])
-                            //            .setPopup(
-                            //                new mapboxgl.Popup({ offset: 25 }) // add popups
-                            //                    .setHTML(getPopupHtml(data)
-                            //                    )
-                            //            )
-                            //            .addTo(mapBox);
-
-                            //    }
-                            //    else if (fromtime != "" && totime != "") {
-                            //        debugger;
-                            //        if (convertFromStringToDate(data.datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(data.datetime) <= convertFromStringToDate(totime)) {
-                            //            temicon = "../Content/images/img/segregationImg/Dumpyard_marker.png";
-                            //            dumpCordinates = [data.log, data.lat];
-                            //            const el = document.createElement('div');
-                            //            el.className = 'mapBoxMarker';
-                            //            el.style.backgroundImage = "url(" + temicon + ")";
-                            //            new mapboxgl.Marker(el)
-                            //                .setLngLat([data.log, data.lat])
-                            //                .setPopup(
-                            //                    new mapboxgl.Popup({ offset: 25 }) // add popups
-                            //                        .setHTML(getPopupHtml(data)
-                            //                        )
-                            //                )
-                            //                .addTo(mapBox);
-
-                            //        } else {
-                            //            const el = document.createElement('div');
-                            //            new mapboxgl.Marker(el)
-                            //                .setLngLat([data.log, data.lat])
-                            //                .addTo(mapBox);
-                            //        }
-
-                            //    }
-                            //    else {
-                            //        temicon = "../Content/images/img/segregationImg/Dumpyard_marker.png";
-                            //        dumpCordinates = [data.log, data.lat];
-                            //        const el = document.createElement('div');
-                            //        el.className = 'mapBoxMarker';
-                            //        el.style.backgroundImage = "url(" + temicon + ")";
-                            //        new mapboxgl.Marker(el)
-                            //            .setLngLat([data.log, data.lat])
-                            //            .setPopup(
-                            //                new mapboxgl.Popup({ offset: 25 }) // add popups
-                            //                    .setHTML(getPopupHtml(data)
-                            //                    )
-                            //            )
-                            //            .addTo(mapBox);
-                            //    }
-
-
-
-                            //}
-
-
-
-
-
                         }
                         let counter = 0;
                         let steps = 0;
                         var pathCordinates = [];
                         var returnPathCord = [];
-
-
-
-                        //for (var k = 0; k < markers.length - 1; k++) {
-                        //    //if (map.getSource('route' + k)) {
-                        //    //    map.removeSource('route' + k);
-                        //    //}
-                        //    //    debugger;
-                        //    //    var start = [markers[k].log, markers[k].lat];
-                        //    //    var end = [markers[k + 1].log, markers[k + 1].lat];
-                        //    //    // make an initial directions request that
-                        //    //    // starts and ends at the same location
-                        //    //    getRoute(start, end, k);
-
-
-
-                        //    if (map.getSource('route' + k)) {
-                        //        map.removeSource('route' + k);
-                        //    }
-
-                        //    var b = k + 1;
-                        //    if (from == "" || to == "") {
-                        //        var start = [markers[k].log, markers[k].lat];
-                        //        var end = [markers[k + 1].log, markers[k + 1].lat];
-                        //        // make an initial directions request that
-                        //        // starts and ends at the same location
-                        //        getRoute(start, end, k);
-
-                        //    }
-                        //    else {
-                        //        if (b >= from && b < to) {
-                        //            var start = [markers[k].log, markers[k].lat];
-                        //            var end = [markers[k + 1].log, markers[k + 1].lat];
-                        //            // make an initial directions request that
-                        //            // starts and ends at the same location
-                        //            getRoute(start, end, k);
-
-                        //        }
-                        //    }
-                        //}
-
-                        // A single point that animates along the route.
-                        // Coordinates are initially set to origin.
 
 
 
@@ -721,17 +611,7 @@
                             });
 
                             var origin = [];
-                            //for (var m = 0; m < markers.length - 1; m++) {
-                            //    var c = m + 1;
-                            //    if (from == "" || to == "") {
-                            //        origin = [markers[0].log, markers[0].lat];
-                            //    }
-                            //    else {
-                            //        if (c >= from && c < to) {
-                            //            origin = [markers[from - 1].log, markers[from - 1].lat];
-                            //        }
-                            //    }
-                            //}
+                          
                             //debugger;
                             for (var m = 0; m < markers.length - 1; m++) {
                                 var c = m + 1;
@@ -787,27 +667,6 @@
 
 
 
-                            //mapBox.addLayer({
-                            //    'id': 'point',
-                            //    'source': 'point',
-                            //    'type': 'symbol',
-                            //    'layout': {
-                            //        // This icon is a part of the Mapbox Streets style.
-                            //        // To view all images available in a Mapbox style, open
-                            //        // the style in Mapbox Studio and click the "Images" tab.
-                            //        // To add a new image to the style at runtime see
-                            //        // https://docs.mapbox.com/mapbox-gl-js/example/add-image/
-                            //        //'icon-image': 'airport-15',
-
-                            //        'icon-image': 'rout-icon',
-                            //        //'icon-rotate': 90,
-                            //        'icon-rotate': ['get', 'bearing'],
-                            //        'icon-rotation-alignment': 'map',
-                            //        'icon-allow-overlap': true,
-                            //        'icon-ignore-placement': true
-                            //    }
-                            //});
-
                             var k = 0;
                             var start;
                             var end
@@ -850,27 +709,7 @@
                                             }
                                         }
                                     }
-                                    //if (from == "" || to == "") {
-                                    //    if (k < markers.length - 1) {
-                                    //        start = [markers[k].log, markers[k].lat];
-                                    //        end = [markers[k + 1].log, markers[k + 1].lat];
-                                    //        // make an initial directions request that
-                                    //        // starts and ends at the same location
-                                    //        getRoute(start, end, k);
-                                    //    }
-
-                                    //}
-                                    //else {
-                                    //    if (b >= from && b < to) {
-                                    //        if (k < markers.length - 1) {
-                                    //            start = [markers[k].log, markers[k].lat];
-                                    //            end = [markers[k + 1].log, markers[k + 1].lat];
-                                    //            // make an initial directions request that
-                                    //            // starts and ends at the same location
-                                    //            getRoute(start, end, k);
-                                    //        }
-                                    //    }
-                                    //}
+                                   
 
                                     //debugger;
                                     if (k == markers.length - 1) {
