@@ -1483,46 +1483,46 @@
                                     }
 
                                     if (data.gpBeforImage == null) {
-                                        data.gpBeforImage = "/Images/default_not_upload.png"
+                                        data.gpBeforImage = "../../Areas/Street/Content/Images/default_not_upload.png"
                                     }
                                     if (data.gpAfterImage == null) {
-                                        data.gpAfterImage = "/Images/default_not_upload.png"
+                                        data.gpAfterImage = "../../Areas/Street/Content/Images/default_not_upload.png"
                                     }
 
                                     if (data.HouseId != null) {
                                         //New MNarker Click
-                                        google.maps.event.addListener(marker, "click", function (e) {
-                                            debugger;
-                                            var latlng = new google.maps.LatLng(data.lat, data.log);
-                                            var geocoder = geocoder = new google.maps.Geocoder();
-                                            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                                                debugger;
-                                                if (status == google.maps.GeocoderStatus.OK) {
-                                                    debugger;
-                                                    if (results[1]) {
-                                                        //alert("Location: " + results[1].formatted_address);
-                                                        var HouseAddress = results[1].formatted_address;
-                                                        infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>Street Sweeping Details:</b></h5><p><b>Street Sweeping-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Street Sweeping Address:</b>' + HouseAddress + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-                                                        infoWindow.open(map, marker);
-                                                    }
-                                                    else {
-                                                        var HouseAddress = "Not Mention";
-                                                        infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>Street Sweeping Details:</b></h5><p><b>Street Sweeping-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Street Sweeping Address:</b>' + HouseAddress + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-                                                        infoWindow.open(map, marker);
-                                                    }
+                                        //google.maps.event.addListener(marker, "click", function (e) {
+                                        //    debugger;
+                                        //    var latlng = new google.maps.LatLng(data.lat, data.log);
+                                        //    var geocoder = geocoder = new google.maps.Geocoder();
+                                        //    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                                        //        debugger;
+                                        //        if (status == google.maps.GeocoderStatus.OK) {
+                                        //            debugger;
+                                        //            if (results[1]) {
+                                        //                //alert("Location: " + results[1].formatted_address);
+                                        //                var HouseAddress = results[1].formatted_address;
+                                        //                infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>Street Sweeping Details:</b></h5><p><b>Street Sweeping-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Street Sweeping Address:</b>' + HouseAddress + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                        //                infoWindow.open(map, marker);
+                                        //            }
+                                        //            else {
+                                        //                var HouseAddress = "Not Mention";
+                                        //                infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>Street Sweeping Details:</b></h5><p><b>Street Sweeping-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Street Sweeping Address:</b>' + HouseAddress + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                        //                infoWindow.open(map, marker);
+                                        //            }
 
-                                                }
-                                            });
+                                        //        }
+                                        //    });
 
-                                        });
+                                        //});
 
                                         //Old Marker Click
-                                        //google.maps.event.addListener(marker, "click", function (e) {
-                                        //    infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>Street Sweeping Details:</b></h5><p><b>Street Sweeping-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Street Sweeping Address:</b>' + data.HouseAddress + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-                                        //    infoWindow.open(map, marker);
+                                        google.maps.event.addListener(marker, "click", function (e) {
+                                            infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h5><b>Street Sweeping Details:</b></h5><p><b>Street Sweeping-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Street Sweeping Address:</b>' + data.HouseAddress + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                            infoWindow.open(map, marker);
 
-                                        //    //animateCircle(poly,9);
-                                        //});
+                                            //animateCircle(poly,9);
+                                        });
                                     }
                                     //else if (data.DyId != null) {
                                     //    google.maps.event.addListener(marker, "click", function (e) {
