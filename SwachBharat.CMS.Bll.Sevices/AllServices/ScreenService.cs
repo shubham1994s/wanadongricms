@@ -2423,7 +2423,7 @@ namespace SwachBharat.CMS.Bll.Services
                             lwid = Convert.ToInt32(x.LWId),
                             houseId = Convert.ToInt32(x.houseId),
                             ReferanceId = x.ReferanceId,
-                            houseOwnerName = (x.houseOwner == null ? "" : x.houseOwner.ToUpper()),
+                            houseOwnerName = (x.houseOwner == null ? "" : x.houseOwner),
                             houseOwnerMobile = (x.houseOwnerMobile == null ? "" : x.houseOwnerMobile),
                             houseAddress = checkNull(x.houseAddress).Replace("Unnamed Road, ", ""),
                             gcDate = dt.ToString("dd-MM-yyyy"),
