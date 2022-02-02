@@ -2494,6 +2494,8 @@ namespace SwachBharat.CMS.Bll.Services
                             //vehcileNumber = x.v,
                             //userMobile = x.mobile,
                             garbageType = x.garbageType,
+                            gcType=x.gcType,
+                            
                         });
                     }
                     if (!string.IsNullOrEmpty(SearchString))
@@ -2535,6 +2537,7 @@ namespace SwachBharat.CMS.Bll.Services
                         //vehcileNumber = x.v,
                         //userMobile = x.mobile,
                         garbageType = x.garbageType,
+                        gcType=x.gcType,
                     });
                 }
                 if (!string.IsNullOrEmpty(SearchString))
