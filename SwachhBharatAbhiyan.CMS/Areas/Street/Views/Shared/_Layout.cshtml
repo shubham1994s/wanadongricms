@@ -168,7 +168,7 @@
 
                             <li><a href="/Street/StreetLocation/MenuIndex">Location Details</a></li>
                             <li><a href="/Street/StreetLocation/MenuMapIndex">On Map Location</a></li>
-                            <li id="onmap"><a href="/Street/StreetLocation/AllHouseLocation" target="new">Street on Map</a></li>
+                            <li id="onmap"><a href="/Street/StreetLocation/AllHouseLocation" target="new">Street Point on Map</a></li>
                             @*<li id="onmap"><a href="/Location/MenuHouseMapIndex">House on Map</a></li>*@
                         </ul>
                     </li>
@@ -607,7 +607,7 @@
 
                 $.ajax({
                     type: "post",
-                    url: "/GarbageCollection/IdelTimeNotification",
+                    url: "/Street/StreetGarbage/IdelTimeNotification",
                     // data: { userId: UserId, },
                     datatype: "json",
                     traditional: true,
@@ -616,11 +616,11 @@
                         //  alert(data.length);
                         // alert($('#notif_count').text());
                         if (func_count == 1) {
-                            $('#notif_count').text(data.length);
+                            $('#street_notif_count').text(data.length);
                         }
-                        if (data.length > $('#notif_count').text()) {
+                        if (data.length > $('#street_notif_count').text()) {
 
-                            $('#notif_count').text(data.length);
+                            $('#street_notif_count').text(data.length);
                             //   alert("sdf");
                             document.getElementById("snackbar").innerHTML = data[0].UserName + "<br>Not active since " + data[0].IdelTime + " min ";
                             var x = document.getElementById("snackbar");
@@ -628,7 +628,7 @@
                             setTimeout(function () { x.className = x.className.replace("show", ""); }, 4000);
                         }
 
-                        $('#notif_count').text(data.length);
+                        $('#street_notif_count').text(data.length);
                         func_count++;
                     }
                 });

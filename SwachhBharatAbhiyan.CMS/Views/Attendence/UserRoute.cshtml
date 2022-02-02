@@ -31,6 +31,7 @@
 
     #play_id {
         left: 87%;
+        width: 5%;
     }
     #myRadioGroup {
         text-align: center;
@@ -294,10 +295,782 @@
                 <div class="col-sm-2"></div>
             </div>
         </div>
+
+
+
+
+
+        <div class="container " style="display:none;">
+            <div class="row">
+
+                <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width:auto; height:600px"></div>
+
+                <div id="mapBoxMenu">
+                    <input id="satellite-v9" type="radio" name="rtoggle" value="satellite">
+                    <!-- See a list of Mapbox-hosted public styles at -->
+                    <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
+                    <label for="satellite-v9">satellite</label>
+                    <input id="light-v10" type="radio" name="rtoggle" value="light">
+                    <label for="light-v10">light</label>
+                    <input id="dark-v10" type="radio" name="rtoggle" value="dark">
+                    <label for="dark-v10">dark</label>
+                    <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
+                    <label for="streets-v11">streets</label>
+                    <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors">
+                    <label for="outdoors-v11">outdoors</label>
+                    <div class="overlay">
+                        <button type="button" id="replay">Play</button>
+                        <button type="button" id="pauseAnim" style="margin-left: 92%; margin-top: -45%;" disabled>Pause</button>
+                    </div>
+                </div>
+
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+        @*<input type="hidden" value="21.1458" id="deflat" />
+        <input type="hidden" value="80.2767" id="deflang" />*@
+
+
+        <input type="hidden" value="@ViewBag.lat" id="deflat" />
+        <input type="hidden" value="@ViewBag.lang" id="deflang" />
+        <input type="hidden" value="@ViewBag.username" id="deflang" />
+
+
+
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/0.0.124/turf.min.js" integrity="sha512-jpnZ8xGKbS7L9S6d5fk/zDVgF6OoVKLMoEliLxf24BRX+orWhxqJuUcoM+vGmOaozS9dD9ABjQZKAgjjcwTndA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+        <script src="~/Content/turf/turf.min.js"></script>
+        <style>
+            .mapBoxMarker {
+                background-image: url('../Content/images/img/marker24.png');
+                background-size: cover;
+                width: 35px;
+                height: 50px;
+                cursor: pointer;
+            }
+
+            .mapboxgl-popup {
+                max-width: 200px;
+            }
+
+            .mapboxgl-popup-content {
+                text-align: center;
+                font-family: 'Open Sans', sans-serif;
+            }
+
+            #mapBoxMenu {
+                margin-top: -56%;
+                position: absolute;
+                background: #efefef;
+                padding: 10px;
+                font-family: 'Open Sans', sans-serif;
+            }
+        </style>
+        <style>
+            .overlay {
+                position: absolute;
+                top: 6px;
+                left: 105%;
+            }
+
+            /*.overlay button {
+                font: 600 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+                background-color: #3386c0;
+                color: #fff;
+                display: inline-block;
+                margin: 0;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                border-radius: 3px;
+            }
+
+                .overlay button:hover {
+                    background-color: #4ea0da;
+                }*/
+        </style>
+        <script>
+            //function convertFromStringToDate(responseDate) {
+            //    let dateComponents = responseDate.split(' ');
+            //    let datePieces = dateComponents[0].split("/");
+            //    let timePieces = dateComponents[1].split(":");
+            //    return (new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
+            //        timePieces[0], timePieces[1], '00'))
+            //}
+            function convertFromStringToDate(responseDate) {
+                var now = new Date();
+                let dateComponents = responseDate.split(' ');
+                if (dateComponents.length == 1) {
+                    let timePieces = dateComponents[0].split(":");
+                    now.setHours(timePieces[0]);
+                    now.setMinutes(timePieces[1]);
+                    now.setSeconds(0);
+                } else if (dateComponents.length == 2) {
+                    let timePieces = dateComponents[0].split(":");
+                    let hours = timePieces[0];
+                    let min = timePieces[1];
+                    let modifier = dateComponents[1]
+                    if (hours === '12') {
+                        hours = '00';
+                    }
+                    if (modifier === 'PM') {
+                        hours = parseInt(hours, 10) + 12;
+                    }
+                    now.setHours(hours);
+                    now.setMinutes(min);
+                    now.setSeconds(0);
+                }
+                return now;
+            }
+            function myMapBox() {
+                var ajaxCount = 0;
+
+                var from = document.getElementById("frompin").value;
+                var to = document.getElementById("topin").value;
+
+
+                function getPopupHtml(data) {
+
+                    //debugger;
+
+                    if (data.type == 0) {
+
+
+                        if (data.userMobile == null) {
+                            data.userMobile = '';
+                        }
+                        if (data.vehcileNumber == null) {
+                            data.vehcileNumber = '';
+                        }
+                        if (data.address == null) {
+                            data.address = 'Not Mention';
+                        }
+
+
+                        return '<div class=infowindow style="max-width:190px"> <h3>' + data.userName + '</h3><h5><b>Employee Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehicle No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>';
+
+                    }
+
+                }
+
+
+                var defLat = $('#deflat').val();
+                var defLang = $('#deflang').val();
+                mapboxgl.accessToken = 'pk.eyJ1IjoibWlsaW5kd2Fua2hlZGUiLCJhIjoiY2t5OGtydmRsMWV3cjJvb3lqcGFxeW1laSJ9.PSgpPveli2BSppuhR30bcw';
+
+                $("#mapBoxMap").css("display", "none");
+                var industries = $("#HdnIndustries").val();
+                var areaid = $("#AreaId").val();
+                var fromtime = $("#fromtime").val()
+                var totime = $("#totime").val()
+                $.ajax({
+
+                    type: "post",
+                    url: "/Attendence/UserRouteData?daId=" + industries,
+                    datatype: "json",
+                    traditional: true,
+                    success: function (m) {
+                        $("#route_date").val(m[0].date);
+                        $("#mapBoxMap").css("display", "block");
+
+                        markers = m;
+                        if (markers.length == 0) {
+
+                            var mapBox = new mapboxgl.Map({
+                                container: 'mapBoxMap', // container ID
+                                style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                                center: [defLang, defLat], // starting position [lng, lat]
+                                zoom: 15 // starting zoom
+                            });
+
+                        } else {
+
+                            var mapBox = new mapboxgl.Map({
+                                container: 'mapBoxMap', // container ID
+                                style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                                center: [markers[0].log, markers[0].lat], // starting position [lng, lat]
+                                zoom: 15 // starting zoom
+                            });
+
+
+
+                            var col;
+                            var dumpCordinates = [];
+                            var temicon;
+                            var fromToTimeLogLat = [];
+                            var lastmarker = markers.length;
+                            for (var i = 0; i < markers.length; i++) {
+
+
+
+                                var data = markers[i];
+
+
+                                var a = i + 1;
+                                if (a == 1) {
+                                    temicon = "../Content/images/img/segregationImg/Start-Point.png";
+                                }
+                                else if (a == lastmarker) {
+                                    temicon = "../Content/images/img/segregationImg/End_Point.png";
+                                }
+                                else {
+                                    temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|f542e6|000000'
+                                }
+                                if (fromtime == "" || totime == "") {
+                                    //debugger;
+                                    if (from == "" || to == "") {
+                                        const el = document.createElement('div');
+                                        el.className = 'mapBoxMarker';
+                                        el.style.backgroundImage = "url(" + temicon + ")";
+                                        new mapboxgl.Marker(el)
+                                            .setLngLat([data.log, data.lat])
+                                            .setPopup(
+                                                new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                    .setHTML(getPopupHtml(data)
+                                                    )
+                                            )
+                                            .addTo(mapBox);
+
+                                    }
+                                    else {
+                                        if (a >= from && a <= to) {
+                                            const el = document.createElement('div');
+                                            el.className = 'mapBoxMarker';
+                                            el.style.backgroundImage = "url(" + temicon + ")";
+                                            new mapboxgl.Marker(el)
+                                                .setLngLat([data.log, data.lat])
+                                                .setPopup(
+                                                    new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                        .setHTML(getPopupHtml(data)
+                                                        )
+                                                )
+                                                .addTo(mapBox);
+
+                                        }
+                                        else {
+                                            const el = document.createElement('div');
+                                            new mapboxgl.Marker(el)
+                                                .setLngLat([data.log, data.lat])
+                                                .addTo(mapBox);
+                                        }
+                                    }
+
+                                } else if (fromtime != "" && totime != "") {
+                                    // debugger;
+                                    if (convertFromStringToDate(data.datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(data.datetime) <= convertFromStringToDate(totime)) {
+                                        fromToTimeLogLat.push({ "log": data.log, "lat": data.lat });
+                                        const el = document.createElement('div');
+                                        el.className = 'mapBoxMarker';
+                                        el.style.backgroundImage = "url(" + temicon + ")";
+                                        new mapboxgl.Marker(el)
+                                            .setLngLat([data.log, data.lat])
+                                            .setPopup(
+                                                new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                    .setHTML(getPopupHtml(data)
+                                                    )
+                                            )
+                                            .addTo(mapBox);
+                                    }
+                                    else {
+                                        const el = document.createElement('div');
+                                        new mapboxgl.Marker(el)
+                                            .setLngLat([data.log, data.lat])
+                                            .addTo(mapBox);
+                                    }
+
+                                }
+                                else {
+                                    fromToTimeLogLat.push({ "log": data.log, "lat": data.lat });
+                                    const el = document.createElement('div');
+                                    el.className = 'mapBoxMarker';
+                                    el.style.backgroundImage = "url(" + temicon + ")";
+                                    new mapboxgl.Marker(el)
+                                        .setLngLat([data.log, data.lat])
+                                        .setPopup(
+                                            new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                .setHTML(getPopupHtml(data)
+                                                )
+                                        )
+                                        .addTo(mapBox);
+
+                                }
+
+
+                            }
+                            let counter = 0;
+                            let steps = 0;
+                            var pathCordinates = [];
+                            var returnPathCord = [];
+
+
+
+
+                            mapBox.on('load', () => {
+                                mapBox.loadImage('~/Content/images/img/send.png', (error, image) => {
+                                    if (error) throw error;
+                                    mapBox.addImage('rout-icon', image, { 'sdf': false, pixelRatio: 20 });
+                                });
+
+                                var origin = [];
+                                //for (var m = 0; m < markers.length - 1; m++) {
+                                //    var c = m + 1;
+                                //    if (from == "" || to == "") {
+                                //        origin = [markers[0].log, markers[0].lat];
+                                //    }
+                                //    else {
+                                //        if (c >= from && c < to) {
+                                //            origin = [markers[from - 1].log, markers[from - 1].lat];
+                                //        }
+                                //    }
+                                //}
+                                //debugger;
+                                for (var m = 0; m < markers.length - 1; m++) {
+                                    var c = m + 1;
+                                    if (fromtime == "" || totime == "") {
+                                        if (from == "" || to == "") {
+                                            origin = [markers[0].log, markers[0].lat];
+                                            break;
+                                        }
+                                        else {
+                                            if (c >= from && c < to) {
+                                                origin = [markers[from - 1].log, markers[from - 1].lat];
+                                                break;
+                                            }
+                                            else {
+                                                origin = [markers[0].log, markers[0].lat];
+                                            }
+                                        }
+                                    }
+                                    else if (fromtime != "" && totime != "") {
+                                        if (fromToTimeLogLat.length > 0) {
+                                            origin = [fromToTimeLogLat[0].log, fromToTimeLogLat[0].lat];
+                                        }
+                                        else {
+                                            origin = [markers[0].log, markers[0].lat];
+                                        }
+                                    }
+                                    else {
+                                        origin = [markers[0].log, markers[0].lat];
+                                    }
+
+                                }
+
+
+
+                                var point = {
+                                    'type': 'FeatureCollection',
+                                    'features': [
+                                        {
+                                            'type': 'Feature',
+                                            'properties': {},
+                                            'geometry': {
+                                                'type': 'Point',
+                                                'coordinates': origin
+                                            }
+                                        }
+                                    ]
+                                };
+
+                                mapBox.addSource('point', {
+                                    'type': 'geojson',
+                                    'data': point
+                                });
+
+
+
+                                //mapBox.addLayer({
+                                //    'id': 'point',
+                                //    'source': 'point',
+                                //    'type': 'symbol',
+                                //    'layout': {
+                                //        // This icon is a part of the Mapbox Streets style.
+                                //        // To view all images available in a Mapbox style, open
+                                //        // the style in Mapbox Studio and click the "Images" tab.
+                                //        // To add a new image to the style at runtime see
+                                //        // https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+                                //        //'icon-image': 'airport-15',
+
+                                //        'icon-image': 'rout-icon',
+                                //        //'icon-rotate': 90,
+                                //        'icon-rotate': ['get', 'bearing'],
+                                //        'icon-rotation-alignment': 'map',
+                                //        'icon-allow-overlap': true,
+                                //        'icon-ignore-placement': true
+                                //    }
+                                //});
+
+                                var k = 0;
+                                var start;
+                                var end
+                                let interval = setInterval(function () {
+                                    if (ajaxCount == 0) {
+                                        // debugger;
+                                        var b = k + 1;
+                                        if (fromtime == "" || totime == "") {
+                                            if (from == "" || to == "") {
+                                                if (k < markers.length - 1) {
+                                                    start = [markers[k].log, markers[k].lat];
+                                                    end = [markers[k + 1].log, markers[k + 1].lat];
+                                                    // make an initial directions request that
+                                                    // starts and ends at the same location
+                                                    getRoute(start, end, k);
+                                                }
+
+                                            }
+                                            else {
+                                                if (b >= from && b < to) {
+                                                    if (k < markers.length - 1) {
+                                                        start = [markers[k].log, markers[k].lat];
+                                                        end = [markers[k + 1].log, markers[k + 1].lat];
+                                                        // make an initial directions request that
+                                                        // starts and ends at the same location
+                                                        getRoute(start, end, k);
+                                                    }
+                                                }
+                                            }
+                                        } else if (fromtime != "" && totime != "") {
+                                            if (k < markers.length) {
+                                                if (convertFromStringToDate(markers[k].datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(markers[k].datetime) <= convertFromStringToDate(totime) && convertFromStringToDate(markers[k + 1].datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(markers[k + 1].datetime) <= convertFromStringToDate(totime)) {
+                                                    if (k < markers.length - 1) {
+                                                        start = [markers[k].log, markers[k].lat];
+                                                        end = [markers[k + 1].log, markers[k + 1].lat];
+                                                        // make an initial directions request that
+                                                        // starts and ends at the same location
+                                                        getRoute(start, end, k);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        //if (from == "" || to == "") {
+                                        //    if (k < markers.length - 1) {
+                                        //        start = [markers[k].log, markers[k].lat];
+                                        //        end = [markers[k + 1].log, markers[k + 1].lat];
+                                        //        // make an initial directions request that
+                                        //        // starts and ends at the same location
+                                        //        getRoute(start, end, k);
+                                        //    }
+
+                                        //}
+                                        //else {
+                                        //    if (b >= from && b < to) {
+                                        //        if (k < markers.length - 1) {
+                                        //            start = [markers[k].log, markers[k].lat];
+                                        //            end = [markers[k + 1].log, markers[k + 1].lat];
+                                        //            // make an initial directions request that
+                                        //            // starts and ends at the same location
+                                        //            getRoute(start, end, k);
+                                        //        }
+                                        //    }
+                                        //}
+
+                                        //debugger;
+                                        if (k == markers.length - 1) {
+                                            if (dumpCordinates.length > 0) {
+                                                getRoute(end, dumpCordinates, k + 1);
+                                            }
+
+                                        }
+
+                                        k++;
+                                    }
+
+                                    if (k >= markers.length + 1 && ajaxCount == 0) {
+
+                                        clearInterval(interval);
+                                        if (pathCordinates.length > 0) {
+                                            mapBox.addLayer({
+                                                'id': 'point',
+                                                'source': 'point',
+                                                'type': 'symbol',
+                                                'layout': {
+                                                    // This icon is a part of the Mapbox Streets style.
+                                                    // To view all images available in a Mapbox style, open
+                                                    // the style in Mapbox Studio and click the "Images" tab.
+                                                    // To add a new image to the style at runtime see
+                                                    // https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+                                                    //'icon-image': 'airport-15',
+
+                                                    'icon-image': 'rout-icon',
+                                                    //'icon-rotate': 90,
+                                                    'icon-rotate': ['get', 'bearing'],
+                                                    'icon-rotation-alignment': 'map',
+                                                    'icon-allow-overlap': true,
+                                                    'icon-ignore-placement': true
+                                                }
+                                            });
+                                        }
+                                        //getRoute(end, dumpCordinates, k);
+                                    }
+                                }, 1);
+
+                                var requestAnimateId = 0;
+                                document.getElementById('replay').addEventListener('click', () => {
+
+                                    if (requestAnimateId != 0) {
+                                        $('#replay').prop('disabled', true);
+                                        $('#pauseAnim').prop('disabled', false);
+                                        window.cancelAnimationFrame(requestAnimateId);
+                                        animate();
+                                    } else {
+                                        if (pathCordinates.length > 0) {
+                                            $('#replay').prop('disabled', true);
+                                            $('#pauseAnim').prop('disabled', false);
+                                            // Set the coordinates of the original point back to origin
+                                            point.features[0].geometry.coordinates = pathCordinates[0];
+
+                                            // Update the source layer
+                                            mapBox.getSource('point').setData(point);
+
+                                            // Reset the counter
+                                            counter = 0;
+
+                                            // Restart the animation
+                                            animate(counter);
+                                        }
+                                    }
+                                });
+                                document.getElementById('pauseAnim').addEventListener('click', () => {
+
+                                    if (requestAnimateId) {
+                                        $('#replay').prop('disabled', false);
+                                        $('#pauseAnim').prop('disabled', true);
+                                        window.cancelAnimationFrame(requestAnimateId);
+                                        requestAnimateId = undefined;
+                                    }
+                                });
+                                function animate() {
+                                    steps = pathCordinates.length;
+                                    const start =
+                                        pathCordinates[
+                                        counter >= steps ? counter - 1 : counter
+                                        ];
+                                    const end =
+                                        pathCordinates[
+                                        counter >= steps ? counter : counter + 1
+                                        ];
+                                    if (!start || !end) {
+                                        // Update point geometry to a new position based on counter denoting
+                                        // the index to access the arc
+                                        point.features[0].geometry.coordinates =
+                                            pathCordinates[counter];
+
+                                        $('#replay').prop('disabled', false);
+                                        $('#pauseAnim').prop('disabled', true);
+                                        // Update the source with this new data
+                                        mapBox.getSource('point').setData(point);
+                                        requestAnimateId = 0;
+                                        return;
+                                    }
+
+
+                                    // Update point geometry to a new position based on counter denoting
+                                    // the index to access the arc
+                                    point.features[0].geometry.coordinates =
+                                        pathCordinates[counter];
+
+                                    // Calculate the bearing to ensure the icon is rotated to match the route arc
+                                    // The bearing is calculated between the current point and the next point, except
+                                    // at the end of the arc, which uses the previous point and the current point
+                                    point.features[0].properties.bearing = turf.bearing(
+                                        turf.point(start),
+                                        turf.point(end)
+                                    );
+
+                                    // Update the source with this new data
+                                    mapBox.getSource('point').setData(point);
+
+                                    // Request the next frame of animation as long as the end has not been reached
+                                    if (counter < steps) {
+                                        requestAnimateId = requestAnimationFrame(animate);
+                                        //setTimeout(animate,1);
+
+                                    }
+
+                                    counter = counter + 1;
+                                }
+                            });
+
+                            // debugger;
+                        }
+
+
+                        const layerList = document.getElementById('mapBoxMenu');
+                        const inputs = layerList.getElementsByTagName('input');
+
+                        for (const input of inputs) {
+                            input.onclick = (layer) => {
+                                // debugger;
+                                const layerId = layer.target.id;
+                                mapBox.setStyle('mapbox://styles/mapbox/' + layerId);
+
+                            };
+                        }
+                        // create a function to make a directions request
+                        function getRoute1(start, end, i) {
+                            // debugger;
+                            // make a directions request using cycling profile
+                            // an arbitrary start will always be the same
+                            // only the end or destination will change
+
+                            $.ajax({
+                                type: "get",
+                                traditional: true,
+                                dataType: "json",
+                                async: false,
+                                url: `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&steps=false&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+                                success: function (d) {
+                                    debugger;
+                                    const json = JSON.stringify(d);
+                                    const data = json.routes[0];
+                                    const route = data.geometry.coordinates;
+                                    const geojson = {
+                                        type: 'Feature',
+                                        properties: {},
+                                        geometry: {
+                                            type: 'LineString',
+                                            coordinates: route
+                                        }
+                                    };
+
+                                    //if the route already exists on the map, we'll reset it using setData
+                                    if (map.getSource('route' + i)) {
+                                        map.getSource('route' + i).setData(geojson);
+                                    }
+                                    // otherwise, we'll make a new request
+                                    else {
+                                        map.addLayer({
+                                            id: 'route' + i,
+                                            type: 'line',
+                                            source: {
+                                                type: 'geojson',
+                                                data: geojson
+                                            },
+                                            layout: {
+                                                'line-join': 'round',
+                                                'line-cap': 'round'
+                                            },
+                                            paint: {
+                                                'line-color': '#3887be',
+                                                'line-width': 5,
+                                                'line-opacity': 0.75
+                                            }
+                                        });
+                                    }
+
+                                    return route;
+                                }
+                            });
+                            // add turn instructions here at the end
+
+
+                        }
+                        async function getRoute(start, end, i) {
+
+                            // make a directions request using cycling profile
+                            // an arbitrary start will always be the same
+                            // only the end or destination will change
+                            ajaxCount++;
+                            const query = await fetch(
+                                `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&steps=false&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+                                { method: 'GET' }
+                            );
+                            const json = await query.json();
+
+                            const data = json.routes[0];
+                            const route = data.geometry.coordinates;
+
+                            const geojson = {
+                                type: 'Feature',
+                                properties: {},
+                                geometry: {
+                                    type: 'LineString',
+                                    coordinates: route
+                                }
+                            };
+                            //debugger;
+                            for (var l = 0; l < route.length; l++) {
+                                if (l < route.length - 1) {
+
+                                    var line = turf.lineString([route[l], route[l + 1]]);
+                                    var options = { units: 'kilometers' };
+
+                                    var point1 = {
+                                        "type": "Feature",
+                                        "properties": {},
+                                        "geometry": {
+                                            "type": "Point",
+                                            "coordinates": route[l]
+                                        }
+                                    };
+                                    var point2 = {
+                                        "type": "Feature",
+                                        "properties": {},
+                                        "geometry": {
+                                            "type": "Point",
+                                            "coordinates": route[l + 1]
+                                        }
+                                    };
+                                    var units = "kilometers";
+                                    var distanceInMeter = Math.trunc((turf.distance(point1, point2, units)) * 1000);
+                                    for (var n = 0; n < distanceInMeter; n = n + 15) {
+                                        var along = turf.along(line, n / 1000, options);
+                                        pathCordinates.push(along.geometry.coordinates);
+                                    }
+
+
+
+
+                                } else {
+                                    pathCordinates.push(route[l]);
+                                }
+                                //pathCordinates.push(route[l]);
+                                //pathCordinates.push(route[l]);
+                                //pathCordinates.push(route[l]);
+
+                            }
+
+                            //if the route already exists on the map, we'll reset it using setData
+                            if (mapBox.getSource('route' + i)) {
+                                mapBox.getSource('route' + i).setData(geojson);
+                            }
+                            // otherwise, we'll make a new request
+                            else {
+                                mapBox.addLayer({
+                                    id: 'route' + i,
+                                    type: 'line',
+                                    source: {
+                                        type: 'geojson',
+                                        data: geojson
+                                    },
+                                    layout: {
+                                        'line-join': 'round',
+                                        'line-cap': 'round'
+                                    },
+                                    paint: {
+                                        'line-color': '#3887be',
+                                        'line-width': 5,
+                                        'line-opacity': 0.75
+                                    }
+                                });
+                            }
+                            // add turn instructions here at the end
+                            ajaxCount--;
+
+                        }
+
+
+                    }
+
+                });
+
+            }
+        </script>
+
         <script>
 
             function SearchPin() {
-                debugger;
+                //debugger;
                 var from = document.getElementById("frompin").value;
                 var to = document.getElementById("topin").value;
                 if (from == "" || to == "") {
@@ -312,7 +1085,7 @@
             }
 
             function SearchTime() {
-                debugger;
+                //debugger;
                 var fromtime = document.getElementById("fromtime").value;
                 var totime = document.getElementById("totime").value;
                 if (fromtime == "" || totime == "") {
@@ -331,7 +1104,7 @@
             }
 
             function Reset() {
-                debugger;
+                //debugger;
                 var from = "";
                 var to = "";
                 document.getElementById("frompin").value = "";
@@ -345,7 +1118,7 @@
             var searchData = [];
             var isSearch = 0;
             function Search() {
-                debugger;
+                //debugger;
                 var from = document.getElementById("fromtime").value;
                 var to = document.getElementById("totime").value;
                 if (from == "" || to == "") {
@@ -396,6 +1169,7 @@
             }
 
             function myMap() {
+                debugger;
 
                 var from = document.getElementById("frompin").value;
                 var to = document.getElementById("topin").value;
@@ -410,7 +1184,6 @@
                     controlUI.style.cursor = 'pointer';
                     controlUI.style.marginBottom = '22px';
                     controlUI.style.marginTop = '5px';
-                    controlUI.style.marginLeft = '30%';
                     // controlUI.style.textAlign = 'center';
                     controlDiv.appendChild(controlUI);
 
@@ -450,7 +1223,7 @@
                 }
 
 
-                debugger;
+
                 var industries = $("#HdnIndustries").val();
                 var geocoder = new google.maps.Geocoder();
 
@@ -461,10 +1234,9 @@
                     datatype: "json",
                     traditional: true,
                     success: function (m) {
-                        debugger;
                         // alert(m[0].date);
-                        $("#route_date").val(m[0].date);
-                        $("#userid").val(m[0].userId);
+                        //$("#route_date").val(m[0].date);
+                        //$("#userid").val(m[0].userId);
 
                         if (isSearch == 1) {
                             markers = searchData;
@@ -488,7 +1260,8 @@
                         centerControlDivPause.index = 1;
                         //centerControlDiv.style.left = '90%';
                         centerControlDiv.id = "play_id";
-                        centerControlDivPause.style.left = '90%';
+                        centerControlDivPause.id = "pause_id";
+                        centerControlDivPause.style.left = '80%';
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
 
@@ -500,10 +1273,13 @@
                             animateCircle(poly, 7);
                         });
 
+                        debugger;
+
                         var infoWindow = new google.maps.InfoWindow();
                         var lat_lng = new Array();
                         var latlngbounds = new google.maps.LatLngBounds();
                         var lastmarker = markers.length;
+
 
                         for (i = 0; i < markers.length; i++) {
 
@@ -512,14 +1288,24 @@
                             var data = markers[i]
                             var a = i + 1;
                             if (a == 1) {
-                                temicon = "../Content/images/img/segregationImg/Start-Point.png";
+                                temicon = "../images/img/segregationImg/Start-Point.png";
                             }
                             else if (a == lastmarker) {
                                 temicon = "../Content/images/img/segregationImg/End_Point.png";
                             }
                             else {
-                                temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|FF0000|000000'
+                                temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|0F7017|000000'
                             }
+                            // Get Address from server
+
+                            //var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                            //lat_lng.push(myLatlng);
+                            //var marker = new google.maps.Marker({
+                            //    position: myLatlng,
+                            //    map: map,
+                            //    title: data.Username,
+                            //    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + '|FF0000|000000'
+                            //});
                             // Get Address from server
                             if (fromtime == "" && totime == "") {
                                 if (from == "" && to == "") {
@@ -542,7 +1328,7 @@
                                         var marker = new google.maps.Marker({
                                             position: myLatlng,
                                             map: map,
-                                            title: data.Username,
+                                            title: data.username,
                                             icon: {
                                                 // labelOrigin: new google.maps.Point(16, 65),
                                                 url: temicon
@@ -567,7 +1353,7 @@
                                     var marker = new google.maps.Marker({
                                         position: myLatlng,
                                         map: map,
-                                        title: data.Username,
+                                        title: data.userName,
                                         icon: {
                                             // labelOrigin: new google.maps.Point(16, 65),
                                             url: temicon
@@ -589,13 +1375,14 @@
                                 var marker = new google.maps.Marker({
                                     position: myLatlng,
                                     map: map,
-                                    title: data.Username,
+                                    title: data.userName,
                                     icon: {
                                         // labelOrigin: new google.maps.Point(16, 65),
                                         url: temicon
                                     }
                                 });
                             }
+
 
                             latlngbounds.extend(marker.position);
 
@@ -612,33 +1399,51 @@
                                     if (data.address == null) {
                                         data.address = '';
                                     }
-                                    google.maps.event.addListener(marker, "click", function (e) {
-                                        infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h3>' + data.userName + '</h3><h5><b>Employee Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehicle No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>');
-                                        infoWindow.open(map, marker);
 
-                                        //animateCircle(poly,9);
+                                    //New MNarker Click
+                                    google.maps.event.addListener(marker, "click", function (e) {
+                                        debugger;
+                                        var latlng = new google.maps.LatLng(data.lat, data.log);
+                                        var geocoder = geocoder = new google.maps.Geocoder();
+                                        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                                            debugger;
+                                            if (status == google.maps.GeocoderStatus.OK) {
+                                                debugger;
+                                                if (results[1]) {
+                                                    //alert("Location: " + results[1].formatted_address);
+                                                    var address = results[1].formatted_address;
+                                                    infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h3>' + data.userName + '</h3><h5><b>Employee Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehicle No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + address + '</p></div></div>');
+                                                    infoWindow.open(map, marker);
+                                                }
+                                                else {
+                                                    var address = "Not Mention";
+                                                    infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h3>' + data.userName + '</h3><h5><b>Employee Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehicle No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + address + '</p></div></div>');
+                                                    infoWindow.open(map, marker);
+                                                }
+
+                                            }
+                                            else {
+                                                infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h3>' + data.userName + '</h3><h5><b>Employee Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehicle No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>');
+                                                infoWindow.open(map, marker);
+                                            }
+                                        });
+                                       
                                     });
+
+                                    //Old Marker Click
+                                    //google.maps.event.addListener(marker, "click", function (e) {
+                                    //    infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h3>' + data.userName + '</h3><h5><b>Employee Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehicle No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>');
+                                    //    infoWindow.open(map, marker);
+
+                                    //    //animateCircle(poly,9);
+                                    //});
 
                                 })(marker, data);
 
                             }
 
 
-                            //(function (marker, data) {
-
-                            //    //google.maps.event.addListener(marker, "click", function (e) {
-                            //    //    infoWindow.setContent('<div class=infowindow> <h3>' + data.userName + '</h3><h5><b>Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehcile No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>');
-                            //    //    infoWindow.open(map, marker);
-
-
-                            //    google.maps.event.addListener(marker, "click", function (e) {
-                            //        infoWindow.setContent('<div class=infowindow> <h5><b>HouseDetails:</b></h5><p>House-Id:<b>' + data.HouseId + '</b></p><p>Name:<b>' + data.HouseOwnerName + '</b></p><p>MobileNo:<b>' + data.OwnerMobileNo + '</b></p><p>Date:<b>' + data.date + '</b></p><p>Time:<b>' + data.time + '</b></p><p>HouseAddress:<b>' + data.HouseAddress + '</b></p><hr><div><h5><b>EmpDetails:</b></h5><p>EmpName:<b>' + data.userName + '</b></p><p>Vehcile No:<b>' + data.vehcileNumber + '</b></p></div></div>');
-                            //        infoWindow.open(map, marker);
-
-                            //        //animateCircle(poly,9);
-                            //    });
-
-                            //})(marker, data);
+                          
 
 
 
@@ -647,7 +1452,6 @@
                         map.fitBounds(latlngbounds);
 
                         //***********ROUTING****************//
-
                         var car = "M17.402,0H5.643C2.526,0,0,3.467,0,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759c3.116,0,5.644-2.527,5.644-5.644 V6.584C23.044,3.467,20.518,0,17.402,0z M22.057,14.188v11.665l-2.729,0.351v-4.806L22.057,14.188z M20.625,10.773 c-1.016,3.9-2.219,8.51-2.219,8.51H4.638l-2.222-8.51C2.417,10.773,11.3,7.755,20.625,10.773z M3.748,21.713v4.492l-2.73-0.349 V14.502L3.748,21.713z M1.018,37.938V27.579l2.73,0.343v8.196L1.018,37.938z M2.575,40.882l2.218-3.336h13.771l2.219,3.336H2.575z M19.328,35.805v-7.872l2.729-0.355v10.048L19.328,35.805z";
 
                         //Old
@@ -738,7 +1542,7 @@
                     }
 
                 });
-
+                myMapBox();
             }
 
         </script>

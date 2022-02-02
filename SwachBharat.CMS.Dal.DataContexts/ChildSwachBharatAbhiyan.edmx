@@ -1974,6 +1974,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="Int32" Name="houseId" Nullable="true" />
           <Property Type="Int32" Name="LWId" Nullable="true" />
           <Property Type="Int32" Name="SSId" Nullable="true" />
+          <Property Type="Int32" Name="dyId" Nullable="true" />
           <Property Type="String" Name="ReferanceId" Nullable="true" MaxLength="350" />
           <Property Type="String" Name="houseNumber" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="houseOwner" Nullable="true" MaxLength="200" />
@@ -1994,6 +1995,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="Int32" Name="NotSpecified" Nullable="true" />
           <Property Type="Int32" Name="TotalLiquidLatLongCount" Nullable="true" />
           <Property Type="Int32" Name="TotalStreetLatLongCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalDumpYardLatLongCount" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3102,6 +3104,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="houseId" ColumnName="houseId" />
                 <ScalarProperty Name="LWId" ColumnName="LWId" />
                 <ScalarProperty Name="SSId" ColumnName="SSId" />
+                <ScalarProperty Name="dyId" ColumnName="dyId" />
                 <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
                 <ScalarProperty Name="houseNumber" ColumnName="houseNumber" />
                 <ScalarProperty Name="houseOwner" ColumnName="houseOwner" />
@@ -3126,6 +3129,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="NotSpecified" ColumnName="NotSpecified" />
                 <ScalarProperty Name="TotalLiquidLatLongCount" ColumnName="TotalLiquidLatLongCount" />
                 <ScalarProperty Name="TotalStreetLatLongCount" ColumnName="TotalStreetLatLongCount" />
+                <ScalarProperty Name="TotalDumpYardLatLongCount" ColumnName="TotalDumpYardLatLongCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

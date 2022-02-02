@@ -2418,6 +2418,7 @@ namespace SwachBharat.CMS.Bll.Services
                         //string gcTime = x.gcDate.ToString();
                         houseLocation.Add(new SBALHouseLocationMapView()
                         {
+                            dyid = Convert.ToInt32(x.dyId),
                             ssid = Convert.ToInt32(x.SSId),
                             lwid = Convert.ToInt32(x.LWId),
                             houseId = Convert.ToInt32(x.houseId),
@@ -2758,6 +2759,7 @@ namespace SwachBharat.CMS.Bll.Services
                         model.NotSpecified = data.NotSpecified;
                         model.LiquidCollection = data.TotalLiquidLatLongCount;
                         model.StreetCollection = data.TotalStreetLatLongCount;
+                        model.DumpYardCount = data.TotalDumpYardLatLongCount;
                         return model;
                     }
 
@@ -5366,6 +5368,84 @@ namespace SwachBharat.CMS.Bll.Services
             DateTime tdate = Convert.ToDateTime(dt + " " + "23:59:59");
 
             var data = db.SP_IdelTime(0, fdate, tdate).Where(c => c.IdelTime != null & c.IdelTime > 15).ToList().OrderByDescending(c => c.StartTime);
+            //var data = db.SP_IdelTime(0, fdate, fdate).Where(c => c.IdelTime != null & c.IdelTime > 15).ToList();
+            foreach (var x in data)
+            {
+                TimeSpan spWorkMin = TimeSpan.FromMinutes(Convert.ToDouble(x.IdelTime));
+                string workHours = spWorkMin.ToString(@"hh\:mm");
+
+                string displayTime = Convert.ToDateTime(x.date).ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
+                string time = Convert.ToDateTime(x.StartTime).ToString("HH:mm:ss");
+
+                obj.Add(new SBAEmplyeeIdelGrid()
+                {
+                    UserName = x.userName,
+                    Date = Convert.ToDateTime(x.date).ToString("dd/MM/yyyy"),
+                    StartTime = x.StartTime,
+                    EndTime = x.LastTime,
+                    StartAddress = checkNull(x.StartAddress).Replace("Unnamed Road, ", ""),
+                    EndAddress = checkNull(x.address).Replace("Unnamed Road, ", ""),
+                    IdelTime = workHours,
+                    userId = x.userId,
+                    startLat = x.StarLat,
+                    startLong = x.StartLog,
+                    EndLat = x.lat,
+                    EndLong = x.@long,
+                    daDateTIme = (displayTime + " " + time)
+
+                });
+            }
+            return obj;
+        }
+
+        public List<SBAEmplyeeIdelGrid> GetLiquidIdelTimeNotification()
+        {
+            List<SBAEmplyeeIdelGrid> obj = new List<SBAEmplyeeIdelGrid>();
+            // DateTime? fdate = null
+            string dt = DateTime.Now.ToString("MM/dd/yyyy");
+            DateTime fdate = Convert.ToDateTime(dt + " " + "00:00:00");
+            DateTime tdate = Convert.ToDateTime(dt + " " + "23:59:59");
+
+            var data = db.SP_IdelTimeLiquid(0, fdate, tdate).Where(c => c.IdelTime != null & c.IdelTime > 15).ToList().OrderByDescending(c => c.StartTime);
+            //var data = db.SP_IdelTime(0, fdate, fdate).Where(c => c.IdelTime != null & c.IdelTime > 15).ToList();
+            foreach (var x in data)
+            {
+                TimeSpan spWorkMin = TimeSpan.FromMinutes(Convert.ToDouble(x.IdelTime));
+                string workHours = spWorkMin.ToString(@"hh\:mm");
+
+                string displayTime = Convert.ToDateTime(x.date).ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
+                string time = Convert.ToDateTime(x.StartTime).ToString("HH:mm:ss");
+
+                obj.Add(new SBAEmplyeeIdelGrid()
+                {
+                    UserName = x.userName,
+                    Date = Convert.ToDateTime(x.date).ToString("dd/MM/yyyy"),
+                    StartTime = x.StartTime,
+                    EndTime = x.LastTime,
+                    StartAddress = checkNull(x.StartAddress).Replace("Unnamed Road, ", ""),
+                    EndAddress = checkNull(x.address).Replace("Unnamed Road, ", ""),
+                    IdelTime = workHours,
+                    userId = x.userId,
+                    startLat = x.StarLat,
+                    startLong = x.StartLog,
+                    EndLat = x.lat,
+                    EndLong = x.@long,
+                    daDateTIme = (displayTime + " " + time)
+
+                });
+            }
+            return obj;
+        }
+
+        public List<SBAEmplyeeIdelGrid> GetStreetIdelTimeNotification()
+        {
+            List<SBAEmplyeeIdelGrid> obj = new List<SBAEmplyeeIdelGrid>();
+            // DateTime? fdate = null
+            string dt = DateTime.Now.ToString("MM/dd/yyyy");
+            DateTime fdate = Convert.ToDateTime(dt + " " + "00:00:00");
+            DateTime tdate = Convert.ToDateTime(dt + " " + "23:59:59");
+
+            var data = db.SP_IdelTimestreet(0, fdate, tdate).Where(c => c.IdelTime != null & c.IdelTime > 15).ToList().OrderByDescending(c => c.StartTime);
             //var data = db.SP_IdelTime(0, fdate, fdate).Where(c => c.IdelTime != null & c.IdelTime > 15).ToList();
             foreach (var x in data)
             {
