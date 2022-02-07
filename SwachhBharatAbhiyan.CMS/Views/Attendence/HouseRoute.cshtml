@@ -317,27 +317,28 @@
     <div class="container ">
         <div class="row">
 
-            <div class="col-12 bg-white has-shadow" id="googleMap" style="width:auto; height:600px"></div>
+            <div class="col-12 bg-white has-shadow" id="googleMap" style="width: auto; height: 600px; display: none;"></div>
             <div class="col-sm-2"></div>
         </div>
     </div>
-    <div class="container " style="display:none;">
+    <div class="container ">
         <div class="row">
 
-            <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width:auto; height:600px"></div>
+            <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width: auto; height: 600px;"></div>
 
             <div id="mapBoxMenu">
-                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite">
-                <!-- See a list of Mapbox-hosted public styles at -->
-                <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
-                <label for="satellite-v9">satellite</label>
+                <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
+                <label for="streets-v11">streets</label>
                 <input id="light-v10" type="radio" name="rtoggle" value="light">
                 <label for="light-v10">light</label>
                 <input id="dark-v10" type="radio" name="rtoggle" value="dark">
                 <label for="dark-v10">dark</label>
-                <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
-                <label for="streets-v11">streets</label>
+                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite">
+                <!-- See a list of Mapbox-hosted public styles at -->
+                <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
+                <label for="satellite-v9">satellite</label>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors">
+
                 <label for="outdoors-v11">outdoors</label>
                 <div class="overlay">
                     <button type="button" id="replay">Play</button>
@@ -620,7 +621,7 @@
                                     }
 
                                 } else if (fromtime != "" && totime != "") {
-                                    debugger;
+                                 //   debugger;
                                     if (convertFromStringToDate(data.datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(data.datetime) <= convertFromStringToDate(totime)) {
                                         fromToTimeLogLat.push({ "log": data.log, "lat": data.lat });
                                         const el = document.createElement('div');
@@ -798,7 +799,7 @@
                             //        }
                             //    }
                             //}
-                            debugger;
+                         //   debugger;
                             for (var m = 0; m < markers.length - 1; m++) {
                                 var c = m + 1;
                                 if (fromtime == "" || totime == "") {
@@ -879,7 +880,7 @@
                             var end
                             let interval = setInterval(function () {
                                 if (ajaxCount == 0) {
-                                    debugger;
+                                  //  debugger;
                                     var b = k + 1;
                                     if (fromtime == "" || totime == "") {
                                         if (from == "" || to == "") {
@@ -938,7 +939,7 @@
                                     //    }
                                     //}
 
-                                    debugger;
+                                  //  debugger;
                                     if (k == markers.length - 1) {
                                         if (dumpCordinates.length > 0) {
                                             getRoute(end, dumpCordinates, k + 1);
@@ -1065,7 +1066,7 @@
                             }
                         });
 
-                        debugger;
+                     //   debugger;
                     }
 
 
@@ -1074,7 +1075,7 @@
 
                     for (const input of inputs) {
                         input.onclick = (layer) => {
-                            debugger;
+                        //    debugger;
                             const layerId = layer.target.id;
                             mapBox.setStyle('mapbox://styles/mapbox/' + layerId);
 
@@ -1082,7 +1083,7 @@
                     }
                     // create a function to make a directions request
                     function getRoute1(start, end, i) {
-                        debugger;
+                     //   debugger;
                         // make a directions request using cycling profile
                         // an arbitrary start will always be the same
                         // only the end or destination will change
@@ -1094,7 +1095,7 @@
                             async: false,
                             url: `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&steps=false&geometries=geojson&access_token=${mapboxgl.accessToken}`,
                             success: function (d) {
-                                debugger;
+                             //   debugger;
                                 const json = JSON.stringify(d);
                                 const data = json.routes[0];
                                 const route = data.geometry.coordinates;
@@ -1144,7 +1145,7 @@
                         // make a directions request using cycling profile
                         // an arbitrary start will always be the same
                         // only the end or destination will change
-                        debugger;
+                      //  debugger;
                         ajaxCount++;
                         var url = `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&steps=false&geometries=geojson&access_token=${mapboxgl.accessToken}`;
 
@@ -1165,7 +1166,7 @@
                                 coordinates: route
                             }
                         };
-                        debugger;
+                   //     debugger;
                         for (var l = 0; l < route.length; l++) {
                             if (l < route.length - 1) {
 
@@ -1244,9 +1245,9 @@
         }
     </script>
     <script>
-        debugger;
+     //   debugger;
         $('#ZoneId').change(function () {
-            debugger;
+      //      debugger;
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
 
@@ -1299,7 +1300,7 @@
         var totime = "";
 
         function Search() {
-            debugger;
+         //   debugger;
             var from = document.getElementById("frompin").value;
             var to = document.getElementById("topin").value;
             if (from == "" || to == "") {
@@ -1314,7 +1315,7 @@
         }
 
         function SearchTime() {
-            debugger;
+         //   debugger;
             var fromtime = document.getElementById("fromtime").value;
             var totime = document.getElementById("totime").value;
             if (fromtime == "" || totime == "") {
@@ -1333,7 +1334,7 @@
         }
 
         function AreaSearch() {
-            debugger;
+        //    debugger;
             //var from = document.getElementById("frompin").value;
             //var to = document.getElementById("topin").value;
             //if (from == "" || to == "") {
@@ -1348,7 +1349,7 @@
         }
 
         function Reset() {
-            debugger;
+        //    debugger;
             var from = "";
             var to = "";
             document.getElementById("frompin").value = "";
@@ -1375,7 +1376,7 @@
 
 
             function CenterControl(controlDiv, map) {
-                debugger;
+            //    debugger;
                 // Set CSS for the control border.
                 var controlUI = document.createElement('div');
 
@@ -1399,7 +1400,7 @@
             }
 
             function CenterControlPause(controlDivPause, map) {
-                debugger;
+           //     debugger;
                 // Set CSS for the control border.
                 var controlUIPause = document.createElement('div');
 
@@ -1422,7 +1423,7 @@
             }
 
 
-            debugger;
+       //     debugger;
             var industries = $("#HdnIndustries").val();
             var areaid = $("#AreaId").val();
             var fromtime = $("#fromtime").val()
@@ -1439,7 +1440,7 @@
                     markers = m;
 
                     if (markers.length == 0) {
-                        debugger;
+                     //   debugger;
                         var map = new google.maps.Map(document.getElementById('googleMap'), {
                             zoom: 20,
                             center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
@@ -1448,7 +1449,7 @@
 
                     }
                     else {
-                        debugger;
+                   //     debugger;
                         var mapOptions = {
                             center: new google.maps.LatLng(markers[0].lat, markers[0].log),
                             zoom: 20,
@@ -1473,12 +1474,12 @@
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
 
                         centerControlDiv.addEventListener('click', function () {
-                            debugger;
+                         //   debugger;
                             animateCircle(poly, 17);
                         });
 
                         centerControlDivPause.addEventListener('click', function () {
-                            debugger;
+                         //   debugger;
                             animateCircle(poly, 7);
                         });
 
@@ -1516,7 +1517,7 @@
                                 document.getElementById("date").innerHTML = data.date;
                             }
                             if (data.HouseId != null) {
-                                debugger;
+                            //    debugger;
                                 var a = i + 1;
                                 if (a == 1) {
                                     temicon = "../Content/images/img/segregationImg/Start-Point.png";
@@ -1688,7 +1689,7 @@
                             if (data.type == 1) {
 
                                 (function (marker, data) {
-                                    debugger;
+                                 //   debugger;
                                     if (data.HouseOwnerName == null) {
                                         data.HouseOwnerName = 'Not Available';
                                     }
@@ -1912,7 +1913,7 @@
                         //Loop and Draw Path Route between the Points on MAP
                         for (var i = 0; i < lat_lng.length; i++) {
                             if ((i + 1) <= lat_lng.length) {
-                                debugger;
+                             //   debugger;
                                 var src = lat_lng[i];
                                 var des = lat_lng[i + 1];
                                 path.push(src);
@@ -1985,7 +1986,7 @@
         }
 
         $(document).ready(function () {
-            debugger;
+         //   debugger;
             var u_date = document.getElementById("date").innerHTML;
             document.getElementById("demo2").innerHTML = u_date;
             $(".jquery-date-time-picker").datetimepicker({

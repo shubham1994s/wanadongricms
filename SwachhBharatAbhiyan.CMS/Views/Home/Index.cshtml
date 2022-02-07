@@ -562,7 +562,7 @@
 </section>
 
 
-<section class="dashboard-counts no-padding-bottom" style="padding:0px;">
+<section class="dashboard-counts no-padding-bottom" style="padding:0px;" hidden="hidden">
 
     <div class="container-fluid">
         <br>
@@ -629,7 +629,7 @@
 
     </div>
 </section>
-<section class="dashboard-counts no-padding-bottom" style="padding:0px;" hidden="hidden">
+<section class="dashboard-counts no-padding-bottom" style="padding:0px;" >
     <div id="home" class="container tab-pane active" onload="myMapBox()">
         <div class="row bg-white" style="position:relative; height:680px;padding-top:15px;">
 
@@ -643,16 +643,17 @@
             <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width:1200px; height:600px;">
             </div>
             <div id="mapBoxMenu">
-                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite" checked="checked">
+                <input id="streets-v11" type="radio" name="rtoggle" value="street" checked="checked">
                 <!-- See a list of Mapbox-hosted public styles at -->
                 <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
-                <label for="satellite-v9">satellite</label>
+                <label for="streets-v11">streets</label>
+
                 <input id="light-v10" type="radio" name="rtoggle" value="light">
                 <label for="light-v10">light</label>
                 <input id="dark-v10" type="radio" name="rtoggle" value="dark">
                 <label for="dark-v10">dark</label>
-                <input id="streets-v11" type="radio" name="rtoggle" value="streets">
-                <label for="streets-v11">streets</label>
+                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite">
+                <label for="satellite-v9">satellite</label>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors">
                 <label for="outdoors-v11">outdoors</label>
             </div>
@@ -710,7 +711,7 @@
                 if (data.length == 0) {
                     var map = new mapboxgl.Map({
                         container: 'mapBoxMap', // container ID
-                        style: 'mapbox://styles/mapbox/satellite-streets-v11', // style URL
+                        style: 'mapbox://styles/mapbox/streets-v11', // style URL
                         center: [defLang, defLat], // starting position [lng, lat]
                         zoom: 12 // starting zoom
                     });
@@ -718,7 +719,7 @@
                 }
                 var map = new mapboxgl.Map({
                     container: 'mapBoxMap', // container ID
-                    style: 'mapbox://styles/mapbox/satellite-streets-v11', // style URL
+                    style: 'mapbox://styles/mapbox/streets-v11', // style URL
                     center: [data[0].log, data[0].lat], // starting position [lng, lat]
                     zoom: 12 // starting zoom
                 });
