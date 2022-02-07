@@ -323,7 +323,9 @@
     </div>
     <div class="container ">
         <div class="row">
-
+            <p id="wait2" style="display:none;position:absolute;top:35%;left:50%;">
+                <img class="rotate_img" src="~/Content/images/img/marker24.png">
+            </p>
             <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width: auto; height: 600px;"></div>
 
             <div id="mapBoxMenu">
@@ -341,7 +343,7 @@
 
                 <label for="outdoors-v11">outdoors</label>
                 <div class="overlay">
-                    <button type="button" id="replay">Play</button>
+                    <button type="button" id="replay" disabled>Play</button>
                     <button type="button" id="pauseAnim" style="margin-left: 92%; margin-top: -45%;" disabled>Pause</button>
                 </div>
             </div>
@@ -367,8 +369,8 @@
         .mapBoxMarker {
             background-image: url('../Content/images/img/marker24.png');
             background-size: cover;
-            width: 35px;
-            height: 50px;
+            width: 25px;
+            height: 40px;
             cursor: pointer;
         }
 
@@ -503,6 +505,7 @@
             var defLang = $('#deflang').val();
             mapboxgl.accessToken = 'pk.eyJ1IjoibWlsaW5kd2Fua2hlZGUiLCJhIjoiY2t5OGtydmRsMWV3cjJvb3lqcGFxeW1laSJ9.PSgpPveli2BSppuhR30bcw';
 
+            $("#wait2").css("display", "block");
             $("#mapBoxMap").css("display", "none");
             var industries = $("#HdnIndustries").val();
             var areaid = $("#AreaId").val();
@@ -516,6 +519,7 @@
                 traditional: true,
                 success: function (m) {
                     $("#route_date").val(m[0].date);
+                    $("#wait2").css("display", "none");
                     $("#mapBoxMap").css("display", "block");
 
                     markers = m;
@@ -974,7 +978,9 @@
                                                 'icon-ignore-placement': true
                                             }
                                         });
+                                        $('#replay').prop('disabled', false);
                                     }
+
                                     //getRoute(end, dumpCordinates, k);
                                 }
                             }, 1);
