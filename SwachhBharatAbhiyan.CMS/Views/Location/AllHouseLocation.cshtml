@@ -132,6 +132,9 @@
                     </div>
                 </div>
             </div>
+
+
+
             <div class="col" style="width:20%;padding-right: 5px;">
 
 
@@ -325,12 +328,38 @@
         </div>
 
     </div><br />
-    <div class="container ">
+    <div class="container" style="display:none;">
         <div class="row" style="position:relative; height:650px;">
             <p id="wait" style="display:none;position:absolute;top:35%;left:50%;">
                 <img class="rotate_img" src="~/Content/images/img/marker24.png">
             </p>
             <div class="col-10 bg-white has-shadow" id="googleMap" style="width:auto; height:600px"></div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div><br />
+    <div class="container ">
+        <div class="row" style="position:relative; height:650px;">
+            <p id="wait2" style="display:none;position:absolute;top:35%;left:50%;">
+                <img class="rotate_img" src="~/Content/images/img/marker24.png">
+            </p>
+            <div id="mapBoxMenu">
+                <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
+                <label for="streets-v11">streets</label>
+              
+                <input id="light-v10" type="radio" name="rtoggle" value="light">
+                <label for="light-v10">light</label>
+                <input id="dark-v10" type="radio" name="rtoggle" value="dark">
+                <label for="dark-v10">dark</label>
+                <input id="satellite-v9" type="radio" name="rtoggle" value="satellite">
+                <!-- See a list of Mapbox-hosted public styles at -->
+                <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
+                <label for="satellite-v9">satellite</label>
+                <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors">
+                <label for="outdoors-v11">outdoors</label>
+
+            </div>
+            <div class="col-10 bg-white has-shadow" id="mapBoxMap" style="width:auto; height:600px"></div>
+
             <div class="col-sm-2"></div>
         </div>
     </div>
@@ -353,7 +382,262 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="~/Content/turf/turf.min.js"></script>
+    <style>
+        .mapBoxMarker {
+            background-image: url('../Content/images/img/marker24.png');
+            background-size: contain;
+            background-position:center;
+            background-repeat: no-repeat;
+            width: 30px;
+            height: 35px;
+            cursor: pointer;
+        }
 
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #mapBoxMenu {
+            position: absolute;
+            background: #efefef;
+            padding: 10px;
+            font-family: 'Open Sans', sans-serif;
+            z-index:1;
+        }
+    </style>
+    <script>
+
+        function myMapBox() {
+
+            mapboxgl.accessToken = 'pk.eyJ1IjoibWlsaW5kd2Fua2hlZGUiLCJhIjoiY2t5OGtydmRsMWV3cjJvb3lqcGFxeW1laSJ9.PSgpPveli2BSppuhR30bcw';
+            var defLat = $('#deflat').val();
+            var defLang = $('#deflang').val();
+            var RadioValue = $("input[name='radio']:checked").val();
+            if (RadioValue == 0) {
+                document.getElementById('txt_fdate').value = today;
+                $('#selectnumber').val(-1);
+                $('#seg_type').val(-1);
+                $('#txt_fdate').prop('disabled', 'disabled');
+                $('#selectnumber').prop('disabled', 'disabled');
+                $('#seg_type').prop('disabled', 'disabled');
+            } else {
+                $('#txt_fdate').prop('disabled', false);
+                $('#selectnumber').prop('disabled', false);
+                $('#seg_type').prop('disabled', false);
+            }
+            $("#wait2").css("display", "block");
+            $("#mapBoxMap").css("display", "none");
+            $.ajax({
+                type: "post",
+                url: "/Location/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() + "&garbageType=" + $("#seg_type").val() + "&FilterType=" + RadioValue,
+                //url: "/Location/HouseLocationList",
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    $("#wait2").css("display", "none");
+                    $("#mapBoxMap").css("display", "block");
+                    if (data.length == 0) {
+                        $('#myModal').modal('show');
+
+
+                        var mapBox = new mapboxgl.Map({
+                            container: 'mapBoxMap', // container ID
+                            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                            center: [defLang, defLat], // starting position [lng, lat]
+                            zoom: 12 // starting zoom
+                        });
+
+                    }
+                    else {
+                        var mapBox = new mapboxgl.Map({
+                            container: 'mapBoxMap', // container ID
+                            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                            center: [data[0].houseLong, data[0].houseLat], // starting position [lng, lat]
+                            zoom: 12 // starting zoom
+                        });
+                        
+                        var marker, i;
+                        // alert(data.length);
+                        // Get Addres
+                        var gar_type;
+                        for (i = 0; i < data.length; i++) {
+                            if (data[i].houseOwnerName == null) {
+                                data[i].houseOwnerName = 'Not Available';
+                            }
+                            if (data[i].houseOwnerMobile == null) {
+                                data[i].houseOwnerMobile = '';
+                            }
+                            if (data[i].houseAddress == null) {
+                                data[i].houseAddress = '';
+                            }
+                            gar_type = data[i].garbageType
+
+                            var mUrl = "../Content/images/img/segregationImg/icn_house.png";
+                            if (data[i].lwid != 0) {
+                                var mUrl = "../../Areas/Liquid/Content/images/img/segregationImg/Liquidwaste_Marker.png";
+                            }
+                            if (data[i].ssid != 0) {
+                                var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Street_Sweep.png";
+                            }
+                            if (data[i].dyid != 0) {
+                                var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
+
+                            }
+                            switch (gar_type) {
+
+                                case 0:
+                                    mUrl = "../Content/images/img/segregationImg/icn_mixed_garbage.png"
+                                    break;
+                                case 1:
+                                    mUrl = "../Content/images/img/segregationImg/icn_segregated_garbage.png"
+                                    break;
+                                case 2:
+                                    mUrl = "../Content/images/img/segregationImg/icn_garbage_not_recevied.png"
+                                    break;
+                                case 3:
+                                    mUrl = "../Content/images/img/segregationImg/icn_not_specified.png"
+                                    break;
+                            }
+
+                            const el = document.createElement('div');
+                            el.className = 'mapBoxMarker';
+                            el.id = 'marker' + i;
+                            el.style.backgroundImage = "url(" + mUrl + ")";
+                            marker = new mapboxgl.Marker(el)
+                                .setLngLat([data[i].houseLong, data[i].houseLat])
+                                .addTo(mapBox);
+
+                            
+
+                            if (gar_type != null) {
+                                marker.getElement().addEventListener('click', (function (marker, i) {
+                                    return function () {
+                                        var poptext = '<div class=infowindow style="max-width:190px"> <h4 style="text-transform: capitalize;">' + data[i].houseOwnerName + '</h4><p><b>House Id: </b>' + data[i].ReferanceId + '</p>';
+                                        if (data[i].houseOwnerMobile != '') {
+                                            poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+                                        }
+                                        if (data[i].houseAddress != '') {
+                                            poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '<p>';
+                                        }
+                                        poptext = poptext + '<b>Date: </b>' + data[i].gcDate + '</p><div style="height:auto; width:150px"><p><b>Time: </b>' + data[i].gcTime + '</p></div></div>';
+                                        marker.setPopup(
+                                            new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                .setHTML(poptext)
+                                        );
+                                        marker.togglePopup();
+                                    }
+                                })(marker, i));
+                            } else if (data[i].lwid != 0) {
+
+                                marker.getElement().addEventListener('click', (function (marker, i) {
+                                    return function () {
+                                        var poptext = '<div class=infowindow style="max-width:190px"> <h4 style="text-transform: capitalize;">' + data[i].houseOwnerName + '</h4><p><b>Liquid Waste Id: </b>' + data[i].ReferanceId + '</p>'
+                                        if (data[i].houseOwnerMobile != '') {
+                                            poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+                                        }
+                                        if (data[i].houseAddress != '') {
+                                            poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '</p>';
+                                        }
+                                        poptext = poptext + '</div>';
+                                        marker.setPopup(
+                                            new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                .setHTML(poptext)
+                                        );
+                                        marker.togglePopup();
+                                    }
+                                })(marker, i));
+                            } else if (data[i].ssid != 0) {
+
+                                marker.getElement().addEventListener('click', (function (marker, i) {
+                                    return function () {
+                                        var poptext = '<div class=infowindow style="max-width:190px"> <h4 style="text-transform: capitalize;">' + data[i].houseOwnerName + '</h4><p><b>Street Sweep Id: </b>' + data[i].ReferanceId + '</p>'
+                                        if (data[i].houseOwnerMobile != '') {
+                                            poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+                                        }
+                                        if (data[i].houseAddress != '') {
+                                            poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '</p>';
+                                        }
+                                        poptext = poptext + '</div>';
+                                        marker.setPopup(
+                                            new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                .setHTML(poptext)
+                                        );
+                                        marker.togglePopup();
+                                    }
+                                })(marker, i));
+                            } else if (data[i].dyid != 0) {
+
+                                marker.getElement().addEventListener('click', (function (marker, i) {
+                                    return function () {
+                                        var poptext = '<div class=infowindow style="max-width:190px"> <h4 style="text-transform: capitalize;">' + data[i].houseOwnerName + '</h4><p><b>Dump Yard Id: </b>' + data[i].ReferanceId + '</p>'
+                                        if (data[i].houseOwnerMobile != '') {
+                                            poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+                                        }
+                                        if (data[i].houseAddress != '') {
+                                            poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '</p>';
+                                        }
+                                        poptext = poptext + '</div>';
+                                        marker.setPopup(
+                                            new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                .setHTML(poptext)
+                                        );
+                                        marker.togglePopup();
+                                    }
+                                })(marker, i));
+                            }
+                            else {
+                                marker.getElement().addEventListener('click', (function (marker, i) {
+                                    return function () {
+                                        var poptext = '<div class=infowindow style="max-width:190px"> <h4 style="text-transform: capitalize;">' + data[i].houseOwnerName + '</h4><p><b>House Id: </b>' + data[i].ReferanceId + '</p>'
+                                        if (data[i].houseOwnerMobile != '') {
+                                            poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+                                        }
+                                        if (data[i].houseAddress != '') {
+                                            poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '</p>';
+                                        }
+                                        poptext = poptext + '</div>';
+                                        marker.setPopup(
+                                            new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                .setHTML(poptext)
+                                        );
+                                        marker.togglePopup();
+                                    }
+                                })(marker, i));
+                            }
+
+
+                        }
+                        
+
+                    }
+
+
+                    const layerList = document.getElementById('mapBoxMenu');
+                    const inputs = layerList.getElementsByTagName('input');
+
+                    for (const input of inputs) {
+                        input.onclick = (layer) => {
+                            debugger;
+                            const layerId = layer.target.id;
+                            mapBox.setStyle('mapbox://styles/mapbox/' + layerId);
+
+                        };
+                    }
+                }
+            });
+        }
+
+
+
+    </script>
     <script>
         $(document).ready(function () {
 
@@ -627,6 +911,8 @@
                 }
 
             });
+
+            myMapBox();
         }
 
 
