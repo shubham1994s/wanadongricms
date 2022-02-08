@@ -106,6 +106,10 @@ function myMap2() {
                                     infowindow.open(map, marker);
                                 }
                             }
+                            else {
+                                infowindow.setContent('<div class=infowindow> <h3>' + data[i].userName + '</h3><h5><b>Details:</b></h5><p><b>Date:</b>' + data[i].date + '</p><p><b>Time:</b>' + data[i].time + '</p><p><b>Mobile:</b>' + data[i].userMobile + '<p><b>Vehicle No:</b>' + data[i].vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data[i].address + '</p></div></div>');
+                                infowindow.open(map, marker);
+                            }
                         });
 
                       
