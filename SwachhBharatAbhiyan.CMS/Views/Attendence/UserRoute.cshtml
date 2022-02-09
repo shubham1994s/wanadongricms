@@ -572,14 +572,18 @@
                                         data.vehcileNumber = '';
                                     }
                                     //debugger;
-                                    marker.getElement().addEventListener('click', (function (marker, data) {
-                                        getAddress(marker, data);
-                                    })(marker, data));
+                                    //marker.getElement().addEventListener('click', (function (marker, data) {
+                                    //    getAddress(marker, data);
+                                    //})(marker, data));
+
+                                    marker.getElement().addEventListener('click', getAddress.bind(event, data, marker));
                                 }
 
                             }
 
-                            async function getAddress(marker, data) {
+                            async function getAddress(data, marker) {
+                                console.log(data);
+                                console.log(marker);
                                 var lngLat = marker.getLngLat();
                                 var lat = lngLat['lat'];
                                 var lag = lngLat['lng'];
@@ -606,7 +610,7 @@
                                     new mapboxgl.Popup({ offset: 25 }) // add popups
                                         .setHTML(poptext)
                                 );
-                                
+                                marker.togglePopup();
                             }
                             let counter = 0;
                             let steps = 0;
