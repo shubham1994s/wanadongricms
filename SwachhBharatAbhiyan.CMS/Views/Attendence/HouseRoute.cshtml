@@ -101,12 +101,15 @@
     #floating-panel {
         margin-left: -10px;
     }
-    .xdsoft_datepicker{
-        display:none !important;
+
+    .xdsoft_datepicker {
+        display: none !important;
     }
-    .xdsoft_timepicker{
-        width:170px !important;
+
+    .xdsoft_timepicker {
+        width: 170px !important;
     }
+
     .xdsoft_prev, .xdsoft_next {
         margin-left: 40% !important;
     }
@@ -317,33 +320,30 @@
     <div class="container ">
         <div class="row">
 
-            <div class="col-12 bg-white has-shadow" id="googleMap" style="width: auto; height: 600px;"></div>
+            <div class="col-12 bg-white has-shadow" id="googleMap" style="width:auto; height:600px"></div>
             <div class="col-sm-2"></div>
         </div>
     </div>
-    <div class="container " style=" display: none;">
+    <div class="container " style="display:none;">
         <div class="row">
-            <p id="wait2" style="display:none;position:absolute;top:35%;left:50%;">
-                <img class="rotate_img" src="~/Content/images/img/marker24.png">
-            </p>
-            <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width: auto; height: 600px;"></div>
+
+            <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width:auto; height:600px"></div>
 
             <div id="mapBoxMenu">
-                <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
-                <label for="streets-v11">streets</label>
-                <input id="light-v10" type="radio" name="rtoggle" value="light">
-                <label for="light-v10">light</label>
-                <input id="dark-v10" type="radio" name="rtoggle" value="dark">
-                <label for="dark-v10">dark</label>
                 <input id="satellite-v9" type="radio" name="rtoggle" value="satellite">
                 <!-- See a list of Mapbox-hosted public styles at -->
                 <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
                 <label for="satellite-v9">satellite</label>
+                <input id="light-v10" type="radio" name="rtoggle" value="light">
+                <label for="light-v10">light</label>
+                <input id="dark-v10" type="radio" name="rtoggle" value="dark">
+                <label for="dark-v10">dark</label>
+                <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
+                <label for="streets-v11">streets</label>
                 <input id="outdoors-v11" type="radio" name="rtoggle" value="outdoors">
-
                 <label for="outdoors-v11">outdoors</label>
                 <div class="overlay">
-                    <button type="button" id="replay" disabled>Play</button>
+                    <button type="button" id="replay">Play</button>
                     <button type="button" id="pauseAnim" style="margin-left: 92%; margin-top: -45%;" disabled>Pause</button>
                 </div>
             </div>
@@ -369,8 +369,8 @@
         .mapBoxMarker {
             background-image: url('../Content/images/img/marker24.png');
             background-size: cover;
-            width: 20px;
-            height: 33px;
+            width: 35px;
+            height: 50px;
             cursor: pointer;
         }
 
@@ -446,130 +446,6 @@
             }
             return now;
         }
-
-
-        //   debugger;
-        $('#ZoneId').change(function () {
-            //      debugger;
-            var selectedText = $(this).find("option:selected").text();
-            var selectedValue = $(this).val();
-
-            $.ajax({
-                type: "post",
-                url: "/Attendence/LoadWardNoList?",
-                data: { ZoneId: $('#ZoneId').val() },
-                datatype: "json",
-                traditional: true,
-                success: function (data) {
-                    var ward;
-                    for (var i = 0; i < data.length; i++) {
-                        ward = ward + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
-                    }
-
-                    $('#WardNo').html(ward);
-
-                    $('#AreaId').find('option').remove().end().append('<option value="0">--Select Area--</option>');
-                }
-            });
-
-        });
-
-        $('#WardNo').change(function () {
-            var selectedText = $(this).find("option:selected").text();
-            var selectedValue = $(this).val();
-
-            $.ajax({
-                type: "post",
-                url: "/Attendence/LoadAreaList?",
-                data: { WardNo: $('#WardNo').val() },
-                datatype: "json",
-                traditional: true,
-                success: function (data) {
-                    var area;
-                    for (var i = 0; i < data.length; i++) {
-                        area = area + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
-                    }
-                    $('#AreaId').html(area);
-                }
-            });
-
-        });
-
-
-
-        var from = "";
-        var to = "";
-        var fromtime = "";
-        var totime = "";
-
-        function Search() {
-               debugger;
-            var from = document.getElementById("frompin").value;
-            var to = document.getElementById("topin").value;
-            if (from == "" || to == "") {
-                $("#err_time").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
-                return false;
-            }
-            else {
-                myMapBox(from, to)
-            }
-
-
-        }
-
-        function SearchTime() {
-               debugger;
-            var fromtime = document.getElementById("fromtime").value;
-            var totime = document.getElementById("totime").value;
-            if (fromtime == "" || totime == "") {
-                $("#err_time2").html("From Time and To Time is required").delay(3000).show().fadeOut('slow');
-                return false;
-            }
-            else if (fromtime >= totime) {
-                $("#err_time2").html("Please Select From Time Less Than To Time").delay(3000).show().fadeOut('slow');
-                return false;
-            }
-            else {
-                myMapBox(fromtime, totime)
-            }
-
-
-        }
-
-        function AreaSearch() {
-            //    debugger;
-            //var from = document.getElementById("frompin").value;
-            //var to = document.getElementById("topin").value;
-            //if (from == "" || to == "") {
-            //    $("#err_time").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
-            //    return false;
-            //}
-            //else {
-            myMapBox(from, to)
-            // }
-
-
-        }
-
-        function Reset() {
-                debugger;
-            var from = "";
-            var to = "";
-            document.getElementById("frompin").value = "";
-            document.getElementById("topin").value = "";
-            document.getElementById("fromtime").value = "";
-            document.getElementById("totime").value = "";
-            document.getElementById("ZoneId").value = "0";
-            document.getElementById("WardNo").value = "0";
-            document.getElementById("AreaId").value = "0";
-            myMapBox(from, to)
-        }
-
-
-        var searchData = [];
-        var isSearch = 0;
-
-
         function myMapBox() {
             var ajaxCount = 0;
 
@@ -629,7 +505,6 @@
             var defLang = $('#deflang').val();
             mapboxgl.accessToken = 'pk.eyJ1IjoibWlsaW5kd2Fua2hlZGUiLCJhIjoiY2t5OGtydmRsMWV3cjJvb3lqcGFxeW1laSJ9.PSgpPveli2BSppuhR30bcw';
 
-            $("#wait2").css("display", "block");
             $("#mapBoxMap").css("display", "none");
             var industries = $("#HdnIndustries").val();
             var areaid = $("#AreaId").val();
@@ -643,7 +518,6 @@
                 traditional: true,
                 success: function (m) {
                     $("#route_date").val(m[0].date);
-                    $("#wait2").css("display", "none");
                     $("#mapBoxMap").css("display", "block");
 
                     markers = m;
@@ -653,7 +527,7 @@
                             container: 'mapBoxMap', // container ID
                             style: 'mapbox://styles/mapbox/streets-v11', // style URL
                             center: [defLang, defLat], // starting position [lng, lat]
-                            zoom: 15 // starting zoom
+                            zoom: 12 // starting zoom
                         });
 
                     } else {
@@ -662,7 +536,7 @@
                             container: 'mapBoxMap', // container ID
                             style: 'mapbox://styles/mapbox/streets-v11', // style URL
                             center: [markers[0].log, markers[0].lat], // starting position [lng, lat]
-                            zoom: 15 // starting zoom
+                            zoom: 12 // starting zoom
                         });
 
 
@@ -749,7 +623,7 @@
                                     }
 
                                 } else if (fromtime != "" && totime != "") {
-                                 //   debugger;
+                                    //debugger;;
                                     if (convertFromStringToDate(data.datetime) >= convertFromStringToDate(fromtime) && convertFromStringToDate(data.datetime) <= convertFromStringToDate(totime)) {
                                         fromToTimeLogLat.push({ "log": data.log, "lat": data.lat });
                                         const el = document.createElement('div');
@@ -927,7 +801,7 @@
                             //        }
                             //    }
                             //}
-                         //   debugger;
+                            //debugger;;
                             for (var m = 0; m < markers.length - 1; m++) {
                                 var c = m + 1;
                                 if (fromtime == "" || totime == "") {
@@ -1008,7 +882,7 @@
                             var end
                             let interval = setInterval(function () {
                                 if (ajaxCount == 0) {
-                                  //  debugger;
+                                    //debugger;;
                                     var b = k + 1;
                                     if (fromtime == "" || totime == "") {
                                         if (from == "" || to == "") {
@@ -1067,7 +941,7 @@
                                     //    }
                                     //}
 
-                                  //  debugger;
+                                    //debugger;;
                                     if (k == markers.length - 1) {
                                         if (dumpCordinates.length > 0) {
                                             getRoute(end, dumpCordinates, k + 1);
@@ -1102,9 +976,7 @@
                                                 'icon-ignore-placement': true
                                             }
                                         });
-                                        $('#replay').prop('disabled', false);
                                     }
-
                                     //getRoute(end, dumpCordinates, k);
                                 }
                             }, 1);
@@ -1196,7 +1068,7 @@
                             }
                         });
 
-                     //   debugger;
+                        //debugger;;
                     }
 
 
@@ -1205,7 +1077,7 @@
 
                     for (const input of inputs) {
                         input.onclick = (layer) => {
-                        //    debugger;
+                            //debugger;;
                             const layerId = layer.target.id;
                             mapBox.setStyle('mapbox://styles/mapbox/' + layerId);
 
@@ -1213,7 +1085,7 @@
                     }
                     // create a function to make a directions request
                     function getRoute1(start, end, i) {
-                     //   debugger;
+                        //debugger;;
                         // make a directions request using cycling profile
                         // an arbitrary start will always be the same
                         // only the end or destination will change
@@ -1225,7 +1097,7 @@
                             async: false,
                             url: `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&steps=false&geometries=geojson&access_token=${mapboxgl.accessToken}`,
                             success: function (d) {
-                             //   debugger;
+                                //debugger;;
                                 const json = JSON.stringify(d);
                                 const data = json.routes[0];
                                 const route = data.geometry.coordinates;
@@ -1275,7 +1147,7 @@
                         // make a directions request using cycling profile
                         // an arbitrary start will always be the same
                         // only the end or destination will change
-                      //  debugger;
+                        //debugger;;
                         ajaxCount++;
                         var url = `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&steps=false&geometries=geojson&access_token=${mapboxgl.accessToken}`;
 
@@ -1296,7 +1168,7 @@
                                 coordinates: route
                             }
                         };
-                   //     debugger;
+                        //debugger;;
                         for (var l = 0; l < route.length; l++) {
                             if (l < route.length - 1) {
 
@@ -1372,14 +1244,12 @@
 
             });
 
-            
         }
-        myMapBox();
     </script>
     <script>
-     //   debugger;
+        //debugger;;
         $('#ZoneId').change(function () {
-      //      debugger;
+            //debugger;;
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
 
@@ -1432,7 +1302,7 @@
         var totime = "";
 
         function Search() {
-         //   debugger;
+            //debugger;;
             var from = document.getElementById("frompin").value;
             var to = document.getElementById("topin").value;
             if (from == "" || to == "") {
@@ -1447,7 +1317,7 @@
         }
 
         function SearchTime() {
-         //   debugger;
+            //debugger;;
             var fromtime = document.getElementById("fromtime").value;
             var totime = document.getElementById("totime").value;
             if (fromtime == "" || totime == "") {
@@ -1466,22 +1336,22 @@
         }
 
         function AreaSearch() {
-            debugger;
-            var from = document.getElementById("frompin").value;
-            var to = document.getElementById("topin").value;
-            if (from == "" || to == "") {
-                $("#err_time").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
-                return false;
-            }
-            else {
+            //debugger;;
+            //var from = document.getElementById("frompin").value;
+            //var to = document.getElementById("topin").value;
+            //if (from == "" || to == "") {
+            //    $("#err_time").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
+            //    return false;
+            //}
+            //else {
             myMap(from, to)
-             }
+            // }
 
 
         }
 
         function Reset() {
-        //    debugger;
+            //debugger;;
             var from = "";
             var to = "";
             document.getElementById("frompin").value = "";
@@ -1508,7 +1378,7 @@
 
 
             function CenterControl(controlDiv, map) {
-            //    debugger;
+                //debugger;;
                 // Set CSS for the control border.
                 var controlUI = document.createElement('div');
 
@@ -1532,7 +1402,7 @@
             }
 
             function CenterControlPause(controlDivPause, map) {
-           //     debugger;
+                //debugger;;
                 // Set CSS for the control border.
                 var controlUIPause = document.createElement('div');
 
@@ -1555,7 +1425,7 @@
             }
 
 
-       //     debugger;
+            //debugger;;
             var industries = $("#HdnIndustries").val();
             var areaid = $("#AreaId").val();
             var fromtime = $("#fromtime").val()
@@ -1572,7 +1442,7 @@
                     markers = m;
 
                     if (markers.length == 0) {
-                     //   debugger;
+                        //debugger;;
                         var map = new google.maps.Map(document.getElementById('googleMap'), {
                             zoom: 20,
                             center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
@@ -1581,7 +1451,7 @@
 
                     }
                     else {
-                   //     debugger;
+                        //debugger;;
                         var mapOptions = {
                             center: new google.maps.LatLng(markers[0].lat, markers[0].log),
                             zoom: 20,
@@ -1606,12 +1476,12 @@
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
 
                         centerControlDiv.addEventListener('click', function () {
-                         //   debugger;
+                            //debugger;;
                             animateCircle(poly, 17);
                         });
 
                         centerControlDivPause.addEventListener('click', function () {
-                         //   debugger;
+                            //debugger;;
                             animateCircle(poly, 7);
                         });
 
@@ -1649,7 +1519,7 @@
                                 document.getElementById("date").innerHTML = data.date;
                             }
                             if (data.HouseId != null) {
-                            //    debugger;
+                                //debugger;;
                                 var a = i + 1;
                                 if (a == 1) {
                                     temicon = "../Content/images/img/segregationImg/Start-Point.png";
@@ -1821,9 +1691,12 @@
                             if (data.type == 1) {
 
                                 (function (marker, data) {
-                                 //   debugger;
+                                    debugger;
                                     if (data.HouseOwnerName == null) {
                                         data.HouseOwnerName = 'Not Available';
+                                    }
+                                    if (data.DumpYardName == null) {
+                                        data.DumpYardName = 'Not Available';
                                     }
                                     if (data.OwnerMobileNo == null) {
                                         data.OwnerMobileNo = '';
@@ -1889,6 +1762,8 @@
 
                                     }
                                     else if (data.DyId != null) {
+
+
                                         //New MNarker Click
                                         //google.maps.event.addListener(marker, "click", function (e) {
                                         //    debugger;
@@ -2003,7 +1878,7 @@
                         var path = new google.maps.MVCArray();
 
                         //Initialize the Direction Service
-                        var service = new google.maps.DirectionsService();
+                        //var service = new google.maps.DirectionsService();
 
                         //Set the Path Stroke Color
                         var poly = new google.maps.Polyline({
@@ -2045,22 +1920,22 @@
                         //Loop and Draw Path Route between the Points on MAP
                         for (var i = 0; i < lat_lng.length; i++) {
                             if ((i + 1) <= lat_lng.length) {
-                             //   debugger;
+                                //debugger;;
                                 var src = lat_lng[i];
                                 var des = lat_lng[i + 1];
                                 path.push(src);
                                 poly.setPath(path);
-                                service.route({
-                                    origin: src,
-                                    destination: des,
-                                    travelMode: google.maps.DirectionsTravelMode.DRIVING
-                                }, function (result, status) {
-                                    if (status == google.maps.DirectionsStatus.OK) {
-                                        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
-                                            path.push(result.routes[0].overview_path[i]);
-                                        }
-                                    }
-                                });
+                                //service.route({
+                                //    origin: src,
+                                //    destination: des,
+                                //    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                                //}, function (result, status) {
+                                //    if (status == google.maps.DirectionsStatus.OK) {
+                                //        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                                //            path.push(result.routes[0].overview_path[i]);
+                                //        }
+                                //    }
+                                //});
                             }
                         }
                     }
@@ -2068,7 +1943,7 @@
                 }
 
             });
-           
+            myMapBox();
         }
 
 
@@ -2077,10 +1952,10 @@
 
     </script>
 
-    @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap" type="text/javascript"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap3" type="text/javascript"></script>*@
-
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDywSnWh8pKWPa5o5Ws8cI0_SgN6M27TjQ&callback=myMap" type="text/javascript"></script>
+
+    @*Paid API*@
+    @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -2118,7 +1993,7 @@
         }
 
         $(document).ready(function () {
-         //   debugger;
+            //debugger;;
             var u_date = document.getElementById("date").innerHTML;
             document.getElementById("demo2").innerHTML = u_date;
             $(".jquery-date-time-picker").datetimepicker({
@@ -2141,24 +2016,24 @@
         });
     </script>
     <script>
-                //$(document).ready(function () {
-                //    $("input[name$='filter']").click(function () {
+                        //$(document).ready(function () {
+                        //    $("input[name$='filter']").click(function () {
 
-                //        var test = $(this).val();
+                        //        var test = $(this).val();
 
-                //        $("div.desc").hide();
-                //        $("#filter" + test).show();
-                //    });
-                //});
+                        //        $("div.desc").hide();
+                        //        $("#filter" + test).show();
+                        //    });
+                        //});
     </script>
     <script>
-                //$(document).ready(function () {
-                //    debugger;
+                        //$(document).ready(function () {
+                        //    debugger;
 
-                //    var x = document.getElementById("username").innerHTML;
-                //    var tem = x.charAt(0).toUpperCase() + x.slice(1);
-                //    document.getElementById("demo").innerHTML = tem;
-                //});
+                        //    var x = document.getElementById("username").innerHTML;
+                        //    var tem = x.charAt(0).toUpperCase() + x.slice(1);
+                        //    document.getElementById("demo").innerHTML = tem;
+                        //});
 
     </script>
 </fieldset>
