@@ -317,11 +317,11 @@
     <div class="container ">
         <div class="row">
 
-            <div class="col-12 bg-white has-shadow" id="googleMap" style="width: auto; height: 600px; display: none;"></div>
+            <div class="col-12 bg-white has-shadow" id="googleMap" style="width: auto; height: 600px;"></div>
             <div class="col-sm-2"></div>
         </div>
     </div>
-    <div class="container ">
+    <div class="container " style=" display: none;">
         <div class="row">
             <p id="wait2" style="display:none;position:absolute;top:35%;left:50%;">
                 <img class="rotate_img" src="~/Content/images/img/marker24.png">
@@ -1431,645 +1431,645 @@
         var fromtime = "";
         var totime = "";
 
-        //function Search() {
-        // //   debugger;
-        //    var from = document.getElementById("frompin").value;
-        //    var to = document.getElementById("topin").value;
-        //    if (from == "" || to == "") {
-        //        $("#err_time").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
-        //        return false;
-        //    }
-        //    else {
-        //        myMap(from, to)
-        //    }
-
-
-        //}
-
-        //function SearchTime() {
-        // //   debugger;
-        //    var fromtime = document.getElementById("fromtime").value;
-        //    var totime = document.getElementById("totime").value;
-        //    if (fromtime == "" || totime == "") {
-        //        $("#err_time2").html("From Time and To Time is required").delay(3000).show().fadeOut('slow');
-        //        return false;
-        //    }
-        //    else if (fromtime >= totime) {
-        //        $("#err_time2").html("Please Select From Time Less Than To Time").delay(3000).show().fadeOut('slow');
-        //        return false;
-        //    }
-        //    else {
-        //        myMap(fromtime, totime)
-        //    }
-
-
-        //}
-
-        function AreaSearch() {
-        //    debugger;
-            //var from = document.getElementById("frompin").value;
-            //var to = document.getElementById("topin").value;
-            //if (from == "" || to == "") {
-            //    $("#err_time").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
-            //    return false;
-            //}
-            //else {
-            myMap(from, to)
-            // }
+        function Search() {
+         //   debugger;
+            var from = document.getElementById("frompin").value;
+            var to = document.getElementById("topin").value;
+            if (from == "" || to == "") {
+                $("#err_time").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
+                return false;
+            }
+            else {
+                myMap(from, to)
+            }
 
 
         }
 
-        //function Reset() {
-        ////    debugger;
-        //    var from = "";
-        //    var to = "";
-        //    document.getElementById("frompin").value = "";
-        //    document.getElementById("topin").value = "";
-        //    document.getElementById("fromtime").value = "";
-        //    document.getElementById("totime").value = "";
-        //    document.getElementById("ZoneId").value = "0";
-        //    document.getElementById("WardNo").value = "0";
-        //    document.getElementById("AreaId").value = "0";
-        //    myMap(from, to)
-        //}
+        function SearchTime() {
+         //   debugger;
+            var fromtime = document.getElementById("fromtime").value;
+            var totime = document.getElementById("totime").value;
+            if (fromtime == "" || totime == "") {
+                $("#err_time2").html("From Time and To Time is required").delay(3000).show().fadeOut('slow');
+                return false;
+            }
+            else if (fromtime >= totime) {
+                $("#err_time2").html("Please Select From Time Less Than To Time").delay(3000).show().fadeOut('slow');
+                return false;
+            }
+            else {
+                myMap(fromtime, totime)
+            }
+
+
+        }
+
+        function AreaSearch() {
+            debugger;
+            var from = document.getElementById("frompin").value;
+            var to = document.getElementById("topin").value;
+            if (from == "" || to == "") {
+                $("#err_time").html("From Pin and To Pin is required").delay(3000).show().fadeOut('slow');
+                return false;
+            }
+            else {
+            myMap(from, to)
+             }
+
+
+        }
+
+        function Reset() {
+        //    debugger;
+            var from = "";
+            var to = "";
+            document.getElementById("frompin").value = "";
+            document.getElementById("topin").value = "";
+            document.getElementById("fromtime").value = "";
+            document.getElementById("totime").value = "";
+            document.getElementById("ZoneId").value = "0";
+            document.getElementById("WardNo").value = "0";
+            document.getElementById("AreaId").value = "0";
+            myMap(from, to)
+        }
 
 
         var searchData = [];
         var isSearch = 0;
 
-       // function myMap() {
-
-
-       //     var from = document.getElementById("frompin").value;
-       //     var to = document.getElementById("topin").value;
-       //     var fromtime = document.getElementById("fromtime").value;
-       //     var totime = document.getElementById("totime").value;
-
-
-       //     function CenterControl(controlDiv, map) {
-       //     //    debugger;
-       //         // Set CSS for the control border.
-       //         var controlUI = document.createElement('div');
-
-       //         controlUI.style.cursor = 'pointer';
-       //         controlUI.style.marginBottom = '22px';
-       //         controlUI.style.marginTop = '5px';
-       //         controlUI.style.marginLeft = '30%';
-       //         // controlUI.style.textAlign = 'center';
-       //         controlDiv.appendChild(controlUI);
-
-       //         // Set CSS for the control interior.
-       //         var controlText = document.createElement('div');
-       //         controlText.style.color = '#fff';
-       //         controlText.innerHTML = 'Play';
-       //         controlText.id = "play";
-       //         controlText.className = 'test btn btn-sm btn-success';
-       //         controlUI.appendChild(controlText);
-
-       //         // Setup the click event listeners: simply set the map to Chicago.
-
-       //     }
-
-       //     function CenterControlPause(controlDivPause, map) {
-       //    //     debugger;
-       //         // Set CSS for the control border.
-       //         var controlUIPause = document.createElement('div');
-
-       //         controlUIPause.style.cursor = 'pointer';
-       //         controlUIPause.style.marginBottom = '22px';
-       //         controlUIPause.style.marginTop = '5px';
-       //         // controlUI.style.textAlign = 'center';
-       //         controlDivPause.appendChild(controlUIPause);
-
-       //         // Set CSS for the control interior.
-       //         var controlTextPause = document.createElement('div');
-       //         controlTextPause.style.color = '#fff';
-       //         controlTextPause.innerHTML = 'Pause';
-       //         controlTextPause.id = "pause";
-       //         controlTextPause.className = 'test btn btn-sm btn-success';
-       //         controlUIPause.appendChild(controlTextPause);
-
-       //         // Setup the click event listeners: simply set the map to Chicago.
-
-       //     }
-
-
-       ////     debugger;
-       //     var industries = $("#HdnIndustries").val();
-       //     var areaid = $("#AreaId").val();
-       //     var fromtime = $("#fromtime").val()
-       //     var totime = $("#totime").val()
-       //     var geocoder = new google.maps.Geocoder();
-       //     $.ajax({
-
-       //         type: "post",
-       //         url: "/Attendence/HouseRouteData?daId=" + industries + "&areaid=" + areaid,
-       //         datatype: "json",
-       //         traditional: true,
-       //         success: function (m) {
-
-       //             markers = m;
-
-       //             if (markers.length == 0) {
-       //              //   debugger;
-       //                 var map = new google.maps.Map(document.getElementById('googleMap'), {
-       //                     zoom: 20,
-       //                     center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
-       //                     mapTypeId: google.maps.MapTypeId.ROADMAP
-       //                 });
-
-       //             }
-       //             else {
-       //            //     debugger;
-       //                 var mapOptions = {
-       //                     center: new google.maps.LatLng(markers[0].lat, markers[0].log),
-       //                     zoom: 20,
-       //                     mapTypeId: google.maps.MapTypeId.ROADMAP,
-       //                     rotateControl: true
-       //                 };
-       //                 var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
-
-       //                 var centerControlDiv = document.createElement('div');
-       //                 var centerControlDivPause = document.createElement('div');
-       //                 var centerControl = new CenterControl(centerControlDiv, map);
-       //                 var centerControlPause = new CenterControlPause(centerControlDivPause, map);
-
-
-       //                 centerControlDiv.index = 1;
-       //                 centerControlDivPause.index = 1;
-       //                 //centerControlDiv.style.left = '90%';
-       //                 centerControlDiv.id = "play_id";
-       //                 centerControlDivPause.id = "pause_id";
-       //                 centerControlDivPause.style.left = '90%';
-       //                 map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
-       //                 map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
-
-       //                 centerControlDiv.addEventListener('click', function () {
-       //                  //   debugger;
-       //                     animateCircle(poly, 17);
-       //                 });
-
-       //                 centerControlDivPause.addEventListener('click', function () {
-       //                  //   debugger;
-       //                     animateCircle(poly, 7);
-       //                 });
-
-       //                 var infoWindow = new google.maps.InfoWindow();
-       //                 var lat_lng = new Array();
-       //                 var latlngbounds = new google.maps.LatLngBounds();
-
-
-
-       //                 for (i = 0; i < markers.length; i++) {
-
-
-
-       //                     var data = markers[i]
-       //                     if (data.type == 1) {
-       //                         (function (marker, data) {
-       //                             if (data.WasteType == "0") {
-       //                                 col = '|f44336|000000'
-       //                             }
-       //                             else if (data.WasteType == "1") {
-       //                                 col = '|388e3c|000000'
-       //                             }
-       //                             else if (data.WasteType == "2") {
-       //                                 col = '|fe9436|000000'
-       //                             }
-       //                         })(marker, data);
-
-       //                         if (data.DyId != null) {
-       //                             var lastmarker = markers.length - 1;
-       //                         }
-       //                         else {
-       //                             var lastmarker = markers.length;
-       //                         }
-
-       //                         document.getElementById("date").innerHTML = data.date;
-       //                     }
-       //                     if (data.HouseId != null) {
-       //                     //    debugger;
-       //                         var a = i + 1;
-       //                         if (a == 1) {
-       //                             temicon = "../Content/images/img/segregationImg/Start-Point.png";
-       //                         }
-       //                         else if (a == lastmarker) {
-       //                             temicon = "../Content/images/img/segregationImg/End_Point.png";
-       //                         }
-       //                         else {
-       //                             temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
-
-       //                         }
-       //                         if (fromtime == "" && totime == "") {
-
-
-       //                             if (from == "" && to == "") {
-       //                                 // Get Address from server
-       //                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                                 lat_lng.push(myLatlng);
-       //                                 var marker = new google.maps.Marker({
-       //                                     position: myLatlng,
-       //                                     map: map,
-       //                                     title: data.Username,
-       //                                     icon: {
-       //                                         // labelOrigin: new google.maps.Point(16, 65),
-       //                                         url: temicon
-       //                                     }
-       //                                 });
-       //                             }
-       //                             else {
-       //                                 if (a >= from && a <= to) {
-       //                                     // Get Address from server
-       //                                     var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                                     lat_lng.push(myLatlng);
-       //                                     var marker = new google.maps.Marker({
-       //                                         position: myLatlng,
-       //                                         map: map,
-       //                                         title: data.Username,
-       //                                         icon: {
-       //                                             // labelOrigin: new google.maps.Point(16, 65),
-       //                                             url: temicon
-       //                                         }
-       //                                     });
-       //                                 }
-       //                                 else {
-       //                                     var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                                     //lat_lng.push(myLatlng);
-       //                                     var marker = new google.maps.Marker({
-       //                                         position: myLatlng
-       //                                     });
-       //                                 }
-       //                             }
-       //                         }
-       //                         else if (fromtime != "" && totime != "") {
-       //                             if (data.datetime >= fromtime && data.datetime <= totime) {
-       //                                 // Get Address from server
-       //                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                                 lat_lng.push(myLatlng);
-       //                                 var marker = new google.maps.Marker({
-       //                                     position: myLatlng,
-       //                                     map: map,
-       //                                     title: data.Username,
-       //                                     icon: {
-       //                                         // labelOrigin: new google.maps.Point(16, 65),
-       //                                         url: temicon
-       //                                     }
-       //                                 });
-       //                             }
-       //                             else {
-       //                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                                 //lat_lng.push(myLatlng);
-       //                                 var marker = new google.maps.Marker({
-       //                                     position: myLatlng
-       //                                 });
-       //                             }
-       //                         }
-       //                         else {
-       //                             // Get Address from server
-       //                             var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                             lat_lng.push(myLatlng);
-       //                             var marker = new google.maps.Marker({
-       //                                 position: myLatlng,
-       //                                 map: map,
-       //                                 title: data.Username,
-       //                                 icon: {
-       //                                     // labelOrigin: new google.maps.Point(16, 65),
-       //                                     url: temicon
-       //                                 }
-       //                             });
-       //                         }
-
-
-       //                     }
-
-       //                     else if (data.DyId != null) {
-       //                         var a = "D";
-       //                         if (fromtime == "" && totime == "") {
-       //                             // Get Address from server
-       //                             var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                             lat_lng.push(myLatlng);
-       //                             var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
-       //                             var marker = new google.maps.Marker({
-       //                                 position: myLatlng,
-       //                                 map: map,
-       //                                 title: data.Username,
-
-       //                                 /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
-       //                                 /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
-       //                                 /* icon: '-/Content/Images/Icon/dump.jpg'*/
-       //                                 icon: {
-       //                                     // labelOrigin: new google.maps.Point(16, 65),
-       //                                     url: mUrl
-       //                                 }
-       //                             });
-       //                         }
-       //                         else if (fromtime != "" && totime != "") {
-       //                             if (data.datetime >= fromtime && data.datetime <= totime) {
-       //                                 // Get Address from server
-       //                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                                 lat_lng.push(myLatlng);
-       //                                 var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
-       //                                 var marker = new google.maps.Marker({
-       //                                     position: myLatlng,
-       //                                     map: map,
-       //                                     title: data.Username,
-
-       //                                     /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
-       //                                     /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
-       //                                     /* icon: '-/Content/Images/Icon/dump.jpg'*/
-       //                                     icon: {
-       //                                         // labelOrigin: new google.maps.Point(16, 65),
-       //                                         url: mUrl
-       //                                     }
-       //                                 });
-       //                             }
-       //                             else {
-       //                                 var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                                 //lat_lng.push(myLatlng);
-       //                                 var marker = new google.maps.Marker({
-       //                                     position: myLatlng
-       //                                 });
-       //                             }
-       //                         }
-       //                         else {
-       //                             // Get Address from server
-       //                             var myLatlng = new google.maps.LatLng(data.lat, data.log);
-       //                             lat_lng.push(myLatlng);
-       //                             var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
-       //                             var marker = new google.maps.Marker({
-       //                                 position: myLatlng,
-       //                                 map: map,
-       //                                 title: data.Username,
-
-       //                                 /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
-       //                                 /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
-       //                                 /* icon: '-/Content/Images/Icon/dump.jpg'*/
-       //                                 icon: {
-       //                                     // labelOrigin: new google.maps.Point(16, 65),
-       //                                     url: mUrl
-       //                                 }
-       //                             });
-       //                         }
-
-       //                     }
-
-
-       //                     latlngbounds.extend(marker.position);
-
-
-       //                     if (data.type == 1) {
-
-       //                         (function (marker, data) {
-       //                          //   debugger;
-       //                             if (data.HouseOwnerName == null) {
-       //                                 data.HouseOwnerName = 'Not Available';
-       //                             }
-       //                             if (data.OwnerMobileNo == null) {
-       //                                 data.OwnerMobileNo = '';
-       //                             }
-       //                             if (data.HouseAddress == null) {
-       //                                 data.HouseAddress = '';
-       //                             }
-       //                             if (data.vehcileNumber == null) {
-       //                                 data.vehcileNumber = '';
-       //                             }
-       //                             if (data.WasteType == null) {
-       //                                 data.WasteType = '';
-       //                             }
-       //                             else if (data.WasteType == "0") {
-       //                                 data.WasteType = "Mixed Garbage"
-       //                             }
-       //                             else if (data.WasteType == "1") {
-       //                                 data.WasteType = "Segregated Garbage"
-       //                             }
-       //                             else if (data.WasteType == "2") {
-       //                                 data.WasteType = "Garbage not Received"
-       //                             }
-       //                             if (data.gpBeforImage == null || data.gpBeforImage == "") {
-       //                                 data.gpBeforImage = "/Images/default_not_upload.png"
-       //                             }
-       //                             if (data.gpAfterImage == null || data.gpAfterImage == "") {
-       //                                 data.gpAfterImage = "/Images/default_not_upload.png"
-       //                             }
-       //                             if (data.HouseId != null) {
-       //                                 //New MNarker Click
-       //                                 //google.maps.event.addListener(marker, "click", function (e) {
-       //                                 //    debugger;
-       //                                 //    var latlng = new google.maps.LatLng(data.lat, data.log);
-       //                                 //    var geocoder = geocoder = new google.maps.Geocoder();
-       //                                 //    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-       //                                 //        debugger;
-       //                                 //        if (status == google.maps.GeocoderStatus.OK) {
-       //                                 //            debugger;
-       //                                 //            if (results[1]) {
-       //                                 //                //alert("Location: " + results[1].formatted_address);
-       //                                 //                var HouseAddress = results[1].formatted_address;
-       //                                 //                infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>GC Address:</b>' + HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b><span id="emp_name" class="a">' + data.userName + '</span></p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-       //                                 //                infoWindow.open(map, marker);
-       //                                 //            }
-       //                                 //            else {
-       //                                 //                var HouseAddress = "Not Mention";
-       //                                 //                infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>GC Address:</b>' + HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b><span id="emp_name" class="a">' + data.userName + '</span></p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-       //                                 //                infoWindow.open(map, marker);
-       //                                 //            }
-
-       //                                 //        }
-       //                                 //    });
-
-       //                                 //});
-
-       //                                 //Old Marker Click
-       //                                 google.maps.event.addListener(marker, "click", function (e) {
-       //                                     infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b><span id="emp_name" class="a">' + data.userName + '</span></p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-       //                                     infoWindow.open(map, marker);
-
-       //                                     //animateCircle(poly,9);
-       //                                 });
-
-       //                             }
-       //                             else if (data.DyId != null) {
-       //                                 //New MNarker Click
-       //                                 //google.maps.event.addListener(marker, "click", function (e) {
-       //                                 //    debugger;
-       //                                 //    var latlng = new google.maps.LatLng(data.lat, data.log);
-       //                                 //    var geocoder = geocoder = new google.maps.Geocoder();
-       //                                 //    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-       //                                 //        debugger;
-       //                                 //        if (status == google.maps.GeocoderStatus.OK) {
-       //                                 //            debugger;
-       //                                 //            if (results[1]) {
-       //                                 //                //alert("Location: " + results[1].formatted_address);
-       //                                 //                var DumpAddress = results[1].formatted_address;
-       //                                 //                infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-       //                                 //                infoWindow.open(map, marker);
-       //                                 //            }
-       //                                 //            else {
-       //                                 //                var DumpAddress = "Not Mention";
-       //                                 //                infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-       //                                 //                infoWindow.open(map, marker);
-       //                                 //            }
-
-       //                                 //        }
-       //                                 //    });
-
-       //                                 //});
-
-       //                                 //Old Marker click
-       //                                 google.maps.event.addListener(marker, "click", function (e) {
-       //                                     infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + data.DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
-       //                                     infoWindow.open(map, marker);
-
-       //                                     //animateCircle(poly,9);
-       //                                 });
-       //                             }
-
-
-       //                         })(marker, data);
-
-
-       //                     }
-       //                     //else {
-
-       //                     //    (function (marker, data) {
-       //                     //        if (data.userMobile == null) {
-       //                     //            data.userMobile = '';
-       //                     //        }
-       //                     //        if (data.vehcileNumber == null) {
-       //                     //            data.vehcileNumber = '';
-       //                     //        }
-       //                     //        if (data.address == null) {
-       //                     //            data.address = '';
-       //                     //        }
-       //                     //        google.maps.event.addListener(marker, "click", function (e) {
-       //                     //            infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h3>' + data.userName + '</h3><h5><b>Employee Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehicle No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>');
-       //                     //            infoWindow.open(map, marker);
-
-       //                     //            //animateCircle(poly,9);
-       //                     //        });
-
-       //                     //    })(marker, data);
-
-       //                     //}
-
-
-       //                     //(function (marker, data) {
-
-       //                     //    //google.maps.event.addListener(marker, "click", function (e) {
-       //                     //    //    infoWindow.setContent('<div class=infowindow> <h3>' + data.userName + '</h3><h5><b>Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehcile No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>');
-       //                     //    //    infoWindow.open(map, marker);
-
-
-       //                     //    google.maps.event.addListener(marker, "click", function (e) {
-       //                     //        infoWindow.setContent('<div class=infowindow> <h5><b>HouseDetails:</b></h5><p>House-Id:<b>' + data.HouseId + '</b></p><p>Name:<b>' + data.HouseOwnerName + '</b></p><p>MobileNo:<b>' + data.OwnerMobileNo + '</b></p><p>Date:<b>' + data.date + '</b></p><p>Time:<b>' + data.time + '</b></p><p>HouseAddress:<b>' + data.HouseAddress + '</b></p><hr><div><h5><b>EmpDetails:</b></h5><p>EmpName:<b>' + data.userName + '</b></p><p>Vehcile No:<b>' + data.vehcileNumber + '</b></p></div></div>');
-       //                     //        infoWindow.open(map, marker);
-
-       //                     //        //animateCircle(poly,9);
-       //                     //    });
-
-       //                     //})(marker, data);
-
-
-
-       //                 }
-       //                 map.setCenter(latlngbounds.getCenter());
-       //                 map.fitBounds(latlngbounds);
-
-       //                 //***********ROUTING****************//
-       //                 var car = "M17.402,0H5.643C2.526,0,0,3.467,0,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759c3.116,0,5.644-2.527,5.644-5.644 V6.584C23.044,3.467,20.518,0,17.402,0z M22.057,14.188v11.665l-2.729,0.351v-4.806L22.057,14.188z M20.625,10.773 c-1.016,3.9-2.219,8.51-2.219,8.51H4.638l-2.222-8.51C2.417,10.773,11.3,7.755,20.625,10.773z M3.748,21.713v4.492l-2.73-0.349 V14.502L3.748,21.713z M1.018,37.938V27.579l2.73,0.343v8.196L1.018,37.938z M2.575,40.882l2.218-3.336h13.771l2.219,3.336H2.575z M19.328,35.805v-7.872l2.729-0.355v10.048L19.328,35.805z";
-
-       //                 /*old*/
-       //                 var lineSymbol = {
-       //                     path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-       //                     scale: 5,
-       //                     strokeColor: '#17e36f',
-       //                 };
-       //                 /*new*/
-
-       //                 //var lineSymbol = {
-       //                 //    path: car,
-       //                 //    scale: .5,
-       //                 //    strokeColor: 'black',
-       //                 //    strokeWeight: .10,
-       //                 //    fillOpacity: 1,
-       //                 //    fillColor: '#ed281a',
-       //                 //    offset: '2%',
-       //                 //    transform: 'rotate(20 deg)',
-       //                 //    anchor: new google.maps.Point(10, 25)
-       //                 //};
-
-
-       //                 //Initialize the Path Array
-       //                 var path = new google.maps.MVCArray();
-
-       //                 //Initialize the Direction Service
-       //                 var service = new google.maps.DirectionsService();
-
-       //                 //Set the Path Stroke Color
-       //                 var poly = new google.maps.Polyline({
-       //                     strokeColor: '#4986E7',
-       //                     strokeWeight: 5,
-       //                     map: map, icons: [{
-       //                         icon: lineSymbol,
-       //                         offset: '100%',
-       //                     }],
-       //                 });
-       //                 animateCircle(poly, 1);
-       //                 var a = 0;
-       //                 var listener;
-       //                 function animateCircle(line, k) {
-
-       //                     // alert(k);
-       //                     if (k == 7) {
-       //                         clearInterval(listener);
-       //                         a = 0;
-       //                     }
-       //                     else {
-       //                         a = a + 1;
-
-       //                         if (a == 1) {
-       //                             var count = 0;
-       //                             listener = window.setInterval(function () {
-       //                                 count = (count + 1) % 200;
-       //                                 var icons = line.get('icons');
-       //                                 icons[0].offset = (count / 2) + '%';
-       //                                 line.set('icons', icons);
-       //                                 if (count == 199) { clearInterval(listener); a = 0; };
-       //                             }, 100);
-
-
-       //                         }
-       //                     }
-
-       //                 }
-       //                 //Loop and Draw Path Route between the Points on MAP
-       //                 for (var i = 0; i < lat_lng.length; i++) {
-       //                     if ((i + 1) <= lat_lng.length) {
-       //                      //   debugger;
-       //                         var src = lat_lng[i];
-       //                         var des = lat_lng[i + 1];
-       //                         path.push(src);
-       //                         poly.setPath(path);
-       //                         service.route({
-       //                             origin: src,
-       //                             destination: des,
-       //                             travelMode: google.maps.DirectionsTravelMode.DRIVING
-       //                         }, function (result, status) {
-       //                             if (status == google.maps.DirectionsStatus.OK) {
-       //                                 for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
-       //                                     path.push(result.routes[0].overview_path[i]);
-       //                                 }
-       //                             }
-       //                         });
-       //                     }
-       //                 }
-       //             }
-
-       //         }
-
-       //     });
+        function myMap() {
+
+
+            var from = document.getElementById("frompin").value;
+            var to = document.getElementById("topin").value;
+            var fromtime = document.getElementById("fromtime").value;
+            var totime = document.getElementById("totime").value;
+
+
+            function CenterControl(controlDiv, map) {
+            //    debugger;
+                // Set CSS for the control border.
+                var controlUI = document.createElement('div');
+
+                controlUI.style.cursor = 'pointer';
+                controlUI.style.marginBottom = '22px';
+                controlUI.style.marginTop = '5px';
+                controlUI.style.marginLeft = '30%';
+                // controlUI.style.textAlign = 'center';
+                controlDiv.appendChild(controlUI);
+
+                // Set CSS for the control interior.
+                var controlText = document.createElement('div');
+                controlText.style.color = '#fff';
+                controlText.innerHTML = 'Play';
+                controlText.id = "play";
+                controlText.className = 'test btn btn-sm btn-success';
+                controlUI.appendChild(controlText);
+
+                // Setup the click event listeners: simply set the map to Chicago.
+
+            }
+
+            function CenterControlPause(controlDivPause, map) {
+           //     debugger;
+                // Set CSS for the control border.
+                var controlUIPause = document.createElement('div');
+
+                controlUIPause.style.cursor = 'pointer';
+                controlUIPause.style.marginBottom = '22px';
+                controlUIPause.style.marginTop = '5px';
+                // controlUI.style.textAlign = 'center';
+                controlDivPause.appendChild(controlUIPause);
+
+                // Set CSS for the control interior.
+                var controlTextPause = document.createElement('div');
+                controlTextPause.style.color = '#fff';
+                controlTextPause.innerHTML = 'Pause';
+                controlTextPause.id = "pause";
+                controlTextPause.className = 'test btn btn-sm btn-success';
+                controlUIPause.appendChild(controlTextPause);
+
+                // Setup the click event listeners: simply set the map to Chicago.
+
+            }
+
+
+       //     debugger;
+            var industries = $("#HdnIndustries").val();
+            var areaid = $("#AreaId").val();
+            var fromtime = $("#fromtime").val()
+            var totime = $("#totime").val()
+            var geocoder = new google.maps.Geocoder();
+            $.ajax({
+
+                type: "post",
+                url: "/Attendence/HouseRouteData?daId=" + industries + "&areaid=" + areaid,
+                datatype: "json",
+                traditional: true,
+                success: function (m) {
+
+                    markers = m;
+
+                    if (markers.length == 0) {
+                     //   debugger;
+                        var map = new google.maps.Map(document.getElementById('googleMap'), {
+                            zoom: 20,
+                            center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        });
+
+                    }
+                    else {
+                   //     debugger;
+                        var mapOptions = {
+                            center: new google.maps.LatLng(markers[0].lat, markers[0].log),
+                            zoom: 20,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+                            rotateControl: true
+                        };
+                        var map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+                        var centerControlDiv = document.createElement('div');
+                        var centerControlDivPause = document.createElement('div');
+                        var centerControl = new CenterControl(centerControlDiv, map);
+                        var centerControlPause = new CenterControlPause(centerControlDivPause, map);
+
+
+                        centerControlDiv.index = 1;
+                        centerControlDivPause.index = 1;
+                        //centerControlDiv.style.left = '90%';
+                        centerControlDiv.id = "play_id";
+                        centerControlDivPause.id = "pause_id";
+                        centerControlDivPause.style.left = '90%';
+                        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
+                        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
+
+                        centerControlDiv.addEventListener('click', function () {
+                         //   debugger;
+                            animateCircle(poly, 17);
+                        });
+
+                        centerControlDivPause.addEventListener('click', function () {
+                         //   debugger;
+                            animateCircle(poly, 7);
+                        });
+
+                        var infoWindow = new google.maps.InfoWindow();
+                        var lat_lng = new Array();
+                        var latlngbounds = new google.maps.LatLngBounds();
+
+
+
+                        for (i = 0; i < markers.length; i++) {
+
+
+
+                            var data = markers[i]
+                            if (data.type == 1) {
+                                (function (marker, data) {
+                                    if (data.WasteType == "0") {
+                                        col = '|f44336|000000'
+                                    }
+                                    else if (data.WasteType == "1") {
+                                        col = '|388e3c|000000'
+                                    }
+                                    else if (data.WasteType == "2") {
+                                        col = '|fe9436|000000'
+                                    }
+                                })(marker, data);
+
+                                if (data.DyId != null) {
+                                    var lastmarker = markers.length - 1;
+                                }
+                                else {
+                                    var lastmarker = markers.length;
+                                }
+
+                                document.getElementById("date").innerHTML = data.date;
+                            }
+                            if (data.HouseId != null) {
+                            //    debugger;
+                                var a = i + 1;
+                                if (a == 1) {
+                                    temicon = "../Content/images/img/segregationImg/Start-Point.png";
+                                }
+                                else if (a == lastmarker) {
+                                    temicon = "../Content/images/img/segregationImg/End_Point.png";
+                                }
+                                else {
+                                    temicon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=' + a + col
+
+                                }
+                                if (fromtime == "" && totime == "") {
+
+
+                                    if (from == "" && to == "") {
+                                        // Get Address from server
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        lat_lng.push(myLatlng);
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng,
+                                            map: map,
+                                            title: data.Username,
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: temicon
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        if (a >= from && a <= to) {
+                                            // Get Address from server
+                                            var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                            lat_lng.push(myLatlng);
+                                            var marker = new google.maps.Marker({
+                                                position: myLatlng,
+                                                map: map,
+                                                title: data.Username,
+                                                icon: {
+                                                    // labelOrigin: new google.maps.Point(16, 65),
+                                                    url: temicon
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                            //lat_lng.push(myLatlng);
+                                            var marker = new google.maps.Marker({
+                                                position: myLatlng
+                                            });
+                                        }
+                                    }
+                                }
+                                else if (fromtime != "" && totime != "") {
+                                    if (data.datetime >= fromtime && data.datetime <= totime) {
+                                        // Get Address from server
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        lat_lng.push(myLatlng);
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng,
+                                            map: map,
+                                            title: data.Username,
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: temicon
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        //lat_lng.push(myLatlng);
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng
+                                        });
+                                    }
+                                }
+                                else {
+                                    // Get Address from server
+                                    var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                    lat_lng.push(myLatlng);
+                                    var marker = new google.maps.Marker({
+                                        position: myLatlng,
+                                        map: map,
+                                        title: data.Username,
+                                        icon: {
+                                            // labelOrigin: new google.maps.Point(16, 65),
+                                            url: temicon
+                                        }
+                                    });
+                                }
+
+
+                            }
+
+                            else if (data.DyId != null) {
+                                var a = "D";
+                                if (fromtime == "" && totime == "") {
+                                    // Get Address from server
+                                    var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                    lat_lng.push(myLatlng);
+                                    var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
+                                    var marker = new google.maps.Marker({
+                                        position: myLatlng,
+                                        map: map,
+                                        title: data.Username,
+
+                                        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                                        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                                        /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                                        icon: {
+                                            // labelOrigin: new google.maps.Point(16, 65),
+                                            url: mUrl
+                                        }
+                                    });
+                                }
+                                else if (fromtime != "" && totime != "") {
+                                    if (data.datetime >= fromtime && data.datetime <= totime) {
+                                        // Get Address from server
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        lat_lng.push(myLatlng);
+                                        var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng,
+                                            map: map,
+                                            title: data.Username,
+
+                                            /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                                            /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                                            /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                                            icon: {
+                                                // labelOrigin: new google.maps.Point(16, 65),
+                                                url: mUrl
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                        //lat_lng.push(myLatlng);
+                                        var marker = new google.maps.Marker({
+                                            position: myLatlng
+                                        });
+                                    }
+                                }
+                                else {
+                                    // Get Address from server
+                                    var myLatlng = new google.maps.LatLng(data.lat, data.log);
+                                    lat_lng.push(myLatlng);
+                                    var mUrl = "../Content/images/img/segregationImg/Dumpyard_marker.png";
+                                    var marker = new google.maps.Marker({
+                                        position: myLatlng,
+                                        map: map,
+                                        title: data.Username,
+
+                                        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|16|000|truck|24|FFF|000'*/
+                                        /* icon: 'https://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|glyphish_house|16|000|FFF'*/
+                                        /* icon: '-/Content/Images/Icon/dump.jpg'*/
+                                        icon: {
+                                            // labelOrigin: new google.maps.Point(16, 65),
+                                            url: mUrl
+                                        }
+                                    });
+                                }
+
+                            }
+
+
+                            latlngbounds.extend(marker.position);
+
+
+                            if (data.type == 1) {
+
+                                (function (marker, data) {
+                                 //   debugger;
+                                    if (data.HouseOwnerName == null) {
+                                        data.HouseOwnerName = 'Not Available';
+                                    }
+                                    if (data.OwnerMobileNo == null) {
+                                        data.OwnerMobileNo = '';
+                                    }
+                                    if (data.HouseAddress == null) {
+                                        data.HouseAddress = '';
+                                    }
+                                    if (data.vehcileNumber == null) {
+                                        data.vehcileNumber = '';
+                                    }
+                                    if (data.WasteType == null) {
+                                        data.WasteType = '';
+                                    }
+                                    else if (data.WasteType == "0") {
+                                        data.WasteType = "Mixed Garbage"
+                                    }
+                                    else if (data.WasteType == "1") {
+                                        data.WasteType = "Segregated Garbage"
+                                    }
+                                    else if (data.WasteType == "2") {
+                                        data.WasteType = "Garbage not Received"
+                                    }
+                                    if (data.gpBeforImage == null || data.gpBeforImage == "") {
+                                        data.gpBeforImage = "/Images/default_not_upload.png"
+                                    }
+                                    if (data.gpAfterImage == null || data.gpAfterImage == "") {
+                                        data.gpAfterImage = "/Images/default_not_upload.png"
+                                    }
+                                    if (data.HouseId != null) {
+                                        //New MNarker Click
+                                        //google.maps.event.addListener(marker, "click", function (e) {
+                                        //    debugger;
+                                        //    var latlng = new google.maps.LatLng(data.lat, data.log);
+                                        //    var geocoder = geocoder = new google.maps.Geocoder();
+                                        //    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                                        //        debugger;
+                                        //        if (status == google.maps.GeocoderStatus.OK) {
+                                        //            debugger;
+                                        //            if (results[1]) {
+                                        //                //alert("Location: " + results[1].formatted_address);
+                                        //                var HouseAddress = results[1].formatted_address;
+                                        //                infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>GC Address:</b>' + HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b><span id="emp_name" class="a">' + data.userName + '</span></p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                        //                infoWindow.open(map, marker);
+                                        //            }
+                                        //            else {
+                                        //                var HouseAddress = "Not Mention";
+                                        //                infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>GC Address:</b>' + HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b><span id="emp_name" class="a">' + data.userName + '</span></p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                        //                infoWindow.open(map, marker);
+                                        //            }
+
+                                        //        }
+                                        //    });
+
+                                        //});
+
+                                        //Old Marker Click
+                                        google.maps.event.addListener(marker, "click", function (e) {
+                                            infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>House Details:</b></h5><p><b>House-Id:</b>' + data.HouseId + '</p><p><b>Name:</b>' + data.HouseOwnerName + '</p><p><b>Mobile No:</b>' + data.OwnerMobileNo + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>House Address:</b>' + data.HouseAddress + '</p><p><b>Garbage type:</b>' + data.WasteType + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b><span id="emp_name" class="a">' + data.userName + '</span></p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                            infoWindow.open(map, marker);
+
+                                            //animateCircle(poly,9);
+                                        });
+
+                                    }
+                                    else if (data.DyId != null) {
+                                        //New MNarker Click
+                                        //google.maps.event.addListener(marker, "click", function (e) {
+                                        //    debugger;
+                                        //    var latlng = new google.maps.LatLng(data.lat, data.log);
+                                        //    var geocoder = geocoder = new google.maps.Geocoder();
+                                        //    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                                        //        debugger;
+                                        //        if (status == google.maps.GeocoderStatus.OK) {
+                                        //            debugger;
+                                        //            if (results[1]) {
+                                        //                //alert("Location: " + results[1].formatted_address);
+                                        //                var DumpAddress = results[1].formatted_address;
+                                        //                infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                        //                infoWindow.open(map, marker);
+                                        //            }
+                                        //            else {
+                                        //                var DumpAddress = "Not Mention";
+                                        //                infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                        //                infoWindow.open(map, marker);
+                                        //            }
+
+                                        //        }
+                                        //    });
+
+                                        //});
+
+                                        //Old Marker click
+                                        google.maps.event.addListener(marker, "click", function (e) {
+                                            infoWindow.setContent('<div class=infowindow style="max-width:100%"> <h5><b>Dump Yard Details:</b></h5><p><b>DumpYard-Id:</b>' + data.DyId + '</p><p><b>Dump Yard Name:</b>' + data.DumpYardName + '</p><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Dump Yard Address:</b>' + data.DumpAddress + '</p><p><b>Dry Waste Weight :</b>' + data.DryWaste + '</p><p><b>Wet Waste Weight :</b>' + data.WetWaste + '</p><p><b>Total Waste Weight :</b>' + data.TotWaste + '</p><p><b>Before Image:</b><a target="_blank" href="' + data.gpBeforImage + '"><img alt="Photo Not Found"  src=" ' + data.gpBeforImage + ' " style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><p><b>After Image:</b><a target="_blank" href="' + data.gpAfterImage + '"><img alt="Photo Not Found"  src="' + data.gpAfterImage + '" style="height:35px;width:35px;cursor:pointer;margin-left:0px;"></img></a></p><hr><div><h5><b>Employee Details:</b></h5><p><b>Emp Name:</b>' + data.userName + '</p><p><b>Vehicle No:</b>' + data.vehcileNumber + '</p></div></div>');
+                                            infoWindow.open(map, marker);
+
+                                            //animateCircle(poly,9);
+                                        });
+                                    }
+
+
+                                })(marker, data);
+
+
+                            }
+                            //else {
+
+                            //    (function (marker, data) {
+                            //        if (data.userMobile == null) {
+                            //            data.userMobile = '';
+                            //        }
+                            //        if (data.vehcileNumber == null) {
+                            //            data.vehcileNumber = '';
+                            //        }
+                            //        if (data.address == null) {
+                            //            data.address = '';
+                            //        }
+                            //        google.maps.event.addListener(marker, "click", function (e) {
+                            //            infoWindow.setContent('<div class=infowindow style="max-width:190px"> <h3>' + data.userName + '</h3><h5><b>Employee Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehicle No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>');
+                            //            infoWindow.open(map, marker);
+
+                            //            //animateCircle(poly,9);
+                            //        });
+
+                            //    })(marker, data);
+
+                            //}
+
+
+                            //(function (marker, data) {
+
+                            //    //google.maps.event.addListener(marker, "click", function (e) {
+                            //    //    infoWindow.setContent('<div class=infowindow> <h3>' + data.userName + '</h3><h5><b>Details:</b></h5><p><b>Date:</b>' + data.date + '</p><p><b>Time:</b>' + data.time + '</p><p><b>Mobile:</b>' + data.userMobile + '<p><b>Vehcile No:</b>' + data.vehcileNumber + '</p><div style="height:auto; width:150px"><p><b>Address:</b>' + data.address + '</p></div></div>');
+                            //    //    infoWindow.open(map, marker);
+
+
+                            //    google.maps.event.addListener(marker, "click", function (e) {
+                            //        infoWindow.setContent('<div class=infowindow> <h5><b>HouseDetails:</b></h5><p>House-Id:<b>' + data.HouseId + '</b></p><p>Name:<b>' + data.HouseOwnerName + '</b></p><p>MobileNo:<b>' + data.OwnerMobileNo + '</b></p><p>Date:<b>' + data.date + '</b></p><p>Time:<b>' + data.time + '</b></p><p>HouseAddress:<b>' + data.HouseAddress + '</b></p><hr><div><h5><b>EmpDetails:</b></h5><p>EmpName:<b>' + data.userName + '</b></p><p>Vehcile No:<b>' + data.vehcileNumber + '</b></p></div></div>');
+                            //        infoWindow.open(map, marker);
+
+                            //        //animateCircle(poly,9);
+                            //    });
+
+                            //})(marker, data);
+
+
+
+                        }
+                        map.setCenter(latlngbounds.getCenter());
+                        map.fitBounds(latlngbounds);
+
+                        //***********ROUTING****************//
+                        var car = "M17.402,0H5.643C2.526,0,0,3.467,0,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759c3.116,0,5.644-2.527,5.644-5.644 V6.584C23.044,3.467,20.518,0,17.402,0z M22.057,14.188v11.665l-2.729,0.351v-4.806L22.057,14.188z M20.625,10.773 c-1.016,3.9-2.219,8.51-2.219,8.51H4.638l-2.222-8.51C2.417,10.773,11.3,7.755,20.625,10.773z M3.748,21.713v4.492l-2.73-0.349 V14.502L3.748,21.713z M1.018,37.938V27.579l2.73,0.343v8.196L1.018,37.938z M2.575,40.882l2.218-3.336h13.771l2.219,3.336H2.575z M19.328,35.805v-7.872l2.729-0.355v10.048L19.328,35.805z";
+
+                        /*old*/
+                        var lineSymbol = {
+                            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                            scale: 5,
+                            strokeColor: '#17e36f',
+                        };
+                        /*new*/
+
+                        //var lineSymbol = {
+                        //    path: car,
+                        //    scale: .5,
+                        //    strokeColor: 'black',
+                        //    strokeWeight: .10,
+                        //    fillOpacity: 1,
+                        //    fillColor: '#ed281a',
+                        //    offset: '2%',
+                        //    transform: 'rotate(20 deg)',
+                        //    anchor: new google.maps.Point(10, 25)
+                        //};
+
+
+                        //Initialize the Path Array
+                        var path = new google.maps.MVCArray();
+
+                        //Initialize the Direction Service
+                        var service = new google.maps.DirectionsService();
+
+                        //Set the Path Stroke Color
+                        var poly = new google.maps.Polyline({
+                            strokeColor: '#4986E7',
+                            strokeWeight: 5,
+                            map: map, icons: [{
+                                icon: lineSymbol,
+                                offset: '100%',
+                            }],
+                        });
+                        animateCircle(poly, 1);
+                        var a = 0;
+                        var listener;
+                        function animateCircle(line, k) {
+
+                            // alert(k);
+                            if (k == 7) {
+                                clearInterval(listener);
+                                a = 0;
+                            }
+                            else {
+                                a = a + 1;
+
+                                if (a == 1) {
+                                    var count = 0;
+                                    listener = window.setInterval(function () {
+                                        count = (count + 1) % 200;
+                                        var icons = line.get('icons');
+                                        icons[0].offset = (count / 2) + '%';
+                                        line.set('icons', icons);
+                                        if (count == 199) { clearInterval(listener); a = 0; };
+                                    }, 100);
+
+
+                                }
+                            }
+
+                        }
+                        //Loop and Draw Path Route between the Points on MAP
+                        for (var i = 0; i < lat_lng.length; i++) {
+                            if ((i + 1) <= lat_lng.length) {
+                             //   debugger;
+                                var src = lat_lng[i];
+                                var des = lat_lng[i + 1];
+                                path.push(src);
+                                poly.setPath(path);
+                                service.route({
+                                    origin: src,
+                                    destination: des,
+                                    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                                }, function (result, status) {
+                                    if (status == google.maps.DirectionsStatus.OK) {
+                                        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                                            path.push(result.routes[0].overview_path[i]);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                }
+
+            });
            
-       // }
+        }
 
 
 
