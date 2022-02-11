@@ -1286,26 +1286,26 @@ GMaps.prototype.getRoutes = function(options) {
   delete request_options.error;
 
   var self = this,
-      service = new google.maps.DirectionsService();
+     // service = new google.maps.DirectionsService();
 
-  service.route(request_options, function(result, status) {
-    if (status === google.maps.DirectionsStatus.OK) {
-      for (var r in result.routes) {
-        if (result.routes.hasOwnProperty(r)) {
-          self.routes.push(result.routes[r]);
-        }
-      }
+  //service.route(request_options, function(result, status) {
+  //  if (status === google.maps.DirectionsStatus.OK) {
+  //    for (var r in result.routes) {
+  //      if (result.routes.hasOwnProperty(r)) {
+  //        self.routes.push(result.routes[r]);
+  //      }
+  //    }
 
-      if (options.callback) {
-        options.callback(self.routes);
-      }
-    }
-    else {
-      if (options.error) {
-        options.error(result, status);
-      }
-    }
-  });
+  //    if (options.callback) {
+  //      options.callback(self.routes);
+  //    }
+  //  }
+  //  else {
+  //    if (options.error) {
+  //      options.error(result, status);
+  //    }
+  //  }
+  //});
 };
 
 GMaps.prototype.removeRoutes = function() {
