@@ -134,6 +134,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 //ViewBag.userId = userId;
                 //ViewBag.Date = Date;
                 //return Json(userId, JsonRequestBehavior.AllowGet);
+                TempData.Keep();
                 return View();
             }
             else
