@@ -30,3 +30,6 @@ function disableButton(btn) {
     document.getElementById(btn.id).disabled = true;
     //alert("Button has been disabled.");
 }
+
+
+    document.addEventListener('contextmenu', event => event.preventDefault());
