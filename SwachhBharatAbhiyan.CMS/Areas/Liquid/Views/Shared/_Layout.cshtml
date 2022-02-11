@@ -37,25 +37,25 @@
                     <a href="/GarbageCollection/MenuIdealtime" id="snackbar"></a>
                     <div class="navbar-holder d-flex align-items-center justify-content-between">
                         <!-- Navbar Header-->
-            <div class="navbar-header">
+                        <div class="navbar-header">
                             <!-- Navbar Brand --><a href="/Liquid/LiquidHome/Index" class="navbar-brand">
                                 <div class="brand-text brand-big">
                                     <span>
                                         <img style="height:40px;width:50px;" src="~/Content/images/img/liquid_icon.svg" />
                                     </span><strong style="vertical-align:middle">Liquid Waste Cleaning Monitoring System</strong>
                                     @*</span><strong> घंटा गाडी</strong>*@
-            </div>
+                                </div>
                                 <div class="brand-text brand-small"><strong><img style="height:40px;width:50px;" src="~/Content/images/img/action_icon.svg" /> </strong></div>
                             </a>
                             <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
-            </div>
+                        </div>
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
                         @*<li class="nav-item"><a href="/Account/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
                         @Html.Partial("_LoginPartial")
-                    
-        </div>
-    </div>
+
+                    </div>
+                </div>
             </nav>
         </header>
         <div class="page-content d-flex align-items-stretch">
@@ -95,8 +95,8 @@
                         </a>
                         <ul id="exampledropdownDropdown1" class="collapse list-unstyled ">
                             @*<li><a href="/GarbageCollection/MenuHouseGarbageIndex">घर संकलन</a></li>
-        <li><a href="/GarbageCollection/MenuPointGarbageIndex">कचरा पॉईंट संकलन </a></li>
-        <li><a href="/GarbageCollection/MenuDumpYardIndex">डंप यार्ड तपशील</a></li>*@
+                                <li><a href="/GarbageCollection/MenuPointGarbageIndex">कचरा पॉईंट संकलन </a></li>
+                                <li><a href="/GarbageCollection/MenuDumpYardIndex">डंप यार्ड तपशील</a></li>*@
 
                             <li><a href="/Liquid/LiquidGarbage/MenuLiquidGarbageIndex">Liquid Waste Cleaning Point</a></li>
                             @*<li><a href="/GarbageCollection/MenuPointGarbageIndex">Garbage Point Collection</a></li>*@
@@ -179,9 +179,9 @@
                         </a>
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                             @*<li><a href="/HouseMaster/MenuIndex">घर नोंदणी</a></li>
-        <li><a href="/GarbagePoint/MenuIndex">कचरा पॉइंट नोंदणी</a></li>
-        <li><a href="/DumpYard/MenuIndex">डंप यार्ड नोंदणी</a></li>
-        <li><a href="/Employee/MenuIndex"> कर्मचारी नोंदणी</a></li>*@
+                                <li><a href="/GarbagePoint/MenuIndex">कचरा पॉइंट नोंदणी</a></li>
+                                <li><a href="/DumpYard/MenuIndex">डंप यार्ड नोंदणी</a></li>
+                                <li><a href="/Employee/MenuIndex"> कर्मचारी नोंदणी</a></li>*@
 
                             <li><a href="/Liquid/LiquidWaste/MenuIndex">Liquid Waste Cleaning Point Registration </a></li>
                             @*<li><a href="/Liquid/LiquidDumpYard/MenuIndex">Dump Yard Registration </a></li>*@
@@ -281,9 +281,9 @@
                         </ul>
                     </li>
                     @*<li>
-                        <a href="/Android/AndroidAPKMenu">
-                        <img src="~/Areas/Liquid/Content/theme-assets/img/android.svg" style=" margin-right: 5%;"/>Android App</a>
-                    </li>*@
+                            <a href="/Android/AndroidAPKMenu">
+                            <img src="~/Areas/Liquid/Content/theme-assets/img/android.svg" style=" margin-right: 5%;"/>Android App</a>
+                        </li>*@
                     @*<li class="" id="waste_mgmt">
                             <a href="#exampledropdownDropdown11" aria-expanded="false" data-toggle="collapse">
                                 <i class="i_waste"> </i>
@@ -311,7 +311,7 @@
             </nav>
             <div class="content-inner">
 
-        @RenderBody()
+                @RenderBody()
 
                 <footer class="main-footer">
                     <div class="container-fluid">
@@ -326,8 +326,8 @@
                             </div>
                         </div>
                     </div>
-        </footer>
-    </div>
+                </footer>
+            </div>
         </div>
     </div>
 
@@ -636,7 +636,9 @@
         });
 
     </script>
-
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
     <script src="~/Content/theme-assets/js/icons_load.js"></script>
 
     @RenderSection("scripts", required: false)

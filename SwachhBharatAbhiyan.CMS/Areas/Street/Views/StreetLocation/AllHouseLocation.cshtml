@@ -553,6 +553,9 @@
 </fieldset>
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
 <script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<script>
         var date = new Date();
 
         var day = date.getDate();
