@@ -31,7 +31,7 @@ function disableButton(btn) {
     //alert("Button has been disabled.");
 }
 $(document).keydown(function (event) {
-    if (event.keyCode == 123 || event.keyCode === 67 || event.keyCode === 86 || event.keyCode === 85 || event.keyCode === 117) {
+    if (event.keyCode == 123 || event.keyCode === 67 || event.keyCode === 86 || event.keyCode === 85 || event.keyCode === 117 || event.keyCode === 75) {
         return false;
     }
     else if ((event.ctrlKey && event.shiftKey && event.keyCode == 73) || (event.ctrlKey && event.shiftKey && event.keyCode == 74)) {
