@@ -88,6 +88,11 @@
     #floating-panel {
         margin-left: -10px;
     }
+    .btn-success {
+        color: #fff;
+        background-color: #479cdf !important;
+        border-color: #479cdf !important;
+    }
 </style>
 
 <fieldset>
@@ -310,7 +315,7 @@
             var path = new google.maps.MVCArray();
 
             //Initialize the Direction Service
-            var service = new google.maps.DirectionsService();
+           // var service = new google.maps.DirectionsService();
 
             //Set the Path Stroke Color
             var poly = new google.maps.Polyline({
@@ -356,17 +361,17 @@
                     var des = lat_lng[i + 1];
                     path.push(src);
                     poly.setPath(path);
-                    service.route({
-                        origin: src,
-                        destination: des,
-                        travelMode: google.maps.DirectionsTravelMode.DRIVING
-                    }, function (result, status) {
-                        if (status == google.maps.DirectionsStatus.OK) {
-                            for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
-                                path.push(result.routes[0].overview_path[i]);
-                            }
-                        }
-                    });
+                    //service.route({
+                    //    origin: src,
+                    //    destination: des,
+                    //    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                    //}, function (result, status) {
+                    //    if (status == google.maps.DirectionsStatus.OK) {
+                    //        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                    //            path.push(result.routes[0].overview_path[i]);
+                    //        }
+                    //    }
+                    //});
                 }
             }
 
