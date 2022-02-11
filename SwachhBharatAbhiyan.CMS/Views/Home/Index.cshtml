@@ -134,7 +134,7 @@
         box-shadow: none !important
     }
 
-   
+
     .gd-success {
         color: #fff;
         border: none;
@@ -521,8 +521,8 @@
 
                             </div>
                             @*<div id ="tot_pie" style="position:absolute;top: 94%;z-index: 1; background-color:#fff;height:12px;width:75px;padding-top:10px">
-            <pre style="font-size:12px;font-weight:700">Total: @Model.TotalHouseCount</pre>
-        </div>*@
+                                    <pre style="font-size:12px;font-weight:700">Total: @Model.TotalHouseCount</pre>
+                                </div>*@
                             <div id="chartContainerPie" style="height: 200px; width: 100%;position:absolute">
                             </div>
 
@@ -545,8 +545,8 @@
 
                             </div>
                             @*<div id ="tot_pie" style="position:absolute;top: 94%;z-index: 1; background-color:#fff;height:12px;width:75px;padding-top:10px">
-            <pre style="font-size:12px;font-weight:700">Total: @Model.TotalHouseCount</pre>
-        </div>*@
+                                    <pre style="font-size:12px;font-weight:700">Total: @Model.TotalHouseCount</pre>
+                                </div>*@
                             @*style="color:#fff;background-color: #3ab59e;"*@
                             <div id="chartContainerPieDump" style="height: 200px; width: 100%;position:absolute">
                             </div>
@@ -562,7 +562,7 @@
 </section>
 
 
-<section class="dashboard-counts no-padding-bottom" style="padding:0px;" >
+<section class="dashboard-counts no-padding-bottom" style="padding:0px;">
 
     <div class="container-fluid">
         <br>
@@ -596,7 +596,8 @@
                         <input type="hidden" value="@ViewBag.lat" id="deflat" />
                         <input type="hidden" value="@ViewBag.lang" id="deflang" />
                     </div>
-                    <div class="col-sm-1"><span><input type="button" style="margin-bottom:10px" class="btn btn-success btn-sm" id="refresh" value="Show" /></span>
+                    <div class="col-sm-1">
+                        <span><input type="button" style="margin-bottom:10px" class="btn btn-success btn-sm" id="refresh" value="Show" /></span>
                     </div>
 
                     <div class="col-12 bg-white has-shadow" id="googleMap" style="width:1200px; height:600px;">
@@ -631,23 +632,10 @@
 </section>
 
 <section class="dashboard-counts no-padding-bottom"></section>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDywSnWh8pKWPa5o5Ws8cI0_SgN6M27TjQ&callback=myMap" type="text/javascript"></script>
 
-@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap" type="text/javascript"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap3" type="text/javascript"></script>*@
-
-@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBleyaem26SMTE-yIKSSYIAtrPZ-atxWJs&callback=myMap" type="text/javascript"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBleyaem26SMTE-yIKSSYIAtrPZ-atxWJs&callback=myMap3" type="text/javascript"></script>*@
-
-@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxgJE8ITyvoY7NW_bZ0tnrnSs03a5VWD8&callback=myMap" type="text/javascript"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxgJE8ITyvoY7NW_bZ0tnrnSs03a5VWD8&callback=myMap3" type="text/javascript"></script>*@
-
-@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC1bURZcQZ-I__gSCjm4g0GWauNHW52Ow&callback=myMap" type="text/javascript"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC1bURZcQZ-I__gSCjm4g0GWauNHW52Ow&callback=myMap3" type="text/javascript"></script>*@
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>
-  
-@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap" type="text/javascript"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5cRS1OJ9s5BPjZ4G0L_5OobNRbdvCqU&callback=myMap3" type="text/javascript"></script>*@
+@*Paid API*@
+@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 
 <!-- Dashboard Header Section    -->
 <script src="~/Content/Custom/HomeIndex.js"></script>
