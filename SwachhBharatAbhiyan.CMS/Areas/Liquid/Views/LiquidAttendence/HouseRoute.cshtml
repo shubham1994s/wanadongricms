@@ -1487,10 +1487,10 @@
                                     if (data.vehcileNumber == null) {
                                         data.vehcileNumber = '';
                                     }
-                                    if (data.gpBeforImage == null) {
+                                    if (data.gpBeforImage == null || data.gpBeforImage == "") {
                                         data.gpBeforImage = "../../Areas/Liquid/Content/Images/default_not_upload.png"
                                     }
-                                    if (data.gpAfterImage == null) {
+                                    if (data.gpAfterImage == null || data.gpAfterImage == "") {
                                         data.gpAfterImage = "../../Areas/Liquid/Content/Images/default_not_upload.png"
                                     }
                                     if (data.HouseId != null) {
@@ -1611,7 +1611,7 @@
                         var path = new google.maps.MVCArray();
 
                         //Initialize the Direction Service
-                        var service = new google.maps.DirectionsService();
+                        // var service = new google.maps.DirectionsService();
 
                         //Set the Path Stroke Color
                         var poly = new google.maps.Polyline({
@@ -1657,17 +1657,17 @@
                                 var des = lat_lng[i + 1];
                                 path.push(src);
                                 poly.setPath(path);
-                                service.route({
-                                    origin: src,
-                                    destination: des,
-                                    travelMode: google.maps.DirectionsTravelMode.DRIVING
-                                }, function (result, status) {
-                                    if (status == google.maps.DirectionsStatus.OK) {
-                                        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
-                                            path.push(result.routes[0].overview_path[i]);
-                                        }
-                                    }
-                                });
+                                //service.route({
+                                //    origin: src,
+                                //    destination: des,
+                                //    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                                //}, function (result, status) {
+                                //    if (status == google.maps.DirectionsStatus.OK) {
+                                //        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                                //            path.push(result.routes[0].overview_path[i]);
+                                //        }
+                                //    }
+                                //});
                             }
                         }
                     }
@@ -1679,11 +1679,10 @@
         }
 
     </script>
-    @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap" type="text/javascript"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1OiSXnPhpoH9Wy28QRlyPilQu2Fr17BM&callback=myMap3" type="text/javascript"></script>*@
-
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDywSnWh8pKWPa5o5Ws8cI0_SgN6M27TjQ&callback=myMap" type="text/javascript"></script>
 
+    @*Paid API*@
+    @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>

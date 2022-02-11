@@ -31,8 +31,9 @@
 
     #play_id {
         left: 87%;
-        width:5%;
+        width: 5%;
     }
+
     #myRadioGroup {
         text-align: center;
     }
@@ -180,105 +181,105 @@
 
         </div>*@
 
-<div id="myRadioGroup">
+    <div id="myRadioGroup">
 
-    <spn style="font-weight: bold; font-size: 16px;">Search By :</spn> <input type="radio" name="filter" checked="checked" value="1" style="margin-left: 1%;" /> Pin No
-    <input type="radio" name="filter" value="2" style="margin-left: 1%;" /> Date Time
+        <spn style="font-weight: bold; font-size: 16px;">Search By :</spn> <input type="radio" name="filter" checked="checked" value="1" style="margin-left: 1%;" /> Pin No
+        <input type="radio" name="filter" value="2" style="margin-left: 1%;" /> Date Time
 
-    <div id="filter1" class="desc">
-        <div class="row" style="margin-top:5px">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="">From Pin</label>
-                    <div class="input-group ">
-                        <input autocomplete="off" class="form-control" id="frompin" name="frompin" placeholder="From Pin" style="font-family:Arial, FontAwesome" type="text" value=""><span class="input-group-addon"></span>
+        <div id="filter1" class="desc">
+            <div class="row" style="margin-top:5px">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="">From Pin</label>
+                        <div class="input-group ">
+                            <input autocomplete="off" class="form-control" id="frompin" name="frompin" placeholder="From Pin" style="font-family:Arial, FontAwesome" type="text" value=""><span class="input-group-addon"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+
+                        <label for="">To Pin</label>
+                        <div class="input-group ">
+                            <input autocomplete="off" class="form-control" id="topin" name="topin" placeholder="To Pin" style="font-family:Arial, FontAwesome" type="text" value=""><span class="input-group-addon"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-1">
+
+                    <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
+                        <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="SearchPin()">Search</a>
                     </div>
 
                 </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
+                <div class="col-sm-1">
 
-                    <label for="">To Pin</label>
-                    <div class="input-group ">
-                        <input autocomplete="off" class="form-control" id="topin" name="topin" placeholder="To Pin" style="font-family:Arial, FontAwesome" type="text" value=""><span class="input-group-addon"></span>
+                    <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
+                        <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="Reset()">Reset</a>
                     </div>
 
                 </div>
-            </div>
+                <div class="col-sm-4">
+                    <br />
+                    <h4 class="text-danger" id="err_time"></h4>
 
-            <div class="col-sm-1">
-
-                <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
-                    <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="SearchPin()">Search</a>
                 </div>
 
             </div>
-            <div class="col-sm-1">
+        </div>
+        <div id="filter2" class="desc" style="display: none;">
+            <div class="row" style="margin-top:5px">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="">From Time</label>
+                        <div class="input-group time" id="timepicker">
+                            <input autocomplete="off" class="form-control jquery-date-time-picker" id="fromtime" name="fromtime" placeholder="From Time" style="font-family:Arial, FontAwesome" type="text" value=""><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                        </div>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
 
-                <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
-                    <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="Reset()">Reset</a>
+                        <label for="">To Time</label>
+                        <div class="input-group time" id="timepickerrr">
+                            <input autocomplete="off" class="form-control jquery-date-time-picker" id="totime" name="totime" placeholder="To Time" style="font-family:Arial, FontAwesome" type="text" value=""><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                        </div>
+
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-1">
+
+                    <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
+                        <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="SearchTime()">Search</a>
+                    </div>
+
+                </div>
+                <div class="col-sm-1">
+
+                    <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
+                        <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="Reset()">Reset</a>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <br />
+                    <h4 class="text-danger" id="err_time2"></h4>
+
                 </div>
 
             </div>
-            <div class="col-sm-4">
-                <br />
-                <h4 class="text-danger" id="err_time"></h4>
-
-            </div>
-
         </div>
     </div>
-    <div id="filter2" class="desc" style="display: none;">
-        <div class="row" style="margin-top:5px">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="">From Time</label>
-                    <div class="input-group time" id="timepicker">
-                        <input autocomplete="off" class="form-control jquery-date-time-picker" id="fromtime" name="fromtime" placeholder="From Time" style="font-family:Arial, FontAwesome" type="text" value=""><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
-                    </div>
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-
-                    <label for="">To Time</label>
-                    <div class="input-group time" id="timepickerrr">
-                        <input autocomplete="off" class="form-control jquery-date-time-picker" id="totime" name="totime" placeholder="To Time" style="font-family:Arial, FontAwesome" type="text" value=""><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
-                    </div>
-
-                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-
-            <div class="col-sm-1">
-
-                <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
-                    <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="SearchTime()">Search</a>
-                </div>
-
-            </div>
-            <div class="col-sm-1">
-
-                <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
-                    <a style="margin-top: 22px; color: #fff;" class="btn btn-sm btn-success" onclick="Reset()">Reset</a>
-                </div>
-
-            </div>
-            <div class="col-sm-4">
-                <br />
-                <h4 class="text-danger" id="err_time2"></h4>
-
-            </div>
-
-        </div>
-    </div>
-</div>
 </div>
 <div id="floating-panel" style="display:inline-flex;width:auto;background:transparent;border:none">
     <a style="margin-left:5px" class="btn btn-sm btn-success" href="/Street/StreetAttendence/Index">Back</a>
@@ -298,7 +299,7 @@
     </div>
 
 
-    <div class="container "  style="display:block;">
+    <div class="container " style="display:none;">
         <div class="row">
 
             <div class="col-12 bg-white has-shadow" id="mapBoxMap" style="width:auto; height:600px"></div>
@@ -611,7 +612,7 @@
                             });
 
                             var origin = [];
-                          
+
                             //debugger;
                             for (var m = 0; m < markers.length - 1; m++) {
                                 var c = m + 1;
@@ -709,7 +710,7 @@
                                             }
                                         }
                                     }
-                                   
+
 
                                     //debugger;
                                     if (k == markers.length - 1) {
@@ -1432,7 +1433,7 @@
                     var path = new google.maps.MVCArray();
 
                     //Initialize the Direction Service
-                    var service = new google.maps.DirectionsService();
+                    // var service = new google.maps.DirectionsService();
 
                     //Set the Path Stroke Color
                     var poly = new google.maps.Polyline({
@@ -1478,17 +1479,17 @@
                             var des = lat_lng[i + 1];
                             path.push(src);
                             poly.setPath(path);
-                            service.route({
-                                origin: src,
-                                destination: des,
-                                travelMode: google.maps.DirectionsTravelMode.DRIVING
-                            }, function (result, status) {
-                                if (status == google.maps.DirectionsStatus.OK) {
-                                    for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
-                                        path.push(result.routes[0].overview_path[i]);
-                                    }
-                                }
-                            });
+                            //service.route({
+                            //    origin: src,
+                            //    destination: des,
+                            //    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                            //}, function (result, status) {
+                            //    if (status == google.maps.DirectionsStatus.OK) {
+                            //        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                            //            path.push(result.routes[0].overview_path[i]);
+                            //        }
+                            //    }
+                            //});
                         }
                     }
                 }
@@ -1500,6 +1501,8 @@
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDywSnWh8pKWPa5o5Ws8cI0_SgN6M27TjQ&callback=myMap" type="text/javascript"></script>
 
+    @*Paid API*@
+    @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 
     @*<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js'></script>

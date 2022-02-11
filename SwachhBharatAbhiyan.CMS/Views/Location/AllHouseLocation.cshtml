@@ -345,7 +345,7 @@
             <div id="mapBoxMenu">
                 <input id="streets-v11" type="radio" name="rtoggle" value="streets" checked="checked">
                 <label for="streets-v11">streets</label>
-              
+
                 <input id="light-v10" type="radio" name="rtoggle" value="light">
                 <label for="light-v10">light</label>
                 <input id="dark-v10" type="radio" name="rtoggle" value="dark">
@@ -389,7 +389,7 @@
         .mapBoxMarker {
             background-image: url('../Content/images/img/marker24.png');
             background-size: contain;
-            background-position:center;
+            background-position: center;
             background-repeat: no-repeat;
             width: 30px;
             height: 35px;
@@ -410,7 +410,7 @@
             background: #efefef;
             padding: 10px;
             font-family: 'Open Sans', sans-serif;
-            z-index:1;
+            z-index: 1;
         }
     </style>
     <script>
@@ -463,7 +463,7 @@
                             center: [data[0].houseLong, data[0].houseLat], // starting position [lng, lat]
                             zoom: 12 // starting zoom
                         });
-                        
+
                         var marker, i;
                         // alert(data.length);
                         // Get Addres
@@ -515,7 +515,7 @@
                                 .setLngLat([data[i].houseLong, data[i].houseLat])
                                 .addTo(mapBox);
 
-                            
+
 
                             if (gar_type != null) {
                                 marker.getElement().addEventListener('click', (function (marker, i) {
@@ -615,7 +615,7 @@
 
 
                         }
-                        
+
 
                     }
 
@@ -928,6 +928,9 @@
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDywSnWh8pKWPa5o5Ws8cI0_SgN6M27TjQ&callback=myMap" type="text/javascript"></script>
+
+    @*Paid API*@
+    @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 </fieldset>
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
 <script>
