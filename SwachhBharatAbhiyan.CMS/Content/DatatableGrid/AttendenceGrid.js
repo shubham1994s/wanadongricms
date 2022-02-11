@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    debugger;
+    w debugger;
 
    
     var UserId = $('#selectnumber').val();
