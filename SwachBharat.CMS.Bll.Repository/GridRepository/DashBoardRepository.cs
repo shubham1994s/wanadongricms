@@ -3044,7 +3044,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         {
             using (var dbMain = new DevSwachhBharatMainEntities())
             {
-                var data = dbMain.SP_Admin2().Select(x => new SBAAdminCountGrid
+                var data = dbMain.SP_Admin2().Where(x => !(x.appName.ToUpper().Contains("THANE"))).Select(x => new SBAAdminCountGrid
                 {
                     Name = x.appName,
                     employee = Convert.ToInt32(x.userId),

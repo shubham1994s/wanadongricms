@@ -125,8 +125,11 @@
           <Property Name="MsgForNotReceived" Type="nvarchar" MaxLength="1000" />
           <Property Name="MsgForSegregated" Type="nvarchar" MaxLength="1000" />
           <Property Name="IsScanNear" Type="bit" />
-          <Property Name="LiquidQRCode" Type="varchar" MaxLength="10" />
-          <Property Name="StreetQRCode" Type="varchar" MaxLength="10" />
+          <Property Name="LiquidQRCode" Type="varchar" MaxLength="100" />
+          <Property Name="StreetQRCode" Type="varchar" MaxLength="100" />
+          <Property Name="CommercialQRCode" Type="nvarchar" MaxLength="220" />
+          <Property Name="CTPTQRCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="SWMQRCode" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -564,7 +567,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <FunctionImport Name="SP_Admin_table" />
-          <FunctionImport Name="SP_Admin2" ReturnType="Collection(DevSwachhBharatMainModel.SP_Admin2_Result)" />
           <EntitySet Name="Sauchalay_feedback" EntityType="DevSwachhBharatMainModel.Sauchalay_feedback" />
           <EntitySet Name="Game_AnswerType" EntityType="DevSwachhBharatMainModel.Game_AnswerType" />
           <EntitySet Name="Game_Slogan" EntityType="DevSwachhBharatMainModel.Game_Slogan" />
@@ -574,17 +576,8 @@
           <EntitySet Name="AD_USER_MST_LIQUID" EntityType="DevSwachhBharatMainModel.AD_USER_MST_LIQUID" />
           <EntitySet Name="AD_USER_MST_STREET" EntityType="DevSwachhBharatMainModel.AD_USER_MST_STREET" />
           <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
+          <FunctionImport Name="SP_Admin2" ReturnType="Collection(DevSwachhBharatMainModel.SP_Admin2_Result)" />
         </EntityContainer>
-        <ComplexType Name="SP_Admin2_Result">
-          <Property Type="String" Name="appName" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="userId" Nullable="true" />
-          <Property Type="Int32" Name="attenUser" Nullable="true" />
-          <Property Type="Int32" Name="collectionCount" Nullable="true" />
-          <Property Type="Int32" Name="notrecviedCollection" Nullable="true" />
-          <Property Type="Int32" Name="byfurgetcol" Nullable="true" />
-          <Property Type="Int32" Name="mixedcolle" Nullable="true" />
-          <Property Type="Int32" Name="notspecified" Nullable="true" />
-        </ComplexType>
         <EntityType Name="Sauchalay_feedback">
           <Key>
             <PropertyRef Name="SauchalayFeedback_ID" />
@@ -765,9 +758,22 @@
           <Property Name="MsgForNotReceived" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="MsgForSegregated" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="IsScanNear" Type="Boolean" />
-          <Property Name="LiquidQRCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="StreetQRCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LiquidQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StreetQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CommercialQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="CTPTQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SWMQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="SP_Admin2_Result">
+          <Property Type="String" Name="appName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="userId" Nullable="true" />
+          <Property Type="Int32" Name="attenUser" Nullable="true" />
+          <Property Type="Int32" Name="collectionCount" Nullable="true" />
+          <Property Type="Int32" Name="notspecified" Nullable="true" />
+          <Property Type="Int32" Name="notrecviedCollection" Nullable="true" />
+          <Property Type="Int32" Name="byfurgetcol" Nullable="true" />
+          <Property Type="Int32" Name="mixedcolle" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -894,20 +900,6 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="SP_Admin_table" FunctionName="DevSwachhBharatMainModel.Store.SP_Admin_table" />
-          <FunctionImportMapping FunctionImportName="SP_Admin2" FunctionName="DevSwachhBharatMainModel.Store.SP_Admin2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_Admin2_Result">
-                <ScalarProperty Name="appName" ColumnName="appName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="attenUser" ColumnName="attenUser" />
-                <ScalarProperty Name="collectionCount" ColumnName="collectionCount" />
-                <ScalarProperty Name="notrecviedCollection" ColumnName="notrecviedCollection" />
-                <ScalarProperty Name="byfurgetcol" ColumnName="byfurgetcol" />
-                <ScalarProperty Name="mixedcolle" ColumnName="mixedcolle" />
-                <ScalarProperty Name="notspecified" ColumnName="notspecified" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Sauchalay_feedback">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.Sauchalay_feedback">
               <MappingFragment StoreEntitySet="Sauchalay_feedback">
@@ -1044,6 +1036,9 @@
           <EntitySetMapping Name="AppDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.AppDetail">
               <MappingFragment StoreEntitySet="AppDetails">
+                <ScalarProperty Name="SWMQRCode" ColumnName="SWMQRCode" />
+                <ScalarProperty Name="CTPTQRCode" ColumnName="CTPTQRCode" />
+                <ScalarProperty Name="CommercialQRCode" ColumnName="CommercialQRCode" />
                 <ScalarProperty Name="StreetQRCode" ColumnName="StreetQRCode" />
                 <ScalarProperty Name="LiquidQRCode" ColumnName="LiquidQRCode" />
                 <ScalarProperty Name="IsScanNear" ColumnName="IsScanNear" />
@@ -1100,6 +1095,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Admin2" FunctionName="DevSwachhBharatMainModel.Store.SP_Admin2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_Admin2_Result">
+                <ScalarProperty Name="appName" ColumnName="appName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="attenUser" ColumnName="attenUser" />
+                <ScalarProperty Name="collectionCount" ColumnName="collectionCount" />
+                <ScalarProperty Name="notspecified" ColumnName="notspecified" />
+                <ScalarProperty Name="notrecviedCollection" ColumnName="notrecviedCollection" />
+                <ScalarProperty Name="byfurgetcol" ColumnName="byfurgetcol" />
+                <ScalarProperty Name="mixedcolle" ColumnName="mixedcolle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
