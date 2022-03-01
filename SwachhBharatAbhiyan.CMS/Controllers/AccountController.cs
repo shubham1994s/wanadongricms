@@ -117,7 +117,6 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 }
                 else if (Type == "L")
                 {
-                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
                     LoginViewModel model = new LoginViewModel();
                     
@@ -129,6 +128,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     switch (Result.status)
                     {
                         case "Success":
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                             Session["status"] = "Success";
                             TempData["status"] = "Success";
                             TempData["ADUM_USER_NAME"] = Result.ADUM_USER_NAME;
@@ -165,7 +165,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     switch (Result.status)
                     {
                         case "Success":
-                            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                             //var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
                             //AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
                             //string UserId = UserDetails.Id;
