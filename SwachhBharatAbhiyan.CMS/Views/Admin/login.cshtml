@@ -17,9 +17,52 @@
     @Styles.Render("~/Content/ThemeCss")
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="/Content/images/img/sba.png" />
-
+    @*<link rel="shortcut icon" href="/Content/images/img/sba.png" />*@
+    <link rel="shortcut icon" href="/Content/images/img/ictsbm2.png" />
+    <style>
+        .login-page .form-holder .info {
+            background: #fff;
+            color: #000;
+        }
+        input.input-material {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            border-radius: 20px;
+        }
+        .bg-b {
+          background:  #189cdf !important
+        }
+        input.input-material ~ label {
+            color: #aaa;
+            position: absolute;
+            top: 14px;
+            left: 15px;
+            cursor: text;
+            -webkit-transition: all 0.2s;
+            transition: all 0.2s;
+            font-weight: 300;
+        }
+        input.input-material ~ label.active {
+            color:#fff;
+            top:-14px
+        }
+            .btn-primary {
+    background: #189cdf !important;
+}
+        .btn-primary {
+            background: #fff !important;
+            color:#000
+        }
+            .btn-primary:hover {
+                color: #000;
+               /* background-color: #0069d9;
+                border-color: #0062cc;*/
+            }
+    </style>
 </head>
+
 <body>
 
     <div class="page login-page">
@@ -33,22 +76,23 @@
 
                                 <div class="content">
                                     <div class="logo">
-                                        <img style="height:auto;width:auto;max-width:200px;" src="~/Content/images/img/app_icon_cms.png" />
+                                        @*<img style="height:auto;width:auto;max-width:200px;" src="~/Content/images/img/app_icon_cms.png" />*@
+                                        <img style="height: auto; width: auto;width: 180px; max-width: 100%; " src="~/Content/images/New_Img/WCMT-Logo.png" />
                                     </div>
                                 </div>
                                 <br>
                                 <div class="content">
                                     <div class="logo">
-                                        <h1>Super Admin Login </h1>
+                                        <h1 style="color:#000">Super Admin Login </h1>
                                     </div>
-                                    <p style="margin:0px">Garbage Collection Van, Swachh Bharat Mission</p>
+                                    <p style="margin:0px; color:#000; font-weight:700; font-size:15px">ICT BASED MONITORING TECHNOLOGY</p>
                                 </div>
                             </div>
                         </center>
 
                     </div>
                     <!-- Form Panel    -->
-                    <div class="col-lg-6 bg-white">
+                    <div class="col-lg-6 bg-b">
 
                         @using (Html.BeginForm("Login", "Admin", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
                         {
