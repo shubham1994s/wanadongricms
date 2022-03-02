@@ -1,4 +1,6 @@
-﻿using SwachhBharatAbhiyan.CMS.Models;
+﻿using SwachBharat.CMS.Bll.Repository.MainRepository;
+using SwachBharat.CMS.Bll.ViewModels.MainModel;
+using SwachhBharatAbhiyan.CMS.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,17 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 {
     public class AdminController : Controller
     {
+        private IMainRepository mainrepository;
+        public AdminController()
+        {
+            // AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            mainrepository = new MainRepository();
+        }
         // GET: Admin
         public ActionResult MenuIndex()
         {
-            return View();
+            List<MenuItem> menuList = GetMenus();
+            return View(menuList);
         }
         public ActionResult Index()
         {
@@ -57,5 +66,13 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
             }
         }
+
+        public List<MenuItem> GetMenus()
+        {
+            List<MenuItem> menuList = new List<MenuItem>();
+            menuList = mainrepository.GetMenus();
+            return menuList;
+        }
+        
     }
 }

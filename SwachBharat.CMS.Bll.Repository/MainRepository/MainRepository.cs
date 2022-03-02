@@ -11,7 +11,7 @@ using SwachBharat.CMS.Dal.DataContexts;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
-    public class MainRepository:IMainRepository
+    public class MainRepository : IMainRepository
     {
         MainService mainService;
         public MainRepository()
@@ -23,7 +23,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         #region State
         public AppStateVM GetStateDetailsById(int teamId)
         {
-            AppStateVM stateVM = InitBaseViewModel<AppStateVM>(); 
+            AppStateVM stateVM = InitBaseViewModel<AppStateVM>();
             stateVM = mainService.GetStateDetailsById(teamId);
             return stateVM;
         }
@@ -33,10 +33,10 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             AppStateVM stateVM = InitBaseViewModel<AppStateVM>();
             stateVM = mainService.GetStateDetailsById(Id);
             return stateVM;
-        } 
+        }
         public void SaveState(AppStateVM state)
-        { 
-           mainService.SaveStateDetail(state); 
+        {
+            mainService.SaveStateDetail(state);
         }
 
         public void DeleteState(int teamId)
@@ -44,12 +44,12 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             mainService.DeleteStateRecord(teamId);
         }
         #endregion
-    
+
         #region District
         public AppDistrictVM GetDistrictById(int teamId)
         {
-           return mainService.GetDictrictById(teamId);
-            
+            return mainService.GetDictrictById(teamId);
+
         }
         public void SaveDistrict(AppDistrictVM details)
         {
@@ -59,13 +59,13 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         {
             mainService.DeleteDictrictRecord(teamId);
         }
-        #endregion 
-          
+        #endregion
+
         #region Taluka
-        public AppTalukaVM GetTalukaById(int teamId,string name)
+        public AppTalukaVM GetTalukaById(int teamId, string name)
         {
-            return mainService.GetTalukaById(teamId,name);
-        } 
+            return mainService.GetTalukaById(teamId, name);
+        }
         public void SaveTaluka(AppTalukaVM state)
         {
             mainService.SaveTalukaDetails(state);
@@ -137,7 +137,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                 if (appUser != null)
                 {
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
-                    
+
                     _EmployeeVM.APP_ID = appUser.APP_ID;
                     _EmployeeVM.ADUM_USER_NAME = appUser.ADUM_USER_NAME;
                     _EmployeeVM.ADUM_USER_CODE = Convert.ToInt32(appUser.ADUM_USER_CODE);
@@ -178,7 +178,58 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             }
         }
 
+        public List<MenuItem> GetMenus()
+        {
+            List<MenuItem> menuList = new List<MenuItem>();
+            List<MenuItem> menuListW = new List<MenuItem>();
+            List<MenuItem> menuListL = new List<MenuItem>();
+            List<MenuItem> menuListS = new List<MenuItem>();
+            menuListW.Add(new MenuItem { M_ID = 1, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Waste Collection", returnUrl = "", Type = "W" });
+            menuListL.Add(new MenuItem { M_ID = 2, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Liquid Collection", returnUrl = "", Type = "L" });
+            menuListS.Add(new MenuItem { M_ID = 3, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Street Collection", returnUrl = "", Type = "S" });
+            
+            using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
+            {
+                var appList = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { AppId = a.AppId, AppName = b.AppName }).ToList();
+                if (appList != null && appList.Count > 0)
+                {
+                    foreach(var app in appList)
+                    {
+                        var itemW = db.UserInApps.Join(db.AspNetUsers, a => a.UserId, b => b.Id,
+                            (a, b) => new { M_ID = 1, M_P_ID = 1, ActionName = "Login", ControllerName = "Account", LinkText = app.AppName, returnUrl = b.UserName, Type = "W", appId = a.AppId })
+                            .Where(c => c.appId == app.AppId)
+                            .Select(c=> new MenuItem { M_ID = 1, M_P_ID = c.M_P_ID, ActionName = c.ActionName, ControllerName = c.ControllerName, LinkText = c.LinkText, returnUrl = c.returnUrl, Type = c.Type }).FirstOrDefault();
+                        if (itemW != null)
+                        {
+                            menuListW.Add(itemW);
+                        }
 
+                        var itemL = db.AD_USER_MST_LIQUID.Select(a => new { M_ID = 1, M_P_ID = 2, ActionName = "Login", ControllerName = "Account", LinkText = app.AppName, returnUrl = a.ADUM_LOGIN_ID, Type = "L", appId = a.APP_ID })
+                            .Where(c => c.appId == app.AppId)
+                            .Select(c => new MenuItem { M_ID = 1, M_P_ID = c.M_P_ID, ActionName = c.ActionName, ControllerName = c.ControllerName, LinkText = c.LinkText, returnUrl = c.returnUrl, Type = c.Type }).FirstOrDefault();
+
+                        if (itemL != null)
+                        {
+                            menuListL.Add(itemL);
+                        }
+
+                        var itemS = db.AD_USER_MST_STREET.Select(a => new { M_ID = 1, M_P_ID = 3, ActionName = "Login", ControllerName = "Account", LinkText = app.AppName, returnUrl = a.ADUM_LOGIN_ID, Type = "S", appId = a.APP_ID })
+                            .Where(c => c.appId == app.AppId)
+                            .Select(c => new MenuItem { M_ID = 1, M_P_ID = c.M_P_ID, ActionName = c.ActionName, ControllerName = c.ControllerName, LinkText = c.LinkText, returnUrl = c.returnUrl, Type = c.Type }).FirstOrDefault();
+
+                        if (itemS != null)
+                        {
+                            menuListS.Add(itemS);
+                        }
+                    }
+                    menuList.AddRange(menuListW.OrderBy(a => a.LinkText));
+                    menuList.AddRange(menuListL.OrderBy(a => a.LinkText));
+                    menuList.AddRange(menuListS.OrderBy(a => a.LinkText));
+                }
+            }
+
+            return menuList.Where(a => !(a.LinkText.ToUpper().Contains("THANE"))).ToList();
+        }
         //Addedv By Saurabh (27 May 2019)
 
         public List<AppDetail> GetAppName()
