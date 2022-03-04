@@ -3054,6 +3054,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     notspecified = Convert.ToInt32(x.notspecified),
                     total = Convert.ToInt32(x.collectionCount),
                     mixed = Convert.ToInt32(x.mixedcolle),
+                    TotalLiquidCount = Convert.ToInt32(x.TotalLiquidCount),
+                    TotalStreetCount = Convert.ToInt32(x.TotalStreetCount)
                 }).ToList();
                 ////  var result = data.SkipWhile(element => element.cId != element.reNewId); 
                 //foreach (var item in data)
