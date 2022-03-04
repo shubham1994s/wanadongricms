@@ -52,6 +52,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         EmployeeVM Login(EmployeeVM _userinfo);
 
         EmployeeVM LoginStreet(EmployeeVM _userinfo);
+        List<MenuItem> GetMenus();
 
         #region Game
         List<GameMaster> GetGameList();

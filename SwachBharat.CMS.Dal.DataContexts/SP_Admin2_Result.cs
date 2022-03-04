@@ -17,9 +17,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> userId { get; set; }
         public Nullable<int> attenUser { get; set; }
         public Nullable<int> collectionCount { get; set; }
+        public Nullable<int> notspecified { get; set; }
         public Nullable<int> notrecviedCollection { get; set; }
         public Nullable<int> byfurgetcol { get; set; }
         public Nullable<int> mixedcolle { get; set; }
-        public Nullable<int> notspecified { get; set; }
+        public Nullable<int> TotalLiquidCount { get; set; }
+        public Nullable<int> TotalStreetCount { get; set; }
     }
 }

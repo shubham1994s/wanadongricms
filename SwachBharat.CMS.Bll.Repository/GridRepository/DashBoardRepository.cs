@@ -3044,7 +3044,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         {
             using (var dbMain = new DevSwachhBharatMainEntities())
             {
-                var data = dbMain.SP_Admin2().Select(x => new SBAAdminCountGrid
+                var data = dbMain.SP_Admin2().Where(x => !(x.appName.ToUpper().Contains("THANE"))).Select(x => new SBAAdminCountGrid
                 {
                     Name = x.appName,
                     employee = Convert.ToInt32(x.userId),
@@ -3054,6 +3054,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     notspecified = Convert.ToInt32(x.notspecified),
                     total = Convert.ToInt32(x.collectionCount),
                     mixed = Convert.ToInt32(x.mixedcolle),
+                    TotalLiquidCount = Convert.ToInt32(x.TotalLiquidCount),
+                    TotalStreetCount = Convert.ToInt32(x.TotalStreetCount)
                 }).ToList();
                 ////  var result = data.SkipWhile(element => element.cId != element.reNewId); 
                 //foreach (var item in data)

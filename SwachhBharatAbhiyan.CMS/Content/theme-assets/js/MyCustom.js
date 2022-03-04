@@ -25,11 +25,11 @@
 //20/01/2022
 
 
-function disableButton(btn) {
-    debugger;
-    document.getElementById(btn.id).disabled = true;
-    //alert("Button has been disabled.");
-}
+//function disableButton(btn) {
+//    debugger;
+//    document.getElementById(btn.id).disabled = true;
+//    //alert("Button has been disabled.");
+//}
 //$(document).keydown(function (event) {
 //    //if (event.keyCode == 123 || event.keyCode === 67 || event.keyCode === 86 || event.keyCode === 85 || event.keyCode === 117 || event.keyCode === 75) {
 //    //    return false;
@@ -39,4 +39,4 @@ function disableButton(btn) {
 //    }
 //});
 
-    //document.addEventListener('contextmenu', event => event.preventDefault());
+//    document.addEventListener('contextmenu', event => event.preventDefault());

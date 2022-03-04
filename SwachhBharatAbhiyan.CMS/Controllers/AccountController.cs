@@ -67,50 +67,133 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public async Task<ActionResult> Login(string returnUrl)
+        public async Task<ActionResult> Login(string returnUrl, string Type=null)
         {
             if (returnUrl !=null)
             {
-                LoginViewModel model = new LoginViewModel( );
-                model.Email = returnUrl;
-                   model.Password = "Admin#123";
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, change to shouldLockout: true
-                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-                var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
+                if (Type == "W")
+                {
+                    LoginViewModel model = new LoginViewModel();
+                    model.Email = returnUrl;
+                    model.Password = "Admin#123";
+                    model.Type = Type;
+                    // This doesn't count login failures towards account lockout
+                    // To enable password failures to trigger account lockout, change to shouldLockout: true
+                    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                    var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
 
-                switch (result)
+                    switch (result)
+                    {
+
+                        case SignInStatus.Success:
+                            if (UserDetails != null)
+                            {
+                                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                                var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
+                                AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+
+                                string UserId = UserDetails.Id;
+                                string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
+                                string UserEmail = UserDetails.Email;
+                                string UserName = identity.Name;
+
+                                Logger.WriteInfoMessage("User  " + model.Email + " is successfully login with user id :" + UserId + " ,User Role : " + UserRole + " ,Email ID :" + UserEmail);
+
+                                AddSession(UserId, UserRole, UserEmail, UserName, model.Type);
+
+                            }
+                            return RedirectToAction("Index", "Home");
+                        //return RedirectToLocal(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View(model);
+                    }
+
+                }
+                else if (Type == "L")
                 {
 
-                    case SignInStatus.Success:
-                        if (UserDetails != null)
-                        {
-                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                            var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
-                            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+                    LoginViewModel model = new LoginViewModel();
+                    
+                    EmployeeVM Result = new EmployeeVM();
+                    Result.ADUM_LOGIN_ID = returnUrl;
+                    Result.ADUM_PASSWORD = "Admin#123";
+                    Result = mainrepository.Login(Result);
 
-                            string UserId = UserDetails.Id;
-                            string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
-                            string UserEmail = UserDetails.Email;
-                            string UserName = identity.Name;
+                    switch (Result.status)
+                    {
+                        case "Success":
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            Session["status"] = "Success";
+                            TempData["status"] = "Success";
+                            TempData["ADUM_USER_NAME"] = Result.ADUM_USER_NAME;
+                            AddSession(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
+                            Session["UserID"] = Result.ADUM_USER_CODE.ToString();
+                            Session["LoginId"] = Result.ADUM_LOGIN_ID.ToString();
+                            Session["UserProfile"] = Result;
+                            //return RedirectToLocalLiquid(returnUrl);
+                            return RedirectToAction("Index", "Liquid/LiquidHome");
 
-                            Logger.WriteInfoMessage("User  " + model.Email + " is successfully login with user id :" + UserId + " ,User Role : " + UserRole + " ,Email ID :" + UserEmail);
+                        case "LockedOut":
+                            return View("Lockout");
+                        case "RequiresVerification":
 
-                            AddSession(UserId, UserRole, UserEmail, UserName,model.Type);
+                        case "Failure":
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View(model);
 
-                        }
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View(model);
+                    }
+
                 }
+                else if(Type == "S")
+                {
+                    
 
+                    LoginViewModel model = new LoginViewModel();
 
+                    EmployeeVM Result = new EmployeeVM();
+                    Result.ADUM_LOGIN_ID = returnUrl;
+                    Result.ADUM_PASSWORD = "Admin#123";
+                    Result = mainrepository.LoginStreet(Result);
+                    //var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
+                    switch (Result.status)
+                    {
+                        case "Success":
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            //var identity = await UserManager.CreateIdentityAsync(UserDetails, DefaultAuthenticationTypes.ApplicationCookie);
+                            //AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, identity);
+                            //string UserId = UserDetails.Id;
+                            //string UserRole = UserManager.GetRoles(UserId).FirstOrDefault();
+                            //string UserEmail = UserDetails.Email;
+                            //string UserName = identity.Name;
+                            Session["status"] = "Success";
+                            TempData["status"] = "Success";
+                            TempData["ADUM_USER_NAME"] = Result.ADUM_USER_NAME;
+                            AddSessionStreet(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
+                            Session["UserID"] = Result.ADUM_USER_CODE.ToString();
+                            Session["LoginId"] = Result.ADUM_LOGIN_ID.ToString();
+                            Session["UserProfile"] = Result;
+                            //return RedirectToLocalStreet(returnUrl);
+                            return RedirectToAction("Index", "Street/StreetHome");
+
+                        case "LockedOut":
+                            return View("Lockout");
+                        case "RequiresVerification":
+
+                        case "Failure":
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View(model);
+
+                    }
+
+                }
             }
 
             ViewBag.ReturnUrl = returnUrl;
