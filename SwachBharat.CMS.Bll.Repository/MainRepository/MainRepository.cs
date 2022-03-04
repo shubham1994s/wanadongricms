@@ -178,7 +178,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             }
         }
 
-        public List<MenuItem> GetMenus()
+        public List<MenuItem> GetMenus1()
         {
             List<MenuItem> menuList = new List<MenuItem>();
             List<MenuItem> menuListW = new List<MenuItem>();
@@ -230,8 +230,46 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
             return menuList.Where(a => !(a.LinkText.ToUpper().Contains("THANE"))).ToList();
         }
-        //Addedv By Saurabh (27 May 2019)
+        
 
+        //Added by milind 04-03-2022 
+        public List<MenuItem> GetMenus()
+        {
+            List<MenuItem> menuList = new List<MenuItem>();
+
+            menuList.Add(new MenuItem { M_ID = 1, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Waste Collection", returnUrl = "", Type = "W" });
+            menuList.Add(new MenuItem { M_ID = 2, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Liquid Collection", returnUrl = "", Type = "L" });
+            menuList.Add(new MenuItem { M_ID = 3, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Street Collection", returnUrl = "", Type = "S" });
+
+            using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
+            {
+                var W = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { AppId = a.AppId, AppName = b.AppName })
+                    .Join(db.UserInApps, a => a.AppId, b => b.AppId, (a, b) => new { a, b })
+                    .Join(db.AspNetUsers, c => c.b.UserId, d => d.Id, (c, d) => new MenuItem { M_ID = 1, M_P_ID = 1, ActionName = "Login", ControllerName = "Account", LinkText = c.a.AppName, returnUrl = d.UserName, Type = "W" }).ToList();
+                if (W != null && W.Count > 0)
+                {
+                    menuList.AddRange(W.OrderBy(a => a.LinkText));
+                }
+
+                var L = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,(a,b) => new { AppId = a.AppId, AppName = b.AppName })
+                    .Join(db.AD_USER_MST_LIQUID,c => c.AppId, d => d.APP_ID, (c,d) => new MenuItem { M_ID = 1, M_P_ID = 2, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, returnUrl = d.ADUM_LOGIN_ID, Type = "L" }).ToList();
+                if (L != null && L.Count > 0)
+                {
+                    menuList.AddRange(L.OrderBy(a => a.LinkText));
+                }
+
+                var S = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { AppId = a.AppId, AppName = b.AppName })
+                    .Join(db.AD_USER_MST_STREET, c => c.AppId, d => d.APP_ID, (c, d) => new MenuItem { M_ID = 1, M_P_ID = 3, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, returnUrl = d.ADUM_LOGIN_ID, Type = "S" }).ToList();
+                if (S != null && S.Count > 0)
+                {
+                    menuList.AddRange(S.OrderBy(a => a.LinkText));
+                }
+            }
+
+            return menuList.Where(a => !(a.LinkText.ToUpper().Contains("THANE"))).ToList();
+        }
+
+        //Addedv By Saurabh (27 May 2019)
         public List<AppDetail> GetAppName()
         {
             return mainService.GetAppName();
