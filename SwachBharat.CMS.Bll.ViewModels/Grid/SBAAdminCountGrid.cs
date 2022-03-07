@@ -18,5 +18,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public int mixed { get; set; }
         public int total{ get; set; }
         public int notspecified { get; set; }
+        public int TotalLiquidCount { get; set; }
+        public int TotalStreetCount { get; set; }
     }
 }

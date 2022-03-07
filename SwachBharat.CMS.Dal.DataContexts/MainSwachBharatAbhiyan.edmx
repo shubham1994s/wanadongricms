@@ -5,9 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DevSwachhBharatMainModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.AD_USER_MST_LIQUID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AD_USER_MST_LIQUID">
           <Key>
             <PropertyRef Name="ADUM_USER_CODE" />
+            
+            
+            
+            
+            
           </Key>
           <Property Name="ADUM_USER_CODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SERVER_ID" Type="tinyint" />
@@ -32,9 +39,16 @@
           <Property Name="IS_ACTIVE" Type="bit" />
           <Property Name="IMO_NO" Type="nvarchar" MaxLength="1" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.AD_USER_MST_STREET' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AD_USER_MST_STREET">
           <Key>
             <PropertyRef Name="ADUM_USER_CODE" />
+            
+            
+            
+            
+            
           </Key>
           <Property Name="ADUM_USER_CODE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SERVER_ID" Type="tinyint" />
@@ -125,9 +139,9 @@
           <Property Name="MsgForNotReceived" Type="nvarchar" MaxLength="1000" />
           <Property Name="MsgForSegregated" Type="nvarchar" MaxLength="1000" />
           <Property Name="IsScanNear" Type="bit" />
-          <Property Name="LiquidQRCode" Type="varchar" MaxLength="100" />
-          <Property Name="StreetQRCode" Type="varchar" MaxLength="100" />
-          <Property Name="CommercialQRCode" Type="nvarchar" MaxLength="220" />
+          <Property Name="LiquidQRCode" Type="varchar" MaxLength="50" />
+          <Property Name="StreetQRCode" Type="varchar" MaxLength="50" />
+          <Property Name="CommercialQRCode" Type="nvarchar" MaxLength="100" />
           <Property Name="CTPTQRCode" Type="nvarchar" MaxLength="100" />
           <Property Name="SWMQRCode" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -361,8 +375,6 @@
         <Function Name="SP_Admin_table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_Admin2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DevSwachhBharatMainModelStoreContainer">
-          <EntitySet Name="AD_USER_MST_LIQUID" EntityType="Self.AD_USER_MST_LIQUID" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AD_USER_MST_STREET" EntityType="Self.AD_USER_MST_STREET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppConnection" EntityType="Self.AppConnection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppDetails" EntityType="Self.AppDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -381,6 +393,58 @@
           <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tehsil" EntityType="Self.tehsil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInApps" EntityType="Self.UserInApps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AD_USER_MST_LIQUID" EntityType="Self.AD_USER_MST_LIQUID" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AD_USER_MST_LIQUID].[ADUM_USER_CODE] AS [ADUM_USER_CODE], 
+    [AD_USER_MST_LIQUID].[SERVER_ID] AS [SERVER_ID], 
+    [AD_USER_MST_LIQUID].[APP_ID] AS [APP_ID], 
+    [AD_USER_MST_LIQUID].[ADUM_USER_ID] AS [ADUM_USER_ID], 
+    [AD_USER_MST_LIQUID].[ADUM_USER_NAME] AS [ADUM_USER_NAME], 
+    [AD_USER_MST_LIQUID].[ADUM_LOGIN_ID] AS [ADUM_LOGIN_ID], 
+    [AD_USER_MST_LIQUID].[ADUM_PASSWORD] AS [ADUM_PASSWORD], 
+    [AD_USER_MST_LIQUID].[ADUM_EMPLOYEE_ID] AS [ADUM_EMPLOYEE_ID], 
+    [AD_USER_MST_LIQUID].[ADUM_DESIGNATION] AS [ADUM_DESIGNATION], 
+    [AD_USER_MST_LIQUID].[ADUM_MOBILE] AS [ADUM_MOBILE], 
+    [AD_USER_MST_LIQUID].[ADUM_EMAIL] AS [ADUM_EMAIL], 
+    [AD_USER_MST_LIQUID].[LOCAL_USER_NAME] AS [LOCAL_USER_NAME], 
+    [AD_USER_MST_LIQUID].[PROFILE_IMAGE] AS [PROFILE_IMAGE], 
+    [AD_USER_MST_LIQUID].[ADUM_FRDT] AS [ADUM_FRDT], 
+    [AD_USER_MST_LIQUID].[ADUM_TODT] AS [ADUM_TODT], 
+    [AD_USER_MST_LIQUID].[ADUM_STATUS] AS [ADUM_STATUS], 
+    [AD_USER_MST_LIQUID].[UPDATE_FLAG] AS [UPDATE_FLAG], 
+    [AD_USER_MST_LIQUID].[LAST_UPDATE] AS [LAST_UPDATE], 
+    [AD_USER_MST_LIQUID].[AD_USER_TYPE_ID] AS [AD_USER_TYPE_ID], 
+    [AD_USER_MST_LIQUID].[MOBILE_ID] AS [MOBILE_ID], 
+    [AD_USER_MST_LIQUID].[IS_ACTIVE] AS [IS_ACTIVE], 
+    [AD_USER_MST_LIQUID].[IMO_NO] AS [IMO_NO]
+    FROM [dbo].[AD_USER_MST_LIQUID] AS [AD_USER_MST_LIQUID]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AD_USER_MST_STREET" EntityType="Self.AD_USER_MST_STREET" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AD_USER_MST_STREET].[ADUM_USER_CODE] AS [ADUM_USER_CODE], 
+    [AD_USER_MST_STREET].[SERVER_ID] AS [SERVER_ID], 
+    [AD_USER_MST_STREET].[APP_ID] AS [APP_ID], 
+    [AD_USER_MST_STREET].[ADUM_USER_ID] AS [ADUM_USER_ID], 
+    [AD_USER_MST_STREET].[ADUM_USER_NAME] AS [ADUM_USER_NAME], 
+    [AD_USER_MST_STREET].[ADUM_LOGIN_ID] AS [ADUM_LOGIN_ID], 
+    [AD_USER_MST_STREET].[ADUM_PASSWORD] AS [ADUM_PASSWORD], 
+    [AD_USER_MST_STREET].[ADUM_EMPLOYEE_ID] AS [ADUM_EMPLOYEE_ID], 
+    [AD_USER_MST_STREET].[ADUM_DESIGNATION] AS [ADUM_DESIGNATION], 
+    [AD_USER_MST_STREET].[ADUM_MOBILE] AS [ADUM_MOBILE], 
+    [AD_USER_MST_STREET].[ADUM_EMAIL] AS [ADUM_EMAIL], 
+    [AD_USER_MST_STREET].[LOCAL_USER_NAME] AS [LOCAL_USER_NAME], 
+    [AD_USER_MST_STREET].[PROFILE_IMAGE] AS [PROFILE_IMAGE], 
+    [AD_USER_MST_STREET].[ADUM_FRDT] AS [ADUM_FRDT], 
+    [AD_USER_MST_STREET].[ADUM_TODT] AS [ADUM_TODT], 
+    [AD_USER_MST_STREET].[ADUM_STATUS] AS [ADUM_STATUS], 
+    [AD_USER_MST_STREET].[UPDATE_FLAG] AS [UPDATE_FLAG], 
+    [AD_USER_MST_STREET].[LAST_UPDATE] AS [LAST_UPDATE], 
+    [AD_USER_MST_STREET].[AD_USER_TYPE_ID] AS [AD_USER_TYPE_ID], 
+    [AD_USER_MST_STREET].[MOBILE_ID] AS [MOBILE_ID], 
+    [AD_USER_MST_STREET].[IS_ACTIVE] AS [IS_ACTIVE], 
+    [AD_USER_MST_STREET].[IMO_NO] AS [IMO_NO]
+    FROM [dbo].[AD_USER_MST_STREET] AS [AD_USER_MST_STREET]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -758,9 +822,9 @@
           <Property Name="MsgForNotReceived" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="MsgForSegregated" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="IsScanNear" Type="Boolean" />
-          <Property Name="LiquidQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StreetQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CommercialQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="LiquidQRCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StreetQRCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommercialQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CTPTQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SWMQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -773,6 +837,8 @@
           <Property Type="Int32" Name="notrecviedCollection" Nullable="true" />
           <Property Type="Int32" Name="byfurgetcol" Nullable="true" />
           <Property Type="Int32" Name="mixedcolle" Nullable="true" />
+          <Property Type="Int32" Name="TotalLiquidCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalStreetCount" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1106,6 +1172,8 @@
                 <ScalarProperty Name="notrecviedCollection" ColumnName="notrecviedCollection" />
                 <ScalarProperty Name="byfurgetcol" ColumnName="byfurgetcol" />
                 <ScalarProperty Name="mixedcolle" ColumnName="mixedcolle" />
+                <ScalarProperty Name="TotalLiquidCount" ColumnName="TotalLiquidCount" />
+                <ScalarProperty Name="TotalStreetCount" ColumnName="TotalStreetCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -1,4 +1,5 @@
 ﻿
+@model IEnumerable<SwachBharat.CMS.Bll.ViewModels.MainModel.MenuItem>
 
 @{
     Layout = "";
@@ -52,406 +53,47 @@
                         <!-- Logout    -->
                         <li class="nav-item" style="list-style: none;"><a href="/Admin/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
                         @*<li class="nav-item"><a href="/Account/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
-                       
+
                     </div>
                 </div>
             </nav>
         </header>
-        <div class="page-content d-flex align-items-stretch">
+        <div class="page-content d-flex align-items-stretch" hidden>
             <!-- Side Navbar -->
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
                 <ul class="list-unstyled">
-                    <li>
-                        <a href="#exampledropdownDropdown1" aria-expanded="false" data-toggle="collapse">
+                    @{
+                        var i = 0;
+                        foreach (var item in Model.Where(s => s.M_P_ID == 0).Distinct().ToList())
+                        {
+                            i++;
+                            var aName = "#exampledropdownDropdow" + i;
+                            var lName = "exampledropdownDropdow" + i;
 
-                            <i class="svg_gc" style=" fill: #000;"> </i>
-                            @*कचरा संकलन*@ Waste Collection
-                        </a>
-                        <ul id="exampledropdownDropdown1" class="collapse list-unstyled ">
-                            <li class="">
-                                @Html.ActionLink("Aarmori Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "aarmoriwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Aheri Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "aheriwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Akluj Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "aklujwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Alandi Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "alandiwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Arvi Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "arviwaste@ulb.com", Type = "W" })
-                            </li>
-                            @*<li class="">
-                    @Html.ActionLink("Big V Sale", "Login", new { area = "", controller = "Account", returnUrl = "Bigv@appynitty.com" })
-                </li>*@
-                            <li class="">
-                                @Html.ActionLink("Bhamragad Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "bhamragadwaste@ulb.com", Type = "W" })
-                            </li>
-                            @*<li class="">
-                    @Html.ActionLink("Gadchiroli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "gadchiroli@np.com" })
-                </li>*@
-                            <li class="">
-                                @Html.ActionLink("Chamorshi Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "chamorshiwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Dahanu Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "dahanuwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Deoli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "demowaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Desaiganj Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "desaiganjwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Etapalli Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "etapalliwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Gadchiroli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "gadchiroliwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Hinganghat Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "hinganghatwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Hingna Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "hingnawaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kalmeshwar-Brahmani Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "kalmeshwarbrahmaniwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Khapa Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "khapawaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kuhi Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "kuhiwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kurkheda Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "kurkhedawaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mahadula Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "mahadulawaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mohpa Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "mohpawaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mouda Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "moudawaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mulchera Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "mulcherawaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Nagpur Mahanagar Palika", "Login", new { area = "", controller = "Account", returnUrl = "nagpurwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Parseoni Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "parseoniwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Pulgaon Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "pulgaonwaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Sironcha Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "sironchawaste@ulb.com", Type = "W" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Wardha Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "wardhawaste@ulb.com", Type = "W" })
+                            <li>
+                                <a href="@{@aName}" aria-expanded="false" data-toggle="collapse">
+
+                                    <i class="svg_gc" style=" fill: #000;"> </i>
+                                    @*कचरा संकलन*@ @item.LinkText
+                                </a>
+                                <ul id="@{@lName}" class="collapse list-unstyled ">
+                                    @{foreach (var firstItem in (Model.Where(s => s.M_P_ID == item.M_ID).ToList()))
+                                        {
+                                            <li class="">
+                                                @Html.ActionLink(@firstItem.LinkText, @firstItem.ActionName, new { area = "", controller = @firstItem.ControllerName, returnUrl = @firstItem.returnUrl, Type = @firstItem.Type })
+                                            </li>
+
+                                        }
+                                    }
+                                </ul>
                             </li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse">
-
-                            <i class="svg_gc" style=" fill: #000;"> </i>
-                            @*कचरा संकलन*@Liquid  Waste Collection
-                        </a>
-                        <ul id="exampledropdownDropdown2" class="collapse list-unstyled ">
-                            <li class="">
-                                @Html.ActionLink("Aarmori Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "aarmoriliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Aheri Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "aheriliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Akluj Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "aklujliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Alandi Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "alandiliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Arvi Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "arviliquid@ulb.com", Type = "L" })
-                            </li>
-                            @*<li class="">
-                    @Html.ActionLink("Big V Sale", "Login", new { area = "", controller = "Account", returnUrl = "Bigv@appynitty.com" })
-                </li>*@
-                            <li class="">
-                                @Html.ActionLink("Bhamragad Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "bhamragadliquid@ulb.com", Type = "L" })
-                            </li>
-                            @*<li class="">
-                    @Html.ActionLink("Gadchiroli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "gadchiroli@np.com" })
-                </li>*@
-                            <li class="">
-                                @Html.ActionLink("Chamorshi Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "chamorshiliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Dahanu Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "dahanuliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Deoli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "demoliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Desaiganj Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "desaiganjliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Etapalli Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "etapalliliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Gadchiroli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "gadchiroliliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Hinganghat Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "hinganghatliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Hingna Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "hingnaliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kalmeshwar-Brahmani Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "kalmeshwarbrahmaniliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Khapa Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "khapaliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kuhi Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "kuhiliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kurkheda Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "kurkhedaliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mahadula Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "mahadulaliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mohpa Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "mohpaliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mouda Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "moudaliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mulchera Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "mulcheraliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Nagpur Mahanagar Palika", "Login", new { area = "", controller = "Account", returnUrl = "nagpurliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Parseoni Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "parseoniliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Pulgaon Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "pulgaonliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Sironcha Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "sironchaliquid@ulb.com", Type = "L" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Wardha Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "wardhaliquid@ulb.com", Type = "L" })
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse">
-
-                            <i class="svg_gc" style=" fill: #000;"> </i>
-                            @*कचरा संकलन*@Street Waste Collection
-                        </a>
-                        <ul id="exampledropdownDropdown3" class="collapse list-unstyled ">
-                            <li class="">
-                                @Html.ActionLink("Aarmori Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "aarmoristreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Aheri Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "aheristreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Akluj Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "aklujstreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Alandi Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "alandistreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Arvi Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "arvistreet@ulb.com", Type = "S" })
-                            </li>
-                            @*<li class="">
-                    @Html.ActionLink("Big V Sale", "Login", new { area = "", controller = "Account", returnUrl = "Bigv@appynitty.com" })
-                </li>*@
-                            <li class="">
-                                @Html.ActionLink("Bhamragad Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "bhamragadstreet@ulb.com", Type = "S" })
-                            </li>
-                            @*<li class="">
-                    @Html.ActionLink("Gadchiroli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "gadchiroli@np.com" })
-                </li>*@
-                            <li class="">
-                                @Html.ActionLink("Chamorshi Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "chamorshistreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Dahanu Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "dahanustreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Deoli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "demostreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Desaiganj Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "desaiganjstreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Etapalli Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "etapallistreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Gadchiroli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "gadchirolistreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Hinganghat Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "hinganghatstreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Hingna Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "hingnastreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kalmeshwar-Brahmani Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "kalmeshwarbrahmanistreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Khapa Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "khapastreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kuhi Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "kuhistreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Kurkheda Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "kurkhedastreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mahadula Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "mahadulastreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mohpa Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "mohpastreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mouda Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "moudastreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Mulchera Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "mulcherastreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Nagpur Mahanagar Palika", "Login", new { area = "", controller = "Account", returnUrl = "nagpurstreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Parseoni Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "parseonistreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Pulgaon Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "pulgaonstreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Sironcha Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "sironchastreet@ulb.com", Type = "S" })
-                            </li>
-                            <li class="">
-                                @Html.ActionLink("Wardha Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "wardhastreet@ulb.com", Type = "S" })
-                            </li>
-
-                        </ul>
-                    </li>
-
+                        }
+                    }
                 </ul>
-                <!--<ul class="list-unstyled">-->
-                @*<li class="">
-            @Html.ActionLink("Badnapur Nagar Panchayat ", "Login", new { area = "", controller = "Account", returnUrl = "badnapur@appynitty.com" })
-        </li>*@
-                <!--<li class="">
-        @Html.ActionLink("Aundha Nagnath Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "aundhanagnath@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Bhadravati Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "bhadravati@appynitty.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Bhokar Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "bhokar@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Dharmabad Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "dharmabad@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Jamkhed Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "jamkhed@np.com" })
-    </li>-->
-                @*<li class="">
-            @Html.ActionLink("Big V Sale", "Login", new { area = "", controller = "Account", returnUrl = "Bigv@appynitty.com" })
-        </li>*@
-                <!--<li class="">
-      @Html.ActionLink("Deoli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "namratas@appynitty.com" })
-    </li>-->
-                @*<li class="">
-            @Html.ActionLink("Gadchiroli Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "gadchiroli@np.com" })
-        </li>*@
-                <!--<li class="">
-        @Html.ActionLink("Kannad Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "kannad@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Korchi Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "korchi@appynitty.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Mahur Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "mahur@np.com" })
-    </li>
-     <li class="">
-        @Html.ActionLink("Mangrulpir Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "mangrulpir@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Manmad Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "manmad@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Maregaon Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "maregaon@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Mukhed Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "mukhed@np.com" })
-    </li>
-     <li class="">
-        @Html.ActionLink("Palam Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "palam@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Ralegaon Nagar Panchayat", "Login", new { area = "", controller = "Account", returnUrl = "ralegaon@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Sarni Nagar Palika Parishad", "Login", new { area = "", controller = "Account", returnUrl = "sarni@np.com" })
-    </li>
-     <li class="">
-        @Html.ActionLink("Satana Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "satana@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Shevgaon Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "shevgoan@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Shrigonda Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "shrigonda@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Umarkhed Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "umarkhed@appynitty.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Umri Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "umri@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Wadi Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "wadi@appynitty.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Wani Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "wani@appynitty.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Warora Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "warora@np.com" })
-    </li>
-    <li class="">
-        @Html.ActionLink("Yavatmal Nagar Parishad", "Login", new { area = "", controller = "Account", returnUrl = "yavatmal@np.com" })
-    </li>-->
-                @*<li class="">
-            @Html.ActionLink("Badnapur Nagar Panchayat ", "Login", new { area = "", controller = "Account", returnUrl = "badnapur@appynitty.com" })
-        </li>*@
-
-                @*<li class=""><a style="cursor: pointer; color: rgb(108, 117, 125);" class="li-hover" onclick="Edit(1017)" id="1017">बिग व्ही सेल</a></li>*@
-
-
-
-                <!--</ul>-->
-                @*<span class="heading">Extras</span>*@
-
             </nav>
+          
             <div class="content-inner">
                 <iframe width="100%" height="600px" src="Index" frameborder="0">
                     <p>Your browser does not support iframes.</p>
@@ -471,6 +113,7 @@
                 </footer>
             </div>
         </div>
+                
     </div>
 
 
