@@ -112,7 +112,7 @@ namespace SwachBharat.CMS.Bll.Services
         HSDashBoardVM GetHSDashBoardDetails();
 
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
-        List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type, DateTime fDate, DateTime tDate);
+        List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate);
         //Added By Saurabh (06 June 2019)
         List<SBALHouseLocationMapView> GetAllHouseLocation(string date, int userid, int areaid, int wardNo, string SearchString, int? GarbageType, int FilterType,string Emptype);
 

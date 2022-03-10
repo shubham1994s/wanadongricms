@@ -1,39 +1,7 @@
 ﻿
 function loadGridDump() {
     debugger;
-    $.get("/houseScanify/GetAppNames", null, house);
-
-    function house(data) {
-        var qqq = $('#appid').val();
-        for (var i = 0; i < data.length; i++) {
-
-            if (data[i].AppId == qqq) {
-                $('#ulb_name').html(data[i].AppName);
-            }
-        }
-
-    }
-
-
-    //var UserId = $('#selectnumber').val();
-    var UserId = $('#appid').val();
-    // alert(UserId);
-    $.ajax({
-        type: "post",
-        url: "/HouseScanify/UserListByAppId?AppId=" + UserId,
-        data: { userId: UserId },
-        datatype: "json",
-        traditional: true,
-        success: function (data) {
-            district = '<option value="-1">Select Employee</option>';
-            console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                district = district + '<option value=' + data[i].qrEmpId + '>' + data[i].qrEmpName + '</option>';
-            }
-            //district = district + '</select>';
-            $('#selectnumber').html(district);
-        }
-    });
+   
 
     $("#demoGrid1").dataTable().fnDestroy();
     $("#demoGrid1").DataTable({
@@ -89,7 +57,7 @@ function loadGridDump() {
     });
    
 
-    //SearchDump();
+    SearchDump();
 }
 
     //Search();
@@ -131,7 +99,7 @@ function showInventoriesGrid() {
     Search();
 }
 
-function SearchDump() {
+function Search() {
     var value = ",,," + $("#sDump").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
     // alert(value );
     oTable = $('#demoGrid1').DataTable();
@@ -141,7 +109,7 @@ function SearchDump() {
 }
 
 
-function Search() {
+function SearchDump() {
     var txt_fdate, txt_tdate, Client, UserId;
     var name = [];
     var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
@@ -158,7 +126,7 @@ function Search() {
     NesEvent = " ";
     var Product = "";
     var catProduct = "";
-    var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#s").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+    var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#sDump").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
     // alert(value );
     oTable = $('#demoGrid1').DataTable();
     oTable.search(value).draw();

@@ -1,43 +1,11 @@
 ﻿function loadGridHouse() {
     debugger;
-    $.get("/houseScanify/GetAppNames", null, house);
-
-    function house(data) {
-        var qqq = $('#appid').val();
-        for (var i = 0; i < data.length; i++) {
-
-            if (data[i].AppId == qqq) {
-                $('#ulb_name').html(data[i].AppName);
-            }
-        }
-
-    }
-
-
-    //var UserId = $('#selectnumber').val();
-    var UserId = $('#appid').val();
-    // alert(UserId);
-    $.ajax({
-        type: "post",
-        url: "/HouseScanify/UserListByAppId?AppId=" + UserId,
-        data: { userId: UserId },
-        datatype: "json",
-        traditional: true,
-        success: function (data) {
-            district = '<option value="-1">Select Employee</option>';
-            console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                district = district + '<option value=' + data[i].qrEmpId + '>' + data[i].qrEmpName + '</option>';
-            }
-            //district = district + '</select>';
-            $('#selectnumber').html(district);
-        }
-    });
+   
 
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
-        "order": [[0, "desc"]],
+        //"order": [[0, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -86,8 +54,8 @@
         ],
 
     });
-
-    //SearchHouse();
+    debugger;
+    SearchHouse();
 }
 
 
@@ -127,7 +95,7 @@ function showInventoriesGrid() {
 }
 
 
-function SearchHouse() {
+function Search() {
     var value = ",,," + $("#sHouse").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
     // alert(value );
     oTable = $('#demoGrid').DataTable();
@@ -139,7 +107,7 @@ function SearchHouse() {
 
 
 
-function Search() {
+function SearchHouse() {
     var txt_fdate, txt_tdate, Client, UserId;
     var name = [];
     var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
@@ -156,7 +124,7 @@ function Search() {
     NesEvent = " ";
     var Product = "";
     var catProduct = "";
-    var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#s").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+    var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#sHouse").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
     // alert(value );
     oTable = $('#demoGrid').DataTable();
     oTable.search(value).draw();

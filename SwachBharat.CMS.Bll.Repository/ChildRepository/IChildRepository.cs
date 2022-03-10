@@ -126,7 +126,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
 
-        List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type, DateTime fDate, DateTime tDate);
+        List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate);
         #endregion
 
         //Added By saurabh (04 June 2019)

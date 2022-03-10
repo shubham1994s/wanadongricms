@@ -147,24 +147,33 @@
                 </label>
             </div>
             <div class="row">
-            <div class="col-sm-3">
-                <div class="controls">
-                    <label>From Date</label>
-                    <input id="txt_fdate" class="datepicker form-control form-control-sm" type="text" />
+                <div class="col-sm-3">
+                    <div class="controls">
+                        <label>From Date</label>
+                        <input id="txt_fdate" class="datepicker form-control form-control-sm" type="text" />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="controls">
+                        <label>To Date</label>
+                        <input id="txt_tdate" class="datepicker form-control form-control-sm" type="text" />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>Select Employee</label>
+                    <select id="selectnumber" class="form-control form-control form-control-sm"></select>
+                </div>
+                <div class="col-sm-2">
+                    <div class="controls">
+                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records" id="filter" onclick="Filter()" />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="controls">
+                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Download" id="filter" onclick="DownloadQRCode()" />
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="controls">
-                    <label>To Date</label>
-                    <input id="txt_tdate" class="datepicker form-control form-control-sm" type="text" />
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="controls">
-                    <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Download" id="filter" onclick="DownloadQRCode()" />
-                </div>
-            </div>
-        </div>
 
 
         </div>
@@ -279,6 +288,129 @@
 @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 <!-- Dashboard Header Section    -->
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        $.get("/houseScanify/GetAppNames", null, house);
+
+        function house(data) {
+            var qqq = $('#appid').val();
+            for (var i = 0; i < data.length; i++) {
+
+                if (data[i].AppId == qqq) {
+                    $('#ulb_name').html(data[i].AppName);
+                }
+            }
+
+        }
+
+    });
+</script>
+<script type="text/javascript">
+    $('input[type=radio][name=radio]').change(function () {
+        var date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = day + "/" + month + "/" + year;
+
+        document.getElementById('txt_fdate').value = today;
+        document.getElementById('txt_tdate').value = today;
+        debugger;
+        LoadUserList();
+        var RadioValue = $("input[name='radio']:checked").val();
+        if (RadioValue == 0) {
+            $("#divHouse").show();
+            $("#divDump").hide();
+            $("#divLiquid").hide();
+            $("#divStreet").hide();
+            loadGridHouse();
+        }
+        else if (RadioValue == 1) {
+            $("#divHouse").hide();
+            $("#divDump").show();
+            $("#divLiquid").hide();
+            $("#divStreet").hide();
+            loadGridDump();
+        }
+        else if (RadioValue == 2) {
+            $("#divHouse").hide();
+            $("#divDump").hide();
+            $("#divLiquid").show();
+            $("#divStreet").hide();
+            loadGridLiquid();
+        }
+        else if (RadioValue == 3) {
+            $("#divHouse").hide();
+            $("#divDump").hide();
+            $("#divLiquid").hide();
+            $("#divStreet").show();
+            loadGridStreet();
+        }
+    });
+
+
+    function LoadUserList() {
+        //var UserId = $('#selectnumber').val();
+        var UserId = $('#appid').val();
+        // alert(UserId);
+        $.ajax({
+            type: "post",
+            url: "/HouseScanify/UserListByAppId?AppId=" + UserId,
+            data: { userId: UserId },
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                district = '<option value="-1">Select Employee</option>';
+                console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    district = district + '<option value=' + data[i].qrEmpId + '>' + data[i].qrEmpName + '</option>';
+                }
+                //district = district + '</select>';
+                $('#selectnumber').html(district);
+            }
+        });
+
+    }
+    function Filter()
+    {
+        debugger;
+        var RadioValue = $("input[name='radio']:checked").val();
+        if (RadioValue == 0) {
+            $("#divHouse").show();
+            $("#divDump").hide();
+            $("#divLiquid").hide();
+            $("#divStreet").hide();
+            loadGridHouse();
+        }
+        else if (RadioValue == 1) {
+            $("#divHouse").hide();
+            $("#divDump").show();
+            $("#divLiquid").hide();
+            $("#divStreet").hide();
+            loadGridDump();
+        }
+        else if (RadioValue == 2) {
+            $("#divHouse").hide();
+            $("#divDump").hide();
+            $("#divLiquid").show();
+            $("#divStreet").hide();
+            loadGridLiquid();
+        }
+        else if (RadioValue == 3) {
+            $("#divHouse").hide();
+            $("#divDump").hide();
+            $("#divLiquid").hide();
+            $("#divStreet").show();
+            loadGridStreet();
+        }
+    }
+</script>
+<script type="text/javascript">
     function DownloadQRCode() {
         var RadioValue = $("input[name='radio']:checked").val();
         var txt_fdate, txt_tdate, Client, UserId;
@@ -289,10 +421,10 @@
         //    name = arr[i].split("/");
         //    arr[i] = name[1] + "/" + name[0] + "/" + name[2];
         //}
-
+        UserId = $('#selectnumber').val();
         txt_fdate = $('#txt_fdate').val();
         txt_tdate = $('#txt_tdate').val();
-        window.location.href = "/HouseScanify/Export?type=" + RadioValue + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
+        window.location.href = "/HouseScanify/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
 
     }
     $(document).ready(function () {
@@ -330,39 +462,7 @@
 
 
 
-        $('input[type=radio][name=radio]').change(function () {
-            debugger;
-            var RadioValue = $("input[name='radio']:checked").val();
-            if (RadioValue == 0) {
-                $("#divHouse").show();
-                $("#divDump").hide();
-                $("#divLiquid").hide();
-                $("#divStreet").hide();
-                loadGridHouse();
-            }
-            else if (RadioValue == 1) {
-                $("#divHouse").hide();
-                $("#divDump").show();
-                $("#divLiquid").hide();
-                $("#divStreet").hide();
-                loadGridDump();
-            }
-            else if (RadioValue == 2) {
-                $("#divHouse").hide();
-                $("#divDump").hide();
-                $("#divLiquid").show();
-                $("#divStreet").hide();
-                loadGridLiquid();
-            }
-            else if (RadioValue == 3) {
-                $("#divHouse").hide();
-                $("#divDump").hide();
-                $("#divLiquid").hide();
-                $("#divStreet").show();
-                loadGridStreet();
-            }
-        });
-
+       
 
     });
 
