@@ -17,7 +17,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
 
         public string GetJqGridJson(string INSERT_ID,string draw, string start, string length, string rn, DateTime? fdate = null, DateTime? tdate = null, int userId = 0, string clientName = null, int? param1 = null, int? param2 = null, int? param3 = null)
-        {
+       {
             if (Convert.ToInt32(length) == 5)
             {
                 length = "10";
@@ -441,7 +441,22 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new HSAttendanceGridRepository(0, searchString, fdate, tdate, userId, appId);
                     return gridRepository;
                     break;
-
+                case "HSHouseDetails":
+                    gridRepository = new HSHouseDetailsGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    return gridRepository;
+                    break;
+                case "HSDumpyardDetails":
+                    gridRepository = new HSDumpyardDetailsGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    return gridRepository;
+                    break;
+                case "HSLiquidDetails":
+                    gridRepository = new HSLiquidDetailsGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    return gridRepository;
+                    break;
+                case "HSStreetDetails":
+                    gridRepository = new HSStreetDetailsGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    return gridRepository;
+                    break;
                 case "InfotainmentPlayerDetails":
                     gridRepository = new InfotainmentPlayerGridRepository(0, searchString, fdate, tdate, userId, appId);
                     return gridRepository;
