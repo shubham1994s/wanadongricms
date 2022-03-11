@@ -57,7 +57,7 @@ function loadGridDump() {
     });
    
 
-    SearchDump();
+   // SearchDump();
 }
 
     //Search();

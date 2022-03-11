@@ -56,7 +56,7 @@ $("#demoGrid2").DataTable({
 
 });
 
-    SearchLiquid();
+    //SearchLiquid();
 }
 //Search();
 

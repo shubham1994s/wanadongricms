@@ -165,7 +165,10 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="controls">
-                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records" id="filter" onclick="Filter()" />
+                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records"  onclick="Filter()" />
+                        @*<input data-background-color="filter-button-box-color" style="margin-top:28px; " class="btn btn-sm btn-success filter-button-style"  type="button" value="Filter Records" id="filterDump" onclick="SearchDump()"  />
+                        <input data-background-color="filter-button-box-color" style="margin-top: 28px; " class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records" id="filterLiquid" onclick="SearchLiquid()" />
+                        <input data-background-color="filter-button-box-color" style="margin-top: 28px; " class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records" id="filterStreet" onclick="SearchStreet()" />*@
                     </div>
                 </div>
                 <div class="col-sm-2">
@@ -306,6 +309,7 @@
     });
 </script>
 <script type="text/javascript">
+   
     $('input[type=radio][name=radio]').change(function () {
         var date = new Date();
 
@@ -328,13 +332,16 @@
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").hide();
+           
             loadGridHouse();
         }
         else if (RadioValue == 1) {
+            debugger;
             $("#divHouse").hide();
             $("#divDump").show();
             $("#divLiquid").hide();
-            $("#divStreet").hide();
+            $("#divStreet").hide;
+           
             loadGridDump();
         }
         else if (RadioValue == 2) {
@@ -342,6 +349,7 @@
             $("#divDump").hide();
             $("#divLiquid").show();
             $("#divStreet").hide();
+           
             loadGridLiquid();
         }
         else if (RadioValue == 3) {
@@ -349,6 +357,7 @@
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").show();
+           
             loadGridStreet();
         }
     });
@@ -385,28 +394,28 @@
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").hide();
-            loadGridHouse();
+            SearchHouse()
         }
         else if (RadioValue == 1) {
             $("#divHouse").hide();
             $("#divDump").show();
             $("#divLiquid").hide();
             $("#divStreet").hide();
-            loadGridDump();
+            SearchDump();
         }
         else if (RadioValue == 2) {
             $("#divHouse").hide();
             $("#divDump").hide();
             $("#divLiquid").show();
             $("#divStreet").hide();
-            loadGridLiquid();
+            SearchLiquid();
         }
         else if (RadioValue == 3) {
             $("#divHouse").hide();
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").show();
-            loadGridStreet();
+            SearchStreet();
         }
     }
 </script>
@@ -429,6 +438,8 @@
     }
     $(document).ready(function () {
         debugger;
+      
+        LoadUserList();
         var RadioValue = $("input[name='radio']:checked").val();
 
         if (RadioValue == 0) {
