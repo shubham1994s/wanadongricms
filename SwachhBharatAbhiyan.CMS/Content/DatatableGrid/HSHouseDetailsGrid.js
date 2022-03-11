@@ -1,7 +1,5 @@
 ﻿function loadGridHouse() {
-    debugger;
-   
-
+  
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
@@ -54,13 +52,11 @@
         ],
 
     });
-    debugger;
    
 }
 
 
-    //Search();
-
+ 
 
 
 function noImageNotification() {
