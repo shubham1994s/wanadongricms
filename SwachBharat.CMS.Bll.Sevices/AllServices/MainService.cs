@@ -322,7 +322,7 @@ namespace SwachBharat.CMS.Bll.Services
         public List<AppDetail> GetAppName()
         {
             List<AppDetail> appNames = new List<AppDetail>();
-            appNames = dbMain.AppDetails.Where(x => x.IsActive == true && x.AppName != "Thane Mahanagar Palika").OrderBy(x => x.AppName).ToList();
+            appNames = dbMain.AppDetails.Where(x => x.IsActive == true && x.AppName != "Thane Mahanagar Palika" && x.AppId != 3088).OrderBy(x => x.AppName).ToList(); //Live AppID=3088 for Thane ULB
             //appNames = dbMain.AppDetails.ToList();
               //var appNames= dbMain.AppDetails.Where(row => row.)
             return appNames.OrderBy(x =>x.AppName).ToList();

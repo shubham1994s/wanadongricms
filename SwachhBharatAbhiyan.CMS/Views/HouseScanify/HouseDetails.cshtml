@@ -309,7 +309,49 @@
     });
 </script>
 <script type="text/javascript">
-   
+            $(document).ready(function () {
+                debugger;
+              
+                LoadUserList();
+                var RadioValue = $("input[name='radio']:checked").val();
+
+                if (RadioValue == 0) {
+                    $("#divHouse").show();
+                    $("#divDump").hide();
+                    $("#divLiquid").hide();
+                    $("#divStreet").hide();
+                    loadGridHouse();
+                }
+                else if (RadioValue == 1) {
+                    $("#divHouse").hide();
+                    $("#divDump").show();
+                    $("#divLiquid").hide();
+                    $("#divStreet").hide();
+                    // loadGridDump();
+                }
+                else if (RadioValue == 2) {
+                    $("#divHouse").hide();
+                    $("#divDump").hide();
+                    $("#divLiquid").show();
+                    $("#divStreet").hide();
+                    //    loadGridLiquid();
+                }
+                else if (RadioValue == 3) {
+                    $("#divHouse").hide();
+                    $("#divDump").hide();
+                    $("#divLiquid").hide();
+                    $("#divStreet").show();
+                    //    loadGridStreet();
+                }
+
+
+
+
+
+            });
+            var CheckDump = '0';
+            var CheckLiquid = '0';
+            var CheckStreet = '0';
     $('input[type=radio][name=radio]').change(function () {
         var date = new Date();
 
@@ -326,6 +368,7 @@
         document.getElementById('txt_tdate').value = today;
         debugger;
         LoadUserList();
+      
         var RadioValue = $("input[name='radio']:checked").val();
         if (RadioValue == 0) {
             $("#divHouse").show();
@@ -340,24 +383,42 @@
             $("#divDump").show();
             $("#divLiquid").hide();
             $("#divStreet").hide();
-           
-            loadGridDump();
+            if (CheckDump == '0') {
+                loadGridDump();
+                CheckDump = '1';
+            }
+            else {
+
+            }
+              
         }
         else if (RadioValue == 2) {
             $("#divHouse").hide();
             $("#divDump").hide();
             $("#divLiquid").show();
             $("#divStreet").hide();
+            if (CheckLiquid == '0') {
+                loadGridLiquid();
+                CheckLiquid = '1';
+            }
+            else {
+
+            }
            
-            loadGridLiquid();
         }
         else if (RadioValue == 3) {
             $("#divHouse").hide();
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").show();
-           
-            loadGridStreet();
+            if (CheckStreet == '0') {
+                loadGridStreet();
+                CheckStreet = '1';
+            }
+            else {
+
+            }
+          
         }
     });
 
@@ -435,47 +496,7 @@
         window.location.href = "/HouseScanify/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
 
     }
-    $(document).ready(function () {
-        debugger;
-      
-        LoadUserList();
-        var RadioValue = $("input[name='radio']:checked").val();
-
-        if (RadioValue == 0) {
-            $("#divHouse").show();
-            $("#divDump").hide();
-            $("#divLiquid").hide();
-            $("#divStreet").hide();
-            loadGridHouse();
-        }
-        else if (RadioValue == 1) {
-            $("#divHouse").hide();
-            $("#divDump").show();
-            $("#divLiquid").hide();
-            $("#divStreet").hide();
-           // loadGridDump();
-        }
-        else if (RadioValue == 2) {
-            $("#divHouse").hide();
-            $("#divDump").hide();
-            $("#divLiquid").show();
-            $("#divStreet").hide();
-        //    loadGridLiquid();
-        }
-        else if (RadioValue == 3) {
-            $("#divHouse").hide();
-            $("#divDump").hide();
-            $("#divLiquid").hide();
-            $("#divStreet").show();
-        //    loadGridStreet();
-        }
-
-
-
-       
-
-    });
-
+   
 
 </script>
 <script>
