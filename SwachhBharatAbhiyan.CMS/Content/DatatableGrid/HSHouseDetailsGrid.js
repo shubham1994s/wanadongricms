@@ -61,8 +61,6 @@
 
     //Search();
 
-
-
 function noImageNotification() {
     document.getElementById("snackbar").innerHTML = "Image not uploaded...";
     var x = document.getElementById("snackbar");
