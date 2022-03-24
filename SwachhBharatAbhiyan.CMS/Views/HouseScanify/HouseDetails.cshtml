@@ -165,10 +165,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="controls">
-                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records"  onclick="Filter()" />
-                        @*<input data-background-color="filter-button-box-color" style="margin-top:28px; " class="btn btn-sm btn-success filter-button-style"  type="button" value="Filter Records" id="filterDump" onclick="SearchDump()"  />
-                        <input data-background-color="filter-button-box-color" style="margin-top: 28px; " class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records" id="filterLiquid" onclick="SearchLiquid()" />
-                        <input data-background-color="filter-button-box-color" style="margin-top: 28px; " class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records" id="filterStreet" onclick="SearchStreet()" />*@
+                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records" id="filter" onclick="Filter()" />
                     </div>
                 </div>
                 <div class="col-sm-2">
@@ -188,6 +185,7 @@
                     <thead style="font-size:14px">
                         <tr>
                             <th>Id</th>
+                            <th>Date Time</th>
                             <th> House ID</th>
                             <th> Name</th>
                             <th> Latiude</th>
@@ -209,6 +207,7 @@
                     <thead style="font-size:14px">
                         <tr>
                             <th>Id</th>
+                            <th>Date Time</th>
                             <th> Dumpyard ID</th>
                             <th> Name</th>
                             <th> Latiude</th>
@@ -228,6 +227,7 @@
                     <thead style="font-size:14px">
                         <tr>
                             <th>Id</th>
+                            <th>Date Time</th>
                             <th> Liquid ID</th>
                             <th> Name</th>
                             <th> Latiude</th>
@@ -247,6 +247,7 @@
                     <thead style="font-size:14px">
                         <tr>
                             <th>Id</th>
+                            <th>Date Time</th>
                             <th> Street ID</th>
                             <th> Name</th>
                             <th> Latiude</th>
@@ -309,7 +310,6 @@
     });
 </script>
 <script type="text/javascript">
-   
     $('input[type=radio][name=radio]').change(function () {
         var date = new Date();
 
@@ -326,30 +326,30 @@
         document.getElementById('txt_tdate').value = today;
         debugger;
         LoadUserList();
+        
+    });
+
+    function LoadGrid() {
         var RadioValue = $("input[name='radio']:checked").val();
         if (RadioValue == 0) {
-            $("#divHouse").show();
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").hide();
-           
+            $("#divHouse").show();
             loadGridHouse();
         }
         else if (RadioValue == 1) {
-            debugger;
             $("#divHouse").hide();
-            $("#divDump").show();
             $("#divLiquid").hide();
-            $("#divStreet").hide;
-           
+            $("#divStreet").hide();
+            $("#divDump").show();
             loadGridDump();
         }
         else if (RadioValue == 2) {
             $("#divHouse").hide();
             $("#divDump").hide();
-            $("#divLiquid").show();
             $("#divStreet").hide();
-           
+            $("#divLiquid").show();
             loadGridLiquid();
         }
         else if (RadioValue == 3) {
@@ -357,11 +357,9 @@
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").show();
-           
             loadGridStreet();
         }
-    });
-
+    }
 
     function LoadUserList() {
         //var UserId = $('#selectnumber').val();
@@ -381,6 +379,7 @@
                 }
                 //district = district + '</select>';
                 $('#selectnumber').html(district);
+                LoadGrid();
             }
         });
 
@@ -390,24 +389,27 @@
         debugger;
         var RadioValue = $("input[name='radio']:checked").val();
         if (RadioValue == 0) {
-            $("#divHouse").show();
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").hide();
-            SearchHouse()
+            $("#divHouse").show();
+            //loadGridHouse();
+            SearchHouse();
         }
         else if (RadioValue == 1) {
             $("#divHouse").hide();
-            $("#divDump").show();
             $("#divLiquid").hide();
             $("#divStreet").hide();
+            $("#divDump").show();
+            //loadGridDump();
             SearchDump();
         }
         else if (RadioValue == 2) {
             $("#divHouse").hide();
             $("#divDump").hide();
-            $("#divLiquid").show();
             $("#divStreet").hide();
+            $("#divLiquid").show();
+            //loadGridLiquid();
             SearchLiquid();
         }
         else if (RadioValue == 3) {
@@ -415,6 +417,7 @@
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").show();
+            //loadGridStreet();
             SearchStreet();
         }
     }
@@ -438,42 +441,7 @@
     }
     $(document).ready(function () {
         debugger;
-      
         LoadUserList();
-        var RadioValue = $("input[name='radio']:checked").val();
-
-        if (RadioValue == 0) {
-            $("#divHouse").show();
-            $("#divDump").hide();
-            $("#divLiquid").hide();
-            $("#divStreet").hide();
-            loadGridHouse();
-        }
-        else if (RadioValue == 1) {
-            $("#divHouse").hide();
-            $("#divDump").show();
-            $("#divLiquid").hide();
-            $("#divStreet").hide();
-            loadGridDump();
-        }
-        else if (RadioValue == 2) {
-            $("#divHouse").hide();
-            $("#divDump").hide();
-            $("#divLiquid").show();
-            $("#divStreet").hide();
-            loadGridLiquid();
-        }
-        else if (RadioValue == 3) {
-            $("#divHouse").hide();
-            $("#divDump").hide();
-            $("#divLiquid").hide();
-            $("#divStreet").show();
-            loadGridStreet();
-        }
-
-
-
-       
 
     });
 

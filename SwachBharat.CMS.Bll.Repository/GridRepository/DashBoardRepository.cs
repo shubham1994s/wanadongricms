@@ -4171,7 +4171,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseLat = x.HouseLat,
                     HouseLong = x.HouseLong,
                     QRCodeImage = x.QRCodeImage,
-                    ReferanceId = x.ReferanceId
+                    ReferanceId = x.ReferanceId,
+                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy HH:mm:ss") : ""
                 }).ToList();
                 return data;
             }
@@ -4242,7 +4243,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseLat = x.HouseLat,
                     HouseLong = x.HouseLong,
                     QRCodeImage = x.QRCodeImage,
-                    ReferanceId = x.ReferanceId
+                    ReferanceId = x.ReferanceId,
+                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy HH:mm:ss") : ""
                 }).ToList();
                 return data;
             }
@@ -4314,7 +4316,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseLat = x.HouseLat,
                     HouseLong = x.HouseLong,
                     QRCodeImage = x.QRCodeImage,
-                    ReferanceId = x.ReferanceId
+                    ReferanceId = x.ReferanceId,
+                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy HH:mm:ss") : ""
                 }).ToList();
                 return data;
             }
@@ -4385,7 +4388,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseLat = x.HouseLat,
                     HouseLong = x.HouseLong,
                     QRCodeImage = x.QRCodeImage,
-                    ReferanceId = x.ReferanceId
+                    ReferanceId = x.ReferanceId,
+                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy HH:mm:ss") : ""
                 }).ToList();
                 return data;
             }

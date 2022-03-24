@@ -25,7 +25,7 @@
                 "searchable": false
             },
                 {
-                    "targets": [5],
+                    "targets": [6],
                     "visible": true,
 
                     "render": function (data, type, full, meta) {
@@ -45,6 +45,7 @@
 
         "columns": [
             { "data": "houseId", "name": "houseId", "autoWidth": true },
+            { "data": "modifiedDate", "name": "modifiedDate", "autoWidth": true },
             { "data": "ReferanceId", "name": "ReferanceId", "autoWidth": true },
             { "data": "Name", "name": "Name", "autoWidth": true },
             { "data": "HouseLat", "name": "HouseLat", "autoWidth": true },
@@ -55,11 +56,13 @@
 
     });
     debugger;
-   
+    //SearchHouse();
 }
 
 
     //Search();
+
+
 
 function noImageNotification() {
     document.getElementById("snackbar").innerHTML = "Image not uploaded...";
