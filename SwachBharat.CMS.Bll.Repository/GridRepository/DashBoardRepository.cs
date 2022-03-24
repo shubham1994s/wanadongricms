@@ -4174,7 +4174,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseLong = x.HouseLong,
                     QRCodeImage = x.QRCodeImage,
                     ReferanceId = x.ReferanceId,
-                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy HH:mm:ss") : ""
+                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy hh:mm tt") : ""
                 }).ToList();
                 return data;
             }
@@ -4246,7 +4246,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseLong = x.HouseLong,
                     QRCodeImage = x.QRCodeImage,
                     ReferanceId = x.ReferanceId,
-                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy HH:mm:ss") : ""
+                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy hh:mm tt") : ""
                 }).ToList();
                 return data;
             }
@@ -4319,7 +4319,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseLong = x.HouseLong,
                     QRCodeImage = x.QRCodeImage,
                     ReferanceId = x.ReferanceId,
-                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy HH:mm:ss") : ""
+                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy hh:mm tt") : ""
                 }).ToList();
                 return data;
             }
@@ -4391,7 +4391,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     HouseLong = x.HouseLong,
                     QRCodeImage = x.QRCodeImage,
                     ReferanceId = x.ReferanceId,
-                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy HH:mm:ss") : ""
+                    modifiedDate = x.modifiedDate.HasValue ? Convert.ToDateTime(x.modifiedDate).ToString("dd/MM/yyyy hh:mm tt") : ""
                 }).ToList();
                 return data;
             }
