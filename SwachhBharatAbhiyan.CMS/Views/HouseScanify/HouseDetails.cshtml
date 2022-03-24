@@ -187,7 +187,7 @@
                             <th>Id</th>
                             <th>Date Time</th>
                             <th> House ID</th>
-                            <th> Name</th>
+                            <th> Employee Name</th>
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
@@ -209,7 +209,7 @@
                             <th>Id</th>
                             <th>Date Time</th>
                             <th> Dumpyard ID</th>
-                            <th> Name</th>
+                            <th> Employee Name</th>
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
@@ -229,7 +229,7 @@
                             <th>Id</th>
                             <th>Date Time</th>
                             <th> Liquid ID</th>
-                            <th> Name</th>
+                            <th> Employee Name</th>
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
@@ -249,7 +249,7 @@
                             <th>Id</th>
                             <th>Date Time</th>
                             <th> Street ID</th>
-                            <th> Name</th>
+                            <th> Employee Name</th>
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
@@ -273,7 +273,7 @@
                     <center>
                         <img class="img-responsive" id="imggg" alt="Photo Not Found">
                         <br />
-                        <p> <b id="hide_date">Owner Name: </b><span id="dateData"></span></p>
+                        <p> <b id="hide_date">Employee Name: </b><span id="dateData"></span></p>
                         <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
                     </center>
 
@@ -350,7 +350,6 @@
             $("#divDump").hide();
             $("#divStreet").hide();
             $("#divLiquid").show();
-            loadGridLiquid();
         }
         else if (RadioValue == 3) {
             $("#divHouse").hide();

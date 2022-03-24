@@ -1,7 +1,5 @@
 ﻿function loadGridHouse() {
-    debugger;
-   
-
+  
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
@@ -60,7 +58,8 @@
 }
 
 
-    //Search();
+ 
+
 
 
 

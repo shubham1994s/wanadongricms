@@ -4164,6 +4164,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                      ).ToList();
                     
                 }
+                model = model.GroupBy(book => new { book.houseId}).Select(book => book.FirstOrDefault()).ToList();
+               
                 var data = model.Select(x => new SBAHSHouseDetailsGrid
                 {
                     houseId = x.houseId,
