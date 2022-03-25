@@ -66,9 +66,11 @@ thead{
 
 }
 
-.btn-success{
-    background-color:#3ab59e;
-    border-color:#3ab59e;
+.btn-success {
+    /* background-color: #3ab59e;
+    border-color: #3ab59e;*/
+    background-color: #189cdf;
+    border-color: #189cdf;
 }
 
 .btn-success:hover{
