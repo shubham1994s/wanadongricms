@@ -1,11 +1,46 @@
-﻿
+﻿var appName, frmdt, todt;
+getapp();
+function getapp() {
+
+    $.get("/houseScanify/GetAppNames", null, house);
+
+    function house(data) {
+        var qqq = $('#appid').val();
+        for (var i = 0; i < data.length; i++) {
+
+            if (data[i].AppId == qqq) {
+                $('#ulb_name').html(data[i].AppName);
+                // appName.push(data[AppName]);
+                appName = data[i].AppName;
+            }
+        }
+        //$('#txt_fdate').click(function() {
+        //    frmdt = $('#txt_fdate').val()
+        //});
+        //$('#txt_fdate').click(function () {
+        //    todt = $('#txt_tdate').val()
+        //});
+    }
+
+
+}
+
 function loadGridLiquid() {
 debugger;
 
 
 $("#demoGrid2").dataTable().fnDestroy();
-$("#demoGrid2").DataTable({
-    "sDom": "ltipr",
+    $("#demoGrid2").DataTable({
+        buttons: [
+
+            {
+                extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: appName, text: 'Export to Excel', exportOptions: { columns: [0, 1, 2, 3, 4, 5] }
+            },
+        ],
+        //"sDom": "ltipr",
+        dom: 'lBfrtip',
+        lbFilter: false,
+   // "sDom": "ltipr",
     //   "order": [[11, "desc"]],
     "processing": true, // for show progress bar
     "serverSide": true, // for process server side
