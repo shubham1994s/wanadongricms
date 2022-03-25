@@ -4137,7 +4137,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                           HouseLong = p.c.houseLong,
                                           QRCodeImage = string.IsNullOrEmpty(p.c.QRCodeImage) ? "/Images/default_not_upload.png" : p.c.QRCodeImage,
                                           ReferanceId = p.c.ReferanceId
-                                      }).OrderByDescending(d => d.modifiedDate).ThenByDescending(c => c.houseId).ToList();
+                                      }).Where(c=>c.userId!=null).OrderByDescending(d => d.modifiedDate).ThenByDescending(c => c.houseId).ToList();
 
 
                 if (fdate != null && tdate != null)

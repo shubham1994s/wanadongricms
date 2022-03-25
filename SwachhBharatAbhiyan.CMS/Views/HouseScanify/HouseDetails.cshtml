@@ -328,15 +328,24 @@
         LoadUserList();
         
     });
-
+    var checkHouse = 0;
     function LoadGrid() {
         var RadioValue = $("input[name='radio']:checked").val();
+       
         if (RadioValue == 0) {
+            debugger;
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").hide();
             $("#divHouse").show();
-            loadGridHouse();
+            if (checkHouse == 0) {
+                loadGridHouse();
+
+            }
+            else {
+                checkHouse = 1;
+                SearchHouse();
+            }
         }
         else if (RadioValue == 1) {
             $("#divHouse").hide();
