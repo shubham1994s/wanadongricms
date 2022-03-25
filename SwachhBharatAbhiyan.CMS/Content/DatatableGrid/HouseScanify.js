@@ -79,6 +79,7 @@ $(document).ready(function () {
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
+        "searching": true,
         //"pageLength": 10,
 
         "ajax": {
@@ -123,7 +124,7 @@ $(document).ready(function () {
 
     });
 
-    Search();
+   // Search();
 
 });
 function Edit(Id) {
