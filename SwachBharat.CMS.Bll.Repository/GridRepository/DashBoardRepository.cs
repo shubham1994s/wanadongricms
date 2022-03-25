@@ -3926,19 +3926,23 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 }).ToList();
 
+                if(SearchString != "undefined")
+                { 
+                if (!string.IsNullOrEmpty(SearchString) )
+                {
+                    var model = data.Where(c => c.qrEmpName.ToLower().ToString().Contains(SearchString) || c.qrEmpMobileNumber.ToLower().ToString().Contains(SearchString)
+                    || c.qrEmpAddress.ToString().ToLower().Contains(SearchString) || c.qrEmpName.ToUpper().ToString().Contains(SearchString) || c.qrEmpMobileNumber.ToUpper().ToString().Contains(SearchString)
+                    || c.qrEmpAddress.ToString().ToUpper().Contains(SearchString)
 
-                //if (!string.IsNullOrEmpty(SearchString))
-                //{
-                //    var model = data.Where(c => c.userMobileNumber.ToString().Contains(SearchString) || c.userEmployeeNo.ToString().Contains(SearchString)
-                //    || c.userAddress.ToString().Contains(SearchString) || c.userName.ToString().Contains(SearchString) || c.userNameMar.ToString().Contains(SearchString) || c.bloodGroup.ToString().Contains(SearchString)
+                   //|| c.userMobileNumber.Contains(SearchString) || c.userAddress.ToLower().ToString().Contains(SearchString) || c.userName.ToLower().ToString().Contains(SearchString) || c.userNameMar.ToLower().ToString().Contains(SearchString)
+                   //|| c.userEmployeeNo.ToLower().ToString().Contains(SearchString) || c.bloodGroup.ToLower().ToString().Contains(SearchString)
 
-                //    || c.userMobileNumber.Contains(SearchString) || c.userAddress.ToLower().ToString().Contains(SearchString) || c.userName.ToLower().ToString().Contains(SearchString) || c.userNameMar.ToLower().ToString().Contains(SearchString)
-                //    || c.userEmployeeNo.ToLower().ToString().Contains(SearchString) || c.bloodGroup.ToLower().ToString().Contains(SearchString)
+                   //|| c.userMobileNumber.ToUpper().ToString().Contains(SearchString) || c.userNameMar.ToUpper().ToString().Contains(SearchString) || c.userName.ToUpper().ToString().Contains(SearchString) || c.bloodGroup.ToUpper().ToString().Contains(SearchString) || c.userAddress.ToUpper().ToString().Contains(SearchString) || c.userEmployeeNo.ToUpper().ToString().Contains(SearchString)
+                   ).ToList();
 
-                //    || c.userMobileNumber.ToUpper().ToString().Contains(SearchString) || c.userNameMar.ToUpper().ToString().Contains(SearchString) || c.userName.ToUpper().ToString().Contains(SearchString) || c.bloodGroup.ToUpper().ToString().Contains(SearchString) || c.userAddress.ToUpper().ToString().Contains(SearchString) || c.userEmployeeNo.ToUpper().ToString().Contains(SearchString)).ToList();
-
-                //    data = model.ToList();
-                //}
+                    data = model.ToList();
+                }
+                }
                 return data.OrderByDescending(c => c.LiquidCount).OrderByDescending(c => c.HouseCount).OrderByDescending(c => c.StreetCount);
             }
         }

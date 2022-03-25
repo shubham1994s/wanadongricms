@@ -1,8 +1,16 @@
-﻿function loadGridHouse() {
-  
+﻿var appName = "Excel";
+
+function loadGridHouse() {
+    debugger;
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
+        buttons: [
+
+            {
+                extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: appName, text: 'Export to Excel', exportOptions: { columns: [1, 4] }
+            },
+        ],
         //"order": [[0, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
@@ -52,8 +60,10 @@
 
         ],
 
+      
+
     });
-    debugger;
+   
     //SearchHouse();
 }
 
