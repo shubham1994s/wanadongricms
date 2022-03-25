@@ -334,22 +334,28 @@
         LoadUserList();
         
     });
-    var checkHouse = 0;
+    var CheckHouse = '0';
+    var CheckCommercial = '0';
+    var CheckLiquid = '0';
+    var CheckStreet = '0';
+    var Checkdump = '0';
+  
     function LoadGrid() {
         var RadioValue = $("input[name='radio']:checked").val();
-       
+        debugger;
         if (RadioValue == 0) {
             debugger;
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").hide();
             $("#divHouse").show();
-            if (checkHouse == 0) {
+            if (CheckHouse == '0') {
                 loadGridHouse();
-
+                CheckHouse = '1';
             }
             else {
-                checkHouse = 1;
+          
+                debugger;
                 SearchHouse();
             }
         }
@@ -358,20 +364,43 @@
             $("#divLiquid").hide();
             $("#divStreet").hide();
             $("#divDump").show();
-            loadGridDump();
+            if (Checkdump == '0') {
+                loadGridDump();
+                Checkdump = '1';
+                  }
+            else {
+              
+                SearchDump();
+            }
         }
         else if (RadioValue == 2) {
             $("#divHouse").hide();
             $("#divDump").hide();
             $("#divStreet").hide();
             $("#divLiquid").show();
+            if (CheckLiquid == '0') {
+                loadGridLiquid();
+                CheckLiquid = '1';
+            }
+            else {
+              
+                SearchLiquid();
+            }
         }
         else if (RadioValue == 3) {
             $("#divHouse").hide();
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").show();
-            loadGridStreet();
+
+            if (CheckStreet == '0') {
+                loadGridStreet();
+                CheckStreet = '1';
+            }
+            else {
+             
+                SearchStreet();
+            }
         }
     }
 
