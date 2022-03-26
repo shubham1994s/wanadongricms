@@ -16,6 +16,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string QRCodeImage { get; set; }
         public string modifiedDate { get; set; }
 
+        public int totalRowCount { get; set; }
+
 
     }
 }
