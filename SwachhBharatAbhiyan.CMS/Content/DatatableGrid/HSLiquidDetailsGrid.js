@@ -1,29 +1,6 @@
-﻿var appName, frmdt, todt;
-getapp();
-function getapp() {
+﻿var appName;
 
-    $.get("/houseScanify/GetAppNames", null, house);
-
-    function house(data) {
-        var qqq = $('#appid').val();
-        for (var i = 0; i < data.length; i++) {
-
-            if (data[i].AppId == qqq) {
-                $('#ulb_name').html(data[i].AppName);
-                // appName.push(data[AppName]);
-                appName = data[i].AppName;
-            }
-        }
-        //$('#txt_fdate').click(function() {
-        //    frmdt = $('#txt_fdate').val()
-        //});
-        //$('#txt_fdate').click(function () {
-        //    todt = $('#txt_tdate').val()
-        //});
-    }
-
-
-}
+appName = ('#ulb_name').val();
 
 function loadGridLiquid() {
 debugger;
