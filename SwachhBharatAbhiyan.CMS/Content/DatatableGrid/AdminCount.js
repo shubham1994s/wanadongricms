@@ -70,7 +70,7 @@
 
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
-        "order": [[0, "asc"]],
+        "order": [[2, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)

@@ -3078,7 +3078,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 //    data = model.ToList();
                 //}
                 //return data.OrderByDescending(c => c.Id);
-                return data.OrderBy(c => c.Name);
+                return data.OrderByDescending(c => c.total).ThenBy(c => c.Name).ToList();
             }
 
 
