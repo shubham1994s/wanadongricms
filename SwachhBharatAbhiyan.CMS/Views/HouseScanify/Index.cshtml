@@ -22,6 +22,7 @@
         padding: 10px 10px !important;
     }
 </style>
+
 <body>
     <input type="hidden" value="@ViewBag.AppId" id="appid" />
 
@@ -104,6 +105,7 @@
         <div class="container" style="overflow-y:auto">
             <br />
             <div style="width:100%; margin:0 auto;">
+                <label style="display: inline-flex; margin-left: -22%; padding-top: 40px; " class="float-right">Search:&nbsp;<input type="text" id="s" class="form-control form-control-sm" onkeyup="Search()"></label>
                 <a href="AttendenceIndex" class="btn btn-success btn-sm float-right" type="button">Attendance</a>
                 <a href="AddHSEmployeeDetails" class="btn btn-success btn-sm float-right" style="margin-right: 5px;" type="button">Add Employee</a>
                 <a href="HouseDetails" class="btn btn-success btn-sm float-right" style="margin-right: 5px;" type="button">House Details</a>
@@ -157,7 +159,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>
 <!-- Dashboard Header Section    -->
 

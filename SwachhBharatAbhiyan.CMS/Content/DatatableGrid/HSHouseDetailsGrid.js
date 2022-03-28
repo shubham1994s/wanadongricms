@@ -1,8 +1,20 @@
-﻿function loadGridHouse() {
-  
+﻿var appName;
+
+appName = ('#ulb_name').val();
+function loadGridHouse() {
+    debugger;
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({
-        "sDom": "ltipr",
+        buttons: [
+
+            {
+                extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: appName, text: 'Export to Excel', exportOptions: { columns: [0,1,2,3,4,5] }
+            },
+        ],
+        //"sDom": "ltipr",
+        dom: 'lBfrtip',
+        lbFilter: false,
+        //"sDom": "ltipr",
         //"order": [[0, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
@@ -23,7 +35,7 @@
                 "searchable": false
             },
                 {
-                    "targets": [5],
+                    "targets": [6],
                     "visible": true,
 
                     "render": function (data, type, full, meta) {
@@ -43,6 +55,7 @@
 
         "columns": [
             { "data": "houseId", "name": "houseId", "autoWidth": true },
+            { "data": "modifiedDate", "name": "modifiedDate", "autoWidth": true },
             { "data": "ReferanceId", "name": "ReferanceId", "autoWidth": true },
             { "data": "Name", "name": "Name", "autoWidth": true },
             { "data": "HouseLat", "name": "HouseLat", "autoWidth": true },
@@ -51,12 +64,17 @@
 
         ],
 
+      
+
     });
    
+    //SearchHouse();
 }
 
 
  
+
+
 
 
 function noImageNotification() {

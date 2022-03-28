@@ -1,11 +1,23 @@
-﻿
+﻿var appName;
+
+appName = ('#ulb_name').val();
+
 function loadGridDump() {
     debugger;
    
 
     $("#demoGrid1").dataTable().fnDestroy();
     $("#demoGrid1").DataTable({
-        "sDom": "ltipr",
+        buttons: [
+
+            {
+                extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: appName, text: 'Export to Excel', exportOptions: { columns: [0, 1, 2, 3, 4, 5] }
+            },
+        ],
+        //"sDom": "ltipr",
+        dom: 'lBfrtip',
+        lbFilter: false,
+        //"sDom": "ltipr",
         //   "order": [[11, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
@@ -26,7 +38,7 @@ function loadGridDump() {
                 "searchable": false
             },
             {
-                "targets": [5],
+                "targets": [6],
                 "visible": true,
 
                 "render": function (data, type, full, meta) {
@@ -46,6 +58,7 @@ function loadGridDump() {
 
         "columns": [
             { "data": "dumpId", "name": "dumpId", "autoWidth": true },
+            { "data": "modifiedDate", "name": "modifiedDate", "autoWidth": true },
             { "data": "ReferanceId", "name": "ReferanceId", "autoWidth": true },
             { "data": "Name", "name": "Name", "autoWidth": true },
             { "data": "HouseLat", "name": "HouseLat", "autoWidth": true },
@@ -56,8 +69,8 @@ function loadGridDump() {
 
     });
    
-   
-   // SearchDump();
+
+    //SearchDump();
 }
 
     //Search();

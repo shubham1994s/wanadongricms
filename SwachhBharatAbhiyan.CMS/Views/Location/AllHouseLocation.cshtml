@@ -474,7 +474,7 @@
 
                     }
                     var map = new google.maps.Map(document.getElementById('googleMap'), {
-
+                        zoom: 25,
                         center: new google.maps.LatLng(data[0].houseLat, data[0].houseLong),
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     });
@@ -484,6 +484,7 @@
                     var marker, i;
                     // alert(data.length);
                     // Get Addres
+                    debugger;
                     var gar_type;
                     for (i = 0; i < data.length; i++) {
                         if (data[i].houseOwnerName == null) {
@@ -654,15 +655,15 @@
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
 
 <script>
-    $(document).keydown(function (event) {
-        if (event.keyCode == 123 || event.keyCode === 67 || event.keyCode === 86 || event.keyCode === 85 || event.keyCode === 117 || event.keyCode === 75) {
-            return false;
-        }
-        else if ((event.ctrlKey && event.shiftKey && event.keyCode == 73) || (event.ctrlKey && event.shiftKey && event.keyCode == 74)) {
-            return false;
-        }
-    });
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    //$(document).keydown(function (event) {
+    //    if (event.keyCode == 123 || event.keyCode === 67 || event.keyCode === 86 || event.keyCode === 85 || event.keyCode === 117 || event.keyCode === 75) {
+    //        return false;
+    //    }
+    //    else if ((event.ctrlKey && event.shiftKey && event.keyCode == 73) || (event.ctrlKey && event.shiftKey && event.keyCode == 74)) {
+    //        return false;
+    //    }
+    //});
+    //document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 <script>
     var date = new Date();

@@ -1,11 +1,23 @@
-﻿
+﻿var appName;
+
+appName = ('#ulb_name').val();
+
 function loadGridStreet() {
 debugger;
 
 
 $("#demoGrid3").dataTable().fnDestroy();
-$("#demoGrid3").DataTable({
-    "sDom": "ltipr",
+    $("#demoGrid3").DataTable({
+        buttons: [
+
+            {
+                extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: appName, text: 'Export to Excel', exportOptions: { columns: [0, 1, 2, 3, 4, 5] }
+            },
+        ],
+        //"sDom": "ltipr",
+        dom: 'lBfrtip',
+        lbFilter: false,
+    //"sDom": "ltipr",
     //   "order": [[11, "desc"]],
     "processing": true, // for show progress bar
     "serverSide": true, // for process server side
@@ -26,7 +38,7 @@ $("#demoGrid3").DataTable({
             "searchable": false
         },
         {
-            "targets": [5],
+            "targets": [6],
             "visible": true,
 
             "render": function (data, type, full, meta) {
@@ -46,6 +58,7 @@ $("#demoGrid3").DataTable({
 
     "columns": [
         { "data": "streetId", "name": "streetId", "autoWidth": true },
+        { "data": "modifiedDate", "name": "modifiedDate", "autoWidth": true },
         { "data": "ReferanceId", "name": "ReferanceId", "autoWidth": true },
         { "data": "Name", "name": "Name", "autoWidth": true },
         { "data": "HouseLat", "name": "HouseLat", "autoWidth": true },
