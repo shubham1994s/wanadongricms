@@ -43,7 +43,7 @@ $("#demoGrid3").dataTable().fnDestroy();
                 if (full["QRCodeImage"] != null) {
                     return "<div style='cursor:pointer;display:inline-flex;'  onclick=PopImages(this)><img alt='Photo Not Found'  src='" + data +
                         "' style='height:35px;width:35px;cursor:pointer;margin-left:0px;'></img><span><ul class='dt_pop'  style='margin:2px -5px -5px -5px; padding:0px;list-style:none;display:none;'><li  class='li_date datediv' >" + full["Name"] + "</li><li class='addr-length' style='margin:0px 0px 0px 10px;'>"
-                        + full["ReferanceId"] + "</li><li style='display:none' class='li_title' >QR Code Image </li></ul></span></div>";
+                        + full["ReferanceId"] + "</li><li class='date_time'>" + full["modifiedDate"] + "</li><li style='display:none' class='li_title' >QR Code Image </li></ul></span></div>";
                 }
                 else {
 
@@ -83,22 +83,7 @@ function noImageNotification() {
     x.className = "show";
     setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 }
-
-function PopImages(cel) {
-
-    $('#myModal_Image').modal('toggle');
-
-    var addr = $(cel).find('.addr-length').text();
-    var date = $(cel).find('.li_date').text();
-    var imgsrc = $(cel).find('img').attr('src');
-    var head = $(cel).find('.li_title').text();
-    jQuery("#latlongData").text(addr);
-    jQuery("#dateData").text(date);
-    jQuery("#imggg").attr('src', imgsrc);
-    //jQuery("#latlongData").text(cellValue);
-    jQuery("#header_data").html(head);
 }
-
 
 function user_route(id) {
     window.location.href = "/HouseScanify/HSUserRoute?qrEmpDaId=" + id;

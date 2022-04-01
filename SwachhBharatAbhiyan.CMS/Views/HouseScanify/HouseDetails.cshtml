@@ -294,6 +294,7 @@
                         <br />
                         <p> <b id="hide_date">Employee Name: </b><span id="dateData"></span></p>
                         <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
+                        <p> <b id="hide_add1">Date And Time: </b><span id="date1"></span></p>
                     </center>
 
                     <div class="modal-footer">
@@ -320,6 +321,22 @@
 @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 <!-- Dashboard Header Section    -->
 <script type="text/javascript">
+    function PopImages(cel) {
+        debugger
+        $('#myModal_Image').modal('toggle');
+        var d1 = $(cel).find('.date_time').text();
+        var addr = $(cel).find('.addr-length').text();
+        var date = $(cel).find('.li_date').text();
+        var imgsrc = $(cel).find('img').attr('src');
+        var head = $(cel).find('.li_title').text();
+        jQuery("#date1").text(d1);
+        jQuery("#latlongData").text(addr);
+        jQuery("#dateData").text(date);
+        jQuery("#imggg").attr('src', imgsrc);
+        //jQuery("#latlongData").text(cellValue);
+        jQuery("#header_data").html(head);
+
+    }
 
     $(document).ready(function () {
         
