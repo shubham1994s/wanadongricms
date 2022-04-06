@@ -49,9 +49,13 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
        // Added By Saurabh ( 27 May 2019)
         List<AppDetail> GetAppName();
 
+        List<AppDetail> GetURAppName(string utype, string LoginId, string Password);
+
         EmployeeVM Login(EmployeeVM _userinfo);
 
         EmployeeVM LoginStreet(EmployeeVM _userinfo);
+
+        EmployeeVM LoginUR(EmployeeVM _userinfo);
         List<MenuItem> GetMenus();
 
         #region Game

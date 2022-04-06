@@ -105,12 +105,18 @@ namespace SwachBharat.CMS.Bll.Services
         //Added By Saurabh (03 June 2019)
         HouseScanifyEmployeeDetailsVM GetHSEmployeeDetails(int teamId);
 
+        UREmployeeDetailsVM GetUREmployeeDetails(int teamId);
+
         //Added By Saurabh (04 June 2019)
         void SaveHSEmployeeDetails(HouseScanifyEmployeeDetailsVM employee);
+
+        void SaveUREmployeeDetails(UREmployeeDetailsVM employee);
 
         //Added By Saurabh (04 June 2019)
         HSDashBoardVM GetHSDashBoardDetails();
 
+
+        HSDashBoardVM GetURDashBoardDetails();
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
         List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate);
         //Added By Saurabh (06 June 2019)

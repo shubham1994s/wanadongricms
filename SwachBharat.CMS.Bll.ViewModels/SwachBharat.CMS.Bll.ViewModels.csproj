@@ -78,6 +78,7 @@
     <Compile Include="ChildModel\Model\SBALUserLocationMapView.cs" />
     <Compile Include="ChildModel\Model\StreetSweepingVM.cs" />
     <Compile Include="ChildModel\Model\StreetSweepVM.cs" />
+    <Compile Include="ChildModel\Model\UREmployeeDetailsVM.cs" />
     <Compile Include="ChildModel\Model\UserMasterVM.cs" />
     <Compile Include="ChildModel\Model\VehicleTypeVM.cs" />
     <Compile Include="ChildModel\Model\WardNumberVM.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Grid\HomeSplashGridRow.cs" />
     <Compile Include="Grid\SBAStateGridRow.cs" />
     <Compile Include="Grid\SBAZoneGridRow.cs" />
+    <Compile Include="Grid\UREmployeeDetails.cs" />
     <Compile Include="Grid\WM_WasteDetailsGridRow.cs" />
     <Compile Include="HSDashBoardVM.cs" />
     <Compile Include="MainModel\AppConnectionVM.cs" />

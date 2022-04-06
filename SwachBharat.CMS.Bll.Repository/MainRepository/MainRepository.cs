@@ -178,6 +178,30 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             }
         }
 
+        public EmployeeVM LoginUR(EmployeeVM _userinfo)
+        {
+            EmployeeVM _EmployeeVM = new EmployeeVM();
+            using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
+            {
+                var appUser = (db.EmployeeMasters.Where(x => x.LoginId == _userinfo.ADUM_LOGIN_ID && x.Password == _userinfo.ADUM_PASSWORD && x.isActive==true).SingleOrDefault());
+                if (appUser != null)
+                {
+                    _EmployeeVM.ADUM_LOGIN_ID = appUser.LoginId;
+                    _EmployeeVM.ADUM_PASSWORD = appUser.Password;
+                    _EmployeeVM.ADUM_DESIGNATION = appUser.type;
+                    _EmployeeVM.ADUM_USER_CODE = appUser.EmpId;
+                    _EmployeeVM.status = "Success";
+
+                    return _EmployeeVM;
+                }
+                else
+                {
+                    _EmployeeVM.status = "Failure";
+                    return _EmployeeVM;
+                }
+            }
+        }
+
         public List<MenuItem> GetMenus1()
         {
             List<MenuItem> menuList = new List<MenuItem>();
@@ -287,6 +311,10 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             return mainService.GetAppName();
         }
 
+        public List<AppDetail> GetURAppName(string utype, string LoginId,string Password)
+        {
+            return mainService.GetURAppName(utype, LoginId, Password);
+        }
         #region Game
         public List<GameMaster> GetGameList()
         {

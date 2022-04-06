@@ -4686,6 +4686,38 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         }
 
 
+        public IEnumerable<UREmployeeDetails> GetURDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+        {
+            string strOrderBy = "";
+            if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
+            {
+                strOrderBy = sortColumn + " " + sortColumnDir;
+            }
+
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+
+            List<UREmployeeDetails> data = null;
+
+            using (var db = new DevSwachhBharatMainEntities())
+            {
+
+                data = db.EmployeeMasters.Select(x => new UREmployeeDetails
+                {
+                    EmpId = x.EmpId,
+                    EmpName = x.EmpName,
+                    lastModifyDateEntry =(x.lastModifyDateEntry).ToString(),
+                    type = x.type,
+                    EmpAddress = x.EmpAddress,
+                    
+                }).ToList();
+             return data;
+
+            }
+           
+        
+        }
+
         public IEnumerable<SBAHSDumpyardDetailsGrid> GetHSDumpyardDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
         {
 
