@@ -278,7 +278,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 mainRepository = new MainRepository();
                 childRepository = new ChildRepository(1);
                 UREmployeeDetailsVM house = childRepository.GetUREmployeeById(teamId);
-                return View(house);              
+            ViewBag.EmpId = teamId;
+            return View(house);              
         }
 
         [HttpPost]

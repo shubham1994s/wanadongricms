@@ -34,6 +34,7 @@
 
 <body>
     <input type="hidden" value="@ViewBag.AppId" id="appid" />
+    <input type="hidden" value="@ViewBag.EmpId" id="qrEmpId" />
 
 
     <div class="page">
@@ -104,11 +105,14 @@
 
                 @using (Html.BeginForm("AddUREmployeeDetails", "HouseScanifyEmp", FormMethod.Post, new { enctype = "multipart/form-data", data_toggle = "validator", role = "form" }))
                 {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.EmpId);
                     <div class="container" style="overflow-y:auto">
                         <br />
+                        <center>  <h1 class="add-edit-h1 title_change"></h1></center>
                         <div class="row">
 
-                            <h1 class="add-edit-h1 title_change"></h1>
+
                             <div>@Html.ValidationSummary(true, "", new { @class = "text-danger" }) </div>
                             <div class="panel panel-warning col-sm-12 ">
                                 <div class="row">
@@ -215,7 +219,10 @@
 
                                 </div>
                                 <br />
-                                <center id="hur"><h4>User Rights</h4></center>
+                                <center id="hur">
+                                    <h4>User Rights</h4>
+                                    <input id="searchbar" onkeyup="search_ulb()" type="text" name="search" placeholder="Search ">
+                                </center>
 
                                 <div class="row" id="checkUR">
 
@@ -244,7 +251,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <td>
+                                                    <td class="ulbs">
 
                                                         @Html.CheckBoxFor(x => x.CheckAppDs[i].IsCheked, new { @class = "custom-checkbox" })
                                                         <label>@Model.CheckAppDs[i].App_Name</label>
@@ -254,7 +261,7 @@
                                                 }
                                                 if (i % 4 == 0)
                                                 {
-                                                    <td>
+                                                    <td class="ulbs">
                                                         @Html.CheckBoxFor(x => x.CheckAppDs[i].IsCheked, new { @class = "custom-checkbox" })
                                                         <label>@Model.CheckAppDs[i].App_Name</label>
                                                         @Html.HiddenFor(x => x.CheckAppDs[i].AppId)
@@ -295,8 +302,8 @@
 
                         </div>
                     </div>
-                                                }
-                </div>
+                }
+            </div>
         </div>
     </div>
 
@@ -488,6 +495,22 @@
             }
 
         });
+
+        // JavaScript code
+        function search_ulb() {
+            let input = document.getElementById('searchbar').value
+            input = input.toLowerCase();
+            let x = document.getElementsByClassName('ulbs');
+
+            for (i = 0; i < x.length; i++) {
+                if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                    x[i].style.display = "none";
+                }
+                else {
+                    x[i].style.display = "block";
+                }
+            }
+        }
     </script>
 </body>
 </html>
