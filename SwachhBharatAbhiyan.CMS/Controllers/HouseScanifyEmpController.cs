@@ -288,7 +288,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 mainRepository = new MainRepository();
                 childRepository = new ChildRepository(1);
                 childRepository.SaveUREmployee(emp);
-                return Redirect("Index");
+                return Redirect("URIndex");
            
         }
 
