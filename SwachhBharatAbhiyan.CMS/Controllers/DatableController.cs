@@ -441,6 +441,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new HSAttendanceGridRepository(0, searchString, fdate, tdate, userId, appId);
                     return gridRepository;
                     break;
+
+                case "URAttendance":
+                    gridRepository = new URAttendanceGridRepository(0, searchString, fdate, tdate, userId, appId, sortColumn, sortColumnDir, draw, length, start);
+                    return gridRepository;
+                    break;
                 case "HSHouseDetails":
                     gridRepository = new HSHouseDetailsGridRepository(0, searchString, fdate, tdate, userId, appId, sortColumn, sortColumnDir, draw, length, start);
                     return gridRepository;

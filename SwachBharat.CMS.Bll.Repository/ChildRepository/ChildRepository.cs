@@ -362,16 +362,34 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetHSEmployeeDetails(teamId);
         }
 
+
+        public UREmployeeDetailsVM GetUREmployeeById(int teamId)
+        {
+            return screenService.GetUREmployeeDetails(teamId);
+        }
+
         // Addded By Saurabh (04 June 2019)
         public void SaveHSEmployee(HouseScanifyEmployeeDetailsVM employee)
         {
             screenService.SaveHSEmployeeDetails(employee);
         }
 
+        public void SaveUREmployee(UREmployeeDetailsVM employee)
+        {
+            screenService.SaveUREmployeeDetails(employee);
+        }
+
+
         // Addded By Saurabh (04 June 2019)
         public HSDashBoardVM GetHSDashBoardDetails()
         {
             return screenService.GetHSDashBoardDetails();
+
+        }
+
+        public HSDashBoardVM GetURDashBoardDetails()
+        {
+            return screenService.GetURDashBoardDetails();
 
         }
 

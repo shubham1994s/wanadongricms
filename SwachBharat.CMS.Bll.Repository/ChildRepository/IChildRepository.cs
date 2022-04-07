@@ -118,11 +118,18 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         HouseScanifyEmployeeDetailsVM GetHSEmployeeById(int teamId);
 
+        UREmployeeDetailsVM GetUREmployeeById(int teamId);
+
         //Added By saurabh (04 June 2019)
         void SaveHSEmployee(HouseScanifyEmployeeDetailsVM employee);
 
+
+        void SaveUREmployee(UREmployeeDetailsVM employee);
+
         //Added By saurabh (04 June 2019)
         HSDashBoardVM GetHSDashBoardDetails();
+
+        HSDashBoardVM GetURDashBoardDetails();
 
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
 

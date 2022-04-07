@@ -1,14 +1,13 @@
-﻿var appName;
-
-appName = ('#ulb_name').val();
+﻿
 function loadGridHouse() {
     debugger;
+    let appName = document.getElementById("ulb_name").innerHTML;
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({
         buttons: [
 
             {
-                extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: appName, text: 'Export to Excel', exportOptions: { columns: [0,1,2,3,4,5] }
+                extend: 'excel', className: 'btn btn-sm btn-success filter-button-style', title: appName + ' House Report', text: 'Export to Excel', exportOptions: { columns: [0, 1, 2, 3, 4, 5] }
             },
         ],
         //"sDom": "ltipr",
@@ -42,7 +41,7 @@ function loadGridHouse() {
                         if (full["QRCodeImage"] != null) {
                             return "<div style='cursor:pointer;display:inline-flex;'  onclick=PopImages(this)><img alt='Photo Not Found'  src='" + data +
                                 "' style='height:35px;width:35px;cursor:pointer;margin-left:0px;'></img><span><ul class='dt_pop'  style='margin:2px -5px -5px -5px; padding:0px;list-style:none;display:none;'><li  class='li_date datediv' >" + full["Name"] + "</li><li class='addr-length' style='margin:0px 0px 0px 10px;'>"
-                                + full["ReferanceId"] + "</li><li style='display:none' class='li_title' >QR Code Image </li></ul></span></div>";
+                                + full["ReferanceId"] + "</li><li class='date_time'>" + full["modifiedDate"] + "</li><li style='display:none' class='li_title' >QR Code Image </li></ul></span></div>";
                         }
                         else {
 
@@ -84,64 +83,48 @@ function noImageNotification() {
     setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 }
 
-function PopImages(cel) {
-
-    $('#myModal_Image').modal('toggle');
-
-    var addr = $(cel).find('.addr-length').text();
-    var date = $(cel).find('.li_date').text();
-    var imgsrc = $(cel).find('img').attr('src');
-    var head = $(cel).find('.li_title').text();
-    jQuery("#latlongData").text(addr);
-    jQuery("#dateData").text(date);
-    jQuery("#imggg").attr('src', imgsrc);
-    //jQuery("#latlongData").text(cellValue);
-    jQuery("#header_data").html(head);
-}
-
-
-function user_route(id) {
-    window.location.href = "/HouseScanify/HSUserRoute?qrEmpDaId=" + id;
-};
-//////////////////////////////////////////////////////////////////////////////
-function showInventoriesGrid() {
-    Search();
-}
-
-
-function Search() {
-    var value = ",,," + $("#sHouse").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
-    // alert(value );
-    oTable = $('#demoGrid').DataTable();
-    oTable.search(value).draw();
-    oTable.search("");
-    document.getElementById('USER_ID_FK').value = -1;
-}
-
-
-
-
-function SearchHouse() {
-    var txt_fdate, txt_tdate, Client, UserId;
-    var name = [];
-    var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
-
-    for (var i = 0; i <= arr.length - 1; i++) {
-        name = arr[i].split("/");
-        arr[i] = name[1] + "/" + name[0] + "/" + name[2];
+    function user_route(id) {
+        window.location.href = "/HouseScanify/HSUserRoute?qrEmpDaId=" + id;
+    };
+    //////////////////////////////////////////////////////////////////////////////
+    function showInventoriesGrid() {
+        Search();
     }
 
-    txt_fdate = arr[0];
-    txt_tdate = arr[1];
-    UserId = $('#selectnumber').val();
-    Client = " ";
-    NesEvent = " ";
-    var Product = "";
-    var catProduct = "";
-    var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#sHouse").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
-    // alert(value );
-    oTable = $('#demoGrid').DataTable();
-    oTable.search(value).draw();
-    oTable.search("");
-    document.getElementById('USER_ID_FK').value = -1;
-}
+
+    function Search() {
+        var value = ",,," + $("#sHouse").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+        // alert(value );
+        oTable = $('#demoGrid').DataTable();
+        oTable.search(value).draw();
+        oTable.search("");
+        document.getElementById('USER_ID_FK').value = -1;
+    }
+
+
+
+
+    function SearchHouse() {
+        var txt_fdate, txt_tdate, Client, UserId;
+        var name = [];
+        var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
+
+        for (var i = 0; i <= arr.length - 1; i++) {
+            name = arr[i].split("/");
+            arr[i] = name[1] + "/" + name[0] + "/" + name[2];
+        }
+
+        txt_fdate = arr[0];
+        txt_tdate = arr[1];
+        UserId = $('#selectnumber').val();
+        Client = " ";
+        NesEvent = " ";
+        var Product = "";
+        var catProduct = "";
+        var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#sHouse").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+        // alert(value );
+        oTable = $('#demoGrid').DataTable();
+        oTable.search(value).draw();
+        oTable.search("");
+        //document.getElementById('USER_ID_FK').value = -1;
+    }

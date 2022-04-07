@@ -19,6 +19,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web;
 using Microsoft.SqlServer.Server;
+using System.Web.UI.WebControls;
 
 namespace SwachBharat.CMS.Bll.Services
 {
@@ -3206,6 +3207,23 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
 
+        private EmployeeMaster FillUREmployeeDataModel(UREmployeeDetailsVM data)
+        {
+            EmployeeMaster model = new EmployeeMaster();
+            model.EmpId = data.EmpId;
+            model.EmpAddress = data.EmpAddress;
+            model.LoginId = data.LoginId;
+            model.Password = data.Password;
+            model.EmpMobileNumber = data.EmpMobileNumber;
+            model.EmpName = data.EmpName;
+            model.EmpNameMar = data.EmpNameMar;
+            model.isActive = data.isActive;
+            model.type = data.type;
+            model.lastModifyDateEntry = DateTime.Now;
+            return model;
+        }
+
+
         private SauchalayAddress FillSauchalayDetailsDataModel(SauchalayDetailsVM data)
         {
             SauchalayAddress model = new SauchalayAddress();
@@ -3702,6 +3720,23 @@ namespace SwachBharat.CMS.Bll.Services
             model.isActive = data.isActive;
             model.bloodGroup = data.bloodGroup;
             model.userEmployeeNo = data.userEmployeeNo;
+            return model;
+        }
+
+        private UREmployeeDetailsVM FillUREmployeeViewModel(EmployeeMaster data)
+        {
+            UREmployeeDetailsVM model = new UREmployeeDetailsVM();
+            model.EmpId = data.EmpId;
+            model.EmpAddress = data.EmpAddress;
+            model.LoginId = data.LoginId;
+            model.Password = data.Password;
+            model.EmpMobileNumber = data.EmpMobileNumber;
+            model.EmpName = data.EmpName;
+            model.EmpNameMar = data.EmpNameMar;
+            model.isActiveULB = data.isActiveULB;
+            model.isActive = data.isActive;
+            model.lastModifyDate = data.lastModifyDateEntry;
+            model.type = data.type;
             return model;
         }
 
@@ -4332,19 +4367,12 @@ namespace SwachBharat.CMS.Bll.Services
                     if (Details != null)
                     {
                         type = FillHSEmployeeViewModel(Details);
-                        //if (type.userProfileImage != null && type.userProfileImage != "")
-                        //{
-                        //    type.userProfileImage = ThumbnaiUrlCMS + type.userProfileImage.Trim();
-                        //}
-                        //else
-                        //{
-                        //    type.userProfileImage = "/Images/default_not_upload.png";
-                        //}
+                      
                         return type;
                     }
                     else
                     {
-                        //type.userProfileImage = "/Images/add_image_square.png";
+   
                         return type;
                     }
                 }
@@ -4355,8 +4383,89 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public UREmployeeDetailsVM GetUREmployeeDetails(int teamId)
+        {
+            try
+            {
+                UREmployeeDetailsVM TypeDetail = new UREmployeeDetailsVM();
+              //  DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+               
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.UserProfile + "/";
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    var Details = db.EmployeeMasters.Where(x => x.EmpId == teamId).FirstOrDefault();
+                    if (Details != null)
+                    {
+                        TypeDetail = FillUREmployeeViewModel(Details);
+                        
+                        TypeDetail.CheckAppDs = db.CheckAppDs.ToList<CheckAppD>();
+                        if (TypeDetail.isActiveULB!=null)
+                        { 
+                        string s = TypeDetail.isActiveULB;
+                        string[] values = s.Split(',');
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            values[i] = values[i].Trim();
+                            int u = 0;
+                            if(values[i]!="")
+                            { 
+                            u = Convert.ToInt32(values[i]);
+                            }
+                            string state1 = "";
+                            foreach (var v in TypeDetail.CheckAppDs)
+                            {
+                                if (v.AppId == u)
+                                {
+
+                                    v.IsCheked = true;
+
+                                }
+                            }
+                        }
+
+                        }
+                        return TypeDetail;
+                    }
+                    else
+                    {
+                                             
+                        TypeDetail.CheckAppDs = db.CheckAppDs.ToList<CheckAppD>();
+                        return TypeDetail;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+     
+        public List<AppDetail> GetAppName()
+        {
+            List<AppDetail> appNames = new List<AppDetail>();
+            appNames = dbMain.AppDetails.Where(x => x.IsActive == true && x.AppName != "Thane Mahanagar Palika").OrderBy(x => x.AppName).ToList();
+            //appNames = dbMain.AppDetails.ToList();
+            //var appNames= dbMain.AppDetails.Where(row => row.)
+            return appNames.OrderBy(x => x.AppName).ToList();
+        }
 
 
+        //public List<AppDetails> ListULB()
+        //{
+        //    List<AppDetails> users = new List<AppDetails>();
+        //    SelectListItem itemAdd = new SelectListItem() { Text = "--Select Employee--", Value = "0" };
+        //    DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+        //    try
+        //    {
+        //        users = dbMain..ToList();
+
+        //    }
+        //    catch (Exception ex) { throw ex; }
+
+        //    return users;
+        //}
         public void SaveHSEmployeeDetails(HouseScanifyEmployeeDetailsVM data)
         {
             try
@@ -4399,7 +4508,142 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+
+        public void SaveUREmployeeDetails(UREmployeeDetailsVM data)
+        {
+            try
+            {
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    if (data.EmpId > 0)
+                    {
+                        var model = db.EmployeeMasters.Where(x => x.EmpId == data.EmpId).FirstOrDefault();
+                        if (model != null)
+                        {
+
+                            model.EmpId = data.EmpId;
+                            model.EmpName = data.EmpName;
+                            model.EmpNameMar = data.EmpNameMar;
+                            model.LoginId = data.LoginId;
+                            model.Password = data.Password;
+                            model.EmpAddress = data.EmpAddress;
+                            model.isActive = data.isActive;
+                            model.EmpMobileNumber = data.EmpMobileNumber;                     
+                            model.lastModifyDateEntry = DateTime.Now;
+                            string state1 = "";
+                            foreach (var s in data.CheckAppDs)
+                            {
+                                if (s.IsCheked == true)
+                                {
+
+                                    state1 += s.AppId + ",";
+
+                                }
+                            }
+                            if (data.type == "A")
+                            {
+                                model.isActiveULB = null;
+                                model.type = data.type;
+                            }
+                            else
+                            { 
+                            model.isActiveULB = state1;
+                            model.type = data.type;
+                            }
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = FillUREmployeeDataModel(data);
+
+                        //arr[CheckAppD] myArray = data.CheckAppDs.ToArray();
+
+                        string state1 = "";
+                        foreach(var s in data.CheckAppDs)
+                        {
+                            if (s.IsCheked==true)
+                            {
+
+                                state1 += s.AppId + ",";
+
+                            }
+                        }
+
+                        if (data.type == "A")
+                        {
+                            type.isActiveULB = null;
+                            type.type = data.type;
+                        }
+                        else
+                        {
+                            type.isActiveULB = state1;
+                            type.type = data.type;
+                        }
+                       
+                        db.EmployeeMasters.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw;
+            }
+        }
+
         public HSDashBoardVM GetHSDashBoardDetails()
+        {
+            HSDashBoardVM model = new HSDashBoardVM();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+
+                    DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
+                    var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
+
+                    var data = db.SP_HouseScanifyDetails().First();
+
+
+                    if (data != null)
+                    {
+
+                        model.TotalHouse = data.TotalHouse;
+                        model.TotalHouseUpdated = data.TotalHouseUpdated;
+                        model.TotalHouseUpdated_CurrentDay = data.TotalHouseUpdated_CurrentDay;
+                        model.TotalPoint = data.TotalPoint;
+                        model.TotalPointUpdated = data.TotalPointUpdated;
+                        model.TotalPointUpdated_CurrentDay = data.TotalPointUpdated_CurrentDay;
+                        model.TotalDump = data.TotalDump;
+                        model.TotalDumpUpdated = data.TotalDumpUpdated;
+                        model.TotalDumpUpdated_CurrentDay = data.TotalDumpUpdated_CurrentDay;
+
+                        model.TotalLiquid = data.TotalLiquid;
+                        model.TotalLiquidUpdated = data.TotalLiquidUpdated;
+                        model.TotalLiquidUpdated_CurrentDay = data.TotalLiquidUpdated_CurrentDay;
+
+                        model.TotalStreet = data.TotalStreet;
+                        model.TotalStreetUpdated = data.TotalStreetUpdated;
+                        model.TotalStreetUpdated_CurrentDay = data.TotalStreetUpdated_CurrentDay;
+
+                        return model;
+                    }
+
+                    else
+                    {
+                        return model;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return model;
+            }
+        }
+
+
+        public HSDashBoardVM GetURDashBoardDetails()
         {
             HSDashBoardVM model = new HSDashBoardVM();
             try

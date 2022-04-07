@@ -97,6 +97,7 @@
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
           <Property Name="LWId" Type="int" />
           <Property Name="SSId" Type="int" />
+          <Property Name="AreaId" Type="int" />
         </EntityType>
         <EntityType Name="GarbagePointDetails">
           <Key>
@@ -367,50 +368,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.SS_1.4_QUESTI
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
           <Property Name="imoNo2" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="UserMaster_Liquid">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userName" Type="nvarchar" MaxLength="500" />
-          <Property Name="userNameMar" Type="nvarchar" MaxLength="200" />
-          <Property Name="userLoginId" Type="nvarchar" MaxLength="200" />
-          <Property Name="userPassword" Type="nvarchar" MaxLength="100" />
-          <Property Name="userMobileNumber" Type="nvarchar" MaxLength="20" />
-          <Property Name="userAddress" Type="nvarchar" MaxLength="200" />
-          <Property Name="userProfileImage" Type="nvarchar" MaxLength="500" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="userEmployeeNo" Type="nvarchar" MaxLength="250" />
-          <Property Name="userDesignation" Type="nvarchar(max)" />
-          <Property Name="imoNo" Type="nvarchar(max)" />
-          <Property Name="bloodGroup" Type="nvarchar" MaxLength="250" />
-          <Property Name="isActive" Type="bit" />
-          <Property Name="gcTarget" Type="varchar" MaxLength="250" />
-          <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
-          <Property Name="imoNo2" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="UserMaster_Street">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userName" Type="nvarchar" MaxLength="500" />
-          <Property Name="userNameMar" Type="nvarchar" MaxLength="200" />
-          <Property Name="userLoginId" Type="nvarchar" MaxLength="200" />
-          <Property Name="userPassword" Type="nvarchar" MaxLength="100" />
-          <Property Name="userMobileNumber" Type="nvarchar" MaxLength="20" />
-          <Property Name="userAddress" Type="nvarchar" MaxLength="200" />
-          <Property Name="userProfileImage" Type="nvarchar" MaxLength="500" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="userEmployeeNo" Type="nvarchar" MaxLength="250" />
-          <Property Name="userDesignation" Type="nvarchar(max)" />
-          <Property Name="imoNo" Type="nvarchar(max)" />
-          <Property Name="bloodGroup" Type="nvarchar" MaxLength="250" />
-          <Property Name="isActive" Type="bit" />
-          <Property Name="gcTarget" Type="varchar" MaxLength="250" />
-          <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
-          <Property Name="imoNo2" Type="nvarchar(max)" />
-        </EntityType>
         <EntityType Name="VehicleType">
           <Key>
             <PropertyRef Name="vtId" />
@@ -504,6 +461,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="bloodGroup" Type="nvarchar" MaxLength="250" />
           <Property Name="isActive" Type="bit" />
           <Property Name="gcTarget" Type="varchar" MaxLength="250" />
+          <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
+          <Property Name="imoNo2" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_SS_1_4_ANSWER_SS_1_4_ANSWER">
           <End Role="SS_1_4_ANSWER" Type="Self.SS_1_4_ANSWER" Multiplicity="1" />
@@ -574,6 +533,16 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Parameter Name="ZoneId" Type="int" Mode="In" />
           <Parameter Name="AreaId" Type="int" Mode="In" />
           <Parameter Name="WardNo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetHSHouseDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fdate" Type="datetime" Mode="In" />
+          <Parameter Name="tdate" Type="datetime" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="sortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="sortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="OffsetValue" Type="int" Mode="In" />
+          <Parameter Name="PagingSize" Type="int" Mode="In" />
+          <Parameter Name="SearchText" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_GetLiveTracking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HouseOnMapDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -675,8 +644,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="StreetSweepingDetails" EntityType="Self.StreetSweepingDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeritoryMaster" EntityType="Self.TeritoryMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserMaster_Liquid" EntityType="Self.UserMaster_Liquid" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserMaster_Street" EntityType="Self.UserMaster_Street" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WardNumber" EntityType="Self.WardNumber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WM_Garbage_Details" EntityType="Self.WM_Garbage_Details" Schema="dbo" store:Type="Tables" />
@@ -723,7 +690,9 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
     [Vw_MsgNotification].[imoNo] AS [imoNo], 
     [Vw_MsgNotification].[bloodGroup] AS [bloodGroup], 
     [Vw_MsgNotification].[isActive] AS [isActive], 
-    [Vw_MsgNotification].[gcTarget] AS [gcTarget]
+    [Vw_MsgNotification].[gcTarget] AS [gcTarget], 
+    [Vw_MsgNotification].[EmployeeType] AS [EmployeeType], 
+    [Vw_MsgNotification].[imoNo2] AS [imoNo2]
     FROM [dbo].[Vw_MsgNotification] AS [Vw_MsgNotification]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_SS_1_4_ANSWER_SS_1_4_ANSWER" Association="Self.FK_SS_1_4_ANSWER_SS_1_4_ANSWER">
@@ -908,6 +877,16 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="FilterType" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="HouseMasters" EntityType="DevSwachhBharatNagpurModel.HouseMaster" />
+          <FunctionImport Name="SP_GetHSHouseDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_GetHSHouseDetails_Result)">
+            <Parameter Name="fdate" Mode="In" Type="DateTime" />
+            <Parameter Name="tdate" Mode="In" Type="DateTime" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="sortColumn" Mode="In" Type="String" />
+            <Parameter Name="sortOrder" Mode="In" Type="String" />
+            <Parameter Name="OffsetValue" Mode="In" Type="Int32" />
+            <Parameter Name="PagingSize" Mode="In" Type="Int32" />
+            <Parameter Name="SearchText" Mode="In" Type="String" />
+          </FunctionImport>
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -1520,6 +1499,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="bloodGroup" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Boolean" />
           <Property Name="gcTarget" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="imoNo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="SP_GarbageCollection_Result">
           <Property Type="Int32" Name="gcId" Nullable="false" />
@@ -1780,6 +1761,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="LWId" Type="Int32" />
           <Property Name="SSId" Type="Int32" />
+          <Property Name="AreaId" Type="Int32" />
         </EntityType>
         <ComplexType Name="SP_LiquidEmployeeTarget_Result">
           <Property Type="Int32" Name="userId" Nullable="true" />
@@ -2007,6 +1989,17 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="WasteType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="QRCodeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="SP_GetHSHouseDetails_Result">
+          <Property Type="Int32" Name="userId" Nullable="true" />
+          <Property Type="Int32" Name="houseId" Nullable="false" />
+          <Property Type="String" Name="houseLat" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="houseLong" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ReferanceId" Nullable="true" MaxLength="350" />
+          <Property Type="DateTime" Name="modified" Nullable="true" Precision="23" />
+          <Property Type="String" Name="qrEmpName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="QRCodeImage" Nullable="true" />
+          <Property Type="Int32" Name="FilterTotalCount" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2538,6 +2531,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="Vw_MsgNotification">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.Vw_MsgNotification">
               <MappingFragment StoreEntitySet="Vw_MsgNotification">
+                <ScalarProperty Name="imoNo2" ColumnName="imoNo2" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
                 <ScalarProperty Name="gcTarget" ColumnName="gcTarget" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="bloodGroup" ColumnName="bloodGroup" />
@@ -2830,6 +2825,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="GarbageCollectionDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.GarbageCollectionDetail">
               <MappingFragment StoreEntitySet="GarbageCollectionDetails">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
                 <ScalarProperty Name="SSId" ColumnName="SSId" />
                 <ScalarProperty Name="LWId" ColumnName="LWId" />
                 <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
@@ -3149,6 +3145,21 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetHSHouseDetails" FunctionName="DevSwachhBharatNagpurModel.Store.SP_GetHSHouseDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.SP_GetHSHouseDetails_Result">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="houseId" ColumnName="houseId" />
+                <ScalarProperty Name="houseLat" ColumnName="houseLat" />
+                <ScalarProperty Name="houseLong" ColumnName="houseLong" />
+                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
+                <ScalarProperty Name="modified" ColumnName="modified" />
+                <ScalarProperty Name="qrEmpName" ColumnName="qrEmpName" />
+                <ScalarProperty Name="QRCodeImage" ColumnName="QRCodeImage" />
+                <ScalarProperty Name="FilterTotalCount" ColumnName="FilterTotalCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
          
         </EntityContainerMapping>
       </Mapping>
