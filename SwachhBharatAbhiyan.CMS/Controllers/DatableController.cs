@@ -443,7 +443,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
 
                 case "URAttendance":
-                    gridRepository = new URAttendanceGridRepository(0, searchString, fdate, tdate, userId, appId, sortColumn, sortColumnDir, draw, length, start);
+                    gridRepository = new URAttendanceGridRepository(0, searchString, fdate, tdate, userId,clientId, appId, sortColumn, sortColumnDir, draw, length, start);
                     return gridRepository;
                     break;
                 case "HSHouseDetails":

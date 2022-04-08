@@ -2734,7 +2734,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                     obj = model.ToList();
                 }
-                var d = obj.OrderByDescending(c => DateTime.Parse(c.daDateTIme)).ToList();
+                //var d = obj.OrderByDescending(c => DateTime.Parse(c.daDateTIme)).ToList();
+                var d = obj.OrderByDescending(c => c.daID).ToList();
                 return d;
             }
         }
@@ -4686,8 +4687,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         }
 
 
-        public IEnumerable<UREmployeeDetails> GetURDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
-        {
+        public IEnumerable<UREmployeeDetails> GetURDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId,string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+       {
             string strOrderBy = "";
             if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
             {
@@ -4701,17 +4702,39 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
             using (var db = new DevSwachhBharatMainEntities())
             {
-
+                if(ClientId=="A")
+                { 
                 data = db.EmployeeMasters.Select(x => new UREmployeeDetails
                 {
                     EmpId = x.EmpId,
                     EmpName = x.EmpName,
                     lastModifyDateEntry =(x.lastModifyDateEntry).ToString(),
                     type = x.type,
-                    EmpAddress = x.EmpAddress,
+                    isActive = x.isActive,
                     
-                }).ToList();
-             return data;
+                }).Where(x=>x.isActive==true).ToList();
+                }
+                else 
+                {
+                    data = db.EmployeeMasters.Select(x => new UREmployeeDetails
+                    {
+                        EmpId = x.EmpId,
+                        EmpName = x.EmpName,
+                        lastModifyDateEntry = (x.lastModifyDateEntry).ToString(),
+                        type = x.type,
+                        isActive = x.isActive,
+
+                    }).Where(x => x.isActive == false).ToList();
+                }
+
+
+                if (!string.IsNullOrEmpty(SearchString) && SearchString!="-2")
+                {
+                    data = data.Where(c => ((string.IsNullOrEmpty(c.EmpName) ? " " : c.EmpName) + " " + (string.IsNullOrEmpty(c.type) ? " " : c.type)).ToUpper().Contains(SearchString.ToUpper())
+                     ).ToList();
+
+                }
+                return data;
 
             }
            
