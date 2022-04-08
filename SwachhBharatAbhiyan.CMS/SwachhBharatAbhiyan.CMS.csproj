@@ -3036,6 +3036,7 @@
     <Content Include="Views\Shared\_HSLayout.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSUserList.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSMenuIndex.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSURIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

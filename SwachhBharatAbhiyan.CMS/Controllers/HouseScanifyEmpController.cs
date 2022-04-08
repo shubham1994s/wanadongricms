@@ -81,6 +81,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
           
         }
 
+        public ActionResult HSURIndex()
+        {
+            int appid = 1;
+            ViewBag.AppId = appid;
+            ViewBag.UType = Session["utype"];
+            return View();
+
+
+        }
 
         public ActionResult MenuURIndex()
         {        

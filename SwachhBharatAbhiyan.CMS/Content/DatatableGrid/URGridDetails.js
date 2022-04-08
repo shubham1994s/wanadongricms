@@ -74,6 +74,16 @@
 
 function LoadNGrid() {
     debugger;
+    var appid = $('#appid').val();
+    $.get("/houseScanifyEmp/GameAppList", null, house);
+    function house(data) {
+        var res = '';
+        //for (var i = 0; i < data.length; i++) {
+        //    res += "<li class=''><a style='cursor:pointer'class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + "</a></li>";
+        //}
+        var url_string = window.location.href; //window.location.href
+        var url = new URL(url_string);
+        var AppId_New = url.searchParams.get("AppId");
 
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({
@@ -85,11 +95,16 @@ function LoadNGrid() {
         "orderMulti": false, // for disable multiple column at once
         "pageLength": 10,
 
-        "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=URAttendance&clientName=N",
-            "type": "POST",
-            "datatype": "json"
-        },
+        for (var i = 0; i < data.length; i++) {
+            res += "<li class='' ><a style='cursor:pointer' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
+            if (data[i].FAQ == 1) {
+                res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+            }
+            //if (AppId_New == data[i].AppId) {
+            //      res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+            //}
+            res += "</a></li>";
+        }
 
         "columnDefs":
             [{
@@ -158,10 +173,12 @@ function Edit(Id) {
     window.location.href = "/HouseScanifyEmp/AddUREmployeeDetails?teamId=" + Id;
 
 };
+
 function AppList(Id) {
-    // alert(Id);
+    //alert(Id);
+    debugger;
     if (Id != null) {
-        var url = "/HouseScanifyEmp/UserList?AppId=" + Id;
+        var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
         window.location.href = url;
     }
 };
