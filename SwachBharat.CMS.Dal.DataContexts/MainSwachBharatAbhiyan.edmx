@@ -188,11 +188,13 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
         <EntityType Name="CheckAppD">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="IsCheked" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="App_Name" Type="varchar" MaxLength="100" />
-          <Property Name="IsCheked" Type="bit" />
+          <Property Name="IsCheked" Type="bit" Nullable="false" />
           <Property Name="AppId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="country_states">
           <Key>
@@ -414,7 +416,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
     [CheckAppD].[Id] AS [Id], 
     [CheckAppD].[App_Name] AS [App_Name], 
     [CheckAppD].[IsCheked] AS [IsCheked], 
-    [CheckAppD].[AppId] AS [AppId]
+    [CheckAppD].[AppId] AS [AppId], 
+    [CheckAppD].[IsActive] AS [IsActive]
     FROM [dbo].[CheckAppD] AS [CheckAppD]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -613,8 +616,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="AD_USER_MST_STREET" EntityType="DevSwachhBharatMainModel.AD_USER_MST_STREET" />
           <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
           <FunctionImport Name="SP_Admin2" ReturnType="Collection(DevSwachhBharatMainModel.SP_Admin2_Result)" />
-          <EntitySet Name="CheckAppDs" EntityType="DevSwachhBharatMainModel.CheckAppD" />
           <EntitySet Name="EmployeeMasters" EntityType="DevSwachhBharatMainModel.EmployeeMaster" />
+          <EntitySet Name="CheckAppDs" EntityType="DevSwachhBharatMainModel.CheckAppD" />
         </EntityContainer>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -814,15 +817,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Type="Int32" Name="TotalLiquidCount" Nullable="true" />
           <Property Type="Int32" Name="TotalStreetCount" Nullable="true" />
         </ComplexType>
-        <EntityType Name="CheckAppD">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="App_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsCheked" Type="Boolean" />
-          <Property Name="AppId" Type="Int32" />
-        </EntityType>
         <EntityType Name="EmployeeMaster">
           <Key>
             <PropertyRef Name="EmpId" />
@@ -838,6 +832,17 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="isActive" Type="Boolean" />
           <Property Name="isActiveULB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="lastModifyDateEntry" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CheckAppD">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsCheked" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="App_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsCheked" Type="Boolean" Nullable="false" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1176,16 +1181,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CheckAppDs">
-            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.CheckAppD">
-              <MappingFragment StoreEntitySet="CheckAppD">
-                <ScalarProperty Name="AppId" ColumnName="AppId" />
-                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
-                <ScalarProperty Name="App_Name" ColumnName="App_Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EmployeeMasters">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.EmployeeMaster">
               <MappingFragment StoreEntitySet="EmployeeMaster">
@@ -1200,6 +1195,17 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
                 <ScalarProperty Name="EmpNameMar" ColumnName="EmpNameMar" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CheckAppDs">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.CheckAppD">
+              <MappingFragment StoreEntitySet="CheckAppD">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
+                <ScalarProperty Name="App_Name" ColumnName="App_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
