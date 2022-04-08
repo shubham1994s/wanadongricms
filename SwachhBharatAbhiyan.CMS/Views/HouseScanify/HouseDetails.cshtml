@@ -50,7 +50,8 @@
 
     /* When the radio button is checked, add a blue background */
     .check-container input:checked ~ .checkmark {
-        background-color: #3ab59e;
+        background-color: #189cdf;
+       
     }
 
     /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -295,6 +296,9 @@
                         <p> <b id="hide_date">Employee Name: </b><span id="dateData"></span></p>
                         <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
                         <p> <b id="hide_add1">Date And Time: </b><span id="date1"></span></p>
+
+                        <p> <b id="hide_add2">Lat: </b><span id="lat"></span> <b id="hide_add3">Long: </b><span id="long"></span></p>
+                        <p> </p>
                     </center>
 
                     <div class="modal-footer">
@@ -329,12 +333,18 @@
         var date = $(cel).find('.li_date').text();
         var imgsrc = $(cel).find('img').attr('src');
         var head = $(cel).find('.li_title').text();
+
+        var lat = $(cel).find('.li_lat').text();
+        var long = $(cel).find('.li_long').text();
+        
         jQuery("#date1").text(d1);
         jQuery("#latlongData").text(addr);
         jQuery("#dateData").text(date);
         jQuery("#imggg").attr('src', imgsrc);
         //jQuery("#latlongData").text(cellValue);
         jQuery("#header_data").html(head);
+        jQuery("#lat").text(lat);
+        jQuery("#long").text(long);
 
     }
 

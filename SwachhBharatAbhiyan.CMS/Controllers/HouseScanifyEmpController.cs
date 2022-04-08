@@ -29,6 +29,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             return View();
         }
 
+        public ActionResult HSMenuIndex()
+        {
+            ViewBag.UType = Session["utype"];
+            return View();
+        }
         public HouseScanifyEmpController()
         {
             mainRepository = new MainRepository();
@@ -106,7 +111,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 Session["utype"] = Result.ADUM_DESIGNATION;
                 Session["Id"] = Result.ADUM_LOGIN_ID;
                 Session["Pwd"] = Result.ADUM_PASSWORD;
-                return RedirectToAction("MenuIndex");
+                return RedirectToAction("HSMenuIndex");
             }
             else
             {
@@ -208,8 +213,45 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
+        public ActionResult GameAppList()
+        {
+            try
+            {
 
+                mainRepository = new MainRepository();
+                List<AppDetail> house = new List<AppDetail>();
+                //objDetail = objRep.GetActiveEmployee(AppId);
+
+                var utype = (string)Session["utype"];
+                var LoginId = (string)Session["Id"];
+                var Password = (string)Session["Pwd"];
+                house = mainRepository.GetAppList(utype, LoginId, Password);
+                //AppId = house.app
+                //AddSession(UserId, UserRole, UserEmail, UserName);
+                return Json(house, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult UserList(int AppId)
+        {
+
+            int AppID = AppId;
+            AddSession(AppID);
+
+            if (SessionHandler.Current.AppId != 0)
+            {
+                ViewBag.AppId = AppId;
+                ViewBag.UType = Session["utype"];
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult HSUserList(int AppId)
         {
 
             int AppID = AppId;

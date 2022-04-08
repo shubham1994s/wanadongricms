@@ -158,6 +158,13 @@ function Edit(Id) {
     window.location.href = "/HouseScanifyEmp/AddUREmployeeDetails?teamId=" + Id;
 
 };
+function AppList(Id) {
+    // alert(Id);
+    if (Id != null) {
+        var url = "/HouseScanifyEmp/UserList?AppId=" + Id;
+        window.location.href = url;
+    }
+};
 
 
 

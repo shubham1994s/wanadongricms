@@ -4739,7 +4739,6 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
            
         
         }
-
         public IEnumerable<SBAHSDumpyardDetailsGrid> GetHSDumpyardDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
         {
 
@@ -4811,8 +4810,6 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 return data;
             }
         }
-
-
         public IEnumerable<SBAHSLiquidDetailsGrid> GetHSLiquidDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
         {
 
@@ -4884,7 +4881,6 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 return data;
             }
         }
-
         public IEnumerable<SBAHSStreetDetailsGrid> GetHSStreetDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
         {
 
