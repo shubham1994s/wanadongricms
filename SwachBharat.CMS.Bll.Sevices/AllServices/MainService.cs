@@ -666,6 +666,37 @@ namespace SwachBharat.CMS.Bll.Services
             return gameList;
         }
 
+        public List<AppDetail> GetAppList(string utype, string LoginId, string Password)
+        {
+            List<AppDetail> appList = new List<AppDetail>();
+            if (utype == "A")
+            {
+                appList = dbMain.AppDetails.Where(x => x.IsActive == true && (x.AppName != "Thane Mahanagar Palika" && x.AppName != "Nagpur Mahanagar Palika")).OrderBy(x => x.AppName).ToList();
+                //appNames = dbMain.AppDetails.ToList();
+                //var appNames= dbMain.AppDetails.Where(row => row.)
+                return appList;
+            }
+            else
+            {
+                var ULBList = dbMain.EmployeeMasters.Where(x => x.LoginId == LoginId && x.Password == Password).FirstOrDefault();
+                string s = ULBList.isActiveULB;
+                string[] values = s.Split(',');
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = values[i].Trim();
+                    int u = 0;
+                    if (values[i] != "")
+                    {
+                        u = Convert.ToInt32(values[i]);
+                        var details = dbMain.AppDetails.Where(x => x.IsActive == true && (x.AppName != "Thane Mahanagar Palika" && x.AppName != "Nagpur Mahanagar Palika") && x.AppId == u).OrderBy(x => x.AppName).FirstOrDefault();
+                        appList.Add(details);
+                    }
+
+
+                }
+            }
+            return appList;
+        }
         public InfotainmentDetailsVW GetInfotainmentDetailsById(int ID)
         {
             try

@@ -1,9 +1,7 @@
 ﻿
-
 @{
-    Layout = "";
+    ViewBag.Title = "House Scanify Emp";
 }
-
 
 <!DOCTYPE html>
 <html>
@@ -20,13 +18,11 @@
     @*@Scripts.Render("~/bundles/modernizr")*@
     @*@RenderSection("styles", required: false)*@
     <link rel="shortcut icon" href="~/Content/images/img/ictsbm2.png" />
-    <style>
-        #URbutton{
-            display:none;
-        }
-    </style>
+
 </head>
 <body>
+    @*<input type="hidden" value='@Request.QueryString["daId"]' id='HdnIndustries' />*@
+
     <input type="hidden" value="@ViewBag.UType" id="UType" />
     <div class="page">
         <!-- Main Navbar-->
@@ -45,14 +41,14 @@
                         <!-- Navbar Header-->
                         <div class="navbar-header">
                             <!-- Navbar Brand --><a href="#" class="navbar-brand">
-                                <div class="brand-text brand-big"><span><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </span><strong style="font-size:15px;margin-left:3%">  House / Liquid / Street Scanify</strong></div>
+                                <div class="brand-text brand-big"><span><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </span><strong style="font-size:15px;margin-left:3%"> House / Liquid / Street Scanify</strong></div>
                                 <div class="brand-text brand-small"><strong><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </strong></div>
                             </a>
                             <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
                         </div>
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
-                        <li class="nav-item" style="list-style: none;"><a href="/houseScanifyemp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                        <li class="nav-item" style="list-style: none;"><a href="/houseScanify/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
 
                     </div>
                 </div>
@@ -62,25 +58,20 @@
             <!-- Side Navbar -->
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
-               
-                    <ul>
-                        <li id='URbutton' class='' style='text-align: center;background-color: #189cdf;'><a href='URIndex' style='cursor: pointer'>User Right</a></li>
-                    </ul>
-                  
-                
-                <ul class="list-unstyled">
+                <ul>
+                    <li id='URbutton' class='' style='text-align: center;background-color: #189cdf;'><a href='URIndex' style='cursor: pointer'>User Right</a></li>
+                </ul>
+                <ul class="list-unstyled" style="max-height:700px;overflow-y:auto">
                     <p id="img_ldr" style="display:block;position:absolute;top:40%;left:5%;">
-                        <img style="height:90px" class="rotate_img" src="~/Content/images/img/loading.gif">
+                        <img style="height:90px" class="" src="~/Content/images/img/loading.gif">
                     </p>
-                   
-                 
                 </ul>
                 @*<span class="heading">Extras</span>*@
 
             </nav>
             <div class="content-inner">
-                <br />
-                <h3 style="margin-left:15px">Please Select ULB</h3>
+
+                @RenderBody()
                 <footer class="main-footer">
                     <div class="container-fluid">
                         <div class="row">
@@ -102,119 +93,116 @@
 
     @Scripts.Render("~/Scripts/ThemeScripts")
     <script>
-
+        var Utypes = $('#UType').val();
+        if (Utypes == 'A') {
+            //$('#URbutton').show();
+            document.getElementById("URbutton").style.display = "block";
+        }
+        else {
+            // $('#URbutton').hide();
+            document.getElementById("URbutton").style.display = "none";
+        }
         function Edit(Id) {
-            // alert(Id);
+            //alert(Id);
             if (Id != null) {
                 var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
                 window.location.href = url;
             }
         };
 
-        $(document).ready(function () {
 
-            $.get("/HouseScanifyEmp/GetURAppNames", null, house);
-            debugger;
+        // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
+        debugger;
+        var appid = $('#appid').val();
+     
+
+        $.get("/houseScanifyEmp/GameAppList", null, house);
             function house(data) {
-                // window.localStorage.setItem("ulb_menu", JSON.stringify(data));
-                var res = "";
+                var res = '';
+                //for (var i = 0; i < data.length; i++) {
+                //    res += "<li class=''><a style='cursor:pointer'class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + "</a></li>";
+                //}
                 var url_string = window.location.href; //window.location.href
                 var url = new URL(url_string);
                 var AppId_New = url.searchParams.get("AppId");
 
+
                 for (var i = 0; i < data.length; i++) {
                     res += "<li class='' ><a style='cursor:pointer' class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
-                    if (data[i].TotalHouseUpdated_CurrentDay != 0 || data[i].TotalPointUpdated_CurrentDay != 0 || data[i].TotalDumpUpdated_CurrentDay != 0) {
+                    if (data[i].FAQ == 1 ) {
                         res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
                     }
                     //if (AppId_New == data[i].AppId) {
-                    //    res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+                    //      res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
                     //}
                     res += "</a></li>";
                 }
 
+
                 $('.list-unstyled').html(res);
                 $('#img_ldr').css("display", "none");
+                $('#' + appid).parents('li').addClass('active');
+
                 $(".li-hover").hover(function () {
                     $(this).css("color", "#fff");
                 }, function () {
                     $(this).css("color", "#6c757d");
                 });
+                $(".active a").hover(function () {
+                    $(this).css("color", "#fff");
+                }, function () {
+                    $(this).css("color", "#fff");
+                });
+
             }
-        });
-
-        $(document).ready(function () {
-
-            //if ($("#asdf").text() != "namratas@appynitty.com!") {
-            //    $("#complaint_menu").css("display", "none")
-            //    $("#report_menu").css("display", "none")
-            //}
-            debugger;
-          
-            var Utypes = $('#UType').val();
-            if (Utypes == 'A') {
-                //$('#URbutton').show();
-                document.getElementById("URbutton").style.display = "block";
-            }
-            else {
-               // $('#URbutton').hide();
-                document.getElementById("URbutton").style.display = "none";
-            }
-
-            $(document).on('click', '.nav', function (e) {
-                if (!$(e.target).is('a')) {
-                    $('.collapse').collapse('hide');
-                }
-            });
-
-            var pathname = window.location.pathname;
-            //alert(pathname);
-            if (pathname == "/GarbageCollection/MenuHouseGarbageIndex" || pathname == "/GarbageCollection/MenuPointGarbageIndex" || pathname == "/Location/MenuIndex" || pathname == "/Location/MenuMapIndex" || pathname == "/HouseMaster/MenuIndex" || pathname == "/GarbagePoint/MenuIndex" || pathname == "/Employee/MenuIndex" || pathname == "/MainMaster/MenuStateIndex" || pathname == "/MainMaster/MenuTalukaIndex" || pathname == "/MainMaster/MenuDistrictIndex" || pathname == "/MainMaster/MenuZoneIndex" || pathname == "/MainMaster/MenuWardIndex" || pathname == "/MainMaster/MenuAreaIndex" || pathname == "/MainMaster/MenuVehicleIndex" || pathname == "/HouseMaster/ReportIndex" || pathname == "/GarbageCollection/MenuEntryDetails" || pathname == "/GarbageCollection/MenuIdealtime") {
-
-                $('.collapse a').filter(function () {
-                    {
-                        return $(this).attr('href') == pathname
-                    }
-                }).addClass('active').closest('ul li a').parents().addClass('active show');
-                if (!$(e.target).is('a')) {
-                    $('.collapse').collapse('hide');
-                }
-            }
-            else {
-                $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
-            }
+        
 
 
-
-        });
-
-        // Returns path only
-
-        $('#toggle-btn').on('click', function (e) {
-            e.preventDefault();
-            $(this).toggleClass('active');
-
-            $('.side-navbar').toggleClass('shrinked');
-            $('.content-inner').toggleClass('active');
-            $(document).trigger('sidebarChanged');
-
-            if ($(window).outerWidth() > 1183) {
-                if ($('#toggle-btn').hasClass('active')) {
-                    $('.navbar-header .brand-small').hide();
-                    $('.navbar-header .brand-big').show();
-                } else {
-                    $('.navbar-header .brand-small').show();
-                    $('.navbar-header .brand-big').hide();
-                }
-            }
-
-            if ($(window).outerWidth() < 1183) {
-                $('.navbar-header .brand-small').show();
-            }
-        });
 
     </script>
     <script src="~/Content/theme-assets/js/icons_load.js"></script>
+    <script>
+        //debugger;
+        var date = new Date();
+        var today = '';
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = day + "/" + month + "/" + year;
+
+        document.getElementById('txt_fdate').value = today;
+        document.getElementById('txt_tdate').value = today;
+
+
+    </script>
+    <script src="~/Content/css/datepicker/js/datepicker.js"></script>
+    <script type="text/javascript">
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            weekStart: 1,
+            color: 'red',
+            pickTime: false
+        }).on('changeDate', function (e) {
+
+            $(this).datepicker('hide');
+
+        });
+        //hide  show on hover
+        $('#txt_fdate').focus(function () {
+            $('.dtpk_drpdwn').eq(1).hide();
+        });
+        $('#txt_tdate').focus(function () {
+            $('.dtpk_drpdwn').eq(0).hide();
+        });
+
+
+    </script>
     @*@RenderSection("scripts", required: false)*@
 </body>
 </html>
+
+

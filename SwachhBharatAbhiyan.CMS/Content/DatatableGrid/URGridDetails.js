@@ -68,7 +68,7 @@
 
 
         for (var i = 0; i < data.length; i++) {
-            res += "<li class='' ><a style='cursor:pointer' class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
+            res += "<li class='' ><a style='cursor:pointer' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
             if (data[i].TotalHouseUpdated_CurrentDay != 0 || data[i].TotalPointUpdated_CurrentDay != 0 || data[i].TotalDumpUpdated_CurrentDay != 0) {
                 res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
             }
@@ -123,9 +123,7 @@
 
 });
 
-function user_route(id) {
-    window.location.href = "/HouseScanifyEmp/AddUREmployeeDetails?EmpId=" + id;
-};
+
 //////////////////////////////////////////////////////////////////////////////
 function showInventoriesGrid() {
     Search();
@@ -133,6 +131,13 @@ function showInventoriesGrid() {
 
 function Edit(Id) {
     window.location.href = "/HouseScanifyEmp/AddUREmployeeDetails?teamId=" + Id;
+};
+function AppList(Id) {
+    // alert(Id);
+    if (Id != null) {
+        var url = "/HouseScanifyEmp/UserList?AppId=" + Id;
+        window.location.href = url;
+    }
 };
 
 function Search() {
