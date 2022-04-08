@@ -4691,6 +4691,7 @@ namespace SwachBharat.CMS.Bll.Services
             {
                 return model;
             }
+
         }
 
         public HouseScanifyEmployeeDetailsVM GetUserDetails(int teamId, string name)

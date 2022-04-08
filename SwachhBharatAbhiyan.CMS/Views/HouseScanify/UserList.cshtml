@@ -68,7 +68,9 @@
             <!-- Side Navbar -->
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
-
+                <ul>
+                    <li id='URbutton' class='' style='text-align: center;background-color: #189cdf;'><a href='URIndex' style='cursor: pointer'>User Right</a></li>
+                </ul>
                 <ul class="list-unstyled" style="max-height:700px;overflow-y:auto">
                     <p id="img_ldr" style="display:block;position:absolute;top:40%;left:5%;">
                         <img style="height:90px" class="" src="~/Content/images/img/loading.gif">
@@ -109,7 +111,7 @@
         function Edit(Id) {
             //alert(Id);
             if (Id != null) {
-                var url = "/houseScanify/UserList?AppId="+Id;
+                var url = "/HouseScanifyEmp/UserList?AppId="+Id;
                 window.location.href = url;
             }
         };
