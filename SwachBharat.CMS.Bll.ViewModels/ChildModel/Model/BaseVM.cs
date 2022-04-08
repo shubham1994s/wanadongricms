@@ -24,8 +24,11 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public List<SelectListItem> WasteSubCategoryList { get; set; }
         public List<SelectListItem> WM_UserList { get; set; }
 
-
+     
 
     }
+
+   
+
 }
 

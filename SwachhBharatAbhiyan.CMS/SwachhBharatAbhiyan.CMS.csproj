@@ -287,6 +287,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseMasterController.cs" />
     <Compile Include="Controllers\HouseScanifyController.cs" />
+    <Compile Include="Controllers\HouseScanifyEmpController.cs" />
     <Compile Include="Controllers\InfotainmentController.cs" />
     <Compile Include="Controllers\LeagueController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
@@ -1706,6 +1707,7 @@
     <Content Include="Content\DatatableGrid\GarbageCountGrid.js" />
     <Content Include="Content\DatatableGrid\GarbagePointGrid.js" />
     <Content Include="Content\DatatableGrid\HouseScanify.js" />
+    <Content Include="Content\DatatableGrid\HouseScanifyUR.js" />
     <Content Include="Content\DatatableGrid\HSAttendenceGrid.js" />
     <Content Include="Content\DatatableGrid\HSDumpyardDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\HSHouseDetailsGrid.js" />
@@ -1736,6 +1738,7 @@
     <Content Include="Content\DatatableGrid\StateGrid.js" />
     <Content Include="Content\DatatableGrid\StreetSweepGrid.js" />
     <Content Include="Content\DatatableGrid\TalukaGrid.js" />
+    <Content Include="Content\DatatableGrid\URGridDetails.js" />
     <Content Include="Content\DatatableGrid\VehicleTypeGrid.js" />
     <Content Include="Content\DatatableGrid\WardNumberGrid.js" />
     <Content Include="Content\DatatableGrid\WM_WasteDetailsGrid.js" />
@@ -3018,6 +3021,18 @@
     <Content Include="Views\Account\Old_Login.cshtml" />
     <Content Include="Views\HouseScanify\Old_Login.cshtml" />
     <Content Include="Views\HouseScanify\HouseDetails.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\AddHSEmployeeDetails.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\AttendenceIndex.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HouseDetails.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSUserRoute.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\Index.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\login.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\MenuIndex.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\Old_Login.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\UserList.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\AddUREmployeeDetails.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\URIndex.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\MenuURIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
