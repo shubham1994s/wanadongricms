@@ -31,7 +31,15 @@
     @*<script src="~/Content/DatatableGrid/HouseScanify.js"></script>*@
 
     <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
-
+    <style>
+        .search {
+            width: 85%;
+            margin-left: 7%;
+            border-radius: 10px;
+            border: 1px solid #bbb7b7;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -72,10 +80,10 @@
             <!-- Side Navbar -->
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
-                <ul style=" PADDING: 1PX; MARGIN-BOTTOM: 1PX;">
-                    <li id='URbutton' class='' style='text-align: center; background-color: #52bd0f;'><a href='HSURIndex' style='cursor: pointer; COLOR: #FFF !IMPORTANT; FONT-SIZE: 18PX; PADDING: 5PX;'>User Right</a></li>
+                <ul style=" padding: 1PX; margin-bottom: 1PX;">
+                    <li id='URbutton'class='py-2 px-4'><a href='HSURIndex'  class="btn btn-primary" style="color:#fff !important">User Right</a></li>
                 </ul>
-                <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" style="width: 100%;">
+                <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" class="search">
 
                 <ul class="list-unstyled" style="max-height:700px;overflow-y:auto">
                     <p id="img_ldr" style="display:block;position:absolute;top:40%;left:5%;">
@@ -110,11 +118,11 @@
                     <div class="row">
                         <span class="backk" style="margin-left: 15px;">
 
-                            <a href="@Url.Action("HSMenuIndex", "HouseScanifyEmp")" id="btnBack" class="btn btn-sm btn-success filter-button-style"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
+                            <a href="@Url.Action("HSMenuIndex", "HouseScanifyEmp")" id="btnBack" class="btn btn-sm btn-primary filter-button-style"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
 
                         </span>
                         <span class="backks" style="margin-left: 68%;">
-                            <a href="AddHSUREmployeeDetails" class="btn btn-success btn-sm float-right mr-3" type="button">Add User</a>
+                            <a href="AddHSUREmployeeDetails" class="btn btn-primary btn-sm float-right mr-3" type="button">Add User</a>
 
 
                             <label style="display:inline-flex;padding-right:5px" class="float-right">Search:&nbsp;<input type="text" id="s" class="form-control form-control-sm" onkeyup="Search()"></label>

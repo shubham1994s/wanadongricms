@@ -288,20 +288,24 @@
                     <h4 id="header_data" class="modal-title"></h4>
                 </div>
 
-                <div class="modal-body">
+                <div class="modal-body pt-0">
                     <center>
-                        <img class="img-responsive" id="imggg" alt="Photo Not Found">
-                        <br />
-                        <p> <b id="hide_date">Employee Name: </b><span id="dateData"></span></p>
-                        <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
-                        <p> <b id="hide_add1">Date And Time: </b><span id="date1"></span></p>
+                      
+                        <div class="row"> <div class="col-md-6" style="padding-top:10rem">
+                                <p> <b id="hide_date">Employee Name: </b><span id="dateData"></span></p>
+                                <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
+                                <p>  <b id="hide_add1">Date And Time: </b><span id="date1"></span></p>
+                                <p>  <b id="hide_add2">Lat: </b><span id="lat"></span> <b id="hide_add3">Long: </b><span id="long"></span></p>
+                            </div>
+                            <div class="col-md-6 text-left">
+                                <img class="img-responsive" id="imggg" alt="Photo Not Found" style="height:480px">
 
-                        <p> <b id="hide_add2">Lat: </b><span id="lat"></span> <b id="hide_add3">Long: </b><span id="long"></span></p>
-                        <p> </p>
+                            </div>
+                        </div>
                     </center>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
                     </div>
                 </div>
