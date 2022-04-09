@@ -4430,7 +4430,7 @@ namespace SwachBharat.CMS.Bll.Services
                     else
                     {
                                              
-                        TypeDetail.CheckAppDs = db.CheckAppDs.ToList<CheckAppD>();
+                        TypeDetail.CheckAppDs = db.CheckAppDs.Where(x => x.IsActive == true).ToList<CheckAppD>();
                         return TypeDetail;
                     }
                 }
