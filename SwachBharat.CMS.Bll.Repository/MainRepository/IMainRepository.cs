@@ -52,6 +52,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         List<AppDetail> GetURAppName(string utype, string LoginId, string Password);
 
+        string GetLoginid(string utype);
+
         EmployeeVM Login(EmployeeVM _userinfo);
 
         EmployeeVM LoginStreet(EmployeeVM _userinfo);

@@ -361,6 +361,20 @@ namespace SwachBharat.CMS.Bll.Services
             return appNames.OrderBy(x => x.AppName).ToList();
         }
 
+        public string GetLoginid(string LoginId)
+        {
+            var isrecord = dbMain.EmployeeMasters.Where(x => x.LoginId == LoginId && x.isActive == true).FirstOrDefault();
+            if(isrecord==null)
+            {
+                return "0";
+            }
+            else
+            {
+                return "1";
+            }
+           
+        }
+
         #endregion
 
         #region DataModel

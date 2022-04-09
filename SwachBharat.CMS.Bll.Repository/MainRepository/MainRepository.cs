@@ -315,6 +315,11 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         {
             return mainService.GetURAppName(utype, LoginId, Password);
         }
+
+        public string GetLoginid(string LoginId)
+        {
+            return mainService.GetLoginid(LoginId);
+        }
         #region Game
         public List<GameMaster> GetGameList()
         {

@@ -168,6 +168,18 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
+
+        [HttpPost]
+        public string IsLoginIdExists(string LoginId)
+        {
+           
+            mainRepository = new MainRepository();
+            var isrecord = mainRepository.GetLoginid(LoginId);
+
+            return isrecord;
+
+            
+        }
         public ActionResult GetAppNames()
         {
             try
