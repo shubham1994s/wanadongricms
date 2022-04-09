@@ -330,6 +330,19 @@
         });
     });
 
+
+    $('#type').change(function () {
+        var Utype = $('#type').val();
+        if (Utype == 'A') {
+            $('#checkUR').hide();
+            $('#hur').hide();
+        }
+        else {
+            $('#checkUR').show();
+            $('#hur').show();
+        }
+
+    });
     // JavaScript code
     function search_ulb() {
         let input = document.getElementById('searchbar').value
