@@ -702,14 +702,20 @@ namespace SwachBharat.CMS.Bll.Services
                     if (values[i] != "")
                     {
                         u = Convert.ToInt32(values[i]);
-                        var details = dbMain.AppDetails.Where(x => x.IsActive == true && (x.AppName != "Thane Mahanagar Palika" && x.AppName != "Nagpur Mahanagar Palika") && x.AppId == u).OrderBy(x => x.AppName).FirstOrDefault();
-                        appList.Add(details);
+                        var detail = dbMain.AppDetails.Where(x => x.AppId == u).FirstOrDefault();
+                        if(detail.IsActive == true)
+                        {
+                            var details = dbMain.AppDetails.Where(x => x.IsActive == true && x.AppName != "Thane Mahanagar Palika" && x.AppId == u).OrderBy(x => x.AppName).FirstOrDefault();
+                            appList.Add(details);
+                        }
+                        
                     }
 
 
                 }
+              
             }
-            return appList;
+            return appList.OrderBy(x => x.AppName).ToList();
         }
         public InfotainmentDetailsVW GetInfotainmentDetailsById(int ID)
         {

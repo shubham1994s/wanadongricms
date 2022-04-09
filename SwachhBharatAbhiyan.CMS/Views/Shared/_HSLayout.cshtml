@@ -18,7 +18,7 @@
     @*@Scripts.Render("~/bundles/modernizr")*@
     @*@RenderSection("styles", required: false)*@
     <link rel="shortcut icon" href="~/Content/images/img/ictsbm2.png" />
-
+    <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
 </head>
 <body>
     @*<input type="hidden" value='@Request.QueryString["daId"]' id='HdnIndustries' />*@
@@ -48,7 +48,7 @@
                         </div>
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
-                        <li class="nav-item" style="list-style: none;"><a href="/houseScanify/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                        <li class="nav-item" style="list-style: none;"><a href="/houseScanifyEmp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
 
                     </div>
                 </div>
@@ -58,9 +58,10 @@
             <!-- Side Navbar -->
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
-                <ul>
-                    <li id='URbutton' class='' style='text-align: center;background-color: #189cdf;'><a href='URIndex' style='cursor: pointer'>User Right</a></li>
+                <ul style=" PADDING: 1PX; MARGIN-BOTTOM: 1PX;">
+                    <li id='URbutton' class='' style='text-align: center; background-color: #52bd0f;'><a href='HSURIndex' style='cursor: pointer; COLOR: #FFF !IMPORTANT; FONT-SIZE: 18PX; PADDING: 5PX;'>User Right</a></li>
                 </ul>
+                <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" style="width: 100%;">
                 <ul class="list-unstyled" style="max-height:700px;overflow-y:auto">
                     <p id="img_ldr" style="display:block;position:absolute;top:40%;left:5%;">
                         <img style="height:90px" class="" src="~/Content/images/img/loading.gif">
@@ -102,8 +103,9 @@
             // $('#URbutton').hide();
             document.getElementById("URbutton").style.display = "none";
         }
-        function Edit(Id) {
+        function AppList(Id) {
             //alert(Id);
+            debugger;
             if (Id != null) {
                 var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
                 window.location.href = url;
@@ -114,48 +116,48 @@
         // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
         debugger;
         var appid = $('#appid').val();
-     
+
 
         $.get("/houseScanifyEmp/GameAppList", null, house);
-            function house(data) {
-                var res = '';
-                //for (var i = 0; i < data.length; i++) {
-                //    res += "<li class=''><a style='cursor:pointer'class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + "</a></li>";
-                //}
-                var url_string = window.location.href; //window.location.href
-                var url = new URL(url_string);
-                var AppId_New = url.searchParams.get("AppId");
+        function house(data) {
+            var res = '';
+            //for (var i = 0; i < data.length; i++) {
+            //    res += "<li class=''><a style='cursor:pointer'class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + "</a></li>";
+            //}
+            var url_string = window.location.href; //window.location.href
+            var url = new URL(url_string);
+            var AppId_New = url.searchParams.get("AppId");
 
 
-                for (var i = 0; i < data.length; i++) {
-                    res += "<li class='' ><a style='cursor:pointer' class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
-                    if (data[i].FAQ == 1 ) {
-                        res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
-                    }
-                    //if (AppId_New == data[i].AppId) {
-                    //      res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
-                    //}
-                    res += "</a></li>";
+            for (var i = 0; i < data.length; i++) {
+                res += "<li class='ulb' ><a style='cursor:pointer' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
+                if (data[i].FAQ == 1) {
+                    res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
                 }
-
-
-                $('.list-unstyled').html(res);
-                $('#img_ldr').css("display", "none");
-                $('#' + appid).parents('li').addClass('active');
-
-                $(".li-hover").hover(function () {
-                    $(this).css("color", "#fff");
-                }, function () {
-                    $(this).css("color", "#6c757d");
-                });
-                $(".active a").hover(function () {
-                    $(this).css("color", "#fff");
-                }, function () {
-                    $(this).css("color", "#fff");
-                });
-
+                //if (AppId_New == data[i].AppId) {
+                //      res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+                //}
+                res += "</a></li>";
             }
-        
+
+
+            $('.list-unstyled').html(res);
+            $('#img_ldr').css("display", "none");
+            $('#' + appid).parents('li').addClass('active');
+
+            $(".li-hover").hover(function () {
+                $(this).css("color", "#fff");
+            }, function () {
+                $(this).css("color", "#6c757d");
+            });
+            $(".active a").hover(function () {
+                $(this).css("color", "#fff");
+            }, function () {
+                $(this).css("color", "#fff");
+            });
+
+        }
+
 
 
 
@@ -201,6 +203,73 @@
 
 
     </script>
+
+    <script type="text/javascript">
+        $('input[type=radio][name=radio]').change(function () {
+
+            debugger;
+
+            LoadGridC();
+        });
+
+        function LoadGridC() {
+            var RadioValue = $("input[name='radio']:checked").val();
+            debugger;
+            if (RadioValue == 0) {
+                debugger;
+                $('#s').val('');
+                LoadAGrid();
+                $('#hchange').text('Active User');
+
+            }
+            else if (RadioValue == 1) {
+                $('#s').val('');
+                LoadNGrid();
+                $('#hchange').text('Non Active User');
+
+            }
+
+        }
+
+
+
+        function Search() {
+            debugger;
+            var value = ",,," + $("#s").val();
+            oTable = $('#demoGrid').DataTable();
+            oTable.search(value).draw();
+            oTable.search("");
+            document.getElementById('USER_ID_FK').value = -1;
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            debugger;
+            LoadGridC();
+
+        });
+
+        function search_ulbname() {
+            let input = document.getElementById('searchbar').value
+            input = input.toLowerCase();
+            let x = document.getElementsByClassName('ulb');
+
+            for (i = 0; i < x.length; i++) {
+                if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                    x[i].style.display = "none";
+                }
+                else {
+                    x[i].style.display = "block";
+                }
+            }
+        }
+    </script>
+    <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
     @*@RenderSection("scripts", required: false)*@
 </body>
 </html>

@@ -151,17 +151,17 @@ function user_route(id) {
 };
 //////////////////////////////////////////////////////////////////////////////
 function showInventoriesGrid() {
-   // Search();
+    // Search();
 }
 
 function Edit(Id) {
-    window.location.href = "/HouseScanifyEmp/AddUREmployeeDetails?teamId=" + Id;
+    window.location.href = "/HouseScanifyEmp/AddHSUREmployeeDetails?teamId=" + Id;
 
 };
 function AppList(Id) {
     // alert(Id);
     if (Id != null) {
-        var url = "/HouseScanifyEmp/UserList?AppId=" + Id;
+        var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
         window.location.href = url;
     }
 };

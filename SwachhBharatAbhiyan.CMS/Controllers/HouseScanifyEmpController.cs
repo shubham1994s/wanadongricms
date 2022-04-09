@@ -81,6 +81,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
           
         }
 
+        public ActionResult HSURIndex()
+        {
+            int appid = 1;
+            ViewBag.AppId = appid;
+            ViewBag.UType = Session["utype"];
+            return View();
+
+
+        }
 
         public ActionResult MenuURIndex()
         {        
@@ -237,9 +246,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 var utype = (string)Session["utype"];
                 var LoginId = (string)Session["Id"];
                 var Password = (string)Session["Pwd"];
+
                 house = mainRepository.GetAppList(utype, LoginId, Password);
-                //AppId = house.app
-                //AddSession(UserId, UserRole, UserEmail, UserName);
+               
+
                 return Json(house, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -345,6 +355,30 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 childRepository.SaveUREmployee(emp);
                 return Redirect("URIndex");
            
+        }
+
+
+        public ActionResult AddHSUREmployeeDetails(int teamId = -1)
+        {
+
+            mainRepository = new MainRepository();
+            childRepository = new ChildRepository(1);
+            UREmployeeDetailsVM house = childRepository.GetUREmployeeById(teamId);
+            ViewBag.EmpId = teamId;
+            ViewBag.UType = Session["utype"];
+            return View(house);
+        }
+
+        [HttpPost]
+        public ActionResult AddHSUREmployeeDetails(UREmployeeDetailsVM emp)
+        {
+
+            mainRepository = new MainRepository();
+            childRepository = new ChildRepository(1);
+            childRepository.SaveUREmployee(emp);
+            ViewBag.UType = Session["utype"];
+            return Redirect("HSURIndex");
+
         }
 
 

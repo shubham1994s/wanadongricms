@@ -11,6 +11,7 @@
 }
 .btn-primary {
     background: #189cdf !important;
+    border-color: #189cdf !important;
 }
 nav.navbar {
     background: #189cdf !important;

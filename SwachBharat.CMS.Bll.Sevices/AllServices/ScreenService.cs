@@ -4399,7 +4399,7 @@ namespace SwachBharat.CMS.Bll.Services
                     {
                         TypeDetail = FillUREmployeeViewModel(Details);
                         
-                        TypeDetail.CheckAppDs = db.CheckAppDs.ToList<CheckAppD>();
+                        TypeDetail.CheckAppDs = db.CheckAppDs.Where(x=> x.IsActive == true).ToList<CheckAppD>();
                         if (TypeDetail.isActiveULB!=null)
                         { 
                         string s = TypeDetail.isActiveULB;

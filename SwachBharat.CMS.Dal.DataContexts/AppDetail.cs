@@ -70,8 +70,5 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string CommercialQRCode { get; set; }
         public string CTPTQRCode { get; set; }
         public string SWMQRCode { get; set; }
-        public Nullable<int> TotalHouseUpdated_CurrentDay { get; set; }
-        public Nullable<int> TotalPointUpdated_CurrentDay { get; set; }
-        public Nullable<int> TotalDumpUpdated_CurrentDay { get; set; }
     }
 }
