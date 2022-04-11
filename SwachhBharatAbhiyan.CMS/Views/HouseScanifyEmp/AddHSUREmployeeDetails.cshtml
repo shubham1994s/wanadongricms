@@ -145,7 +145,7 @@
                 <br />
                 <center id="hur">
                     <h4>User Rights</h4>
-                    <input id="searchbar" onkeyup="search_ulb()" type="text" name="search" placeholder="Search ">
+                    <input id="searchbar_ulb" onkeyup="search_ulb()" type="text" name="search" placeholder="Search ">
                 </center>
 
                 <div class="row" id="checkUR">
@@ -361,7 +361,8 @@
     });
     // JavaScript code
     function search_ulb() {
-        let input = document.getElementById('searchbar').value
+        debugger;
+        let input = document.getElementById('searchbar_ulb').value
         input = input.toLowerCase();
         let x = document.getElementsByClassName('ulbs');
 
