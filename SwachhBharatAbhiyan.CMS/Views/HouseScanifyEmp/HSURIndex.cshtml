@@ -44,7 +44,8 @@
 
 <body>
     <input type="hidden" value="@ViewBag.AppId" id="appid" />
-
+    <input type="hidden" value="@ViewBag.UType" id="UType" />
+    <input type="hidden" value="@ViewBag.HSuserid" id="HSID" />
 
     <div class="page">
         <!-- Main Navbar-->
@@ -70,8 +71,11 @@
                         </div>
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
-                        <li class="nav-item" style="list-style: none;"><a href="/houseScanifyemp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                        @*<li class="nav-item" style="list-style: none;"><a href="/houseScanifyemp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
+                        <li class="nav-item" style="list-style: none; margin-left: 55%;" id="HDUserid"></li>
+                        <li class="nav-item" style="list-style: none;" id="HSType"> </li>
 
+                        @Html.Partial("_HSLoginPartial")
                     </div>
                 </div>
             </nav>
@@ -81,7 +85,7 @@
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
                 <ul style=" padding: 1PX; margin-bottom: 1PX;">
-                    <li id='URbutton'class='py-2 px-4'><a href='HSURIndex'  class="btn btn-primary" style="color: #fff !important; font-weight: 600">User Right</a></li>
+                    <li id='URbutton' class='py-2 px-4'><a href='HSURIndex' class="btn btn-primary" style="color: #fff !important; font-weight: 600">User Right</a></li>
                 </ul>
                 <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" class="search">
 
@@ -188,6 +192,33 @@
     </script>
     <script src="~/Content/graph-assets/js/custom.js"></script>
     <script src="~/Content/css/datepicker/js/datepicker.js"></script>
+    <script>
+        debugger;
+        var HSID = $('#HSID').val();
+        document.getElementById("HDUserid").innerHTML = HSID.toUpperCase();
+
+        var Utypes = $('#UType').val();
+        if (Utypes == 'A') {
+            //$('#URbutton').show();
+            document.getElementById("URbutton").style.display = "block";
+            document.getElementById("HSType").innerHTML = "(ADMIN)";
+        }
+        else {
+            // $('#URbutton').hide();
+            document.getElementById("URbutton").style.display = "none";
+            document.getElementById("HSType").innerHTML = "(SUB-ADMIN)";
+        }
+        function AppList(Id) {
+            //alert(Id);
+            debugger;
+            if (Id != null) {
+                var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
+                window.location.href = url;
+            }
+        };
+
+
+    </script>
     <script>
 
 
