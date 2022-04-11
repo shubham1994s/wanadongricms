@@ -330,7 +330,23 @@
         });
     });
 
+    $("#LoginId").change(function () {
+        debugger;
 
+        var LoginId = $("#LoginId").val();
+        $.ajax({
+            url: "/HouseScanifyEmp/IsLoginIdExists?LoginId=" + LoginId,
+            type: "POST",
+            data: { LoginId: LoginId }
+        })
+            .done(function (msg) {
+                if (msg == 1) {
+                    $('#err_login').text('This Is Already Exist LoginId!');
+                } else {
+                    $('#err_login').text('');
+                }
+            });
+    });
     $('#type').change(function () {
         var Utype = $('#type').val();
         if (Utype == 'A') {
