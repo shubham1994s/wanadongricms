@@ -49,6 +49,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
         [AllowAnonymous]
         public ActionResult login()
+        
         {
             return View();
         }

@@ -4002,17 +4002,17 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 if (Convert.ToDateTime(fdate).ToString("dd/MM/yyyy") == Convert.ToDateTime(DateTime.Now).ToString("dd/MM/yyyy"))
                 {
-                    data = data.Where(c => (c.startDate == fdate || c.endDate == fdate || c.endTime == "")).ToList();
+                    data = data.OrderByDescending(c => c.qrEmpDaId).Where(c => (c.startDate == fdate || c.endDate == fdate || c.endTime == "")).ToList();
                 }
                 else
                 {
 
-                    data = data.Where(c => (c.startDate >= fdate && c.startDate <= tdate) || (c.startDate >= fdate && c.startDate <= tdate)).ToList();
+                    data = data.OrderByDescending(c => c.qrEmpDaId).Where(c => (c.startDate >= fdate && c.startDate <= tdate) || (c.startDate >= fdate && c.startDate <= tdate)).ToList();
                 }
 
                 if (userId > 0)
                 {
-                    var model = data.Where(c => c.qrEmpId == userId).ToList();
+                    var model = data.OrderByDescending(c=>c.qrEmpDaId).Where(c => c.qrEmpId == userId).ToList();
 
                     data = model.ToList();
                 }
@@ -4106,7 +4106,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 //    obj = obj.Where(fullEntry => fullEntry.CompareDate >= fdate && fullEntry.CompareDate <= dt1).OrderByDescending(c => c.CompareDate).ToList();
                 //}
 
-                return obj.OrderByDescending(c => c.daDateTIme).ToList();
+                //return obj.OrderByDescending(c => c.daDateTIme).ToList();
+                return obj.OrderByDescending(c => c.qrEmpDaId).ToList();
             }
         }
 
