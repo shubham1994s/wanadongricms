@@ -60,7 +60,7 @@
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
                         @*<li class="nav-item" style="list-style: none;"><a href="/houseScanifyEmp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
-                    <li class="nav-item" style="list-style: none; margin-left: 55%;" id="HDUserid"></li>
+                    <li class="nav-item" style="list-style: none; margin-left: 50%;" id="HDUserid"></li>
                     <li class="nav-item" style="list-style: none;" id="HSType"> </li>
 
                         @Html.Partial("_HSLoginPartial")
@@ -108,6 +108,9 @@
 
     @Scripts.Render("~/Scripts/ThemeScripts")
     <script>
+
+    
+
         debugger;
         var HSID = $('#HSID').val();
         document.getElementById("HDUserid").innerHTML = HSID.toUpperCase();
