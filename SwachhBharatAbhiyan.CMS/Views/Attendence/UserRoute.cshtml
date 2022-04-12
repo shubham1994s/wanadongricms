@@ -658,6 +658,17 @@
                                 google.maps.event.addListener(marker, "click", function (e) {
                                     debugger;
                                     var latlng = new google.maps.LatLng(data.lat, data.log);
+                                    const URL = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + data.lat + "&longitude=" + data.log +"&localityLanguage=en";
+
+                                    async function getDataFromApi(URL) {
+                                        const response = await fetch(URL);
+                                        var data = await response.json();
+                                        var ADDRESS = data.locality;
+                                        console.log(ADDRESS);
+                                    }
+
+                                    getDataFromApi(URL);
+
                                     var geocoder = geocoder = new google.maps.Geocoder();
                                     geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                                         debugger;

@@ -63,13 +63,28 @@
                 }
             },
 
-            { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>'; }, "width": "10%" },
+            {
+                "render": function (data, type, full, meta) {
+
+                    if (full["type"] == 'SA') {
+                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
+
+                    }
+                    else {
+                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="myFunction()"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
+                    }
+                }, "width": "10%"
+            },
 
 
         ],
 
     });
 
+}
+
+function myFunction() {
+    alert("Admin ID Are Not Available To Edit");
 }
 
 function LoadNGrid() {
@@ -137,7 +152,18 @@ function LoadNGrid() {
                 }
             },
 
-            { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>'; }, "width": "10%" },
+            {
+                "render": function (data, type, full, meta) {
+
+                    if (full["type"] == 'SA') {
+                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
+
+                    }
+                    else {
+                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="myFunction()"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
+                    }
+                }, "width": "10%"
+            },
 
 
         ],
