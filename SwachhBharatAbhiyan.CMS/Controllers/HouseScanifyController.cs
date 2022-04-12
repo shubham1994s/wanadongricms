@@ -84,7 +84,6 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             if (model.Password == "Bigv#123" & model.Email == "Bigv")
             {
 
-             //   return RedirectToRoute("~/HouseScanifyemp/Login");
                 return RedirectToAction("Login", "HouseScanifyemp");
             }
             else
