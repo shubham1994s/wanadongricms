@@ -3033,7 +3033,12 @@
     <Content Include="Views\HouseScanifyEmp\AddUREmployeeDetails.cshtml" />
     <Content Include="Views\HouseScanifyEmp\URIndex.cshtml" />
     <Content Include="Views\HouseScanifyEmp\MenuURIndex.cshtml" />
-    <Content Include="Views\Admin\MenuIndex2.cshtml" />
+    <Content Include="Views\Shared\_HSLayout.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSUserList.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSMenuIndex.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSURIndex.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\AddHSUREmployeeDetails.cshtml" />
+    <Content Include="Views\Shared\_HSLoginPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

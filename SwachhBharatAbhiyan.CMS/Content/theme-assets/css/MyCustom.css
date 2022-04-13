@@ -11,6 +11,7 @@
 }
 .btn-primary {
     background: #189cdf !important;
+    border-color: #189cdf !important;
 }
 nav.navbar {
     background: #189cdf !important;
@@ -19,6 +20,11 @@ nav.navbar {
 nav.side-navbar ul li a:hover {
     background: #189cdf !important;
 }
+/*.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}*/
 nav.side-navbar ul li.active > a {
     background: #479cdf !important;
 }

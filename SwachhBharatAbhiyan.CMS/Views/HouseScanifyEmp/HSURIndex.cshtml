@@ -31,12 +31,21 @@
     @*<script src="~/Content/DatatableGrid/HouseScanify.js"></script>*@
 
     <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
-
+    <style>
+        .search {
+            width: 85%;
+            margin-left: 7%;
+            border-radius: 10px;
+            border: 1px solid #bbb7b7;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
     <input type="hidden" value="@ViewBag.AppId" id="appid" />
-
+    <input type="hidden" value="@ViewBag.UType" id="UType" />
+    <input type="hidden" value="@ViewBag.HSuserid" id="HSID" />
 
     <div class="page">
         <!-- Main Navbar-->
@@ -62,8 +71,11 @@
                         </div>
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
-                        <li class="nav-item" style="list-style: none;"><a href="/houseScanifyemp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>
+                        @*<li class="nav-item" style="list-style: none;"><a href="/houseScanifyemp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
+                        <li class="nav-item" style="list-style: none; margin-left: 50%;" id="HDUserid"></li>
+                        <li class="nav-item" style="list-style: none;" id="HSType"> </li>
 
+                        @Html.Partial("_HSLoginPartial")
                     </div>
                 </div>
             </nav>
@@ -72,9 +84,11 @@
             <!-- Side Navbar -->
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
-                <ul>
-                    <li id='URbutton' class='' style='text-align: center;background-color: #189cdf;'><a href='URIndex' style='cursor: pointer'>User Right</a></li>
+                <ul style=" padding: 1PX; margin-bottom: 1PX;">
+                    <li id='URbutton' class='py-2 px-4'><a href='HSURIndex' class="btn btn-primary" style="color: #fff !important; font-weight: 600">User Right</a></li>
                 </ul>
+                <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" class="search">
+
                 <ul class="list-unstyled" style="max-height:700px;overflow-y:auto">
                     <p id="img_ldr" style="display:block;position:absolute;top:40%;left:5%;">
                         <img style="height:90px" class="" src="~/Content/images/img/loading.gif">
@@ -99,7 +113,7 @@
                             <span class="checkmark"></span>
                         </label>
                         <label class="check-container" style="font-size: 18px;">
-                            <input type="radio"  value="1" name="radio">
+                            <input type="radio" value="1" name="radio">
                             Non Active User
 
                             <span class="checkmark"></span>
@@ -108,11 +122,11 @@
                     <div class="row">
                         <span class="backk" style="margin-left: 15px;">
 
-                            <a href="@Url.Action("MenuIndex", "HouseScanifyEmp")" id="btnBack" class="btn btn-sm btn-success filter-button-style"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
+                            <a href="@Url.Action("HSMenuIndex", "HouseScanifyEmp")" id="btnBack" class="btn btn-sm btn-primary filter-button-style"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
 
                         </span>
                         <span class="backks" style="margin-left: 68%;">
-                            <a href="AddUREmployeeDetails" class="btn btn-success btn-sm float-right mr-3" type="button">Add User</a>
+                            <a href="AddHSUREmployeeDetails" class="btn btn-primary btn-sm float-right mr-3" type="button">Add User</a>
 
 
                             <label style="display:inline-flex;padding-right:5px" class="float-right">Search:&nbsp;<input type="text" id="s" class="form-control form-control-sm" onkeyup="Search()"></label>
@@ -179,6 +193,33 @@
     <script src="~/Content/graph-assets/js/custom.js"></script>
     <script src="~/Content/css/datepicker/js/datepicker.js"></script>
     <script>
+        debugger;
+        var HSID = $('#HSID').val();
+        document.getElementById("HDUserid").innerHTML = HSID.toUpperCase();
+
+        var Utypes = $('#UType').val();
+        if (Utypes == 'A') {
+            //$('#URbutton').show();
+            document.getElementById("URbutton").style.display = "block";
+            document.getElementById("HSType").innerHTML = "(ADMIN)";
+        }
+        else {
+            // $('#URbutton').hide();
+            document.getElementById("URbutton").style.display = "none";
+            document.getElementById("HSType").innerHTML = "(SUB-ADMIN)";
+        }
+        function AppList(Id) {
+            //alert(Id);
+            debugger;
+            if (Id != null) {
+                var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
+                window.location.href = url;
+            }
+        };
+
+
+    </script>
+    <script>
 
 
         $(document).ready(function () {
@@ -186,7 +227,8 @@
 
             var getthevalue = $(this).attr('id');
             var appid = $('#appid').val();
-            $.get("/HouseScanifyEmp/GetURAppNames", null, house);
+
+            $.get("/houseScanifyEmp/GameAppList", null, house);
             function house(data) {
                 var res = '';
                 //for (var i = 0; i < data.length; i++) {
@@ -198,8 +240,8 @@
 
 
                 for (var i = 0; i < data.length; i++) {
-                    res += "<li class='' ><a style='cursor:pointer' class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
-                    if (data[i].TotalHouseUpdated_CurrentDay != 0 || data[i].TotalPointUpdated_CurrentDay != 0 || data[i].TotalDumpUpdated_CurrentDay != 0) {
+                    res += "<li class='' ><a style='cursor:pointer' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
+                    if (data[i].FAQ == 1) {
                         res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
                     }
                     //if (AppId_New == data[i].AppId) {
@@ -233,8 +275,8 @@
 
 
 
-       
-       
+
+
     </script>
 
     <script type="text/javascript">
@@ -244,7 +286,7 @@
 
             LoadGridC();
         });
-     
+
         function LoadGridC() {
             var RadioValue = $("input[name='radio']:checked").val();
             debugger;
@@ -253,32 +295,32 @@
                 $('#s').val('');
                 LoadAGrid();
                 $('#hchange').text('Active User');
-            
+
             }
             else if (RadioValue == 1) {
                 $('#s').val('');
                 LoadNGrid();
                 $('#hchange').text('Non Active User');
-                
+
             }
 
         }
 
-                    
 
-                    function Search() {
-                        debugger;
-                        var value = ",,," + $("#s").val();
-                        oTable = $('#demoGrid').DataTable();
-                        oTable.search(value).draw();
-                        oTable.search("");
-                        document.getElementById('USER_ID_FK').value = -1;
-                    }
-       
+
+        function Search() {
+            debugger;
+            var value = ",,," + $("#s").val();
+            oTable = $('#demoGrid').DataTable();
+            oTable.search(value).draw();
+            oTable.search("");
+            document.getElementById('USER_ID_FK').value = -1;
+        }
+
     </script>
 
 
-   
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -308,7 +350,7 @@
             $('.dtpk_drpdwn').eq(0).hide();
         });
 
-     
+
     </script>
 
 

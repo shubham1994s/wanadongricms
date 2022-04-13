@@ -114,7 +114,7 @@
             <div class="row">
                 <span class="backk" style="margin-left: 15px;">
 
-                    <a href="@Url.Action("Index", "HouseScanify")" id="btnBack" class="btn btn-sm btn-success filter-button-style"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
+                    <a href="@Url.Action("Index", "HouseScanify")" id="btnBack" class="btn btn-sm btn-primary filter-button-style"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
                 </span>
                 <h4 id="ulb_name" class="text-center" style="padding-left:14px;width:80%"></h4>
             </div>
@@ -142,7 +142,7 @@
                         </div>
                     </div>
                 </div>*@
-            <div class="row form" style="text-align:center;display:inline-flex">
+            <div class="row form" style="text-align:center;display:inline-flex;margin-left:30%;">
                 <label class="check-container">
                     Houses
                     <input type="radio" checked="checked" value="0" name="radio">
@@ -184,12 +184,12 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="controls">
-                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Filter Records" id="filter" onclick="Filter()" />
+                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-primary filter-button-style" type="button" value="Filter Records" id="filter" onclick="Filter()" />
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="controls">
-                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-success filter-button-style" type="button" value="Download" id="filter" onclick="DownloadQRCode()" />
+                        <input data-background-color="filter-button-box-color" style="margin-top:28px;" class="btn btn-sm btn-primary filter-button-style" type="button" value="Download" id="filter" onclick="DownloadQRCode()" />
                     </div>
                 </div>
             </div>
@@ -288,16 +288,24 @@
                     <h4 id="header_data" class="modal-title"></h4>
                 </div>
 
-                <div class="modal-body">
+                <div class="modal-body pt-0">
                     <center>
-                        <img class="img-responsive" id="imggg" alt="Photo Not Found">
-                        <br />
-                        <p> <b id="hide_date">Employee Name: </b><span id="dateData"></span></p>
-                        <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
+                      
+                        <div class="row"> <div class="col-md-6" style="padding-top:10rem;text-align:left;padding-left:8%">
+                                <p> <b id="hide_date">Employee Name: </b><span id="dateData"></span></p>
+                                <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
+                                <p>  <b id="hide_add1">Date And Time: </b><span id="date1"></span></p>
+                                <p>  <b id="hide_add2">Lat: </b><span id="lat"></span> <b id="hide_add3">Long: </b><span id="long"></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <img class="img-responsive" id="imggg" alt="Photo Not Found" style="height:400px">
+
+                            </div>
+                        </div>
                     </center>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
                     </div>
                 </div>
@@ -321,9 +329,32 @@
 <!-- Dashboard Header Section    -->
 <script type="text/javascript">
 
+    function PopImages(cel) {
+        // debugger
+        $('#myModal_Image').modal('toggle');
+        var d1 = $(cel).find('.date_time').text();
+        var addr = $(cel).find('.addr-length').text();
+        var date = $(cel).find('.li_date').text();
+        var imgsrc = $(cel).find('img').attr('src');
+        var head = $(cel).find('.li_title').text();
+
+        var lat = $(cel).find('.li_lat').text();
+        var long = $(cel).find('.li_long').text();
+
+        jQuery("#date1").text(d1);
+        jQuery("#latlongData").text(addr);
+        jQuery("#dateData").text(date);
+        jQuery("#imggg").attr('src', imgsrc);
+        //jQuery("#latlongData").text(cellValue);
+        jQuery("#header_data").html(head);
+        jQuery("#lat").text(lat);
+        jQuery("#long").text(long);
+
+    }
+
     $(document).ready(function () {
-        
-       
+
+        debugger;
 
         $.get("/houseScanify/GetAppNames", null, house);
 

@@ -1,4 +1,5 @@
-﻿using SwachBharat.CMS.Bll.Repository.ChildRepository;
+﻿using Microsoft.AspNet.Identity;
+using SwachBharat.CMS.Bll.Repository.ChildRepository;
 using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using SwachBharat.CMS.Bll.ViewModels.Grid;
@@ -12,8 +13,11 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using Microsoft.Owin.Security;
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
 {
@@ -22,19 +26,30 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         // GET: HouseScanifyEmp
         IChildRepository childRepository;
         IMainRepository mainRepository;
-   
+
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+        private IMainRepository mainrepository;
+
         public ActionResult MenuIndex()
         {
             ViewBag.UType = Session["utype"];
             return View();
         }
 
+        public ActionResult HSMenuIndex()
+        {
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return View();
+        }
         public HouseScanifyEmpController()
         {
             mainRepository = new MainRepository();
         }
         [AllowAnonymous]
         public ActionResult login()
+        
         {
             return View();
         }
@@ -76,6 +91,16 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
           
         }
 
+        public ActionResult HSURIndex()
+        {
+            int appid = 1;
+            ViewBag.AppId = appid;
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return View();
+
+
+        }
 
         public ActionResult MenuURIndex()
         {        
@@ -106,7 +131,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 Session["utype"] = Result.ADUM_DESIGNATION;
                 Session["Id"] = Result.ADUM_LOGIN_ID;
                 Session["Pwd"] = Result.ADUM_PASSWORD;
-                return RedirectToAction("MenuIndex");
+                Session["status"] = "Success";
+                TempData["status"] = "Success";
+                TempData["ADUM_USER_NAME"] = Result.ADUM_LOGIN_ID;
+                ViewBag.HSuserid = Result.ADUM_LOGIN_ID;
+                return RedirectToAction("HSMenuIndex");
             }
             else
             {
@@ -163,6 +192,18 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
+
+        [HttpPost]
+        public string IsLoginIdExists(string LoginId)
+        {
+           
+            mainRepository = new MainRepository();
+            var isrecord = mainRepository.GetLoginid(LoginId);
+
+            return isrecord;
+
+            
+        }
         public ActionResult GetAppNames()
         {
             try
@@ -208,7 +249,30 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
+        public ActionResult GameAppList()
+        {
+            try
+            {
 
+                mainRepository = new MainRepository();
+                List<AppDetail> house = new List<AppDetail>();
+                //objDetail = objRep.GetActiveEmployee(AppId);
+
+                var utype = (string)Session["utype"];
+                var LoginId = (string)Session["Id"];
+                var Password = (string)Session["Pwd"];
+
+                house = mainRepository.GetAppList(utype, LoginId, Password);
+               
+
+                return Json(house, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult UserList(int AppId)
         {
 
@@ -219,6 +283,22 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             {
                 ViewBag.AppId = AppId;
                 ViewBag.UType = Session["utype"];
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult HSUserList(int AppId)
+        {
+
+            int AppID = AppId;
+            AddSession(AppID);
+
+            if (SessionHandler.Current.AppId != 0)
+            {
+                ViewBag.AppId = AppId;
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
                 return View();
             }
             else
@@ -291,6 +371,32 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 childRepository.SaveUREmployee(emp);
                 return Redirect("URIndex");
            
+        }
+
+
+        public ActionResult AddHSUREmployeeDetails(int teamId = -1)
+        {
+
+            mainRepository = new MainRepository();
+            childRepository = new ChildRepository(1);
+            UREmployeeDetailsVM house = childRepository.GetUREmployeeById(teamId);
+            ViewBag.EmpId = teamId;
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return View(house);
+        }
+
+        [HttpPost]
+        public ActionResult AddHSUREmployeeDetails(UREmployeeDetailsVM emp)
+        {
+
+            mainRepository = new MainRepository();
+            childRepository = new ChildRepository(1);
+            childRepository.SaveUREmployee(emp);
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return Redirect("HSURIndex");
+
         }
 
 
@@ -527,5 +633,22 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             //return data;
 
         }
+
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            Session["__MySession__"] = null; //it's my session variable
+            Session.Clear();
+            Session.Abandon();
+            FormsAuthentication.SignOut(); 
+            return RedirectToAction("Login", "HouseScanifyEmp");
+        }
+
+
+      
+
     }
 }

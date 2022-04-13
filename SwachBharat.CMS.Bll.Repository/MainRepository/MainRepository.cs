@@ -412,12 +412,21 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         {
             return mainService.GetURAppName(utype, LoginId, Password);
         }
+
+        public string GetLoginid(string LoginId)
+        {
+            return mainService.GetLoginid(LoginId);
+        }
         #region Game
         public List<GameMaster> GetGameList()
         {
             return mainService.GetGameList();
         }
 
+        public List<AppDetail> GetAppList(string utype, string LoginId, string Password)
+        {
+            return mainService.GetAppList(utype, LoginId, Password);
+        }
         public InfotainmentDetailsVW GetInfotainmentDetailsById(int ID)
         {
             return mainService.GetInfotainmentDetailsById(ID);

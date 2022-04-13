@@ -18,7 +18,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string App_Name { get; set; }
         public bool IsCheked { get; set; }
         public Nullable<int> AppId { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
-
-
 }

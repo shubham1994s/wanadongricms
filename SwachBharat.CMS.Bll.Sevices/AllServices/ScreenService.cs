@@ -4399,7 +4399,7 @@ namespace SwachBharat.CMS.Bll.Services
                     {
                         TypeDetail = FillUREmployeeViewModel(Details);
                         
-                        TypeDetail.CheckAppDs = db.CheckAppDs.ToList<CheckAppD>();
+                        TypeDetail.CheckAppDs = db.CheckAppDs.Where(x=> x.IsActive == true).ToList<CheckAppD>();
                         if (TypeDetail.isActiveULB!=null)
                         { 
                         string s = TypeDetail.isActiveULB;
@@ -4430,7 +4430,7 @@ namespace SwachBharat.CMS.Bll.Services
                     else
                     {
                                              
-                        TypeDetail.CheckAppDs = db.CheckAppDs.ToList<CheckAppD>();
+                        TypeDetail.CheckAppDs = db.CheckAppDs.Where(x => x.IsActive == true).ToList<CheckAppD>();
                         return TypeDetail;
                     }
                 }
@@ -4691,6 +4691,7 @@ namespace SwachBharat.CMS.Bll.Services
             {
                 return model;
             }
+
         }
 
         public HouseScanifyEmployeeDetailsVM GetUserDetails(int teamId, string name)

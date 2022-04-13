@@ -48,8 +48,11 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
        // Added By Saurabh ( 27 May 2019)
         List<AppDetail> GetAppName();
+        List<AppDetail> GetAppList(string utype, string LoginId, string Password);
 
         List<AppDetail> GetURAppName(string utype, string LoginId, string Password);
+
+        string GetLoginid(string utype);
 
         EmployeeVM Login(EmployeeVM _userinfo);
 
