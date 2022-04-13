@@ -18,10 +18,16 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             mainrepository = new MainRepository();
         }
         // GET: Admin
+        //public ActionResult MenuIndex()
+        //{
+        //    List<MenuItem> menuList = GetMenus();
+        //    return View(menuList);
+        //}
+
         public ActionResult MenuIndex()
         {
-            List<MenuItem> menuList = GetMenus();
-            return View(menuList);
+            List<MenuItemULB> menuList = GetULBMenus();
+            return View("MenuIndex2", menuList);
         }
         public ActionResult Index()
         {
@@ -73,6 +79,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             menuList = mainrepository.GetMenus();
             return menuList;
         }
-        
+
+
+        public List<MenuItemULB> GetULBMenus()
+        {
+            List<MenuItemULB> menuList = new List<MenuItemULB>();
+            menuList = mainrepository.GetULBMenus();
+            return menuList;
+        }
+
     }
 }

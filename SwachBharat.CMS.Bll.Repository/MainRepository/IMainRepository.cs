@@ -57,6 +57,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         EmployeeVM LoginUR(EmployeeVM _userinfo);
         List<MenuItem> GetMenus();
+        List<MenuItemULB> GetULBMenus();
+
 
         #region Game
         List<GameMaster> GetGameList();
