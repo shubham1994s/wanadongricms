@@ -3039,6 +3039,7 @@
     <Content Include="Views\HouseScanifyEmp\HSURIndex.cshtml" />
     <Content Include="Views\HouseScanifyEmp\AddHSUREmployeeDetails.cshtml" />
     <Content Include="Views\Shared\_HSLoginPartial.cshtml" />
+    <Content Include="Views\Admin\MenuIndex2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
