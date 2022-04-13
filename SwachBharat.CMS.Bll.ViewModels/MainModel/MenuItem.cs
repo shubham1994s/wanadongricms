@@ -16,5 +16,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
         public string returnUrl { get; set; }
         public string Type { get; set; }
 
+        public Nullable<bool> isActive { get; set; }
+
+
+
     }
 }
