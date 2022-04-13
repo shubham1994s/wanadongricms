@@ -183,7 +183,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             EmployeeVM _EmployeeVM = new EmployeeVM();
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                var appUser = (db.EmployeeMasters.Where(x => x.LoginId == _userinfo.ADUM_LOGIN_ID && x.Password == _userinfo.ADUM_PASSWORD && x.isActive==true).SingleOrDefault());
+                var appUser = (db.EmployeeMasters.Where(x => x.LoginId == _userinfo.ADUM_LOGIN_ID && x.Password == _userinfo.ADUM_PASSWORD && x.isActive == true).SingleOrDefault());
                 if (appUser != null)
                 {
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.LoginId;
@@ -267,7 +267,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                
+
                 var W = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
                     (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive })
                     .Join(db.UserInApps, c => c.AppId, d => d.AppId,
@@ -305,13 +305,110 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             return menuList.Where(a => !(a.LinkText.ToUpper().Contains("THANE")) ).ToList();
         }
 
+        public class Division
+        {
+            public int divisionId { get; set; }
+            public string divisionName { get; set; }
+
+        }
+        public class District
+        {
+            public int districtId { get; set; }
+            public int divisionId { get; set; }
+            public string districtName { get; set; }
+
+        }
+
+        public List<MenuItemULB> GetULBMenus()
+        {
+            List<int> AppList = new List<int> { 3047 };
+            List<MenuItemULB> menuList = new List<MenuItemULB>();
+            List<Division> divisionList = new List<Division> {
+                                                               new Division {divisionId = 1,divisionName= "Other" },
+                                                               new Division {divisionId = 2,divisionName= "Nagpur" }
+                                                             };
+            List<District> districtList = new List<District> {
+                                                                 new District{ divisionId = 2,districtId = 1,districtName = "Nagpur"},
+                                                                 new District{ divisionId = 2,districtId = 2,districtName = "Gadchiroli"},
+                                                                 new District{ divisionId = 1,districtId = 2,districtName = "Other"},
+                                                              };
+            using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
+            {
+                var appListDivision = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { AppId = a.AppId, AppName = b.AppName, Devision = b.Tehsil })
+                    .Where(c => AppList.Contains(c.AppId))
+                    .GroupBy(c => c.Devision)
+                    .Select(group => group.FirstOrDefault()).ToList();
+                if (appListDivision != null && appListDivision.Count > 0)
+                {
+                    foreach (var appDiv in appListDivision)
+                    {
+
+                        var div = divisionList.Where(a => a.divisionId == appDiv.Devision)
+                            .Select(b => new MenuItemULB { divisionId = b.divisionId, districtId = 0, ULBId = 0, LinkText = b.divisionName, ActionName = "", ControllerName = "", returnUrl = "", Type = "W"  })
+                            .FirstOrDefault();
+                        if (div != null)
+                        {
+                            menuList.Add(div);
+
+                            var appListDistrict = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { AppId = a.AppId, AppName = b.AppName, Devision = b.Tehsil, District = b.District })
+                            .Where(c => AppList.Contains(c.AppId))
+                            .Where(c => c.Devision == appDiv.Devision)
+                            .GroupBy(c => c.District)
+                            .Select(group => group.FirstOrDefault()).ToList();
+
+                            if (appListDistrict != null && appListDistrict.Count > 0)
+                            {
+                                foreach (var appDist in appListDistrict)
+                                {
+                                    var dist = districtList.Where(a => a.divisionId == appDiv.Devision && a.districtId == appDist.District)
+                                        .Select(b => new MenuItemULB { divisionId = b.divisionId, districtId = b.districtId, ULBId = 0, LinkText = b.districtName, ActionName = "", ControllerName = "", returnUrl = "", Type = "W" })
+                                        .FirstOrDefault();
+                                    if (dist != null)
+                                    {
+                                        menuList.Add(dist);
+
+                                        var ulb = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
+                                                (a, b) => new { AppId = a.AppId, AppName = b.AppName, Devision = b.Tehsil, District = b.District })
+                                                .Where(c => AppList.Contains(c.AppId))
+                                                .Where(c => c.Devision == appDiv.Devision && c.District == appDist.District)
+                                                .Join(db.UserInApps, c => c.AppId, d => d.AppId,
+                                                (c, d) => new { c, d })
+                                                .Join(db.AspNetUsers, e => e.d.UserId, f => f.Id,
+                                                (e, f) => new MenuItemULB { divisionId = e.c.Devision, districtId = e.c.District, ULBId = e.c.AppId, LinkText = e.c.AppName, ActionName = "Login", ControllerName = "Account", returnUrl = f.UserName, Type = "W" }).ToList();
+                                        if (ulb != null && ulb.Count > 0)
+                                        {
+                                            menuList.AddRange(ulb);
+
+                                        }
+
+
+                                    }
+
+
+                                }
+                            }
+
+                        }
+                        
+
+                        
+
+                    }
+                }
+
+            }
+
+
+            return menuList;
+        }
+
         //Addedv By Saurabh (27 May 2019)
         public List<AppDetail> GetAppName()
         {
             return mainService.GetAppName();
         }
 
-        public List<AppDetail> GetURAppName(string utype, string LoginId,string Password)
+        public List<AppDetail> GetURAppName(string utype, string LoginId, string Password)
         {
             return mainService.GetURAppName(utype, LoginId, Password);
         }

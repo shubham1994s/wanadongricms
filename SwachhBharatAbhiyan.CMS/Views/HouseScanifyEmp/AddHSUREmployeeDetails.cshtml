@@ -143,11 +143,13 @@
 
                 </div>
                 <br />
-                <center id="hur">
+                <center id="hur" style="padding-right: 14%;">
                     <h4>User Rights</h4>
                     <input id="searchbar_ulb" onkeyup="search_ulb()" type="text" name="search" placeholder="Search ">
-                </center>
+                    <span style="float: right; margin-left: -10%; }"><input type="checkbox" class="selectall" /> <span style="font-size: 15px;font-weight:bold">Select All</span></span>
 
+                </center>
+               
                 <div class="row" id="checkUR">
 
 
@@ -177,7 +179,7 @@
                                 {
                                     <td class="ulbs">
 
-                                        @Html.CheckBoxFor(x => x.CheckAppDs[i].IsCheked, new { @class = "custom-checkbox" })
+                                        @Html.CheckBoxFor(x => x.CheckAppDs[i].IsCheked, new { @class = "custom-checkbox individual" })
                                         <label>@Model.CheckAppDs[i].App_Name</label>
                                         @Html.HiddenFor(x => x.CheckAppDs[i].AppId)
                                         @Html.HiddenFor(x => x.CheckAppDs[i].App_Name)
@@ -186,7 +188,7 @@
                                 if (i % 4 == 0)
                                 {
                                     <td class="ulbs">
-                                        @Html.CheckBoxFor(x => x.CheckAppDs[i].IsCheked, new { @class = "custom-checkbox" })
+                                        @Html.CheckBoxFor(x => x.CheckAppDs[i].IsCheked, new { @class = "custom-checkbox individual" })
                                         <label>@Model.CheckAppDs[i].App_Name</label>
                                         @Html.HiddenFor(x => x.CheckAppDs[i].AppId)
                                         @Html.HiddenFor(x => x.CheckAppDs[i].App_Name)
@@ -229,6 +231,9 @@
 }
 
 <script>
+    $(".selectall").click(function () {
+        $(".individual").prop("checked", $(this).prop("checked"));
+    });
     $(document).ready(function () {
         // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
         debugger;
@@ -268,7 +273,7 @@
             $('#check').not(this).prop('checked', true);
         }
 
-
+       
 
         /////////
 
