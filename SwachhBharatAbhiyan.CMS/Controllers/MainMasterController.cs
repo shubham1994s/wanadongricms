@@ -186,7 +186,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
            if (SessionHandler.Current.AppId != 0)
             {
-            AppTalukaVM taluka = mainRepository.GetTalukaById(teamId,"");
+                AppTalukaVM taluka = mainRepository.GetTalukaById(teamId,"");
                 return View(taluka);
             }
             else

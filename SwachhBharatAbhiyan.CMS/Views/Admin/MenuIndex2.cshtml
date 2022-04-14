@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<SwachBharat.CMS.Bll.ViewModels.MainModel.MenuItem>
+@model IEnumerable<SwachBharat.CMS.Bll.ViewModels.MainModel.MenuItemULB>
 
 @{
     Layout = "";
@@ -65,24 +65,52 @@
                 <ul class="list-unstyled">
                     @{
                         var i = 0;
-                        foreach (var item in Model.Where(s => s.M_P_ID == 0 ).Distinct().ToList())
+                        
+                        foreach (var item in Model.Where(s => s.districtId == 0 && s.ULBId == 0).ToList())
                         {
                             i++;
                             var aName = "#exampledropdownDropdow" + i;
                             var lName = "exampledropdownDropdow" + i;
 
                             <li>
+                                @if ((Model.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 1) && !(Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 0))
+                                {
                                 <a href="@{@aName}" aria-expanded="false" data-toggle="collapse">
 
                                     <i class="svg_gc" style=" fill: #000;"> </i>
                                     @*कचरा संकलन*@ @item.LinkText
                                 </a>
-                                <ul id="@{@lName}" class="collapse list-unstyled ">
-                                    @{foreach (var firstItem in (Model.Where(s => s.M_P_ID == item.M_ID).ToList()))
+                                }
+                                <ul id="@{@lName}" class="in list-unstyled ">
+                                    @{
+                                        var j = 0;
+                                        foreach (var firstItem in (Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList()))
                                         {
-                                            <li class="">
-                                                @Html.ActionLink(@firstItem.LinkText, @firstItem.ActionName, new { area = "", controller = @firstItem.ControllerName, returnUrl = @firstItem.returnUrl, Type = @firstItem.Type })
-                                            </li>
+                                            j++;
+                                            var aName1 = "#exampledropdownDropdow" + i + j;
+                                            var lName1 = "exampledropdownDropdow" + i + j;
+                                                                        <li>
+                                                                            @if (Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 0)
+                                                                            {
+                                                                            <a href="@{@aName1}" aria-expanded="false" data-toggle="collapse">
+
+                                                                                <i class="svg_gc" style=" fill: #000;"> </i>
+                                                                                @*कचरा संकलन*@ @firstItem.LinkText
+                                                                            </a>
+                                                                            }
+                                                                            
+                                                                            <ul id="@{@lName1}" class="in list-unstyled">
+                                                                                @{foreach (var secondItem in (Model.Where(s => s.divisionId == item.divisionId && s.districtId == firstItem.districtId && s.ULBId != 0).ToList()))
+                                                                                    {
+                                                                                        <li class="">
+                                                                                            @Html.ActionLink(@secondItem.LinkText, @secondItem.ActionName, new { area = "", controller = @secondItem.ControllerName, returnUrl = @secondItem.returnUrl, Type = @secondItem.Type })
+                                                                                        </li>
+
+                                                                                    }
+                                                                                }
+                                                                            </ul>
+                                                                        </li>
+
 
                                         }
                                     }
@@ -93,11 +121,12 @@
                     }
                 </ul>
             </nav>
-          
+
             <div class="content-inner">
-                <iframe width="100%" height="600px" src="Index" frameborder="0">
-                    <p>Your browser does not support iframes.</p>
-                </iframe>
+                <div style="width:100%;height:600px">
+
+
+                </div>
                 <footer class="main-footer">
                     <div class="container-fluid">
                         <div class="row">
@@ -113,7 +142,7 @@
                 </footer>
             </div>
         </div>
-                
+
     </div>
 
 

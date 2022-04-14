@@ -1,13 +1,13 @@
-﻿using System;
+﻿using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 
-namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
+namespace SwachBharat.CMS.Bll.ViewModels.MainModel
 {
-    public class HouseScanifyEmployeeDetailsVM
+ public   class AEmployeeDetailVM : BaseVM
     {
         public int qrEmpId { get; set; }
         public Nullable<int> appId { get; set; }
@@ -27,11 +27,19 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string target { get; set; }
         public Nullable<System.DateTime> lastModifyDate { get; set; }
 
-     
+
         public string qrEmpLoginId { get; set; }
-        
+
         public string LoginId { get; set; }
         //[Remote("CheckUserDetails", "HouseScanify", HttpMethod = "POST", ErrorMessage = "Name already exists!", AdditionalFields = "userId")]
-          public string Password { get; set; }
+        public string Password { get; set; }
+
+        public int StateId { get; set; }
+
+        public int DivisionId { get; set; }
+
+        public string DivisionName { get; set; }
+
+        public int DistictId { get; set; }
     }
 }

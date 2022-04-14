@@ -22,6 +22,13 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         #region District
         AppDistrictVM GetDistrictById(int teamId);
+
+
+        AEmployeeDetailVM GetDivision();
+
+        AEmployeeDetailVM GetDistrict(int id);
+
+        void SaveUREmployee(AEmployeeDetailVM employee);
         void SaveDistrict(AppDistrictVM state);
         void DeleteDistrict(int teamId);
         #endregion
@@ -60,6 +67,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         EmployeeVM LoginUR(EmployeeVM _userinfo);
         List<MenuItem> GetMenus();
+        List<MenuItemULB> GetULBMenus();
+
 
         #region Game
         List<GameMaster> GetGameList();

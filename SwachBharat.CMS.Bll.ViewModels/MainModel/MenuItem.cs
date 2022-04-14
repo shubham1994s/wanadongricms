@@ -16,5 +16,23 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
         public string returnUrl { get; set; }
         public string Type { get; set; }
 
+        public Nullable<bool> isActive { get; set; }
+
+
+
     }
+
+    public class MenuItemULB
+    {
+        public int? divisionId { get; set; }
+        public int? districtId { get; set; }
+        public int? ULBId { get; set; }
+        public string LinkText { get; set; }
+        public string ActionName { get; set; }
+        public string ControllerName { get; set; }
+        public string returnUrl { get; set; }
+        public string Type { get; set; }
+
+    }
+
 }

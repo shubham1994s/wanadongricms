@@ -26,6 +26,8 @@ namespace SwachBharat.CMS.Bll.Services
 
         #region District
         AppDistrictVM GetDictrictById(int teamId);
+
+        AEmployeeDetailVM GetDivision();
         void SaveDictrictDetails(AppDistrictVM state);
         void DeleteDictrictRecord(int teamId);
         #endregion
