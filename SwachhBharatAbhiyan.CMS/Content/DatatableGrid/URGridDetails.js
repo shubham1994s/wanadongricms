@@ -17,6 +17,7 @@
             "datatype": "json"
         },
 
+
         "columnDefs":
             [{
                 "targets": [0],

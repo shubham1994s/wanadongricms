@@ -51,6 +51,24 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             return mainService.GetDictrictById(teamId);
 
         }
+
+        public AEmployeeDetailVM GetDivision()
+        {
+            return mainService.GetDivision();
+
+        }
+
+        public AEmployeeDetailVM GetDistrict(int id)
+        {
+            return mainService.GetDistrict(id);
+
+        }
+
+        public void SaveUREmployee(AEmployeeDetailVM employee)
+        {
+          mainService.SaveUREmployeeDetails(employee);
+
+        }
         public void SaveDistrict(AppDistrictVM details)
         {
             mainService.SaveDictrictDetails(details);
@@ -261,19 +279,19 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         {
             List<MenuItem> menuList = new List<MenuItem>();
 
-            menuList.Add(new MenuItem { M_ID = 1, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Waste Collection", returnUrl = "", Type = "W" });
-            menuList.Add(new MenuItem { M_ID = 2, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Liquid Collection", returnUrl = "", Type = "L" });
-            menuList.Add(new MenuItem { M_ID = 3, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Street Collection", returnUrl = "", Type = "S" });
+            menuList.Add(new MenuItem { M_ID = 1, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Waste Collection", returnUrl = "", Type = "W", isActive=true});
+            menuList.Add(new MenuItem { M_ID = 2, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Liquid Collection", returnUrl = "", Type = "L", isActive = true });
+            menuList.Add(new MenuItem { M_ID = 3, M_P_ID = 0, ActionName = "", ControllerName = "", LinkText = "Street Collection", returnUrl = "", Type = "S", isActive = true });
 
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
 
                 var W = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
-                    (a, b) => new { AppId = a.AppId, AppName = b.AppName })
+                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive })
                     .Join(db.UserInApps, c => c.AppId, d => d.AppId,
                     (c, d) => new { c, d })
                     .Join(db.AspNetUsers, e => e.d.UserId, f => f.Id,
-                    (e, f) => new MenuItem { M_ID = 1, M_P_ID = 1, ActionName = "Login", ControllerName = "Account", LinkText = e.c.AppName, returnUrl = f.UserName, Type = "W" }).ToList();
+                    (e, f) => new MenuItem { M_ID = 1, M_P_ID = 1, ActionName = "Login", ControllerName = "Account", LinkText = e.c.AppName, returnUrl = f.UserName, Type = "W",isActive=e.c.IsActive }).Where(x=>x.isActive==true).ToList();
 
                 if (W != null && W.Count > 0)
                 {
@@ -281,9 +299,9 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                 }
 
                 var L = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
-                    (a, b) => new { AppId = a.AppId, AppName = b.AppName })
+                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive })
                     .Join(db.AD_USER_MST_LIQUID, c => c.AppId, d => d.APP_ID,
-                    (c, d) => new MenuItem { M_ID = 1, M_P_ID = 2, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, returnUrl = d.ADUM_LOGIN_ID, Type = "L" }).ToList();
+                    (c, d) => new MenuItem { M_ID = 1, M_P_ID = 2, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, returnUrl = d.ADUM_LOGIN_ID, Type = "L", isActive = c.IsActive }).Where(x => x.isActive == true).ToList();
 
                 if (L != null && L.Count > 0)
                 {
@@ -291,9 +309,9 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                 }
 
                 var S = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
-                    (a, b) => new { AppId = a.AppId, AppName = b.AppName })
+                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive })
                     .Join(db.AD_USER_MST_STREET, c => c.AppId, d => d.APP_ID,
-                    (c, d) => new MenuItem { M_ID = 1, M_P_ID = 3, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, returnUrl = d.ADUM_LOGIN_ID, Type = "S" }).ToList();
+                    (c, d) => new MenuItem { M_ID = 1, M_P_ID = 3, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, returnUrl = d.ADUM_LOGIN_ID, Type = "S", isActive = c.IsActive }).Where(x => x.isActive == true).ToList();
 
                 if (S != null && S.Count > 0)
                 {
@@ -302,7 +320,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
             }
 
-            return menuList.Where(a => !(a.LinkText.ToUpper().Contains("THANE"))).ToList();
+            return menuList.Where(a => !(a.LinkText.ToUpper().Contains("THANE")) ).ToList();
         }
 
         public class Division
