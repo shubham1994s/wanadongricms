@@ -895,7 +895,7 @@ namespace SwachBharat.CMS.Bll.Services
                     if (values[i] != "")
                     {
                         u = Convert.ToInt32(values[i]);
-                        var detail = dbMain.AppDetails.Where(x => x.AppId == u).FirstOrDefault();
+                        var detail = dbMain.AppDetails.Where(x => x.AppName != "Thane Mahanagar Palika" && x.AppId == u).FirstOrDefault();
                         if(detail.IsActive == true)
                         {
                             var details = dbMain.AppDetails.Where(x => x.IsActive == true && x.AppName != "Thane Mahanagar Palika" && x.AppId == u).OrderBy(x => x.AppName).FirstOrDefault();
