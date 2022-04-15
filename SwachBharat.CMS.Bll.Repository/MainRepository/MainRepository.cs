@@ -51,6 +51,24 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             return mainService.GetDictrictById(teamId);
 
         }
+
+        public AEmployeeDetailVM GetDivision()
+        {
+            return mainService.GetDivision();
+
+        }
+
+        public AEmployeeDetailVM GetDistrict(int id)
+        {
+            return mainService.GetDistrict(id);
+
+        }
+
+        public void SaveUREmployee(AEmployeeDetailVM employee)
+        {
+          mainService.SaveUREmployeeDetails(employee);
+
+        }
         public void SaveDistrict(AppDistrictVM details)
         {
             mainService.SaveDictrictDetails(details);
