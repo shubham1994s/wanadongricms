@@ -125,6 +125,125 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+
+        public AEmployeeDetailVM GetDivision()
+        {
+            try
+            {
+                AEmployeeDetailVM details = new AEmployeeDetailVM();
+                details.DivisionList = ListDivision();
+                details.DistrictList = ListSubDivision(0);
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    var districtDetails = db.state_districts.FirstOrDefault();
+                    if (districtDetails != null)
+                    {
+                        details = FillDivisionViewModel(districtDetails);
+                        details.DivisionList = ListDivision();
+                        details.DistrictList = ListSubDivision(0);
+                        return details;
+                    }
+                    else
+                    {
+                        return details;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public AEmployeeDetailVM GetDistrict(int id)
+        {
+            try
+            {
+                AEmployeeDetailVM details = new AEmployeeDetailVM();
+                details.DistrictList = ListSubDivision(id);
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    var districtDetails = db.state_districts.FirstOrDefault();
+                    if (districtDetails != null)
+                    {
+                        details = FillDivisionViewModel(districtDetails);
+                        details.DistrictList = ListSubDivision(id);
+                        return details;
+                    }
+                    else
+                    {
+                        return details;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public void SaveUREmployeeDetails(AEmployeeDetailVM data)
+        {
+            try
+            {
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    if (data.qrEmpId > 0)
+                    {
+                        var model = db.AEmployeeMasters.Where(x => x.EmpId == data.qrEmpId).FirstOrDefault();
+                        if (model != null)
+                        {
+
+                            model.EmpId = data.qrEmpId;
+                            model.EmpName = data.qrEmpName;
+                            model.EmpNameMar = data.qrEmpNameMar;
+                            model.LoginId = data.qrEmpLoginId;
+                            model.Password = data.qrEmpPassword;
+                            model.EmpAddress = data.qrEmpAddress;
+                            model.isActive = data.isActive;
+                            model.EmpMobileNumber = data.qrEmpMobileNumber;
+                            model.lastModifyDateEntry = DateTime.Now;
+                            model.DivisionId = data.DivisionId;
+                            model.DistictId = data.DistictId;
+                        
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = FillUREmployeeDataModel(data);
+
+                        db.AEmployeeMasters.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw;
+            }
+        }
+
+        private AEmployeeMaster FillUREmployeeDataModel(AEmployeeDetailVM data)
+        {
+            AEmployeeMaster model = new AEmployeeMaster();
+            model.EmpId = data.qrEmpId;
+            model.EmpName = data.qrEmpName;
+            model.EmpNameMar = data.qrEmpNameMar;
+            model.LoginId = data.qrEmpLoginId;
+            model.Password = data.qrEmpPassword;
+            model.EmpAddress = data.qrEmpAddress;
+            model.isActive = data.isActive;
+            model.EmpMobileNumber = data.qrEmpMobileNumber;
+            model.lastModifyDateEntry = DateTime.Now;
+            model.DivisionId = data.DivisionId;
+            model.DistictId = data.DistictId;
+            return model;
+        }
+
         public void SaveDictrictDetails(AppDistrictVM data)
         {
             try
@@ -485,13 +604,22 @@ namespace SwachBharat.CMS.Bll.Services
             model.stateId = data.id;
             return model;
         }
+        private AEmployeeDetailVM FillDivisionViewModel(state_districts data)
+        {
+            AEmployeeDetailVM model = new AEmployeeDetailVM();
+            model.DivisionName = data.district_name;    
+            model.DivisionId = data.id;
+          
+            return model;
+        }
+
         private AppDistrictVM FillDistrictViewModel(state_districts data)
         {
             AppDistrictVM model = new AppDistrictVM();
             model.districtName = data.district_name;
             model.districtNameMmar = data.district_name_mar;
             model.districtId = data.id;
-            model.stateId = data.state_id; 
+            model.stateId = data.state_id;
             return model;
         }
 
@@ -544,6 +672,71 @@ namespace SwachBharat.CMS.Bll.Services
                         Value = x.id.ToString()
                     }).OrderBy(t => t.Text).ToList();
 
+                State.Insert(0, itemAdd);
+            }
+            catch (Exception ex) { throw ex; }
+
+            return State;
+        }
+
+
+        public List<SelectListItem> ListDivision()
+        {
+            var State = new List<SelectListItem>();
+            SelectListItem itemAdd = new SelectListItem() { Text = "--Select All--", Value = "0" };
+
+            try
+            {
+
+                State = dbMain.state_districts.Join(dbMain.AppDetails, a => a.id, b => b.District, (a, b) => new { id = a.id, district_name = a.district_name, district_name_mar = a.district_name_mar })
+                 .GroupBy(c => c.id)
+                 .Select(group => group.FirstOrDefault()).ToList()
+             
+                    .Select(x => new SelectListItem
+                    {
+                        Text = x.district_name + '(' + x.district_name_mar+ ')',
+                        Value = x.id.ToString()
+                    }).OrderBy(t => t.Text).ToList();
+                State.Insert(0, itemAdd);
+
+            }
+            catch (Exception ex) { throw ex; }
+
+            return State;
+        }
+
+        public List<SelectListItem> ListSubDivision(int disid)
+        {
+            var State = new List<SelectListItem>();
+            SelectListItem itemAdd = new SelectListItem() { Text = "--Select All--", Value = "0" };
+
+            try
+            {
+                if (disid != 0)
+                {
+                    State = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District })
+                    .Where(x => x.Districts == disid)
+                    .GroupBy(c => c.id)
+                    .Select(group => group.FirstOrDefault()).ToList()
+
+                        .Select(x => new SelectListItem
+                        {
+                            Text = x.name + '(' + x.name_mar + ')',
+                            Value = x.id.ToString()
+                        }).OrderBy(t => t.Text).ToList();
+                    
+                }
+                else
+                {
+                    State = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District }) .GroupBy(c => c.id)
+                    .Select(group => group.FirstOrDefault()).ToList()
+
+                                            .Select(x => new SelectListItem
+                                            {
+                                                Text = x.name + '(' + x.name_mar + ')',
+                                                Value = x.id.ToString()
+                                            }).OrderBy(t => t.Text).ToList();
+                }
                 State.Insert(0, itemAdd);
             }
             catch (Exception ex) { throw ex; }

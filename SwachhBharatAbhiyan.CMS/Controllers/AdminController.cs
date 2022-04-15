@@ -11,24 +11,24 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 {
     public class AdminController : Controller
     {
-        private IMainRepository mainrepository;
+         IMainRepository mainrepository;
         public AdminController()
         {
             // AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             mainrepository = new MainRepository();
         }
         // GET: Admin
-        //public ActionResult MenuIndex()
-        //{
-        //    List<MenuItem> menuList = GetMenus();
-        //    return View(menuList);
-        //}
-
         public ActionResult MenuIndex()
         {
-            List<MenuItemULB> menuList = GetULBMenus();
-            return View("MenuIndex2", menuList);
+            List<MenuItem> menuList = GetMenus();
+            return View(menuList);
         }
+
+        //public ActionResult MenuIndex()
+        //{
+        //    List<MenuItemULB> menuList = GetULBMenus();
+        //    return View("MenuIndex2", menuList);
+        //}
         public ActionResult Index()
         {
             return View();
@@ -73,6 +73,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
+
         public List<MenuItem> GetMenus()
         {
             List<MenuItem> menuList = new List<MenuItem>();
@@ -86,6 +87,48 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             List<MenuItemULB> menuList = new List<MenuItemULB>();
             menuList = mainrepository.GetULBMenus();
             return menuList;
+        }
+
+
+   
+
+        public ActionResult AddAUREmployeeDetails(int teamId = -1)
+        
+        {        
+            AEmployeeDetailVM division = mainrepository.GetDivision();
+           
+            return View(division);
+        }
+
+        [HttpPost]
+        public ActionResult LoadDistrictListList(int Id)
+        
+        {
+                         
+                AEmployeeDetailVM division = mainrepository.GetDistrict(Id);
+           
+                return Json(division.DistrictList, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult AddHSUREmployeeDetails(AEmployeeDetailVM emp)
+        {
+            mainrepository.SaveUREmployee(emp);
+            return Redirect("HSURIndex");
+
+        }
+
+
+        public ActionResult AURIndex()
+        {
+            int appid = 1;
+            ViewBag.AppId = appid;
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return View();
+
+
         }
 
     }

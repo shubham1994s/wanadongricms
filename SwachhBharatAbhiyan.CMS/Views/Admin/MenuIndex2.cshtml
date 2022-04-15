@@ -65,7 +65,7 @@
                 <ul class="list-unstyled">
                     @{
                         var i = 0;
-                        
+
                         foreach (var item in Model.Where(s => s.districtId == 0 && s.ULBId == 0).ToList())
                         {
                             i++;
@@ -73,13 +73,13 @@
                             var lName = "exampledropdownDropdow" + i;
 
                             <li>
-                                @if ((Model.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 1) && !(Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 0))
+                                @if ((Model.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 1) || (Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 1))
                                 {
-                                <a href="@{@aName}" aria-expanded="false" data-toggle="collapse">
+                                    <a href="@{@aName}" aria-expanded="false" data-toggle="collapse">
 
-                                    <i class="svg_gc" style=" fill: #000;"> </i>
-                                    @*कचरा संकलन*@ @item.LinkText
-                                </a>
+                                        <i class="svg_gc" style=" fill: #000;"> </i>
+                                        @*कचरा संकलन*@ @item.LinkText
+                                    </a>
                                 }
                                 <ul id="@{@lName}" class="in list-unstyled ">
                                     @{
@@ -89,27 +89,27 @@
                                             j++;
                                             var aName1 = "#exampledropdownDropdow" + i + j;
                                             var lName1 = "exampledropdownDropdow" + i + j;
-                                                                        <li>
-                                                                            @if (Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 0)
-                                                                            {
-                                                                            <a href="@{@aName1}" aria-expanded="false" data-toggle="collapse">
+                                            <li>
+                                                @if (Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 0)
+                                                {
+                                                    <a href="@{@aName1}" aria-expanded="false" data-toggle="collapse">
 
-                                                                                <i class="svg_gc" style=" fill: #000;"> </i>
-                                                                                @*कचरा संकलन*@ @firstItem.LinkText
-                                                                            </a>
-                                                                            }
-                                                                            
-                                                                            <ul id="@{@lName1}" class="in list-unstyled">
-                                                                                @{foreach (var secondItem in (Model.Where(s => s.divisionId == item.divisionId && s.districtId == firstItem.districtId && s.ULBId != 0).ToList()))
-                                                                                    {
-                                                                                        <li class="">
-                                                                                            @Html.ActionLink(@secondItem.LinkText, @secondItem.ActionName, new { area = "", controller = @secondItem.ControllerName, returnUrl = @secondItem.returnUrl, Type = @secondItem.Type })
-                                                                                        </li>
+                                                        <i class="svg_gc" style=" fill: #000;"> </i>
+                                                        @*कचरा संकलन*@ @firstItem.LinkText
+                                                    </a>
+                                                }
 
-                                                                                    }
-                                                                                }
-                                                                            </ul>
-                                                                        </li>
+                                                <ul id="@{@lName1}" class="in list-unstyled">
+                                                    @{foreach (var secondItem in (Model.Where(s => s.divisionId == item.divisionId && s.districtId == firstItem.districtId && s.ULBId != 0).ToList()))
+                                                        {
+                                                            <li class="">
+                                                                @Html.ActionLink(@secondItem.LinkText, @secondItem.ActionName, new { area = "", controller = @secondItem.ControllerName, returnUrl = @secondItem.returnUrl, Type = @secondItem.Type })
+                                                            </li>
+
+                                                        }
+                                                    }
+                                                </ul>
+                                            </li>
 
 
                                         }

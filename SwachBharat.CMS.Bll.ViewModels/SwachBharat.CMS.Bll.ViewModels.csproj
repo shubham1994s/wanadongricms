@@ -134,6 +134,7 @@
     <Compile Include="Grid\UREmployeeDetails.cs" />
     <Compile Include="Grid\WM_WasteDetailsGridRow.cs" />
     <Compile Include="HSDashBoardVM.cs" />
+    <Compile Include="MainModel\AEmployeeDetailVM.cs" />
     <Compile Include="MainModel\AppConnectionVM.cs" />
     <Compile Include="MainModel\AppDetailsVM.cs" />
     <Compile Include="MainModel\AppDistrictVM.cs" />

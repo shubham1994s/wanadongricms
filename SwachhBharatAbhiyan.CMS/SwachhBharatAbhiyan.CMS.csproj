@@ -1698,6 +1698,7 @@
     <Content Include="Content\DatatableGrid\AriaGrid.js" />
     <Content Include="Content\DatatableGrid\AttendenceDetailGrid.js" />
     <Content Include="Content\DatatableGrid\AttendenceGrid.js" />
+    <Content Include="Content\DatatableGrid\AURGridDetails.js" />
     <Content Include="Content\DatatableGrid\Complaint.js" />
     <Content Include="Content\DatatableGrid\District.js" />
     <Content Include="Content\DatatableGrid\DumpYardDetailGrid.js" />
@@ -3040,6 +3041,8 @@
     <Content Include="Views\HouseScanifyEmp\AddHSUREmployeeDetails.cshtml" />
     <Content Include="Views\Shared\_HSLoginPartial.cshtml" />
     <Content Include="Views\Admin\MenuIndex2.cshtml" />
+    <Content Include="Views\Admin\AddAUREmployeeDetails.cshtml" />
+    <Content Include="Views\Admin\AURIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

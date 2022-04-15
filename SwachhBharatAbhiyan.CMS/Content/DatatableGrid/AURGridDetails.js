@@ -12,7 +12,7 @@
         "pageLength": 10,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=URAttendance&clientName=A",
+            "url": "/Datable/GetJqGridJson?rn=AURAttendance&clientName=A",
             "type": "POST",
             "datatype": "json"
         },
@@ -33,20 +33,7 @@
             { "data": "lastModifyDateEntry", "name": "lastModifyDateEntry", "autoWidth": true },
             { "data": "EmpName", "name": "EmpName", "autoWidth": true },
 
-            {
-                "data": "type", "render": function (data, type, full, meta) {
-                    if (full["type"] == 'A') {
-                        return 'Admin';
-                    }
-                    else if (full["type"] == 'SA') {
-                        return 'Sub Admin';
-                    }
 
-                    else {
-                        return 'Not Available';
-                    }
-                }
-            },
 
             {
                 "data": "type", "render": function (data, type, full, meta) {
@@ -67,13 +54,10 @@
             {
                 "render": function (data, type, full, meta) {
 
-                    if (full["type"] == 'SA') {
-                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
 
-                    }
-                    else {
-                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="myFunction()"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
-                    }
+                    return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
+
+
                 }, "width": "10%"
             },
 
@@ -102,7 +86,7 @@ function LoadNGrid() {
         "pageLength": 10,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=URAttendance&clientName=N",
+            "url": "/Datable/GetJqGridJson?rn=AURAttendance&clientName=N",
             "type": "POST",
             "datatype": "json"
         },
@@ -122,20 +106,7 @@ function LoadNGrid() {
             { "data": "lastModifyDateEntry", "name": "lastModifyDateEntry", "autoWidth": true },
             { "data": "EmpName", "name": "EmpName", "autoWidth": true },
 
-            {
-                "data": "type", "render": function (data, type, full, meta) {
-                    if (full["type"] == 'A') {
-                        return 'Admin';
-                    }
-                    else if (full["type"] == 'SA') {
-                        return 'Sub Admin';
-                    }
-
-                    else {
-                        return 'Not Available';
-                    }
-                }
-            },
+         
 
             {
                 "data": "type", "render": function (data, type, full, meta) {
@@ -156,13 +127,10 @@ function LoadNGrid() {
             {
                 "render": function (data, type, full, meta) {
 
-                    if (full["type"] == 'SA') {
+               
                         return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
 
-                    }
-                    else {
-                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="myFunction()"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
-                    }
+                   
                 }, "width": "10%"
             },
 
