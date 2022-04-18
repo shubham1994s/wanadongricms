@@ -624,7 +624,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="AD_USER_MST_STREET" EntityType="DevSwachhBharatMainModel.AD_USER_MST_STREET" />
           <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
           <FunctionImport Name="SP_Admin2" ReturnType="Collection(DevSwachhBharatMainModel.SP_Admin2_Result)" />
-          <EntitySet Name="EmployeeMasters" EntityType="DevSwachhBharatMainModel.EmployeeMaster" />
           <EntitySet Name="CheckAppDs" EntityType="DevSwachhBharatMainModel.CheckAppD" />
           <EntitySet Name="AEmployeeMasters" EntityType="DevSwachhBharatMainModel.AEmployeeMaster" />
           <EntitySet Name="tehsils" EntityType="DevSwachhBharatMainModel.tehsil" />
@@ -827,6 +826,17 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Type="Int32" Name="TotalLiquidCount" Nullable="true" />
           <Property Type="Int32" Name="TotalStreetCount" Nullable="true" />
         </ComplexType>
+        <EntityType Name="CheckAppD">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsCheked" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="App_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsCheked" Type="Boolean" Nullable="false" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
         <EntityType Name="EmployeeMaster">
           <Key>
             <PropertyRef Name="EmpId" />
@@ -1210,6 +1220,17 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CheckAppDs">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.CheckAppD">
+              <MappingFragment StoreEntitySet="CheckAppD">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
+                <ScalarProperty Name="App_Name" ColumnName="App_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="EmployeeMasters">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.EmployeeMaster">
               <MappingFragment StoreEntitySet="EmployeeMaster">
