@@ -18,17 +18,17 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             mainrepository = new MainRepository();
         }
         // GET: Admin
-        //public ActionResult MenuIndex()
-        //{
-        //    List<MenuItem> menuList = GetMenus();
-        //    return View(menuList);
-        //}
-
         public ActionResult MenuIndex()
         {
-            List<MenuItemULB> menuList = GetULBMenus();
-            return View("MenuIndex2", menuList);
+            List<MenuItem> menuList = GetMenus();
+            return View(menuList);
         }
+
+        //public ActionResult MenuIndex()
+        //{
+        //    List<MenuItemULB> menuList = GetULBMenus();
+        //    return View("MenuIndex2", menuList);
+        //}
         public ActionResult Index()
         {
             return View();
@@ -73,6 +73,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
+
         public List<MenuItem> GetMenus()
         {
             List<MenuItem> menuList = new List<MenuItem>();
@@ -88,5 +89,30 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             return menuList;
         }
 
+
+   
+
+        public ActionResult AddAUREmployeeDetails(int teamId = -1)
+        {
+
+          
+            //UREmployeeDetailsVM house = childRepository.GetUREmployeeById(teamId);
+            //ViewBag.EmpId = teamId;
+            //ViewBag.UType = Session["utype"];
+            //ViewBag.HSuserid = Session["Id"];
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult AddHSUREmployeeDetails(UREmployeeDetailsVM emp)
+        //{
+
+         
+        //    childRepository.SaveUREmployee(emp);
+        //    ViewBag.UType = Session["utype"];
+        //    ViewBag.HSuserid = Session["Id"];
+        //    return Redirect("HSURIndex");
+
+        //}
     }
 }
