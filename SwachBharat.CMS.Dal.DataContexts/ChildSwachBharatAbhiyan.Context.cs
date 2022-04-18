@@ -18,10 +18,9 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-                 : base(SwachBharatAppConnection.GetConnectionString(AppId))
+                : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -616,6 +615,15 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("SearchText", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHSHouseDetails_Result>("SP_GetHSHouseDetails", fdateParameter, tdateParameter, useridParameter, sortColumnParameter, sortOrderParameter, offsetValueParameter, pagingSizeParameter, searchTextParameter);
+        }
+    
+        public virtual int GetMonthlyAttedance(Nullable<System.DateTime> date)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetMonthlyAttedance", dateParameter);
         }
     }
 }
