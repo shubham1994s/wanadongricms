@@ -1712,6 +1712,7 @@
     <Content Include="Content\DatatableGrid\HSDumpyardDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\HSHouseDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\HSLiquidDetailsGrid.js" />
+    <Content Include="Content\DatatableGrid\HSLiquidDetailsGridNew.js" />
     <Content Include="Content\DatatableGrid\HSStreetDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\IdelGrid.js" />
     <Content Include="Content\DatatableGrid\InfotainmentGrid.js" />
@@ -3040,6 +3041,7 @@
     <Content Include="Views\HouseScanifyEmp\AddHSUREmployeeDetails.cshtml" />
     <Content Include="Views\Shared\_HSLoginPartial.cshtml" />
     <Content Include="Views\Admin\MenuIndex2.cshtml" />
+    <Content Include="Views\Admin\AddAUREmployeeDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
