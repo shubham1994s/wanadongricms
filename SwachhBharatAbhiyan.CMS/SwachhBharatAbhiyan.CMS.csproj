@@ -1712,7 +1712,6 @@
     <Content Include="Content\DatatableGrid\HSDumpyardDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\HSHouseDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\HSLiquidDetailsGrid.js" />
-    <Content Include="Content\DatatableGrid\HSLiquidDetailsGridNew.js" />
     <Content Include="Content\DatatableGrid\HSStreetDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\IdelGrid.js" />
     <Content Include="Content\DatatableGrid\InfotainmentGrid.js" />
