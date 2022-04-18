@@ -1,4 +1,5 @@
-﻿using SwachBharat.CMS.Dal.DataContexts;
+﻿using SwachBharat.CMS.Bll.ViewModels.MainModel;
+using SwachBharat.CMS.Dal.DataContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string isActiveULB { get; set; }
 
         public List<CheckAppD> CheckAppDs { get; set; }
+
+
+      
 
 
         public Nullable<bool> isActive { get; set; }
