@@ -1,4 +1,5 @@
 ﻿using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
+using SwachBharat.CMS.Dal.DataContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
         public string target { get; set; }
         public Nullable<System.DateTime> lastModifyDate { get; set; }
 
-
+        public List<tehsil> CheckDist { get; set; }
         public string qrEmpLoginId { get; set; }
 
         public string LoginId { get; set; }

@@ -102,15 +102,22 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         [HttpPost]
         public ActionResult LoadDistrictListList(int Id)
-        
+
         {
-                         
-                AEmployeeDetailVM division = mainrepository.GetDistrict(Id);
-           
-                return Json(division.DistrictList, JsonRequestBehavior.AllowGet);
+
+            AEmployeeDetailVM division = mainrepository.GetDistrict(Id);
+
+            return Json(division.DistrictList, JsonRequestBehavior.AllowGet);
         }
 
+        //public ActionResult LoadDistrictListList(int Id)
 
+        //{
+
+        //    AEmployeeDetailVM division = mainrepository.GetDistrict(Id);
+
+        //    return View("AddAUREmployeeDetails", division.CheckDist);
+        //}
         [HttpPost]
         public ActionResult AddHSUREmployeeDetails(AEmployeeDetailVM emp)
         {

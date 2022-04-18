@@ -19,5 +19,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
         public string longitude { get; set; }
         public Nullable<int> stateId { get; set; }
         public Nullable<int> districtId { get; set; }
+
+        public bool IsCheked { get; set; }
     }
 }

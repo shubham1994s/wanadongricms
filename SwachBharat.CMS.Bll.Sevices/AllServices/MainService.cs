@@ -10,6 +10,7 @@ using SwachBharat.CMS.Bll.ViewModels.MainModel;
 using SwachBharat.CMS.Dal.DataContexts;
 using System.Web.Mvc;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
+using System.Web.UI.WebControls;
 
 namespace SwachBharat.CMS.Bll.Services
 {
@@ -132,7 +133,29 @@ namespace SwachBharat.CMS.Bll.Services
             {
                 AEmployeeDetailVM details = new AEmployeeDetailVM();
                 details.DivisionList = ListDivision();
-                details.DistrictList = ListSubDivision(0);
+
+                AppTalukaVM at = new AppTalukaVM();
+                details.CheckDist = new List<tehsil>();
+                var appid = dbMain.AppDetails.GroupBy(c => c.District).ToList();
+
+                foreach (var a in appid)
+                { 
+                  var  tes = dbMain.tehsils.Where(c=>c.id==a.Key).FirstOrDefault<tehsil>();
+                    if (tes != null)
+                    {
+                    
+                     
+                        details.CheckDist.Add(new tehsil
+                        {
+                            id = tes.id,
+                            name = tes.name,
+                            IsCheked= tes.IsCheked
+                        });
+                    }
+                   
+                }
+
+             
                 using (var db = new DevSwachhBharatMainEntities())
                 {
                     var districtDetails = db.state_districts.FirstOrDefault();
@@ -140,7 +163,22 @@ namespace SwachBharat.CMS.Bll.Services
                     {
                         details = FillDivisionViewModel(districtDetails);
                         details.DivisionList = ListDivision();
-                        details.DistrictList = ListSubDivision(0);
+                        details.CheckDist = new List<tehsil>();
+                        foreach (var a in appid)
+                        {
+                            var tes = dbMain.tehsils.Where(c => c.id == a.Key).FirstOrDefault<tehsil>();
+                            if (tes != null)
+                            { 
+                                details.CheckDist.Add(new tehsil
+                                {
+                                    id = tes.id,
+                                    name = tes.name,
+                                     IsCheked = tes.IsCheked
+                                });
+                            }
+
+                        }
+
                         return details;
                     }
                     else
@@ -149,7 +187,7 @@ namespace SwachBharat.CMS.Bll.Services
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -161,14 +199,50 @@ namespace SwachBharat.CMS.Bll.Services
             try
             {
                 AEmployeeDetailVM details = new AEmployeeDetailVM();
-                details.DistrictList = ListSubDivision(id);
+
+                details.CheckDist = new List<tehsil>();
+                var appid = dbMain.AppDetails.Where(c=>c.District==id).GroupBy(c => c.District).ToList();
+
+                foreach (var a in appid)
+                {
+                    var tes = dbMain.tehsils.Where(c => c.id == a.Key).FirstOrDefault<tehsil>();
+                    if (tes != null)
+                    {
+
+
+                        details.CheckDist.Add(new tehsil
+                        {
+                            id = tes.id,
+                            name = tes.name,
+                            IsCheked = tes.IsCheked
+                        });
+                    }
+
+                }
                 using (var db = new DevSwachhBharatMainEntities())
                 {
                     var districtDetails = db.state_districts.FirstOrDefault();
                     if (districtDetails != null)
                     {
                         details = FillDivisionViewModel(districtDetails);
-                        details.DistrictList = ListSubDivision(id);
+                        details.CheckDist = new List<tehsil>();
+                   
+                        foreach (var a in appid)
+                        {
+                            var tes = dbMain.tehsils.Where(c => c.id == a.Key).FirstOrDefault<tehsil>();
+                            if (tes != null)
+                            {
+
+
+                                details.CheckDist.Add(new tehsil
+                                {
+                                    id = tes.id,
+                                    name = tes.name,
+                                    IsCheked = tes.IsCheked
+                                });
+                            }
+
+                        }
                         return details;
                     }
                     else
@@ -705,44 +779,26 @@ namespace SwachBharat.CMS.Bll.Services
             return State;
         }
 
-        public List<SelectListItem> ListSubDivision(int disid)
-        {
-            var State = new List<SelectListItem>();
-            SelectListItem itemAdd = new SelectListItem() { Text = "--Select All--", Value = "0" };
+        //public AEmployeeDetailVM ListSubDivision(int disid)
+        //{
 
-            try
-            {
-                if (disid != 0)
-                {
-                    State = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District })
-                    .Where(x => x.Districts == disid)
-                    .GroupBy(c => c.id)
-                    .Select(group => group.FirstOrDefault()).ToList()
+        //    AEmployeeDetailVM TypeDetail = new AEmployeeDetailVM();
+        //    try
+        //    {
+              
+              
 
-                        .Select(x => new SelectListItem
-                        {
-                            Text = x.name + '(' + x.name_mar + ')',
-                            Value = x.id.ToString()
-                        }).OrderBy(t => t.Text).ToList();
-                    
-                }
-                else
-                {
-                    State = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District }) .GroupBy(c => c.id)
-                    .Select(group => group.FirstOrDefault()).ToList()
+        //           // TypeDetail.CheckDist = dbMain.tehsils.Where(x => x.district == disid).ToList<tehsil>();
+        //          TypeDetail.CheckDist = dbMain.tehsils.ToList<tehsil>();
+        //            //  TypeDetail.CheckDist = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District }).ToList<tehsil>();
+        //            // TypeDetail.CheckDist = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District }).Where(x => x.Districts == disid).GroupBy(c => c.id).ToList<tehsil>();
 
-                                            .Select(x => new SelectListItem
-                                            {
-                                                Text = x.name + '(' + x.name_mar + ')',
-                                                Value = x.id.ToString()
-                                            }).OrderBy(t => t.Text).ToList();
-                }
-                State.Insert(0, itemAdd);
-            }
-            catch (Exception ex) { throw ex; }
+              
+        //    }
+        //    catch (Exception ex) { throw ex; }
 
-            return State;
-        }
+        //    return TypeDetail;
+        //}
         public List<SelectListItem> ListDistrict()
         {
             var District = new List<SelectListItem>();
@@ -895,7 +951,7 @@ namespace SwachBharat.CMS.Bll.Services
                     if (values[i] != "")
                     {
                         u = Convert.ToInt32(values[i]);
-                        var detail = dbMain.AppDetails.Where(x => x.AppId == u).FirstOrDefault();
+                        var detail = dbMain.AppDetails.Where(x => x.AppName != "Thane Mahanagar Palika" && x.AppId == u).FirstOrDefault();
                         if(detail.IsActive == true)
                         {
                             var details = dbMain.AppDetails.Where(x => x.IsActive == true && x.AppName != "Thane Mahanagar Palika" && x.AppId == u).OrderBy(x => x.AppName).FirstOrDefault();
