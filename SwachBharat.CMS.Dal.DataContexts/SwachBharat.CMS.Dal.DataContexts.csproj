@@ -138,7 +138,7 @@
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="GamePlayerDetail.cs">
-      <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="Game_AnswerType.cs">
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
@@ -208,6 +208,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MainSwachBharatAbhiyan.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MonthlyAttedance.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="PointDetails_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>

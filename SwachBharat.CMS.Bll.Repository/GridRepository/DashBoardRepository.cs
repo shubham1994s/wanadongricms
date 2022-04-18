@@ -2740,6 +2740,45 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
+        public IEnumerable<SBAAttendenceGrid> GetMonthlyAttendeceData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string Emptype)
+        {
+            List<SBAAttendenceGrid> obj = new List<SBAAttendenceGrid>();
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.MonthlyAttedances.ToList();
+                foreach (var x in data)
+                {
+                    obj.Add(new SBAAttendenceGrid()
+                    {
+                        daID = x.ID,
+                        userId = Convert.ToInt32(x.userId),
+                        userName = x.UserName,
+                        month_name=x.Month_name,
+                        day=x.Day,
+                        status=x.Status,
+
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    var model = obj.Where(c => c.userName.ToLower().Contains(SearchString)).ToList();
+
+                    obj = model.ToList();
+                }
+
+               
+                if (userId > 0)
+                {
+                    var model = obj.Where(c => c.userId == userId).ToList();
+
+                    obj = model.ToList();
+                }
+                var d = obj.OrderByDescending(c => c.daID).ToList();
+                return d;
+            }
+        }
+
         public IEnumerable<ComplaintGrid> GetComplaintData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int appId)
         {
             List<ComplaintGrid> obj = new List<ComplaintGrid>();
