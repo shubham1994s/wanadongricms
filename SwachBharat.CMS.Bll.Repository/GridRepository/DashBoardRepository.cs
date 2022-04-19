@@ -2745,50 +2745,14 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             List<SBAAttendenceGrid> obj = new List<SBAAttendenceGrid>();
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
             {
-                var data = db.Daily_Attendance.Where(c => c.EmployeeType == Emptype).ToList();
-                if (Convert.ToDateTime(fdate).ToString("dd/MM/yyyy") == Convert.ToDateTime(DateTime.Now).ToString("dd/MM/yyyy"))
-                {
-                    data = data.Where(c => (c.daDate == fdate || c.daEndDate == fdate || c.endTime == "")).ToList();
-                }
-                else
-                {
-
-                    data = data.Where(c => (c.daDate >= fdate && c.daDate <= tdate) || (c.daDate >= fdate && c.daDate <= tdate)).ToList();
-                }
-
+                var data = db.MonthlyAttedances.ToList();
+               
                 foreach (var x in data)
                 {
-                    int a = Convert.ToInt32(x.vtId.Trim());
-                    string vt = "";
-                    try { vt = db.VehicleTypes.Where(c => c.vtId == a).FirstOrDefault().description; }
-                    catch { vt = ""; }
-                    ///x.daDate = checkNull(x.daDate.tp);
-                    x.endLat = checkNull(x.endLat);
-                    x.endLong = checkNull(x.endLong);
-                    x.endTime = checkNull(x.endTime);
-                    x.startLat = checkNull(x.startLat);
-                    x.startLong = checkNull(x.startLong);
-                    x.startTime = checkNull(x.startTime);
-                    x.vehicleNumber = checkNull(x.vehicleNumber);
-                    x.daEndNote = checkNull(x.daEndNote);
-                    x.daStartNote = checkNull(x.daStartNote);
-                    string endate = "";
-                    if (x.daEndDate == null)
-                    {
-                        endate = "";
-                    }
-                    else
-                    {
-                        endate = Convert.ToDateTime(x.daEndDate).ToString("dd/MM/yyyy");
-                    }
-
-                    // string displayTime = Convert.ToDateTime(x.daDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    string displayTime = Convert.ToDateTime(x.daDate).ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
-                    string time = Convert.ToDateTime(x.startTime).ToString("HH:mm:ss");
 
                     obj.Add(new SBAAttendenceGrid()
                     {
-                        daID = x.daID,
+                        daID = x.ID,
                         userId = Convert.ToInt32(x.userId),
                         userName = x.UserName,
                         month_name=x.Month_name,
@@ -2830,30 +2794,21 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 if (!string.IsNullOrEmpty(SearchString))
                 {
-                    var model = obj.Where(c => c.userName.ToLower().Contains(SearchString) ).ToList();
-
-                    || c.vehicleNumber.ToLower().Contains(SearchString) || c.vtId.ToLower().Contains(SearchString) || c.daDate.ToLower().Contains(SearchString) || c.endTime.ToLower().Contains(SearchString) || c.startLat.ToLower().Contains(SearchString) || c.endLat.ToLower().Contains(SearchString) || c.startTime.ToLower().Contains(SearchString) || c.userName.ToLower().Contains(SearchString)).ToList();
+                    var model = obj.Where(c => c.userName.ToLower().Contains(SearchString)).ToList();
 
                     obj = model.ToList();
                 }
 
-                //if (!string.IsNullOrEmpty(fdate.ToString()))
-                //{
-                //    DateTime? dt1 = null;
-                //    if (!string.IsNullOrEmpty(tdate.ToString()))
-                //    { dt1 = tdate; }
-                //    else { dt1 = fdate; }
-                //    obj = obj.Where(fullEntry => fullEntry.CompareDate >= fdate && fullEntry.CompareDate <= dt1).OrderByDescending(c => c.CompareDate).ToList();
-                //}
+
                 if (userId > 0)
                 {
                     var model = obj.Where(c => c.userId == userId).ToList();
 
                     obj = model.ToList();
                 }
-                //var d = obj.OrderByDescending(c => DateTime.Parse(c.daDateTIme)).ToList();
                 var d = obj.OrderByDescending(c => c.daID).ToList();
                 return d;
+
             }
         }
 
