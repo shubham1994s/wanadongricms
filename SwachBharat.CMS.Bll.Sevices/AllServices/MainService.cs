@@ -133,7 +133,7 @@ namespace SwachBharat.CMS.Bll.Services
             {
                 AEmployeeDetailVM details = new AEmployeeDetailVM();
                 details.DivisionList = ListDivision();
-                details.DistrictList = ListSubDivision(0);
+             //   details.DistrictList = ListSubDivision(0);
                 details.ULBList = GetULBMenus();
                 using (var db = new DevSwachhBharatMainEntities())
                 {
@@ -142,7 +142,7 @@ namespace SwachBharat.CMS.Bll.Services
                     {
                         details = FillDivisionViewModel(districtDetails);
                         details.DivisionList = ListDivision();
-                        details.DistrictList = ListSubDivision(0);
+                    //    details.DistrictList = ListSubDivision(0);
                         details.ULBList = GetULBMenus();
 
                         return details;
@@ -966,27 +966,27 @@ namespace SwachBharat.CMS.Bll.Services
               
               
 
-                        .Select(x => new SelectListItem
-                        {
-                            Text = x.name + '(' + x.name_mar + ')',
-                            Value = x.id.ToString()
-                        }).OrderBy(t => t.Text).ToList();
+            //            .Select(x => new SelectListItem
+            //            {
+            //                Text = x.name + '(' + x.name_mar + ')',
+            //                Value = x.id.ToString()
+            //            }).OrderBy(t => t.Text).ToList();
 
-                }
-                else
-                {
-                    State = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District }).GroupBy(c => c.id)
-                    .Select(group => group.FirstOrDefault()).ToList()
+            //    }
+            //    else
+            //    {
+            //        State = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District }).GroupBy(c => c.id)
+            //        .Select(group => group.FirstOrDefault()).ToList()
 
-                                            .Select(x => new SelectListItem
-                                            {
-                                                Text = x.name + '(' + x.name_mar + ')',
-                                                Value = x.id.ToString()
-                                            }).OrderBy(t => t.Text).ToList();
-                }
-                State.Insert(0, itemAdd);
-            }
-            catch (Exception ex) { throw ex; }
+            //                                .Select(x => new SelectListItem
+            //                                {
+            //                                    Text = x.name + '(' + x.name_mar + ')',
+            //                                    Value = x.id.ToString()
+            //                                }).OrderBy(t => t.Text).ToList();
+            //    }
+            //    State.Insert(0, itemAdd);
+            //}
+            //catch (Exception ex) { throw ex; }
 
         //    return TypeDetail;
         //}

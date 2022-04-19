@@ -97,9 +97,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             @*@Html.Label("रक्त गट / Blood Group ")*@
-                            @Html.Label("Division")
+                           @*@Html.Label("Division")
                             @Html.DropDownListFor(model => model.DivisionId, Model.DivisionList, new { placeholder = HttpUtility.HtmlDecode("&#xf039;Select Division"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
-                            @Html.ValidationMessageFor(model => model.DivisionId, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.DivisionId, "", new { @class = "text-danger" })*@
 
 
                         </div>
@@ -108,9 +108,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             @*@Html.Label("रक्त गट / Blood Group ")*@
-                            @Html.Label("District")
+                            @*@Html.Label("District")
                             @Html.DropDownListFor(model => model.DistictId, Model.DistrictList, new { @disabled = "disabled", placeholder = HttpUtility.HtmlDecode("&#xf039;Select District"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
-                            @Html.ValidationMessageFor(model => model.DistictId, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.DistictId, "", new { @class = "text-danger" })*@
 
                             </div>
 
@@ -220,7 +220,7 @@
                 </div>
             </div>
         </div>
-    </div>
+   
 }
 
 <script>

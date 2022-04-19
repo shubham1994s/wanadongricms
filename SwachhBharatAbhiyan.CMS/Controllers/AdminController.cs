@@ -94,7 +94,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         public ActionResult AddAUREmployeeDetails(int teamId = -1)
         
         {        
-            AEmployeeDetailVM division = mainrepository.GetDivision();
+           AEmployeeDetailVM division = mainrepository.GetDivision();
 
             
 
