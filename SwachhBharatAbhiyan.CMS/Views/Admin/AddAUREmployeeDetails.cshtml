@@ -12,7 +12,49 @@
 @Scripts.Render("~/bundles/modernizr")
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<style>
+  
+    .plus, .minus {
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-size: 16px 16px !important;
+        width: 16px;
+        height: 16px;
+        /*vertical-align: middle;*/
+    }
 
+    .plus {
+        background-image: url(https://img.icons8.com/color/48/000000/plus.png);
+    }
+
+    .minus {
+        background-image: url(https://img.icons8.com/color/48/000000/minus.png);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0px 0px 0px 20px;
+    }
+
+        ul.inner_ul li:before {
+            content: "├";
+            font-size: 18px;
+            margin-left: -11px;
+            margin-top: -5px;
+            vertical-align: middle;
+            float: left;
+            width: 8px;
+            color: #41424e;
+        }
+
+        ul.inner_ul li:last-child:before {
+            content: "└";
+        }
+
+    .inner_ul {
+        padding: 0px 0px 0px 35px;
+    }
+</style>
 
 @using (Html.BeginForm("AddHSUREmployeeDetails", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", data_toggle = "validator", role = "form" }))
 {
@@ -91,134 +133,184 @@
                 </div>
 
 
-                <div class="row">
+                <!--<div class="row">
 
 
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group">-->
                             @*@Html.Label("रक्त गट / Blood Group ")*@
-                           @*@Html.Label("Division")
-                            @Html.DropDownListFor(model => model.DivisionId, Model.DivisionList, new { placeholder = HttpUtility.HtmlDecode("&#xf039;Select Division"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
-                            @Html.ValidationMessageFor(model => model.DivisionId, "", new { @class = "text-danger" })*@
+                            @*@Html.Label("Division")
+                        @Html.DropDownListFor(model => model.DivisionId, Model.DivisionList, new { placeholder = HttpUtility.HtmlDecode("&#xf039;Select Division"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
+                        @Html.ValidationMessageFor(model => model.DivisionId, "", new { @class = "text-danger" })*@
 
 
-                        </div>
+                        <!--</div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group">-->
                             @*@Html.Label("रक्त गट / Blood Group ")*@
                             @*@Html.Label("District")
-                            @Html.DropDownListFor(model => model.DistictId, Model.DistrictList, new { @disabled = "disabled", placeholder = HttpUtility.HtmlDecode("&#xf039;Select District"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
-                            @Html.ValidationMessageFor(model => model.DistictId, "", new { @class = "text-danger" })*@
+                        @Html.DropDownListFor(model => model.DistictId, Model.DistrictList, new { @disabled = "disabled", placeholder = HttpUtility.HtmlDecode("&#xf039;Select District"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
+                        @Html.ValidationMessageFor(model => model.DistictId, "", new { @class = "text-danger" })*@
 
-                            </div>
+                        <!--</div>
 
+                    </div>
+                </div>-->
+            </div>
+
+   
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @*@Html.Label("पत्ता / Address")*@
+                            @Html.Label("Address")
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.qrEmpAddress, new { @class = "form-control", style = "font-family:Arial, FontAwesome", required = "required" })
+                            @Html.ValidationMessageFor(model => model.qrEmpAddress, "", new { @class = "text-danger" })
+                            <span class="text-danger" id="err_address"></span>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span class="help-block with-errors"></span>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="row">
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                @*@Html.Label("पत्ता / Address")*@
-                                @Html.Label("Address")
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.TextBoxFor(model => model.qrEmpAddress, new { @class = "form-control", style = "font-family:Arial, FontAwesome", required = "required" })
-                                @Html.ValidationMessageFor(model => model.qrEmpAddress, "", new { @class = "text-danger" })
-                                <span class="text-danger" id="err_address"></span>
-                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                <span class="help-block with-errors"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <br />
-                            <div class="form-group" style="margin-top:10px">
-                                <label>Is Active </label>
-                                @Html.CheckBox("isActive")
-                            </div>
-
+                    <div class="col-md-2">
+                        <br />
+                        <div class="form-group" style="margin-top:10px">
+                            <label>Is Active </label>
+                            @Html.CheckBox("isActive")
                         </div>
 
                     </div>
 
-
-
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul>
-                            @{
-                                //var icount = Model.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count;
-                                for (int i = 0; i < Model.ULBList.Count; i++)
-                                {
-                                    var aName = "#exampledropdownDropdow" + i;
-                                    var lName = "exampledropdownDropdow" + i;
 
-                                    <li>
+         
+            <br />
+            <div class="row">
+                <label>Select ULBs</label>
+                <div class="tree_main">
+                    <ul class="main_ul">
+                        @{
+                            //var icount = Model.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count;
+                            for (int i = 0; i < Model.ULBList.Count; i++)
+                            {
+                                var aName = "#exampledropdownDropdow" + i;
+                                var lName = "exampledropdownDropdow" + i;
 
-                                        @Html.CheckBoxFor(m => m.ULBList[i].IsChecked, new { @class = "parentULB" })
-                                        @Html.LabelFor(m => m.ULBList[i].IsChecked, Model.ULBList[i].LinkText)
-
-
-                                        <ul id="@{@lName}" class="in list-unstyled ">
-                                            @{
-                                                //var jcount = Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count;
-                                                for (int j = 0; j < Model.ULBList[i].DistrictList.Count; j++)
-                                                {
-                                                    var aName1 = "#exampledropdownDropdow" + i + j;
-                                                    var lName1 = "exampledropdownDropdow" + i + j;
-                                                    <li>
-
-                                                        @Html.CheckBoxFor(m => m.ULBList[i].DistrictList[j].IsChecked, new { @class = "parentULB" })
-                                                        @Html.LabelFor(m => m.ULBList[i].DistrictList[j].IsChecked, Model.ULBList[i].DistrictList[j].LinkText)
+                                <li>
+                                    <span class="plus">&nbsp;</span>
+                                    @Html.CheckBoxFor(m => m.ULBList[i].IsChecked, new { @class = "parentULB" })
+                                    @Html.LabelFor(m => m.ULBList[i].IsChecked, Model.ULBList[i].LinkText)
 
 
-                                                        <ul id="@{@lName1}" class="in list-unstyled">
-                                                            @{
-                                                                for (int k = 0; k < Model.ULBList[i].DistrictList[j].ULBList.Count; k++)
-                                                                {
-                                                                    <li class="">
-                                                                        @Html.CheckBoxFor(m => m.ULBList[i].DistrictList[j].ULBList[k].IsChecked)
-                                                                        @Html.LabelFor(m => m.ULBList[i].DistrictList[j].ULBList[k].IsChecked, Model.ULBList[i].DistrictList[j].ULBList[k].LinkText)
-                                                                        @Html.HiddenFor(m => m.ULBList[i].DistrictList[j].ULBList[k].ULBId)
-                                                                    </li>
+                                    <ul id="@{@lName}" class="in list-unstyled inner_ul" style="display: none">
+                                        @{
+                                            //var jcount = Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count;
+                                            for (int j = 0; j < Model.ULBList[i].DistrictList.Count; j++)
+                                            {
+                                                var aName1 = "#exampledropdownDropdow" + i + j;
+                                                var lName1 = "exampledropdownDropdow" + i + j;
+                                                <li>
+                                                    <span class="plus">&nbsp;</span>
+                                                    @Html.CheckBoxFor(m => m.ULBList[i].DistrictList[j].IsChecked, new { @class = "parentULB" })
+                                                    @Html.LabelFor(m => m.ULBList[i].DistrictList[j].IsChecked, Model.ULBList[i].DistrictList[j].LinkText)
 
-                                                                }
+
+                                                    <ul id="@{@lName1}" class="in list-unstyled inner_ul" style="display: none">
+                                                        @{
+                                                            for (int k = 0; k < Model.ULBList[i].DistrictList[j].ULBList.Count; k++)
+                                                            {
+                                                                <li class="">
+                                                                    @Html.CheckBoxFor(m => m.ULBList[i].DistrictList[j].ULBList[k].IsChecked)
+                                                                    @Html.LabelFor(m => m.ULBList[i].DistrictList[j].ULBList[k].IsChecked, Model.ULBList[i].DistrictList[j].ULBList[k].LinkText)
+                                                                    @Html.HiddenFor(m => m.ULBList[i].DistrictList[j].ULBList[k].ULBId)
+                                                                </li>
+
                                                             }
-                                                        </ul>
-                                                    </li>
+                                                        }
+                                                    </ul>
+                                                </li>
 
 
-                                                }
                                             }
-                                        </ul>
-                                    </li>
+                                        }
+                                    </ul>
+                                </li>
 
-                                }
                             }
-                        </ul>
-
-                    </div>
-
+                        }
+                    </ul>
                 </div>
+                @*<div class="tree_main">
+            <ul class="main_ul">
+                <li>
+                    <span class="plus">&nbsp;</span>
+                    <input type="checkbox" id="c_bs_1" />
+                    <span>Main Level 1 </span>
+                    <ul class="sub_ul" style="display: none">
+                        <li>
+                            <span class="plus">&nbsp;</span>
+                            <input type="checkbox" id="c_bf_1" />
+                            <span>Sub Level 1 </span>
+                            <ul style="display: none" class="inner_ul">
+                                <li>
+                                    <input type="checkbox" id="c_io_1" /><span>Last Level 1 </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="c_io_2" /><span>Last Level 2 </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="c_io_3" /><span>Last Level 3 </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="c_io_4" /><span>Last Level 4 </span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="plus">&nbsp;</span>
+                            <input type="checkbox" id="c_bf_2" />
+                            <span>Sub Level 2</span>
+                            <ul style="display: none" class="inner_ul">
+                                <li>
+                                    <input type="checkbox" id="c_io_5" /><span>Last Level 5 </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="c_io_6" /><span>Last Level 6 </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="c_io_7" /><span>Last Level 7 </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="c_io_8" /><span>Last Level 8 </span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
 
-                <br />
+            </ul>
+        </div>*@
 
 
-                <div class="row">
-                    <center><span class="text-danger" id="err_generate"></span></center>
-                    <div class="form-group1">
-                        <button type="submit" name="submit" class="btn" id="btnSubmit" onclick="return Validate()">
+            </div>
 
-                            <span class="glyphicon glyphicon-saved"></span>
-                            <span id="buttonName">Save Changes</span>
-                        </button>
-                    </div>
+            <br />
+
+
+            <div class="row">
+                <center><span class="text-danger" id="err_generate"></span></center>
+                <div class="form-group1">
+                    <button type="submit" name="submit" class="btn" id="btnSubmit" onclick="return Validate()">
+
+                        <span class="glyphicon glyphicon-saved"></span>
+                        <span id="buttonName">Save Changes</span>
+                    </button>
                 </div>
             </div>
+        </div>
         </div>
    
 }
@@ -245,7 +337,78 @@
     }
 </script>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $(".plus").click(function () {
+            $(this).toggleClass("minus").siblings("ul").toggle();
+        })
 
+        $("input[type=checkbox]").click(function () {
+            //alert($(this).attr("id"));
+            //var sp = $(this).attr("id");
+            //if (sp.substring(0, 4) === "c_bs" || sp.substring(0, 4) === "c_bf") {
+            $(this).siblings("ul").find("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+            //}
+        })
+
+        $("input[type=checkbox]").change(function () {
+            var sp = $(this).attr("id");
+            if (sp.substring(0, 4) === "c_io") {
+                var ff = $(this).parents("ul[id^=bf_l]").attr("id");
+                if ($('#' + ff + ' > li input[type=checkbox]:checked').length == $('#' + ff + ' > li input[type=checkbox]').length) {
+                    $('#' + ff).siblings("input[type=checkbox]").prop('checked', true);
+                    check_fst_lvl(ff);
+                }
+                else {
+                    $('#' + ff).siblings("input[type=checkbox]").prop('checked', false);
+                    check_fst_lvl(ff);
+                }
+            }
+
+            if (sp.substring(0, 4) === "c_bf") {
+                var ss = $(this).parents("ul[id^=bs_l]").attr("id");
+                if ($('#' + ss + ' > li input[type=checkbox]:checked').length == $('#' + ss + ' > li input[type=checkbox]').length) {
+                    $('#' + ss).siblings("input[type=checkbox]").prop('checked', true);
+                    check_fst_lvl(ss);
+                }
+                else {
+                    $('#' + ss).siblings("input[type=checkbox]").prop('checked', false);
+                    check_fst_lvl(ss);
+                }
+            }
+        });
+
+    })
+
+    function check_fst_lvl(dd) {
+        //var ss = $('#' + dd).parents("ul[id^=bs_l]").attr("id");
+        var ss = $('#' + dd).parent().closest("ul").attr("id");
+        if ($('#' + ss + ' > li input[type=checkbox]:checked').length == $('#' + ss + ' > li input[type=checkbox]').length) {
+            //$('#' + ss).siblings("input[id^=c_bs]").prop('checked', true);
+            $('#' + ss).siblings("input[type=checkbox]").prop('checked', true);
+        }
+        else {
+            //$('#' + ss).siblings("input[id^=c_bs]").prop('checked', false);
+            $('#' + ss).siblings("input[type=checkbox]").prop('checked', false);
+        }
+
+    }
+
+    function pageLoad() {
+        $(".plus").click(function () {
+            $(this).toggleClass("minus").siblings("ul").toggle();
+        })
+    }
+
+
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
     
     $(".parentULB").change(function () {
         $(this).siblings('ul')
