@@ -7,6 +7,11 @@
 
 @Scripts.Render("~/Scripts/IndexScript")
 <script src="~/Content/DatatableGrid/MonthlyAttendenceGrid.js"></script>
+<style>
+    #tot_days{
+        display:none;
+    }
+</style>
 <body>
     <br />
 
@@ -83,9 +88,10 @@
                         <th> Day 26</th>
                         <th> Day 27</th>
                         <th> Day 28</th>
-                        <th> Day 29</th>
-                        <th> Day 30</th>
-                        <th> Day 31</th>
+                        <th id="day29"> Day 29</th>
+                        <th id="day30"> Day 30</th>
+                        <th id="day31"> Day 31</th>
+                        <th id="tot_days"> Total Days</th>
 
 
                     </tr>
@@ -136,5 +142,24 @@
     });
 
 
+</script>
+<script>
+    $(document).ready(function () {
+    debugger
+    var tot_day = document.getElementById("tot_days").innerHTML;
+    if (tot_day = 28) {
+        document.getElementById("day29").style.display = "none";
+        document.getElementById("day30").style.display = "none";
+        document.getElementById("day31").style.display = "none";
+    }
+    else if (tot_day = 29) {
+        document.getElementById("day30").style.display = "none";
+        document.getElementById("day31").style.display = "none";
+    }
+    else if (tot_day = 30) {
+    
+        document.getElementById("day31").style.display = "none";
+        }
+    });
 </script>
 </html>

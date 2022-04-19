@@ -2788,6 +2788,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         day29 = x.Day29,
                         day30 = x.Day30,
                         day31 = x.Day31,
+                        TOTAL_DAYS = x.TOTAL_MONTH_DAYS,
 
                     });
                 }

@@ -251,6 +251,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.MonthlyAtteda
           <Property Name="Day29" Type="nvarchar(max)" />
           <Property Name="Day30" Type="nvarchar(max)" />
           <Property Name="Day31" Type="nvarchar(max)" />
+          <Property Name="TOTAL_MONTH_DAYS" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Qr_Employee_Daily_Attendance">
           <Key>
@@ -719,7 +720,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
     [MonthlyAttedance].[Day28] AS [Day28], 
     [MonthlyAttedance].[Day29] AS [Day29], 
     [MonthlyAttedance].[Day30] AS [Day30], 
-    [MonthlyAttedance].[Day31] AS [Day31]
+    [MonthlyAttedance].[Day31] AS [Day31], 
+    [MonthlyAttedance].[TOTAL_MONTH_DAYS] AS [TOTAL_MONTH_DAYS]
     FROM [dbo].[MonthlyAttedance] AS [MonthlyAttedance]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SauchalayAddress" EntityType="Self.SauchalayAddress" store:Type="Tables" store:Schema="dbo">
@@ -2106,6 +2108,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="Day29" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Day30" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Day31" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TOTAL_MONTH_DAYS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3252,6 +3255,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="MonthlyAttedances">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.MonthlyAttedance">
               <MappingFragment StoreEntitySet="MonthlyAttedance">
+                <ScalarProperty Name="TOTAL_MONTH_DAYS" ColumnName="TOTAL_MONTH_DAYS" />
                 <ScalarProperty Name="Day31" ColumnName="Day31" />
                 <ScalarProperty Name="Day30" ColumnName="Day30" />
                 <ScalarProperty Name="Day29" ColumnName="Day29" />

@@ -50,5 +50,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string Day29 { get; set; }
         public string Day30 { get; set; }
         public string Day31 { get; set; }
+        public string TOTAL_MONTH_DAYS { get; set; }
     }
 }
