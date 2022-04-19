@@ -64,10 +64,11 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         EmployeeVM Login(EmployeeVM _userinfo);
 
         EmployeeVM LoginStreet(EmployeeVM _userinfo);
+        EmployeeVM LoginMaster(EmployeeVM _userinfo);
 
         EmployeeVM LoginUR(EmployeeVM _userinfo);
         List<MenuItem> GetMenus();
-        List<MenuItemULB> GetULBMenus();
+        List<MenuItemULB> GetULBMenus(string loginId);
 
 
         #region Game

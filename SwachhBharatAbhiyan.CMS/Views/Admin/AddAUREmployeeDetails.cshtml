@@ -44,7 +44,7 @@
                         </div>
                     </div>
 
-                 
+
                     <div class="col-md-6">
                         <div class="form-group">
                             @*@Html.Label("मोबाइल / Mobile")*@
@@ -60,7 +60,7 @@
 
                 </div>
 
-             
+
 
                 <div class="row">
 
@@ -109,7 +109,7 @@
                         <div class="form-group">
                             @*@Html.Label("रक्त गट / Blood Group ")*@
                             @Html.Label("District")
-                            @Html.DropDownListFor(model => model.DistictId, Model.DistrictList, new { @disabled = "disabled",placeholder = HttpUtility.HtmlDecode("&#xf039;Select District"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
+                            @Html.DropDownListFor(model => model.DistictId, Model.DistrictList, new { @disabled = "disabled", placeholder = HttpUtility.HtmlDecode("&#xf039;Select District"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
                             @Html.ValidationMessageFor(model => model.DistictId, "", new { @class = "text-danger" })
 
 
@@ -143,9 +143,67 @@
 
                     </div>
 
-                 
+
 
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            @{
+                                //var icount = Model.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count;
+                                for (int i = 0; i < Model.ULBList.Count; i++)
+                                {
+                                    var aName = "#exampledropdownDropdow" + i;
+                                    var lName = "exampledropdownDropdow" + i;
+
+                                    <li>
+
+                                        @Html.CheckBoxFor(m => m.ULBList[i].IsChecked, new { @class = "parentULB" })
+                                        @Html.LabelFor(m => m.ULBList[i].IsChecked, Model.ULBList[i].LinkText)
+
+
+                                        <ul id="@{@lName}" class="in list-unstyled ">
+                                            @{
+                                                //var jcount = Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count;
+                                                for (int j = 0; j < Model.ULBList[i].DistrictList.Count; j++)
+                                                {
+                                                    var aName1 = "#exampledropdownDropdow" + i + j;
+                                                    var lName1 = "exampledropdownDropdow" + i + j;
+                                                    <li>
+
+                                                        @Html.CheckBoxFor(m => m.ULBList[i].DistrictList[j].IsChecked, new { @class = "parentULB" })
+                                                        @Html.LabelFor(m => m.ULBList[i].DistrictList[j].IsChecked, Model.ULBList[i].DistrictList[j].LinkText)
+
+
+                                                        <ul id="@{@lName1}" class="in list-unstyled">
+                                                            @{
+                                                                for (int k = 0; k < Model.ULBList[i].DistrictList[j].ULBList.Count; k++)
+                                                                {
+                                                                    <li class="">
+                                                                        @Html.CheckBoxFor(m => m.ULBList[i].DistrictList[j].ULBList[k].IsChecked)
+                                                                        @Html.LabelFor(m => m.ULBList[i].DistrictList[j].ULBList[k].IsChecked, Model.ULBList[i].DistrictList[j].ULBList[k].LinkText)
+                                                                        @Html.HiddenFor(m => m.ULBList[i].DistrictList[j].ULBList[k].ULBId)
+                                                                    </li>
+
+                                                                }
+                                                            }
+                                                        </ul>
+                                                    </li>
+
+
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+
+                    </div>
+
+                </div>
+
                 <br />
 
 
@@ -160,8 +218,8 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 }
 
 <script>
@@ -186,6 +244,14 @@
     }
 </script>
 <script type="text/javascript">
+
+    
+    $(".parentULB").change(function () {
+        $(this).siblings('ul')
+            .find("input[type='checkbox']")
+            .prop('checked', this.checked);
+    });
+
     $(document).ready(function () {
         debugger;
         var id = $('#qrEmpId').val();
@@ -198,8 +264,8 @@
             //$('.title_change').text("कर्मचारी तपशील सादर करा / Add  Employee Details");
             $('.title_change').text("Add  Employee Details");
         }
-    
-      /*  $('#DivisionId').html('<option selected = "selected" value = "0" > --Select Division--</option >');*/
+
+        /*  $('#DivisionId').html('<option selected = "selected" value = "0" > --Select Division--</option >');*/
 
         //imei Validation and clear login validation
 
@@ -236,7 +302,7 @@
 
 
 
-       
+
 
         $("#btnSubmit").click(function () {
             if ($.trim($("#qrEmpName").val()) == '') {

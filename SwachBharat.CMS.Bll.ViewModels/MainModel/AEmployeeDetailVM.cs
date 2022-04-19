@@ -41,5 +41,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
         public string DivisionName { get; set; }
 
         public int DistictId { get; set; }
+
+        public List<MenuItemDivison> ULBList { get; set; }
+
     }
 }

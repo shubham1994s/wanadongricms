@@ -82,12 +82,12 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-        public List<MenuItemULB> GetULBMenus()
-        {
-            List<MenuItemULB> menuList = new List<MenuItemULB>();
-            menuList = mainrepository.GetULBMenus();
-            return menuList;
-        }
+        //public List<MenuItemULB> GetULBMenus()
+        //{
+        //    List<MenuItemULB> menuList = new List<MenuItemULB>();
+        //    menuList = mainrepository.GetULBMenus();
+        //    return menuList;
+        //}
 
 
    

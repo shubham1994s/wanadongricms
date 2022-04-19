@@ -274,6 +274,7 @@
     <Compile Include="Areas\Street\Controllers\StreetSweepingController.cs" />
     <Compile Include="Areas\Street\StreetAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountMasterController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AndroidController.cs" />
     <Compile Include="Controllers\AttendenceController.cs" />
@@ -3041,6 +3042,8 @@
     <Content Include="Views\Shared\_HSLoginPartial.cshtml" />
     <Content Include="Views\Admin\MenuIndex2.cshtml" />
     <Content Include="Views\Admin\AddAUREmployeeDetails.cshtml" />
+    <Content Include="Views\AccountMaster\Login.cshtml" />
+    <Content Include="Views\AccountMaster\MenuIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
