@@ -76,6 +76,7 @@
     <Compile Include="GridRepository\Grid\AreaGridRepository.cs" />
     <Compile Include="GridRepository\Grid\AttendeceGridRepository.cs" />
     <Compile Include="GridRepository\Grid\AttendenceSettingsGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\AURAttendanceGridRepository.cs" />
     <Compile Include="GridRepository\Grid\ComplaintGridRepository.cs" />
     <Compile Include="GridRepository\Grid\DumpYardCollectionGridRepository.cs" />
     <Compile Include="GridRepository\Grid\DumpYardGridRepository.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="GridRepository\Grid\LiquidWasteGridRepository.cs" />
     <Compile Include="GridRepository\Grid\LiquidZoneGridRepository.cs" />
     <Compile Include="GridRepository\Grid\LocationGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\MonthlyAttendeceGridRepository.cs" />
     <Compile Include="GridRepository\Grid\OnePointeightEditGridRepository.cs" />
     <Compile Include="GridRepository\Grid\OnePointeightGridRepository.cs" />
     <Compile Include="GridRepository\Grid\OnepointfiveEditGridRepository.cs" />

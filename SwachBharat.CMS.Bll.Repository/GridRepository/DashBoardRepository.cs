@@ -2740,6 +2740,101 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
+        public IEnumerable<SBAAttendenceGrid> GetMonthlyAttendeceData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string Emptype)
+        {
+            List<SBAAttendenceGrid> obj = new List<SBAAttendenceGrid>();
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.Daily_Attendance.Where(c => c.EmployeeType == Emptype).ToList();
+                if (Convert.ToDateTime(fdate).ToString("dd/MM/yyyy") == Convert.ToDateTime(DateTime.Now).ToString("dd/MM/yyyy"))
+                {
+                    data = data.Where(c => (c.daDate == fdate || c.daEndDate == fdate || c.endTime == "")).ToList();
+                }
+                else
+                {
+
+                    data = data.Where(c => (c.daDate >= fdate && c.daDate <= tdate) || (c.daDate >= fdate && c.daDate <= tdate)).ToList();
+                }
+
+                foreach (var x in data)
+                {
+                    int a = Convert.ToInt32(x.vtId.Trim());
+                    string vt = "";
+                    try { vt = db.VehicleTypes.Where(c => c.vtId == a).FirstOrDefault().description; }
+                    catch { vt = ""; }
+                    ///x.daDate = checkNull(x.daDate.tp);
+                    x.endLat = checkNull(x.endLat);
+                    x.endLong = checkNull(x.endLong);
+                    x.endTime = checkNull(x.endTime);
+                    x.startLat = checkNull(x.startLat);
+                    x.startLong = checkNull(x.startLong);
+                    x.startTime = checkNull(x.startTime);
+                    x.vehicleNumber = checkNull(x.vehicleNumber);
+                    x.daEndNote = checkNull(x.daEndNote);
+                    x.daStartNote = checkNull(x.daStartNote);
+                    string endate = "";
+                    if (x.daEndDate == null)
+                    {
+                        endate = "";
+                    }
+                    else
+                    {
+                        endate = Convert.ToDateTime(x.daEndDate).ToString("dd/MM/yyyy");
+                    }
+
+                    // string displayTime = Convert.ToDateTime(x.daDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    string displayTime = Convert.ToDateTime(x.daDate).ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
+                    string time = Convert.ToDateTime(x.startTime).ToString("HH:mm:ss");
+
+                    obj.Add(new SBAAttendenceGrid()
+                    {
+                        daID = x.daID,
+                        userId = Convert.ToInt32(x.userId),
+                        userName = db.UserMasters.Where(c => c.userId == x.userId).FirstOrDefault().userName,
+                        daDate = Convert.ToDateTime(x.daDate).ToString("dd/MM/yyyy"),
+                        daEndDate = endate,
+                        startTime = x.startTime,
+                        endTime = x.endTime,
+                        startLat = x.startLat,
+                        startLong = x.startLong,
+                        endLat = x.startLong,
+                        endLong = x.endLong,
+                        vtId = vt,
+                        vehicleNumber = x.vehicleNumber,
+                        CompareDate = x.daDate,
+                        daDateTIme = (displayTime + " " + time)
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    var model = obj.Where(c => c.vehicleNumber.Contains(SearchString) || c.daDate.Contains(SearchString) || c.endTime.Contains(SearchString) || c.startLat.Contains(SearchString) || c.endLat.Contains(SearchString) || c.startTime.Contains(SearchString) || c.userName.Contains(SearchString) || c.vtId.Contains(SearchString)
+
+                    || c.vehicleNumber.ToLower().Contains(SearchString) || c.vtId.ToLower().Contains(SearchString) || c.daDate.ToLower().Contains(SearchString) || c.endTime.ToLower().Contains(SearchString) || c.startLat.ToLower().Contains(SearchString) || c.endLat.ToLower().Contains(SearchString) || c.startTime.ToLower().Contains(SearchString) || c.userName.ToLower().Contains(SearchString)).ToList();
+
+                    obj = model.ToList();
+                }
+
+                //if (!string.IsNullOrEmpty(fdate.ToString()))
+                //{
+                //    DateTime? dt1 = null;
+                //    if (!string.IsNullOrEmpty(tdate.ToString()))
+                //    { dt1 = tdate; }
+                //    else { dt1 = fdate; }
+                //    obj = obj.Where(fullEntry => fullEntry.CompareDate >= fdate && fullEntry.CompareDate <= dt1).OrderByDescending(c => c.CompareDate).ToList();
+                //}
+                if (userId > 0)
+                {
+                    var model = obj.Where(c => c.userId == userId).ToList();
+
+                    obj = model.ToList();
+                }
+                //var d = obj.OrderByDescending(c => DateTime.Parse(c.daDateTIme)).ToList();
+                var d = obj.OrderByDescending(c => c.daID).ToList();
+                return d;
+            }
+        }
+
         public IEnumerable<ComplaintGrid> GetComplaintData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int appId)
         {
             List<ComplaintGrid> obj = new List<ComplaintGrid>();
@@ -4741,6 +4836,62 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
            
         
         }
+
+
+        public IEnumerable<UREmployeeDetails> GetAURDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+        {
+            string strOrderBy = "";
+            if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
+            {
+                strOrderBy = sortColumn + " " + sortColumnDir;
+            }
+
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+
+            List<UREmployeeDetails> data = null;
+
+            using (var db = new DevSwachhBharatMainEntities())
+            {
+                if (ClientId == "A")
+                {
+                    data = db.AEmployeeMasters.Select(x => new UREmployeeDetails
+                    {
+                        EmpId = x.EmpId,
+                        EmpName = x.EmpName,
+                        lastModifyDateEntry = (x.lastModifyDateEntry).ToString(),
+                        type = x.type,
+                        isActive = x.isActive,
+
+                    }).Where(x => x.isActive == true).ToList();
+                }
+                else
+                {
+                    data = db.AEmployeeMasters.Select(x => new UREmployeeDetails
+                    {
+                        EmpId = x.EmpId,
+                        EmpName = x.EmpName,
+                        lastModifyDateEntry = (x.lastModifyDateEntry).ToString(),
+                        type = x.type,
+                        isActive = x.isActive,
+
+                    }).Where(x => x.isActive == false).ToList();
+                }
+
+
+                if (!string.IsNullOrEmpty(SearchString) && SearchString != "-2")
+                {
+                    data = data.Where(c => ((string.IsNullOrEmpty(c.EmpName) ? " " : c.EmpName) + " " + (string.IsNullOrEmpty(c.type) ? " " : c.type)).ToUpper().Contains(SearchString.ToUpper())
+                     ).ToList();
+
+                }
+                return data;
+
+            }
+
+
+        }
+
         public IEnumerable<SBAHSDumpyardDetailsGrid> GetHSDumpyardDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
         {
 
