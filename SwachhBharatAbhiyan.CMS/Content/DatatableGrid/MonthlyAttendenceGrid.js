@@ -23,7 +23,7 @@
 
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
-        "order": [[2, "desc"]],
+        "order": [[1, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -53,15 +53,47 @@
 
 
         "columns": [
-            { "data": "daID", "name": "daID", "autoWidth": true },
+            //{ "data": "daID", "name": "daID", "autoWidth": true },
             { "data": "daID", "name": "daID", "autoWidth": true },
             { "data": "userName", "name": "userName", "autoWidth": true },
             { "data": "month_name", "name": "month_name", "autoWidth": true },
-            { "data": "day", "name": "day", "autoWidth": true },
-            { "data": "status", "name": "status", "autoWidth": true },
-            //{ "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="house_route(' + full["daID"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
-            //{ "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="user_route(' + full["daID"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
 
+            { "data": "day1", "name": "day1", "autoWidth": true },
+            { "data": "day2", "name": "day2", "autoWidth": true },
+            { "data": "day3", "name": "day3", "autoWidth": true },
+            { "data": "day4", "name": "day4", "autoWidth": true },
+            { "data": "day5", "name": "day5", "autoWidth": true },
+            { "data": "day6", "name": "day6", "autoWidth": true },
+            { "data": "day7", "name": "day7", "autoWidth": true },
+            { "data": "day8", "name": "day8", "autoWidth": true },
+            { "data": "day9", "name": "day9", "autoWidth": true },
+            { "data": "day10", "name": "day10", "autoWidth": true },
+
+            { "data": "day11", "name": "day11", "autoWidth": true },
+            { "data": "day12", "name": "day12", "autoWidth": true },
+            { "data": "day13", "name": "day13", "autoWidth": true },
+            { "data": "day14", "name": "day14", "autoWidth": true },
+            { "data": "day15", "name": "day15", "autoWidth": true },
+            { "data": "day16", "name": "day16", "autoWidth": true },
+            { "data": "day17", "name": "day17", "autoWidth": true },
+            { "data": "day18", "name": "day18", "autoWidth": true },
+            { "data": "day19", "name": "day19", "autoWidth": true },
+            { "data": "day20", "name": "day20", "autoWidth": true },
+
+            { "data": "day21", "name": "day21", "autoWidth": true },
+            { "data": "day22", "name": "day22", "autoWidth": true },
+            { "data": "day23", "name": "day23", "autoWidth": true },
+            { "data": "day24", "name": "day24", "autoWidth": true },
+            { "data": "day25", "name": "day25", "autoWidth": true },
+            { "data": "day26", "name": "day26", "autoWidth": true },
+            { "data": "day27", "name": "day27", "autoWidth": true },
+            { "data": "day28", "name": "day28", "autoWidth": true },
+            { "data": "day29", "name": "day29", "autoWidth": true },
+            { "data": "day30", "name": "day30", "autoWidth": true },
+            { "data": "day31", "name": "day31", "autoWidth": true },
+          
+           
+           
         ],
         // Sort: "locId DESC"
     });

@@ -209,51 +209,48 @@
           <Property Name="SourceId" Type="int" />
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.MonthlyAttedance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MonthlyAttedance">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userId" Type="int" />
-          <Property Name="startTime" Type="nvarchar" MaxLength="200" />
-          <Property Name="endTime" Type="nvarchar" MaxLength="200" />
-          <Property Name="Date" Type="date" />
-          <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
           <Property Name="UserName" Type="nvarchar" MaxLength="200" />
           <Property Name="Month_name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Day" Type="nvarchar" MaxLength="10" />
-          <Property Name="Day1" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day2" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day3" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day4" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day5" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day6" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day7" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day8" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day9" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day10" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day11" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day12" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day13" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day14" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day15" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day16" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day17" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day18" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day19" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day20" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day21" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day22" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day23" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day24" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day25" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day26" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day27" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day28" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day29" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day30" Type="nvarchar" MaxLength="20" />
-          <Property Name="Day31" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day1" Type="nvarchar(max)" />
+          <Property Name="Day2" Type="nvarchar(max)" />
+          <Property Name="Day3" Type="nvarchar(max)" />
+          <Property Name="Day4" Type="nvarchar(max)" />
+          <Property Name="Day5" Type="nvarchar(max)" />
+          <Property Name="Day6" Type="nvarchar(max)" />
+          <Property Name="Day7" Type="nvarchar(max)" />
+          <Property Name="Day8" Type="nvarchar(max)" />
+          <Property Name="Day9" Type="nvarchar(max)" />
+          <Property Name="Day10" Type="nvarchar(max)" />
+          <Property Name="Day11" Type="nvarchar(max)" />
+          <Property Name="Day12" Type="nvarchar(max)" />
+          <Property Name="Day13" Type="nvarchar(max)" />
+          <Property Name="Day14" Type="nvarchar(max)" />
+          <Property Name="Day15" Type="nvarchar(max)" />
+          <Property Name="Day16" Type="nvarchar(max)" />
+          <Property Name="Day17" Type="nvarchar(max)" />
+          <Property Name="Day18" Type="nvarchar(max)" />
+          <Property Name="Day19" Type="nvarchar(max)" />
+          <Property Name="Day20" Type="nvarchar(max)" />
+          <Property Name="Day21" Type="nvarchar(max)" />
+          <Property Name="Day22" Type="nvarchar(max)" />
+          <Property Name="Day23" Type="nvarchar(max)" />
+          <Property Name="Day24" Type="nvarchar(max)" />
+          <Property Name="Day25" Type="nvarchar(max)" />
+          <Property Name="Day26" Type="nvarchar(max)" />
+          <Property Name="Day27" Type="nvarchar(max)" />
+          <Property Name="Day28" Type="nvarchar(max)" />
+          <Property Name="Day29" Type="nvarchar(max)" />
+          <Property Name="Day30" Type="nvarchar(max)" />
+          <Property Name="Day31" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Qr_Employee_Daily_Attendance">
           <Key>
@@ -669,7 +666,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="HouseMaster" EntityType="Self.HouseMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LiquidWasteDetails" EntityType="Self.LiquidWasteDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MonthlyAttedance" EntityType="Self.MonthlyAttedance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Qr_Employee_Daily_Attendance" EntityType="Self.Qr_Employee_Daily_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Qr_Location" EntityType="Self.Qr_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QrEmployeeMaster" EntityType="Self.QrEmployeeMaster" Schema="dbo" store:Type="Tables" />
@@ -686,6 +682,46 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="WM_GarbageCategory" EntityType="Self.WM_GarbageCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WM_GarbageSubCategory" EntityType="Self.WM_GarbageSubCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZoneMaster" EntityType="Self.ZoneMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthlyAttedance" EntityType="Self.MonthlyAttedance" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MonthlyAttedance].[ID] AS [ID], 
+    [MonthlyAttedance].[userId] AS [userId], 
+    [MonthlyAttedance].[EmployeeType] AS [EmployeeType], 
+    [MonthlyAttedance].[UserName] AS [UserName], 
+    [MonthlyAttedance].[Month_name] AS [Month_name], 
+    [MonthlyAttedance].[Day1] AS [Day1], 
+    [MonthlyAttedance].[Day2] AS [Day2], 
+    [MonthlyAttedance].[Day3] AS [Day3], 
+    [MonthlyAttedance].[Day4] AS [Day4], 
+    [MonthlyAttedance].[Day5] AS [Day5], 
+    [MonthlyAttedance].[Day6] AS [Day6], 
+    [MonthlyAttedance].[Day7] AS [Day7], 
+    [MonthlyAttedance].[Day8] AS [Day8], 
+    [MonthlyAttedance].[Day9] AS [Day9], 
+    [MonthlyAttedance].[Day10] AS [Day10], 
+    [MonthlyAttedance].[Day11] AS [Day11], 
+    [MonthlyAttedance].[Day12] AS [Day12], 
+    [MonthlyAttedance].[Day13] AS [Day13], 
+    [MonthlyAttedance].[Day14] AS [Day14], 
+    [MonthlyAttedance].[Day15] AS [Day15], 
+    [MonthlyAttedance].[Day16] AS [Day16], 
+    [MonthlyAttedance].[Day17] AS [Day17], 
+    [MonthlyAttedance].[Day18] AS [Day18], 
+    [MonthlyAttedance].[Day19] AS [Day19], 
+    [MonthlyAttedance].[Day20] AS [Day20], 
+    [MonthlyAttedance].[Day21] AS [Day21], 
+    [MonthlyAttedance].[Day22] AS [Day22], 
+    [MonthlyAttedance].[Day23] AS [Day23], 
+    [MonthlyAttedance].[Day24] AS [Day24], 
+    [MonthlyAttedance].[Day25] AS [Day25], 
+    [MonthlyAttedance].[Day26] AS [Day26], 
+    [MonthlyAttedance].[Day27] AS [Day27], 
+    [MonthlyAttedance].[Day28] AS [Day28], 
+    [MonthlyAttedance].[Day29] AS [Day29], 
+    [MonthlyAttedance].[Day30] AS [Day30], 
+    [MonthlyAttedance].[Day31] AS [Day31]
+    FROM [dbo].[MonthlyAttedance] AS [MonthlyAttedance]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="SauchalayAddress" EntityType="Self.SauchalayAddress" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [SauchalayAddress].[Id] AS [Id], 
@@ -916,10 +952,10 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="PagingSize" Mode="In" Type="Int32" />
             <Parameter Name="SearchText" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="MonthlyAttedances" EntityType="DevSwachhBharatNagpurModel.MonthlyAttedance" />
           <EntitySet Name="Vw_MsgNotification" EntityType="DevSwachhBharatNagpurModel.Vw_MsgNotification" />
           <EntitySet Name="GarbageCollectionDetails" EntityType="DevSwachhBharatNagpurModel.GarbageCollectionDetail" />
           <EntitySet Name="Daily_Attendance" EntityType="DevSwachhBharatNagpurModel.Daily_Attendance" />
+          <EntitySet Name="MonthlyAttedances" EntityType="DevSwachhBharatNagpurModel.MonthlyAttedance" />
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -1950,52 +1986,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="String" Name="QRCodeImage" Nullable="true" />
           <Property Type="Int32" Name="FilterTotalCount" Nullable="true" />
         </ComplexType>
-        <EntityType Name="MonthlyAttedance">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="startTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="endTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Month_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Day" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Day1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day4" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day5" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day6" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day7" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day8" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day9" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day10" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day11" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day12" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day13" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day14" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day15" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day16" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day17" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day18" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day19" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day20" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day21" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day22" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day23" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day24" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day25" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day26" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day27" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day28" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day29" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day30" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Day31" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Vw_MsgNotification">
           <Key>
             <PropertyRef Name="userId" />
@@ -2075,6 +2065,47 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="totalKm" Type="Int32" />
           <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MonthlyAttedance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Month_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day7" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day8" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day9" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day10" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day11" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day12" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day13" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day14" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day15" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day16" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day17" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day18" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day19" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day20" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day21" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day22" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day23" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day24" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day25" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day26" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day27" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day28" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day29" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day30" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Day31" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3135,53 +3166,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MonthlyAttedances">
-            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.MonthlyAttedance">
-              <MappingFragment StoreEntitySet="MonthlyAttedance">
-                <ScalarProperty Name="Day31" ColumnName="Day31" />
-                <ScalarProperty Name="Day30" ColumnName="Day30" />
-                <ScalarProperty Name="Day29" ColumnName="Day29" />
-                <ScalarProperty Name="Day28" ColumnName="Day28" />
-                <ScalarProperty Name="Day27" ColumnName="Day27" />
-                <ScalarProperty Name="Day26" ColumnName="Day26" />
-                <ScalarProperty Name="Day25" ColumnName="Day25" />
-                <ScalarProperty Name="Day24" ColumnName="Day24" />
-                <ScalarProperty Name="Day23" ColumnName="Day23" />
-                <ScalarProperty Name="Day22" ColumnName="Day22" />
-                <ScalarProperty Name="Day21" ColumnName="Day21" />
-                <ScalarProperty Name="Day20" ColumnName="Day20" />
-                <ScalarProperty Name="Day19" ColumnName="Day19" />
-                <ScalarProperty Name="Day18" ColumnName="Day18" />
-                <ScalarProperty Name="Day17" ColumnName="Day17" />
-                <ScalarProperty Name="Day16" ColumnName="Day16" />
-                <ScalarProperty Name="Day15" ColumnName="Day15" />
-                <ScalarProperty Name="Day14" ColumnName="Day14" />
-                <ScalarProperty Name="Day13" ColumnName="Day13" />
-                <ScalarProperty Name="Day12" ColumnName="Day12" />
-                <ScalarProperty Name="Day11" ColumnName="Day11" />
-                <ScalarProperty Name="Day10" ColumnName="Day10" />
-                <ScalarProperty Name="Day9" ColumnName="Day9" />
-                <ScalarProperty Name="Day8" ColumnName="Day8" />
-                <ScalarProperty Name="Day7" ColumnName="Day7" />
-                <ScalarProperty Name="Day6" ColumnName="Day6" />
-                <ScalarProperty Name="Day5" ColumnName="Day5" />
-                <ScalarProperty Name="Day4" ColumnName="Day4" />
-                <ScalarProperty Name="Day3" ColumnName="Day3" />
-                <ScalarProperty Name="Day2" ColumnName="Day2" />
-                <ScalarProperty Name="Day1" ColumnName="Day1" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="Month_name" ColumnName="Month_name" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="endTime" ColumnName="endTime" />
-                <ScalarProperty Name="startTime" ColumnName="startTime" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Vw_MsgNotification">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.Vw_MsgNotification">
               <MappingFragment StoreEntitySet="Vw_MsgNotification">
@@ -3262,6 +3246,48 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="startLat" ColumnName="startLat" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="daID" ColumnName="daID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthlyAttedances">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.MonthlyAttedance">
+              <MappingFragment StoreEntitySet="MonthlyAttedance">
+                <ScalarProperty Name="Day31" ColumnName="Day31" />
+                <ScalarProperty Name="Day30" ColumnName="Day30" />
+                <ScalarProperty Name="Day29" ColumnName="Day29" />
+                <ScalarProperty Name="Day28" ColumnName="Day28" />
+                <ScalarProperty Name="Day27" ColumnName="Day27" />
+                <ScalarProperty Name="Day26" ColumnName="Day26" />
+                <ScalarProperty Name="Day25" ColumnName="Day25" />
+                <ScalarProperty Name="Day24" ColumnName="Day24" />
+                <ScalarProperty Name="Day23" ColumnName="Day23" />
+                <ScalarProperty Name="Day22" ColumnName="Day22" />
+                <ScalarProperty Name="Day21" ColumnName="Day21" />
+                <ScalarProperty Name="Day20" ColumnName="Day20" />
+                <ScalarProperty Name="Day19" ColumnName="Day19" />
+                <ScalarProperty Name="Day18" ColumnName="Day18" />
+                <ScalarProperty Name="Day17" ColumnName="Day17" />
+                <ScalarProperty Name="Day16" ColumnName="Day16" />
+                <ScalarProperty Name="Day15" ColumnName="Day15" />
+                <ScalarProperty Name="Day14" ColumnName="Day14" />
+                <ScalarProperty Name="Day13" ColumnName="Day13" />
+                <ScalarProperty Name="Day12" ColumnName="Day12" />
+                <ScalarProperty Name="Day11" ColumnName="Day11" />
+                <ScalarProperty Name="Day10" ColumnName="Day10" />
+                <ScalarProperty Name="Day9" ColumnName="Day9" />
+                <ScalarProperty Name="Day8" ColumnName="Day8" />
+                <ScalarProperty Name="Day7" ColumnName="Day7" />
+                <ScalarProperty Name="Day6" ColumnName="Day6" />
+                <ScalarProperty Name="Day5" ColumnName="Day5" />
+                <ScalarProperty Name="Day4" ColumnName="Day4" />
+                <ScalarProperty Name="Day3" ColumnName="Day3" />
+                <ScalarProperty Name="Day2" ColumnName="Day2" />
+                <ScalarProperty Name="Day1" ColumnName="Day1" />
+                <ScalarProperty Name="Month_name" ColumnName="Month_name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

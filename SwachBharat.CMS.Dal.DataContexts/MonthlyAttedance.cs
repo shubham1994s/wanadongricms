@@ -16,14 +16,9 @@ namespace SwachBharat.CMS.Dal.DataContexts
     {
         public int ID { get; set; }
         public Nullable<int> userId { get; set; }
-        public string startTime { get; set; }
-        public string endTime { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string Status { get; set; }
         public string EmployeeType { get; set; }
         public string UserName { get; set; }
         public string Month_name { get; set; }
-        public string Day { get; set; }
         public string Day1 { get; set; }
         public string Day2 { get; set; }
         public string Day3 { get; set; }

@@ -2754,15 +2754,45 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         userId = Convert.ToInt32(x.userId),
                         userName = x.UserName,
                         month_name=x.Month_name,
-                        day=x.Day,
-                        status=x.Status,
+                        day1=x.Day1,
+                        day2 = x.Day2,
+                        day3 = x.Day3,
+                        day4 = x.Day4,
+                        day5 = x.Day5,
+                        day6 = x.Day6,
+                        day7 = x.Day7,
+                        day8 = x.Day8,
+                        day9 = x.Day9,
+                        day10 = x.Day10,
+                        day11 = x.Day11,
+                        day12 = x.Day12,
+                        day13 = x.Day13,
+                        day14 = x.Day14,
+                        day15 = x.Day15,
+                        day16 = x.Day16,
+                        day17 = x.Day17,
+                        day18 = x.Day18,
+                        day19 = x.Day19,
+                        day20 = x.Day20,
+
+                        day21 = x.Day21,
+                        day22 = x.Day22,
+                        day23 = x.Day23,
+                        day24 = x.Day24,
+                        day25 = x.Day25,
+                        day26 = x.Day26,
+                        day27 = x.Day27,
+                        day28 = x.Day28,
+                        day29 = x.Day29,
+                        day30 = x.Day30,
+                        day31 = x.Day31,
 
                     });
                 }
 
                 if (!string.IsNullOrEmpty(SearchString))
                 {
-                    var model = obj.Where(c => c.userName.ToLower().Contains(SearchString)).ToList();
+                    var model = obj.Where(c => c.userName.ToLower().Contains(SearchString) ).ToList();
 
                     obj = model.ToList();
                 }
