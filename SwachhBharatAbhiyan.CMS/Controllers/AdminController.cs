@@ -90,26 +90,18 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-   
-
+       
         public ActionResult AddAUREmployeeDetails(int teamId = -1)
         
         {        
             AEmployeeDetailVM division = mainrepository.GetDivision();
-           
+
+            
+
             return View(division);
         }
 
-        [HttpPost]
-        public ActionResult LoadDistrictListList(int Id)
-
-        {
-
-            AEmployeeDetailVM division = mainrepository.GetDistrict(Id);
-
-            return Json(division.DistrictList, JsonRequestBehavior.AllowGet);
-        }
-
+      
         //public ActionResult LoadDistrictListList(int Id)
 
         //{
@@ -121,6 +113,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [HttpPost]
         public ActionResult AddHSUREmployeeDetails(AEmployeeDetailVM emp)
         {
+
+
             mainrepository.SaveUREmployee(emp);
             return Redirect("HSURIndex");
 

@@ -44,7 +44,7 @@
                         </div>
                     </div>
 
-                 
+
                     <div class="col-md-6">
                         <div class="form-group">
                             @*@Html.Label("मोबाइल / Mobile")*@
@@ -60,7 +60,7 @@
 
                 </div>
 
-             
+
 
                 <div class="row">
 
@@ -110,7 +110,7 @@
                             @*@Html.Label("रक्त गट / Blood Group ")*@
                             @Html.Label("District")
                             @*@Html.DropDownListFor(model => model.DistictId, Model.DistrictList, new { @disabled = "disabled", placeholder = HttpUtility.HtmlDecode("&#xf039;Select District"), style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
-                            @Html.ValidationMessageFor(model => model.DistictId, "", new { @class = "text-danger" })*@
+                                @Html.ValidationMessageFor(model => model.DistictId, "", new { @class = "text-danger" })*@
                             <div class="row" id="checkUR">
 
 
@@ -148,12 +148,12 @@
                                             }
                                             if (i % 4 == 0)
                                             {
-                                    <td class="ulbs">
-                                        @Html.CheckBoxFor(x => x.CheckDist[i].IsCheked, new { @class = "custom-checkbox individual" })
-                                        <label>@Model.CheckDist[i].name</label>
-                                        @Html.HiddenFor(x => x.CheckDist[i].id)
-                                        @Html.HiddenFor(x => x.CheckDist[i].name)
-                                    </td>
+                                                <td class="ulbs">
+                                                    @Html.CheckBoxFor(x => x.CheckDist[i].IsCheked, new { @class = "custom-checkbox individual" })
+                                                    <label>@Model.CheckDist[i].name</label>
+                                                    @Html.HiddenFor(x => x.CheckDist[i].id)
+                                                    @Html.HiddenFor(x => x.CheckDist[i].name)
+                                                </td>
                                             }
 
                                         }
@@ -201,7 +201,7 @@
 
                     </div>
 
-                 
+
 
                 </div>
                 <br />
@@ -218,8 +218,8 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 }
 
 <script>
@@ -256,8 +256,8 @@
             //$('.title_change').text("कर्मचारी तपशील सादर करा / Add  Employee Details");
             $('.title_change').text("Add  User Details");
         }
-    
-      /*  $('#DivisionId').html('<option selected = "selected" value = "0" > --Select Division--</option >');*/
+
+        /*  $('#DivisionId').html('<option selected = "selected" value = "0" > --Select Division--</option >');*/
 
         //imei Validation and clear login validation
 
@@ -294,7 +294,7 @@
 
 
 
-       
+
 
         $("#btnSubmit").click(function () {
             if ($.trim($("#qrEmpName").val()) == '') {
@@ -349,7 +349,7 @@
         }
         $.ajax({
             type: "post",
-            url: "/Admin/LoadDistrictListList?",
+            url: "/Admin/AddHSUREmployeeDetails ?",
             data: { Id: $('#DivisionId').val() },
             datatype: "json",
             traditional: true,
@@ -357,9 +357,9 @@
                 debugger;
                 var area;
                 for (var i = 0; i < data.length; i++) {
-                   /* area = area + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';*/
+                    /* area = area + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';*/
 
-                    area = area + '<td class="ulbs"><input class="custom-checkbox individual" data-val="true" data-val-required="The IsCheked field is required." id="CheckDist_0__IsCheked" name="CheckDist[0].IsCheked" type="checkbox" value="true" autocomplete="off"><input name="CheckDist[0].IsCheked" type="hidden" value="false" autocomplete="off"> <label>'+data[i].Text+'</label> <input data-val="true" data-val-number="The field id must be a number." data-val-required="The id field is required." id="CheckDist_0__id" name="CheckDist[0].id" type="hidden" value="1001" autocomplete="off"> <input id="CheckDist_0__name" name="CheckDist[0].name" type="hidden" value="Seloo" autocomplete="off">   </td>'
+                    area = area + '<td class="ulbs"><input class="custom-checkbox individual" data-val="true" data-val-required="The IsCheked field is required." id="CheckDist_0__IsCheked" name="CheckDist[0].IsCheked" type="checkbox" value="true" autocomplete="off"><input name="CheckDist[0].IsCheked" type="hidden" value="false" autocomplete="off"> <label>' + data[i].Text + '</label> <input data-val="true" data-val-number="The field id must be a number." data-val-required="The id field is required." id="CheckDist_0__id" name="CheckDist[0].id" type="hidden" value="1001" autocomplete="off"> <input id="CheckDist_0__name" name="CheckDist[0].name" type="hidden" value="Seloo" autocomplete="off">   </td>'
                 }
 
 

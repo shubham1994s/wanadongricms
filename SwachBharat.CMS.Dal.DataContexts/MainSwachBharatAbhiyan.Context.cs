@@ -45,11 +45,10 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<AD_USER_MST_LIQUID> AD_USER_MST_LIQUID { get; set; }
         public virtual DbSet<AD_USER_MST_STREET> AD_USER_MST_STREET { get; set; }
         public virtual DbSet<AppDetail> AppDetails { get; set; }
-        public virtual DbSet<CheckAppD> CheckAppDs { get; set; }
         public virtual DbSet<EmployeeMaster> EmployeeMasters { get; set; }
-    
-        public virtual DbSet<AEmployeeMaster> AEmployeeMasters { get; set; }
+        public virtual DbSet<CheckAppD> CheckAppDs { get; set; }
         public virtual DbSet<tehsil> tehsils { get; set; }
+        public virtual DbSet<AEmployeeMaster> AEmployeeMasters { get; set; }
     
         public virtual int SP_Admin_table()
         {

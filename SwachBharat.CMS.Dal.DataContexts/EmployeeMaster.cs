@@ -11,8 +11,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class EmployeeMaster
     {
         public int EmpId { get; set; }
@@ -24,7 +23,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string EmpAddress { get; set; }
         public string type { get; set; }
         public Nullable<bool> isActive { get; set; }
-        [MaxLength(750)]
         public string isActiveULB { get; set; }
         public Nullable<System.DateTime> lastModifyDateEntry { get; set; }
     }
