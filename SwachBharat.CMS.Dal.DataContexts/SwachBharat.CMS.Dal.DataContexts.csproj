@@ -212,9 +212,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainSwachBharatAbhiyan.edmx</DependentUpon>
     </Compile>
-    <Compile Include="MonthlyAttedance.cs">
-      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
-    </Compile>
     <Compile Include="PointDetails_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
