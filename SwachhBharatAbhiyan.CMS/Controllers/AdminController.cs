@@ -11,7 +11,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 {
     public class AdminController : Controller
     {
-        private IMainRepository mainrepository;
+         IMainRepository mainrepository;
         public AdminController()
         {
             // AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
@@ -90,29 +90,47 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-   
-
+       
         public ActionResult AddAUREmployeeDetails(int teamId = -1)
-        {
+        
+        {        
+            AEmployeeDetailVM division = mainrepository.GetDivision();
 
-          
-            //UREmployeeDetailsVM house = childRepository.GetUREmployeeById(teamId);
-            //ViewBag.EmpId = teamId;
-            //ViewBag.UType = Session["utype"];
-            //ViewBag.HSuserid = Session["Id"];
-            return View();
+            
+
+            return View(division);
         }
 
-        //[HttpPost]
-        //public ActionResult AddHSUREmployeeDetails(UREmployeeDetailsVM emp)
+      
+        //public ActionResult LoadDistrictListList(int Id)
+
         //{
 
-         
-        //    childRepository.SaveUREmployee(emp);
-        //    ViewBag.UType = Session["utype"];
-        //    ViewBag.HSuserid = Session["Id"];
-        //    return Redirect("HSURIndex");
+        //    AEmployeeDetailVM division = mainrepository.GetDistrict(Id);
 
+        //    return View("AddAUREmployeeDetails", division.CheckDist);
         //}
+        [HttpPost]
+        public ActionResult AddHSUREmployeeDetails(AEmployeeDetailVM emp)
+        {
+
+
+            mainrepository.SaveUREmployee(emp);
+            return Redirect("HSURIndex");
+
+        }
+
+
+        public ActionResult AURIndex()
+        {
+            int appid = 1;
+            ViewBag.AppId = appid;
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return View();
+
+
+        }
+
     }
 }

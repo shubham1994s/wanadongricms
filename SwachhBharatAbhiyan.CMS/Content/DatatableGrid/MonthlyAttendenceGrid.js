@@ -41,6 +41,38 @@
                 "targets": [0],
                 "visible": false,
                 "searchable": false
+            }, {
+                "targets": [6],
+                "visible": false,
+                "searchable": false
+            }, {
+                "targets": [7],
+                "visible": false,
+                "searchable": false
+            }, {
+                "targets": [8],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [9],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [10],
+                "orderable": false
+            },
+            {
+                "targets": [14],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [15],
+                "visible": false,
+                "searchable": false,
+                "type": "date-eu"
                 }
                 //,
             //{

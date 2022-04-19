@@ -27,10 +27,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string target { get; set; }
         public Nullable<System.DateTime> lastModifyDate { get; set; }
 
-        //public int userId { get; set; }
-        //[Remote("CheckUserDetails", "HouseScanify", HttpMethod = "POST", ErrorMessage = "Name already exists!", AdditionalFields = "userId")]
-
-        [Remote("CheckUserDetails", "HouseScanify", HttpMethod = "POST", ErrorMessage = "Name already exists!", AdditionalFields = "qrEmpId")]
+     
         public string qrEmpLoginId { get; set; }
         
         public string LoginId { get; set; }

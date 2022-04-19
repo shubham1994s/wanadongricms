@@ -279,11 +279,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     return gridRepository;
                     break;
 
-
-                case "MonthlyAttendance":
+                case "MonthlyAttendence":
                     gridRepository = new MonthlyAttendeceGridRepository(0, searchString, fdate, tdate, userId, appId, null);
                     return gridRepository;
                     break;
+
 
                 case "LiquidAttendence":
                     gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId,"L");
@@ -450,6 +450,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                 case "URAttendance":
                     gridRepository = new URAttendanceGridRepository(0, searchString, fdate, tdate, userId,clientId, appId, sortColumn, sortColumnDir, draw, length, start);
+                    return gridRepository;
+                    break;
+
+                case "AURAttendance":
+                    gridRepository = new URAttendanceGridRepository(0, searchString, fdate, tdate, userId, clientId, appId, sortColumn, sortColumnDir, draw, length, start);
                     return gridRepository;
                     break;
                 case "HSHouseDetails":

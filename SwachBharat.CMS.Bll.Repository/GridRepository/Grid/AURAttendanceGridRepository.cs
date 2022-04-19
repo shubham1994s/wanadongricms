@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SwachBharat.CMS.Bll.Repository.GridRepository.Grid
 {
-  public  class URAttendanceGridRepository : IDataTableRepository
+   public class AURAttendanceGridRepository : IDataTableRepository
     {
         IEnumerable<UREmployeeDetails> dataset;
 
         DashBoardRepository objRep = new DashBoardRepository();
 
-        public URAttendanceGridRepository(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId,string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+        public AURAttendanceGridRepository(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
         {
             dataset = objRep.GetAURDetailsData(wildcard, SearchString, fdate, tdate, userId, ClientId, appId, sortColumn, sortColumnDir, draw, length, start);
         }
@@ -25,3 +25,5 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository.Grid
         }
     }
 }
+
+ 

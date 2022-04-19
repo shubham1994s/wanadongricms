@@ -271,8 +271,8 @@
                 <li><a href="/Report/Onepoint8Index?ReportName=1.8">1.8</a></li>*@
 
                             @*<li id="citizen_app"><a href="/League/MenuIndex">Citizen App</a></li>
-                <li><a id="yocc_fb" href="" target="new">YOCC-Feedback</a></li>
-                <li><a id="yocc_dnd" href="" target="new">YOCC-DND</a></li>*@
+                                <li><a id="yocc_fb" href="" target="new">YOCC-Feedback</a></li>
+                                <li><a id="yocc_dnd" href="" target="new">YOCC-DND</a></li>*@
 
                         </ul>
                     </li>
@@ -301,11 +301,11 @@
 
 
                     @*<li class="" id="live_menu">
-            <a href="/Log/MenuIndex">
-                <i class="svg_swacch"> </i>
-                <span class="satana_feedback">Live Tracking</span>
-            </a>
-        </li>*@
+                            <a href="/Log/MenuIndex">
+                                <i class="svg_swacch"> </i>
+                                <span class="satana_feedback">Live Tracking</span>
+                            </a>
+                        </li>*@
 
                 </ul>
                 @*<span class="heading">Extras</span>*@
@@ -622,7 +622,7 @@
                 //$("#clns").css("display", "none");
             }
 
-           
+
             if ($("#asdf").text() == "nagpur@ulb.com!") {
                 //$("#complaint_menu").css("display", "block");
                 $("#citizen_app").css("display", "block");
@@ -695,6 +695,32 @@
         });
 
     </script>
+
+    <script>
+        var idleTime = 0;
+        $(document).ready(function () {
+            //Increment the idle time counter every minute.
+            var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+            //Zero the idle timer on mouse movement.
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+            });
+            $(this).keypress(function (e) {
+                idleTime = 0;
+            });
+        });
+
+        function timerIncrement() {
+            idleTime = idleTime + 1;
+            if (idleTime > 30) { // 15 minutes
+                // window.location = "/Account/login"
+                alert('Session TimeOut');
+                document.getElementById('logoutForm').submit()
+            }
+        }
+    </script>
+
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
     </script>

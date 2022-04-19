@@ -285,13 +285,15 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="header_data" class="modal-title"></h4>
+                    <h3 id="ulb_name1" class="text-center" style="padding-left:12%;width:80%"></h3>
                 </div>
 
                 <div class="modal-body pt-0">
                     <center>
-                      
-                        <div class="row"> <div class="col-md-6" style="padding-top:10rem;text-align:left;padding-left:8%">
+                       
+                        <div class="row">
+                            <div class="col-md-6" style="padding-top:1rem;text-align:left;padding-left:8%">
+                                <h4 id="header_data" class="modal-title" style="padding-bottom:4rem;text-align:left;"></h4>
                                 <p> <b id="hide_date">Employee Name: </b><span id="dateData"></span></p>
                                 <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
                                 <p>  <b id="hide_add1">Date And Time: </b><span id="date1"></span></p>
@@ -330,7 +332,7 @@
 <script type="text/javascript">
 
     function PopImages(cel) {
-        // debugger
+        //debugger
         $('#myModal_Image').modal('toggle');
         var d1 = $(cel).find('.date_time').text();
         var addr = $(cel).find('.addr-length').text();
@@ -340,7 +342,8 @@
 
         var lat = $(cel).find('.li_lat').text();
         var long = $(cel).find('.li_long').text();
-
+        var ulb = $("#ulb_name").text()
+        jQuery("#ulb_name1").text(ulb);
         jQuery("#date1").text(d1);
         jQuery("#latlongData").text(addr);
         jQuery("#dateData").text(date);
