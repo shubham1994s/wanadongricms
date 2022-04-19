@@ -26,5 +26,11 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string daDateTIme { get; set; }
 
 
+        public string month_name { get; set; }
+
+        public string status { get; set; }
+
+        public string day { get; set; }
+
     }
 }

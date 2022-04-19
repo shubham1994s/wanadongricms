@@ -23,7 +23,7 @@
 
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
-        "order": [[15, "desc"]],
+        "order": [[2, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -31,7 +31,7 @@
         //"pageLength": 10,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=MonthlyAttendence",
+            "url": "/Datable/GetJqGridJson?rn=MonthlyAttendance",
             "type": "POST",
             "datatype": "json"
         },
@@ -73,29 +73,26 @@
                 "visible": false,
                 "searchable": false,
                 "type": "date-eu"
-            }
+                }
+                //,
+            //{
+            //    "targets": [15],
+            //    "visible": false,
+            //    "searchable": false,
+            //    "type": "date-eu"
+            //}
             ],
 
 
         "columns": [
             { "data": "daID", "name": "daID", "autoWidth": true },
+            { "data": "daID", "name": "daID", "autoWidth": true },
             { "data": "userName", "name": "userName", "autoWidth": true },
-            { "data": "daDate", "name": "daDate", "autoWidth": true },
-            { "data": "startTime", "name": "startTime", "autoWidth": true },
-            { "data": "daEndDate", "name": "daEndDate", "autoWidth": true },
-            { "data": "endTime", "name": "endTime", "autoWidth": true },
-            { "data": "startLat", "name": "endstartLatTime", "autoWidth": true },
-            { "data": "startLong", "name": "startLong", "autoWidth": true },
-            { "data": "endLat", "name": "endLat", "autoWidth": true },
-            { "data": "endLong", "name": "endLong", "autoWidth": true },
-
-            { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="house_route(' + full["daID"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
-            { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="user_route(' + full["daID"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
-
-            { "data": "vtId", "name": "vtId", "autoWidth": true },
-            { "data": "vehicleNumber", "name": "vehicleNumber", "autoWidth": true },
-            { "data": "CompareDate", "name": "daID", "autoWidth": true },
-            { "data": "daDateTIme", "name": "daDateTIme", "autoWidth": true },
+            { "data": "month_name", "name": "month_name", "autoWidth": true },
+            { "data": "day", "name": "day", "autoWidth": true },
+            { "data": "status", "name": "status", "autoWidth": true },
+            //{ "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="house_route(' + full["daID"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
+            //{ "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="user_route(' + full["daID"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
 
         ],
         // Sort: "locId DESC"

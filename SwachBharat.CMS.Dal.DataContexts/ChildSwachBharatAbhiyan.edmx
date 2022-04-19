@@ -97,7 +97,6 @@
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
           <Property Name="LWId" Type="int" />
           <Property Name="SSId" Type="int" />
-          <Property Name="AreaId" Type="int" />
         </EntityType>
         <EntityType Name="GarbagePointDetails">
           <Key>
@@ -209,6 +208,52 @@
           <Property Name="RFIDReaderId" Type="nvarchar" MaxLength="255" />
           <Property Name="SourceId" Type="int" />
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="MonthlyAttedance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="startTime" Type="nvarchar" MaxLength="200" />
+          <Property Name="endTime" Type="nvarchar" MaxLength="200" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Month_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Day" Type="nvarchar" MaxLength="10" />
+          <Property Name="Day1" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day2" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day3" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day4" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day5" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day6" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day7" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day8" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day9" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day10" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day11" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day12" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day13" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day14" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day15" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day16" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day17" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day18" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day19" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day20" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day21" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day22" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day23" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day24" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day25" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day26" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day27" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day28" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day29" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day30" Type="nvarchar" MaxLength="20" />
+          <Property Name="Day31" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Qr_Employee_Daily_Attendance">
           <Key>
@@ -461,8 +506,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="bloodGroup" Type="nvarchar" MaxLength="250" />
           <Property Name="isActive" Type="bit" />
           <Property Name="gcTarget" Type="varchar" MaxLength="250" />
-          <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
-          <Property Name="imoNo2" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_SS_1_4_ANSWER_SS_1_4_ANSWER">
           <End Role="SS_1_4_ANSWER" Type="Self.SS_1_4_ANSWER" Multiplicity="1" />
@@ -536,16 +579,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Parameter Name="ZoneId" Type="int" Mode="In" />
           <Parameter Name="AreaId" Type="int" Mode="In" />
           <Parameter Name="WardNo" Type="int" Mode="In" />
-        </Function>
-        <Function Name="SP_GetHSHouseDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fdate" Type="datetime" Mode="In" />
-          <Parameter Name="tdate" Type="datetime" Mode="In" />
-          <Parameter Name="userid" Type="int" Mode="In" />
-          <Parameter Name="sortColumn" Type="varchar" Mode="In" />
-          <Parameter Name="sortOrder" Type="varchar" Mode="In" />
-          <Parameter Name="OffsetValue" Type="int" Mode="In" />
-          <Parameter Name="PagingSize" Type="int" Mode="In" />
-          <Parameter Name="SearchText" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_GetLiveTracking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HouseOnMapDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -639,6 +672,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="HouseMaster" EntityType="Self.HouseMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LiquidWasteDetails" EntityType="Self.LiquidWasteDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthlyAttedance" EntityType="Self.MonthlyAttedance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Qr_Employee_Daily_Attendance" EntityType="Self.Qr_Employee_Daily_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Qr_Location" EntityType="Self.Qr_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QrEmployeeMaster" EntityType="Self.QrEmployeeMaster" Schema="dbo" store:Type="Tables" />
@@ -693,9 +727,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
     [Vw_MsgNotification].[imoNo] AS [imoNo], 
     [Vw_MsgNotification].[bloodGroup] AS [bloodGroup], 
     [Vw_MsgNotification].[isActive] AS [isActive], 
-    [Vw_MsgNotification].[gcTarget] AS [gcTarget], 
-    [Vw_MsgNotification].[EmployeeType] AS [EmployeeType], 
-    [Vw_MsgNotification].[imoNo2] AS [imoNo2]
+    [Vw_MsgNotification].[gcTarget] AS [gcTarget]
     FROM [dbo].[Vw_MsgNotification] AS [Vw_MsgNotification]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_SS_1_4_ANSWER_SS_1_4_ANSWER" Association="Self.FK_SS_1_4_ANSWER_SS_1_4_ANSWER">
@@ -781,9 +813,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="fdate" Mode="In" Type="DateTime" />
             <Parameter Name="tdate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="Daily_Attendance" EntityType="DevSwachhBharatNagpurModel.Daily_Attendance" />
           <EntitySet Name="WM_Garbage_Sales" EntityType="DevSwachhBharatNagpurModel.WM_Garbage_Sales" />
-          <EntitySet Name="Vw_MsgNotification" EntityType="DevSwachhBharatNagpurModel.Vw_MsgNotification" />
           <FunctionImport Name="SP_GarbageCollection" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_GarbageCollection_Result)">
             <Parameter Name="appId" Mode="In" Type="Int32" />
             <Parameter Name="userid" Mode="In" Type="Int32" />
@@ -825,7 +855,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="tdate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="SP_SSweeping_Count" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_SSweeping_Count_Result)" />
-          <EntitySet Name="GarbageCollectionDetails" EntityType="DevSwachhBharatNagpurModel.GarbageCollectionDetail" />
           <FunctionImport Name="SP_LiquidEmployeeTarget" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_LiquidEmployeeTarget_Result)">
             <Parameter Name="fdate" Mode="In" Type="DateTime" />
             <Parameter Name="tdate" Mode="In" Type="DateTime" />
@@ -1452,29 +1481,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="String" Name="lat" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="long" Nullable="true" MaxLength="500" />
         </ComplexType>
-        <EntityType Name="Daily_Attendance">
-          <Key>
-            <PropertyRef Name="daID" />
-          </Key>
-          <Property Name="daID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="startLat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="startLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="endLat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="endLong" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="startTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="endTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="daDate" Type="DateTime" Precision="0" />
-          <Property Name="daEndDate" Type="DateTime" Precision="0" />
-          <Property Name="vtId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="daStartNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="daEndNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="vehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="totalKm" Type="Int32" />
-          <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="WM_Garbage_Sales">
           <Key>
             <PropertyRef Name="ID" />
@@ -1485,28 +1491,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="SalesWeight" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Vw_MsgNotification">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="userNameMar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="userLoginId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="userPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="userMobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="userAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="userProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="userEmployeeNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="userDesignation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="imoNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="bloodGroup" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="isActive" Type="Boolean" />
-          <Property Name="gcTarget" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="imoNo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="SP_GarbageCollection_Result">
           <Property Type="Int32" Name="gcId" Nullable="false" />
@@ -1731,44 +1715,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="Int32" Name="NotCollected" Nullable="true" />
           <Property Type="Int32" Name="NotSpecified" Nullable="true" />
         </ComplexType>
-        <EntityType Name="GarbageCollectionDetail">
-          <Key>
-            <PropertyRef Name="gcId" />
-          </Key>
-          <Property Name="gcId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="houseId" Type="Int32" />
-          <Property Name="gpId" Type="Int32" />
-          <Property Name="gcDate" Type="DateTime" Precision="3" />
-          <Property Name="Lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="gcImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="gcQRcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="gpBeforImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="gpAfterImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="gcType" Type="Int32" />
-          <Property Name="vehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="locAddresss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="garbageType" Type="Int32" />
-          <Property Name="modified" Type="DateTime" Precision="3" />
-          <Property Name="dyId" Type="Int32" />
-          <Property Name="totalGcWeight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="totalDryWeight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="totalWetWeight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Distance" Type="Double" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="RFIDTagId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="RFIDReaderId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="SourceId" Type="Int32" />
-          <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="WasteType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="LWId" Type="Int32" />
-          <Property Name="SSId" Type="Int32" />
-          <Property Name="AreaId" Type="Int32" />
-        </EntityType>
         <ComplexType Name="SP_LiquidEmployeeTarget_Result">
           <Property Type="Int32" Name="userId" Nullable="true" />
           <Property Type="DateTime" Name="fromDate" Nullable="true" />
@@ -2006,6 +1952,132 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="String" Name="QRCodeImage" Nullable="true" />
           <Property Type="Int32" Name="FilterTotalCount" Nullable="true" />
         </ComplexType>
+        <EntityType Name="MonthlyAttedance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="startTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="endTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Month_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Day" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Day1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day4" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day5" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day6" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day7" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day8" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day9" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day10" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day11" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day12" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day13" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day14" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day15" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day16" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day17" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day18" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day19" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day20" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day21" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day22" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day23" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day24" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day25" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day26" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day27" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day28" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day29" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day30" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Day31" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vw_MsgNotification">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="userNameMar" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="userLoginId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="userPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="userMobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="userAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="userProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userEmployeeNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="userDesignation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="imoNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="bloodGroup" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="gcTarget" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GarbageCollectionDetail">
+          <Key>
+            <PropertyRef Name="gcId" />
+          </Key>
+          <Property Name="gcId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="houseId" Type="Int32" />
+          <Property Name="gpId" Type="Int32" />
+          <Property Name="gcDate" Type="DateTime" Precision="3" />
+          <Property Name="Lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="gcImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gcQRcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gpBeforImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gpAfterImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gcType" Type="Int32" />
+          <Property Name="vehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="locAddresss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="garbageType" Type="Int32" />
+          <Property Name="modified" Type="DateTime" Precision="3" />
+          <Property Name="dyId" Type="Int32" />
+          <Property Name="totalGcWeight" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="totalDryWeight" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="totalWetWeight" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Distance" Type="Double" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="RFIDTagId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RFIDReaderId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SourceId" Type="Int32" />
+          <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="WasteType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LWId" Type="Int32" />
+          <Property Name="SSId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Daily_Attendance">
+          <Key>
+            <PropertyRef Name="daID" />
+          </Key>
+          <Property Name="daID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="startLat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="startLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="endLat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="endLong" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="startTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="endTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="daDate" Type="DateTime" Precision="0" />
+          <Property Name="daEndDate" Type="DateTime" Precision="0" />
+          <Property Name="vtId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="daStartNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="daEndNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="totalKm" Type="Int32" />
+          <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2498,30 +2570,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Daily_Attendance">
-            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.Daily_Attendance">
-              <MappingFragment StoreEntitySet="Daily_Attendance">
-                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
-                <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
-                <ScalarProperty Name="totalKm" ColumnName="totalKm" />
-                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
-                <ScalarProperty Name="vehicleNumber" ColumnName="vehicleNumber" />
-                <ScalarProperty Name="daEndNote" ColumnName="daEndNote" />
-                <ScalarProperty Name="daStartNote" ColumnName="daStartNote" />
-                <ScalarProperty Name="vtId" ColumnName="vtId" />
-                <ScalarProperty Name="daEndDate" ColumnName="daEndDate" />
-                <ScalarProperty Name="daDate" ColumnName="daDate" />
-                <ScalarProperty Name="endTime" ColumnName="endTime" />
-                <ScalarProperty Name="startTime" ColumnName="startTime" />
-                <ScalarProperty Name="endLong" ColumnName="endLong" />
-                <ScalarProperty Name="endLat" ColumnName="endLat" />
-                <ScalarProperty Name="startLong" ColumnName="startLong" />
-                <ScalarProperty Name="startLat" ColumnName="startLat" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="daID" ColumnName="daID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WM_Garbage_Sales">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.WM_Garbage_Sales">
               <MappingFragment StoreEntitySet="WM_Garbage_Sales">
@@ -2531,29 +2579,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="PartyName" ColumnName="PartyName" />
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vw_MsgNotification">
-            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.Vw_MsgNotification">
-              <MappingFragment StoreEntitySet="Vw_MsgNotification">
-                <ScalarProperty Name="imoNo2" ColumnName="imoNo2" />
-                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
-                <ScalarProperty Name="gcTarget" ColumnName="gcTarget" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="bloodGroup" ColumnName="bloodGroup" />
-                <ScalarProperty Name="imoNo" ColumnName="imoNo" />
-                <ScalarProperty Name="userDesignation" ColumnName="userDesignation" />
-                <ScalarProperty Name="userEmployeeNo" ColumnName="userEmployeeNo" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="userProfileImage" ColumnName="userProfileImage" />
-                <ScalarProperty Name="userAddress" ColumnName="userAddress" />
-                <ScalarProperty Name="userMobileNumber" ColumnName="userMobileNumber" />
-                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
-                <ScalarProperty Name="userLoginId" ColumnName="userLoginId" />
-                <ScalarProperty Name="userNameMar" ColumnName="userNameMar" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2828,45 +2853,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="GarbageCollectionDetails">
-            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.GarbageCollectionDetail">
-              <MappingFragment StoreEntitySet="GarbageCollectionDetails">
-                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
-                <ScalarProperty Name="SSId" ColumnName="SSId" />
-                <ScalarProperty Name="LWId" ColumnName="LWId" />
-                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
-                <ScalarProperty Name="WasteType" ColumnName="WasteType" />
-                <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
-                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
-                <ScalarProperty Name="RFIDReaderId" ColumnName="RFIDReaderId" />
-                <ScalarProperty Name="RFIDTagId" ColumnName="RFIDTagId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Distance" ColumnName="Distance" />
-                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
-                <ScalarProperty Name="totalWetWeight" ColumnName="totalWetWeight" />
-                <ScalarProperty Name="totalDryWeight" ColumnName="totalDryWeight" />
-                <ScalarProperty Name="totalGcWeight" ColumnName="totalGcWeight" />
-                <ScalarProperty Name="dyId" ColumnName="dyId" />
-                <ScalarProperty Name="modified" ColumnName="modified" />
-                <ScalarProperty Name="garbageType" ColumnName="garbageType" />
-                <ScalarProperty Name="locAddresss" ColumnName="locAddresss" />
-                <ScalarProperty Name="note" ColumnName="note" />
-                <ScalarProperty Name="vehicleNumber" ColumnName="vehicleNumber" />
-                <ScalarProperty Name="gcType" ColumnName="gcType" />
-                <ScalarProperty Name="gpAfterImage" ColumnName="gpAfterImage" />
-                <ScalarProperty Name="gpBeforImage" ColumnName="gpBeforImage" />
-                <ScalarProperty Name="gcQRcode" ColumnName="gcQRcode" />
-                <ScalarProperty Name="gcImage" ColumnName="gcImage" />
-                <ScalarProperty Name="Long" ColumnName="Long" />
-                <ScalarProperty Name="Lat" ColumnName="Lat" />
-                <ScalarProperty Name="gcDate" ColumnName="gcDate" />
-                <ScalarProperty Name="gpId" ColumnName="gpId" />
-                <ScalarProperty Name="houseId" ColumnName="houseId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="gcId" ColumnName="gcId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_LiquidEmployeeTarget" FunctionName="DevSwachhBharatNagpurModel.Store.SP_LiquidEmployeeTarget">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.SP_LiquidEmployeeTarget_Result">
@@ -3151,10 +3137,106 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_GetHSHouseDetails" FunctionName="DevSwachhBharatNagpurModel.Store.SP_GetHSHouseDetails">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.SP_GetHSHouseDetails_Result">
+          <EntitySetMapping Name="MonthlyAttedances">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.MonthlyAttedance">
+              <MappingFragment StoreEntitySet="MonthlyAttedance">
+                <ScalarProperty Name="Day31" ColumnName="Day31" />
+                <ScalarProperty Name="Day30" ColumnName="Day30" />
+                <ScalarProperty Name="Day29" ColumnName="Day29" />
+                <ScalarProperty Name="Day28" ColumnName="Day28" />
+                <ScalarProperty Name="Day27" ColumnName="Day27" />
+                <ScalarProperty Name="Day26" ColumnName="Day26" />
+                <ScalarProperty Name="Day25" ColumnName="Day25" />
+                <ScalarProperty Name="Day24" ColumnName="Day24" />
+                <ScalarProperty Name="Day23" ColumnName="Day23" />
+                <ScalarProperty Name="Day22" ColumnName="Day22" />
+                <ScalarProperty Name="Day21" ColumnName="Day21" />
+                <ScalarProperty Name="Day20" ColumnName="Day20" />
+                <ScalarProperty Name="Day19" ColumnName="Day19" />
+                <ScalarProperty Name="Day18" ColumnName="Day18" />
+                <ScalarProperty Name="Day17" ColumnName="Day17" />
+                <ScalarProperty Name="Day16" ColumnName="Day16" />
+                <ScalarProperty Name="Day15" ColumnName="Day15" />
+                <ScalarProperty Name="Day14" ColumnName="Day14" />
+                <ScalarProperty Name="Day13" ColumnName="Day13" />
+                <ScalarProperty Name="Day12" ColumnName="Day12" />
+                <ScalarProperty Name="Day11" ColumnName="Day11" />
+                <ScalarProperty Name="Day10" ColumnName="Day10" />
+                <ScalarProperty Name="Day9" ColumnName="Day9" />
+                <ScalarProperty Name="Day8" ColumnName="Day8" />
+                <ScalarProperty Name="Day7" ColumnName="Day7" />
+                <ScalarProperty Name="Day6" ColumnName="Day6" />
+                <ScalarProperty Name="Day5" ColumnName="Day5" />
+                <ScalarProperty Name="Day4" ColumnName="Day4" />
+                <ScalarProperty Name="Day3" ColumnName="Day3" />
+                <ScalarProperty Name="Day2" ColumnName="Day2" />
+                <ScalarProperty Name="Day1" ColumnName="Day1" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Month_name" ColumnName="Month_name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_MsgNotification">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.Vw_MsgNotification">
+              <MappingFragment StoreEntitySet="Vw_MsgNotification">
+                <ScalarProperty Name="gcTarget" ColumnName="gcTarget" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="bloodGroup" ColumnName="bloodGroup" />
+                <ScalarProperty Name="imoNo" ColumnName="imoNo" />
+                <ScalarProperty Name="userDesignation" ColumnName="userDesignation" />
+                <ScalarProperty Name="userEmployeeNo" ColumnName="userEmployeeNo" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="userProfileImage" ColumnName="userProfileImage" />
+                <ScalarProperty Name="userAddress" ColumnName="userAddress" />
+                <ScalarProperty Name="userMobileNumber" ColumnName="userMobileNumber" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userLoginId" ColumnName="userLoginId" />
+                <ScalarProperty Name="userNameMar" ColumnName="userNameMar" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GarbageCollectionDetails">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.GarbageCollectionDetail">
+              <MappingFragment StoreEntitySet="GarbageCollectionDetails">
+                <ScalarProperty Name="SSId" ColumnName="SSId" />
+                <ScalarProperty Name="LWId" ColumnName="LWId" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="WasteType" ColumnName="WasteType" />
+                <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="RFIDReaderId" ColumnName="RFIDReaderId" />
+                <ScalarProperty Name="RFIDTagId" ColumnName="RFIDTagId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
+                <ScalarProperty Name="totalWetWeight" ColumnName="totalWetWeight" />
+                <ScalarProperty Name="totalDryWeight" ColumnName="totalDryWeight" />
+                <ScalarProperty Name="totalGcWeight" ColumnName="totalGcWeight" />
+                <ScalarProperty Name="dyId" ColumnName="dyId" />
+                <ScalarProperty Name="modified" ColumnName="modified" />
+                <ScalarProperty Name="garbageType" ColumnName="garbageType" />
+                <ScalarProperty Name="locAddresss" ColumnName="locAddresss" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="vehicleNumber" ColumnName="vehicleNumber" />
+                <ScalarProperty Name="gcType" ColumnName="gcType" />
+                <ScalarProperty Name="gpAfterImage" ColumnName="gpAfterImage" />
+                <ScalarProperty Name="gpBeforImage" ColumnName="gpBeforImage" />
+                <ScalarProperty Name="gcQRcode" ColumnName="gcQRcode" />
+                <ScalarProperty Name="gcImage" ColumnName="gcImage" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="gcDate" ColumnName="gcDate" />
+                <ScalarProperty Name="gpId" ColumnName="gpId" />
                 <ScalarProperty Name="houseId" ColumnName="houseId" />
                 <ScalarProperty Name="houseLat" ColumnName="houseLat" />
                 <ScalarProperty Name="houseLong" ColumnName="houseLong" />

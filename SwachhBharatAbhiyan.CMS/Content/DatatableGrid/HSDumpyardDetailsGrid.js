@@ -1,4 +1,4 @@
-﻿
+﻿//Dump Code Start
 
 function loadGridDump() {
     debugger;
@@ -144,3 +144,6 @@ function SearchDump() {
     oTable.search("");
     document.getElementById('USER_ID_FK').value = -1;
 }
+
+//Dump Code End
+
