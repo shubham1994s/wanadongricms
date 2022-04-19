@@ -65,6 +65,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
 
         public string day31 { get; set; }
 
+        public string TOTAL_DAYS { get; set; }
+
 
     }
 }
