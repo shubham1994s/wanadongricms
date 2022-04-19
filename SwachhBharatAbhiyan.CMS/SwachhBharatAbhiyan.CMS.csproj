@@ -1719,6 +1719,7 @@
     <Content Include="Content\DatatableGrid\InfotainmentResult.js" />
     <Content Include="Content\DatatableGrid\League.js" />
     <Content Include="Content\DatatableGrid\Log.js" />
+    <Content Include="Content\DatatableGrid\MonthlyAttendenceGrid.js" />
     <Content Include="Content\DatatableGrid\OnepointeightEditGrid.js" />
     <Content Include="Content\DatatableGrid\OnepointeightGrid.js" />
     <Content Include="Content\DatatableGrid\OnepointfiveEditGrid.js" />
@@ -3043,6 +3044,8 @@
     <Content Include="Views\Admin\MenuIndex2.cshtml" />
     <Content Include="Views\Admin\AddAUREmployeeDetails.cshtml" />
     <Content Include="Views\Admin\AURIndex.cshtml" />
+    <Content Include="Views\Attendence\MonthlyAttedanceIndex.cshtml" />
+    <Content Include="Views\Attendence\MonthlyAttendance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
