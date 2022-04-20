@@ -8,13 +8,19 @@
 @Scripts.Render("~/Scripts/IndexScript")
 <script src="~/Content/DatatableGrid/MonthlyAttendenceGrid.js"></script>
 <style>
-    #tot_days{
-        display:none;
+    #tot_days, #demo {
+        display: none;
     }
+    li[data-dtr-index="34"] {
+        display: none;
+    }
+  /*  li[data-dt-column="33"] {
+        display: none;
+    }*/
 </style>
 <body>
     <br />
-
+    <p id="demo"></p>
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
@@ -91,7 +97,7 @@
                         <th id="day29"> Day 29</th>
                         <th id="day30"> Day 30</th>
                         <th id="day31"> Day 31</th>
-                        <th id="tot_days"> Total Days</th>
+                        <th>Total Days</th>
 
 
                     </tr>
@@ -104,6 +110,8 @@
 
 
 <script>
+    $(document).ready(function () {
+    debugger;
     var date = new Date();
 
     var day = date.getDate();
@@ -118,7 +126,30 @@
     document.getElementById('txt_fdate').value = today;
     document.getElementById('txt_tdate').value = today;
 
+    function getDaysInMonth(year, month) {
+        return new Date(year, month, 0).getDate();
+    }
+    const daysInCurrentMonth = getDaysInMonth(year, month);
+    document.getElementById("demo").innerHTML = daysInCurrentMonth;
+        console.log(daysInCurrentMonth);
 
+        $("table tbody tr td:nth-child(22)").addClass("black");
+
+        let tot_day = document.getElementById("demo").innerHTML;
+        if (tot_day == 28) {
+            document.getElementById("day29").style.display = "none";
+            document.getElementById("day30").style.display = "none";
+            document.getElementById("day31").style.display = "none";
+        }
+        else if (tot_day == 29) {
+            document.getElementById("day30").style.display = "none";
+            document.getElementById("day31").style.display = "none";
+        }
+        else if (tot_day == 30) {
+
+            document.getElementById("day31").style.display = "none";
+        }
+    });
 </script>
 <script src="~/Content/graph-assets/js/custom.js"></script>
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
@@ -143,10 +174,14 @@
 
 
 </script>
-<script>
+@*<script>
     $(document).ready(function () {
     debugger
-    var tot_day = document.getElementById("tot_days").innerHTML;
+        //let html = document.getElementById("tot_days").innerHTML;
+        //document.getElementById("demo").innerHTML = html;
+
+        let text = document.getElementById("tot_days").innerHTML;
+        document.getElementById("demo").innerHTML = text;
     if (tot_day = 28) {
         document.getElementById("day29").style.display = "none";
         document.getElementById("day30").style.display = "none";
@@ -161,5 +196,5 @@
         document.getElementById("day31").style.display = "none";
         }
     });
-</script>
+</script>*@
 </html>
