@@ -42,13 +42,8 @@
                 "visible": false,
                 "searchable": false
             }
-                //,
-            //{
-            //    "targets": [15],
-            //    "visible": false,
-            //    "searchable": false,
-            //    "type": "date-eu"
-            //}
+
+
             ],
 
 
