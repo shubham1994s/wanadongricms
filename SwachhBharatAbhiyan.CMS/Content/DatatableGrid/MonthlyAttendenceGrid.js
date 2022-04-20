@@ -41,7 +41,12 @@
                 "targets": [0],
                 "visible": false,
                 "searchable": false
-            }
+            },
+                {
+                    "targets": [34],
+                    "visible": false,
+                    "searchable": false
+                }
 
 
             ],
