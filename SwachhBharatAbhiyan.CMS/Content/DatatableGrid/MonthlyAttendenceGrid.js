@@ -129,7 +129,7 @@
                         }
 
                         else {
-                            return "<div class='circle' style='height: 20px;width: 20px;background-color: #0086c3;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Garbage type not specified)";
+                            return "";
 
                         }
 
