@@ -120,7 +120,7 @@
     if (month < 10) month = "0" + month;
     if (day < 10) day = "0" + day;
 
-    var today = day + "/" + month + "/" + year;
+    var today =  month + "/" + year;
 
     document.getElementById('txt_fdate').value = today;
     document.getElementById('txt_tdate').value = today;
@@ -159,13 +159,13 @@
     });
 </script>
 <script src="~/Content/graph-assets/js/custom.js"></script>
-<script src="~/Content/css/datepicker/js/datepicker.js"></script>
+@*<script src="~/Content/css/datepicker/js/datepicker.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
     $('.datepicker').datepicker({
-        format: 'dd/mm/yyyy',
-        weekStart: 1,
-        color: 'red',
-        pickTime: false
+        format: 'mm/yyyy',
+        startView: "months",
+        minViewMode: "months"
     }).on('changeDate', function (e) {
 
         $(this).datepicker('hide');
