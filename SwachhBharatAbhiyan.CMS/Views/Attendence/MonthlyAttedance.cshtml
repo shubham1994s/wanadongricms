@@ -133,9 +133,13 @@
         console.log(daysInCurrentMonth);
 
         $("table tbody tr td:nth-child(22)").addClass("black");
+        const table = document.getElementById('demoGrid');
+        const cells = table.getElementsByTagName('tbody tr td ul li');
 
         let tot_day = document.getElementById("demo").innerHTML;
         if (tot_day == 28) {
+            test = document.getElementsByTagName("li")[33].attributes['data-dtr-index'];
+            test.style.display = "none";
             document.getElementById("day29").style.display = "none";
             document.getElementById("day30").style.display = "none";
             document.getElementById("day31").style.display = "none";
@@ -145,8 +149,12 @@
             document.getElementById("day31").style.display = "none";
         }
         else if (tot_day == 30) {
-
+           //document.getElementsByTagName("li")[33].style.display = "none";
+            //var element = document.getElementsByClassName('.box')[0];
             document.getElementById("day31").style.display = "none";
+            document.getElementsByTagName("li[data-dt-column='33']").style.fontSize = "24px";
+            //element.style.display = none;
+            //element.getElementsByTagName("li")[33].style.fontSize = "24px";
         }
     });
 </script>
