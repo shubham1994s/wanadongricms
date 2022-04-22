@@ -72,6 +72,69 @@
                     "visible": false,
                     "searchable": false
                 },
+                {
+                    "targets": [2],
+
+                    "visible": true,
+
+                    "render": function (data, type, full, meta) {
+
+                        if (full["month_name"] == "1") {
+                            return " January";
+
+                        }
+                        else if (full["month_name"] == "2") {
+                            return " February";
+
+                        }
+                        else if (full["month_name"] == "3") {
+                            return " March";
+
+                        }
+                        else if (full["month_name"] == "4") {
+                            return " April";
+
+                        }
+                        else if (full["month_name"] == "5") {
+                            return " May";
+
+                        }
+                        else if (full["month_name"] == "6") {
+                            return " June";
+
+                        }
+                        else if (full["month_name"] == "7") {
+                            return " July";
+
+                        }
+                        else if (full["month_name"] == "8") {
+                            return " August";
+
+                        }
+                        else if (full["month_name"] == "9") {
+                            return " September";
+
+                        }
+                        else if (full["month_name"] == "10") {
+                            return " October";
+
+                        }
+                        else if (full["month_name"] == "11") {
+                            return " November ";
+
+                        }
+                        else if (full["month_name"] == "12") {
+                            return " December";
+
+                        }
+
+                        else {
+                            return "<div class='circle' style='height: 20px;width: 20px;background-color: #0086c3;border-radius: 50%;vertical-align: middle;display: inline-flex;'></div> (Garbage type not specified)";
+
+                        }
+
+                    },
+                },
             ],
 
         
