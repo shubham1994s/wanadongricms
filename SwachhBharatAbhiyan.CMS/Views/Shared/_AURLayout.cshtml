@@ -100,7 +100,7 @@
                                     var lName = "exampledropdownDropdow" + i;
 
                                     <li>
-                                        @if ((MenuList.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 1) || (MenuList.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 1))
+                                        @if ((MenuList.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 1))
                                         {
                                             <a href="@{@aName}" aria-expanded="false" data-toggle="collapse">
 
@@ -108,7 +108,7 @@
                                                 @*कचरा संकलन*@ @item.LinkText
                                             </a>
                                         }
-                                        <ul id="@{@lName}" class="in list-unstyled ">
+                                        <ul id="@{@lName}" class="list-unstyled ">
                                             @{
                                                 var j = 0;
                                                 //var jcount = Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count;
@@ -127,7 +127,7 @@
                                                             </a>
                                                         }
 
-                                                        <ul id="@{@lName1}" class="in list-unstyled">
+                                                        <ul id="@{@lName1}" class="list-unstyled">
                                                             @{foreach (var secondItem in (MenuList.Where(s => s.divisionId == item.divisionId && s.districtId == firstItem.districtId && s.ULBId != 0).ToList()))
                                                                 {
                                                                     <li class="">
