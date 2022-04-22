@@ -8,10 +8,15 @@
 @Scripts.Render("~/Scripts/IndexScript")
 <script src="~/Content/DatatableGrid/MonthlyAttendenceGrid.js"></script>
 <style>
-    #tot_days{
-        display:none;
+    #tot_days {
+        display: none;
     }
+  /*  table.dataTable > tbody > tr.child ul.dtr-details > li:last-child {
+        display: none;
+        border-bottom: none;
+    }*/
 </style>
+
 <body>
     <br />
 
@@ -143,23 +148,4 @@
 
 
 </script>
-<script>
-    $(document).ready(function () {
-    debugger
-    var tot_day = document.getElementById("tot_days").innerHTML;
-    if (tot_day = 28) {
-        document.getElementById("day29").style.display = "none";
-        document.getElementById("day30").style.display = "none";
-        document.getElementById("day31").style.display = "none";
-    }
-    else if (tot_day = 29) {
-        document.getElementById("day30").style.display = "none";
-        document.getElementById("day31").style.display = "none";
-    }
-    else if (tot_day = 30) {
-    
-        document.getElementById("day31").style.display = "none";
-        }
-    });
-</script>
-</html>
+

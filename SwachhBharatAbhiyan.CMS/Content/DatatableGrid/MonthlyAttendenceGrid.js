@@ -21,13 +21,38 @@
 
     $('#selecttype').html('<option value=0>Select Monitoring Type</option><option value=S>Waste Collection Monitoring Technology</option><option value=SS>Street Sweeping Monitoring System</option><option value=L>Liquid Waste Cleaning Monitoring System</option>');
 
-    $("#demoGrid").DataTable({
+   var table = $("#demoGrid").DataTable({
+        //"initComplete": function (settings, json) {
+        //   // $("#demoGrid").find("[data-dt-column='33']").hide();
+        //   debugger;
+        //   var jlength = json.data.length;
+        //   //var jlenght2 = jlength - 1;
+        //   for (let i = 0; i < jlength; i++) {
+        //       var days = json.data[i].TOTAL_DAYS;
+        //       if (days == 28) {
+
+        //           table.row(1).column([31, 32, 33]).visible(false);
+        //       }
+        //       else if (days == 29) {
+
+        //           table.row(i).column([32, 33]).visible(false);
+        //       }
+        //       else if (days == 30) {
+
+        //           table.row(2).column([33]).visible(false);
+        //       }
+        //   }
+         
+         
+        
+        //},
         "sDom": "ltipr",
         "order": [[1, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
+        "scrollX": true,
         //"pageLength": 10,
 
         "ajax": {
@@ -41,12 +66,15 @@
                 "targets": [0],
                 "visible": false,
                 "searchable": false
-            }
-
-
+            },
+                {
+                    "targets": [34],
+                    "visible": false,
+                    "searchable": false
+                },
             ],
 
-
+        
         "columns": [
             //{ "data": "daID", "name": "daID", "autoWidth": true },
             { "data": "daID", "name": "daID", "autoWidth": true },
@@ -88,7 +116,7 @@
             { "data": "day31", "name": "day31", "autoWidth": true },
             { "data": "TOTAL_DAYS", "name": "TOTAL_DAYS", "autoWidth": true },
            
-           
+         
            
         ],
         // Sort: "locId DESC"
@@ -96,7 +124,34 @@
     });
 
 
+    $('#demoGrid tbody').on('click', 'tr', function () {
+
+        debugger;
+        
+        var da = table.row(this).data();
+        var days = da.TOTAL_DAYS;
+      //  table.row(this).column([31, 32, 33]).visible(false);
+        if (days == 28) {
+            $("#demoGrid").find("[data-dt-column='31']").css("display", "none");
+            $("#demoGrid").find("[data-dt-column='32']").css("display", "none");
+            $("#demoGrid").find("[data-dt-column='33']").css("display", "none");
+        }
+        else if (days == 29) {
+            $("#demoGrid").find("[data-dt-column='32']").css("display", "none");
+            $("#demoGrid").find("[data-dt-column='33']").css("display", "none");
+        }
+        else if (days == 30) {
+           
+            $("#demoGrid").find("[data-dt-column='33']").css("display", "none");
+        }
+
+    });
+   
+
 });
+
+
+
 
 function test(id) {
     window.location.href = "/Attendence/Location?daId=" + id;
