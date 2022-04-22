@@ -2740,7 +2740,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
-        public IEnumerable<SBAAttendenceGrid> GetMonthlyAttendeceData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string Emptype)
+        public IEnumerable<SBAAttendenceGrid> GetMonthlyAttendeceData(long wildcard, string SearchString, string smonth, string emonth, string syear, string eyear, int userId, int appId, string Emptype)
         {
             List<SBAAttendenceGrid> obj = new List<SBAAttendenceGrid>();
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
