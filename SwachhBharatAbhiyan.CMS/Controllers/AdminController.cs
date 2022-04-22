@@ -94,11 +94,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         public ActionResult AddAUREmployeeDetails(int teamId = -1)
         
         {        
-           AEmployeeDetailVM division = mainrepository.GetDivision();
+           AEmployeeDetailVM emp = mainrepository.GetAUREmployeeDetails(teamId);
 
-            
-
-            return View(division);
+            return View(emp);
         }
 
       
@@ -116,7 +114,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
 
             mainrepository.SaveUREmployee(emp);
-            return Redirect("HSURIndex");
+            return Redirect("AURIndex");
 
         }
 

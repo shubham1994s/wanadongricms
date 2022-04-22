@@ -32,17 +32,32 @@
             { "data": "EmpId", "name": "EmpId", "autoWidth": true },
             { "data": "lastModifyDateEntry", "name": "lastModifyDateEntry", "autoWidth": true },
             { "data": "EmpName", "name": "EmpName", "autoWidth": true },
-
-
+            { "data": "EmpMobileNumber", "name": "EmpMobileNumber", "autoWidth": true },
 
             {
                 "data": "type", "render": function (data, type, full, meta) {
+                    if (full["type"] == 'A') {
+                        return 'Admin';
+                    }
+
+                    if (full["type"] == 'SA') {
+                        return 'Sub Admin';
+                    }
+
+                    else {
+                        return 'Not Available';
+                    }
+                }
+            },
+
+            {
+                "data": "isActive", "render": function (data, type, full, meta) {
                     if (full["isActive"] == '1') {
                         return 'Active';
                     }
 
                     if (full["isActive"] == '0') {
-                        return 'Non Active';
+                        return 'Not Active';
                     }
 
                     else {
@@ -105,11 +120,26 @@ function LoadNGrid() {
             { "data": "EmpId", "name": "EmpId", "autoWidth": true },
             { "data": "lastModifyDateEntry", "name": "lastModifyDateEntry", "autoWidth": true },
             { "data": "EmpName", "name": "EmpName", "autoWidth": true },
+            { "data": "EmpMobileNumber", "name": "EmpMobileNumber", "autoWidth": true },
+            {
+                "data": "type", "render": function (data, type, full, meta) {
+                    if (full["type"] == 'A') {
+                        return 'Admin';
+                    }
 
+                    if (full["type"] == 'SA') {
+                        return 'Sub Admin';
+                    }
+
+                    else {
+                        return 'Not Available';
+                    }
+                }
+            },
          
 
             {
-                "data": "type", "render": function (data, type, full, meta) {
+                "data": "isActive", "render": function (data, type, full, meta) {
                     if (full["isActive"] == '1') {
                         return 'Active';
                     }
@@ -150,7 +180,7 @@ function showInventoriesGrid() {
 }
 
 function Edit(Id) {
-    window.location.href = "/HouseScanifyEmp/AddHSUREmployeeDetails?teamId=" + Id;
+    window.location.href = "/AccountMaster/AddAUREmployeeDetails?teamId=" + Id;
 
 };
 function AppList(Id) {

@@ -75,46 +75,116 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         public ActionResult login(LoginViewModel model, string returnUrl)
         {
 
-                //if (!ModelState.IsValid)
-                //{
-                //    return View(model);
-                //}
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
 
-            
-                //   LoginViewModel Result= new LoginViewModel();
-                EmployeeVM Result = new EmployeeVM();
-                Result.ADUM_LOGIN_ID = model.Email;
-                Result.ADUM_PASSWORD = model.Password;
-                Result = mainrepository.LoginMaster(Result);
-                //var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
-                switch (Result.status)
-                {
-                    case "Success":
 
-                        Session["status"] = "Success";
-                        TempData["status"] = "Success";
-                        TempData["ADUM_USER_NAME"] = Result.ADUM_USER_NAME;
-                        //AddSessionStreet(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
-                        Session["UserID"] = Result.ADUM_USER_CODE.ToString();
-                        Session["LoginId"] = Result.ADUM_LOGIN_ID.ToString();
-                        Session["UserProfile"] = Result;
-                        return RedirectToAction("MenuIndex");
+            //   LoginViewModel Result= new LoginViewModel();
+            EmployeeVM Result = new EmployeeVM();
+            Result.ADUM_LOGIN_ID = model.Email;
+            Result.ADUM_PASSWORD = model.Password;
+            Result = mainrepository.LoginMaster(Result);
+            //var UserDetails = await UserManager.FindAsync(model.Email, model.Password);
+            switch (Result.status)
+            {
+                case "Success":
 
-                    case "LockedOut":
-                        return View("Lockout");
-                    case "RequiresVerification":
+                    Session["status"] = "Success";
+                    TempData["status"] = "Success";
+                    //TempData["ADUM_USER_NAME"] = Result.ADUM_USER_NAME;
+                    //AddSessionStreet(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
+                    Session["UserID"] = Result.ADUM_USER_CODE.ToString();
+                    Session["LoginId"] = Result.ADUM_LOGIN_ID.ToString();
+                    Session["UserProfile"] = Result;
 
-                    case "Failure":
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View(model);
+                    Session["utype"] = Result.ADUM_DESIGNATION;
+                    Session["Id"] = Result.ADUM_LOGIN_ID;
+                    Session["Pwd"] = Result.ADUM_PASSWORD;
+                    TempData["ADUM_USER_NAME"] = Result.ADUM_LOGIN_ID;
+                    TempData["MenuList"] = GetULBMenus(Result.ADUM_LOGIN_ID);
+                    ViewBag.HSuserid = Result.ADUM_LOGIN_ID;
+                    ViewBag.UType = Result.ADUM_DESIGNATION;
 
-                }
+                    return RedirectToAction("AURMenuIndex");
+
+                case "LockedOut":
+                    return View("Lockout");
+                case "RequiresVerification":
+
+                case "Failure":
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+
+            }
 
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
+        public ActionResult AURMenuIndex()
+        {
+
+            string loginId =
+                (string)Session["LoginId"];
+            if (string.IsNullOrEmpty(loginId))
+            {
+                return RedirectToAction("login");
+
+            }
+            else
+            {
+                TempData["MenuList"] = GetULBMenus(loginId);
+
+                return View();
+
+            }
+
+        }
+
+
+        public ActionResult AURIndex()
+        {
+
+            string loginId =
+                (string)Session["LoginId"];
+            if (string.IsNullOrEmpty(loginId))
+            {
+                return RedirectToAction("login");
+
+            }
+            else
+            {
+                TempData["MenuList"] = GetULBMenus(loginId);
+
+                return View();
+
+            }
+
+
+        }
+        public ActionResult Index()
+        {
+
+            string loginId =
+                (string)Session["LoginId"];
+            if (string.IsNullOrEmpty(loginId))
+            {
+                return RedirectToAction("login");
+
+            }
+            else
+            {
+                //TempData["MenuList"] = GetULBMenus(loginId);
+
+                return View();
+
+            }
+
+
+        }
 
         public ActionResult MenuIndex()
         {
@@ -131,8 +201,28 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return View("MenuIndex", menuList);
 
             }
-            
+
         }
+
+        public ActionResult AddAUREmployeeDetails(int teamId = -1)
+        {
+            AEmployeeDetailVM emp = mainrepository.GetAUREmployeeDetails(teamId);
+
+            return View(emp);
+        }
+
+        
+        [HttpPost]
+        public ActionResult AddAUREmployeeDetails(AEmployeeDetailVM emp)
+        {
+
+
+            mainrepository.SaveUREmployee(emp);
+            return Redirect("Index");
+
+        }
+
+
 
         public List<MenuItemULB> GetULBMenus(string loginId)
         {
@@ -140,5 +230,22 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             menuList = mainrepository.GetULBMenus(loginId);
             return menuList;
         }
+
+
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            Session["__MySession__"] = null; //it's my session variable
+            Session.Clear();
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("login", "AccountMaster");
+        }
+
+
+
     }
 }

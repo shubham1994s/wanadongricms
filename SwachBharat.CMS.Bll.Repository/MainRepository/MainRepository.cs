@@ -57,6 +57,11 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             return mainService.GetDivision();
 
         }
+        public AEmployeeDetailVM GetAUREmployeeDetails(int teamId)
+        {
+            return mainService.GetAUREmployeeDetails(teamId);
+
+        }
 
         public AEmployeeDetailVM GetDistrict(int id)
         {
@@ -209,6 +214,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                     //_EmployeeVM.APP_ID = appUser.APP_ID;
                     _EmployeeVM.ADUM_USER_NAME = appUser.EmpName;
                     _EmployeeVM.ADUM_USER_CODE = Convert.ToInt32(appUser.EmpId);
+                    _EmployeeVM.ADUM_DESIGNATION = appUser.type;
+                    _EmployeeVM.ADUM_PASSWORD = appUser.Password;
                     _EmployeeVM.status = "Success";
 
                     return _EmployeeVM;

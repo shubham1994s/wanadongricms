@@ -133,7 +133,7 @@ namespace SwachBharat.CMS.Bll.Services
             {
                 AEmployeeDetailVM details = new AEmployeeDetailVM();
                 details.DivisionList = ListDivision();
-             //   details.DistrictList = ListSubDivision(0);
+                //   details.DistrictList = ListSubDivision(0);
                 details.ULBList = GetULBMenus();
                 using (var db = new DevSwachhBharatMainEntities())
                 {
@@ -142,13 +142,44 @@ namespace SwachBharat.CMS.Bll.Services
                     {
                         details = FillDivisionViewModel(districtDetails);
                         details.DivisionList = ListDivision();
-                    //    details.DistrictList = ListSubDivision(0);
+                        //    details.DistrictList = ListSubDivision(0);
                         details.ULBList = GetULBMenus();
 
                         return details;
                     }
                     else
                     {
+                        return details;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        public AEmployeeDetailVM GetAUREmployeeDetails(int teamId)
+        {
+            try
+            {
+                AEmployeeDetailVM details = new AEmployeeDetailVM();
+
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    var emp = db.AEmployeeMasters.Where(a => a.EmpId == teamId).FirstOrDefault();
+                    if (emp != null)
+                    {
+                        details = FillAEmployeeViewModel(emp);
+                        details.ULBList = GetULBMenus(teamId);
+
+                        return details;
+                    }
+                    else
+                    {
+                        details.ULBList = GetULBMenus(teamId);
                         return details;
                     }
                 }
@@ -249,15 +280,15 @@ namespace SwachBharat.CMS.Bll.Services
             return menuList.Select(x => new MenuItemULB { divisionId = x.divisionId, districtId = x.districtId, ULBId = x.ULBId, LinkText = x.LinkText, ActionName = x.ActionName, ControllerName = x.ControllerName, returnUrl = x.returnUrl, Type = x.Type, IsChecked = AppList.Contains(x.ULBId ?? 0) }).ToList();
         }
 
-        public List<MenuItemDivison> GetULBMenus(string loginId = "")
+        public List<MenuItemDivison> GetULBMenus(int teamId = -1)
         {
 
             List<int> AppList = new List<int>();
             List<MenuItemDivison> menuList = new List<MenuItemDivison>();
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                var appUser = db.AEmployeeMasters.Where(a => a.LoginId == loginId).FirstOrDefault();
-                if (appUser != null)
+                var appUser = db.AEmployeeMasters.Where(a => a.EmpId == teamId).FirstOrDefault();
+                if (appUser != null && !string.IsNullOrEmpty(appUser.isActiveULB))
                 {
                     AppList = appUser.isActiveULB.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 }
@@ -312,13 +343,20 @@ namespace SwachBharat.CMS.Bll.Services
                                             var ULBs = ulb.Select(x => new MenuItemULB { divisionId = x.divisionId, districtId = x.districtId, ULBId = x.ULBId, LinkText = x.LinkText, ActionName = x.ActionName, ControllerName = x.ControllerName, returnUrl = x.returnUrl, Type = x.Type, IsChecked = AppList.Contains(x.ULBId ?? 0) }).ToList();
                                             dist.ULBList.AddRange(ULBs);
                                         }
-
+                                        if(ulb.Count == dist.ULBList.Where(u => u.IsChecked).ToList().Count)
+                                        {
+                                            dist.IsChecked = true;
+                                        }
                                         div.DistrictList.Add(dist);
 
                                     }
 
 
                                 }
+                            }
+                            if (div.DistrictList.Count == div.DistrictList.Where(d => d.IsChecked).ToList().Count)
+                            {
+                                div.IsChecked = true;
                             }
                             menuList.Add(div);
                         }
@@ -332,7 +370,7 @@ namespace SwachBharat.CMS.Bll.Services
 
 
             }
-
+            
             return menuList;
         }
 
@@ -347,7 +385,7 @@ namespace SwachBharat.CMS.Bll.Services
                 AEmployeeDetailVM details = new AEmployeeDetailVM();
 
                 details.CheckDist = new List<tehsil>();
-                var appid = dbMain.AppDetails.Where(c=>c.District==id).GroupBy(c => c.District).ToList();
+                var appid = dbMain.AppDetails.Where(c => c.District == id).GroupBy(c => c.District).ToList();
 
                 foreach (var a in appid)
                 {
@@ -372,7 +410,7 @@ namespace SwachBharat.CMS.Bll.Services
                     {
                         details = FillDivisionViewModel(districtDetails);
                         details.CheckDist = new List<tehsil>();
-                   
+
                         foreach (var a in appid)
                         {
                             var tes = dbMain.tehsils.Where(c => c.id == a.Key).FirstOrDefault<tehsil>();
@@ -428,6 +466,7 @@ namespace SwachBharat.CMS.Bll.Services
                             model.lastModifyDateEntry = DateTime.Now;
                             model.DivisionId = data.DivisionId;
                             model.DistictId = data.DistictId;
+                            model.type = data.type;
                             model.isActiveULB = GetAciveULB(data.ULBList);
                             db.SaveChanges();
                         }
@@ -457,14 +496,14 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     foreach (MenuItemULB ulb in dist.ULBList)
                     {
-                        if(ulb.IsChecked == true)
+                        if (ulb.IsChecked == true)
                         {
                             AppId = ulb.ULBId ?? 0;
-                            if(AppId != 0)
+                            if (AppId != 0)
                             {
                                 AppList.Add(AppId);
                             }
-                            
+
                         }
                     }
 
@@ -472,11 +511,11 @@ namespace SwachBharat.CMS.Bll.Services
 
 
             }
-            if(AppList.Count > 0)
+            if (AppList.Count > 0)
             {
                 strActiveULB = string.Join(",", AppList);
             }
-            
+
             return strActiveULB;
         }
         private AEmployeeMaster FillUREmployeeDataModel(AEmployeeDetailVM data)
@@ -493,6 +532,7 @@ namespace SwachBharat.CMS.Bll.Services
             model.lastModifyDateEntry = DateTime.Now;
             model.DivisionId = data.DivisionId;
             model.DistictId = data.DistictId;
+            model.type = data.type;
             return model;
         }
 
@@ -864,6 +904,24 @@ namespace SwachBharat.CMS.Bll.Services
 
             return model;
         }
+        private AEmployeeDetailVM FillAEmployeeViewModel(AEmployeeMaster data)
+        {
+            AEmployeeDetailVM model = new AEmployeeDetailVM();
+            model.qrEmpId = data.EmpId;
+            model.qrEmpName = data.EmpName;
+            model.qrEmpNameMar = data.EmpNameMar;
+            model.qrEmpPassword = data.Password;
+            model.qrEmpLoginId = data.LoginId;
+            model.qrEmpMobileNumber = data.EmpMobileNumber;
+            model.qrEmpAddress = data.EmpAddress;
+            model.type = data.type;
+            model.isActive = data.isActive;
+            model.StateId = data.StateId ?? 0;
+            model.DivisionId = data.DivisionId ?? 0;
+            model.DistictId = data.DistictId ?? 0;
+            model.lastModifyDate = data.lastModifyDateEntry;
+            return model;
+        }
 
         private AppDistrictVM FillDistrictViewModel(state_districts data)
         {
@@ -963,30 +1021,30 @@ namespace SwachBharat.CMS.Bll.Services
         //    AEmployeeDetailVM TypeDetail = new AEmployeeDetailVM();
         //    try
         //    {
-              
-              
 
-            //            .Select(x => new SelectListItem
-            //            {
-            //                Text = x.name + '(' + x.name_mar + ')',
-            //                Value = x.id.ToString()
-            //            }).OrderBy(t => t.Text).ToList();
 
-            //    }
-            //    else
-            //    {
-            //        State = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District }).GroupBy(c => c.id)
-            //        .Select(group => group.FirstOrDefault()).ToList()
 
-            //                                .Select(x => new SelectListItem
-            //                                {
-            //                                    Text = x.name + '(' + x.name_mar + ')',
-            //                                    Value = x.id.ToString()
-            //                                }).OrderBy(t => t.Text).ToList();
-            //    }
-            //    State.Insert(0, itemAdd);
-            //}
-            //catch (Exception ex) { throw ex; }
+        //            .Select(x => new SelectListItem
+        //            {
+        //                Text = x.name + '(' + x.name_mar + ')',
+        //                Value = x.id.ToString()
+        //            }).OrderBy(t => t.Text).ToList();
+
+        //    }
+        //    else
+        //    {
+        //        State = dbMain.tehsils.Join(dbMain.AppDetails, a => a.id, b => b.Tehsil, (a, b) => new { id = a.id, name = a.name, name_mar = a.name_mar, Districts = b.District }).GroupBy(c => c.id)
+        //        .Select(group => group.FirstOrDefault()).ToList()
+
+        //                                .Select(x => new SelectListItem
+        //                                {
+        //                                    Text = x.name + '(' + x.name_mar + ')',
+        //                                    Value = x.id.ToString()
+        //                                }).OrderBy(t => t.Text).ToList();
+        //    }
+        //    State.Insert(0, itemAdd);
+        //}
+        //catch (Exception ex) { throw ex; }
 
         //    return TypeDetail;
         //}

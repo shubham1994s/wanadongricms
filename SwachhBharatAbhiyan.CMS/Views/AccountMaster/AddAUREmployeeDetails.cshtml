@@ -56,7 +56,7 @@
     }
 </style>
 
-@using (Html.BeginForm("AddHSUREmployeeDetails", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", data_toggle = "validator", role = "form" }))
+@using (Html.BeginForm("AddAUREmployeeDetails", "AccountMaster", FormMethod.Post, new { enctype = "multipart/form-data", data_toggle = "validator", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.qrEmpId);
@@ -66,7 +66,7 @@
         <div class="row">
             <span class="backk">
 
-                <a href="@Url.Action("AURIndex", "Admin")" id="btnBack" class="btn"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
+                <a href="@Url.Action("Index", "AccountMaster")" id="btnBack" class="btn"><span class="glyphicon glyphicon-circle-arrow-left"></span>  Back</a>
             </span>
             <h1 class="add-edit-h1 title_change"></h1>
             <div class="row">@Html.ValidationSummary(true, "", new { @class = "text-danger" }) </div>

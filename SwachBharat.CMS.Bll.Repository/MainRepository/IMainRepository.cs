@@ -26,6 +26,9 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         AEmployeeDetailVM GetDivision();
 
+        AEmployeeDetailVM GetAUREmployeeDetails(int teamId);
+
+
         AEmployeeDetailVM GetDistrict(int id);
 
         void SaveUREmployee(AEmployeeDetailVM employee);

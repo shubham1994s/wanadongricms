@@ -454,7 +454,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
 
                 case "AURAttendance":
-                    gridRepository = new URAttendanceGridRepository(0, searchString, fdate, tdate, userId, clientId, appId, sortColumn, sortColumnDir, draw, length, start);
+                    gridRepository = new AURIndexGridRepository(0, searchString, fdate, tdate, userId, clientId, appId, sortColumn, sortColumnDir, draw, length, start);
                     return gridRepository;
                     break;
                 case "HSHouseDetails":
