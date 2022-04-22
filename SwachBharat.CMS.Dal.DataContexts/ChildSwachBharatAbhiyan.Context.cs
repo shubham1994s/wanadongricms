@@ -45,16 +45,17 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<SS_1_4_QUESTION> SS_1_4_QUESTION { get; set; }
         public virtual DbSet<GramCleaningComplient> GramCleaningComplients { get; set; }
         public virtual DbSet<SS_1_7_ANSWER> SS_1_7_ANSWER { get; set; }
-        public virtual DbSet<Daily_Attendance> Daily_Attendance { get; set; }
         public virtual DbSet<WM_Garbage_Sales> WM_Garbage_Sales { get; set; }
-        public virtual DbSet<Vw_MsgNotification> Vw_MsgNotification { get; set; }
         public virtual DbSet<LiquidWasteDetail> LiquidWasteDetails { get; set; }
         public virtual DbSet<StreetSweepingDetail> StreetSweepingDetails { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
-        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
         public virtual DbSet<DumpYardDetail> DumpYardDetails { get; set; }
         public virtual DbSet<HouseMaster> HouseMasters { get; set; }
+        public virtual DbSet<Vw_MsgNotification> Vw_MsgNotification { get; set; }
+        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
+        public virtual DbSet<Daily_Attendance> Daily_Attendance { get; set; }
+        public virtual DbSet<MonthlyAttedance> MonthlyAttedances { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
@@ -615,15 +616,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("SearchText", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHSHouseDetails_Result>("SP_GetHSHouseDetails", fdateParameter, tdateParameter, useridParameter, sortColumnParameter, sortOrderParameter, offsetValueParameter, pagingSizeParameter, searchTextParameter);
-        }
-    
-        public virtual int GetMonthlyAttedance(Nullable<System.DateTime> date)
-        {
-            var dateParameter = date.HasValue ?
-                new ObjectParameter("date", date) :
-                new ObjectParameter("date", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetMonthlyAttedance", dateParameter);
         }
     }
 }

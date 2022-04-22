@@ -83,7 +83,7 @@ function noImageNotification() {
     x.className = "show";
     setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 }
-}
+
 
 function user_route(id) {
     window.location.href = "/HouseScanify/HSUserRoute?qrEmpDaId=" + id;

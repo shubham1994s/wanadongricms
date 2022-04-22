@@ -21,13 +21,38 @@
 
     $('#selecttype').html('<option value=0>Select Monitoring Type</option><option value=S>Waste Collection Monitoring Technology</option><option value=SS>Street Sweeping Monitoring System</option><option value=L>Liquid Waste Cleaning Monitoring System</option>');
 
-    $("#demoGrid").DataTable({
+   var table = $("#demoGrid").DataTable({
+        //"initComplete": function (settings, json) {
+        //   // $("#demoGrid").find("[data-dt-column='33']").hide();
+        //   debugger;
+        //   var jlength = json.data.length;
+        //   //var jlenght2 = jlength - 1;
+        //   for (let i = 0; i < jlength; i++) {
+        //       var days = json.data[i].TOTAL_DAYS;
+        //       if (days == 28) {
+
+        //           table.row(1).column([31, 32, 33]).visible(false);
+        //       }
+        //       else if (days == 29) {
+
+        //           table.row(i).column([32, 33]).visible(false);
+        //       }
+        //       else if (days == 30) {
+
+        //           table.row(2).column([33]).visible(false);
+        //       }
+        //   }
+         
+         
+        
+        //},
         "sDom": "ltipr",
-        "order": [[15, "desc"]],
+        "order": [[1, "desc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
+        "scrollX": true,
         //"pageLength": 10,
 
         "ajax": {
@@ -41,68 +66,155 @@
                 "targets": [0],
                 "visible": false,
                 "searchable": false
-            }, {
-                "targets": [6],
-                "visible": false,
-                "searchable": false
-            }, {
-                "targets": [7],
-                "visible": false,
-                "searchable": false
-            }, {
-                "targets": [8],
-                "visible": false,
-                "searchable": false
             },
-            {
-                "targets": [9],
-                "visible": false,
-                "searchable": false
-            },
-            {
-                "targets": [10],
-                "orderable": false
-            },
-            {
-                "targets": [14],
-                "visible": false,
-                "searchable": false
-            },
-            {
-                "targets": [15],
-                "visible": false,
-                "searchable": false,
-                "type": "date-eu"
-            }
+                {
+                    "targets": [34],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [2],
+
+                    "visible": true,
+
+                    "render": function (data, type, full, meta) {
+
+                        if (full["month_name"] == "1") {
+                            return " January";
+
+                        }
+                        else if (full["month_name"] == "2") {
+                            return " February";
+
+                        }
+                        else if (full["month_name"] == "3") {
+                            return " March";
+
+                        }
+                        else if (full["month_name"] == "4") {
+                            return " April";
+
+                        }
+                        else if (full["month_name"] == "5") {
+                            return " May";
+
+                        }
+                        else if (full["month_name"] == "6") {
+                            return " June";
+
+                        }
+                        else if (full["month_name"] == "7") {
+                            return " July";
+
+                        }
+                        else if (full["month_name"] == "8") {
+                            return " August";
+
+                        }
+                        else if (full["month_name"] == "9") {
+                            return " September";
+
+                        }
+                        else if (full["month_name"] == "10") {
+                            return " October";
+
+                        }
+                        else if (full["month_name"] == "11") {
+                            return " November ";
+
+                        }
+                        else if (full["month_name"] == "12") {
+                            return " December";
+
+                        }
+
+                        else {
+                            return "";
+
+                        }
+
+                    },
+                },
             ],
 
-
+        
         "columns": [
+            //{ "data": "daID", "name": "daID", "autoWidth": true },
             { "data": "daID", "name": "daID", "autoWidth": true },
             { "data": "userName", "name": "userName", "autoWidth": true },
-            { "data": "daDate", "name": "daDate", "autoWidth": true },
-            { "data": "startTime", "name": "startTime", "autoWidth": true },
-            { "data": "daEndDate", "name": "daEndDate", "autoWidth": true },
-            { "data": "endTime", "name": "endTime", "autoWidth": true },
-            { "data": "startLat", "name": "endstartLatTime", "autoWidth": true },
-            { "data": "startLong", "name": "startLong", "autoWidth": true },
-            { "data": "endLat", "name": "endLat", "autoWidth": true },
-            { "data": "endLong", "name": "endLong", "autoWidth": true },
+            { "data": "month_name", "name": "month_name", "autoWidth": true },
 
-            { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="house_route(' + full["daID"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
-            { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer" onclick="user_route(' + full["daID"] + ')" ><i class="material-icons location-icon">location_on</i><span class="tooltiptext1">Route</span> </a>'; }, "width": "10%" },
+            { "data": "day1", "name": "day1", "autoWidth": true },
+            { "data": "day2", "name": "day2", "autoWidth": true },
+            { "data": "day3", "name": "day3", "autoWidth": true },
+            { "data": "day4", "name": "day4", "autoWidth": true },
+            { "data": "day5", "name": "day5", "autoWidth": true },
+            { "data": "day6", "name": "day6", "autoWidth": true },
+            { "data": "day7", "name": "day7", "autoWidth": true },
+            { "data": "day8", "name": "day8", "autoWidth": true },
+            { "data": "day9", "name": "day9", "autoWidth": true },
+            { "data": "day10", "name": "day10", "autoWidth": true },
 
-            { "data": "vtId", "name": "vtId", "autoWidth": true },
-            { "data": "vehicleNumber", "name": "vehicleNumber", "autoWidth": true },
-            { "data": "CompareDate", "name": "daID", "autoWidth": true },
-            { "data": "daDateTIme", "name": "daDateTIme", "autoWidth": true },
+            { "data": "day11", "name": "day11", "autoWidth": true },
+            { "data": "day12", "name": "day12", "autoWidth": true },
+            { "data": "day13", "name": "day13", "autoWidth": true },
+            { "data": "day14", "name": "day14", "autoWidth": true },
+            { "data": "day15", "name": "day15", "autoWidth": true },
+            { "data": "day16", "name": "day16", "autoWidth": true },
+            { "data": "day17", "name": "day17", "autoWidth": true },
+            { "data": "day18", "name": "day18", "autoWidth": true },
+            { "data": "day19", "name": "day19", "autoWidth": true },
+            { "data": "day20", "name": "day20", "autoWidth": true },
 
+            { "data": "day21", "name": "day21", "autoWidth": true },
+            { "data": "day22", "name": "day22", "autoWidth": true },
+            { "data": "day23", "name": "day23", "autoWidth": true },
+            { "data": "day24", "name": "day24", "autoWidth": true },
+            { "data": "day25", "name": "day25", "autoWidth": true },
+            { "data": "day26", "name": "day26", "autoWidth": true },
+            { "data": "day27", "name": "day27", "autoWidth": true },
+            { "data": "day28", "name": "day28", "autoWidth": true },
+            { "data": "day29", "name": "day29", "autoWidth": true },
+            { "data": "day30", "name": "day30", "autoWidth": true },
+            { "data": "day31", "name": "day31", "autoWidth": true },
+            { "data": "TOTAL_DAYS", "name": "TOTAL_DAYS", "autoWidth": true },
+           
+         
+           
         ],
-        // Sort: "locId DESC"
+    
+     
     });
 
 
+    $('#demoGrid tbody').on('click', 'tr', function () {
+
+        debugger;
+        
+        var da = table.row(this).data();
+        var days = da.TOTAL_DAYS;
+    
+        if (days == 28) {
+            $("#demoGrid").find("[data-dt-column='31']").css("display", "none");
+            $("#demoGrid").find("[data-dt-column='32']").css("display", "none");
+            $("#demoGrid").find("[data-dt-column='33']").css("display", "none");
+        }
+        else if (days == 29) {
+            $("#demoGrid").find("[data-dt-column='32']").css("display", "none");
+            $("#demoGrid").find("[data-dt-column='33']").css("display", "none");
+        }
+        else if (days == 30) {
+           
+            $("#demoGrid").find("[data-dt-column='33']").css("display", "none");
+        }
+
+    });
+   
+
 });
+
+
+
 
 function test(id) {
     window.location.href = "/Attendence/Location?daId=" + id;

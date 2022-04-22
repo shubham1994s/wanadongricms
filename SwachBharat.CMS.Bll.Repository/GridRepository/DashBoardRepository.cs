@@ -2740,98 +2740,88 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
-        public IEnumerable<SBAAttendenceGrid> GetMonthlyAttendeceData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string Emptype)
+        public IEnumerable<SBAAttendenceGrid> GetMonthlyAttendeceData(long wildcard, string SearchString, string smonth, string emonth, string syear, string eyear, int userId, int appId, string Emptype)
         {
             List<SBAAttendenceGrid> obj = new List<SBAAttendenceGrid>();
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
             {
-                var data = db.Daily_Attendance.Where(c => c.EmployeeType == Emptype).ToList();
-                if (Convert.ToDateTime(fdate).ToString("dd/MM/yyyy") == Convert.ToDateTime(DateTime.Now).ToString("dd/MM/yyyy"))
-                {
-                    data = data.Where(c => (c.daDate == fdate || c.daEndDate == fdate || c.endTime == "")).ToList();
-                }
-                else
-                {
-
-                    data = data.Where(c => (c.daDate >= fdate && c.daDate <= tdate) || (c.daDate >= fdate && c.daDate <= tdate)).ToList();
-                }
-
+                var data = db.MonthlyAttedances.ToList();
+               
                 foreach (var x in data)
                 {
-                    int a = Convert.ToInt32(x.vtId.Trim());
-                    string vt = "";
-                    try { vt = db.VehicleTypes.Where(c => c.vtId == a).FirstOrDefault().description; }
-                    catch { vt = ""; }
-                    ///x.daDate = checkNull(x.daDate.tp);
-                    x.endLat = checkNull(x.endLat);
-                    x.endLong = checkNull(x.endLong);
-                    x.endTime = checkNull(x.endTime);
-                    x.startLat = checkNull(x.startLat);
-                    x.startLong = checkNull(x.startLong);
-                    x.startTime = checkNull(x.startTime);
-                    x.vehicleNumber = checkNull(x.vehicleNumber);
-                    x.daEndNote = checkNull(x.daEndNote);
-                    x.daStartNote = checkNull(x.daStartNote);
-                    string endate = "";
-                    if (x.daEndDate == null)
-                    {
-                        endate = "";
-                    }
-                    else
-                    {
-                        endate = Convert.ToDateTime(x.daEndDate).ToString("dd/MM/yyyy");
-                    }
-
-                    // string displayTime = Convert.ToDateTime(x.daDate).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    string displayTime = Convert.ToDateTime(x.daDate).ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
-                    string time = Convert.ToDateTime(x.startTime).ToString("HH:mm:ss");
 
                     obj.Add(new SBAAttendenceGrid()
                     {
-                        daID = x.daID,
+                        daID = x.ID,
                         userId = Convert.ToInt32(x.userId),
-                        userName = db.UserMasters.Where(c => c.userId == x.userId).FirstOrDefault().userName,
-                        daDate = Convert.ToDateTime(x.daDate).ToString("dd/MM/yyyy"),
-                        daEndDate = endate,
-                        startTime = x.startTime,
-                        endTime = x.endTime,
-                        startLat = x.startLat,
-                        startLong = x.startLong,
-                        endLat = x.startLong,
-                        endLong = x.endLong,
-                        vtId = vt,
-                        vehicleNumber = x.vehicleNumber,
-                        CompareDate = x.daDate,
-                        daDateTIme = (displayTime + " " + time)
+                        userName = x.UserName,
+                        month_name=x.Month_name,
+                        day1=x.Day1,
+                        day2 = x.Day2,
+                        day3 = x.Day3,
+                        day4 = x.Day4,
+                        day5 = x.Day5,
+                        day6 = x.Day6,
+                        day7 = x.Day7,
+                        day8 = x.Day8,
+                        day9 = x.Day9,
+                        day10 = x.Day10,
+                        day11 = x.Day11,
+                        day12 = x.Day12,
+                        day13 = x.Day13,
+                        day14 = x.Day14,
+                        day15 = x.Day15,
+                        day16 = x.Day16,
+                        day17 = x.Day17,
+                        day18 = x.Day18,
+                        day19 = x.Day19,
+                        day20 = x.Day20,
+
+                        day21 = x.Day21,
+                        day22 = x.Day22,
+                        day23 = x.Day23,
+                        day24 = x.Day24,
+                        day25 = x.Day25,
+                        day26 = x.Day26,
+                        day27 = x.Day27,
+                        day28 = x.Day28,
+                        day29 = x.Day29,
+                        day30 = x.Day30,
+                        day31 = x.Day31,
+                        TOTAL_DAYS = x.TOTAL_MONTH_DAYS,
+                        YEAR_NAME=x.YEAR_NAME,
+
                     });
                 }
 
-                if (!string.IsNullOrEmpty(SearchString))
-                {
-                    var model = obj.Where(c => c.vehicleNumber.Contains(SearchString) || c.daDate.Contains(SearchString) || c.endTime.Contains(SearchString) || c.startLat.Contains(SearchString) || c.endLat.Contains(SearchString) || c.startTime.Contains(SearchString) || c.userName.Contains(SearchString) || c.vtId.Contains(SearchString)
+              
+                 
 
-                    || c.vehicleNumber.ToLower().Contains(SearchString) || c.vtId.ToLower().Contains(SearchString) || c.daDate.ToLower().Contains(SearchString) || c.endTime.ToLower().Contains(SearchString) || c.startLat.ToLower().Contains(SearchString) || c.endLat.ToLower().Contains(SearchString) || c.startTime.ToLower().Contains(SearchString) || c.userName.ToLower().Contains(SearchString)).ToList();
 
-                    obj = model.ToList();
-                }
-
-                //if (!string.IsNullOrEmpty(fdate.ToString()))
-                //{
-                //    DateTime? dt1 = null;
-                //    if (!string.IsNullOrEmpty(tdate.ToString()))
-                //    { dt1 = tdate; }
-                //    else { dt1 = fdate; }
-                //    obj = obj.Where(fullEntry => fullEntry.CompareDate >= fdate && fullEntry.CompareDate <= dt1).OrderByDescending(c => c.CompareDate).ToList();
-                //}
                 if (userId > 0)
                 {
-                    var model = obj.Where(c => c.userId == userId).ToList();
+                    var model = obj.Where(c => c.userId == userId ).ToList();
 
                     obj = model.ToList();
                 }
-                //var d = obj.OrderByDescending(c => DateTime.Parse(c.daDateTIme)).ToList();
+
+                if (!string.IsNullOrEmpty(smonth) && !string.IsNullOrEmpty(emonth) && !string.IsNullOrEmpty(syear) && !string.IsNullOrEmpty(eyear))
+                {
+
+                  var model = obj.Where(c => c.month_name >= Convert.ToInt32(smonth) && c.month_name <= Convert.ToInt32(emonth) && c.YEAR_NAME >= Convert.ToInt32(syear) && c.YEAR_NAME <= Convert.ToInt32(eyear)).ToList();
+                  //  var model = obj.Where(c => c.month_name.CompareTo(smonth) >= Convert.ToInt32(smonth) && c.month_name.CompareTo(c.month_name) >= Convert.ToInt32(emonth)).ToList();
+                    obj = model.ToList();
+                }
+                else
+                {
+                    var model = obj.Where(c => c.userName.ToLower().Contains(SearchString)).ToList();
+
+                    obj = model.ToList();
+
+                }
                 var d = obj.OrderByDescending(c => c.daID).ToList();
                 return d;
+
             }
         }
 

@@ -16,7 +16,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         IDataTableRepository gridRepository;
 
 
-        public string GetJqGridJson(string INSERT_ID, string draw, string start, string length, string rn, DateTime? fdate = null, DateTime? tdate = null, int userId = 0, string clientName = null, int? param1 = null, int? param2 = null, int? param3 = null, int? param5 = null, int? param6 = null)
+        public string GetJqGridJson(string INSERT_ID, string draw, string start, string length, string rn, DateTime? fdate = null, DateTime? tdate = null, int userId = 0, string clientName = null, int? param1 = null, int? param2 = null, int? param3 = null, int? param5 = null, int? param6 = null, string smonth="", string emonth="", string syear="", string eyear="")
         {
             if (Convert.ToInt32(length) == 5)
             {
@@ -68,7 +68,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
             Dictionary<string, string> filtersFromSession = CreateFiltersDictionary(Session);
-            gridRepository = GetRepository(INSERT_ID, rn, searchValue, fdate, tdate, userId, clientName, param1, param2, param3, param5, param6, param6, sortColumn, sortColumnDir, draw, length, start);
+            gridRepository = GetRepository(INSERT_ID, rn, searchValue, fdate, tdate, userId, clientName, param1, param2, param3, param5, param6, param6, sortColumn, sortColumnDir, draw, length, start, smonth, emonth, syear, eyear);
             //string x = gridRepository.GetDataTabelJson(sord, page, rows, _search, Request.QueryString, filtersFromSession, sidx);
 
             return gridRepository.GetDataTabelJson(sortColumn, sortColumnDir, draw, length, searchValue, start);
@@ -86,7 +86,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             return FiltersDictionary;
         }
 
-        private IDataTableRepository GetRepository(string INSERT_ID, string RepositoryName, string searchString = "", DateTime? fdate = null, DateTime? tdate = null, int userId = 0, string clientId = null, int? param1 = null, int? param2 = null, int? param3 = null, int? param4 = null, int? param5 = null, int? param6 = null, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+        private IDataTableRepository GetRepository(string INSERT_ID, string RepositoryName, string searchString = "", DateTime? fdate = null, DateTime? tdate = null, int userId = 0, string clientId = null, int? param1 = null, int? param2 = null, int? param3 = null, int? param4 = null, int? param5 = null, int? param6 = null, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "", string smonth="", string emonth="", string syear="", string eyear="")
         {
             int product = 0, category = 0;
             //string[] arr = new string[6];
@@ -96,75 +96,108 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 Session["Search"] = searchString;
                 Session["rn"] = RepositoryName;
 
-                string[] arr = searchString.Split(',');
-                if (arr.Length >= 3)
+                if (Session["rn"].ToString() == "MonthlyAttendence")
                 {
-                    searchString = "";
+                   
+                    string[] arrs = searchString.Split(',');
+                    if (arrs[0].ToString() != null && arrs[0] != " " && arrs[0].ToString() != string.Empty)
+                    {
+                        string[] smontharr = arrs[0].Split('/');
+                        smonth = smontharr[1];
+                        syear= smontharr[0];
+                    }
+                    else smonth = null;
+                    if (arrs[1].ToString() != null && arrs[1] != " " && arrs[1].ToString() != string.Empty)
+                    {
+                        string[] emontharr = arrs[1].Split('/');
+                        emonth = emontharr[1];
+                        eyear = emontharr[0];
+                    }
+                    else emonth = null;
 
-                    if (arr[0].ToString() != null && arr[0] != " " && arr[0].ToString() != string.Empty)
-                    { fdate = Convert.ToDateTime(arr[0] + " " + "00:00:00"); }
-                    else fdate = null;
-                    if (arr[1].ToString() != null && arr[1] != " " && arr[1].ToString() != string.Empty)
-                    { tdate = Convert.ToDateTime(arr[1] + " " + "23:59:59"); }
-                    else tdate = fdate;
+                    if (arrs[2].ToString() != "null" && arrs[2].ToString() != null && arrs[2] != " " && arrs[2].ToString() != string.Empty)
+                    {
+                        userId = Convert.ToInt32(arrs[2]);
+                    }
 
-                    if (arr[2].ToString() != "null" && arr[2].ToString() != null && arr[2] != " " && arr[2].ToString() != string.Empty)
-                    { userId = Convert.ToInt32(arr[2]); }
                     else userId = 0;
-                    if (arr[3].ToString() != null && arr[3] != " " && arr[3].ToString() != string.Empty)
-                    { searchString = Convert.ToString(arr[3]); }
-                    else searchString = "";
-
-                    if (arr.Length > 4)
-                    {
-                        if (arr[4].ToString() != null && arr[4] != "0" && arr[4] != " " && arr[4].ToString() != string.Empty)
-                        { param1 = Convert.ToInt32(arr[4]); }
-                        else param1 = null;
-                    }
-
-                    if (arr.Length > 5)
-                    {
-                        if (arr[5].ToString() != null && arr[5].ToString() != "null" && arr[5] != "0" && arr[5] != " " && arr[5].ToString() != string.Empty)
-                        { param2 = Convert.ToInt32(arr[5]); }
-                        else param2 = null;
-                    }
-
-                    if (arr.Length > 6)
-                    {
-                        if (arr[6].ToString() != null && arr[6].ToString() != "null" && arr[6] != "0" && arr[6] != " " && arr[5].ToString() != string.Empty)
-                        { param3 = Convert.ToInt32(arr[6]); }
-                        else param3 = null;
-                    }
-
-                    //if (arr[3].ToString() != null && arr[3] != " ")
-                    //{ clientId = arr[3]; }
-                    //else clientId = null;
-
-                    //if (arr[4].ToString() != null && arr[4] != " ")
-                    //{ searchString = arr[4]; }
-                    //else searchString = "";
-
-                    //if (arr[5].ToString() != null && arr[5] != "")
-                    //{ product = Convert.ToInt32(arr[5]); }
-                    //else product = 0;
-
-                    //if (arr[6].ToString() != null && arr[6] != "")
-                    //{ category = Convert.ToInt32(arr[6]); }
-                    //else category = 0;
                 }
                 else
                 {
-                    fdate = null;
-                    tdate = null;
-                    userId = 0;
-                    clientId = null;
-                    product = 0;
-                    category = 0;
-                    param1 = null;
-                    param2 = null;
-                    param3 = null;
-                    // searchString = "";
+                    string[] arr = searchString.Split(',');
+                    if (arr.Length >= 3)
+                    {
+                        searchString = "";
+
+
+
+
+                        if (arr[0].ToString() != null && arr[0] != " " && arr[0].ToString() != string.Empty)
+                        { fdate = Convert.ToDateTime(arr[0] + " " + "00:00:00"); }
+                        else fdate = null;
+                        if (arr[1].ToString() != null && arr[1] != " " && arr[1].ToString() != string.Empty)
+                        { tdate = Convert.ToDateTime(arr[1] + " " + "23:59:59"); }
+                        else tdate = fdate;
+
+                        if (arr[2].ToString() != "null" && arr[2].ToString() != null && arr[2] != " " && arr[2].ToString() != string.Empty)
+                        { userId = Convert.ToInt32(arr[2]); }
+                        else userId = 0;
+                        if (arr[3].ToString() != null && arr[3] != " " && arr[3].ToString() != string.Empty)
+                        { searchString = Convert.ToString(arr[3]); }
+                        else searchString = "";
+
+                        if (arr.Length > 4)
+                        {
+                            if (arr[4].ToString() != null && arr[4] != "0" && arr[4] != " " && arr[4].ToString() != string.Empty)
+                            { param1 = Convert.ToInt32(arr[4]); }
+                            else param1 = null;
+                        }
+
+                        if (arr.Length > 5)
+                        {
+                            if (arr[5].ToString() != null && arr[5].ToString() != "null" && arr[5] != "0" && arr[5] != " " && arr[5].ToString() != string.Empty)
+                            { param2 = Convert.ToInt32(arr[5]); }
+                            else param2 = null;
+                        }
+
+                        if (arr.Length > 6)
+                        {
+                            if (arr[6].ToString() != null && arr[6].ToString() != "null" && arr[6] != "0" && arr[6] != " " && arr[5].ToString() != string.Empty)
+                            { param3 = Convert.ToInt32(arr[6]); }
+                            else param3 = null;
+                        }
+
+                        //if (arr[3].ToString() != null && arr[3] != " ")
+                        //{ clientId = arr[3]; }
+                        //else clientId = null;
+
+                        //if (arr[4].ToString() != null && arr[4] != " ")
+                        //{ searchString = arr[4]; }
+                        //else searchString = "";
+
+                        //if (arr[5].ToString() != null && arr[5] != "")
+                        //{ product = Convert.ToInt32(arr[5]); }
+                        //else product = 0;
+
+                        //if (arr[6].ToString() != null && arr[6] != "")
+                        //{ category = Convert.ToInt32(arr[6]); }
+                        //else category = 0;
+                    }
+                    else
+                    {
+                        fdate = null;
+                        tdate = null;
+                        userId = 0;
+                        clientId = null;
+                        product = 0;
+                        category = 0;
+                        param1 = null;
+                        param2 = null;
+                        param3 = null;
+                        // searchString = "";
+                    }
                 }
+              
             }
             else {
 
@@ -280,7 +313,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
 
                 case "MonthlyAttendence":
-                    gridRepository = new MonthlyAttendeceGridRepository(0, searchString, fdate, tdate, userId, appId, null);
+                    gridRepository = new MonthlyAttendeceGridRepository(0, searchString, smonth, emonth, syear, eyear,userId, appId, null);
                     return gridRepository;
                     break;
 

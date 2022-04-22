@@ -27,7 +27,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
         public Nullable<bool> isActive { get; set; }
         public string target { get; set; }
         public Nullable<System.DateTime> lastModifyDate { get; set; }
-
+        public Nullable<bool> IsCheked { get; set; }
         public List<tehsil> CheckDist { get; set; }
         public string qrEmpLoginId { get; set; }
 
