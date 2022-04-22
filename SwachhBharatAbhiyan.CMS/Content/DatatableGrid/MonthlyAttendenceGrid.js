@@ -119,7 +119,7 @@
          
            
         ],
-        // Sort: "locId DESC"
+    
      
     });
 
@@ -130,7 +130,7 @@
         
         var da = table.row(this).data();
         var days = da.TOTAL_DAYS;
-      //  table.row(this).column([31, 32, 33]).visible(false);
+    
         if (days == 28) {
             $("#demoGrid").find("[data-dt-column='31']").css("display", "none");
             $("#demoGrid").find("[data-dt-column='32']").css("display", "none");
