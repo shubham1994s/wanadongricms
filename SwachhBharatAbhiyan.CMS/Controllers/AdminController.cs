@@ -82,53 +82,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-        //public List<MenuItemULB> GetULBMenus()
-        //{
-        //    List<MenuItemULB> menuList = new List<MenuItemULB>();
-        //    menuList = mainrepository.GetULBMenus();
-        //    return menuList;
-        //}
-
-
-       
-        public ActionResult AddAUREmployeeDetails(int teamId = -1)
-        
-        {        
-           AEmployeeDetailVM emp = mainrepository.GetAUREmployeeDetails(teamId);
-
-            return View(emp);
-        }
-
       
-        //public ActionResult LoadDistrictListList(int Id)
-
-        //{
-
-        //    AEmployeeDetailVM division = mainrepository.GetDistrict(Id);
-
-        //    return View("AddAUREmployeeDetails", division.CheckDist);
-        //}
-        [HttpPost]
-        public ActionResult AddHSUREmployeeDetails(AEmployeeDetailVM emp)
-        {
-
-
-            mainrepository.SaveUREmployee(emp);
-            return Redirect("AURIndex");
-
-        }
-
-
-        public ActionResult AURIndex()
-        {
-            int appid = 1;
-            ViewBag.AppId = appid;
-            ViewBag.UType = Session["utype"];
-            ViewBag.HSuserid = Session["Id"];
-            return View();
-
-
-        }
 
     }
 }
