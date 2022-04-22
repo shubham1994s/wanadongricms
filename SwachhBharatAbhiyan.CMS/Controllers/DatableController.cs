@@ -103,15 +103,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     if (arrs[0].ToString() != null && arrs[0] != " " && arrs[0].ToString() != string.Empty)
                     {
                         string[] smontharr = arrs[0].Split('/');
-                        smonth = smontharr[0];
-                        syear= smontharr[1];
+                        smonth = smontharr[1];
+                        syear= smontharr[0];
                     }
                     else smonth = null;
                     if (arrs[1].ToString() != null && arrs[1] != " " && arrs[1].ToString() != string.Empty)
                     {
                         string[] emontharr = arrs[1].Split('/');
-                        emonth = emontharr[0];
-                        eyear = emontharr[1];
+                        emonth = emontharr[1];
+                        eyear = emontharr[0];
                     }
                     else emonth = null;
 
@@ -313,7 +313,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
 
                 case "MonthlyAttendence":
-                    gridRepository = new MonthlyAttendeceGridRepository(0, searchString, smonth, smonth, syear, eyear,userId, appId, null);
+                    gridRepository = new MonthlyAttendeceGridRepository(0, searchString, smonth, emonth, syear, eyear,userId, appId, null);
                     return gridRepository;
                     break;
 

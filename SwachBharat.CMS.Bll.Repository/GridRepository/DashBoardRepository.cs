@@ -2789,23 +2789,35 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         day30 = x.Day30,
                         day31 = x.Day31,
                         TOTAL_DAYS = x.TOTAL_MONTH_DAYS,
+                        YEAR_NAME=x.YEAR_NAME,
 
                     });
                 }
 
-                if (!string.IsNullOrEmpty(SearchString))
-                {
-                    var model = obj.Where(c => c.userName.ToLower().Contains(SearchString)).ToList();
-
-                    obj = model.ToList();
-                }
+              
+                 
 
 
                 if (userId > 0)
                 {
-                    var model = obj.Where(c => c.userId == userId).ToList();
+                    var model = obj.Where(c => c.userId == userId ).ToList();
 
                     obj = model.ToList();
+                }
+
+                if (!string.IsNullOrEmpty(smonth) && !string.IsNullOrEmpty(emonth) && !string.IsNullOrEmpty(syear) && !string.IsNullOrEmpty(eyear))
+                {
+
+                  var model = obj.Where(c => c.month_name >= Convert.ToInt32(smonth) && c.month_name <= Convert.ToInt32(emonth) && c.YEAR_NAME >= Convert.ToInt32(syear) && c.YEAR_NAME <= Convert.ToInt32(eyear)).ToList();
+                  //  var model = obj.Where(c => c.month_name.CompareTo(smonth) >= Convert.ToInt32(smonth) && c.month_name.CompareTo(c.month_name) >= Convert.ToInt32(emonth)).ToList();
+                    obj = model.ToList();
+                }
+                else
+                {
+                    var model = obj.Where(c => c.userName.ToLower().Contains(SearchString)).ToList();
+
+                    obj = model.ToList();
+
                 }
                 var d = obj.OrderByDescending(c => c.daID).ToList();
                 return d;

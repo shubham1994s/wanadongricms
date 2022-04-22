@@ -15,7 +15,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository.Grid
         DashBoardRepository objRep = new DashBoardRepository();
         public MonthlyAttendeceGridRepository(long wildcard, string SearchString, string smonth , string emonth , string syear, string eyear , int userId, int appId, string Emptype)
         {
-            dataset = objRep.GetMonthlyAttendeceData(wildcard, SearchString, smonth, smonth, syear, eyear, userId, appId, Emptype);
+            dataset = objRep.GetMonthlyAttendeceData(wildcard, SearchString, smonth, emonth, syear, eyear, userId, appId, Emptype);
         }
 
         public string GetDataTabelJson(string sortColumn, string sortColumnDir, string draw, string length, string searchValue, string start)

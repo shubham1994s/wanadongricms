@@ -219,7 +219,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.MonthlyAtteda
           <Property Name="userId" Type="int" />
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
           <Property Name="UserName" Type="nvarchar" MaxLength="200" />
-          <Property Name="Month_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Month_name" Type="int" />
           <Property Name="Day1" Type="nvarchar(max)" />
           <Property Name="Day2" Type="nvarchar(max)" />
           <Property Name="Day3" Type="nvarchar(max)" />
@@ -252,6 +252,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.MonthlyAtteda
           <Property Name="Day30" Type="nvarchar(max)" />
           <Property Name="Day31" Type="nvarchar(max)" />
           <Property Name="TOTAL_MONTH_DAYS" Type="nvarchar" MaxLength="10" />
+          <Property Name="YEAR_NAME" Type="int" />
         </EntityType>
         <EntityType Name="Qr_Employee_Daily_Attendance">
           <Key>
@@ -721,7 +722,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
     [MonthlyAttedance].[Day29] AS [Day29], 
     [MonthlyAttedance].[Day30] AS [Day30], 
     [MonthlyAttedance].[Day31] AS [Day31], 
-    [MonthlyAttedance].[TOTAL_MONTH_DAYS] AS [TOTAL_MONTH_DAYS]
+    [MonthlyAttedance].[TOTAL_MONTH_DAYS] AS [TOTAL_MONTH_DAYS], 
+    [MonthlyAttedance].[YEAR_NAME] AS [YEAR_NAME]
     FROM [dbo].[MonthlyAttedance] AS [MonthlyAttedance]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SauchalayAddress" EntityType="Self.SauchalayAddress" store:Type="Tables" store:Schema="dbo">
@@ -2076,7 +2078,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="userId" Type="Int32" />
           <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Month_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Month_name" Type="Int32" />
           <Property Name="Day1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Day2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Day3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -2109,6 +2111,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="Day30" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Day31" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TOTAL_MONTH_DAYS" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="YEAR_NAME" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3255,6 +3258,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="MonthlyAttedances">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.MonthlyAttedance">
               <MappingFragment StoreEntitySet="MonthlyAttedance">
+                <ScalarProperty Name="YEAR_NAME" ColumnName="YEAR_NAME" />
                 <ScalarProperty Name="TOTAL_MONTH_DAYS" ColumnName="TOTAL_MONTH_DAYS" />
                 <ScalarProperty Name="Day31" ColumnName="Day31" />
                 <ScalarProperty Name="Day30" ColumnName="Day30" />

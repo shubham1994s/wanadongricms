@@ -18,7 +18,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> userId { get; set; }
         public string EmployeeType { get; set; }
         public string UserName { get; set; }
-        public string Month_name { get; set; }
+        public Nullable<int> Month_name { get; set; }
         public string Day1 { get; set; }
         public string Day2 { get; set; }
         public string Day3 { get; set; }
@@ -51,5 +51,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string Day30 { get; set; }
         public string Day31 { get; set; }
         public string TOTAL_MONTH_DAYS { get; set; }
+        public Nullable<int> YEAR_NAME { get; set; }
     }
 }

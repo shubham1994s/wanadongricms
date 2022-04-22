@@ -26,7 +26,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string daDateTIme { get; set; }
 
 
-        public string month_name { get; set; }
+        public Nullable<int>  month_name { get; set; }
 
         public string status { get; set; }
 
@@ -68,5 +68,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string TOTAL_DAYS { get; set; }
 
 
-    }
+        public Nullable<int> YEAR_NAME { get; set; }
+
+
+}
 }
