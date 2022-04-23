@@ -3044,10 +3044,8 @@
     <Content Include="Views\HouseScanifyEmp\AddHSUREmployeeDetails.cshtml" />
     <Content Include="Views\Shared\_HSLoginPartial.cshtml" />
     <Content Include="Views\Admin\MenuIndex2.cshtml" />
-    <Content Include="Views\Admin\AddAUREmployeeDetails.cshtml" />
     <Content Include="Views\AccountMaster\Login.cshtml" />
     <Content Include="Views\AccountMaster\MenuIndex.cshtml" />
-    <Content Include="Views\Admin\AURIndex.cshtml" />
     <Content Include="Views\Shared\_AURLayout.cshtml" />
     <Content Include="Views\AccountMaster\AURMenuIndex.cshtml" />
     <Content Include="Views\AccountMaster\AURIndex.cshtml" />
