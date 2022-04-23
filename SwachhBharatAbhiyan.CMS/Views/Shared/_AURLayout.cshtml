@@ -17,12 +17,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
     @Styles.Render("~/Content/ThemeCss")
-    @Scripts.Render("~/Scripts/ThemeScripts")
+    @*@Scripts.Render("~/Scripts/ThemeScripts")*@
 
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     @*@Scripts.Render("~/bundles/modernizr")*@
     @*@RenderSection("styles", required: false)*@
-    @Styles.Render("~/Content/ThemeCss")
+    @*@Styles.Render("~/Content/ThemeCss")*@
     @*@Scripts.Render("~/bundles/modernizr")*@
     @RenderSection("styles", required: false)
     <link rel="shortcut icon" href="~/Content/images/img/ictsbm2.png" />
@@ -36,6 +36,91 @@
             border: 1px solid #bbb7b7;
             text-align: center;
         }
+
+
+        .heading {
+            font-weight: 400;
+            text-align: center;
+            background: #293538;
+            margin: 0;
+            color: white;
+            padding: 10px 0;
+        }
+
+        .wrapper {
+            padding: 20px 10px;
+            margin: 0 auto;
+            width: 300px;
+        }
+
+        .file-browser {
+            background: #364346;
+            color: white;
+            padding: 20px 10px;
+        }
+
+        .file {
+            color: #eee;
+            display: block;
+            list-style: none;
+        }
+
+        .folder {
+            list-style: none;
+            cursor: pointer;
+            margin: 4px 0;
+        }
+
+            .folder > ul {
+                display: none;
+            }
+
+            .folder a:after {
+                color: #000;
+                padding: 5px;
+                padding-left: 40%;
+                padding-top: 0%;
+                height: 10px;
+                width: 10px;
+                text-align: center;
+                line-height: 10px;
+                background: transparent;
+                border-radius: 1px;
+                display: inline-block;
+                /* content: "+";*/
+                content: '\f104';
+                font-family: 'FontAwesome';
+            }
+            .folder .a2 a:after {
+                content: " " !important;
+            }
+          /*  .folder::before {
+                content: '\f104';
+                display: inline-block;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                font-family: 'FontAwesome';
+                position: absolute;
+            padding-top:3%;
+                left: 15%;
+            }*/
+            .folder.folder-open > ul {
+                display: block;
+                /*padding-left: 15px;
+                margin-left: 9px;*/
+               /* border-left: 2px solid #5f6f72;*/
+             
+            }
+            .folder.folder-open a {
+                background: #189cdf;
+            }
+            .folder .a1:after {
+                /*  content: "-";*/
+                content: '\f107';
+            }
+            /*.folder.folder-open::before {
+                content: '\f107';
+            }*/
     </style>
 </head>
 
@@ -99,10 +184,10 @@
                                     var aName = "#exampledropdownDropdow" + i;
                                     var lName = "exampledropdownDropdow" + i;
 
-                                    <li>
+                                    <li class="folder">
                                         @if ((MenuList.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 1))
                                         {
-                                            <a href="@{@aName}" aria-expanded="false" data-toggle="collapse">
+                                            <a href="@{@aName}">
 
                                                 <i class="svg_gc" style=" fill: #000;"> </i>
                                                 @*कचरा संकलन*@ @item.LinkText
@@ -117,10 +202,10 @@
                                                     j++;
                                                     var aName1 = "#exampledropdownDropdow" + i + j;
                                                     var lName1 = "exampledropdownDropdow" + i + j;
-                                                    <li>
+                                                    <li class="folder">
                                                         @if (MenuList.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 0)
                                                         {
-                                                            <a href="@{@aName1}" aria-expanded="false" data-toggle="collapse">
+                                                            <a href="@{@aName1}">
 
                                                                 <i class="svg_gc" style=" fill: #000;"> </i>
                                                                 @*कचरा संकलन*@ @firstItem.LinkText
@@ -130,8 +215,8 @@
                                                         <ul id="@{@lName1}" class="list-unstyled">
                                                             @{foreach (var secondItem in (MenuList.Where(s => s.divisionId == item.divisionId && s.districtId == firstItem.districtId && s.ULBId != 0).ToList()))
                                                                 {
-                                                                    <li class="">
-                                                                        @Html.ActionLink(@secondItem.LinkText, @secondItem.ActionName, new { area = "", controller = @secondItem.ControllerName, returnUrl = @secondItem.returnUrl, Type = @secondItem.Type })
+                                                                    <li class="file a2">
+                                                                        @Html.ActionLink(@secondItem.LinkText, @secondItem.ActionName, new {area = "", controller = @secondItem.ControllerName, returnUrl = @secondItem.returnUrl, Type = @secondItem.Type })
                                                                     </li>
 
                                                                 }
@@ -151,7 +236,47 @@
                     </ul>
                 </nav>
                 @*<span class="heading">Extras</span>*@
-
+            @*<div class="wrapper">
+                <h3 class="heading">File Browser</h3>
+                <div class="file-browser">
+                    <ul>
+                        <li class="folder folder-open">
+                            Dashboard
+                            <ul>
+                                <li class="file">Accounts Module</li>
+                                <li class="file">Help Module</li>
+                            </ul>
+                        </li>
+                        <li class="folder">
+                            Transfers
+                            <ul>
+                                <li class="folder folder-open">
+                                    Quick
+                                    <ul>
+                                        <li class="file">Disclosures</li>
+                                        <li class="file">Modals</li>
+                                    </ul>
+                                </li>
+                                <li class="file">Classic</li>
+                                <li class="folder">
+                                    Scheduled
+                                    <ul>
+                                        <li class="folder">
+                                            Calendar
+                                            <ul>
+                                                <li class="file">Days</li>
+                                                <li class="file">Months</li>
+                                            </ul>
+                                        </li>
+                                        <li class="file">Modals</li>
+                                    </ul>
+                                </li>
+                                <li class="file">History</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>*@
             </nav>
             <div class="content-inner">
 
@@ -177,6 +302,20 @@
 
     @Scripts.Render("~/Scripts/ThemeScripts")
     <script>
+        $(function () {
+            $('.folder').on('click', function (e) {
+                $(this).toggleClass('folder-open');
+                e.stopPropagation();
+            });
+
+            $('.file').on('click', function (e) {
+                e.stopPropagation();
+            });
+            $('a').on('click', function (e) {
+                $(this).toggleClass('a1');
+           
+            });
+        })
         $(document).ready(function () {
 
             debugger;
@@ -195,7 +334,9 @@
                 document.getElementById("HSType").innerHTML = "(SUB-ADMIN)";
             }
 
-
+            $('#a').collapse({
+                toggle: false
+            })
 
         });
 
@@ -291,7 +432,7 @@
             
             let input = document.getElementById('searchbar').value
             input = input.toLowerCase();
-            $('.ulbnavbar ul').find('a:not(:contains("' + input + '"))').each(function () {
+            $('. ul').find('a:not(:contains("' + input + '"))').each(function () {
                 console.log($(this).text());
                 $(this).hide();
             });
@@ -354,7 +495,7 @@
             }
         }
     </script>
-    @*@RenderSection("scripts", required: false)*@
+    @RenderSection("scripts", required: false)
 </body>
 </html>
 
