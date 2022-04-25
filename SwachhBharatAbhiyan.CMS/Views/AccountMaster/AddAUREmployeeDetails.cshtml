@@ -61,7 +61,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.qrEmpId);
 
-
+    <input type="hidden" value="@ViewBag.UType" id="UType" />
     <div class="container">
         <div class="row">
             <span class="backk">
@@ -212,7 +212,7 @@
 
 
             <br />
-            <div class="row">
+            <div class="row" id="checkUR">
                 <label>Select ULBs</label>
                 <div class="tree_main">
                     <ul class="main_ul">
@@ -360,8 +360,23 @@
         evt.target.value = newWords.join(" ");
     }
 </script>
+
+
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $('#UType').change(function () {
+            var Utype = $('#type').val();
+            if (Utype == 'A') {
+                $('#checkUR').hide();
+
+            }
+            else {
+                $('#checkUR').show();
+
+            }
+
+        });
         $(".plus").click(function () {
             $(this).toggleClass("minus").siblings("ul").toggle();
         })
