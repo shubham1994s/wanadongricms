@@ -157,6 +157,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
             else
             {
+              
                 TempData["MenuList"] = GetULBMenus(loginId);
 
                 return View();
@@ -216,7 +217,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         public ActionResult AddAUREmployeeDetails(AEmployeeDetailVM emp)
         {
 
-
+            ViewBag.UType = Session["utypes"];
             mainrepository.SaveUREmployee(emp);
             return Redirect("Index");
 
