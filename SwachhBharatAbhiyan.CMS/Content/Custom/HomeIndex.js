@@ -413,7 +413,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
- //   debugger;
+   debugger;
     var not_coll = $('#not_coll').val();
     var mixed_coll = $('#mixed_coll').val();
     var bif_coll = $('#bif_coll').val();
