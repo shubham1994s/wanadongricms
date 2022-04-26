@@ -212,7 +212,7 @@
 
 
             <br />
-            <div class="row">
+            <div class="row" id="checkUR">
                 <label>Select ULBs</label>
                 <div class="tree_main">
                     <ul class="main_ul">
@@ -361,7 +361,31 @@
     }
 </script>
 <script type="text/javascript">
+
+    $('#type').change(function () {
+        var Utype = $('#type').val();
+        if (Utype == 'A') {
+            $('#checkUR').hide();
+        }
+        else {
+            $('#checkUR').show();
+        }
+
+    });
+
+
+
     $(document).ready(function () {
+
+        var Utype = $('#type').val();
+        if (Utype == 'A') {
+            $('#checkUR').hide();
+
+        }
+        else {
+            $('#checkUR').show();
+        }
+
         $(".plus").click(function () {
             $(this).toggleClass("minus").siblings("ul").toggle();
         })

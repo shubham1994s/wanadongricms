@@ -70,8 +70,13 @@
                 "render": function (data, type, full, meta) {
 
 
-                    return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
+                    if (full["type"] == 'A') {
+                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="myFunction()"   ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
 
+                    } else {
+                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
+
+                    }
 
                 }, "width": "10%"
             },
@@ -156,11 +161,13 @@ function LoadNGrid() {
 
             {
                 "render": function (data, type, full, meta) {
+                    if (full["type"] == 'A') {
+                        return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="myFunction()"   ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
 
-               
+                    } else {
                         return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"   onclick="Edit(' + full["EmpId"] + ')"  ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>';
 
-                   
+                    }
                 }, "width": "10%"
             },
 
@@ -170,6 +177,11 @@ function LoadNGrid() {
     });
 
 }
+
+function myFunction() {
+    alert("Admin ID Are Not Available To Edit");
+}
+
 
 function user_route(id) {
     window.location.href = "/HouseScanifyEmp/AddUREmployeeDetails?EmpId=" + id;

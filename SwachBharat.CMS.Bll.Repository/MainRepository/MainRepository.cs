@@ -454,7 +454,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             return menuList;
         }
 
-        public List<MenuItemULB> GetULBMenus(string loginId)
+        public List<MenuItemULB> GetULBMenus2(string loginId)
         {
 
             List<int> AppList = new List<int>();
@@ -486,9 +486,14 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                     //    AppList = db.AppDetails.Select(a => a.AppId).ToList();
 
                     //}
-
-                    AppList = appUser.isActiveULB.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-
+                    if (appUser.type == "A")
+                    {
+                        AppList = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => a.AppId).ToList();
+                    }
+                    else
+                    {
+                        AppList = appUser.isActiveULB.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                    }
 
                     var appListDivision = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { AppId = a.AppId, AppName = b.AppName, Devision = b.District })
                        .Where(c => AppList.Contains(c.AppId))
@@ -548,6 +553,87 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
 
 
+
+                        }
+                    }
+
+                }
+
+            }
+
+
+            return menuList;
+        }
+
+        public List<MenuItemULB> GetULBMenus(string loginId)
+        {
+
+            List<int> AppList = new List<int>();
+            List<MenuItemULB> menuList = new List<MenuItemULB>();
+            using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
+            {
+                var appUser = db.AEmployeeMasters.Where(a => a.LoginId == loginId).FirstOrDefault();
+                if (appUser != null)
+                {
+
+                    if (appUser.type == "A")
+                    {
+                        AppList = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => a.AppId).ToList();
+                    }
+                    else
+                    {
+                        AppList = appUser.isActiveULB.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                    }
+
+                    var appListDivision = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { a, b })
+                        .Join(db.state_districts, c => c.b.District, d => d.id, (c, d) => new { c, d })
+                       .Where(e => AppList.Contains(e.c.a.AppId))
+                       .GroupBy(f => f.c.b.District)
+                       .Select(group => group.FirstOrDefault())
+                       .OrderBy(g => g.d.district_name)
+                       .Select(g => new MenuItemULB { divisionId = g.d.id, districtId = 0, ULBId = 0, LinkText = g.d.district_name, ActionName = "", ControllerName = "", returnUrl = "", Type = "W" })
+                       .ToList();
+                    if (appListDivision != null && appListDivision.Count > 0)
+                    {
+                        foreach (var appDiv in appListDivision)
+                        {
+                            menuList.Add(appDiv);
+
+                            var appListDistrict = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { a, b })
+                            .Join(db.tehsils, c => c.b.Tehsil, d => d.id, (c, d) => new { c, d })
+                            .Where(e => AppList.Contains(e.c.a.AppId))
+                            .Where(f => f.c.b.District == appDiv.divisionId)
+                            .GroupBy(g => g.c.b.Tehsil)
+                            .Select(group => group.FirstOrDefault())
+                            .OrderBy(g => g.d.name)
+                            .Select(g => new MenuItemULB { divisionId = appDiv.divisionId, districtId = g.d.id, ULBId = 0, LinkText = g.d.name, ActionName = "", ControllerName = "", returnUrl = "", Type = "W" })
+                            .ToList();
+
+                            if (appListDistrict != null && appListDistrict.Count > 0)
+                            {
+                                foreach (var appDist in appListDistrict)
+                                {
+
+                                    menuList.Add(appDist);
+
+                                    var ulb = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
+                                            (a, b) => new { AppId = a.AppId, AppName = b.AppName, Devision = b.District, District = b.Tehsil })
+                                            .Where(c => AppList.Contains(c.AppId))
+                                            .Where(c => c.Devision == appDiv.divisionId && c.District == appDist.districtId)
+                                            .Join(db.UserInApps, c => c.AppId, d => d.AppId,
+                                            (c, d) => new { c, d })
+                                            .Join(db.AspNetUsers, e => e.d.UserId, f => f.Id,
+                                            (e, f) => new MenuItemULB { divisionId = e.c.Devision, districtId = e.c.District, ULBId = e.c.AppId, LinkText = e.c.AppName, ActionName = "Login", ControllerName = "Account", returnUrl = f.UserName, Type = "W" })
+                                            .OrderBy(m => m.LinkText)
+                                            .ToList();
+                                    if (ulb != null && ulb.Count > 0)
+                                    {
+                                        menuList.AddRange(ulb);
+
+                                    }
+
+                                }
+                            }
 
                         }
                     }

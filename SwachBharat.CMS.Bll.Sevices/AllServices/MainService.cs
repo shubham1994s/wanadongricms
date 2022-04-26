@@ -280,7 +280,7 @@ namespace SwachBharat.CMS.Bll.Services
             return menuList.Select(x => new MenuItemULB { divisionId = x.divisionId, districtId = x.districtId, ULBId = x.ULBId, LinkText = x.LinkText, ActionName = x.ActionName, ControllerName = x.ControllerName, returnUrl = x.returnUrl, Type = x.Type, IsChecked = AppList.Contains(x.ULBId ?? 0) }).ToList();
         }
 
-        public List<MenuItemDivison> GetULBMenus(int teamId = -1)
+        public List<MenuItemDivison> GetULBMenus2(int teamId = -1)
         {
 
             List<int> AppList = new List<int>();
@@ -343,7 +343,7 @@ namespace SwachBharat.CMS.Bll.Services
                                             var ULBs = ulb.Select(x => new MenuItemULB { divisionId = x.divisionId, districtId = x.districtId, ULBId = x.ULBId, LinkText = x.LinkText, ActionName = x.ActionName, ControllerName = x.ControllerName, returnUrl = x.returnUrl, Type = x.Type, IsChecked = AppList.Contains(x.ULBId ?? 0) }).ToList();
                                             dist.ULBList.AddRange(ULBs);
                                         }
-                                        if(ulb.Count == dist.ULBList.Where(u => u.IsChecked).ToList().Count)
+                                        if (ulb.Count == dist.ULBList.Where(u => u.IsChecked).ToList().Count)
                                         {
                                             dist.IsChecked = true;
                                         }
@@ -370,7 +370,95 @@ namespace SwachBharat.CMS.Bll.Services
 
 
             }
-            
+
+            return menuList;
+        }
+
+
+        public List<MenuItemDivison> GetULBMenus(int teamId = -1)
+        {
+
+            List<int> AppList = new List<int>();
+            List<MenuItemDivison> menuList = new List<MenuItemDivison>();
+            using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
+            {
+                var appUser = db.AEmployeeMasters.Where(a => a.EmpId == teamId).FirstOrDefault();
+                if (appUser != null && !string.IsNullOrEmpty(appUser.isActiveULB))
+                {
+                    AppList = appUser.isActiveULB.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                }
+                else
+                {
+
+
+                }
+
+
+                var appListDivision = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { a, b })
+                        .Join(db.state_districts, c => c.b.District, d => d.id, (c, d) => new { c, d })
+                       .GroupBy(f => f.c.b.District)
+                       .Select(group => group.FirstOrDefault())
+                       .OrderBy(g => g.d.district_name)
+                       .Select(g => new MenuItemDivison { divisionId = g.d.id, districtId = 0, ULBId = 0, LinkText = g.d.district_name, ActionName = "", ControllerName = "", returnUrl = "", Type = "W" })
+                       .ToList();
+                if (appListDivision != null && appListDivision.Count > 0)
+                {
+                    foreach (var appDiv in appListDivision)
+                    {
+                        //menuList.Add(div);
+
+                        var appListDistrict = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId, (a, b) => new { a, b })
+                        .Join(db.tehsils, c => c.b.Tehsil, d => d.id, (c, d) => new { c, d })
+                        .Where(f => f.c.b.District == appDiv.divisionId)
+                        .GroupBy(g => g.c.b.Tehsil)
+                        .Select(group => group.FirstOrDefault())
+                        .OrderBy(g => g.d.name)
+                        .Select(g => new MenuItemDistrict { divisionId = appDiv.divisionId, districtId = g.d.id, ULBId = 0, LinkText = g.d.name, ActionName = "", ControllerName = "", returnUrl = "", Type = "W" })
+                        .ToList();
+
+                        if (appListDistrict != null && appListDistrict.Count > 0)
+                        {
+                            foreach (var appDist in appListDistrict)
+                            {
+
+                                //menuList.Add(dist);
+                                var ulb = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
+                                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, Devision = b.District, District = b.Tehsil })
+                                    .Where(c => c.Devision == appDiv.divisionId && c.District == appDist.districtId)
+                                    .Join(db.UserInApps, c => c.AppId, d => d.AppId,
+                                    (c, d) => new { c, d })
+                                    .Join(db.AspNetUsers, e => e.d.UserId, f => f.Id,
+                                    (e, f) => new MenuItemULB { divisionId = e.c.Devision, districtId = e.c.District, ULBId = e.c.AppId, LinkText = e.c.AppName, ActionName = "Login", ControllerName = "Account", returnUrl = f.UserName, Type = "W" })
+                                    .OrderBy(m => m.LinkText)
+                                    .ToList();
+                                if (ulb != null && ulb.Count > 0)
+                                {
+                                    //menuList.AddRange(ulb);
+                                    var ULBs = ulb.Select(x => new MenuItemULB { divisionId = x.divisionId, districtId = x.districtId, ULBId = x.ULBId, LinkText = x.LinkText, ActionName = x.ActionName, ControllerName = x.ControllerName, returnUrl = x.returnUrl, Type = x.Type, IsChecked = AppList.Contains(x.ULBId ?? 0) }).ToList();
+                                    appDist.ULBList.AddRange(ULBs);
+                                }
+                                if (ulb.Count == appDist.ULBList.Where(u => u.IsChecked).ToList().Count)
+                                {
+                                    appDist.IsChecked = true;
+                                }
+                                appDiv.DistrictList.Add(appDist);
+
+
+                            }
+                        }
+                        if (appDiv.DistrictList.Count == appDiv.DistrictList.Where(d => d.IsChecked).ToList().Count)
+                        {
+                            appDiv.IsChecked = true;
+                        }
+                        menuList.Add(appDiv);
+
+                    }
+                }
+
+
+
+            }
+
             return menuList;
         }
 
