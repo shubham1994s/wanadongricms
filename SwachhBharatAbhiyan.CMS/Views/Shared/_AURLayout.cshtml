@@ -28,7 +28,7 @@
     <link rel="shortcut icon" href="~/Content/images/img/ictsbm2.png" />
     <link href="~/Content/css/alertify/alertify.core.css" rel="stylesheet" />
     <link href="~/Content/css/alertify/alertify.default.css" rel="stylesheet" />
-    <style>
+    <style type="text/css">
         .search {
             width: 85%;
             margin-left: 7%;
@@ -75,10 +75,10 @@
                 display: none;
             }
 
-            .folder a:after {
+            .folder a:before {
                 color: #000;
                 padding: 5px;
-                padding-left: 40%;
+                padding-right: 7%;
                 padding-top: 0%;
                 height: 10px;
                 width: 10px;
@@ -87,11 +87,13 @@
                 background: transparent;
                 border-radius: 1px;
                 display: inline-block;
-                /* content: "+";*/
-                content: '\f104';
+                content: "+";
+                /*  content: '\f104';*/
                 font-family: 'FontAwesome';
+                font-size: 20px;
+                font-weight:bold;
             }
-            .folder .a2 a:after {
+            .folder .a2 a:before {
                 content: " " !important;
                 padding-left: 0%;
             }
@@ -115,13 +117,42 @@
             .folder.folder-open a {
                 background: #189cdf;
             }
-            .folder .a1:after {
-                /*  content: "-";*/
-                content: '\f107';
+            .folder .a1:before {
+                  content: "-";
+              /*  content: '\f107';*/
             }
+      
+        ul.inner_ul li:before {
+            content: "├";
+            font-size: 25px;
+            margin-left: -8px;
+            margin-top: -5px;
+            vertical-align: middle;
+            float: left;
+            width: 8px;
+            color: #41424e;
+        }
+
+        ul.inner_ul li:last-child:before {
+            content: "└";
+        }
+
+
             /*.folder.folder-open::before {
                 content: '\f107';
             }*/
+        nav.side-navbar ul li {
+            padding-left: 14px;
+        }
+            nav.side-navbar ul li li a {
+                background:transparent !important;
+                padding-left:15px;
+              
+            }
+            nav.side-navbar ul li a {
+                padding: 5px 15px !important;
+            }
+
     </style>
 </head>
 
@@ -155,7 +186,7 @@
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
                         @*<li class="nav-item" style="list-style: none;"><a href="/houseScanifyEmp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
-                        <li class="nav-item" style="list-style: none; margin-left: 50%;" id="HDUserid"></li>
+                        <li class="nav-item" style="list-style: none; margin-left: 70%;" id="HDUserid"></li>
                         <li class="nav-item" style="list-style: none;" id="HSType"> </li>
 
                         @Html.Partial("_AURLoginPartial")
@@ -190,11 +221,11 @@
                                         {
                                             <a href="@{@aName}">
 
-                                                <i class="svg_gc" style=" fill: #000;"> </i>
+                                                @*<i class="svg_gc" style=" fill: #000;"> </i>*@
                                                 @*कचरा संकलन*@ @item.LinkText
                                             </a>
                                         }
-                                        <ul id="@{@lName}" class="list-unstyled ">
+                                        <ul id="@{@lName}" class="list-unstyled inner_ul">
                                             @{
                                                 var j = 0;
                                                 //var jcount = Model.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count;
@@ -208,7 +239,7 @@
                                                         {
                                                             <a href="@{@aName1}">
 
-                                                                <i class="svg_gc" style=" fill: #000;"> </i>
+                                                                @*<i class="svg_gc" style=" fill: #000;"> </i>*@
                                                                 @*कचरा संकलन*@ @firstItem.LinkText
                                                             </a>
                                                         }
@@ -303,6 +334,10 @@
 
     @Scripts.Render("~/Scripts/ThemeScripts")
     <script>
+        $(".plus").click(function () {
+            $(this).toggleClass("minus").siblings("ul").toggle();
+        })
+
         $(function () {
             $('.folder').on('click', function (e) {
                 $(this).toggleClass('folder-open');

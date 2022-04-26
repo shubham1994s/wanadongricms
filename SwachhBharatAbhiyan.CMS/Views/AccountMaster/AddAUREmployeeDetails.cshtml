@@ -363,20 +363,31 @@
 
 
 <script type="text/javascript">
+
+    $('#type').change(function () {
+        var Utype = $('#type').val();
+        if (Utype == 'A') {
+            $('#checkUR').hide();
+        }
+        else {
+            $('#checkUR').show();
+        }
+
+    });
+
+
+
     $(document).ready(function () {
 
-        $('#UType').change(function () {
-            var Utype = $('#type').val();
-            if (Utype == 'A') {
-                $('#checkUR').hide();
+        var Utype = $('#type').val();
+        if (Utype == 'A') {
+            $('#checkUR').hide();
 
-            }
-            else {
-                $('#checkUR').show();
+        }
+        else {
+            $('#checkUR').show();
+        }
 
-            }
-
-        });
         $(".plus").click(function () {
             $(this).toggleClass("minus").siblings("ul").toggle();
         })
