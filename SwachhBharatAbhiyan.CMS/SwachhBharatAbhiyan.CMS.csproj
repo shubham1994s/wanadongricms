@@ -1741,6 +1741,7 @@
     <Content Include="Content\DatatableGrid\StateGrid.js" />
     <Content Include="Content\DatatableGrid\StreetSweepGrid.js" />
     <Content Include="Content\DatatableGrid\TalukaGrid.js" />
+    <Content Include="Content\DatatableGrid\ULBAdmin.js" />
     <Content Include="Content\DatatableGrid\URGridDetails.js" />
     <Content Include="Content\DatatableGrid\VehicleTypeGrid.js" />
     <Content Include="Content\DatatableGrid\WardNumberGrid.js" />
