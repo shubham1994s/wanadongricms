@@ -61,7 +61,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.qrEmpId);
 
-
+    <input type="hidden" value="@ViewBag.UType" id="UType" />
     <div class="container">
         <div class="row">
             <span class="backk">
@@ -360,6 +360,8 @@
         evt.target.value = newWords.join(" ");
     }
 </script>
+
+
 <script type="text/javascript">
 
     $('#type').change(function () {
