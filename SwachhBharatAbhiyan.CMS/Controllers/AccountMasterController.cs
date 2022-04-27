@@ -124,11 +124,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             return View();
         }
 
-        public ActionResult AURMenuIndex()
+        public ActionResult AURMenuIndex(int DivisionId = 0, int DistrictId = 0, int AppId = 0)
         {
 
             string loginId =
                 (string)Session["LoginId"];
+            ViewData["DivisionId"] = DivisionId;
+            ViewData["DistrictId"] = DistrictId;
+            ViewData["AppId"] = AppId;
             if (string.IsNullOrEmpty(loginId))
             {
                 return RedirectToAction("login");

@@ -1,4 +1,8 @@
 ﻿$(document).ready(function () {
+    var DivisionId = $("#DivisionId").val();
+    var DistrictId = $("#DistrictId").val();
+    var AppId = $("#AppId").val();
+    var UserId = $("#HSID").val();
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
         "order": [[0, "desc"]],
@@ -9,7 +13,7 @@
         "pageLength": 10,
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=ULBAdmin",
+            "url": "/Datable/GetJqGridJson?rn=ULBAdmin&param1=" + DivisionId + "&param2=" + DistrictId + "&param3=" + AppId + "&userId=" + UserId,
             "type": "POST",
             "datatype": "json"
         },
