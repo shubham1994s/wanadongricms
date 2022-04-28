@@ -9,13 +9,13 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository.Grid
 {
     public class ULBAdminGridRepository : IDataTableRepository
     {
-        IEnumerable<UREmployeeDetails> dataset;
+        IEnumerable<AdminULBDetails> dataset;
 
         DashBoardRepository objRep = new DashBoardRepository();
 
-        public ULBAdminGridRepository(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+        public ULBAdminGridRepository(long wildcard, string SearchString, int? DivisionId, int? DistricrId, int? AppId, int UserId)
         {
-            dataset = objRep.GetAURIndexData(wildcard, SearchString, fdate, tdate, userId, ClientId, appId, sortColumn, sortColumnDir, draw, length, start);
+            dataset = objRep.GetAdminULBDetails(wildcard, SearchString, DivisionId, DistricrId, AppId, UserId);
         }
 
         public string GetDataTabelJson(string sortColumn, string sortColumnDir, string draw, string length, string searchValue, string start)

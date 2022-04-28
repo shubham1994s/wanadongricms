@@ -95,7 +95,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     TempData["status"] = "Success";
                     //TempData["ADUM_USER_NAME"] = Result.ADUM_USER_NAME;
                     //AddSessionStreet(Result.ADUM_USER_CODE.ToString(), Result.AD_USER_TYPE_ID.ToString(), Result.ADUM_LOGIN_ID, Result.ADUM_USER_NAME, Result.APP_ID.ToString());
-                    Session["UserID"] = Result.ADUM_USER_CODE.ToString();
+                    Session["UserID"] = Result.ADUM_USER_CODE;
                     Session["LoginId"] = Result.ADUM_LOGIN_ID.ToString();
                     Session["UserProfile"] = Result;
 
@@ -124,14 +124,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             return View();
         }
 
-        public ActionResult AURMenuIndex(int DivisionId = 0, int DistrictId = 0, int AppId = 0)
+        public ActionResult AURMenuIndex(int DivisionId = 0, int DistrictId = 0, int AppId = 0, string Type = "")
         {
 
             string loginId =
                 (string)Session["LoginId"];
-            ViewData["DivisionId"] = DivisionId;
-            ViewData["DistrictId"] = DistrictId;
-            ViewData["AppId"] = AppId;
+            Session["DivisionId"] = DivisionId;
+            Session["DistrictId"] = DistrictId;
+            Session["AppId"] = AppId;
             if (string.IsNullOrEmpty(loginId))
             {
                 return RedirectToAction("login");
@@ -146,7 +146,31 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
         }
+        public ActionResult ULBIndex()
+        {
+            ViewData["DivisionId"] = Session["DivisionId"];
+            ViewData["DistrictId"] = Session["DistrictId"];
+            ViewData["AppId"] = Session["AppId"];
+            ViewData["UserID"] = Session["UserID"];
 
+            string loginId =
+                (string)Session["LoginId"];
+
+            if (string.IsNullOrEmpty(loginId))
+            {
+                return RedirectToAction("login");
+
+            }
+            else
+            {
+                //TempData["MenuList"] = GetULBMenus(loginId);
+
+                return View();
+
+            }
+
+
+        }
 
         public ActionResult AURIndex()
         {
@@ -207,6 +231,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
         }
+
+
+
 
         public ActionResult AddAUREmployeeDetails(int teamId = -1)
         {

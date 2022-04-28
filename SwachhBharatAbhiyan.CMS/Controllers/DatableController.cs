@@ -534,7 +534,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                 case "ULBAdmin":
                     //gridRepository = new InfotainmentGridRepository(0, searchString, appId);
-                    gridRepository = new RfidGridRepository(0, searchString, 0);
+                    gridRepository = new ULBAdminGridRepository(0,searchString,param1,param2,param3,userId);
                     return gridRepository;
                     break;
 

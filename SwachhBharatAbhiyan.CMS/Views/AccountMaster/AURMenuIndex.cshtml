@@ -2,11 +2,16 @@
 @{
     ViewBag.Title = "AURMenuIndex";
     Layout = "~/Views/Shared/_AURLayout.cshtml";
-    var DivisionId = (string)ViewData["DivisionId"];
-    var DistrictId = (string)ViewData["DistrictId"];
-    var AppId = (string)ViewData["AppId"];
+    
 }
+
+@Styles.Render("~/Content/IndexCSS")
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+
+@Scripts.Render("~/Scripts/IndexScript")
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
 <style>
     .canvasjs-chart-credit {
         color: #fff !important
@@ -14,9 +19,6 @@
 </style>
 <br />
 @*<input type="hidden" value="0" id="appid" />*@
-<input type="hidden" value="@DivisionId" id="DivisionId" />
-<input type="hidden" value="@DistrictId" id="DistrictId" />
-<input type="hidden" value="@AppId" id="AppId" />
 
 <h3 style="margin-left:15px">Please Select ULB</h3>
 <div class="d-flex justify-content-between">
@@ -40,32 +42,16 @@
         <div id="chartContainer2" style="height: 200px; width: 270px;"></div>
     </div>
 </div>
-<div class="content-inner" style="overflow-y:auto">
-    <br />
-    <div style="width:100%; margin:0 auto;">
-        @*<a href="AttendenceIndex" class="btn btn-success btn-sm float-right" type="button">Attendance</a>
-            <a href="AddHSEmployeeDetails" class="btn btn-success btn-sm float-right" type="button">Add Employee</a>*@
-        @*<label style="display:inline-flex;padding-right:5px" class="float-right">Search:&nbsp;<input type="text" id="s" class="form-control form-control-sm" onkeyup="Search()"></label>*@
-        <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0" style="font-size:14px">
-
-            <thead style="font-size:14px">
-
-
-                <tr>
-                    <th> ULB ID</th>
-                    <th> ULB Name</th>
-                    <th> Total Properties</th>
-                    <th> Total Scanning Today</th>
-                    <th> Total Segregated</th>
-                    <th> Total Mixed</th>
-                    <th> Total Not Received</th>
-                </tr>
-            </thead>
-
-
-        </table>
+<header class="page-header">
+    <div class="container-fluid">
+        <h2 class="no-margin-bottom">ULB Details</h2>
     </div>
-</div>
+</header>
+<iframe width="100%" height="600px" src="ULBIndex" frameborder="0">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+
+
 <script>
     /* total property*/
     CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56"]);

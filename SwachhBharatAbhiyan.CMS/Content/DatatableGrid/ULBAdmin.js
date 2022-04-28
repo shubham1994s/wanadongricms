@@ -2,10 +2,10 @@
     var DivisionId = $("#DivisionId").val();
     var DistrictId = $("#DistrictId").val();
     var AppId = $("#AppId").val();
-    var UserId = $("#HSID").val();
+    var UserId = $("#UserId").val();
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
-        "order": [[0, "desc"]],
+        "order": [[1, "asc"]],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -21,11 +21,6 @@
         "columnDefs":
             [{
                 "targets": [0],
-                "visible": false,
-                "searchable": false
-            },
-            {
-                "targets": [2],
                 "visible": false,
                 "searchable": false
             }],
