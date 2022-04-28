@@ -69,6 +69,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
             var districtIdInParameter = districtIdIn.HasValue ?
                 new ObjectParameter("DistrictIdIn", districtIdIn) :
                 new ObjectParameter("DistrictIdIn", typeof(int));
+
     
             var appIdINParameter = appIdIN.HasValue ?
                 new ObjectParameter("AppIdIN", appIdIN) :
