@@ -78,7 +78,18 @@ namespace SwachhBharatAbhiyan.CMS
 
                         // param[1] = new ReportParameter("clientid", _userInfo.ClientID.ToString());
                     }
+                    else if (ReportName == "Employee_Attendance")
+                    {
+                        ReportParameter[] param = new ReportParameter[5];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("userid", UserId);
+                        param[4] = new ReportParameter("DBName", DB_Name);
+                        rptViewer.ServerReport.SetParameters(param);
 
+                        // param[1] = new ReportParameter("clientid", _userInfo.ClientID.ToString());
+                    }
                     else if (ReportName == "single Employee collection")
                     {
                         ReportParameter[] param = new ReportParameter[5];

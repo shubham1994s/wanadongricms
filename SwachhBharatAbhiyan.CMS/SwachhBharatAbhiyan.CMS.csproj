@@ -3052,6 +3052,7 @@
     <Content Include="Views\AccountMaster\Index.cshtml" />
     <Content Include="Views\AccountMaster\AddAUREmployeeDetails.cshtml" />
     <Content Include="Views\Shared\_AURLoginPartial.cshtml" />
+    <Content Include="Views\Report\MonthlyAttendance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
