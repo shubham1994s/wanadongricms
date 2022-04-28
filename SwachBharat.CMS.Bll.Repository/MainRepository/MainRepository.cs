@@ -591,7 +591,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                        .GroupBy(f => f.c.b.District)
                        .Select(group => group.FirstOrDefault())
                        .OrderBy(g => g.d.district_name)
-                       .Select(g => new MenuItemULB { divisionId = g.d.id, districtId = 0, ULBId = 0, LinkText = g.d.district_name, ActionName = "", ControllerName = "", returnUrl = "", Type = "W" })
+                       .Select(g => new MenuItemULB { divisionId = g.d.id, districtId = 0, ULBId = 0, LinkText = g.d.district_name, ActionName = "AURMenuIndex", ControllerName = "AccountMaster", returnUrl = "", Type = "W" })
                        .ToList();
                     if (appListDivision != null && appListDivision.Count > 0)
                     {
@@ -606,7 +606,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                             .GroupBy(g => g.c.b.Tehsil)
                             .Select(group => group.FirstOrDefault())
                             .OrderBy(g => g.d.name)
-                            .Select(g => new MenuItemULB { divisionId = appDiv.divisionId, districtId = g.d.id, ULBId = 0, LinkText = g.d.name, ActionName = "", ControllerName = "", returnUrl = "", Type = "W" })
+                            .Select(g => new MenuItemULB { divisionId = appDiv.divisionId, districtId = g.d.id, ULBId = 0, LinkText = g.d.name, ActionName = "AURMenuIndex", ControllerName = "AccountMaster", returnUrl = "", Type = "W" })
                             .ToList();
 
                             if (appListDistrict != null && appListDistrict.Count > 0)
@@ -623,7 +623,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                                             .Join(db.UserInApps, c => c.AppId, d => d.AppId,
                                             (c, d) => new { c, d })
                                             .Join(db.AspNetUsers, e => e.d.UserId, f => f.Id,
-                                            (e, f) => new MenuItemULB { divisionId = e.c.Devision, districtId = e.c.District, ULBId = e.c.AppId, LinkText = e.c.AppName, ActionName = "Login", ControllerName = "Account", returnUrl = f.UserName, Type = "W" })
+                                            (e, f) => new MenuItemULB { divisionId = e.c.Devision, districtId = e.c.District, ULBId = e.c.AppId, LinkText = e.c.AppName, ActionName = "AURMenuIndex", ControllerName = "AccountMaster", returnUrl = f.UserName, Type = "W" })
                                             .OrderBy(m => m.LinkText)
                                             .ToList();
                                     if (ulb != null && ulb.Count > 0)
