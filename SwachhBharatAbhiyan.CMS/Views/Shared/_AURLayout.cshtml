@@ -91,13 +91,14 @@
                 /*  content: '\f104';*/
                 font-family: 'FontAwesome';
                 font-size: 20px;
-                font-weight:bold;
+                font-weight: bold;
             }
+
             .folder .a2 a:before {
                 content: " " !important;
                 padding-left: 0%;
             }
-          /*  .folder::before {
+            /*  .folder::before {
                 content: '\f104';
                 display: inline-block;
                 -webkit-transform: translateY(-50%);
@@ -111,17 +112,18 @@
                 display: block;
                 /*padding-left: 15px;
                 margin-left: 9px;*/
-               /* border-left: 2px solid #5f6f72;*/
-             
+                /* border-left: 2px solid #5f6f72;*/
             }
+
             .folder.folder-open a {
                 background: #189cdf;
             }
+
             .folder .a1:before {
-                  content: "-";
-              /*  content: '\f107';*/
+                content: "-";
+                /*  content: '\f107';*/
             }
-      
+
         ul.inner_ul li:before {
             content: "├";
             font-size: 25px;
@@ -138,21 +140,21 @@
         }
 
 
-            /*.folder.folder-open::before {
+        /*.folder.folder-open::before {
                 content: '\f107';
             }*/
         nav.side-navbar ul li {
-            padding-left: 14px;
+            padding-left: 12px;
         }
+
             nav.side-navbar ul li li a {
-                background:transparent !important;
-                padding-left:15px;
-              
+                background: transparent !important;
+                padding-left: 15px;
             }
+
             nav.side-navbar ul li a {
                 padding: 5px 15px !important;
             }
-
     </style>
 </head>
 
@@ -217,13 +219,10 @@
                                     var lName = "exampledropdownDropdow" + i;
 
                                     <li class="folder">
-                                        @if ((MenuList.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 1))
+                                        @if ((MenuList.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 0))
                                         {
-                                            <a href="@{@aName}">
+                                            @Html.ActionLink(@item.LinkText, @item.ActionName, new { area = "", controller = @item.ControllerName, DivisionId = @item.divisionId, DistrictId = 0, AppId = 0, Type = @item.Type })
 
-                                                @*<i class="svg_gc" style=" fill: #000;"> </i>*@
-                                                @*कचरा संकलन*@ @item.LinkText
-                                            </a>
                                         }
                                         <ul id="@{@lName}" class="list-unstyled inner_ul">
                                             @{
@@ -237,18 +236,15 @@
                                                     <li class="folder">
                                                         @if (MenuList.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 0)
                                                         {
-                                                            <a href="@{@aName1}">
+                                                            @Html.ActionLink(@firstItem.LinkText, @firstItem.ActionName, new { area = "", controller = @firstItem.ControllerName, DivisionId = 0, DistrictId = @firstItem.districtId, AppId = 0, Type = @firstItem.Type })
 
-                                                                @*<i class="svg_gc" style=" fill: #000;"> </i>*@
-                                                                @*कचरा संकलन*@ @firstItem.LinkText
-                                                            </a>
                                                         }
 
                                                         <ul id="@{@lName1}" class="list-unstyled">
                                                             @{foreach (var secondItem in (MenuList.Where(s => s.divisionId == item.divisionId && s.districtId == firstItem.districtId && s.ULBId != 0).ToList()))
                                                                 {
                                                                     <li class="file a2">
-                                                                        @Html.ActionLink(@secondItem.LinkText, @secondItem.ActionName, new {area = "", controller = @secondItem.ControllerName, returnUrl = @secondItem.returnUrl, Type = @secondItem.Type })
+                                                                        @Html.ActionLink(@secondItem.LinkText, @secondItem.ActionName, new { area = "", controller = @secondItem.ControllerName, DivisionId = 0, DistrictId = 0, AppId = @secondItem.ULBId, Type = @secondItem.Type })
                                                                     </li>
 
                                                                 }
@@ -268,47 +264,47 @@
                     </ul>
                 </nav>
                 @*<span class="heading">Extras</span>*@
-            @*<div class="wrapper">
-                <h3 class="heading">File Browser</h3>
-                <div class="file-browser">
-                    <ul>
-                        <li class="folder folder-open">
-                            Dashboard
-                            <ul>
-                                <li class="file">Accounts Module</li>
-                                <li class="file">Help Module</li>
-                            </ul>
-                        </li>
-                        <li class="folder">
-                            Transfers
+                @*<div class="wrapper">
+                        <h3 class="heading">File Browser</h3>
+                        <div class="file-browser">
                             <ul>
                                 <li class="folder folder-open">
-                                    Quick
+                                    Dashboard
                                     <ul>
-                                        <li class="file">Disclosures</li>
-                                        <li class="file">Modals</li>
+                                        <li class="file">Accounts Module</li>
+                                        <li class="file">Help Module</li>
                                     </ul>
                                 </li>
-                                <li class="file">Classic</li>
                                 <li class="folder">
-                                    Scheduled
+                                    Transfers
                                     <ul>
-                                        <li class="folder">
-                                            Calendar
+                                        <li class="folder folder-open">
+                                            Quick
                                             <ul>
-                                                <li class="file">Days</li>
-                                                <li class="file">Months</li>
+                                                <li class="file">Disclosures</li>
+                                                <li class="file">Modals</li>
                                             </ul>
                                         </li>
-                                        <li class="file">Modals</li>
+                                        <li class="file">Classic</li>
+                                        <li class="folder">
+                                            Scheduled
+                                            <ul>
+                                                <li class="folder">
+                                                    Calendar
+                                                    <ul>
+                                                        <li class="file">Days</li>
+                                                        <li class="file">Months</li>
+                                                    </ul>
+                                                </li>
+                                                <li class="file">Modals</li>
+                                            </ul>
+                                        </li>
+                                        <li class="file">History</li>
                                     </ul>
                                 </li>
-                                <li class="file">History</li>
                             </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>*@
+                        </div>
+                    </div>*@
             </nav>
             <div class="content-inner">
 
@@ -349,7 +345,7 @@
             });
             $('a').on('click', function (e) {
                 $(this).toggleClass('a1');
-           
+
             });
         })
         $(document).ready(function () {
@@ -465,7 +461,7 @@
 
     <script type="text/javascript">
         //function search_ulbname1() {
-            
+
         //    let input = document.getElementById('searchbar').value
         //    input = input.toLowerCase();
         //    $('. ul').find('a:not(:contains("' + input + '"))').each(function () {
@@ -488,7 +484,7 @@
                     $(this).hide();
                 }
             });
-            
+
         }
 
         function search_ulbname1() {

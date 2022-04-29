@@ -4945,7 +4945,28 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         }
 
 
+        public IEnumerable<AdminULBDetails> GetAdminULBDetails(long wildcard, string SearchString, int? DivisionId = 0, int? DistricrId = 0, int? AppId = 0, int UserId = 0)
+        {
+            DivisionId = DivisionId ?? 0;
+            DistricrId = DistricrId ?? 0;
+            AppId = AppId ?? 0;
+            List<AdminULBDetails> data = null;
+            using (var db = new DevSwachhBharatMainEntities())
+            {
+                data = db.SP_ULBADMIN(DivisionId, DistricrId, AppId, UserId).Select(x => new AdminULBDetails
+                {
+                    ULBId = x.ULBId,
+                    ULBName = x.ULBName,
+                    TotalHouse = x.TotalHouse,
+                    TotalHouseScan = x.TotalHouseScan,
+                    TotalSeg = x.TotalSeg,
+                    TotalMix = x.TotalMix,
+                    TotalNotReceived = x.TotalNotReceived
+                }).ToList();
+            }
 
+            return data;
+        }
 
         public IEnumerable<SBAHSDumpyardDetailsGrid> GetHSDumpyardDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId)
         {

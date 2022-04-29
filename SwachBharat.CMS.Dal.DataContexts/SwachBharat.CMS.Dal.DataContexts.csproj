@@ -372,6 +372,9 @@
     <Compile Include="SP_TotalHouseCollection_Count_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_ULBADMIN_Result.cs">
+      <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="SS_1_4_ANSWER.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
