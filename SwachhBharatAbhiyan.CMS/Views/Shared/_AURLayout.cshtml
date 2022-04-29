@@ -69,13 +69,14 @@
             list-style: none;
             cursor: pointer;
             margin: 4px 0;
+            position:relative
         }
 
             .folder > ul {
                 display: none;
             }
 
-            .folder a:before {
+            .folder .link:before {
                 color: #000;
                 padding: 5px;
                 padding-right: 7%;
@@ -116,7 +117,7 @@
             }
 
             .folder.folder-open a {
-                background: #189cdf;
+                background: transparent !important;
             }
 
             .folder .a1:before {
@@ -154,7 +155,30 @@
 
             nav.side-navbar ul li a {
                 padding: 5px 15px !important;
+                margin-left: 10%;
             }
+                nav.side-navbar ul li a:hover {
+                    background: transparent !important;
+                }
+                .plus {
+                    background-image: url(https://img.icons8.com/color/48/000000/plus.png);
+                }
+
+        .minus {
+            background-image: url(https://img.icons8.com/color/48/000000/minus.png);
+        }
+        .plus, .minus {
+            display: inline-block;
+            background-repeat: no-repeat;
+            background-size: 16px 16px !important;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 1%;
+            left:9%;
+        }
+            /*vertical-align: middle;*/
+        }
     </style>
 </head>
 
@@ -221,10 +245,7 @@
                                     <li class="folder">
                                         @if ((MenuList.Where(s => s.districtId == 0 && s.ULBId == 0).ToList().Count > 0))
                                         {
-                                            <a href="@{@aName}">
-
-                                                <span></span>
-                                            </a>
+                                            <span class="plus">&nbsp;</span>
                                             @Html.ActionLink(@item.LinkText, @item.ActionName, new { area = "", controller = @item.ControllerName, DivisionId = @item.divisionId, DistrictId = 0, AppId = 0, Type = @item.Type })
 
                                         }
@@ -240,10 +261,7 @@
                                                     <li class="folder">
                                                         @if (MenuList.Where(s => s.ULBId == 0 && s.districtId != 0 && s.divisionId == item.divisionId).ToList().Count > 0)
                                                         {
-                                                            <a href="@{@aName1}">
-
-                                                                <span></span>
-                                                            </a>
+                                                            <span class="plus">&nbsp;</span>
                                                             @Html.ActionLink(@firstItem.LinkText, @firstItem.ActionName, new { area = "", controller = @firstItem.ControllerName, DivisionId = 0, DistrictId = @firstItem.districtId, AppId = 0, Type = @firstItem.Type })
 
                                                         }
