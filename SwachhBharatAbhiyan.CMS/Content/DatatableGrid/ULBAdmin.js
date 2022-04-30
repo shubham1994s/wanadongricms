@@ -10,7 +10,7 @@ var ParentULB = '';
 
 $(document).ready(function () {
     
-
+    debugger;
     var DivisionId = $("#DivisionId").val();
     var DistrictId = $("#DistrictId").val();
     var AppId = $("#AppId").val();
@@ -30,6 +30,7 @@ $(document).ready(function () {
             "datatype": "json"
         },
         "drawCallback": function (settings) {
+            debugger;
             var api = this.api();
             var rowData = api.rows().data();
             ParentULB = rowData[0]['ParentULB'];
@@ -95,16 +96,19 @@ function Search() {
 function showCharts() {
 
 
-    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56"]);
+    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
     var chart = new CanvasJS.Chart("chartContainer", {
         colorSet: "customColors1",
         title: {
-            text: TotalProp,
+            text: TotalProp + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
             fontColor: "#ff6384",
             fontSize: 26,
             fontFamily: "arial"
+        },
+        toolTip: {
+            content: "{name} : {number}",
         },
         legend: {
             verticalAlign: "bottom"
@@ -116,15 +120,17 @@ function showCharts() {
             showInLegend: false,
             legendMarkerType: "square",
             dataPoints: [
-                { y: 100, name: "Total Properties" },
+                { y: 100, name: "Total Properties", number: TotalProp},
             ]
         }]
     });
+    //showDefaultText(chart, 'No Data Available', TotalProp);
+    showDefaultText(chart, TotalProp, 'Not Available', TotalProp);
 
     chart.render();
 
     /*Total Scanning */
-    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56"]);
+    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
     var ToatalNotScan = TotalProp - TotalPropScan;
     var TotalPropPer = TotalProp;
     if (TotalProp == 0)
@@ -134,7 +140,7 @@ function showCharts() {
     var chart = new CanvasJS.Chart("chartContainer1", {
         colorSet: "customColors1",
         title: {
-            text: TotalPropScan,
+            text: TotalPropScan + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
             fontColor: "#ff6384",
@@ -142,7 +148,7 @@ function showCharts() {
             fontFamily: "arial"
         },
         toolTip: {
-            content: "In Numbers {number}",
+            content: "{name} : {number}",
         },
         legend: {
             verticalAlign: "bottom"
@@ -160,10 +166,14 @@ function showCharts() {
         }]
     });
 
+    //showDefaultText(chart, 'No Data Available', TotalProp);
+    showDefaultText(chart, TotalProp, 'Not Available', TotalProp);
+
+
     chart.render();
 
     /*chart type*/
-    CanvasJS.addColorSet("customColors", ["#ff6384", "#36a2eb", "#ffce56"]);
+    CanvasJS.addColorSet("customColors", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
     var TotalAll = TotalSeg + TotalMix + TotalNotRecv;
     var TotalAllPrec = TotalAll
     if (TotalAll == 0) {
@@ -175,7 +185,7 @@ function showCharts() {
     var chart = new CanvasJS.Chart("chartContainer2", {
         colorSet: "customColors",
         title: {
-            text: TotalAll,
+            text: TotalAll + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
             fontColor: "#ff6384",
@@ -183,7 +193,7 @@ function showCharts() {
             fontFamily: "arial"
         },
         toolTip: {
-            content: "In Numbers {number}",
+            content: "{name} : {number}",
         },
         legend: {
             maxWidth: 90,
@@ -210,5 +220,28 @@ function showCharts() {
         }]
     });
 
+    showDefaultText(chart, TotalAll, 'Not Scanned', ToatalNotScan);
+
+
     chart.render();
+
+
+    function showDefaultText(chart, yValue, textName,textNumber) {
+        debugger;
+        var isEmpty = !(yValue > 0);
+
+        if (isEmpty) {
+            chart.options.data[0].dataPoints.push({
+                y: 0.000001,
+                name: textName,
+                number: textNumber,
+                showInLegend: false
+            });
+
+        }
+    }
+
+
+
+
 }
