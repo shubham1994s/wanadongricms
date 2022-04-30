@@ -85,11 +85,19 @@
                                                   
                                                     <a target="_blank" href="/?returnUrl=@firstItem.returnUrl&Type=@firstItem.Type">
                                                         @firstItem.LinkText
-                                                        @if (@firstItem.FAQ == "1")
+                                                        @if (@firstItem.Today_Waste_Status == true && @firstItem.Type == "W")
                                                         {
-                                                        <i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>
+                                                            <i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>
                                                         }
-                                                     </a>
+                                                        @if (@firstItem.Today_Liquid_Status == true && @firstItem.Type == "L")
+                                                        {
+                                                            <i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>
+                                                        }
+                                                        @if (@firstItem.Today_Street_Status == true && @firstItem.Type == "S")
+                                                        {
+                                                            <i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>
+                                                        }
+                                                    </a>
                                                 </li>
 
                                         }

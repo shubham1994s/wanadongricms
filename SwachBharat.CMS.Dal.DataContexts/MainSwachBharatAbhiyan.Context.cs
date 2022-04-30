@@ -45,10 +45,10 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<GamePlayerDetail> GamePlayerDetails { get; set; }
         public virtual DbSet<AD_USER_MST_LIQUID> AD_USER_MST_LIQUID { get; set; }
         public virtual DbSet<AD_USER_MST_STREET> AD_USER_MST_STREET { get; set; }
-        public virtual DbSet<AppDetail> AppDetails { get; set; }
         public virtual DbSet<EmployeeMaster> EmployeeMasters { get; set; }
         public virtual DbSet<CheckAppD> CheckAppDs { get; set; }
         public virtual DbSet<AEmployeeMaster> AEmployeeMasters { get; set; }
+        public virtual DbSet<AppDetail> AppDetails { get; set; }
     
         public virtual int SP_Admin_table()
         {
@@ -59,26 +59,25 @@ namespace SwachBharat.CMS.Dal.DataContexts
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Admin2_Result>("SP_Admin2");
         }
-
-
+    
         public virtual ObjectResult<SP_ULBADMIN_Result> SP_ULBADMIN(Nullable<int> divisionIdIn, Nullable<int> districtIdIn, Nullable<int> appIdIN, Nullable<int> userId)
         {
             var divisionIdInParameter = divisionIdIn.HasValue ?
                 new ObjectParameter("DivisionIdIn", divisionIdIn) :
                 new ObjectParameter("DivisionIdIn", typeof(int));
-
+    
             var districtIdInParameter = districtIdIn.HasValue ?
                 new ObjectParameter("DistrictIdIn", districtIdIn) :
                 new ObjectParameter("DistrictIdIn", typeof(int));
-
+    
             var appIdINParameter = appIdIN.HasValue ?
                 new ObjectParameter("AppIdIN", appIdIN) :
                 new ObjectParameter("AppIdIN", typeof(int));
-
+    
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(int));
-
+    
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ULBADMIN_Result>("SP_ULBADMIN", divisionIdInParameter, districtIdInParameter, appIdINParameter, userIdParameter);
         }
     }
