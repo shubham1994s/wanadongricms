@@ -174,8 +174,8 @@ function showCharts() {
 
     chart.render();
 
-    /*chart type*/
-    CanvasJS.addColorSet("customColors", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
+    /*chart type*//*"#ff6384", "#36a2eb", "#ffce56",*/
+    CanvasJS.addColorSet("customColors", ["#388e3c", "#f44336","#fe9436", "#c0dbbe"]);
     var TotalAll = TotalSeg + TotalMix + TotalNotRecv;
     var TotalAllPrec = TotalAll
     if (TotalAll == 0) {
@@ -216,9 +216,9 @@ function showCharts() {
             showInLegend: true,
             legendMarkerType: "square",
             dataPoints: [
-                { y: TotalMix, name: "Mixed", number: TotalMix },
                 { y: TotalSeg, name: "Segregated", number: TotalSeg },
-                { y: TotalNotRecv, name: "Not Received", number: TotalNotRecv }
+                { y: TotalMix, name: "Mixed", number: TotalMix },
+                { y: TotalNotRecv, name: "Not Collected", number: TotalNotRecv }
             ]
         }]
     });
