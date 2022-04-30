@@ -9,12 +9,35 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 
 @Scripts.Render("~/Scripts/IndexScript")
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 <script src="~/Content/DatatableGrid/ULBAdmin.js"></script>
 <body>
     <input type="hidden" value="@DivisionId" id="DivisionId" />
     <input type="hidden" value="@DistrictId" id="DistrictId" />
     <input type="hidden" value="@AppId" id="AppId" />
     <input type="hidden" value="@UserId" id="UserId" />
+    <div class="d-flex justify-content-between">
+        <div class="card-block" style=" margin-left:5%">
+            <div style="position:relative;top: 94%;z-index: 1; background-color:#fff;height:12px;width:62px;padding-top:10px">
+
+            </div>
+
+            <div id="chartContainer" style="height: 200px; width: 180px;"></div>
+        </div>
+        <div class="card-block">
+            <div style="position:relative;top: 94%;z-index: 1; background-color:#fff;height:12px;width:62px;padding-top:10px">
+
+            </div>
+            <div id="chartContainer1" style="height: 200px; width: 180px;"></div>
+        </div>
+        <div class="card-block" style=" margin-right:12%">
+            <div style="position:relative;top: 94%;z-index: 1; background-color:#fff;height:12px;width:62px;padding-top:10px">
+
+            </div>
+            <div id="chartContainer2" style="height: 200px; width: 270px;"></div>
+        </div>
+    </div>
     <div class="content-inner" style="overflow-y:auto">
         <br />
         <div style="width:100%; margin:0 auto;">

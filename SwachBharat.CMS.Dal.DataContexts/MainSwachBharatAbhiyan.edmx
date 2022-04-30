@@ -899,6 +899,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="lastModifyDateEntry" Type="DateTime" Precision="3" />
         </EntityType>
         <ComplexType Name="SP_ULBADMIN_Result">
+          <Property Type="String" Name="ParentULB" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="ULBName" Nullable="true" MaxLength="500" />
           <Property Type="Int32" Name="ULBId" Nullable="true" />
           <Property Type="Int32" Name="TotalHouse" Nullable="true" />
@@ -1296,6 +1297,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <FunctionImportMapping FunctionImportName="SP_ULBADMIN" FunctionName="DevSwachhBharatMainModel.Store.SP_ULBADMIN">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_ULBADMIN_Result">
+                <ScalarProperty Name="ParentULB" ColumnName="ParentULB" />
                 <ScalarProperty Name="ULBName" ColumnName="ULBName" />
                 <ScalarProperty Name="ULBId" ColumnName="ULBId" />
                 <ScalarProperty Name="TotalHouse" ColumnName="TotalHouse" />

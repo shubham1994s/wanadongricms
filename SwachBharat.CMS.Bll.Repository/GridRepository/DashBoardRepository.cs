@@ -4953,6 +4953,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 {
                     ULBId = x.ULBId,
                     ULBName = x.ULBName,
+                    ParentULB = x.ParentULB,
                     TotalHouse = x.TotalHouse,
                     TotalHouseScan = x.TotalHouseScan,
                     TotalSeg = x.TotalSeg,

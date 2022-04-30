@@ -1,4 +1,16 @@
-﻿$(document).ready(function () {
+﻿
+
+
+var TotalProp = 0;
+var TotalPropScan = 0;
+var TotalSeg = 0;
+var TotalMix = 0;
+var TotalNotRecv = 0;
+var ParentULB = '';
+
+$(document).ready(function () {
+    
+
     var DivisionId = $("#DivisionId").val();
     var DistrictId = $("#DistrictId").val();
     var AppId = $("#AppId").val();
@@ -17,7 +29,20 @@
             "type": "POST",
             "datatype": "json"
         },
+        "drawCallback": function (settings) {
+            var api = this.api();
+            var rowData = api.rows().data();
+            ParentULB = rowData[0]['ParentULB'];
+            for (var i = 0; i < rowData.length; i++) {
+                TotalProp += rowData[i]['TotalHouse'];
+                TotalPropScan += rowData[i]['TotalHouseScan'];
+                TotalSeg += rowData[i]['TotalSeg'];
+                TotalMix += rowData[i]['TotalMix'];
+                TotalNotRecv += rowData[i]['TotalNotReceived'];
 
+            }
+            showCharts();
+        },
         "columnDefs":
             [{
                 "targets": [0],
@@ -65,4 +90,125 @@ function Search() {
     oTable.search(value).draw();
     oTable.search("");
     document.getElementById('USER_ID_FK').value = -1;
+}
+
+function showCharts() {
+
+
+    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56"]);
+    var chart = new CanvasJS.Chart("chartContainer", {
+        colorSet: "customColors1",
+        title: {
+            text: TotalProp,
+            verticalAlign: "center",
+            dockInsidePlotArea: true,
+            fontColor: "#ff6384",
+            fontSize: 26,
+            fontFamily: "arial"
+        },
+        legend: {
+            verticalAlign: "bottom"
+        },
+        data: [{
+            type: "doughnut",
+            startAngle: -90,
+            innerRadius: "80%",
+            showInLegend: false,
+            legendMarkerType: "square",
+            dataPoints: [
+                { y: 100, name: "Total Properties" },
+            ]
+        }]
+    });
+
+    chart.render();
+
+    /*Total Scanning */
+    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56"]);
+    var ToatalNotScan = TotalProp - TotalPropScan;
+    var TotalPropPer = TotalProp;
+    if (TotalProp == 0)
+        TotalPropPer = null;
+    //var totalScanedPerct = TotalPropScan / TotalPropPer * 100;
+    //var totalNotScanPerct = ToatalNotScan / TotalPropPer * 100;
+    var chart = new CanvasJS.Chart("chartContainer1", {
+        colorSet: "customColors1",
+        title: {
+            text: TotalPropScan,
+            verticalAlign: "center",
+            dockInsidePlotArea: true,
+            fontColor: "#ff6384",
+            fontSize: 26,
+            fontFamily: "arial"
+        },
+        toolTip: {
+            content: "In Numbers {number}",
+        },
+        legend: {
+            verticalAlign: "bottom"
+        },
+        data: [{
+            type: "doughnut",
+            startAngle: -90,
+            innerRadius: "80%",
+            showInLegend: false,
+            legendMarkerType: "square",
+            dataPoints: [
+                { y: ToatalNotScan, name: "Total Not Scanned", number: ToatalNotScan},
+                { y: TotalPropScan, name: "Total Scanned", number: TotalPropScan},
+            ]
+        }]
+    });
+
+    chart.render();
+
+    /*chart type*/
+    CanvasJS.addColorSet("customColors", ["#ff6384", "#36a2eb", "#ffce56"]);
+    var TotalAll = TotalSeg + TotalMix + TotalNotRecv;
+    var TotalAllPrec = TotalAll
+    if (TotalAll == 0) {
+        TotalAllPrec = null;
+    }
+    //var res_mixed_coll = TotalMix / TotalAllPrec * 100;
+    //var res_bif_coll = TotalSeg / TotalAllPrec * 100;
+    //var res_not_coll = TotalNotRecv / TotalAllPrec * 100;
+    var chart = new CanvasJS.Chart("chartContainer2", {
+        colorSet: "customColors",
+        title: {
+            text: TotalAll,
+            verticalAlign: "center",
+            dockInsidePlotArea: true,
+            fontColor: "#ff6384",
+            fontSize: 26,
+            fontFamily: "arial"
+        },
+        toolTip: {
+            content: "In Numbers {number}",
+        },
+        legend: {
+            maxWidth: 90,
+
+            fontSize: 14,
+            verticalAlign: "center",
+            horizontalAlign: "right"
+        },
+        data: [{
+            type: "doughnut",
+            startAngle: -90,
+            innerRadius: "80%",
+            //yValueFormatString: "###0.00\"%\"",
+            //indexLabel: "#percent%",
+            percentFormatString: "#0.##",
+            legendText: "{name}:{y} (#percent%)",
+            showInLegend: true,
+            legendMarkerType: "square",
+            dataPoints: [
+                { y: TotalMix, name: "Mixed", number: TotalMix },
+                { y: TotalSeg, name: "Segregated", number: TotalSeg },
+                { y: TotalNotRecv, name: "Not Received", number: TotalNotRecv }
+            ]
+        }]
+    });
+
+    chart.render();
 }
