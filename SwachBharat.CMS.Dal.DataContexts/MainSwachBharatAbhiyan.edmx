@@ -644,6 +644,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
             <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
+          <EntitySet Name="tehsils" EntityType="DevSwachhBharatMainModel.tehsil" />
         </EntityContainer>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -904,6 +905,19 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="Today_Street_Status" Type="Boolean" />
           <Property Name="ulb_property" Type="Int32" />
           <Property Name="Add_Ulb_Property" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tehsil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="name_mar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="district" Type="Int32" />
+          <Property Name="IsCheked" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1293,6 +1307,20 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
                 <ScalarProperty Name="AppName_mar" ColumnName="AppName_mar" />
                 <ScalarProperty Name="AppName" ColumnName="AppName" />
                 <ScalarProperty Name="AppId" ColumnName="AppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tehsils">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.tehsil">
+              <MappingFragment StoreEntitySet="tehsil">
+                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="name_mar" ColumnName="name_mar" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
