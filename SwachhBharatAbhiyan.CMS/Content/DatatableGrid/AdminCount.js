@@ -67,7 +67,7 @@
 
     });
 
-
+    debugger;
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
         "order": [[2, "desc"]],
@@ -104,9 +104,9 @@
         ]
     });
 
-    setInterval(function () {
-        Search()
-    }, 20000);
+    //setInterval(function () {
+    //    Search()
+    //}, 6000000);
 
 
 });

@@ -486,7 +486,7 @@ namespace SwachBharat.CMS.Bll.Services
                         {
                             id = tes.id,
                             name = tes.name,
-                            IsCheked = tes.IsCheked
+                         //   IsCheked = tes.IsCheked
                         });
                     }
 
@@ -510,7 +510,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 {
                                     id = tes.id,
                                     name = tes.name,
-                                    IsCheked = tes.IsCheked
+                                 //   IsCheked = tes.IsCheked
                                 });
                             }
 

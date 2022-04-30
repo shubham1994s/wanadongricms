@@ -23,5 +23,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> mixedcolle { get; set; }
         public Nullable<int> TotalLiquidCount { get; set; }
         public Nullable<int> TotalStreetCount { get; set; }
+        public string Datasource { get; set; }
     }
 }
