@@ -59,25 +59,26 @@ namespace SwachBharat.CMS.Dal.DataContexts
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Admin2_Result>("SP_Admin2");
         }
-    
+
+
         public virtual ObjectResult<SP_ULBADMIN_Result> SP_ULBADMIN(Nullable<int> divisionIdIn, Nullable<int> districtIdIn, Nullable<int> appIdIN, Nullable<int> userId)
         {
             var divisionIdInParameter = divisionIdIn.HasValue ?
                 new ObjectParameter("DivisionIdIn", divisionIdIn) :
                 new ObjectParameter("DivisionIdIn", typeof(int));
-    
+
             var districtIdInParameter = districtIdIn.HasValue ?
                 new ObjectParameter("DistrictIdIn", districtIdIn) :
                 new ObjectParameter("DistrictIdIn", typeof(int));
-    
+
             var appIdINParameter = appIdIN.HasValue ?
                 new ObjectParameter("AppIdIN", appIdIN) :
                 new ObjectParameter("AppIdIN", typeof(int));
-    
+
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(int));
-    
+
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ULBADMIN_Result>("SP_ULBADMIN", divisionIdInParameter, districtIdInParameter, appIdINParameter, userIdParameter);
         }
     }
