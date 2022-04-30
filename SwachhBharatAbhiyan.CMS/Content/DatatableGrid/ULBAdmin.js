@@ -96,14 +96,15 @@ function Search() {
 function showCharts() {
 
 
-    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
+    CanvasJS.addColorSet("customColors1", [/*"#ff6384", "#36a2eb", "#ffce56", "#01a800"*/"#388e3c"]);
     var chart = new CanvasJS.Chart("chartContainer", {
         colorSet: "customColors1",
+        animationEnabled: true,
         title: {
             text: TotalProp + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
-            fontColor: "#ff6384",
+            fontColor: /*"#ff6384"*/"#595959",
             fontSize: 26,
             fontFamily: "arial"
         },
@@ -130,7 +131,7 @@ function showCharts() {
     chart.render();
 
     /*Total Scanning */
-    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
+    CanvasJS.addColorSet("customColors1", ["#c0dbbe", "#388e3c", "#ffce56", "#01a800"]);
     var ToatalNotScan = TotalProp - TotalPropScan;
     var TotalPropPer = TotalProp;
     if (TotalProp == 0)
@@ -139,11 +140,12 @@ function showCharts() {
     //var totalNotScanPerct = ToatalNotScan / TotalPropPer * 100;
     var chart = new CanvasJS.Chart("chartContainer1", {
         colorSet: "customColors1",
+        animationEnabled: true,
         title: {
             text: TotalPropScan + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
-            fontColor: "#ff6384",
+            fontColor:/*"#ff6384"*/"#595959",
             fontSize: 26,
             fontFamily: "arial"
         },
@@ -184,11 +186,12 @@ function showCharts() {
     //var res_not_coll = TotalNotRecv / TotalAllPrec * 100;
     var chart = new CanvasJS.Chart("chartContainer2", {
         colorSet: "customColors",
+        animationEnabled: true,
         title: {
             text: TotalAll + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
-            fontColor: "#ff6384",
+            fontColor: "#595959",
             fontSize: 26,
             fontFamily: "arial"
         },
