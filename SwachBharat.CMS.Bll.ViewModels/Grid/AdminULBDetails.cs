@@ -10,6 +10,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
     {
         public Nullable<int> ULBId { get; set; }
         public string ULBName { get; set; }
+        public string ParentULB { get; set; }
         public Nullable<int> TotalHouse { get; set; }
         public Nullable<int> TotalHouseScan { get; set; }
         public Nullable<int> TotalSeg { get; set; }

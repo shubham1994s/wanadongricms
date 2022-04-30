@@ -18,7 +18,10 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
 
         public Nullable<bool> isActive { get; set; }
 
-
+        public string FAQ { get; set; }
+        public Nullable<bool> Today_Waste_Status { get; set; }
+        public Nullable<bool> Today_Liquid_Status { get; set; }
+        public Nullable<bool> Today_Street_Status { get; set; }
 
     }
 

@@ -80,9 +80,25 @@
                                 <ul id="@{@lName}" class="collapse list-unstyled ">
                                     @{foreach (var firstItem in (Model.Where(s => s.M_P_ID == item.M_ID).ToList()))
                                         {
-                                            <li class="">
-                                                @Html.ActionLink(@firstItem.LinkText, @firstItem.ActionName, new { area = "", controller = @firstItem.ControllerName, returnUrl = @firstItem.returnUrl, Type = @firstItem.Type })
-                                            </li>
+                                                <li class="">
+                                                    @*@Html.ActionLink(@firstItem.LinkText, @firstItem.ActionName, new { area = "", controller = @firstItem.ControllerName, returnUrl = @firstItem.returnUrl, Type = @firstItem.Type, FAQ = @firstItem.FAQ })*@
+                                                  
+                                                    <a target="_blank" href="/?returnUrl=@firstItem.returnUrl&Type=@firstItem.Type">
+                                                        @firstItem.LinkText
+                                                        @if (@firstItem.Today_Waste_Status == true && @firstItem.Type == "W")
+                                                        {
+                                                            <i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>
+                                                        }
+                                                        @if (@firstItem.Today_Liquid_Status == true && @firstItem.Type == "L")
+                                                        {
+                                                            <i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>
+                                                        }
+                                                        @if (@firstItem.Today_Street_Status == true && @firstItem.Type == "S")
+                                                        {
+                                                            <i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>
+                                                        }
+                                                    </a>
+                                                </li>
 
                                         }
                                     }

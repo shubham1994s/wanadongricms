@@ -13,6 +13,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
     public partial class SP_ULBADMIN_Result
     {
+        public string ParentULB { get; set; }
         public string ULBName { get; set; }
         public Nullable<int> ULBId { get; set; }
         public Nullable<int> TotalHouse { get; set; }
