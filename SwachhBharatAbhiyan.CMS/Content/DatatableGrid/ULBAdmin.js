@@ -42,6 +42,7 @@ $(document).ready(function () {
                 TotalNotRecv += rowData[i]['TotalNotReceived'];
 
             }
+            $("#spnULBName").text(ParentULB);
             showCharts();
         },
         "columnDefs":
