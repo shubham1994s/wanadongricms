@@ -14,6 +14,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class SP_Admin2_Result
     {
         public string appName { get; set; }
+
+        public string Datasource { get; set; }
         public Nullable<int> userId { get; set; }
         public Nullable<int> attenUser { get; set; }
         public Nullable<int> collectionCount { get; set; }
@@ -23,6 +25,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> mixedcolle { get; set; }
         public Nullable<int> TotalLiquidCount { get; set; }
         public Nullable<int> TotalStreetCount { get; set; }
-        public string Datasource { get; set; }
+       
     }
 }
