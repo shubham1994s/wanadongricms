@@ -143,30 +143,27 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             {
                 TempData["MenuList"] = GetULBMenus(loginId);
 
-              
-
-                string head = SGetULBMenus(loginId, DivisionId, DistrictId, AppId);
-
                 if (DivisionId == 0 && DistrictId == 0 && AppId == 0)
                 {
-                    ViewBag.head = "Maharashtra Division's Details";
-                }
+                    Session["ULBType"] = " Division's Details";
 
-                if (DivisionId != 0)
+                }
+                else if (DivisionId > 0 && DistrictId == 0 && AppId == 0)
                 {
-                    ViewBag.head = head + " Division Details";
-                }
+                    Session["ULBType"] = " Division Details";
 
-                if (DistrictId != 0)
+
+                }
+                else if (DivisionId == 0 && DistrictId > 0 && AppId == 0)
                 {
-                    ViewBag.head = head + " District Details";
-                }
+                    Session["ULBType"] = " District Details";
 
-                if (AppId != 0)
+
+                }
+                else
                 {
-                    ViewBag.head = head;
+                    Session["ULBType"] = " ULB Details";
                 }
-
                 return View();
 
             }
@@ -178,7 +175,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             ViewData["DistrictId"] = Session["DistrictId"];
             ViewData["AppId"] = Session["AppId"];
             ViewData["UserID"] = Session["UserID"];
-
+            ViewData["ULBType"] = Session["ULBType"];
             string loginId =
                 (string)Session["LoginId"];
 
