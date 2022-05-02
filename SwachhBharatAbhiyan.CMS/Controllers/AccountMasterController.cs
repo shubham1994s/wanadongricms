@@ -150,13 +150,13 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 }
                 else if (DivisionId > 0 && DistrictId == 0 && AppId == 0)
                 {
-                    Session["ULBType"] = " Division's Details";
+                    Session["ULBType"] = " Division Details";
 
 
                 }
                 else if (DivisionId == 0 && DistrictId > 0 && AppId == 0)
                 {
-                    Session["ULBType"] = " District's Details";
+                    Session["ULBType"] = " District Details";
 
 
                 }
