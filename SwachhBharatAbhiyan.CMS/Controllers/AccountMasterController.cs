@@ -143,29 +143,49 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             {
                 TempData["MenuList"] = GetULBMenus(loginId);
 
-              
-
-                string head = SGetULBMenus(loginId, DivisionId, DistrictId, AppId);
-
                 if (DivisionId == 0 && DistrictId == 0 && AppId == 0)
                 {
-                    ViewBag.head = "Maharashtra Division's Details";
+                    Session["ULBType"] = " Division's Details";
+
+                }
+                else if (DivisionId > 0 && DistrictId == 0 && AppId == 0)
+                {
+                    Session["ULBType"] = " Division's Details";
+
+
+                }
+                else if (DivisionId == 0 && DistrictId > 0 && AppId == 0)
+                {
+                    Session["ULBType"] = " District's Details";
+
+
+                }
+                else
+                {
+                    Session["ULBType"] = " ULB Details";
                 }
 
-                if (DivisionId != 0)
-                {
-                    ViewBag.head = head + " Division Details";
-                }
+                //string head = SGetULBMenus(loginId, DivisionId, DistrictId, AppId);
 
-                if (DistrictId != 0)
-                {
-                    ViewBag.head = head + " District Details";
-                }
+                //if (DivisionId == 0 && DistrictId == 0 && AppId == 0)
+                //{
+                //    ViewBag.head = "Maharashtra Division's Details";
+                //}
 
-                if (AppId != 0)
-                {
-                    ViewBag.head = head;
-                }
+                //if (DivisionId != 0)
+                //{
+                //    ViewBag.head = head + " Division Details";
+                //}
+
+                //if (DistrictId != 0)
+                //{
+                //    ViewBag.head = head + " District Details";
+                //}
+
+                //if (AppId != 0)
+                //{
+                //    ViewBag.head = head;
+                //}
 
                 return View();
 
@@ -178,7 +198,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             ViewData["DistrictId"] = Session["DistrictId"];
             ViewData["AppId"] = Session["AppId"];
             ViewData["UserID"] = Session["UserID"];
-
+            ViewData["ULBType"] = Session["ULBType"];
             string loginId =
                 (string)Session["LoginId"];
 
