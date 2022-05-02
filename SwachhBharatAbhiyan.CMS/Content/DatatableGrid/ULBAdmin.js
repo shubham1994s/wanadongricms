@@ -42,6 +42,7 @@ $(document).ready(function () {
                 TotalNotRecv += rowData[i]['TotalNotReceived'];
 
             }
+            $("#spnULBName").text(ParentULB);
             showCharts();
         },
         "columnDefs":
@@ -96,14 +97,15 @@ function Search() {
 function showCharts() {
 
 
-    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
+    CanvasJS.addColorSet("customColors1", [/*"#ff6384", "#36a2eb", "#ffce56", "#01a800"*/"#388e3c"]);
     var chart = new CanvasJS.Chart("chartContainer", {
         colorSet: "customColors1",
+        animationEnabled: true,
         title: {
             text: TotalProp + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
-            fontColor: "#ff6384",
+            fontColor: /*"#ff6384"*/"#595959",
             fontSize: 26,
             fontFamily: "arial"
         },
@@ -130,7 +132,7 @@ function showCharts() {
     chart.render();
 
     /*Total Scanning */
-    CanvasJS.addColorSet("customColors1", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
+    CanvasJS.addColorSet("customColors1", ["#c0dbbe", "#388e3c", "#ffce56", "#01a800"]);
     var ToatalNotScan = TotalProp - TotalPropScan;
     var TotalPropPer = TotalProp;
     if (TotalProp == 0)
@@ -139,11 +141,12 @@ function showCharts() {
     //var totalNotScanPerct = ToatalNotScan / TotalPropPer * 100;
     var chart = new CanvasJS.Chart("chartContainer1", {
         colorSet: "customColors1",
+        animationEnabled: true,
         title: {
             text: TotalPropScan + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
-            fontColor: "#ff6384",
+            fontColor:/*"#ff6384"*/"#595959",
             fontSize: 26,
             fontFamily: "arial"
         },
@@ -172,8 +175,8 @@ function showCharts() {
 
     chart.render();
 
-    /*chart type*/
-    CanvasJS.addColorSet("customColors", ["#ff6384", "#36a2eb", "#ffce56", "#01a800"]);
+    /*chart type*//*"#ff6384", "#36a2eb", "#ffce56",*/
+    CanvasJS.addColorSet("customColors", ["#388e3c", "#f44336","#fe9436", "#c0dbbe"]);
     var TotalAll = TotalSeg + TotalMix + TotalNotRecv;
     var TotalAllPrec = TotalAll
     if (TotalAll == 0) {
@@ -184,11 +187,12 @@ function showCharts() {
     //var res_not_coll = TotalNotRecv / TotalAllPrec * 100;
     var chart = new CanvasJS.Chart("chartContainer2", {
         colorSet: "customColors",
+        animationEnabled: true,
         title: {
             text: TotalAll + '',
             verticalAlign: "center",
             dockInsidePlotArea: true,
-            fontColor: "#ff6384",
+            fontColor: "#595959",
             fontSize: 26,
             fontFamily: "arial"
         },
@@ -213,9 +217,9 @@ function showCharts() {
             showInLegend: true,
             legendMarkerType: "square",
             dataPoints: [
-                { y: TotalMix, name: "Mixed", number: TotalMix },
                 { y: TotalSeg, name: "Segregated", number: TotalSeg },
-                { y: TotalNotRecv, name: "Not Received", number: TotalNotRecv }
+                { y: TotalMix, name: "Mixed", number: TotalMix },
+                { y: TotalNotRecv, name: "Not Collected", number: TotalNotRecv }
             ]
         }]
     });
