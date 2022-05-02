@@ -147,6 +147,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                 string head = SGetULBMenus(loginId, DivisionId, DistrictId, AppId);
 
+                if (DivisionId == 0 && DistrictId == 0 && AppId == 0)
+                {
+                    ViewBag.head = "Maharashtra Division's Details";
+                }
+
                 if (DivisionId != 0)
                 {
                     ViewBag.head = head + " Division Details";

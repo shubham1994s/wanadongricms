@@ -24,7 +24,7 @@
     <input type="hidden" value="@UserId" id="UserId" />
     <header class="page-header">
         <div class="container-fluid">
-            <h2 class="no-margin-bottom">ULB Details <span id="spnULBName"></span></h2>
+            <h2 class="no-margin-bottom">ULB Details <span id="spnULBName1"></span></h2>
         </div>
     </header>
     <div class="d-flex justify-content-between">
@@ -58,7 +58,24 @@
 
                     <tr>
                         <th> ULB ID</th>
-                        <th> ULB Name</th>
+                        <th>
+                            @if (@DivisionId == 0 && @DistrictId == 0 && @AppId == 0)
+                            {
+                                <span>Division Name</span>
+                            }
+                            @if (@DivisionId >= 1 && @DistrictId == 0 && @AppId == 0)
+                            {
+                                <span>District Name</span>
+                            }
+                            @if (@DivisionId == 0 && @DistrictId >= 1 && @AppId == 0)
+                            {
+                                <span>ULB Name</span>
+                            }
+                            @if (@DivisionId == 0 && @DistrictId == 0 && @AppId >= 1)
+                            {
+                                <span>ULB Name</span>
+                            }
+                        </th>
                         <th> Total Properties</th>
                         <th> Total Scanning Today</th>
                         <th> Total Segregated</th>
