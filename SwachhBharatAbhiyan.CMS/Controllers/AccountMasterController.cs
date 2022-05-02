@@ -132,6 +132,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             Session["DivisionId"] = DivisionId;
             Session["DistrictId"] = DistrictId;
             Session["AppId"] = AppId;
+
+          
             if (string.IsNullOrEmpty(loginId))
             {
                 return RedirectToAction("login");
@@ -140,6 +142,25 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             else
             {
                 TempData["MenuList"] = GetULBMenus(loginId);
+
+              
+
+                string head = SGetULBMenus(loginId, DivisionId, DistrictId, AppId);
+
+                if (DivisionId != 0)
+                {
+                    ViewBag.head = head + " Division Details";
+                }
+
+                if (DistrictId != 0)
+                {
+                    ViewBag.head = head + " District Details";
+                }
+
+                if (AppId != 0)
+                {
+                    ViewBag.head = head;
+                }
 
                 return View();
 
@@ -262,6 +283,13 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             return menuList;
         }
 
+
+        public string SGetULBMenus(string loginId,int DivisionId,int DistrictId, int AppId)
+        {
+           
+          var  menuList = mainrepository.SGetULBMenus(loginId, DivisionId, DistrictId, AppId);
+            return menuList;
+        }
 
         //
         // POST: /Account/LogOff

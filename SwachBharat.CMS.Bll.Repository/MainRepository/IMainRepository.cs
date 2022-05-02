@@ -74,6 +74,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         List<MenuItemULB> GetULBMenus(string loginId);
 
 
+        string SGetULBMenus(string loginId, int DivisionId, int DistrictId, int AppId);
+
         #region Game
         List<GameMaster> GetGameList();
         InfotainmentDetailsVW GetInfotainmentDetailsById(int ID);
