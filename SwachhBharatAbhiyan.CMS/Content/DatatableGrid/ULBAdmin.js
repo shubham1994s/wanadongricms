@@ -110,6 +110,18 @@ function showCharts() {
             fontSize: 26,
             fontFamily: "arial"
         },
+        subtitles: [
+            {
+                text: "Total Property",
+                verticalAlign: "top", // "top", "center", "bottom"
+                horizontalAlign: "center",
+                //Uncomment properties below to see how they behave
+                //fontColor: "red",
+                fontSize: 14,
+                fontWeight: "normal",
+                fontFamily: "arial"
+            }
+        ],
         toolTip: {
             content: "{name} : {number}",
         },
@@ -151,6 +163,18 @@ function showCharts() {
             fontSize: 26,
             fontFamily: "arial"
         },
+        subtitles: [
+            {
+                text: "Total Scanning Today",
+                verticalAlign: "top", // "top", "center", "bottom"
+                horizontalAlign: "center",
+                //Uncomment properties below to see how they behave
+                //fontColor: "red",
+                fontSize: 14,
+                fontWeight: "normal",
+                fontFamily: "arial"
+            }
+        ],
         toolTip: {
             content: "{name} : {number}",
         },
@@ -197,30 +221,44 @@ function showCharts() {
             fontSize: 26,
             fontFamily: "arial"
         },
+        subtitles: [
+            {
+                text: "Scanning Bifurcation",
+                verticalAlign: "top", // "top", "center", "bottom"
+                horizontalAlign: "center",
+                //Uncomment properties below to see how they behave
+                //fontColor: "red",
+                fontSize: 14,
+                fontWeight: "normal",
+                fontFamily: "arial"
+            }
+        ],
         toolTip: {
             content: "{name} : {number}",
         },
         legend: {
-            maxWidth: 90,
-
-            fontSize: 14,
+            //maxWidth: 90,
+            itemWidth: 320,
+            fontSize: 12,
             verticalAlign: "center",
-            horizontalAlign: "right"
+            horizontalAlign: "right",
+            markerMargin: 15
         },
         data: [{
+          
             type: "doughnut",
             startAngle: -90,
             innerRadius: "80%",
             //yValueFormatString: "###0.00\"%\"",
             //indexLabel: "#percent%",
             percentFormatString: "#0.##",
-            legendText: "{name}:{y} (#percent%)",
+            legendText: "{name} :  {y}           (#percent%)",
             showInLegend: true,
             legendMarkerType: "square",
             dataPoints: [
-                { y: TotalSeg, name: "Segregated", number: TotalSeg },
-                { y: TotalMix, name: "Mixed", number: TotalMix },
-                { y: TotalNotRecv, name: "Not Collected", number: TotalNotRecv }
+                { y: TotalSeg, name: "Segregated", number: TotalSeg, legendMarkerType: "circle" },
+                { y: TotalMix, name: "Mixed", number: TotalMix, legendMarkerType: "circle" },
+                { y: TotalNotRecv, name: "Not Collected", number: TotalNotRecv, legendMarkerType: "circle" }
             ]
         }]
     });

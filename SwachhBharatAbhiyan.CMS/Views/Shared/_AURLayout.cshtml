@@ -18,7 +18,7 @@
     <meta name="robots" content="all,follow">
     @Styles.Render("~/Content/ThemeCss")
     @*@Scripts.Render("~/Scripts/ThemeScripts")*@
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     @*@Scripts.Render("~/bundles/modernizr")*@
     @*@RenderSection("styles", required: false)*@
@@ -28,158 +28,7 @@
     <link rel="shortcut icon" href="~/Content/images/img/ictsbm2.png" />
     <link href="~/Content/css/alertify/alertify.core.css" rel="stylesheet" />
     <link href="~/Content/css/alertify/alertify.default.css" rel="stylesheet" />
-    <style type="text/css">
-        .search {
-            width: 85%;
-            margin-left: 7%;
-            border-radius: 10px;
-            border: 1px solid #bbb7b7;
-            text-align: center;
-        }
-
-
-        .heading {
-            font-weight: 400;
-            text-align: center;
-            background: #293538;
-            margin: 0;
-            color: white;
-            padding: 10px 0;
-        }
-
-        .wrapper {
-            padding: 20px 10px;
-            margin: 0 auto;
-            width: 300px;
-        }
-
-        .file-browser {
-            background: #364346;
-            color: white;
-            padding: 20px 10px;
-        }
-
-        .file {
-            color: #eee;
-            display: block;
-            list-style: none;
-        }
-
-        .folder {
-            list-style: none;
-            cursor: pointer;
-            margin: 4px 0;
-            position:relative
-        }
-
-            .folder > ul {
-                display: none;
-            }
-
-            .folder .link:before {
-                color: #000;
-                padding: 5px;
-                padding-right: 7%;
-                padding-top: 0%;
-                height: 10px;
-                width: 10px;
-                text-align: center;
-                line-height: 10px;
-                background: transparent;
-                border-radius: 1px;
-                display: inline-block;
-                content: "+";
-                /*  content: '\f104';*/
-                font-family: 'FontAwesome';
-                font-size: 20px;
-                font-weight: bold;
-            }
-
-            .folder .a2 a:before {
-                content: " " !important;
-                padding-left: 0%;
-            }
-            /*  .folder::before {
-                content: '\f104';
-                display: inline-block;
-                -webkit-transform: translateY(-50%);
-                transform: translateY(-50%);
-                font-family: 'FontAwesome';
-                position: absolute;
-            padding-top:3%;
-                left: 15%;
-            }*/
-            .folder.folder-open > ul {
-                display: block;
-                /*padding-left: 15px;
-                margin-left: 9px;*/
-                /* border-left: 2px solid #5f6f72;*/
-            }
-
-            .folder.folder-open a {
-                background: transparent !important;
-            }
-
-            .folder .a1:before {
-                content: "-";
-                /*  content: '\f107';*/
-            }
-
-        ul.inner_ul li:before {
-            content: "├";
-            font-size: 25px;
-            margin-left: -8px;
-            margin-top: -5px;
-            vertical-align: middle;
-            float: left;
-            width: 8px;
-            color: #41424e;
-        }
-
-        ul.inner_ul li:last-child:before {
-            content: "└";
-        }
-
-
-        /*.folder.folder-open::before {
-                content: '\f107';
-            }*/
-        nav.side-navbar ul li {
-            padding-left: 12px;
-        }
-
-            nav.side-navbar ul li li a {
-                background: transparent !important;
-                padding-left: 15px;
-            }
-
-            nav.side-navbar ul li a {
-                padding: 5px 15px !important;
-                margin-left: 12%;
-            }
-               /* nav.side-navbar ul li a:hover {
-                    background: transparent !important;
-                }*/
-                .plus {
-                    background-image: url(https://img.icons8.com/color/48/000000/plus.png);
-                }
-
-        .minus {
-            background-image: url(https://img.icons8.com/color/48/000000/minus.png);
-        }
-        .plus, .minus {
-            display: inline-block;
-            background-repeat: no-repeat;
-            background-size: 16px 16px !important;
-            width: 16px;
-            height: 16px;
-            position: absolute;
-            top:1%;
-            left:9%;
-        }
-            /*vertical-align: middle;*/
-        }
-    </style>
+    <link href="~/Content/css/AccountMaster.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -190,7 +39,7 @@
     <div class="page">
         <!-- Main Navbar-->
         <header class="header">
-            <nav class="navbar">
+            <nav class="navbar" style=" background: #9ad9f8 !important; color: #000;">
                 <!-- Search Box-->
                 <div class="search-box">
                     <button class="dismiss"><i class="icon-close"></i></button>
@@ -199,39 +48,43 @@
                     </form>
                 </div>
 
-                <div class="container-fluid">
-                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                <div class="container-fluid" style="padding-right:10%">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between" style="display: -webkit-box !important;">
                         <!-- Navbar Header-->
-                        <div class="navbar-header">
-                            <!-- Navbar Brand --><a href="#" class="navbar-brand">
-                                <div class="brand-text brand-big"><span><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </span></div>
-                                <div class="brand-text brand-small"><strong><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </strong></div>
-                            </a>
-                            <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                        <div class="navbar-header d-flex" style="display: -webkit-box !important;">
+                            <!-- Navbar Brand <a href="#" class="navbar-brand">
+            <div class="brand-text brand-big"><span><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </span></div>
+            <div class="brand-text brand-small"><strong><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </strong></div>
+        </a>
+        <!-- Toggle Button-->
+                            <img src="~/Content/images/New_Img/WCMT-Logo.png" style="width:45px;height:auto" />
+                            <h6 style="color: #000; padding-top: 7%; padding-left: 5%;">ICT BASED MONITARING SYSTEM </h6>
+                            <!-- <a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>-->
                         </div>
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
                         @*<li class="nav-item" style="list-style: none;"><a href="/houseScanifyEmp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
                         <li class="nav-item" style="list-style: none; margin-left: 70%;" id="HDUserid"></li>
-                        <li class="nav-item" style="list-style: none;" id="HSType"> </li>
-
+                        <li class="nav-item" style="list-style: none; padding-right: 1%;" id="HSType"> </li>
+                        <i class="fa-regular fa-user"style="border-right: 2px solid #7daec8; padding-right: 1%; font-size: 14px;" ></i>
                         @Html.Partial("_AURLoginPartial")
                     </div>
                 </div>
             </nav>
         </header>
-        <div class="page-content d-flex align-items-stretch">
+        <div class="page-content d-flex align-items-stretch" style="padding-left: 5%; padding-right: 5%;">
             <!-- Side Navbar -->
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
-                <ul style=" padding: 1PX; margin-bottom: 1PX;">
-                    <li id='URbutton' class='py-2 px-4'><a href='AURIndex' class="btn btn-primary" style="color:#fff !important;font-weight:600" onMouseOver="this.style.background='#189cdf!important;'">User Right</a></li>
+               
+                <ul style=" padding: 1PX; margin-bottom: 1PX;list-style:none">
+                    <li id='URbutton' class='py-2 px-4'><a href='AURIndex' class="btn btn-primary" style="background: #9ad9f8 !important; color: #000 !important; font-weight: 600; border-color: #9ad9f8 !important; margin-left: 2%; " onMouseOver="this.style.background='#189cdf!important;'">User Right</a></li>
                 </ul>
                 <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" class="search">
-                <ul style=" padding: 1PX; margin-bottom: 1PX;">
-                    <li  class='py-2 px-4'><a href='AURMenuIndex' class="btn btn-primary" style="color:#fff !important;font-weight:600">MAHARASHTRA</a></li>
+                <ul style=" padding: 1px; margin-bottom: 1px; list-style: none">
+                    <li  class='py-2 px-4'><a href='AURMenuIndex' class="btn btn-primary" style="background: #9ad9f8 !important; color: #000 !important; font-weight: 600; border-color: #9ad9f8 !important; margin-left: 2%; ">MAHARASHTRA</a></li>
                 </ul>
-                <nav class="side-navbar ulbnavbar">
+                <nav class="side-navbar ulbnavbar" >
                     <!-- Sidebar Header-->
                     <ul class="list-unstyled">
                         @{
@@ -338,18 +191,66 @@
             <div class="content-inner">
 
                 @RenderBody()
-                <footer class="main-footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                @*<p>Appynitty &copy; 2017-2019</p>*@
-                                <p>All Rights Reserved © 2017-2022</p>
-                            </div>
-                            <div class="col-sm-6 text-right">
-                                <p>@*Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a>*@</p>
-                                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                            </div>
-                        </div>
+                <footer class="main-footer" style="padding:0px">
+                    <!--<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">-->
+                    @*<p>Appynitty &copy; 2017-2019</p>*@
+                    <!--<p>All Rights Reserved © 2017-2022</p>
+    </div>
+    <div class="col-sm-6 text-right">
+        <p>-->
+                    @*Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a>*@<!--</p>-->
+                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                    <!--</div>
+        </div>
+    </div>-->
+                    <div class="row justify-content-center bg-footer">
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/e-greating.png" style="padding: 8px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/Transforming-india-logo.png" style="border-left: 1px solid #6b6c6f; padding: 8px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/innovation-logo.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/swachh-bharat.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/mygov_quiz.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/blog-logo.png" style="border-left: 1px solid #6b6c6f; padding: 8px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/itowe-logo.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
+                        </a>
+               </div>
+                    <div class="row justify-content-center bg-black">
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/pm-india-logo.png" style="padding: 10px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/Meity_logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
+                        </a>
+
+
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/mygov-footer-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/india-gov-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/data-gov-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
+                        </a>
+                        <a href="" target="blank">
+                            <img src="~/Content/images/Linked_imag/digital-india-logo.png" style="border-left: 1px solid #3e3e42; padding: 10px;">
+                        </a>
+
+
                     </div>
                 </footer>
             </div>
