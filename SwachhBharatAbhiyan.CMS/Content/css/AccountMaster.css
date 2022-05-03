@@ -89,10 +89,10 @@
         background: transparent !important;
     }
 
-    .folder .a1:before {
-        content: "-";
+    /*.folder .a1:before {
+        content: "-";*/
         /*  content: '\f107';*/
-    }
+    /*}*/
 
 ul.inner_ul li:before {
     content: "├";
