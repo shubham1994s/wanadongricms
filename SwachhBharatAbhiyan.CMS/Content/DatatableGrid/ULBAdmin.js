@@ -252,7 +252,7 @@ function showCharts() {
             //yValueFormatString: "###0.00\"%\"",
             //indexLabel: "#percent%",
             percentFormatString: "#0.##",
-            legendText: "{name} :  {y}           (#percent%)",
+            legendText: "{name} :   {y}     (#percent%)",
             showInLegend: true,
             legendMarkerType: "square",
             dataPoints: [
