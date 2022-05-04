@@ -3113,6 +3113,8 @@
     <Content Include="Views\Shared\_AURLoginPartial.cshtml" />
     <Content Include="Views\Report\MonthlyAttendance.cshtml" />
     <Content Include="Views\AccountMaster\ULBIndex.cshtml" />
+    <Content Include="Views\Attendence\MonthlyAttedanceIndex.cshtml" />
+    <Content Include="Views\Attendence\MonthlyAttendance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
