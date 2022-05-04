@@ -273,7 +273,6 @@
     <Compile Include="Areas\Street\Controllers\StreetReportController.cs" />
     <Compile Include="Areas\Street\Controllers\StreetSweepingController.cs" />
     <Compile Include="Areas\Street\StreetAreaRegistration.cs" />
-    <Compile Include="Content\images\icons\HouseMasterController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMasterController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
