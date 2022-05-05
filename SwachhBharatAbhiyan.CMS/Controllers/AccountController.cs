@@ -778,6 +778,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 {
                 AppDetailsVM ApplicationDetails = mainrepository.GetApplicationDetails(AppId);
                 string DB_Connect = mainrepository.GetDatabaseFromAppID(AppId);
+                string DB_Source = mainrepository.GetDataSourceFromAppID(AppId);
                 SessionHandler.Current.UserId = UserId;
                 SessionHandler.Current.UserRole = UserRole;
                 SessionHandler.Current.UserEmail = UserEmail;
@@ -789,6 +790,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 SessionHandler.Current.Latitude = ApplicationDetails.Latitude;
                 SessionHandler.Current.Logitude = ApplicationDetails.Logitude;
                 SessionHandler.Current.DB_Name = DB_Connect;
+                SessionHandler.Current.DB_Source = DB_Source;
                 SessionHandler.Current.YoccClientID = ApplicationDetails.YoccClientID;
                 SessionHandler.Current.GramPanchyatAppID = ApplicationDetails.GramPanchyatAppID;
                 SessionHandler.Current.YoccFeddbackLink = ApplicationDetails.YoccFeddbackLink;

@@ -204,6 +204,69 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
             
         }
+
+        [HttpPost]
+        public string IsLIdEOnHSAndUM(string LoginId)
+        {
+           
+            int AppID = SessionHandler.Current.AppId;
+            childRepository = new ChildRepository(AppID);
+            var isrecord = childRepository.GetLoginidData(LoginId);
+
+            return isrecord;
+
+
+        }
+
+
+        [HttpPost]
+        public ActionResult CheckUserName(HouseScanifyEmployeeDetailsVM obj)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                childRepository = new ChildRepository(SessionHandler.Current.AppId);
+                string user1 = "";
+
+                if (obj.qrEmpName != null)
+                {
+                    user1 = obj.qrEmpName;
+                }
+
+                HouseScanifyEmployeeDetailsVM user = childRepository.GetUserName(0, user1);
+
+                if (obj.qrEmpId > 0)
+                {
+                    if (user.qrEmpId == 0)
+                    {
+                        user.qrEmpId = obj.qrEmpId;
+                    }
+                    if (user1 == obj.qrEmpName & user.qrEmpId != obj.qrEmpId)
+                    {
+                        return Json(false, JsonRequestBehavior.AllowGet);
+                    }
+                    else if (user1 == user.qrEmpName & user.qrEmpId != obj.qrEmpId)
+                    {
+                        return Json(false, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                        return Json(true, JsonRequestBehavior.AllowGet);
+                }
+                else
+                 if (user.qrEmpName != null)
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return Json(true, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+                return Json(true, JsonRequestBehavior.AllowGet);
+
+
+
+
+        }
         public ActionResult GetAppNames()
         {
             try

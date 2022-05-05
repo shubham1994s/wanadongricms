@@ -420,6 +420,11 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetUserDetails(teamId, name);
         }
 
+     
+        public HouseScanifyEmployeeDetailsVM GetUserName(int teamId, string name)
+        {
+            return screenService.GetUserNameDetails(teamId, name);
+        }
         public DashBoardVM GetHouseOnMapDetails()
         {
             return screenService.GetHouseOnMapDetails();
@@ -608,7 +613,14 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetHouseTimeWiseRoute(date, fTime, tTime, userId);
         }
 
-
+        public string GetLoginidData(string LoginId)
+        {
+            return screenService.GetLoginidData(LoginId);
+        }
+        public string GetUserName(string userName)
+        {
+            return screenService.GetUserName(userName);
+        }
     }
 }
 

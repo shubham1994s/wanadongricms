@@ -19,6 +19,7 @@ namespace SwachhBharatAbhiyan.CMS
                     var AppID = Request.QueryString["AppID"];
                     var ReportName = Request.QueryString["ReportName"];
                     var DB_Name = Request.QueryString["DB_Name"];
+                    var DB_Source = Request.QueryString["DB_Source"];
                     var param1 = Request.QueryString["Param1"];
                     var SelectDate = Request.QueryString["SelectDate"];
                     var FromDate = Request.QueryString["FromDate"];
@@ -138,6 +139,7 @@ namespace SwachhBharatAbhiyan.CMS
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        //param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Areawise Garbage Collection")

@@ -131,6 +131,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         HSDashBoardVM GetURDashBoardDetails();
 
+        string GetLoginidData(string utype);
+        string GetUserName(string uname);
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
 
         List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate);
@@ -146,6 +148,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         //Added By saurabh ( June 2019)
         HouseScanifyEmployeeDetailsVM GetUser(int teamId, string name);
+     
+        HouseScanifyEmployeeDetailsVM GetUserName(int teamId, string name);
 
         //Added By saurabh ( 02 July 2019)
         DashBoardVM GetHouseOnMapDetails();
