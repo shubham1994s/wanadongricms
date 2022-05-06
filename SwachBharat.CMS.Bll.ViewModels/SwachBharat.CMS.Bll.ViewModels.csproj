@@ -85,6 +85,7 @@
     <Compile Include="ChildModel\Model\WasteDetailsVM.cs" />
     <Compile Include="ChildModel\Model\ZoneVM.cs" />
     <Compile Include="Grid\AdminULBDetails.cs" />
+    <Compile Include="Grid\AdminULBStatusDetails.cs" />
     <Compile Include="Grid\AdsClassificationGridRow.cs" />
     <Compile Include="Grid\ComplaintGrid.cs" />
     <Compile Include="Grid\ContactUsMemberGridRow.cs" />

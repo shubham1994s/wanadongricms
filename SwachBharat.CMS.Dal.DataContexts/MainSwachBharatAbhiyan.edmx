@@ -154,6 +154,7 @@
           <Property Name="Today_Street_Status" Type="bit" />
           <Property Name="ulb_property" Type="int" />
           <Property Name="Add_Ulb_Property" Type="int" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -420,6 +421,12 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Parameter Name="AppIdIN" Type="int" Mode="In" />
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_ULBADMINSTATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DivisionIdIn" Type="int" Mode="In" />
+          <Parameter Name="DistrictIdIn" Type="int" Mode="In" />
+          <Parameter Name="AppIdIN" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DevSwachhBharatMainModelStoreContainer">
           <EntitySet Name="AD_USER_MST_LIQUID" EntityType="Self.AD_USER_MST_LIQUID" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AD_USER_MST_STREET" EntityType="Self.AD_USER_MST_STREET" Schema="dbo" store:Type="Tables" />
@@ -637,14 +644,20 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="EmployeeMasters" EntityType="DevSwachhBharatMainModel.EmployeeMaster" />
           <EntitySet Name="CheckAppDs" EntityType="DevSwachhBharatMainModel.CheckAppD" />
           <EntitySet Name="AEmployeeMasters" EntityType="DevSwachhBharatMainModel.AEmployeeMaster" />
+          <EntitySet Name="tehsils" EntityType="DevSwachhBharatMainModel.tehsil" />
+          <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
+          <FunctionImport Name="SP_ULBADMINSTATUS" ReturnType="Collection(DevSwachhBharatMainModel.SP_ULBADMINSTATUS_Result)">
+            <Parameter Name="DivisionIdIn" Mode="In" Type="Int32" />
+            <Parameter Name="DistrictIdIn" Mode="In" Type="Int32" />
+            <Parameter Name="AppIdIN" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="SP_ULBADMIN" ReturnType="Collection(DevSwachhBharatMainModel.SP_ULBADMIN_Result)">
             <Parameter Name="DivisionIdIn" Mode="In" Type="Int32" />
             <Parameter Name="DistrictIdIn" Mode="In" Type="Int32" />
             <Parameter Name="AppIdIN" Mode="In" Type="Int32" />
             <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
-          <EntitySet Name="tehsils" EntityType="DevSwachhBharatMainModel.tehsil" />
         </EntityContainer>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -830,16 +843,19 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="isActiveULB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="lastModifyDateEntry" Type="DateTime" Precision="3" />
         </EntityType>
-        <ComplexType Name="SP_ULBADMIN_Result">
-          <Property Type="String" Name="ParentULB" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ULBName" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="ULBId" Nullable="true" />
-          <Property Type="Int32" Name="TotalHouse" Nullable="true" />
-          <Property Type="Int32" Name="TotalHouseScan" Nullable="true" />
-          <Property Type="Int32" Name="TotalSeg" Nullable="true" />
-          <Property Type="Int32" Name="TotalMix" Nullable="true" />
-          <Property Type="Int32" Name="TotalNotReceived" Nullable="true" />
-        </ComplexType>
+        <EntityType Name="tehsil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="name_mar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="district" Type="Int32" />
+          <Property Name="IsCheked" Type="Boolean" />
+        </EntityType>
         <EntityType Name="AppDetail">
           <Key>
             <PropertyRef Name="AppId" />
@@ -905,20 +921,29 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="Today_Street_Status" Type="Boolean" />
           <Property Name="ulb_property" Type="Int32" />
           <Property Name="Add_Ulb_Property" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
         </EntityType>
-        <EntityType Name="tehsil">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="name_mar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="state" Type="Int32" />
-          <Property Name="district" Type="Int32" />
-          <Property Name="IsCheked" Type="Boolean" />
-        </EntityType>
+        <ComplexType Name="SP_ULBADMINSTATUS_Result">
+          <Property Type="Int32" Name="AppId" Nullable="false" />
+          <Property Type="String" Name="appName" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ULBADMIN_Result">
+          <Property Type="String" Name="ParentULB" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ULBName" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="ULBId" Nullable="true" />
+          <Property Type="Int32" Name="TotalHouse" Nullable="true" />
+          <Property Type="Int32" Name="TotalHouseScan" Nullable="true" />
+          <Property Type="Int32" Name="TotalSeg" Nullable="true" />
+          <Property Type="Int32" Name="TotalMix" Nullable="true" />
+          <Property Type="Int32" Name="TotalNotReceived" Nullable="true" />
+          <Property Type="Int32" Name="ULBCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalActiveEmp" Nullable="true" />
+          <Property Type="Int32" Name="TotalOnDutyEmp" Nullable="true" />
+          <Property Type="Int32" Name="TotalOffDutyEmp" Nullable="true" />
+          <Property Type="Int32" Name="InprogressULB" Nullable="true" />
+          <Property Type="Int32" Name="CompleteULB" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1229,23 +1254,24 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_ULBADMIN" FunctionName="DevSwachhBharatMainModel.Store.SP_ULBADMIN">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_ULBADMIN_Result">
-                <ScalarProperty Name="ParentULB" ColumnName="ParentULB" />
-                <ScalarProperty Name="ULBName" ColumnName="ULBName" />
-                <ScalarProperty Name="ULBId" ColumnName="ULBId" />
-                <ScalarProperty Name="TotalHouse" ColumnName="TotalHouse" />
-                <ScalarProperty Name="TotalHouseScan" ColumnName="TotalHouseScan" />
-                <ScalarProperty Name="TotalSeg" ColumnName="TotalSeg" />
-                <ScalarProperty Name="TotalMix" ColumnName="TotalMix" />
-                <ScalarProperty Name="TotalNotReceived" ColumnName="TotalNotReceived" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <EntitySetMapping Name="tehsils">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.tehsil">
+              <MappingFragment StoreEntitySet="tehsil">
+                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="name_mar" ColumnName="name_mar" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AppDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.AppDetail">
               <MappingFragment StoreEntitySet="AppDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Add_Ulb_Property" ColumnName="Add_Ulb_Property" />
                 <ScalarProperty Name="ulb_property" ColumnName="ulb_property" />
                 <ScalarProperty Name="Today_Street_Status" ColumnName="Today_Street_Status" />
@@ -1310,20 +1336,35 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tehsils">
-            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.tehsil">
-              <MappingFragment StoreEntitySet="tehsil">
-                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
-                <ScalarProperty Name="district" ColumnName="district" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="name_mar" ColumnName="name_mar" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_ULBADMINSTATUS" FunctionName="DevSwachhBharatMainModel.Store.SP_ULBADMINSTATUS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_ULBADMINSTATUS_Result">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="appName" ColumnName="appName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ULBADMIN" FunctionName="DevSwachhBharatMainModel.Store.SP_ULBADMIN">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_ULBADMIN_Result">
+                <ScalarProperty Name="ParentULB" ColumnName="ParentULB" />
+                <ScalarProperty Name="ULBName" ColumnName="ULBName" />
+                <ScalarProperty Name="ULBId" ColumnName="ULBId" />
+                <ScalarProperty Name="TotalHouse" ColumnName="TotalHouse" />
+                <ScalarProperty Name="TotalHouseScan" ColumnName="TotalHouseScan" />
+                <ScalarProperty Name="TotalSeg" ColumnName="TotalSeg" />
+                <ScalarProperty Name="TotalMix" ColumnName="TotalMix" />
+                <ScalarProperty Name="TotalNotReceived" ColumnName="TotalNotReceived" />
+                <ScalarProperty Name="ULBCount" ColumnName="ULBCount" />
+                <ScalarProperty Name="TotalActiveEmp" ColumnName="TotalActiveEmp" />
+                <ScalarProperty Name="TotalOnDutyEmp" ColumnName="TotalOnDutyEmp" />
+                <ScalarProperty Name="TotalOffDutyEmp" ColumnName="TotalOffDutyEmp" />
+                <ScalarProperty Name="InprogressULB" ColumnName="InprogressULB" />
+                <ScalarProperty Name="CompleteULB" ColumnName="CompleteULB" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

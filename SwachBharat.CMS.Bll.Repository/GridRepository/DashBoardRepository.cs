@@ -569,7 +569,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     data = model.ToList();
                 }
                 else
-                {   
+                {
                     data = data.Where(c => c.houseId <= appDetails.APIHit).ToList();
                 }
                 return data.OrderByDescending(c => c.houseId);
@@ -2750,7 +2750,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
             {
                 var data = db.MonthlyAttedances.ToList();
-               
+
                 foreach (var x in data)
                 {
 
@@ -2759,8 +2759,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         daID = x.ID,
                         userId = Convert.ToInt32(x.userId),
                         userName = x.UserName,
-                        month_name=x.Month_name,
-                        day1=x.Day1,
+                        month_name = x.Month_name,
+                        day1 = x.Day1,
                         day2 = x.Day2,
                         day3 = x.Day3,
                         day4 = x.Day4,
@@ -2793,18 +2793,18 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         day30 = x.Day30,
                         day31 = x.Day31,
                         TOTAL_DAYS = x.TOTAL_MONTH_DAYS,
-                        YEAR_NAME=x.YEAR_NAME,
+                        YEAR_NAME = x.YEAR_NAME,
 
                     });
                 }
 
-              
-                 
+
+
 
 
                 if (userId > 0)
                 {
-                    var model = obj.Where(c => c.userId == userId ).ToList();
+                    var model = obj.Where(c => c.userId == userId).ToList();
 
                     obj = model.ToList();
                 }
@@ -2812,8 +2812,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 if (!string.IsNullOrEmpty(smonth) && !string.IsNullOrEmpty(emonth) && !string.IsNullOrEmpty(syear) && !string.IsNullOrEmpty(eyear))
                 {
 
-                  var model = obj.Where(c => c.month_name >= Convert.ToInt32(smonth) && c.month_name <= Convert.ToInt32(emonth) && c.YEAR_NAME >= Convert.ToInt32(syear) && c.YEAR_NAME <= Convert.ToInt32(eyear)).ToList();
-                  //  var model = obj.Where(c => c.month_name.CompareTo(smonth) >= Convert.ToInt32(smonth) && c.month_name.CompareTo(c.month_name) >= Convert.ToInt32(emonth)).ToList();
+                    var model = obj.Where(c => c.month_name >= Convert.ToInt32(smonth) && c.month_name <= Convert.ToInt32(emonth) && c.YEAR_NAME >= Convert.ToInt32(syear) && c.YEAR_NAME <= Convert.ToInt32(eyear)).ToList();
+                    //  var model = obj.Where(c => c.month_name.CompareTo(smonth) >= Convert.ToInt32(smonth) && c.month_name.CompareTo(c.month_name) >= Convert.ToInt32(emonth)).ToList();
                     obj = model.ToList();
                 }
                 else
@@ -3135,7 +3135,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         {
             using (var dbMain = new DevSwachhBharatMainEntities())
             {
-                var data = dbMain.SP_Admin2().Where(x => !(x.appName.ToUpper().Contains("THANE") )).Select(x => new SBAAdminCountGrid
+                var data = dbMain.SP_Admin2().Where(x => !(x.appName.ToUpper().Contains("THANE"))).Select(x => new SBAAdminCountGrid
                 {
                     Name = x.appName,
                     employee = Convert.ToInt32(x.userId),
@@ -4017,22 +4017,22 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 }).ToList();
 
-                if(SearchString != "undefined")
-                { 
-                if (!string.IsNullOrEmpty(SearchString) )
+                if (SearchString != "undefined")
                 {
-                    var model = data.Where(c => c.qrEmpName.ToLower().ToString().Contains(SearchString) || c.qrEmpMobileNumber.ToLower().ToString().Contains(SearchString)
-                    || c.qrEmpAddress.ToString().ToLower().Contains(SearchString) || c.qrEmpName.ToUpper().ToString().Contains(SearchString) || c.qrEmpMobileNumber.ToUpper().ToString().Contains(SearchString)
-                    || c.qrEmpAddress.ToString().ToUpper().Contains(SearchString)
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+                        var model = data.Where(c => c.qrEmpName.ToLower().ToString().Contains(SearchString) || c.qrEmpMobileNumber.ToLower().ToString().Contains(SearchString)
+                        || c.qrEmpAddress.ToString().ToLower().Contains(SearchString) || c.qrEmpName.ToUpper().ToString().Contains(SearchString) || c.qrEmpMobileNumber.ToUpper().ToString().Contains(SearchString)
+                        || c.qrEmpAddress.ToString().ToUpper().Contains(SearchString)
 
-                   //|| c.userMobileNumber.Contains(SearchString) || c.userAddress.ToLower().ToString().Contains(SearchString) || c.userName.ToLower().ToString().Contains(SearchString) || c.userNameMar.ToLower().ToString().Contains(SearchString)
-                   //|| c.userEmployeeNo.ToLower().ToString().Contains(SearchString) || c.bloodGroup.ToLower().ToString().Contains(SearchString)
+                       //|| c.userMobileNumber.Contains(SearchString) || c.userAddress.ToLower().ToString().Contains(SearchString) || c.userName.ToLower().ToString().Contains(SearchString) || c.userNameMar.ToLower().ToString().Contains(SearchString)
+                       //|| c.userEmployeeNo.ToLower().ToString().Contains(SearchString) || c.bloodGroup.ToLower().ToString().Contains(SearchString)
 
-                   //|| c.userMobileNumber.ToUpper().ToString().Contains(SearchString) || c.userNameMar.ToUpper().ToString().Contains(SearchString) || c.userName.ToUpper().ToString().Contains(SearchString) || c.bloodGroup.ToUpper().ToString().Contains(SearchString) || c.userAddress.ToUpper().ToString().Contains(SearchString) || c.userEmployeeNo.ToUpper().ToString().Contains(SearchString)
-                   ).ToList();
+                       //|| c.userMobileNumber.ToUpper().ToString().Contains(SearchString) || c.userNameMar.ToUpper().ToString().Contains(SearchString) || c.userName.ToUpper().ToString().Contains(SearchString) || c.bloodGroup.ToUpper().ToString().Contains(SearchString) || c.userAddress.ToUpper().ToString().Contains(SearchString) || c.userEmployeeNo.ToUpper().ToString().Contains(SearchString)
+                       ).ToList();
 
-                    data = model.ToList();
-                }
+                        data = model.ToList();
+                    }
                 }
                 return data.OrderByDescending(c => c.LiquidCount).OrderByDescending(c => c.HouseCount).OrderByDescending(c => c.StreetCount);
             }
@@ -4101,7 +4101,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 if (userId > 0)
                 {
-                    var model = data.OrderByDescending(c=>c.qrEmpDaId).Where(c => c.qrEmpId == userId).ToList();
+                    var model = data.OrderByDescending(c => c.qrEmpDaId).Where(c => c.qrEmpId == userId).ToList();
 
                     data = model.ToList();
                 }
@@ -4777,8 +4777,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         }
 
 
-        public IEnumerable<UREmployeeDetails> GetURDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId,string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
-       {
+        public IEnumerable<UREmployeeDetails> GetURDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+        {
             string strOrderBy = "";
             if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
             {
@@ -4792,19 +4792,19 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
             using (var db = new DevSwachhBharatMainEntities())
             {
-                if(ClientId=="A")
-                { 
-                data = db.EmployeeMasters.Select(x => new UREmployeeDetails
+                if (ClientId == "A")
                 {
-                    EmpId = x.EmpId,
-                    EmpName = x.EmpName,
-                    lastModifyDateEntry =(x.lastModifyDateEntry).ToString(),
-                    type = x.type,
-                    isActive = x.isActive,
-                    
-                }).Where(x=>x.isActive==true).ToList();
+                    data = db.EmployeeMasters.Select(x => new UREmployeeDetails
+                    {
+                        EmpId = x.EmpId,
+                        EmpName = x.EmpName,
+                        lastModifyDateEntry = (x.lastModifyDateEntry).ToString(),
+                        type = x.type,
+                        isActive = x.isActive,
+
+                    }).Where(x => x.isActive == true).ToList();
                 }
-                else 
+                else
                 {
                     data = db.EmployeeMasters.Select(x => new UREmployeeDetails
                     {
@@ -4818,7 +4818,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 }
 
 
-                if (!string.IsNullOrEmpty(SearchString) && SearchString!="-2")
+                if (!string.IsNullOrEmpty(SearchString) && SearchString != "-2")
                 {
                     data = data.Where(c => ((string.IsNullOrEmpty(c.EmpName) ? " " : c.EmpName) + " " + (string.IsNullOrEmpty(c.type) ? " " : c.type)).ToUpper().Contains(SearchString.ToUpper())
                      ).ToList();
@@ -4827,8 +4827,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 return data;
 
             }
-           
-        
+
+
         }
 
 
@@ -4925,7 +4925,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         lastModifyDateEntry = (x.lastModifyDateEntry).ToString(),
                         type = x.type,
                         isActive = x.isActive,
-                        EmpMobileNumber= x.EmpMobileNumber
+                        EmpMobileNumber = x.EmpMobileNumber
 
                     }).Where(x => x.isActive == false).ToList();
                 }
@@ -4962,10 +4962,39 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     TotalHouseScan = x.TotalHouseScan,
                     TotalSeg = x.TotalSeg,
                     TotalMix = x.TotalMix,
-                    TotalNotReceived = x.TotalNotReceived
+                    TotalNotReceived = x.TotalNotReceived,
+                    ULBCount = x.ULBCount,
+                    TotalActiveEmp = x.TotalActiveEmp,
+                    TotalOnDutyEmp = x.TotalOnDutyEmp,
+                    TotalOffDutyEmp = x.TotalOffDutyEmp,
+                    TotalAbsentEmp = x.TotalActiveEmp - x.TotalOnDutyEmp,
+                    InprogressULB = x.InprogressULB,
+                    CompleteULB = x.CompleteULB
                 }).ToList();
             }
 
+            return data;
+        }
+
+        public IEnumerable<AdminULBStatusDetails> GetAdminULBStatusDetails(long wildcard, string SearchString, int? DivisionId = 0, int? DistricrId = 0, int? AppId = 0, int? status = 0, int UserId = 0)
+        {
+            DivisionId = DivisionId ?? 0;
+            DistricrId = DistricrId ?? 0;
+            AppId = AppId ?? 0;
+            bool bStatus = (status == 0) ? false : true;
+            List<AdminULBStatusDetails> data = new List<AdminULBStatusDetails>();
+            using (var db = new DevSwachhBharatMainEntities())
+            {
+                data = db.SP_ULBADMINSTATUS(DivisionId, DistricrId, AppId, UserId)
+                       .Where(a => a.Status == bStatus)
+                       .Select(x => new AdminULBStatusDetails
+                       {
+                           ULBId = x.AppId,
+                           ULBName = x.appName,
+                           ULBStatus = (x.Status ?? false) ? "Complete":"In Progress"
+                       }
+                       ).ToList();
+            }
             return data;
         }
 

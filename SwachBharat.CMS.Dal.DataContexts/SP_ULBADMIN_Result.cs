@@ -21,5 +21,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<int> TotalSeg { get; set; }
         public Nullable<int> TotalMix { get; set; }
         public Nullable<int> TotalNotReceived { get; set; }
+        public Nullable<int> ULBCount { get; set; }
+        public Nullable<int> TotalActiveEmp { get; set; }
+        public Nullable<int> TotalOnDutyEmp { get; set; }
+        public Nullable<int> TotalOffDutyEmp { get; set; }
+        public Nullable<int> InprogressULB { get; set; }
+        public Nullable<int> CompleteULB { get; set; }
     }
 }

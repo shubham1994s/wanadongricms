@@ -790,7 +790,12 @@ namespace SwachBharat.CMS.Bll.Services
             var DB_Name = dbMain.AppConnections.Where(x => x.AppId == AppId).FirstOrDefault().InitialCatalog;
             return DB_Name.ToString();
         }
-        public int GetUserAppId(string UserId)
+        public string GetDataSourceFromAppID(int AppId)
+        {
+            var DB_Source = dbMain.AppConnections.Where(x => x.AppId == AppId).FirstOrDefault().DataSource;
+            return DB_Source.ToString();
+        }
+public int GetUserAppId(string UserId)
         {
             int AppId = 0;
             AppId = dbMain.UserInApps.Where(x => x.UserId == UserId).Select(x => x.AppId).FirstOrDefault();
