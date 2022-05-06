@@ -537,6 +537,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new ULBAdminGridRepository(0,searchString,param1,param2,param3,userId);
                     return gridRepository;
                     break;
+                case "ULBAdminStatus":
+                    //gridRepository = new InfotainmentGridRepository(0, searchString, appId);
+                    gridRepository = new ULBAdminStatusGridRepository(0, searchString, param1, param2, param3, param4, userId);
+                    return gridRepository;
+                    break;
 
             }
             

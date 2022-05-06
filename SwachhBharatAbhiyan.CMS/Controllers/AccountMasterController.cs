@@ -145,7 +145,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                 if (DivisionId == 0 && DistrictId == 0 && AppId == 0)
                 {
-                    Session["ULBType"] = " Division's Details";
+                    Session["ULBType"] = " Division Wise Details";
 
                 }
                 else if (DivisionId > 0 && DistrictId == 0 && AppId == 0)

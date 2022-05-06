@@ -30,7 +30,22 @@
 
     <header class="page-header">
         <div class="container-fluid">
+
             <h4 class="no-margin-bottom"><span id="spnULBName"></span></h4>
+            <h4><span style="font-size:16px" id="spnULBCount"></span></h4>
+            <h4>
+                <a href="#" onclick="showULBStatus(0); return false;"><span style="font-size:16px" id="spnInprogressULB"></span></a>
+
+            </h4>
+            <h4>
+                <a href="#" onclick="showULBStatus(1); return false;"><span style="font-size:16px" id="spnCompleteULB"></span></a>
+
+            </h4>
+            <h4><span style="font-size:16px" id="spnTotalEmp"></span></h4>
+            <h4><span style="font-size:16px" id="spnOnDutyEmp"></span></h4>
+            <h4><span style="font-size:16px" id="spnOffDutylEmp"></span></h4>
+            <h4><span style="font-size:16px" id="spnAbsentlEmp"></span></h4>
+
         </div>
     </header>
     <div class="d-flex">
@@ -42,7 +57,7 @@
 
             </div>
             <div id="chartContainer" style="height: 200px; width: 180px;"></div>
-           
+
         </div>
         <div class="card-block" style=" margin-right: 5%">
             <div style="position:relative;top: 97%;z-index: 1; background-color:#fff;height:12px;width:62px;padding-top:10px">
@@ -96,6 +111,27 @@
                         <th> Total Segregated</th>
                         <th> Total Mixed</th>
                         <th> Total Not Received</th>
+                    </tr>
+                </thead>
+
+
+            </table>
+        </div>
+    </div>
+    <div class="content-inner" style="overflow-y:auto;display:none" id="divULBStatus">
+        <br />
+        <div style="width:100%; margin:0 auto;">
+            <h4 class="no-margin-bottom"><span id="spnULBStatus"></span></h4>
+
+            <table id="grdULBStatus" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0" style="font-size:14px">
+
+                <thead style="font-size:14px">
+
+
+                    <tr>
+                        <th> ULB ID</th>
+                        <th> ULB Name</th>
+                        <th> ULB Status</th>
                     </tr>
                 </thead>
 

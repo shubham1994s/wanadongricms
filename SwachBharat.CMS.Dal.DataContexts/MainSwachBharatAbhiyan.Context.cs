@@ -47,8 +47,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<EmployeeMaster> EmployeeMasters { get; set; }
         public virtual DbSet<CheckAppD> CheckAppDs { get; set; }
         public virtual DbSet<AEmployeeMaster> AEmployeeMasters { get; set; }
-        public virtual DbSet<AppDetail> AppDetails { get; set; }
         public virtual DbSet<tehsil> tehsils { get; set; }
+        public virtual DbSet<AppDetail> AppDetails { get; set; }
     
         public virtual int SP_Admin_table()
         {
@@ -58,6 +58,27 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual ObjectResult<SP_Admin2_Result> SP_Admin2()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Admin2_Result>("SP_Admin2");
+        }
+    
+        public virtual ObjectResult<SP_ULBADMINSTATUS_Result> SP_ULBADMINSTATUS(Nullable<int> divisionIdIn, Nullable<int> districtIdIn, Nullable<int> appIdIN, Nullable<int> userId)
+        {
+            var divisionIdInParameter = divisionIdIn.HasValue ?
+                new ObjectParameter("DivisionIdIn", divisionIdIn) :
+                new ObjectParameter("DivisionIdIn", typeof(int));
+    
+            var districtIdInParameter = districtIdIn.HasValue ?
+                new ObjectParameter("DistrictIdIn", districtIdIn) :
+                new ObjectParameter("DistrictIdIn", typeof(int));
+    
+            var appIdINParameter = appIdIN.HasValue ?
+                new ObjectParameter("AppIdIN", appIdIN) :
+                new ObjectParameter("AppIdIN", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ULBADMINSTATUS_Result>("SP_ULBADMINSTATUS", divisionIdInParameter, districtIdInParameter, appIdINParameter, userIdParameter);
         }
     
         public virtual ObjectResult<SP_ULBADMIN_Result> SP_ULBADMIN(Nullable<int> divisionIdIn, Nullable<int> districtIdIn, Nullable<int> appIdIN, Nullable<int> userId)

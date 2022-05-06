@@ -6,6 +6,13 @@ var TotalPropScan = 0;
 var TotalSeg = 0;
 var TotalMix = 0;
 var TotalNotRecv = 0;
+var ULBCount = 0;
+var TotalActiveEmp = 0;
+var TotalOnDutyEmp = 0;
+var TotalOffDutyEmp = 0;
+var TotalAbsentEmp = 0;
+var InprogressULB = 0;
+var CompleteULB = 0;
 var ParentULB = '';
 
 $(document).ready(function () {
@@ -40,10 +47,26 @@ $(document).ready(function () {
                 TotalSeg += rowData[i]['TotalSeg'];
                 TotalMix += rowData[i]['TotalMix'];
                 TotalNotRecv += rowData[i]['TotalNotReceived'];
+                ULBCount += rowData[i]['ULBCount'];
+                TotalActiveEmp += rowData[i]['TotalActiveEmp'];
+                TotalOnDutyEmp += rowData[i]['TotalOnDutyEmp'];
+                TotalOffDutyEmp += rowData[i]['TotalOffDutyEmp'];
+                TotalAbsentEmp += rowData[i]['TotalAbsentEmp'];
+                InprogressULB += rowData[i]["InprogressULB"];
+                CompleteULB += rowData[i]["CompleteULB"];
 
             }
             var ULBType = $("#ULBType").val();
             $("#spnULBName").text(ParentULB + ULBType);
+            $("#spnULBCount").text('(ULB Count : ' + ULBCount + ')');
+            $("#spnTotalEmp").text('(Total Employee Active : ' + TotalActiveEmp + ')');
+            $("#spnOnDutyEmp").text('(Total Employee Present Today: ' + TotalOnDutyEmp + ')');
+            $("#spnOffDutylEmp").text('(Total Employee Off Duty Today: ' + TotalOffDutyEmp + ')');
+            $("#spnAbsentlEmp").text('(Total Employee Not Present Today: ' + TotalAbsentEmp + ')');
+            $("#spnInprogressULB").text('(Total Inprogress ULBs: ' + InprogressULB + ')');
+            $("#spnCompleteULB").text('(Total Complete ULBs: ' + CompleteULB + ')');
+
+
             showCharts();
         },
         "columnDefs":
@@ -94,6 +117,50 @@ function Search() {
     oTable.search("");
     document.getElementById('USER_ID_FK').value = -1;
 }
+
+function showULBStatus(status) {
+    $("#divULBStatus").show();
+    $("#spnULBStatus").text(ParentULB + ' ULB Status');
+
+    debugger;
+    var DivisionId = $("#DivisionId").val();
+    var DistrictId = $("#DistrictId").val();
+    var AppId = $("#AppId").val();
+    var UserId = $("#UserId").val();
+
+    $("#grdULBStatus").dataTable().fnDestroy();
+    $("#grdULBStatus").DataTable({
+        "sDom": "ltipr",
+        "order": [[1, "asc"]],
+        "processing": true, // for show progress bar
+        "serverSide": true, // for process server side
+        "filter": true, // this is for disable filter (search box)
+        "orderMulti": false, // for disable multiple column at once
+        "pageLength": 10,
+
+        "ajax": {
+            "url": "/Datable/GetJqGridJson?rn=ULBAdminStatus&param1=" + DivisionId + "&param2=" + DistrictId + "&param3=" + AppId + "&param5=" + status +"&userId=" + UserId,
+            "type": "POST",
+            "datatype": "json"
+        },
+        "columnDefs":
+            [{
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }],
+
+        "columns": [
+            { "data": "ULBId", "name": "ULBId", "autoWidth": false },
+            { "data": "ULBName", "name": "ULBName", "autoWidth": false },
+            { "data": "ULBStatus", "name": "ULBStatus", "autoWidth": false },
+
+            //<a  data-toggle="modal" style="cursor:pointer;margin-left:10px;" class="tooltip1" style="cursor:pointer" onclick="Delete(' + full["Id"] + ',' + full["Name"] + ')" ><i class="material-icons delete-icon">delete</i><span class="tooltiptext1">Delete</span> </a>
+        ]
+    });
+
+}
+
 
 function showCharts() {
 
