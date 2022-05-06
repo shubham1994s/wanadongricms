@@ -238,7 +238,7 @@ function showCharts() {
         },
         legend: {
             //maxWidth: 90,
-            itemWidth: 350,
+            itemWidth: 360,
             fontSize: 12,
             verticalAlign: "center",
             horizontalAlign: "right",
