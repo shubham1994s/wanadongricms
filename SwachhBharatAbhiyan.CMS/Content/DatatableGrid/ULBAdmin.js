@@ -37,7 +37,7 @@ $(document).ready(function () {
             "datatype": "json"
         },
         "drawCallback": function (settings) {
-            debugger;
+            //debugger;
             var api = this.api();
             var rowData = api.rows().data();
             ParentULB = rowData[0]['ParentULB'];
@@ -292,7 +292,7 @@ function showCharts() {
             {
                 text: "Scanning Bifurcation",
                 verticalAlign: "top", // "top", "center", "bottom"
-                horizontalAlign: "center",
+                horizontalAlign: "left",
                 //Uncomment properties below to see how they behave
                 //fontColor: "red",
                 fontSize: 14,
@@ -305,11 +305,13 @@ function showCharts() {
         },
         legend: {
             //maxWidth: 90,
-            itemWidth: 320,
+            itemWidth: 350,
             fontSize: 12,
             verticalAlign: "center",
             horizontalAlign: "right",
-            markerMargin: 15
+            markerMargin: 9,
+            fontWeight: "normal",
+            fontFamily: "arial"
         },
         data: [{
           
@@ -319,7 +321,7 @@ function showCharts() {
             //yValueFormatString: "###0.00\"%\"",
             //indexLabel: "#percent%",
             percentFormatString: "#0.##",
-            legendText: "{name} :   {y}     (#percent%)",
+            legendText: "{name} : {y} (#percent%)",
             showInLegend: true,
             legendMarkerType: "square",
             dataPoints: [
@@ -337,7 +339,7 @@ function showCharts() {
 
 
     function showDefaultText(chart, yValue, textName,textNumber) {
-        debugger;
+        //debugger;
         var isEmpty = !(yValue > 0);
 
         if (isEmpty) {

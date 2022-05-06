@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
 {
@@ -10,6 +11,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
     {
         public int userId { get; set; }
         public string userName { get; set; }
+
+       
         public string userLoginId { get; set; }
         public string userConfirmPassword { get; set; }
         public string userPassword { get; set; }
@@ -25,5 +28,6 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string gcTarget { get; set; }
 
         public string EmployeeType { get; set; }
+        public string LoginId { get; set; }
     }
 }

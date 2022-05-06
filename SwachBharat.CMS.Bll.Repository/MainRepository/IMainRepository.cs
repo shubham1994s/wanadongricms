@@ -55,6 +55,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         int GetUserAppIdSS(string UserId);
         string GetDatabaseFromAppID(int AppId);
+        string GetDataSourceFromAppID(int AppId);
 
        // Added By Saurabh ( 27 May 2019)
         List<AppDetail> GetAppName();

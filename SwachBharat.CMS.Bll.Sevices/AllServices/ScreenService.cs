@@ -3468,6 +3468,34 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+
+
+        private HouseScanifyEmployeeDetailsVM FillUserNameViewModel(QrEmployeeMaster data)
+        {
+            try
+            {
+                HouseScanifyEmployeeDetailsVM model = new HouseScanifyEmployeeDetailsVM();
+                // model.qrEmpId = (data.qrEmpId == null ? 0 : data.qrEmpId) ;
+                if (data != null)
+                {
+                    model.qrEmpName = (data.qrEmpName == null ? "" : data.qrEmpName);
+                }
+                else
+                {
+                    model.qrEmpName = "";
+                }
+             
+
+                //model.NameMar = data.AreaMar;
+                //model.wardId = data.wardId;
+                return model;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         private UserMasterVM FillUserMasterViewModel(UserMaster data)
         {
             UserMasterVM model = new UserMasterVM();
@@ -4716,6 +4744,47 @@ namespace SwachBharat.CMS.Bll.Services
                     if (Details != null || Details1 != null)
                     {
                         HouseScanifyEmployeeDetailsVM user = FillUserViewModel(Details, Details1);
+                        // area.WardList = ListWardNo();
+                        return user;
+                    }
+                    //if (Details1 != null)
+                    //{
+                    //    HouseScanifyEmployeeDetailsVM user = FillUserViewModel(Details1);
+                    //    // area.WardList = ListWardNo();
+                    //    return user;
+                    //}
+                    else
+                    {
+                        HouseScanifyEmployeeDetailsVM user = new HouseScanifyEmployeeDetailsVM();
+                        // area.WardList = ListWardNo();
+
+                        return user;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                return new HouseScanifyEmployeeDetailsVM();
+            }
+        }
+
+
+
+        public HouseScanifyEmployeeDetailsVM GetUserNameDetails(int teamId, string name)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var Details = db.QrEmployeeMasters.Where(x => x.qrEmpId == teamId || x.qrEmpName.ToUpper()
+                    == name.ToUpper()).FirstOrDefault();
+
+               
+
+                    if (Details != null )
+                    {
+                        HouseScanifyEmployeeDetailsVM user = FillUserNameViewModel(Details);
                         // area.WardList = ListWardNo();
                         return user;
                     }
@@ -6171,6 +6240,48 @@ namespace SwachBharat.CMS.Bll.Services
             {
                 return model;
             }
+        }
+
+        public string GetLoginidData(string LoginId)
+        {
+           
+            using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+            {
+                var isrecord = db.QrEmployeeMasters.Where(x => x.qrEmpLoginId == LoginId && x.isActive == true).FirstOrDefault();
+                var isrecord1 = db.UserMasters.Where(x => x.userLoginId == LoginId && x.isActive == true).FirstOrDefault();
+                if (isrecord == null && isrecord1 == null)
+                {
+                    return "0";
+                }
+                else
+                {
+                    return "1";
+                }
+            }
+             
+          
+
+        }
+
+        public string GetUserName(string userName)
+        {
+
+            using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+            {
+               
+                var isrecord1 = db.UserMasters.Where(x => x.userName == userName && x.isActive == true).FirstOrDefault();
+                if (isrecord1 == null)
+                {
+                    return "0";
+                }
+                else
+                {
+                    return "1";
+                }
+            }
+
+
+
         }
     }
 }

@@ -9,6 +9,7 @@ namespace SwachhBharatAbhiyan.CMS.Models.SessionHelper
     public class SessionHandler
     {
         public string DB_Name { get; set; }
+        public string DB_Source { get; set; }
         public string Property1 { get; set; }
         public string UserId { get; set; }
         public string UserRole { get; set; }
