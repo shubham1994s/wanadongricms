@@ -133,6 +133,11 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         {
             return mainService.GetDatabaseFromAppID(AppId);
         }
+        public string GetDataSourceFromAppID(int AppId)
+        {
+            return mainService.GetDataSourceFromAppID(AppId);
+        }
+        
         public AppDetailsVM GetApplicationDetails(int AppId)
         {
             return mainService.GetApplicationDetails(AppId);

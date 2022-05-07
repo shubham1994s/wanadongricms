@@ -127,6 +127,8 @@ namespace SwachBharat.CMS.Bll.Services
 
         //Added By Saurabh (1 June 2019)
         HouseScanifyEmployeeDetailsVM GetUserDetails(int teamId, string Name);
+     
+        HouseScanifyEmployeeDetailsVM GetUserNameDetails(int teamId, string Name);
 
         //Added By Saurabh (2 July 2019)
         DashBoardVM GetHouseOnMapDetails();
@@ -196,5 +198,9 @@ namespace SwachBharat.CMS.Bll.Services
         List<SBALUserLocationMapView> GetUserTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null);
 
         List<SBALUserLocationMapView> GetHouseTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null);
+
+        string GetLoginidData(string LoginId);
+        string GetUserName(string userName);
+     
     }
 }

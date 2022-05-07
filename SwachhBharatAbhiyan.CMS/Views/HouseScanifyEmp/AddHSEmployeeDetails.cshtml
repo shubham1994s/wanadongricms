@@ -290,5 +290,22 @@
         });
     });
 
+    $("#qrEmpLoginId").keyup(function () {
+        debugger;
+
+        var LoginId = $("#qrEmpLoginId").val();
+        $.ajax({
+            url: "/HouseScanifyEmp/IsLIdEOnHSAndUM?LoginId=" + LoginId,
+            type: "POST",
+            data: { LoginId: LoginId }
+        })
+            .done(function (msg) {
+                if (msg == 1) {
+                    $('#err_login').text('This Is Already Exist LoginId!');
+                } else {
+                    $('#err_login').text('');
+                }
+            });
+    });
 
 </script>
