@@ -17,7 +17,7 @@ var ParentULB = '';
 
 $(document).ready(function () {
     
-    debugger;
+    //debugger;
     var DivisionId = $("#DivisionId").val();
     var DistrictId = $("#DistrictId").val();
     var AppId = $("#AppId").val();
@@ -38,6 +38,18 @@ $(document).ready(function () {
         },
         "drawCallback": function (settings) {
             //debugger;
+             TotalProp = 0;
+             TotalPropScan = 0;
+             TotalSeg = 0;
+             TotalMix = 0;
+             TotalNotRecv = 0;
+             ULBCount = 0;
+             TotalActiveEmp = 0;
+             TotalOnDutyEmp = 0;
+             TotalOffDutyEmp = 0;
+            TotalAbsentEmp = 0;
+            InprogressULB = 0;
+             CompleteULB = 0;
             var api = this.api();
             var rowData = api.rows().data();
             ParentULB = rowData[0]['ParentULB'];
@@ -58,13 +70,13 @@ $(document).ready(function () {
             }
             var ULBType = $("#ULBType").val();
             $("#spnULBName").text(ParentULB + ULBType);
-            $("#spnULBCount").text('(ULB Count : ' + ULBCount + ')');
-            $("#spnTotalEmp").text('(Total Employee Active : ' + TotalActiveEmp + ')');
-            $("#spnOnDutyEmp").text('(Total Employee Present Today: ' + TotalOnDutyEmp + ')');
-            $("#spnOffDutylEmp").text('(Total Employee Off Duty Today: ' + TotalOffDutyEmp + ')');
-            $("#spnAbsentlEmp").text('(Total Employee Not Present Today: ' + TotalAbsentEmp + ')');
-            $("#spnInprogressULB").text('(Total Inprogress ULBs: ' + InprogressULB + ')');
-            $("#spnCompleteULB").text('(Total Complete ULBs: ' + CompleteULB + ')');
+            $("#spnULBCount").text(ULBCount);
+            $("#spnTotalEmp").text(TotalActiveEmp );
+            $("#spnOnDutyEmp").text(TotalOnDutyEmp );
+            $("#spnOffDutylEmp").text(TotalOffDutyEmp );
+            $("#spnAbsentlEmp").text(TotalAbsentEmp);
+            $("#spnInprogressULB").text( InprogressULB );
+            $("#spnCompleteULB").text(CompleteULB );
 
 
             showCharts();
@@ -122,7 +134,7 @@ function showULBStatus(status) {
     $("#divULBStatus").show();
     $("#spnULBStatus").text(ParentULB + ' ULB Status');
 
-    debugger;
+    //debugger;
     var DivisionId = $("#DivisionId").val();
     var DistrictId = $("#DistrictId").val();
     var AppId = $("#AppId").val();
@@ -321,7 +333,7 @@ function showCharts() {
             //yValueFormatString: "###0.00\"%\"",
             //indexLabel: "#percent%",
             percentFormatString: "#0.##",
-            legendText: "{name} : {y} (#percent%)",
+            legendText: "{name}  {y} (#percent%)",
             showInLegend: true,
             legendMarkerType: "square",
             dataPoints: [

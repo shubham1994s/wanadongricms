@@ -53,10 +53,10 @@
                         <!-- Navbar Header-->
                         <div class="navbar-header d-flex" style="display: -webkit-box !important;">
                             <!-- Navbar Brand <a href="#" class="navbar-brand">
-            <div class="brand-text brand-big"><span><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </span></div>
-            <div class="brand-text brand-small"><strong><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </strong></div>
-        </a>
-        <!-- Toggle Button-->
+                            <div class="brand-text brand-big"><span><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </span></div>
+                            <div class="brand-text brand-small"><strong><img style="height:40px;width:50px;" src="~/Content/images/img/house_icon.svg" /> </strong></div>
+                        </a>
+                        <!-- Toggle Button-->
                             <img src="~/Content/images/New_Img/WCMT-Logo.png" style="width:45px;height:auto" />
                             <h6 style="color: #000; padding-top: 7%; padding-left: 5%;">ICT BASED MONITORING SYSTEM </h6>
                             <!-- <a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>-->
@@ -66,7 +66,7 @@
                         @*<li class="nav-item" style="list-style: none;"><a href="/houseScanifyEmp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
                         <li class="nav-item" style="list-style: none; margin-left: 70%;" id="HDUserid"></li>
                         <li class="nav-item" style="list-style: none; padding-right: 1%;" id="HSType"> </li>
-                        <i class="fa-regular fa-user"style="border-right: 2px solid #7daec8; padding-right: 1%; font-size: 14px;" ></i>
+                        <i class="fa-regular fa-user" style="border-right: 2px solid #7daec8; padding-right: 1%; font-size: 14px;"></i>
                         @Html.Partial("_AURLoginPartial")
                     </div>
                 </div>
@@ -76,15 +76,15 @@
             <!-- Side Navbar -->
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
-               
+
                 <ul style=" padding: 1PX; margin-bottom: 1PX;list-style:none">
                     <li id='URbutton' class='py-2 px-4'><a href='AURIndex' class="btn btn-primary" style="background: #9ad9f8 !important; color: #000 !important; font-weight: 600; border-color: #9ad9f8 !important; margin-left: 2%; " onMouseOver="this.style.background='#189cdf!important;'">User Right</a></li>
                 </ul>
                 <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" class="search">
                 <ul style=" padding: 1px; margin-bottom: 1px; list-style: none">
-                    <li  class='py-2 px-4'><a href='AURMenuIndex' class="btn btn-primary" style="background: #9ad9f8 !important; color: #000 !important; font-weight: 600; border-color: #9ad9f8 !important; margin-left: 2%; ">MAHARASHTRA</a></li>
+                    <li class='py-2 px-4'><a href='AURMenuIndex' class="btn btn-primary" style="background: #9ad9f8 !important; color: #000 !important; font-weight: 600; border-color: #9ad9f8 !important; margin-left: 2%; ">MAHARASHTRA</a></li>
                 </ul>
-                <nav class="side-navbar ulbnavbar" >
+                <nav class="side-navbar ulbnavbar">
                     <!-- Sidebar Header-->
                     <ul class="list-unstyled">
                         @{
@@ -147,114 +147,116 @@
                 </nav>
                 @*<span class="heading">Extras</span>*@
                 @*<div class="wrapper">
-            <h3 class="heading">File Browser</h3>
-            <div class="file-browser">
-                <ul>
-                    <li class="folder folder-open">
-                        Dashboard
-                        <ul>
-                            <li class="file">Accounts Module</li>
-                            <li class="file">Help Module</li>
-                        </ul>
-                    </li>
-                    <li class="folder">
-                        Transfers
+                    <h3 class="heading">File Browser</h3>
+                    <div class="file-browser">
                         <ul>
                             <li class="folder folder-open">
-                                Quick
+                                Dashboard
                                 <ul>
-                                    <li class="file">Disclosures</li>
-                                    <li class="file">Modals</li>
+                                    <li class="file">Accounts Module</li>
+                                    <li class="file">Help Module</li>
                                 </ul>
                             </li>
-                            <li class="file">Classic</li>
                             <li class="folder">
-                                Scheduled
+                                Transfers
                                 <ul>
-                                    <li class="folder">
-                                        Calendar
+                                    <li class="folder folder-open">
+                                        Quick
                                         <ul>
-                                            <li class="file">Days</li>
-                                            <li class="file">Months</li>
+                                            <li class="file">Disclosures</li>
+                                            <li class="file">Modals</li>
                                         </ul>
                                     </li>
-                                    <li class="file">Modals</li>
+                                    <li class="file">Classic</li>
+                                    <li class="folder">
+                                        Scheduled
+                                        <ul>
+                                            <li class="folder">
+                                                Calendar
+                                                <ul>
+                                                    <li class="file">Days</li>
+                                                    <li class="file">Months</li>
+                                                </ul>
+                                            </li>
+                                            <li class="file">Modals</li>
+                                        </ul>
+                                    </li>
+                                    <li class="file">History</li>
                                 </ul>
                             </li>
-                            <li class="file">History</li>
                         </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>*@
+                    </div>
+                </div>*@
             </nav>
             <div class="content-inner">
 
                 @RenderBody()
-                <footer class="main-footer" style="padding:0px">
-                    <!--<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-6">-->
-                    @*<p>Appynitty &copy; 2017-2019</p>*@
-                    <!--<p>All Rights Reserved © 2017-2022</p>
-    </div>
-    <div class="col-sm-6 text-right">
-        <p>-->
-                    @*Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a>*@<!--</p>-->
-                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                    <!--</div>
-        </div>
-    </div>-->
-                    <div class="row justify-content-center bg-footer">
-                        <a href="https://egreetings.gov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/e-greating.png" style="padding: 8px;">
-                        </a>
-                        <a href="https://transformingindia.mygov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/Transforming-india-logo.png" style="border-left: 1px solid #6b6c6f; padding: 8px;">
-                        </a>
-                        <a href="https://innovateindia.mygov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/innovation-logo.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
-                        </a>
-                        <a href="https://swachhbharat.mygov.in/" target="blank">
-                            <img src="~/Content/images/Linked_imag/swachh-bharat.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
-                        </a>
-                        <a href="https://quiz.mygov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/mygov_quiz.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
-                        </a>
-                        <a href="https://blog.mygov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/blog-logo.png" style="border-left: 1px solid #6b6c6f; padding: 8px;">
-                        </a>
-                        <a href="https://self4society.mygov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/itowe-logo.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
-                        </a>
-               </div>
-                    <div class="row justify-content-center bg-black">
-                        <a href="http://pmindia.gov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/pm-india-logo.png" style="padding: 10px;">
-                        </a>
-                        <a href="http://meity.gov.in/" target="blank">
-                            <img src="~/Content/images/Linked_imag/Meity_logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
-                        </a>
 
-
-                        <a href="https://www.mygov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/mygov-footer-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
-                        </a>
-                        <a href="https://india.gov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/india-gov-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
-                        </a>
-                        <a href="http://data.gov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/data-gov-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
-                        </a>
-                        <a href="http://www.digitalindia.gov.in" target="blank">
-                            <img src="~/Content/images/Linked_imag/digital-india-logo.png" style="border-left: 1px solid #3e3e42; padding: 10px;">
-                        </a>
-
-
-                    </div>
-                </footer>
             </div>
+
         </div>
+        <footer class="" style="padding:0px">
+            <!--<div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">-->
+            @*<p>Appynitty &copy; 2017-2019</p>*@
+            <!--<p>All Rights Reserved © 2017-2022</p>
+        </div>
+        <div class="col-sm-6 text-right">
+            <p>-->
+            @*Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a>*@<!--</p>-->
+            <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            <!--</div>
+            </div>
+        </div>-->
+            <div class="row justify-content-center bg-footer">
+                <a href="https://egreetings.gov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/e-greating.png" style="padding: 8px;">
+                </a>
+                <a href="https://transformingindia.mygov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/Transforming-india-logo.png" style="border-left: 1px solid #6b6c6f; padding: 8px;">
+                </a>
+                <a href="https://innovateindia.mygov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/innovation-logo.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
+                </a>
+                <a href="https://swachhbharat.mygov.in/" target="blank">
+                    <img src="~/Content/images/Linked_imag/swachh-bharat.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
+                </a>
+                <a href="https://quiz.mygov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/mygov_quiz.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
+                </a>
+                <a href="https://blog.mygov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/blog-logo.png" style="border-left: 1px solid #6b6c6f; padding: 8px;">
+                </a>
+                <a href="https://self4society.mygov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/itowe-logo.png" style="border-left: 1px solid #6b6c6f;padding: 8px;">
+                </a>
+            </div>
+            <div class="row justify-content-center bg-black">
+                <a href="http://pmindia.gov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/pm-india-logo.png" style="padding: 10px;">
+                </a>
+                <a href="http://meity.gov.in/" target="blank">
+                    <img src="~/Content/images/Linked_imag/Meity_logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
+                </a>
+
+
+                <a href="https://www.mygov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/mygov-footer-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
+                </a>
+                <a href="https://india.gov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/india-gov-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
+                </a>
+                <a href="http://data.gov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/data-gov-logo.png" style="border-left: 1px solid #3e3e42;padding: 10px;">
+                </a>
+                <a href="http://www.digitalindia.gov.in" target="blank">
+                    <img src="~/Content/images/Linked_imag/digital-india-logo.png" style="border-left: 1px solid #3e3e42; padding: 10px;">
+                </a>
+
+
+            </div>
+        </footer>
     </div>
 
 
