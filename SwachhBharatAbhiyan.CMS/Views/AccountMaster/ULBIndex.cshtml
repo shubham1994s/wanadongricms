@@ -20,6 +20,19 @@
     body::-webkit-scrollbar {
         display: none; /* Safari and Chrome */
     }
+    .card1 {
+        box-shadow: 1px 1px 9px 4px rgb(0 0 0 / 20%);
+        margin-top: 5%;
+        flex: 1;
+        transition: all 0.5s ease-out !important;
+    }
+        .card1:hover {
+            box-shadow: 2px 1px 9px 4px rgb(0 0 0 / 20%);
+            /*  box-shadow: 2px 1px 15px 4px rgb(0 0 0 / 20%);*/
+            /*transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);*/
+            transform: translateY(-9px) scale(1.005) translateZ(0) !important;
+            /*  box-shadow: 0 24px 36px rgba(0,0,0,0.11), 0 24px 46px var(--box-shadow-color);*/
+        }
 </style>
 <body>
     <input type="hidden" value="@DivisionId" id="DivisionId" />
@@ -32,23 +45,56 @@
         <div class="container-fluid">
 
             <h4 class="no-margin-bottom"><span id="spnULBName"></span></h4>
-            <h4><span style="font-size:16px" id="spnULBCount"></span></h4>
-            <h4>
-                <a href="#" onclick="showULBStatus(0); return false;"><span style="font-size:16px" id="spnInprogressULB"></span></a>
-
-            </h4>
-            <h4>
-                <a href="#" onclick="showULBStatus(1); return false;"><span style="font-size:16px" id="spnCompleteULB"></span></a>
-
-            </h4>
-            <h4><span style="font-size:16px" id="spnTotalEmp"></span></h4>
+            @*<h4><span style="font-size:16px" id="spnULBCount"></span></h4>*@
+          
+         
+            @*<h4><span style="font-size:16px" id="spnTotalEmp"></span></h4>
             <h4><span style="font-size:16px" id="spnOnDutyEmp"></span></h4>
             <h4><span style="font-size:16px" id="spnOffDutylEmp"></span></h4>
-            <h4><span style="font-size:16px" id="spnAbsentlEmp"></span></h4>
+            <h4><span style="font-size:16px" id="spnAbsentlEmp"></span></h4>*@
 
         </div>
     </header>
-    <div class="d-flex">
+    <div class="row w-100">
+        <div class="col-lg-12"style="padding-left:30px;" id="worker">
+            <div class="card1 flex" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
+                <div class="py-3">
+                    <h5 class="text-center">Total Ulbs</h5>
+                    <div class="d-flex justify-content-between">
+
+                        @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
+
+
+        </div>*@
+                        <div class="px-4 flex"style="text-align:center;">
+
+                            <div style="color: #423f3f;font-weight:400;">Total ULB Count</div>
+                            <span style="margin-top: 1%;font-size:16px; color: #000; font-weight: 500" id="spnULBCount"></span>
+
+
+                        </div>
+                        <div class="px-4 flex" onclick="showULBStatus(0);return false;" style="text-align:center;cursor:pointer !important;">
+
+                            <div style="color: #423f3f;font-weight:400;">Total Inprogress ULBs</div>
+                            <span style="margin-top: 1%;font-size:16px; color: #000; font-weight: 500" id="spnInprogressULB"></span>
+
+
+                        </div>
+                        <div class="px-4 flex" onclick="showULBStatus(1); return false;" style="text-align:center;cursor:pointer !important;">
+
+                            <div style="color: #423f3f;font-weight:400;">Total Complete ULBs</div>
+                            <span style="margin-top: 1%;font-size:16px; color: #000; font-weight: 500" id="spnCompleteULB"></span>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="d-flex mt-3">
         <div class="card-block" style=" margin-left: 5%; margin-right: 5%">
             <div style="position:relative;top: 97%;z-index: 1; background-color:#fff;height:12px;width:62px;padding-top:10px">
 
@@ -78,6 +124,81 @@
             <div id="chartContainer2" style="height: 200px; width: 375px;"></div>
         </div>
     </div>
+    <div class="row w-100 mt-3 ml-0">
+       
+        <div class="col-lg-4 col-md-3 col-sm-12" style="cursor:pointer" id="worker">
+            <div class="card1 flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
+                <div class="card-body">
+                    <div class="align-items-center text-hover-success d-flex-cus">
+                        @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
+
+
+                        </div>*@
+                        <div class="flex text-center">
+                            <div>Total Employee Active</div>
+                            <div class="mt-2 outfont" id="spnTotalEmp" style="font-weight:500"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-3 col-sm-12" style="cursor:pointer" id="worker">
+            <div class="card1 flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
+                <div class="card-body px-0">
+                    <div class="align-items-center text-hover-success d-flex-cus">
+                        @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
+
+
+                        </div>*@
+                        <div class="flex text-center">
+                            <div>Employee Present Today</div>
+                            <div class="mt-2 outfont" id="spnOnDutyEmp" style="font-weight:500"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-12" style="cursor:pointer" id="worker">
+            <div class="card1 flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
+                <div class="card-body px-0">
+                    <div class="align-items-center text-hover-success d-flex-cus">
+                        @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
+
+
+                        </div>*@
+                        <div class="flex text-center">
+                            <div>Employee Off Duty Today</div>
+                            <div class="mt-2 outfont" id="spnOffDutylEmp"style="font-weight:500"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-12" style="cursor:pointer" id="worker">
+            <div class="card1 flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
+                <div class="card-body px-0">
+                    <div class="align-items-center text-hover-success d-flex-cus">
+                        @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
+
+
+                        </div>*@
+                        <div class="flex text-center">
+                            <div>Employee Not Present Today</div>
+                            <div class="mt-2 outfont" id="spnAbsentlEmp"style="font-weight:500"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
     <div class="content-inner" style="overflow-y:auto">
         <br />
         <div style="width:100%; margin:0 auto;">
