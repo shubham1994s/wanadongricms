@@ -25,6 +25,7 @@
         margin-top: 5%;
         flex: 1;
         transition: all 0.5s ease-out !important;
+        border-radius:10px;
     }
         .card1:hover {
             box-shadow: 2px 1px 9px 4px rgb(0 0 0 / 20%);
@@ -44,7 +45,7 @@
     <header class="page-header">
         <div class="container-fluid">
 
-            <h4 class="no-margin-bottom"><span id="spnULBName"></span></h4>
+            <h4 class="no-margin-bottom" style="font-size: 18px; margin-bottom: -0.5rem;"><span id="spnULBName"></span></h4>
             @*<h4><span style="font-size:16px" id="spnULBCount"></span></h4>*@
           
          
@@ -57,9 +58,9 @@
     </header>
     <div class="row w-100">
         <div class="col-lg-12"style="padding-left:30px;" id="worker">
-            <div class="card1 flex" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
+            <div class="card1 flex" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s; background: #189cdf; border-radius: 10px; ">
                 <div class="py-3">
-                    <h5 class="text-center">Total Ulbs</h5>
+                    <h5 class="text-center text-white">Total Ulbs Count</h5>
                     <div class="d-flex justify-content-between">
 
                         @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
@@ -68,22 +69,22 @@
         </div>*@
                         <div class="px-4 flex"style="text-align:center;">
 
-                            <div style="color: #423f3f;font-weight:400;">Total ULB Count</div>
-                            <span style="margin-top: 1%;font-size:16px; color: #000; font-weight: 500" id="spnULBCount"></span>
+                            <div style="color: #fff; font-weight: 400; font-size: 14px;">Total ULB Count</div>
+                            <span style="margin-top: 1%;font-size:18px; color: #fff; font-weight: 700" id="spnULBCount"></span>
 
 
                         </div>
                         <div class="px-4 flex" onclick="showULBStatus(0);return false;" style="text-align:center;cursor:pointer !important;">
 
-                            <div style="color: #423f3f;font-weight:400;">Total Inprogress ULBs</div>
-                            <span style="margin-top: 1%;font-size:16px; color: #000; font-weight: 500" id="spnInprogressULB"></span>
+                            <div style="color: #fff;font-weight:400;font-size:14px;">Total Inprogress ULBs</div>
+                            <span style="margin-top: 1%;font-size:18px; color: #fff; font-weight: 700" id="spnInprogressULB"></span>
 
 
                         </div>
                         <div class="px-4 flex" onclick="showULBStatus(1); return false;" style="text-align:center;cursor:pointer !important;">
 
-                            <div style="color: #423f3f;font-weight:400;">Total Complete ULBs</div>
-                            <span style="margin-top: 1%;font-size:16px; color: #000; font-weight: 500" id="spnCompleteULB"></span>
+                            <div style="color: #fff; font-weight: 400; font-size: 14px;">Total Complete ULBs</div>
+                            <span style="margin-top: 1%;font-size:18px; color: #fff; font-weight: 700" id="spnCompleteULB"></span>
 
 
                         </div>
@@ -95,7 +96,7 @@
 
     </div>
     <div class="d-flex mt-3">
-        <div class="card-block" style=" margin-left: 5%; margin-right: 5%">
+        <div class="card-block" style=" margin-left: 4%; margin-right: 5%">
             <div style="position:relative;top: 97%;z-index: 1; background-color:#fff;height:12px;width:62px;padding-top:10px">
 
             </div>
@@ -105,7 +106,7 @@
             <div id="chartContainer" style="height: 200px; width: 180px;"></div>
 
         </div>
-        <div class="card-block" style=" margin-right: 5%">
+        <div class="card-block" style=" margin-right: 4%">
             <div style="position:relative;top: 97%;z-index: 1; background-color:#fff;height:12px;width:62px;padding-top:10px">
 
             </div>
@@ -114,29 +115,29 @@
             </div>
             <div id="chartContainer1" style="height: 200px; width: 180px;"></div>
         </div>
-        <div class="card-block" style=" margin-right:7%">
+        <div class="card-block" style=" margin-right:5%">
             <div style="position:relative;top: 94%;z-index: 1; background-color:#fff;height:12px;width:62px;padding-top:10px">
 
             </div>
             <div style="position: relative; top: 90%; left: 83%; z-index: 1; background-color: #fff; height: 12px; width: 66px; padding-top: 10px">
 
             </div>
-            <div id="chartContainer2" style="height: 200px; width: 375px;"></div>
+            <div id="chartContainer2" style="height: 200px; width: 395px;"></div>
         </div>
     </div>
     <div class="row w-100 mt-3 ml-0">
        
         <div class="col-lg-4 col-md-3 col-sm-12" style="cursor:pointer" id="worker">
             <div class="card1 flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
-                <div class="card-body">
+                <div class="card-body" style="background: #43be9c; border-radius: 10px;">
                     <div class="align-items-center text-hover-success d-flex-cus">
                         @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
 
 
                         </div>*@
-                        <div class="flex text-center">
-                            <div>Total Employee Active</div>
-                            <div class="mt-2 outfont" id="spnTotalEmp" style="font-weight:500"></div>
+                        <div class="flex text-center text-white">
+                            <div style="font-size:14px;">Total Employee Active</div>
+                            <div class="mt-2 outfont" id="spnTotalEmp" style="font-weight: 700; font-size: 18px"></div>
                         </div>
                     </div>
                 </div>
@@ -146,15 +147,15 @@
 
         <div class="col-lg-4 col-md-3 col-sm-12" style="cursor:pointer" id="worker">
             <div class="card1 flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
-                <div class="card-body px-0">
+                <div class="card-body px-0" style="background: #a376e5; border-radius: 10px;">
                     <div class="align-items-center text-hover-success d-flex-cus">
                         @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
 
 
                         </div>*@
-                        <div class="flex text-center">
-                            <div>Employee Present Today</div>
-                            <div class="mt-2 outfont" id="spnOnDutyEmp" style="font-weight:500"></div>
+                        <div class="flex text-center text-white">
+                            <div style="font-size:14px;">Employee Present Today</div>
+                            <div class="mt-2 outfont" id="spnOnDutyEmp" style="font-weight:700;font-size:18px"></div>
                         </div>
                     </div>
                 </div>
@@ -163,15 +164,15 @@
         </div>
         <div class="col-lg-4 col-md-3 col-sm-12" style="cursor:pointer" id="worker">
             <div class="card1 flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
-                <div class="card-body px-0">
+                <div class="card-body px-0" style="background: #4aadc3; border-radius: 10px;">
                     <div class="align-items-center text-hover-success d-flex-cus">
                         @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
 
 
                         </div>*@
-                        <div class="flex text-center">
-                            <div>Employee Off Duty Today</div>
-                            <div class="mt-2 outfont" id="spnOffDutylEmp"style="font-weight:500"></div>
+                        <div class="flex text-center text-white">
+                            <div style="font-size:14px;">Employee Off Duty Today</div>
+                            <div class="mt-2 outfont" id="spnOffDutylEmp"style="font-weight: 700; font-size: 18px"></div>
                         </div>
                     </div>
                 </div>
@@ -180,15 +181,15 @@
         </div>
         <div class="col-lg-4 col-md-3 col-sm-12" style="cursor:pointer" id="worker">
             <div class="card1 flex bg-orange" data-sr-id="10" style="visibility: visible; transform: none; opacity: 1; transition: none 0s ease 0s;">
-                <div class="card-body px-0">
+                <div class="card-body px-0" style="background: #e56a6a;border-radius:10px;">
                     <div class="align-items-center text-hover-success d-flex-cus">
                         @*<div class="avatar w-56 m-2 no-shadow gd-success worsvg">
 
 
                         </div>*@
-                        <div class="flex text-center">
-                            <div>Employee Not Present Today</div>
-                            <div class="mt-2 outfont" id="spnAbsentlEmp"style="font-weight:500"></div>
+                        <div class="flex text-center text-white">
+                            <div style="font-size:14px;">Employee Not Present Today</div>
+                            <div class="mt-2 outfont" id="spnAbsentlEmp"style="font-weight: 700; font-size: 18px"></div>
                         </div>
                     </div>
                 </div>

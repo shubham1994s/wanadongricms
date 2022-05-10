@@ -224,7 +224,7 @@ function showCharts() {
     chart.render();
 
     /*Total Scanning */
-    CanvasJS.addColorSet("customColors1", ["#c0dbbe", "#388e3c", "#ffce56", "#01a800"]);
+    CanvasJS.addColorSet("customColors1", ["#9ad9f8", "#388e3c", "#ffce56", "#01a800", "#c0dbbe"]);
     var ToatalNotScan = TotalProp - TotalPropScan;
     var TotalPropPer = TotalProp;
     if (TotalProp == 0)
@@ -317,11 +317,11 @@ function showCharts() {
         },
         legend: {
             //maxWidth: 90,
-            itemWidth: 360,
+            itemWidth: 410,
             fontSize: 12,
             verticalAlign: "center",
             horizontalAlign: "right",
-            markerMargin: 9,
+            markerMargin: 8,
             fontWeight: "normal",
             fontFamily: "arial"
         },
@@ -333,13 +333,13 @@ function showCharts() {
             //yValueFormatString: "###0.00\"%\"",
             //indexLabel: "#percent%",
             percentFormatString: "#0.##",
-            legendText: "{name}  {y} (#percent%)",
+            legendText: "{name}    {y }    (#percent%)",
             showInLegend: true,
             legendMarkerType: "square",
             dataPoints: [
                 { y: TotalSeg, name: "Segregated", number: TotalSeg, legendMarkerType: "circle" },
-                { y: TotalMix, name: "Mixed", number: TotalMix, legendMarkerType: "circle" },
-                { y: TotalNotRecv, name: "Not Collected", number: TotalNotRecv, legendMarkerType: "circle" }
+                { y: TotalMix, name: "Mixed           ", number: TotalMix, legendMarkerType: "circle" },
+                { y: TotalNotRecv, name: "Not Collected  ", number: TotalNotRecv, legendMarkerType: "circle" }
             ]
         }]
     });
