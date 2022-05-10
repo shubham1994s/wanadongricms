@@ -280,7 +280,7 @@ function showCharts() {
     chart.render();
 
     /*chart type*//*"#ff6384", "#36a2eb", "#ffce56",*/
-    CanvasJS.addColorSet("customColors", ["#388e3c", "#f44336","#fe9436", "#c0dbbe"]);
+    CanvasJS.addColorSet("customColors", ["#388e3c", "#f44336", "#fe9436", "#9ad9f8"]);
     var TotalAll = TotalSeg + TotalMix + TotalNotRecv;
     var TotalAllPrec = TotalAll
     if (TotalAll == 0) {
