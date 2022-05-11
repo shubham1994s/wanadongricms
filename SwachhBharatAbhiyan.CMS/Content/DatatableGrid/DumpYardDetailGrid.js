@@ -21,8 +21,11 @@
 
         "initComplete": function (settings, json) {
             debugger;
-            if ($("#asdf").text() == "mangalwedhawaste@ulb.com!") {
+            if ($("#asdf").text() == "mangalwedhawaste@ulb.com!" || $("#asdf").text() == "appynittywaste@ulb.com!") {
                 table.columns([8]).visible(false);
+                table.columns([10]).visible(false);
+                table.columns([11]).visible(false);
+                $(table.column(7).header()).text('Dump Yard Image');
             }
 
         },

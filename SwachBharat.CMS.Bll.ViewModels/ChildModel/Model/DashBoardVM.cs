@@ -95,5 +95,14 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<double> SSDryWeightCount { get; set; }
         public Nullable<double> SSWetWeightCount { get; set; }
 
+
+        public Nullable<double> DumpYardDryCount { get; set; }
+        public Nullable<double> DumpYardWetCount { get; set; }
+        public Nullable<double> DumpYardConstructionCount { get; set; }
+        public Nullable<double> DumpYardDomesticCount { get; set; }
+        public Nullable<double> DumpYardFSTPCount { get; set; }
+        public Nullable<double> DumpYardSanitaryCount { get; set; }
+        public Nullable<double> DumpYardTotalCount { get; set; }
+
     }
 }

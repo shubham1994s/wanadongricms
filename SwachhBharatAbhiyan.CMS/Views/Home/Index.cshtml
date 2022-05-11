@@ -203,6 +203,16 @@
 <input value="@Model.DryWeightCount" type="hidden" id="dry_count" />
 <input value="@Model.WetWeightCount" type="hidden" id="wet_count" />
 
+
+@*dump data For Mangalwedha*@
+<input value="@Model.DumpYardTotalCount" type="hidden" id="tot_dumpyard_count" />
+<input value="@Model.DumpYardDryCount" type="hidden" id="dumpyard_dry_count" />
+<input value="@Model.DumpYardWetCount" type="hidden" id="dumpyard_wet_count" />
+<input value="@Model.DumpYardConstructionCount" type="hidden" id="dumpyard_construction_count" />
+<input value="@Model.DumpYardFSTPCount" type="hidden" id="dumpyard_fstp_count" />
+<input value="@Model.DumpYardDomesticCount" type="hidden" id="dumpyard_domestic_count" />
+<input value="@Model.DumpYardSanitaryCount" type="hidden" id="dumpyard_sanitary_count" />
+
 <input type="hidden" id="txt_fdate" class="datepicker form-control form-control-sm" type="text" />
 
 <section class="dashboard-counts no-padding-bottom">
@@ -528,8 +538,8 @@
 
                             </div>
                             @*<div id ="tot_pie" style="position:absolute;top: 94%;z-index: 1; background-color:#fff;height:12px;width:75px;padding-top:10px">
-            <pre style="font-size:12px;font-weight:700">Total: @Model.TotalHouseCount</pre>
-        </div>*@
+                                    <pre style="font-size:12px;font-weight:700">Total: @Model.TotalHouseCount</pre>
+                                </div>*@
                             <div id="chartContainerPie" style="height: 200px; width: 100%;position:absolute">
                             </div>
 
@@ -555,10 +565,12 @@
 
                             </div>
                             @*<div id ="tot_pie" style="position:absolute;top: 94%;z-index: 1; background-color:#fff;height:12px;width:75px;padding-top:10px">
-            <pre style="font-size:12px;font-weight:700">Total: @Model.TotalHouseCount</pre>
-        </div>*@
+                                    <pre style="font-size:12px;font-weight:700">Total: @Model.TotalHouseCount</pre>
+                                </div>*@
                             @*style="color:#fff;background-color: #3ab59e;"*@
                             <div id="chartContainerPieDump" style="height: 200px; width: 100%;position:absolute">
+                            </div>
+                            <div id="chartContainerPieDumpMangalwedha" style="height: 200px; width: 100%;position:absolute">
                             </div>
 
                         </div>

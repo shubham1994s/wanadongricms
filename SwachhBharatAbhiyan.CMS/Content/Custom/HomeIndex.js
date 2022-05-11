@@ -16,6 +16,17 @@ $(document).ready(function () {
         $(".custom_col").removeClass('col-xl-3')
         $(".custom_col").addClass('col-xl-4')
     }
+
+    debugger;
+    if ($("#asdf").text() == "appynittywaste@ulb.com!" || $("#asdf").text() ==  "mangalwedhawaste@ulb.com!") {
+
+        $("#chartContainerPieDump").css("display", "none");
+        $("#chartContainerPieDumpMangalwedha").css("display", "block");
+    } else {
+        $("#chartContainerPieDumpMangalwedha").css("display", "none");
+        $("#chartContainerPieDump").css("display", "block");
+    }
+
     //if ($("#asdf").text() == "satana@np.com!") {
     //    $(".custom_col_hide").css("display", "block")
     //    $(".custom_col").removeClass('col-xl-3')
@@ -383,7 +394,7 @@ $(document).ready(function () {
                     dataPoints: ary
                 }]
             });
-            showDefaultText(chart, "No Data available");
+            showDefaultText(chart, "No Data Available");
             chart.render();
             function showDefaultText(chart, text) {
                 var isEmpty = !(chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
@@ -495,7 +506,7 @@ $(document).ready(function () {
             ],
         }]
     });
-    showDefaultText(chart, "No Data available");
+    showDefaultText(chart, "No Data Available");
     chart.render();
     function showDefaultText(chart, text) {
         var isEmpty = !(tot_house_coll && chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
@@ -585,7 +596,7 @@ $(document).ready(function () {
                        }
            ]
        });
-            showDefaultText(chart, "No Data available");
+            showDefaultText(chart, "No Data Available");
             chart.render();
             function showDefaultText(chart, text) {
                 var isEmpty = !(chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
@@ -676,7 +687,7 @@ $(document).ready(function () {
             ],
         }]
     });
-    showDefaultText(chart, "No Data available");
+    showDefaultText(chart, "No Data Available");
     chart.render();
     function showDefaultText(chart, text) {
         var isEmpty = !(tot_dump_count && chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
@@ -703,10 +714,120 @@ $(document).ready(function () {
 
 });
 
+// Dump Pie Chart For Mangalwedha
+$(document).ready(function () {
+
+    var dry_count = $('#dumpyard_dry_count').val();
+    var wet_count = $('#dumpyard_wet_count').val();
+    var construction_count = $('#dumpyard_construction_count').val();
+    var fstp_count = $('#dumpyard_fstp_count').val();
+    var domestic_count = $('#dumpyard_domestic_count').val();
+    var sanitary_count = $('#dumpyard_sanitary_count').val();
+
+    var tot_dumpyard_null_check = $('#tot_dumpyard_count').val();
+
+    var tot_dumpyard_count;
+    if (tot_dumpyard_null_check == 0) {
+        tot_dumpyard_count = null;
+    } else {
+        tot_dumpyard_count = $('#tot_dumpyard_count').val();
+    }
+
+    var res_dry_count = parseFloat(dry_count) * 100 / parseFloat(tot_dumpyard_count);
+    var res_wet_count = parseFloat(wet_count) * 100 / parseFloat(tot_dumpyard_count);
+    var res_construction_count = parseFloat(construction_count) * 100 / parseFloat(tot_dumpyard_count);
+    var res_fstp_count = parseFloat(fstp_count) * 100 / parseFloat(tot_dumpyard_count);
+    var res_domestic_count = parseFloat(domestic_count) * 100 / parseFloat(tot_dumpyard_count);
+    var res_sanitary_count = parseFloat(sanitary_count) * 100 / parseFloat(tot_dumpyard_count);
+
+    var ary3 = []
+    ary3.push({ v: dry_count });
+    ary3.push({ v: wet_count });
+    ary3.push({ v: construction_count });
+    ary3.push({ v: fstp_count });
+    ary3.push({ v: domestic_count });
+    ary3.push({ v: sanitary_count });
+
+
+    //console.log(ary3);
+    var chartNew = new CanvasJS.Chart("chartContainerPieDumpMangalwedha", {
+        theme: "light2",
+        animationEnabled: true,
+        title: {
+            //text: "विलगिकरण प्रकार ",
+            fontSize: 24,
+            padding: 10
+        },
+        subtitles: [{
+            //text: "United Kingdom, 2016",
+            //fontSize: 16
+        }],
+        toolTip: {
+            content: "In Numbers {hover_number} Ton",
+        },
+        legend: {
+            maxWidth: 180,
+            itemWidth: 75,
+            fontSize: 12,
+            // horizontalAlign: "right", // left, center ,right 
+            //verticalAlign: "center",
+        },
+        data: [{
+            type: "pie",
+            indexLabelFontSize: 12,
+            indexLabelMaxWidth: 80,
+            showInLegend: true,
+            legendText: "{hover_number}",
+            radius: 60,
+            indexLabel: "{label} - {y}",
+            yValueFormatString: "###0.0\"%\"",
+            click: explodePie,
+            dataPoints: [
+                //{ y: res_dry_count, label: "एकुण वजन (सुका कचरा)", hover_number: dry_count, color: '#0086c3' },
+                //{ y: res_wet_count, label: "एकुण वजन (ओला कचरा)", hover_number: wet_count, color: '#01ad35' },
+
+                { y: res_dry_count, label: "Total Weight (Dry Waste)", hover_number: dry_count, color: '#0086c3' },
+                { y: res_wet_count, label: "Total Weight (Wet Waste)", hover_number: wet_count, color: '#01ad35' },
+                { y: res_construction_count, label: "Total Weight (CND Waste)", hover_number: construction_count, color: '#63676e' },
+                { y: res_fstp_count, label: "Total Weight (FSTP Waste)", hover_number: fstp_count, color: '#cca300' },
+                { y: res_domestic_count, label: "Total Weight (Domestic Waste)", hover_number: domestic_count, color: '#8f8b28' },
+                { y: res_sanitary_count, label: "Total Weight (Sanitary Waste)", hover_number: sanitary_count, color: '#c384d3' },
+
+
+            ],
+        }]
+    });
+    showDefaultText(chartNew, "No Data Available");
+    chartNew.render();
+    function showDefaultText(chartNew, text) {
+        var isEmpty = !(tot_dumpyard_count && chartNew.options.data[0].dataPoints && chartNew.options.data[0].dataPoints.length > 0);
 
 
 
-        var date = new Date();
+        if (isEmpty) {
+            chartNew.options.subtitles.push({
+                text: text,
+                verticalAlign: 'center',
+            });
+            (chartNew.options.data[0].dataPoints = []);
+        }
+
+
+
+    }
+    function explodePie(e) {
+        for (var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+            if (i !== e.dataPointIndex)
+                e.dataSeries.dataPoints[i].exploded = false;
+        }
+    }
+
+});
+
+//End
+
+
+var date = new Date();
 
 var day = date.getDate();
 var month = date.getMonth() + 1;
@@ -897,7 +1018,7 @@ $(document).ready(function () {
 
            ]
        });
-            showDefaultText(chart, "No Data available");
+            showDefaultText(chart, "No Data Available");
             chart.render();
             function showDefaultText(chart, text) {
                 var isEmpty = !(chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
