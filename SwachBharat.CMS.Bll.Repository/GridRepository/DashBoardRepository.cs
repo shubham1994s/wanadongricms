@@ -568,10 +568,15 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                     data = model.ToList();
                 }
+                else  if (appDetails.APIHit == null)
+                {
+                    data = data.ToList();
+                }
                 else
                 {
                     data = data.Where(c => c.houseId <= appDetails.APIHit).ToList();
                 }
+               
                 return data.OrderByDescending(c => c.houseId);
             }
         }
