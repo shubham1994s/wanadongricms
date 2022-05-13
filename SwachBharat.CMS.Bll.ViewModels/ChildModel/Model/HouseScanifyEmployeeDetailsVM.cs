@@ -12,7 +12,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public int qrEmpId { get; set; }
         public Nullable<int> appId { get; set; }
 
-        [Remote("CheckUserName", "HouseScanifyEmp", HttpMethod = "POST", ErrorMessage = "Name Is already exists!", AdditionalFields = "userId")]
+      //  [Remote("CheckUserName", "HouseScanifyEmp", HttpMethod = "POST", ErrorMessage = "Name Is already exists!", AdditionalFields = "userId")]
         public string qrEmpName { get; set; }
         public string qrEmpNameMar { get; set; }
 

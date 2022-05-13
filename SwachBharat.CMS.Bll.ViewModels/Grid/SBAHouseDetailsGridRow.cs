@@ -22,5 +22,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Grid
         public Nullable<int> WardNoId { get; set; }
         public Nullable<int> zoneId { get; set; }
         public string ReferanceId { get; set; }
+        public string OccupancyStatus { get; set; }
+        public string Property_Type { get; set; }
     }
 }

@@ -30,6 +30,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string SerielNo { get; set; }
 
         public string WasteType { get; set; }
+        public string OccupancyStatus { get; set; }
+        public string Property_Type { get; set; }
 
     }
 }
