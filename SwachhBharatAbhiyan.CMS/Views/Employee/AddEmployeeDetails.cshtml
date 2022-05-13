@@ -165,6 +165,9 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.TextBoxFor(model => model.gcTarget, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
                     @Html.ValidationMessageFor(model => model.gcTarget, "", new { @class = "text-danger" })
+                    <span class="text-danger" id="err_target"></span>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span class="help-block with-errors"></span>
                 </div>
             </div>
 
@@ -418,6 +421,13 @@
             //$("#err_pw").html("पासवर्डआवश्यक आहे / Password is Required").delay(1500).show().fadeOut('slow');
             $("#err_pw").html("Password is Required").delay(1500).show().fadeOut('slow');
             $('#userPassword').focus();
+            return false;
+        }
+
+        if ($.trim($("#gcTarget").val()) == '' || $.trim($("#gcTarget").val()) == '0' ) {
+            //$("#err_mobile").html("मोबाइल नंबर आवश्यक आहे / Mobile Number is Required").delay(1500).show().fadeOut('slow');
+            $("#err_target").html("Target is Required but not '0' value ").delay(1500).show().fadeOut('slow');
+            $('#gcTarget').focus();
             return false;
         }
 
