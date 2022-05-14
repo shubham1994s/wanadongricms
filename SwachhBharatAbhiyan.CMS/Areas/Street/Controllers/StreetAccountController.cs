@@ -16,6 +16,7 @@ using SwachBharat.CMS.Bll.ViewModels.MainModel;
 namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
 {
     [Authorize]
+    [AllowAnonymous]
     public class StreetAccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -80,8 +81,8 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AddSession(null, null, null, null);
             RouteData.Values.Remove("ReturnUrl");
-            return RedirectToAction("Login", "Account");
-           // return View();
+            return RedirectToAction("Login", "Account", new { area = "" });
+            // return View();
         }
 
 
