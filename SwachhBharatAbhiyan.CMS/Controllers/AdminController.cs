@@ -30,10 +30,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 List<MenuItem> menuList = GetMenus();
                 return View(menuList);
             }
+           
             else
             {
                 return Redirect("/Admin/Login");
-            }  
+            }
         }
 
         //public ActionResult MenuIndex()
