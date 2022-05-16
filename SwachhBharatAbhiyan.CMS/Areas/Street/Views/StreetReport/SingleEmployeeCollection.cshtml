@@ -131,9 +131,10 @@
 
 
 
+        var z = $('#myHiddenVar3').val();
        
         var Report_Name = "Street single Employee Collection";
-        var site = '../../DisplayReports.aspx?FromDate=' + $('#txt_fdate').val() + '&ToDate=' + $('#txt_tdate').val() + '&AppID=' + x + '&DB_Name=' + y;
+        var site = '../../DisplayReports.aspx?FromDate=' + $('#txt_fdate').val() + '&ToDate=' + $('#txt_tdate').val() + '&AppID=' + x + '&DB_Name=' + y + '&DB_Source=' + z;
         document.getElementById('iframemc').src = site;
 
 
@@ -154,11 +155,11 @@
        
         var x = $('#myHiddenVar').val();
         var y = $('#myHiddenVar2').val();
-        var z = $('#selectnumber').val();
+        var z = $('#myHiddenVar3').val();
         var Report_Name = "Street single Employee Collection";
         //alert(z);
         $('#loader1').show();
-        var site = '../../DisplayReports.aspx?FromDate=' + $('#txt_fdate').val() + '&ToDate=' + $('#txt_tdate').val() + '&UserId=' + $('#selectnumber').val() + '&Type=' + type + '&AppID=' + x + '&DB_Name=' + y + '&ReportName=' + Report_Name;
+        var site = '../../DisplayReports.aspx?FromDate=' + $('#txt_fdate').val() + '&ToDate=' + $('#txt_tdate').val() + '&UserId=' + $('#selectnumber').val() + '&Type=' + type + '&AppID=' + x + '&DB_Name=' + y + '&DB_Source=' + z + '&ReportName=' + Report_Name;
         document.getElementById('iframemc').src = site;
 
         $('#iframemc').on('load', function () {
@@ -193,4 +194,4 @@
 </script>
 <input type="hidden" value="@Session["NewAppID"]" id="myHiddenVar" /> 
 <input type="hidden" value="@Session["DB_Name"]" id="myHiddenVar2" /> 
- 
+<input type="hidden" value="@Session["DB_Source"]" id="myHiddenVar3" />

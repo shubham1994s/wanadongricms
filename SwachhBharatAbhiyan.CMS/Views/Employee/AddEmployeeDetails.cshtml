@@ -436,39 +436,45 @@
         return true;
     });
 
-    $("#userLoginId").keyup(function () {
-        debugger;
+    var id = $('#userId').val();
+    if (id > 0) { }
+    else {
 
-        var LoginId = $("#userLoginId").val();
-        $.ajax({
-            url: "/Employee/IsLIdEOnHSAndUM?LoginId=" + LoginId,
-            type: "POST",
-            data: { LoginId: LoginId }
-        })
-            .done(function (msg) {
-                if (msg == 1) {
-                    $('#err_login').text('This Login Id Is Already Exist!');
-                } else {
-                    $('#err_login').text('');
-                }
-            });
-    });
-    $("#userName").keyup(function () {
-        debugger;
+        $("#userLoginId").keyup(function () {
+            debugger;
 
-        var userName = $("#userName").val();
-        $.ajax({
-            url: "/Employee/CheckName?userName=" + userName,
-            type: "POST",
-            data: { userName: userName }
-        })
-            .done(function (msg) {
-                if (msg == 1) {
-                    $('#err_name').text('This Name Is Already Exist!');
-                } else {
-                    $('#err_name').text('');
-                }
-            });
-    });
+            var LoginId = $("#userLoginId").val();
+            $.ajax({
+                url: "/Employee/IsLIdEOnHSAndUM?LoginId=" + LoginId,
+                type: "POST",
+                data: { LoginId: LoginId }
+            })
+                .done(function (msg) {
+                    if (msg == 1) {
+                        $('#err_login').text('This Login Id Is Already Exist!');
+                    } else {
+                        $('#err_login').text('');
+                    }
+                });
+        });
+
+        $("#userName").keyup(function () {
+            debugger;
+
+            var userName = $("#userName").val();
+            $.ajax({
+                url: "/Employee/CheckName?userName=" + userName,
+                type: "POST",
+                data: { userName: userName }
+            })
+                .done(function (msg) {
+                    if (msg == 1) {
+                        $('#err_name').text('This Name Is Already Exist!');
+                    } else {
+                        $('#err_name').text('');
+                    }
+                });
+        });
+    }
     
 </script>

@@ -825,6 +825,8 @@ namespace SwachBharat.CMS.Bll.Services
                             model.houseLong = data.houseLong;
                             model.ZoneId = data.ZoneId;
                             model.lastModifiedEntry = DateTime.Now;
+                            model.OccupancyStatus = data.OccupancyStatus;
+                            model.Property_Type = data.Property_Type;
                             //if(data.WasteType== "DW")
                             //{ 
                             //model.WasteType = data.WasteType;
@@ -3116,6 +3118,8 @@ namespace SwachBharat.CMS.Bll.Services
             model.ZoneId = data.ZoneId;
             model.ReferanceId = data.ReferanceId;
             model.modified = DateTime.Now;
+            model.OccupancyStatus = data.OccupancyStatus;
+            model.Property_Type = data.Property_Type;
             //if (data.WasteType == "DW")
             //{
             //    model.WasteType = data.WasteType;
@@ -3563,6 +3567,8 @@ namespace SwachBharat.CMS.Bll.Services
             model.houseLat = data.houseLat;
             model.houseLong = data.houseLong;
             model.ReferanceId = data.ReferanceId;
+            model.OccupancyStatus = data.OccupancyStatus;
+            model.Property_Type = data.Property_Type;
             using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
             {
                 if (data.AreaId > 0)
@@ -6304,7 +6310,23 @@ namespace SwachBharat.CMS.Bll.Services
                 }
             }
 
+        }
+        public string GetHSUserName(string userName)
+        {
 
+            using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+            {
+
+                var isrecord1 = db.QrEmployeeMasters.Where(x => x.qrEmpName == userName && x.isActive == true).FirstOrDefault();
+                if (isrecord1 == null)
+                {
+                    return "0";
+                }
+                else
+                {
+                    return "1";
+                }
+            }
 
         }
     }

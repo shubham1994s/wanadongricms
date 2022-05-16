@@ -63,134 +63,145 @@ namespace SwachhBharatAbhiyan.CMS
                     rptViewer.ProcessingMode = ProcessingMode.Remote;
 
                     rptViewer.ServerReport.ReportServerUrl = new Uri(urlReportServer);
-                    rptViewer.ServerReport.ReportPath = "/ICTSBM_BI_Reports/" + ReportName;
+                    rptViewer.ServerReport.ReportPath = "/ICTSBM_BI_REPORT_NEW/" + ReportName;
                     rptViewer.ShowToolBar = true;
                     rptViewer.BackColor = System.Drawing.Color.White;
                     //rptViewer.Parent.ResolveClientUrl.
 
                     if (ReportName == "Ghar Sankalan Tapashil")
                     {
-                        ReportParameter[] param = new ReportParameter[6];
+                        ReportParameter[] param = new ReportParameter[7];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("userid", UserId);
                         param[4] = new ReportParameter("gartype", garbageType);
                         param[5] = new ReportParameter("DBName", DB_Name);
+                        param[6] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                         // param[1] = new ReportParameter("clientid", _userInfo.ClientID.ToString());
                     }
                     else if (ReportName == "Employee_Attendance")
                     {
-                        ReportParameter[] param = new ReportParameter[5];
+                        ReportParameter[] param = new ReportParameter[6];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("userid", UserId);
                         param[4] = new ReportParameter("DBName", DB_Name);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                         // param[1] = new ReportParameter("clientid", _userInfo.ClientID.ToString());
                     }
                     else if (ReportName == "single Employee collection")
                     {
-                        ReportParameter[] param = new ReportParameter[5];
+                        ReportParameter[] param = new ReportParameter[6];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("userid", UserId);
                         //param[4] = new ReportParameter("gartype", garbageType);
                         param[4] = new ReportParameter("DBName", DB_Name);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Dumpyard_Employeeswise")
                     {
-                        ReportParameter[] param = new ReportParameter[5];
+                        ReportParameter[] param = new ReportParameter[6];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("dyid", DyId);
                         param[4] = new ReportParameter("DBName", DB_Name);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
                     else if (ReportName == "Garbase Collection Percentage")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("from", FromDate);
-                        param[2] = new ReportParameter("to", ToDate);
-                        param[3] = new ReportParameter("DBName", DB_Name);
-                        rptViewer.ServerReport.SetParameters(param);
-                    }
-                    else if (ReportName == "Employee Collection Summary")
                     {
                         ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+                    }
+                    else if (ReportName == "Employee Collection Summary")
+                    {
+                        ReportParameter[] param = new ReportParameter[6];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("DBName", DB_Name);
                         param[4] = new ReportParameter("fromd", Date);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Employee Garbage Collection Count")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
-                        //param[4] = new ReportParameter("DBSource", DB_Source);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Areawise Garbage Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Citywise Garbage Report")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
                     else if (ReportName == "Areawise Garbage Type Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
                     else if (ReportName == "Dashboard_1")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
 
                     else if (ReportName == "DumpYard_Summary")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
@@ -198,21 +209,23 @@ namespace SwachhBharatAbhiyan.CMS
                           
                     else if (ReportName == "Housewise Garbage Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
                     else if (ReportName == "Daywise Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
@@ -275,12 +288,13 @@ namespace SwachhBharatAbhiyan.CMS
                     }
                     else if (ReportName == "Employee_Performance_Report")
                      {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("DBName", DB_Name);
                         param[2] = new ReportParameter("from", FromDate);
                         param[3] = new ReportParameter("to", ToDate);
-                       
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+
                         rptViewer.ServerReport.SetParameters(param);
                     }
 
@@ -288,233 +302,255 @@ namespace SwachhBharatAbhiyan.CMS
                     // Liquid Report Start
                     else if (ReportName == "Liquid Ghar Sankalan Tapashil")
                     {
-                        ReportParameter[] param = new ReportParameter[5];
+                        ReportParameter[] param = new ReportParameter[6];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("userid", UserId);
                         param[4] = new ReportParameter("DBName", DB_Name);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                         // param[1] = new ReportParameter("clientid", _userInfo.ClientID.ToString());
                     }
                     else if (ReportName == "Liquid single Employee Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[5];
+                        ReportParameter[] param = new ReportParameter[6];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("userid", UserId);
                         //param[4] = new ReportParameter("gartype", garbageType);
                         param[4] = new ReportParameter("DBName", DB_Name);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Liquid Citywise Garbage Report")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("from", FromDate);
-                        param[2] = new ReportParameter("to", ToDate);
-                        param[3] = new ReportParameter("DBName", DB_Name);
-                        rptViewer.ServerReport.SetParameters(param);
-
-                    }
-                    else if (ReportName == "Liquid Areawise Garbage Collection")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("from", FromDate);
-                        param[2] = new ReportParameter("to", ToDate);
-                        param[3] = new ReportParameter("DBName", DB_Name);
-                        rptViewer.ServerReport.SetParameters(param);
-                    }
-                    else if (ReportName == "Liquid Areawise Garbage Type Collection")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("from", FromDate);
-                        param[2] = new ReportParameter("to", ToDate);
-                        param[3] = new ReportParameter("DBName", DB_Name);
-                        rptViewer.ServerReport.SetParameters(param);
-
-                    }
-                    else if (ReportName == "Liquid Garbase Collection Percentage")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("from", FromDate);
-                        param[2] = new ReportParameter("to", ToDate);
-                        param[3] = new ReportParameter("DBName", DB_Name);
-                        rptViewer.ServerReport.SetParameters(param);
-                    }
-                    else if (ReportName == "Liquid Employee Garbage Collection Count")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("from", FromDate);
-                        param[2] = new ReportParameter("to", ToDate);
-                        param[3] = new ReportParameter("DBName", DB_Name);
-                        rptViewer.ServerReport.SetParameters(param);
-                    }
-                    else if (ReportName == "LiquidDashboard_1")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("from", FromDate);
-                        param[2] = new ReportParameter("to", ToDate);
-                        param[3] = new ReportParameter("DBName", DB_Name);
-                        rptViewer.ServerReport.SetParameters(param);
-
-                    }
-                    else if (ReportName == "Liquid Daywise Collection")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("from", FromDate);
-                        param[2] = new ReportParameter("to", ToDate);
-                        param[3] = new ReportParameter("DBName", DB_Name);
-                        rptViewer.ServerReport.SetParameters(param);
-
-                    }
-                    else if (ReportName == "Liquid Employee_Performance_Report")
-                    {
-                        ReportParameter[] param = new ReportParameter[4];
-                        param[0] = new ReportParameter("appid", AppID);
-                        param[1] = new ReportParameter("DBName", DB_Name);
-                        param[2] = new ReportParameter("from", FromDate);
-                        param[3] = new ReportParameter("to", ToDate);
-
-                        rptViewer.ServerReport.SetParameters(param);
-                    }
-                    else if (ReportName == "Liquid Employee Collection Summary")
                     {
                         ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+
+                    }
+                    else if (ReportName == "Liquid Areawise Garbage Collection")
+                    {
+                        ReportParameter[] param = new ReportParameter[5];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+                    }
+                    else if (ReportName == "Liquid Areawise Garbage Type Collection")
+                    {
+                        ReportParameter[] param = new ReportParameter[5];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+
+                    }
+                    else if (ReportName == "Liquid Garbase Collection Percentage")
+                    {
+                        ReportParameter[] param = new ReportParameter[5];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+                    }
+                    else if (ReportName == "Liquid Employee Garbage Collection Count")
+                    {
+                        ReportParameter[] param = new ReportParameter[5];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+                    }
+                    else if (ReportName == "LiquidDashboard_1")
+                    {
+                        ReportParameter[] param = new ReportParameter[5];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+
+                    }
+                    else if (ReportName == "Liquid Daywise Collection")
+                    {
+                        ReportParameter[] param = new ReportParameter[5];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+
+                    }
+                    else if (ReportName == "Liquid Employee_Performance_Report")
+                    {
+                        ReportParameter[] param = new ReportParameter[5];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("DBName", DB_Name);
+                        param[2] = new ReportParameter("from", FromDate);
+                        param[3] = new ReportParameter("to", ToDate);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
+
+                        rptViewer.ServerReport.SetParameters(param);
+                    }
+                    else if (ReportName == "Liquid Employee Collection Summary")
+                    {
+                        ReportParameter[] param = new ReportParameter[6];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("DBName", DB_Name);
                         param[4] = new ReportParameter("fromd", Date);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
 
                     // Street Report Start
                     else if (ReportName == "Street single Employee Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[5];
+                        ReportParameter[] param = new ReportParameter[6];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("userid", UserId);
                         //param[4] = new ReportParameter("gartype", garbageType);
                         param[4] = new ReportParameter("DBName", DB_Name);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Street Citywise Garbage Report")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
                     else if (ReportName == "Street Areawise Garbage Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Street Areawise Garbage Type Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
                     else if (ReportName == "Street Garbase Collection Percentage")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Street Employee Garbage Collection Count")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "StreetDashboard_1")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
                     else if (ReportName == "Street Daywise Collection")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                     }
                     else if (ReportName == "Street Employee_Performance_Report")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("DBName", DB_Name);
                         param[2] = new ReportParameter("from", FromDate);
                         param[3] = new ReportParameter("to", ToDate);
-
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
 
                     else if (ReportName == "Street Garbase Collection Percentage")
                     {
-                        ReportParameter[] param = new ReportParameter[4];
+                        ReportParameter[] param = new ReportParameter[5];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
+                        param[4] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
 
                     else if (ReportName == "Street Employee Collection Summary")
                     {
-                        ReportParameter[] param = new ReportParameter[5];
+                        ReportParameter[] param = new ReportParameter[6];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("DBName", DB_Name);
                         param[4] = new ReportParameter("fromd", Date);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
                     }
                     else if (ReportName == "Street Ghar Sankalan Tapashil")
                     {
-                        ReportParameter[] param = new ReportParameter[5];
+                        ReportParameter[] param = new ReportParameter[6];
                         param[0] = new ReportParameter("appid", AppID);
                         param[1] = new ReportParameter("from", FromDate);
                         param[2] = new ReportParameter("to", ToDate);
                         param[3] = new ReportParameter("userid", UserId);
                         param[4] = new ReportParameter("DBName", DB_Name);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
                         rptViewer.ServerReport.SetParameters(param);
 
                         // param[1] = new ReportParameter("clientid", _userInfo.ClientID.ToString());

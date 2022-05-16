@@ -290,22 +290,48 @@
         });
     });
 
-    $("#qrEmpLoginId").keyup(function () {
-        debugger;
+    var id = $('#qrEmpId').val();
+    if (id > 0) {
 
-        var LoginId = $("#qrEmpLoginId").val();
-        $.ajax({
-            url: "/HouseScanifyEmp/IsLIdEOnHSAndUM?LoginId=" + LoginId,
-            type: "POST",
-            data: { LoginId: LoginId }
-        })
-            .done(function (msg) {
-                if (msg == 1) {
-                    $('#err_login').text('This Is Already Exist LoginId!');
-                } else {
-                    $('#err_login').text('');
-                }
-            });
-    });
+    }
+    else {
+        $("#qrEmpLoginId").keyup(function () {
+            debugger;
+
+            var LoginId = $("#qrEmpLoginId").val();
+            $.ajax({
+                url: "/HouseScanifyEmp/IsLIdEOnHSAndUM?LoginId=" + LoginId,
+                type: "POST",
+                data: { LoginId: LoginId }
+            })
+                .done(function (msg) {
+                    if (msg == 1) {
+                        $('#err_login').text('This Is Already Exist LoginId!');
+                    } else {
+                        $('#err_login').text('');
+                    }
+                });
+        });
+
+
+        $("#qrEmpName").keyup(function () {
+            debugger;
+
+            var qrEmpName = $("#qrEmpName").val();
+            $.ajax({
+                url: "/Employee/CheckName?userName=" + qrEmpName,
+                type: "POST",
+                data: { qrEmpName: qrEmpName }
+            })
+                .done(function (msg) {
+                    if (msg == 1) {
+                        $('#err_name').text('This Name Is Already Exist!');
+                    } else {
+                        $('#err_name').text('');
+                    }
+                });
+        });
+
+    }
 
 </script>

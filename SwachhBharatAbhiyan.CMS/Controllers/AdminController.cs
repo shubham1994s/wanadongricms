@@ -1,11 +1,16 @@
-﻿using SwachBharat.CMS.Bll.Repository.MainRepository;
+﻿using Microsoft.AspNet.Identity;
+using SwachBharat.CMS.Bll.Repository.MainRepository;
 using SwachBharat.CMS.Bll.ViewModels.MainModel;
 using SwachhBharatAbhiyan.CMS.Models;
+using SwachhBharatAbhiyan.CMS.Models.SessionHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using Microsoft.Owin.Security;
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
 {
@@ -20,8 +25,16 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         // GET: Admin
         public ActionResult MenuIndex()
         {
-            List<MenuItem> menuList = GetMenus();
-            return View(menuList);
+            if (SessionHandler.Current.UserEmail != null)
+            {
+                List<MenuItem> menuList = GetMenus();
+                return View(menuList);
+            }
+           
+            else
+            {
+                return Redirect("/Admin/Login");
+            }
         }
 
         //public ActionResult MenuIndex()
@@ -48,7 +61,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (model.Password == "Admin#123" & model.Email == "Admin")
             {
-
+                string UserEmail = model.Email;
+                Session["UserName"] = model.Email;
+                AddSession(UserEmail);
                 return RedirectToAction("MenuIndex");
             }
             else {
@@ -63,7 +78,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (model.Password == "Admin#123" & model.Email == "Admin")
             {
-
+                
                 return RedirectToAction("MenuIndex");
             }
             else
@@ -82,7 +97,60 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-      
+        [NonAction]
+        private void AddSession(string UserEmail)
+        {
+            try
+            {
+                
+
+                if (UserEmail != null)
+                {
+                 
+                    SessionHandler.Current.UserEmail = UserEmail;
+                }
+                else
+                {
+               
+                    SessionHandler.Current.UserEmail = null;
+                }
+                // if (SessionHandler.Current.Type.Trim() == "np")
+                // {
+                //     SessionHandler.Current.sessionType = "नगर पंचायत | Our Nagar Panchayat";
+                // }
+                // else
+                //if (SessionHandler.Current.Type.Trim() == "npp")
+                // {
+                //     SessionHandler.Current.sessionType = "नगरपरिषद | Municipal Council";
+                // }
+                // else
+                //     if (SessionHandler.Current.Type.Trim() == "gp")
+                // {
+                //     SessionHandler.Current.sessionType = "ग्रामपंचायत | Gram Panchayat";
+                // }
+                // else
+                // {
+                //     SessionHandler.Current.sessionType = "ग्रामपंचायत | Gram Panchayat";
+                // }
+
+            }
+            catch (Exception exception)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(exception);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            Session["__MySession__"] = null; //it's my session variable
+            Session.Clear();
+            Session.Abandon();
+            FormsAuthentication.SignOut(); 
+            AddSession(null);
+            return RedirectToAction("Login", "Admin");
+        }
 
     }
 }

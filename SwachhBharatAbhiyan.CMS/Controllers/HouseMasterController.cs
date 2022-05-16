@@ -47,6 +47,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                Session["AppName"] = SessionHandler.Current.AppName;
                 return View();
             }
             else
@@ -68,6 +69,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             {
                 Session["NewAppID"] = SessionHandler.Current.AppId;
                 Session["DB_Name"] = SessionHandler.Current.DB_Name;
+                Session["DB_Source"] = SessionHandler.Current.DB_Source;
                 string Reportname = "ss";
 
                 ViewBag.IframeUrl = "/DisplayReports.aspx?FromDate=" + DateTime.Now.ToString("MM/dd/yyyy");

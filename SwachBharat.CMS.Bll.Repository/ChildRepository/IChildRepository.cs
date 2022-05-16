@@ -133,6 +133,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         string GetLoginidData(string utype);
         string GetUserName(string uname);
+        string GetHSUserName(string uname);
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
 
         List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate);

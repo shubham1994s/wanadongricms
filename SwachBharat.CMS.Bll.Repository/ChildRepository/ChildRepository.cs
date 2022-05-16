@@ -621,6 +621,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetUserName(userName);
         }
+        public string GetHSUserName(string userName)
+        {
+            return screenService.GetHSUserName(userName);
+        }
     }
 }
 

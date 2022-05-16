@@ -217,7 +217,18 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
 
         }
+        [HttpPost]
+        public string CheckName(string userName)
+        {
 
+            int AppID = SessionHandler.Current.AppId;
+            childRepository = new ChildRepository(AppID);
+            var isrecord = childRepository.GetHSUserName(userName);
+
+            return isrecord;
+
+
+        }
 
         [HttpPost]
         public ActionResult CheckUserName(HouseScanifyEmployeeDetailsVM obj)

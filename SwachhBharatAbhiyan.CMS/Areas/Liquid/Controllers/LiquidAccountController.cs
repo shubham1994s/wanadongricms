@@ -16,6 +16,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
 {
 
     [Authorize]
+    [AllowAnonymous]
     public class LiquidAccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -79,9 +80,9 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Liquid.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AddSession(null, null, null, null);
-            RouteData.Values.Remove("ReturnUrl");
-            return RedirectToAction("Login", "Account");
-            //return View();
+            RouteData.Values.Remove("ReturnUrl");      
+            return RedirectToAction("Login", "Account", new { area = "" });
+          
         }
 
 

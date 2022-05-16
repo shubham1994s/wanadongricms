@@ -28,7 +28,7 @@
     }
 </style>
 
-@using (Html.BeginForm("AddDumpYardDetails", "DumpYard", FormMethod.Post, new { enctype = "multipart/form-data", data_toggle = "validator", role = "form" }))
+@using (Html.BeginForm("AddDumpYardDetails", "DumpYard", FormMethod.Post, new { enctype = "multipart/form-data", data_toggle = "validator", role = "form" , onsubmit = "disableSubmitButton()" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.dyId)
@@ -333,9 +333,10 @@
             return false;
         }
     });
-        $("#btnSubmit").click(function () {
+    $("#btnSubmit").click(function () {
+        debugger;
             var bool = validation();
-
+           // this.disabled = true;
             if (bool == false) {
                 return false;
             } else {
@@ -446,7 +447,11 @@
                 }
             }
         }
+    function disableSubmitButton() {
 
+        document.getElementById("btnSubmit").disabled = true;
+
+    };
 </script>
 <script>
     $(document).ready(function () {
