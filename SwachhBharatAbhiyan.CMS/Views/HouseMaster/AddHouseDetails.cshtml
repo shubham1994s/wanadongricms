@@ -186,19 +186,9 @@
 
                     </div>
 
-                    <div class="col-md-4" style="padding-top:10%">
-                        <center><span class="text-danger" id="err_generate"></span></center>
-                        <div class="form-group1">
-                            <button type="submit" name="submit" class="btn" id="btnSubmit" onclick="return Validate()">
 
-                                <span class="glyphicon glyphicon-saved"></span>
-                                <span id="buttonName" onclick="disableButton(this)">Save</span>
-                            </button>
-                        </div>
-
-                    </div>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group" style="padding-left:15%">
                             @*<label for="Select_Image">क्यु आर  कोड  / QR-Code Image</label>*@
                             @*@Html.Label("स्कॅनिफाय कोड  / Scaniffy Code")*@
                             @Html.Label("Scaniffy Code")
@@ -242,6 +232,17 @@
                     @Html.HiddenFor(model => model.houseLong, new { @class = "form-control", required = "required" })
 
                     @Html.HiddenFor(model => model.houseLat, new { @class = "form-control", required = "required" })
+                    <div class="col-md-4" style="padding-top:10%">
+                        <center><span class="text-danger" id="err_generate"></span></center>
+                        <div class="form-group1">
+                            <button type="submit" name="submit" class="btn" id="btnSubmit" onclick="return Validate()">
+
+                                <span class="glyphicon glyphicon-saved"></span>
+                                <span id="buttonName" onclick="disableButton(this)">Save</span>
+                            </button>
+                        </div>
+
+                    </div>
                 </div>
 
 
