@@ -617,5 +617,15 @@ namespace SwachBharat.CMS.Dal.DataContexts
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<HouseDetails_Result>("HouseDetails");
         }
+    
+        public virtual ObjectResult<SP_EmployeeHouseCollectionTime_Result> SP_EmployeeHouseCollectionTime()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeHouseCollectionTime_Result>("SP_EmployeeHouseCollectionTime");
+        }
+    
+        public virtual ObjectResult<SP_GetEmpWiseHouseScan_Result> SP_GetEmpWiseHouseScan()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEmpWiseHouseScan_Result>("SP_GetEmpWiseHouseScan");
+        }
     }
 }

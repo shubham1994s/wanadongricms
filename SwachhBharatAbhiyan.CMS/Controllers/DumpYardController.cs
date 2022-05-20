@@ -43,6 +43,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (SessionHandler.Current.AppId != 0)
             {
+                Session["AppName"] = SessionHandler.Current.AppName;
                 return View();
             }
             else

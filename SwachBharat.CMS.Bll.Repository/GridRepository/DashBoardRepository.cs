@@ -5524,6 +5524,64 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
+        public IEnumerable<EmployeeHouseCollectionTime> getEmployeeHouseCollectionTime(int appId)
+        {
+            List<EmployeeHouseCollectionTime> obj = new List<EmployeeHouseCollectionTime>();
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.SP_EmployeeHouseCollectionTime().ToList();
+
+                foreach (var x in data)
+                {
+                    obj.Add(new EmployeeHouseCollectionTime()
+                    {
+                        inTime = x.inTime,
+                        Count = x.Count,
+                        ToDate = x.TodayDate.ToString(),
+                        MixedCount = x.MixedCount,
+                        Bifur = x.Bifur,
+                        NotCollected = x.NotCollected,
+                        gcTarget = x.gcTarget,
+                        NotSpecidfied = x.NotSpecidfied,
+                        userId = x.userId,
+                        userName = x.userName,
+                        MinuteDiff = x.MinuteDiff,
+                        TimeDuration = x.TimeDuration
+                    });
+                }
+                return obj.OrderBy(c => c.userName);
+            }
+        }
+        public IEnumerable<GetEmpWiseHouseScan> getEmployeeHouseScanCollectionTime(int appId)
+        {
+            List<GetEmpWiseHouseScan> obj = new List<GetEmpWiseHouseScan>();
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.SP_GetEmpWiseHouseScan().ToList();
+
+                foreach (var x in data)
+                {
+                    obj.Add(new GetEmpWiseHouseScan()
+                    {
+                       
+                        userId = x.userId,
+                        userName = x.userName,
+                        Totalhousecollection = x.Totalhousecollection,
+                        TotalHouseScanTime = x.TotalHouseScanTime,
+                        TotalMixed = x.TotalMixed,
+                        TotalSeg = x.TotalSeg,
+                        TotalNotColl = x.TotalNotColl,
+                        TotalNotSpecified = x.TotalNotSpecified,
+                        TotalDump = x.TotalDump,
+                        TotalDumpScanTime = x.TotalDumpScanTime,
+                        TotalHouseScanTimeHours = x.TotalHouseScanTimeHours,
+                        TotalDumpScanTimeHours = x.TotalDumpScanTimeHours,
+                    });
+                }
+                return obj.OrderBy(c => c.userName);
+            }
+        }
+
         #region Infotainment 
         public IEnumerable<InfotainmentDetailsGridRow> GetInfotainmentDetailsData(long wildcard, string SearchString, int appId)
         {

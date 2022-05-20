@@ -57,12 +57,14 @@
     <Compile Include="ChildModel\Model\DashBoardVM.cs" />
     <Compile Include="ChildModel\Model\DumpYardDetailsVM.cs" />
     <Compile Include="ChildModel\Model\EmployeeDetailsVM.cs" />
+    <Compile Include="ChildModel\Model\EmployeeHouseCollectionTime.cs" />
     <Compile Include="ChildModel\Model\EmployeeHouseCollectionType.cs" />
     <Compile Include="ChildModel\Model\EmployeeLiquidCollectionType.cs" />
     <Compile Include="ChildModel\Model\EmployeeStreetCollectionType.cs" />
     <Compile Include="ChildModel\Model\EmployeeVM.cs" />
     <Compile Include="ChildModel\Model\GarbageCollectionVM.cs" />
     <Compile Include="ChildModel\Model\GarbagePointDetailsVM.cs" />
+    <Compile Include="ChildModel\Model\GetEmpWiseHouseScan.cs" />
     <Compile Include="ChildModel\Model\HouseScanifyEmployeeDetailsVM.cs" />
     <Compile Include="ChildModel\Model\InfotainmentDetailsVW.cs" />
     <Compile Include="ChildModel\Model\LiquidWasteVM.cs" />

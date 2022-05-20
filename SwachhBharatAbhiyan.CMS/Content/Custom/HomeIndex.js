@@ -927,7 +927,9 @@ $(document).ready(function () {
            axisY: {
                title: "House Collection",
            },
-
+           axisX: {
+               title: "Employee Name",
+           },
            data: [
 
                  {
@@ -1039,4 +1041,329 @@ $(document).ready(function () {
     chart.render();
 
 
+});
+
+
+//$(document).ready(function () {
+
+//    debugger;
+//    /* -------*/
+
+//    $.ajax({
+//        type: "post",
+//        url: "/Home/EmployeeHouseCollectionTime",
+//        //data: { userId: UserId, },
+//        datatype: "json",
+//        traditional: true,
+//        success: function (data) {
+//            console.log(data);
+//            var not_spec = [];
+//            var not_coll = [];
+//            var mixed = [];
+//            var seg = [];
+//            var Min = [];
+//            //var dry = [];
+//            //var wet = [];
+//            var emp_tar = [];
+//            for (var i = 0; i < data.length; i++) {
+//                // alert(data[i].inTime);
+//                var name = data[i].userName;
+//                name = name.trim();
+//                var lastname_array = name.split(' ');
+//                var lastname_firstchar;
+//                if (lastname_array.length == 1) {
+//                    //if condition lastname_array[1] == undefined
+//                    lastname_firstchar = ""
+//                } else {
+//                    lastname_firstchar = lastname_array[1][0];
+//                }
+//                if (data[i].MinuteDiff >= 1 && data[i].MinuteDiff <= 60) {
+//                    Emp_Color = '#8eef84';
+//                }
+//                else if (data[i].MinuteDiff >= 61 && data[i].MinuteDiff <= 120) {
+//                    Emp_Color = '#f5a568';
+//                }
+//                else if (data[i].MinuteDiff >= 121 && data[i].MinuteDiff <= 180) {
+//                    Emp_Color = '#8380e7';
+//                }
+//                else if (data[i].MinuteDiff >= 181 && data[i].MinuteDiff <= 240) {
+//                    Emp_Color = '#f35880';
+//                }
+//                else if (data[i].MinuteDiff >= 241 && data[i].MinuteDiff <= 300) {
+//                    Emp_Color = '#e1d55f';
+//                }
+//                else if (data[i].MinuteDiff >= 301 && data[i].MinuteDiff <= 360) {
+//                    Emp_Color = '#29908d';
+//                }
+//                else if (data[i].MinuteDiff >= 361 && data[i].MinuteDiff <= 420) {
+//                    Emp_Color = '#7db1ea';
+//                }
+//                else if (data[i].MinuteDiff >= 421 && data[i].MinuteDiff <= 480) {
+//                    Emp_Color = '#f4595f';
+//                }
+//                else {
+//                     Emp_Color = '#0086c3';
+//                }
+//               /* Emp_Color = '#0086c3';*/
+//                //var fname = name.substring(0, name.indexOf(" "));
+//                var fname = name.replace(/ .*/, ' ');
+//                // alert(data[i]._Count)
+//                not_spec.push({ y: data[i].NotSpecidfied, label: 'Not Specified', color: '#0086c3', intime: data[i].inTime });
+//                not_coll.push({ y: data[i].NotCollected, label: 'Not Collected', color: '#fe9436', intime: data[i].inTime });
+//                mixed.push({ y: data[i].MixedCount, label: 'Mixed', color: '#f44336', intime: data[i].inTime });
+//                seg.push({ y: data[i].Bifur, label: 'Segregated', color: '#388e3c', intime: data[i].inTime });
+//                Min.push({ y: data[i].MinuteDiff, TimeDuration: data[i].TimeDuration, label: data[i].userName, color: Emp_Color, intime: data[i].inTime, Tot_Seg: data[i].Bifur, Tot_Mixed: data[i].MixedCount, Tot_NCol: data[i].NotCollected, Tot_NSpe: data[i].NotSpecidfied, Tot_Col: data[i].Bifur + data[i].MixedCount + data[i].NotCollected + data[i].NotSpecidfied });
+//                //Min.push({ y: data[i].userName, Time_diff: data[i].MinuteDiff, Tot_Seg: data[i].Bifur, Tot_Mixed: data[i].MixedCount, Tot_NCol: data[i].NotCollected, Tot_NSpe: data[i].NotSpecidfied, });
+//                //dry.push({ y: data[i].DryWaste, label: 'Dry Waste', color: '#0462EA', intime: data[i].inTime });
+//                //wet.push({y: data[i].WetWaste, label: 'Wet Waste', color: '#186634', intime: data[i].inTime });
+//                emp_tar.push({ y: parseInt(data[i].gcTarget), label: fname + lastname_firstchar, z: data[i].Count, intime: data[i].inTime });
+//                // ary2.push({ y: parseInt(data[i].gcTarget), label: data[i].userName });
+
+//            }
+
+//            var chart = new CanvasJS.Chart("chartContainerWorkTime",
+               
+//                {
+//                    animationEnabled: true,
+//                    //title: {
+//                    //    text: "Grouped Stacked Chart"
+//                    //},
+//                    axisX: {
+//                        interval: 1
+//                    },
+//                    axisY: {
+//                        title: "Time In Minutes ",
+//                        includeZero: true,
+//                        //scaleBreaks: {
+//                        //    type: "wavy",
+//                        //    customBreaks: [{
+//                        //        startValue: 80,
+//                        //        endValue: 210
+//                        //    },
+//                        //    {
+//                        //        startValue: 230,
+//                        //        endValue: 600
+//                        //    }
+//                        //    ]
+//                        //}
+//                    },
+//                    axisX: {
+//                        title: "Employee Name",
+//                    },
+//                    axisY: {
+//                        title: "Time In Minutes",
+//                    },
+//                    axisY: {
+//                        interval: 20,
+//                        includeZero: true,
+//                    },
+//                    height: 360,
+//                    data: [
+
+//                        {
+//                            type: "bar",
+//                            showInLegend: true,
+//                            legendText: "Time In Minutes",
+//                            legendMarkerType: "none",
+//                            indexLabel: "{Tot_Col} House Collected In {TimeDuration} ",
+//                            indexLabelPlacement: "inside",
+//                            indexLabelFontColor: "Black",
+//                            labelFontWeight: "bolder",
+//                            toolTipContent: "Employee Name:{label}<br>Total Time In Minutes:{y}<br>Total Segregated:{Tot_Seg}<br>Total Mixed:{Tot_Mixed}<br>Total Not Collected:{Tot_NCol}<br>Total Not Specified:{Tot_NSpe} ",
+//                           // toolTipContent: "Employee name:{y}<br>Total Segregated:{Tot_Seg}<br>Total Mixed:{Tot_Mixed}<br>Total Not Collected:{Tot_NCol}<br>Total Not Specified:{Tot_NSpe} ",
+//                           // color: "#388e3c",
+//                            dataPoints: Min
+//                        }
+//                    ]
+//                });
+//            showDefaultText(chart, "No Data Available");
+//            chart.render();
+//            function showDefaultText(chart, text) {
+//                var isEmpty = !(chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
+
+//                if (!chart.options.subtitles)
+//                    (chart.options.subtitles = []);
+
+//                if (isEmpty)
+//                    chart.options.subtitles.push({
+//                        text: text,
+//                        verticalAlign: 'center',
+//                    });
+//                else
+//                    (chart.options.subtitles = []);
+//            }
+//        }
+//    });
+//    chart.render();
+
+
+//});
+
+$(document).ready(function () {
+
+    debugger;
+
+    $.ajax({
+        type: "post",
+        url: "/Home/EmployeeHouseScanCollectionTime",
+        //data: { userId: UserId, },
+        datatype: "json",
+        traditional: true,
+        success: function (data) {
+            console.log(data);
+            var not_spec = [];
+            var not_coll = [];
+            var mixed = [];
+            var seg = [];
+            var Min = [];
+            var DumpMin = [];
+            //var dry = [];
+            //var wet = [];
+            var emp_tar = [];
+            for (var i = 0; i < data.length; i++) {
+                // alert(data[i].inTime);
+                var name = data[i].userName;
+                name = name.trim();
+                var lastname_array = name.split(' ');
+                var lastname_firstchar;
+                if (lastname_array.length == 1) {
+                    //if condition lastname_array[1] == undefined
+                    lastname_firstchar = ""
+                } else {
+                    lastname_firstchar = lastname_array[1][0];
+                }
+                if (data[i].TotalHouseScanTime >= 1 && data[i].TotalHouseScanTime <= 60) {
+                    Emp_Color = '#8eef84';
+                }
+                else if (data[i].TotalHouseScanTime >= 61 && data[i].TotalHouseScanTime <= 120) {
+                    Emp_Color = '#f5a568';
+                }
+                else if (data[i].TotalHouseScanTime >= 121 && data[i].TotalHouseScanTime <= 180) {
+                    Emp_Color = '#8380e7';
+                }
+                else if (data[i].TotalHouseScanTime >= 181 && data[i].TotalHouseScanTime <= 240) {
+                    Emp_Color = '#f35880';
+                }
+                else if (data[i].TotalHouseScanTime >= 241 && data[i].TotalHouseScanTime <= 300) {
+                    Emp_Color = '#e1d55f';
+                }
+                else if (data[i].TotalHouseScanTime >= 301 && data[i].TotalHouseScanTime <= 360) {
+                    Emp_Color = '#29908d';
+                }
+                else if (data[i].TotalHouseScanTime >= 361 && data[i].TotalHouseScanTime <= 420) {
+                    Emp_Color = '#7db1ea';
+                }
+                else if (data[i].TotalHouseScanTime >= 421 && data[i].TotalHouseScanTime <= 480) {
+                    Emp_Color = '#f4595f';
+                }
+                else {
+                    Emp_Color = '#0086c3';
+                }
+                /* Emp_Color = '#0086c3';*/
+                //var fname = name.substring(0, name.indexOf(" "));
+                var fname = name.replace(/ .*/, ' ');
+                // alert(data[i]._Count)
+                not_spec.push({ y: data[i].TotalNotSpecified, label: 'Not Specified', color: '#0086c3' });
+                not_coll.push({ y: data[i].TotalNotColl, label: 'Not Collected', color: '#fe9436' });
+                mixed.push({ y: data[i].TotalMixed, label: 'Mixed', color: '#f44336' });
+                seg.push({ y: data[i].TotalSeg, label: 'Segregated', color: '#388e3c' });
+                Min.push({ y: data[i].TotalHouseScanTime, TimeDuration: data[i].TotalHouseScanTimeHours, label: data[i].userName, color: Emp_Color, Tot_Seg: data[i].TotalSeg, Tot_Mixed: data[i].TotalMixed, Tot_NCol: data[i].TotalNotColl, Tot_NSpe: data[i].TotalNotSpecified, Tot_Col: data[i].Totalhousecollection, Tot_Dump_Trip: data[i].TotalDump, TimeDuration_Dump: data[i].TotalDumpScanTimeHours});
+                DumpMin.push({ y: data[i].TotalDumpScanTime, TimeDuration: data[i].TotalDumpScanTimeHours, label: data[i].userName, color: '#989a9e', Tot_Seg: data[i].TotalSeg, Tot_Mixed: data[i].TotalMixed, Tot_NCol: data[i].TotalNotColl, Tot_NSpe: data[i].TotalNotSpecified, Tot_Col: data[i].TotalDump });
+                //Min.push({ y: data[i].userName, Time_diff: data[i].MinuteDiff, Tot_Seg: data[i].Bifur, Tot_Mixed: data[i].MixedCount, Tot_NCol: data[i].NotCollected, Tot_NSpe: data[i].NotSpecidfied, });
+                //dry.push({ y: data[i].DryWaste, label: 'Dry Waste', color: '#0462EA', intime: data[i].inTime });
+                //wet.push({y: data[i].WetWaste, label: 'Wet Waste', color: '#186634', intime: data[i].inTime });
+                // emp_tar.push({ y: parseInt(data[i].gcTarget), label: fname + lastname_firstchar, z: data[i].Count, intime: data[i].inTime });
+                // ary2.push({ y: parseInt(data[i].gcTarget), label: data[i].userName });
+
+            }
+
+            var chart = new CanvasJS.Chart("chartContainerWorkTime1",
+
+                {
+                    animationEnabled: true,
+                    //title: {
+                    //    text: "Grouped Stacked Chart"
+                    //},
+                    axisX: {
+                        interval: 1
+                    },
+                    axisY: {
+                        title: "Time In Minutes ",
+                        includeZero: true,
+                        //scaleBreaks: {
+                        //    type: "wavy",
+                        //    customBreaks: [{
+                        //        startValue: 80,
+                        //        endValue: 210
+                        //    },
+                        //    {
+                        //        startValue: 230,
+                        //        endValue: 600
+                        //    }
+                        //    ]
+                        //}
+                    },
+                    axisX: {
+                        title: "Employee Name",
+                    },
+                    axisY: {
+                        title: "Time In Minutes",
+                    },
+                    axisY: {
+                        interval: 20,
+                        includeZero: true,
+                    },
+                    height: 360,
+                    data: [
+
+                        {
+                            type: "bar",
+                            showInLegend: true,
+                            legendText: "Time In Minutes",
+                            legendMarkerType: "none",
+                            indexLabel: "{Tot_Col} House Collected In {TimeDuration} ",
+                            indexLabelPlacement: "inside",
+                            indexLabelFontColor: "Black",
+                            labelFontWeight: "bolder",
+                            toolTipContent: "Employee Name:{label}<br>Total House Collection:{Tot_Col} (<div class='seg_square'></div>-{Tot_Seg} <div class='mix_square'></div>-{Tot_Mixed} <div class='nc_square'></div>-{Tot_NCol} <div class='ns_square'></div>-{Tot_NSpe})<br>Total House Collection Time:{TimeDuration}<br><br>Total DumpYard trip:{Tot_Dump_Trip}<br>Total DumpYard Time Duration:{TimeDuration_Dump}<br> ",
+                            // toolTipContent: "Employee name:{y}<br>Total Segregated:{Tot_Seg}<br>Total Mixed:{Tot_Mixed}<br>Total Not Collected:{Tot_NCol}<br>Total Not Specified:{Tot_NSpe} ",
+                            // color: "#388e3c",
+                            dataPoints: Min
+                        },
+                        //{
+                        //    type: "bar",
+                        //    showInLegend: true,
+                        //    legendText: "Time In Minutes",
+                        //    legendMarkerType: "none",
+                        //    indexLabel: "{Tot_Col} DumpYard Collected In {TimeDuration} ",
+                        //    indexLabelPlacement: "inside",
+                        //    indexLabelFontColor: "Black",
+                        //    labelFontWeight: "bolder",
+                        //    color: "#0086c3",
+                        //    toolTipContent: "Employee Name:{label}<br>Total Time In Minutes:{y}<br>Total Segregated:{Tot_Seg}<br>Total Mixed:{Tot_Mixed}<br>Total Not Collected:{Tot_NCol}<br>Total Not Specified:{Tot_NSpe} ",
+                        //    // toolTipContent: "Employee name:{y}<br>Total Segregated:{Tot_Seg}<br>Total Mixed:{Tot_Mixed}<br>Total Not Collected:{Tot_NCol}<br>Total Not Specified:{Tot_NSpe} ",
+                        //    // color: "#388e3c",
+                        //    dataPoints: DumpMin
+                        //}
+                    ]
+                });
+            showDefaultText(chart, "No Data Available");
+            chart.render();
+            function showDefaultText(chart, text) {
+                var isEmpty = !(chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
+
+                if (!chart.options.subtitles)
+                    (chart.options.subtitles = []);
+
+                if (isEmpty)
+                    chart.options.subtitles.push({
+                        text: text,
+                        verticalAlign: 'center',
+                    });
+                else
+                    (chart.options.subtitles = []);
+            }
+        }
+    });
+    chart.render();
 });
