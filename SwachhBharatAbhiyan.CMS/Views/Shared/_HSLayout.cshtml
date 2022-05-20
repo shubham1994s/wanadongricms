@@ -18,6 +18,7 @@
     @*@Scripts.Render("~/bundles/modernizr")*@
     @*@RenderSection("styles", required: false)*@
     <link rel="shortcut icon" href="~/Content/images/img/ictsbm2.png" />
+    <link href="~/Content/css/blink.css" rel="stylesheet" />
     <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
     <style>
         .search {
@@ -60,8 +61,8 @@
                         <!-- Navbar Menu -->
                         <!-- Logout    -->
                         @*<li class="nav-item" style="list-style: none;"><a href="/houseScanifyEmp/login" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a></li>*@
-                    <li class="nav-item" style="list-style: none; margin-left: 50%;" id="HDUserid"></li>
-                    <li class="nav-item" style="list-style: none;" id="HSType"> </li>
+                        <li class="nav-item" style="list-style: none; margin-left: 50%;" id="HDUserid"></li>
+                        <li class="nav-item" style="list-style: none;" id="HSType"> </li>
 
                         @Html.Partial("_HSLoginPartial")
                     </div>
@@ -73,7 +74,7 @@
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
                 <ul style=" padding: 1PX; margin-bottom: 1PX;">
-                    <li id='URbutton' class='py-2 px-4' ><a href='HSURIndex' class="btn btn-primary" style="color:#fff !important;font-weight:600">User Right</a></li>
+                    <li id='URbutton' class='py-2 px-4'><a href='HSURIndex' class="btn btn-primary" style="color:#fff !important;font-weight:600">User Right</a></li>
                 </ul>
                 <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" class="search">
                 <ul class="list-unstyled" style="max-height:700px;overflow-y:auto">
@@ -109,7 +110,7 @@
     @Scripts.Render("~/Scripts/ThemeScripts")
     <script>
 
-    
+
 
         debugger;
         var HSID = $('#HSID').val();
@@ -155,6 +156,8 @@
             for (var i = 0; i < data.length; i++) {
                 res += "<li class='ulb' ><a style='cursor:pointer' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
                 if (data[i].FAQ == 1) {
+                    res += "<i class='fa fa-circle pull-right blink' style='color:#33cc33;font-size:12px;margin: 3% auto;'></i>";
+                } else if (data[i].FAQ == 2) {
                     res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
                 }
                 //if (AppId_New == data[i].AppId) {
@@ -162,6 +165,9 @@
                 //}
                 res += "</a></li>";
             }
+
+           
+
 
 
             $('.list-unstyled').html(res);
@@ -331,12 +337,21 @@
 
         function timerIncrement() {
             idleTime = idleTime + 1;
-            if (idleTime > 60) { // 15 minutes
+            if (idleTime > 120) { // 15 minutes
                 // window.location = "/Account/login"
                 alert('Session TimeOut');
                 document.getElementById('logoutForm').submit()
             }
         }
+        //var idleIntervalr = setInterval(timerIncrementr, 6000); // 1 minute
+        //function timerIncrementr() {
+        //    window.location.reload();
+        //}
+
+        window.setTimeout(function () {
+            window.location.reload();
+        }, 600000);
+
     </script>
     <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
     @*@RenderSection("scripts", required: false)*@
