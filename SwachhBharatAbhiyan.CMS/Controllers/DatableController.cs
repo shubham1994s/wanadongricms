@@ -542,7 +542,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new ULBAdminStatusGridRepository(0, searchString, param1, param2, param3, param4, userId);
                     return gridRepository;
                     break;
-
+                case "StreetSweepBeat":
+                    gridRepository = new StreetSweepBeatGrid(0, searchString, appId);
+                    return gridRepository;
+                    break;
             }
             
             return null;

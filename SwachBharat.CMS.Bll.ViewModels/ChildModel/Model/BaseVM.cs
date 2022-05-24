@@ -29,10 +29,12 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public List<SelectListItem> OccupancyStatus { get; set; }
         public List<SelectListItem> Property_Type { get; set; }
 
+        public List<SelectListItem> BeatList { get; set; }
+
 
     }
 
-   
+
 
 }
 

@@ -5057,6 +5057,106 @@ namespace SwachBharat.CMS.Bll.Services
         }
         #endregion
 
+        public StreetSweepVM GetBeatDetails(int teamId)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var Details = db.SP_StreetSweepList().Where(x => x.SSId == teamId).FirstOrDefault();
+                    if (Details != null)
+                    {
+                        StreetSweepVM vechile = new StreetSweepVM();
+                        vechile.BeatList = ListBeat();
+                        return vechile;
+                    }
+                    else
+                    {
+                        StreetSweepVM vechile = new StreetSweepVM();
+                        vechile.BeatList = ListBeat();
+                        return vechile;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<SelectListItem> ListBeat()
+        {
+            var Vehicle = new List<SelectListItem>();
+            SelectListItem itemAdd = new SelectListItem() { Text = "--Select Beat--", Value = "0" };
+
+            try
+            {
+                Vehicle = db.SP_StreetSweepList().ToList()
+                    .Select(x => new SelectListItem
+                    {
+                        Text = x.ReferanceId,
+                        Value = x.ReferanceId.ToString()
+                    }).OrderBy(t => t.Text).ToList();
+
+                Vehicle.Insert(0, itemAdd);
+            }
+            catch (Exception ex) { throw ex; }
+
+            return Vehicle;
+        }
+
+        public StreetSweepVM SaveStreetBeatDetails(StreetSweepVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.BeatId > 0)
+                    {
+                        var model = db.StreetSweepingBeats.Where(x => x.BeatId == data.BeatId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.CreateDate = DateTime.Now;
+                            model.ReferanceId1 = data.SSBeatone;
+                            model.ReferanceId2 = data.SSBeattwo;
+                            model.ReferanceId3 = data.SSBeatthree;
+                            model.ReferanceId4 = data.SSBeatfour;
+                            model.ReferanceId5 = data.SSBeatfive;
+
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = FillStreetBeatDetailsDataModel(data);
+                        db.StreetSweepingBeats.Add(type);
+                        db.SaveChanges();
+                    }
+
+                }
+                var SSId = db.StreetSweepingBeats.OrderByDescending(x => x.BeatId).Select(x => x.BeatId).FirstOrDefault();
+                StreetSweepVM vv = GetBeatDetails(SSId);
+                return vv;
+            }
+            catch (Exception Ex)
+            {
+                return null;
+            }
+        }
+
+        private StreetSweepingBeat FillStreetBeatDetailsDataModel(StreetSweepVM data)
+        {
+            StreetSweepingBeat model = new StreetSweepingBeat();
+            model.CreateDate = DateTime.Now;
+            model.ReferanceId1 = data.SSBeatone;
+            model.ReferanceId2 = data.SSBeattwo;
+            model.ReferanceId3 = data.SSBeatthree;
+            model.ReferanceId4 = data.SSBeatfour;
+            model.ReferanceId5 = data.SSBeatfive;
+
+            return model;
+        }
+
         public void Save1Point7(List<OnePointSevenVM> data)
         {
             try

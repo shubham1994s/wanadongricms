@@ -625,6 +625,20 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetHSUserName(userName);
         }
+
+        public StreetSweepVM GetBeat(int teamId)
+        {
+            return screenService.GetBeatDetails(teamId);
+        }
+        public StreetSweepVM SaveStreetBeat(StreetSweepVM data)
+        {
+            if (data.BeatId <= 0)
+            {
+                data.BeatId = 0;
+            }
+            StreetSweepVM dd = screenService.SaveStreetBeatDetails(data);
+            return dd;
+        }
     }
 }
 

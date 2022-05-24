@@ -222,5 +222,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SBALUserLocationMapView> GetUserTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null);
 
         List<SBALUserLocationMapView> GetHouseTimeWiseRoute(string date = "", DateTime? fTime = null, DateTime? tTime = null, int? userId = null);
+
+        StreetSweepVM GetBeat(int teamId);
+        StreetSweepVM SaveStreetBeat(StreetSweepVM data);
+
     }
 }

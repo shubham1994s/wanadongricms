@@ -58,6 +58,61 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 return Redirect("/Account/Login");
         }
 
+        public ActionResult MenuStreetBeatIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                TempData.Keep();
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        [HttpGet]
+        public ActionResult StreetBeatIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                TempData.Keep();
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+
+        public ActionResult AddStreetBeat(int teamId = -1)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                StreetSweepVM vehicle = childRepository.GetBeat(teamId);
+                return View(vehicle);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+
+        [HttpPost]
+        public ActionResult AddStreetBeat(StreetSweepVM StreetSweep)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                var AppDetails = mainRepository.GetApplicationDetails(SessionHandler.Current.AppId);
+
+
+
+                StreetSweepVM pointDetails = childRepository.SaveStreetBeat(StreetSweep);
+
+
+                return Redirect("StreetBeatIndex");
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+
         public ActionResult ReportIndex()
         {
 
