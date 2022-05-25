@@ -669,7 +669,7 @@ $(document).ready(function () {
         data: [{
             type: "pie",
             indexLabelFontSize: 12,
-            indexLabelMaxWidth: 80,
+            indexLabelMaxWidth: 180,
             showInLegend: true,
             legendText: "{hover_number}",
             radius: 60,

@@ -440,6 +440,11 @@
                     });
                     var infowindow = new google.maps.InfoWindow();
                     bounds = new google.maps.LatLngBounds();
+
+                   // var infoWindow = new google.maps.InfoWindow();
+                    var lat_lng = new Array();
+                   // var latlngbounds = new google.maps.LatLngBounds();
+                    //var lastmarker = markers.length;
                     var marker, i;
                     // alert(data.length);
                     // Get Addres
@@ -474,9 +479,11 @@
                                 break;
                         }
 
-
+                        var myLatlng = new google.maps.LatLng(data[i].houseLat, data[i].houseLong);
+                        lat_lng.push(myLatlng);
+                        
                         marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(data[i].houseLat, data[i].houseLong),
+                            position: myLatlng,
                             map: map,
 
                             icon: {
@@ -527,6 +534,75 @@
                     }
                     map.fitBounds(bounds);
                     map.panToBounds(bounds);
+                    map.setCenter(bounds.getCenter());
+                    var lineSymbol = {
+                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                        scale: 0,
+                        strokeColor: '#000',
+                    };
+                    var path = new google.maps.MVCArray();
+
+                    var poly = new google.maps.Polyline({
+                        strokeColor: '#4986E7',
+                        strokeWeight: 15,
+                        map: map, icons: [{
+                            icon: lineSymbol,
+                            offset: '100%',
+                        }],
+                    });
+                    animateCircle(poly, 1);
+
+
+
+
+
+
+                    var a = 0;
+                    var listener;
+                    function animateCircle(line, k) {
+
+                        // alert(k);
+                        if (k == 7) {
+                            clearInterval(listener);
+                            a = 0;
+                        }
+                        else {
+                            a = a + 1;
+
+                            if (a == 1) {
+                                var count = 0;
+                                listener = window.setInterval(function () {
+                                    count = (count + 1) % 200;
+                                    var icons = line.get('icons');
+                                    icons[0].offset = (count / 2) + '%';
+                                    line.set('icons', icons);
+                                    if (count == 199) { icons[0].offset = '100%'; clearInterval(listener); a = 0; };
+                                }, 100);
+
+
+                            }
+                        }
+
+                    }
+                    for (var i = 0; i < lat_lng.length; i++) {
+                        if ((i + 1) <= lat_lng.length) {
+                            var src = lat_lng[i];
+                            var des = lat_lng[i + 1];
+                            path.push(src);
+                            poly.setPath(path);
+                            //service.route({
+                            //    origin: src,
+                            //    destination: des,
+                            //    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                            //}, function (result, status) {
+                            //    if (status == google.maps.DirectionsStatus.OK) {
+                            //        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                            //            path.push(result.routes[0].overview_path[i]);
+                            //        }
+                            //    }
+                            //});
+                        }
+                    }
 
                 }
 
@@ -551,7 +627,7 @@
     @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 </fieldset>
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
-<script>
+@*<script>
     $(document).keydown(function (event) {
         if (event.keyCode == 123 || event.keyCode === 67 || event.keyCode === 86 || event.keyCode === 85 || event.keyCode === 117 || event.keyCode === 75) {
             return false;
@@ -561,7 +637,7 @@
         }
     });
     document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
+</script>*@
 <script>
         var date = new Date();
 
