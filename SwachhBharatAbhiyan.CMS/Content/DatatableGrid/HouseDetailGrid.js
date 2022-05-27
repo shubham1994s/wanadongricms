@@ -38,14 +38,14 @@
               { "render": function (data, type, full, meta) { return '<input  class="btn btn-link" type="button" onclick="DownloadQRCode(' + full["houseId"] + ')" value="Download" />'; } },
 
               
-              { "data": "zone", "autoWidth": false },
-              { "data": "WardNo", "autoWidth": false },
+            { "data": "zone", "name": "zone", "autoWidth": false },
+            { "data": "WardNo", "name": "WardNo","autoWidth": false },
               { "data": "Area", "name": "Area", "autoWidth": false },
-              { "data": "houseNo", "autoWidth": false },
-              { "data": "Mobile", "autoWidth": false }, 
-              { "data": "Address", "autoWidth": false },
-              { "data": "Property_Type", "autoWidth": false },
-              { "data": "OccupancyStatus", "autoWidth": false },
+            { "data": "houseNo", "name": "houseNo", "autoWidth": false },
+            { "data": "Mobile", "name": "Mobile","autoWidth": false },
+            { "data": "Address", "name": "Address", "autoWidth": false },
+            { "data": "Property_Type", "name": "Property_Type", "autoWidth": false },
+            { "data": "OccupancyStatus", "name": "OccupancyStatus", "autoWidth": false },
             //   { "render": function (data, type, full, meta) { return '<input class="btn btn-primary btn-sm" type="button" onclick="Edit(' + full["houseId"] + ')" value="Edit" /> <input style="margin-left:2px" class="btn btn-danger btn-sm" type="button" onclick="Delete(' + full["houseId"] + ',' + full["Name"] + ')" value="Delete" />'; } }
         { "render": function (data, type, full, meta) { return '<a  data-toggle="modal" class="tooltip1" style="cursor:pointer"  onclick="Edit(' + full["houseId"] + ')" ><i class="material-icons edit-icon">edit</i><span class="tooltiptext1">Edit</span> </a>'; }, "width": "10%" },
       //<a  data-toggle="modal" style="cursor:pointer;margin-left:10px;" class="tooltip1" style="cursor:pointer" onclick="Delete(' + full["houseId"] + ')" ><i class="material-icons delete-icon">delete</i><span class="tooltiptext1">Delete</span> </a>
