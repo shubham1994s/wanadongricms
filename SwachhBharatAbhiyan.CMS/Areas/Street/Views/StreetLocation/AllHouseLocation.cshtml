@@ -396,6 +396,221 @@
         });
         //User Wise Location
         // All User On Map
+        //function myMap() {
+        //    var RadioValue = $("input[name='radio']:checked").val();
+        //    if (RadioValue == 0) {
+        //        document.getElementById('txt_fdate').value = today;
+        //        $('#selectnumber').val(-1);
+        //        $('#seg_type').val(-1);
+        //        $('#txt_fdate').prop('disabled', 'disabled');
+        //        $('#selectnumber').prop('disabled', 'disabled');
+        //        $('#seg_type').prop('disabled', 'disabled');
+        //    } else {
+        //        $('#txt_fdate').prop('disabled', false);
+        //        $('#selectnumber').prop('disabled', false);
+        //        $('#seg_type').prop('disabled', false);
+        //    }
+        //    $("#wait").css("display", "block");
+        //    $("#googleMap").css("display", "none");
+        //    $.ajax({
+        //        type: "post",
+        //        //url: "/LiquidLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() +  "&garbageType=" + $("#seg_type").val() + "&FilterType=" + RadioValue,
+        //        url: "/StreetLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() + "&FilterType=" + RadioValue,
+        //        //url: "/Location/HouseLocationList",
+        //        datatype: "json",
+        //        traditional: true,
+        //        success: function (data) {
+        //            $("#wait").css("display", "none");
+        //            $("#googleMap").css("display", "block");
+        //            if (data.length == 0)
+        //                $('#\\#myModal').modal('show');
+        //            debugger;
+        //            {
+        //                var map = new google.maps.Map(document.getElementById('googleMap'), {
+        //                    zoom: 12,
+        //                    center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
+        //                    mapTypeId: google.maps.MapTypeId.ROADMAP
+        //                });
+
+        //            }
+        //            var map = new google.maps.Map(document.getElementById('googleMap'), {
+        //                zoom: 25,
+        //                center: new google.maps.LatLng(data[0].houseLat, data[0].houseLong),
+        //                mapTypeId: google.maps.MapTypeId.ROADMAP
+        //            });
+        //            var infowindow = new google.maps.InfoWindow();
+        //            bounds = new google.maps.LatLngBounds();
+
+        //           // var infoWindow = new google.maps.InfoWindow();
+        //            var lat_lng = new Array();
+        //           // var latlngbounds = new google.maps.LatLngBounds();
+        //            //var lastmarker = markers.length;
+        //            var marker, i;
+        //            // alert(data.length);
+        //            // Get Addres
+        //            var gar_type;
+        //            for (i = 0; i < data.length; i++) {
+        //                if (data[i].houseOwnerName == null) {
+        //                    data[i].houseOwnerName = 'Not Available';
+        //                }
+        //                if (data[i].houseOwnerMobile == null) {
+        //                    data[i].houseOwnerMobile = '';
+        //                }
+        //                if (data[i].houseAddress == null) {
+        //                    data[i].houseAddress = '';
+        //                }
+        //                gar_type = data[i].gcType
+
+        //                /*          var mUrl = "http://localhost:34557/Content/images/img/segregationImg/icn_house.png";*/
+        //                var mUrl = "../../Areas/Street/Content/images/img/segregationImg/Street_Sweep.png";
+        //                switch (gar_type) {
+
+        //                    case 0:
+        //                        mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_mixed_garbage.png"
+        //                        break;
+        //                    case 5:
+        //                        mUrl = "../../Areas/Street/Content/images/img/segregationImg/Street_Sweep_Green.png"
+        //                        break;
+        //                    case 2:
+        //                        mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_garbage_not_recevied.png"
+        //                        break;
+        //                    case 3:
+        //                        mUrl = "../../Areas/Street/Content/images/img/segregationImg/icn_not_specified.png"
+        //                        break;
+        //                }
+
+        //                var myLatlng = new google.maps.LatLng(data[i].houseLat, data[i].houseLong);
+        //                lat_lng.push(myLatlng);
+                        
+        //                marker = new google.maps.Marker({
+        //                    position: myLatlng,
+        //                    map: map,
+
+        //                    icon: {
+        //                        // labelOrigin: new google.maps.Point(16, 65),
+        //                        url: mUrl
+        //                    }
+
+        //                });
+
+        //                //loc = new google.maps.LatLng(data[i].houseLat, data[i].houseLong);
+        //                loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+
+        //                bounds.extend(loc);
+
+        //                if (gar_type != null) {
+        //                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        //                        return function () {
+        //                            var poptext = '<div class=infowindow style="max-width:190px"> <h3>' + data[i].houseOwnerName + '</h3><p><b>Street Id: </b>' + data[i].ReferanceId + '</p>';
+        //                            if (data[i].houseOwnerMobile != '') {
+        //                                poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+        //                            }
+        //                            if (data[i].houseAddress != '') {
+        //                                poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '<p>';
+        //                            }
+        //                            poptext = poptext + '<b>Date: </b>' + data[i].gcDate + '</p><div style="height:auto; width:150px"><p><b>Time: </b>' + data[i].gcTime + '</p></div></div>';
+        //                            infowindow.setContent(poptext);
+        //                            infowindow.open(map, marker);
+        //                        }
+        //                    })(marker, i));
+        //                } else {
+        //                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        //                        return function () {
+        //                            var poptext = '<div class=infowindow style="max-width:190px"> <h3>' + data[i].houseOwnerName + '</h3><p><b>Street Id: </b>' + data[i].ReferanceId + '</p>'
+        //                            if (data[i].houseOwnerMobile != '') {
+        //                                poptext = poptext + '<p><b>Mobile: </b>' + data[i].houseOwnerMobile + '</p>';
+        //                            }
+        //                            if (data[i].houseAddress != '') {
+        //                                poptext = poptext + '<p><b>Address: </b>' + data[i].houseAddress + '</p>';
+        //                            }
+        //                            poptext = poptext + '</div>';
+        //                            infowindow.setContent(poptext);
+        //                            infowindow.open(map, marker);
+        //                        }
+        //                    })(marker, i));
+        //                }
+
+
+        //            }
+        //            map.fitBounds(bounds);
+        //            map.panToBounds(bounds);
+        //            map.setCenter(bounds.getCenter());
+        //            var lineSymbol = {
+        //                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        //                scale: 0,
+        //                strokeColor: '#000',
+        //            };
+        //            var path = new google.maps.MVCArray();
+
+        //            var poly = new google.maps.Polyline({
+        //                strokeColor: '#4986E7',
+        //                strokeWeight: 15,
+        //                map: map, icons: [{
+        //                    icon: lineSymbol,
+        //                    offset: '100%',
+        //                }],
+        //            });
+        //            animateCircle(poly, 1);
+
+
+
+
+
+
+        //            var a = 0;
+        //            var listener;
+        //            function animateCircle(line, k) {
+
+        //                // alert(k);
+        //                if (k == 7) {
+        //                    clearInterval(listener);
+        //                    a = 0;
+        //                }
+        //                else {
+        //                    a = a + 1;
+
+        //                    if (a == 1) {
+        //                        var count = 0;
+        //                        listener = window.setInterval(function () {
+        //                            count = (count + 1) % 200;
+        //                            var icons = line.get('icons');
+        //                            icons[0].offset = (count / 2) + '%';
+        //                            line.set('icons', icons);
+        //                            if (count == 199) { icons[0].offset = '100%'; clearInterval(listener); a = 0; };
+        //                        }, 100);
+
+
+        //                    }
+        //                }
+
+        //            }
+        //            for (var i = 0; i < lat_lng.length; i++) {
+        //                if ((i + 1) <= lat_lng.length) {
+        //                    var src = lat_lng[i];
+        //                    var des = lat_lng[i + 1];
+        //                    path.push(src);
+        //                    poly.setPath(path);
+        //                    //service.route({
+        //                    //    origin: src,
+        //                    //    destination: des,
+        //                    //    travelMode: google.maps.DirectionsTravelMode.DRIVING
+        //                    //}, function (result, status) {
+        //                    //    if (status == google.maps.DirectionsStatus.OK) {
+        //                    //        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+        //                    //            path.push(result.routes[0].overview_path[i]);
+        //                    //        }
+        //                    //    }
+        //                    //});
+        //                }
+        //            }
+
+        //        }
+
+        //    });
+        //}
+
+          //User Wise Location
+        // All User On Map
         function myMap() {
             var RadioValue = $("input[name='radio']:checked").val();
             if (RadioValue == 0) {
@@ -438,6 +653,7 @@
                         center: new google.maps.LatLng(data[0].houseLat, data[0].houseLong),
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     });
+                    console.log(data)
                     var infowindow = new google.maps.InfoWindow();
                     bounds = new google.maps.LatLngBounds();
 
@@ -481,7 +697,7 @@
 
                         var myLatlng = new google.maps.LatLng(data[i].houseLat, data[i].houseLong);
                         lat_lng.push(myLatlng);
-                        
+
                         marker = new google.maps.Marker({
                             position: myLatlng,
                             map: map,
@@ -525,7 +741,7 @@
                                     }
                                     poptext = poptext + '</div>';
                                     infowindow.setContent(poptext);
-                                    infowindow.open(map, marker);
+                                    infowindow.open(map, marker); 
                                 }
                             })(marker, i));
                         }
@@ -535,79 +751,272 @@
                     map.fitBounds(bounds);
                     map.panToBounds(bounds);
                     map.setCenter(bounds.getCenter());
-                    var lineSymbol = {
-                        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                        scale: 0,
-                        strokeColor: '#000',
-                    };
-                    var path = new google.maps.MVCArray();
+                    //var lineSymbol = {
+                    //    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                    //    scale: 0,
+                    //    strokeColor: '#000',
+                    //};
+                    //var path = new google.maps.MVCArray();
 
-                    var poly = new google.maps.Polyline({
-                        strokeColor: '#4986E7',
-                        strokeWeight: 15,
-                        map: map, icons: [{
-                            icon: lineSymbol,
-                            offset: '100%',
-                        }],
-                    });
-                    animateCircle(poly, 1);
-
-
-
+                    //var poly = new google.maps.Polygon({
+                    //    strokeColor: /*'#4986E7'*/"#FF0000",
+                    //    fillColor: "#FF0000",
+                    //    strokeWeight: 5,
+                    //    map: map, icons: [{
+                    //        icon: lineSymbol,
+                    //        offset: '100%',
+                    //    }],
+                    //});
+                    //animateCircle(poly, 1);
 
 
 
-                    var a = 0;
-                    var listener;
-                    function animateCircle(line, k) {
 
-                        // alert(k);
-                        if (k == 7) {
-                            clearInterval(listener);
-                            a = 0;
+
+
+                    //var a = 0;
+                    //var listener;
+                    //function animateCircle(line, k) {
+
+                    //    // alert(k);
+                    //    if (k == 7) {
+                    //        clearInterval(listener);
+                    //        a = 0;
+                    //    }
+                    //    else {
+                    //        a = a + 1;
+
+                    //        if (a == 1) {
+                    //            var count = 0;
+                    //            listener = window.setInterval(function () {
+                    //                count = (count + 1) % 200;
+                    //                var icons = line.get('icons');
+                    //                icons[0].offset = (count / 2) + '%';
+                    //                line.set('icons', icons);
+                    //                if (count == 199) { icons[0].offset = '100%'; clearInterval(listener); a = 0; };
+                    //            }, 100);
+
+
+                    //        }
+                    //    }
+
+                    //}
+                    //for (var i = 0; i < lat_lng.length; i++) {
+                    //    if ((i + 1) <= lat_lng.length) {
+                    //        var src = lat_lng[i];
+                    //        var des = lat_lng[i + 1];
+                    //        path.push(src);
+                    //        poly.setPath(path);
+                    //        //service.route({
+                    //        //    origin: src,
+                    //        //    destination: des,
+                    //        //    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                    //        //}, function (result, status) {
+                    //        //    if (status == google.maps.DirectionsStatus.OK) {
+                    //        //        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                    //        //            path.push(result.routes[0].overview_path[i]);
+                    //        //        }
+                    //        //    }
+                    //        //});
+                    //    }
+                    //}
+
+
+                    var perChunk = 3 // items per chunk   
+
+                    var inputArray = data
+
+                    var coordinates = inputArray.reduce((resultArray, item, index) => {
+                        const chunkIndex = Math.floor(index / perChunk)
+
+                        if (!resultArray[chunkIndex]) {
+                            resultArray[chunkIndex] = [] // start a new chunk
                         }
-                        else {
-                            a = a + 1;
 
-                            if (a == 1) {
-                                var count = 0;
-                                listener = window.setInterval(function () {
-                                    count = (count + 1) % 200;
-                                    var icons = line.get('icons');
-                                    icons[0].offset = (count / 2) + '%';
-                                    line.set('icons', icons);
-                                    if (count == 199) { icons[0].offset = '100%'; clearInterval(listener); a = 0; };
-                                }, 100);
+                        resultArray[chunkIndex].push(item)
+
+                        return resultArray
+                    }, [])
+
+                    console.log(coordinates);
 
 
+                    //arr1 = []
+                    //debugger
+                    //for (i = 0; i < coordinates.length; i++) {
+                    //    var myLatlng = new google.maps.LatLng(coordinates[i].houseLat, coordinates[i].houseLong);
+                    //    arr1.push(myLatlng);
+                    //    console.log(arr1)
+
+                       // debugger;
+                        //var mapOptions = {
+                        //    zoom: 5,
+                        //    center: new google.maps.LatLng(coordinates[i][0].houseLat, coordinates[i][0].houseLong),
+                        //    mapTypeId: google.maps.MapTypeId.TERRAIN
+                        //};
+
+                        var bounds = new google.maps.LatLngBounds();
+                        var polygons = [];
+                        var arr = new Array();
+                        //var map = new google.maps.Map(document.getElementById('googleMap'),
+                        //    map);
+                
+                   
+                        for (var i in coordinates) {
+                            arr = [];
+                            console.log(arr)
+                            debugger
+                            for (var j = 0; j < coordinates[i].length; j++) {
+                                arr.push(new google.maps.LatLng(
+                                    parseFloat(coordinates[i][j].houseLat),
+                                    parseFloat(coordinates[i][j].houseLong)
+                                ));
+                             
+                                bounds.extend(arr[arr.length - 1])
                             }
-                        }
+                            var color_of_this = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+                            // Construct the polygon.
+                            polygons.push(new google.maps.Polyline({
+                                path: arr,
+                                strokeColor: color_of_this,
+                               // strokeOpacity: 0.8,
+                                strokeWeight: 6,
+                                fillColor: color_of_this/* '#FF0000'*/,
+                                fillOpacity: 0.35
+                            }));
+                            polygons[polygons.length - 1].setMap(map);
 
-                    }
-                    for (var i = 0; i < lat_lng.length; i++) {
-                        if ((i + 1) <= lat_lng.length) {
-                            var src = lat_lng[i];
-                            var des = lat_lng[i + 1];
-                            path.push(src);
-                            poly.setPath(path);
-                            //service.route({
-                            //    origin: src,
-                            //    destination: des,
-                            //    travelMode: google.maps.DirectionsTravelMode.DRIVING
-                            //}, function (result, status) {
-                            //    if (status == google.maps.DirectionsStatus.OK) {
-                            //        for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
-                            //            path.push(result.routes[0].overview_path[i]);
-                            //        }
-                            //    }
+                            //var infowindow = new google.maps.InfoWindow({
+                            //    content: "Hello World!"
                             //});
+                    
+                            google.maps.event.addListener(polygons[polygons.length - 1], 'click', function (event) {
+                                infowindow.open(map);
+                                infowindow.setPosition(event.latLng);
+                            });
+
                         }
-                    }
+                        map.fitBounds(bounds);
+                   // }
+                   // }
+                
+
 
                 }
 
             });
         }
+
+        //function myMap() {
+        //    var RadioValue = $("input[name='radio']:checked").val();
+        //    if (RadioValue == 0) {
+        //        document.getElementById('txt_fdate').value = today;
+        //        $('#selectnumber').val(-1);
+        //        $('#seg_type').val(-1);
+        //        $('#txt_fdate').prop('disabled', 'disabled');
+        //        $('#selectnumber').prop('disabled', 'disabled');
+        //        $('#seg_type').prop('disabled', 'disabled');
+        //    } else {
+        //        $('#txt_fdate').prop('disabled', false);
+        //        $('#selectnumber').prop('disabled', false);
+        //        $('#seg_type').prop('disabled', false);
+        //    }
+        //    $("#wait").css("display", "block");
+        //    $("#googleMap").css("display", "none");
+        //    $.ajax({
+        //        type: "post",
+        //        //url: "/LiquidLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() +  "&garbageType=" + $("#seg_type").val() + "&FilterType=" + RadioValue,
+        //        url: "/StreetLocation/HouseLocationList?date=" + $('#txt_fdate').val() + "&userId=" + $("#selectnumber").val() + "&areaId=" + $("#selectArea").val() + "&wardNo=" + $("#selectWard").val() + "&searchstring=" + $("#houseId_filter").val() + "&FilterType=" + RadioValue,
+        //        //url: "/Location/HouseLocationList",
+        //        datatype: "json",
+        //        traditional: true,
+        //        success: function (data) {
+        //            $("#wait").css("display", "none");
+        //            $("#googleMap").css("display", "block");
+        //            if (data.length == 0)
+        //                $('#\\#myModal').modal('show');
+        //            console.log(data)
+        //            var perChunk = 3 // items per chunk   
+
+        //            var inputArray = data
+
+        //            var coordinates = inputArray.reduce((resultArray, item, index) => {
+        //                const chunkIndex = Math.floor(index / perChunk)
+
+        //                if (!resultArray[chunkIndex]) {
+        //                    resultArray[chunkIndex] = [] // start a new chunk
+        //                }
+
+        //                resultArray[chunkIndex].push(item)
+
+        //                return resultArray
+        //            }, [])
+
+        //            console.log(coordinates);
+                 
+               
+        //            arr1 = []
+        //            debugger
+        //            for (i = 0; i < coordinates.length; i++) {
+        //                var myLatlng = new google.maps.LatLng(coordinates[i].houseLat, coordinates[i].houseLong);
+        //                arr1.push(myLatlng);
+        //                console.log(arr1)
+                  
+        //                debugger;
+        //                var mapOptions = {
+        //                    zoom: 5,
+        //                    center: new google.maps.LatLng(coordinates[i][0].houseLat, coordinates[i][0].houseLong),
+        //                    mapTypeId: google.maps.MapTypeId.TERRAIN
+        //                };
+
+        //                var bounds = new google.maps.LatLngBounds();
+        //                var polygons = [];
+        //                var arr = new Array();
+        //                var map = new google.maps.Map(document.getElementById('googleMap'),
+        //                    mapOptions);
+
+                       
+        //                for (var i in coordinates) {
+        //                    arr = [];
+        //                    console.log(arr)
+        //                    debugger
+        //                    for (var j = 0; j < coordinates[i].length; j++) {
+        //                        arr.push(new google.maps.LatLng(
+        //                            parseFloat(coordinates[i][j].houseLat),
+        //                            parseFloat(coordinates[i][j].houseLong)
+        //                        ));
+
+        //                        bounds.extend(arr[arr.length - 1])
+        //                    }
+
+        //                    // Construct the polygon.
+        //                    polygons.push(new google.maps.Polyline({
+        //                        path: arr,
+        //                        strokeColor: '#FF0000',
+        //                        strokeOpacity: 0.8,
+        //                        strokeWeight: 2,
+        //                        fillColor: '#FF0000',
+        //                        fillOpacity: 0.35
+        //                    }));
+        //                    polygons[polygons.length - 1].setMap(map);
+
+        //                    //var infowindow = new google.maps.InfoWindow({
+        //                    //    content: "Hello World!"
+        //                    //});
+
+        //                    google.maps.event.addListener(polygons[polygons.length - 1], 'click', function (event) {
+        //                        infowindow.open(map);
+        //                        infowindow.setPosition(event.latLng);
+        //                    });
+
+        //                }
+        //                map.fitBounds(bounds);
+        //            }
+        //           // }
+        //        }
+
+        //    });
+        //}
 
 
 
