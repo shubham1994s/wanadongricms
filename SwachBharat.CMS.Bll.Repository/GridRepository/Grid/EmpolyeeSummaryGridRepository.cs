@@ -16,7 +16,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository.Grid
 
         public EmpolyeeSummaryGridRepository(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string Emptype)
         {
-            dataset = objRep.GetEmployeeSummaryData(wildcard, SearchString, fdate, tdate, userId, appId, Emptype);
+            dataset = objRep.GetEmployeeSummaryData_New(wildcard, SearchString, fdate, tdate, userId, appId, Emptype);
         }
 
 

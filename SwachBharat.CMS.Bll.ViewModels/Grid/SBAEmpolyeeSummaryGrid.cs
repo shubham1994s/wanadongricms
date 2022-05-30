@@ -24,5 +24,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string InBatteryStatus { get; set; }
 
         public string OutBatteryStatus { get; set; }
+        public string TotalHouseScanTimeHours { get; set; }
+        public string TotalDumpScanTimeHours { get; set; }
     }
 }
