@@ -67,7 +67,7 @@
 
     });
 
-    debugger;
+    
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
         "order": [[2, "desc"]],

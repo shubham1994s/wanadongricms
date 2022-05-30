@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    debugger;
+    
 
 
     var UserId = $('#selectnumber').val();
@@ -24,7 +24,7 @@
    var table = $("#demoGrid").DataTable({
         //"initComplete": function (settings, json) {
         //   // $("#demoGrid").find("[data-dt-column='33']").hide();
-        //   debugger;
+        //   
         //   var jlength = json.data.length;
         //   //var jlenght2 = jlength - 1;
         //   for (let i = 0; i < jlength; i++) {
@@ -190,7 +190,7 @@
 
     $('#demoGrid tbody').on('click', 'tr', function () {
 
-        debugger;
+        
         
         var da = table.row(this).data();
         var days = da.TOTAL_DAYS;
@@ -238,7 +238,7 @@ function showInventoriesGrid() {
 }
 
 function Search() {
-    debugger;
+    
     var txt_fdate, txt_tdate, Client, UserId;
     var name = [];
     var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];

@@ -17,21 +17,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     @*@Scripts.Render("~/bundles/modernizr")*@
     @*@RenderSection("styles", required: false)*@
+    <link href="~/Content/theme-assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="~/Content/images/img/ictsbm2.png" />
     <link href="~/Content/css/blink.css" rel="stylesheet" />
     <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
     <style>
-        .search {
-            width: 85%;
-            margin-left: 7%;
-            border-radius: 10px;
-            border: 1px solid #bbb7b7;
-            text-align: center;
-        }
+                .search {
+                    width: 85%;
+                    margin-left: 7%;
+                    border-radius: 10px;
+                    border: 1px solid #bbb7b7;
+                    text-align: center;
+                }
 
-        /* Blink for Webkit and others
-(Chrome, Safari, Firefox, IE, ...)
-*/
+                /* Blink for Webkit and others
+        (Chrome, Safari, Firefox, IE, ...)
+        */
 
     </style>
 </head>
@@ -117,7 +118,7 @@
 
 
 
-        debugger;
+        
         var HSID = $('#HSID').val();
         document.getElementById("HDUserid").innerHTML = HSID.toUpperCase();
 
@@ -134,7 +135,7 @@
         }
         function AppList(Id) {
             //alert(Id);
-            debugger;
+            
             if (Id != null) {
                 var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
                 window.location.href = url;
@@ -143,7 +144,7 @@
 
 
         // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
-        debugger;
+        
         var appid = $('#appid').val();
 
 
@@ -159,7 +160,7 @@
 
 
             for (var i = 0; i < data.length; i++) {
-                res += "<li class='ulb' ><a style='cursor:pointer' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
+                res += "<li class='ulb' ><a style='cursor:pointer;vertical-align: inherit;' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
                 if (data[i].FAQ == 1) {
                     res += "<i class='fa fa-circle pull-right blink' style='color:#33cc33;font-size:12px;margin: 3% auto;'></i>";
                 } else if (data[i].FAQ == 2) {
@@ -198,7 +199,7 @@
     </script>
     <script src="~/Content/theme-assets/js/icons_load.js"></script>
     <script>
-        //debugger;
+        //
         var date = new Date();
         var today = '';
         var day = date.getDate();
@@ -262,16 +263,16 @@
     <script type="text/javascript">
         $('input[type=radio][name=radio]').change(function () {
 
-            debugger;
+            
 
             LoadGridC();
         });
 
         function LoadGridC() {
             var RadioValue = $("input[name='radio']:checked").val();
-            debugger;
+            
             if (RadioValue == 0) {
-                debugger;
+                
                 $('#s').val('');
                 LoadAGrid();
                 $('#hchange').text('Active User');
@@ -289,7 +290,7 @@
 
 
         function Search() {
-            debugger;
+            
             var value = ",,," + $("#s").val();
             oTable = $('#demoGrid').DataTable();
             oTable.search(value).draw();
@@ -304,7 +305,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            debugger;
+            
             LoadGridC();
 
         });

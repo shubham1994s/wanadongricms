@@ -17,7 +17,7 @@ $(document).ready(function () {
         $(".custom_col").addClass('col-xl-4')
     }
 
-    debugger;
+    
     if ($("#asdf").text() == "appynittywaste@ulb.com!" || $("#asdf").text() ==  "mangalwedhawaste@ulb.com!") {
 
         $("#chartContainerPieDump").css("display", "none");
@@ -73,7 +73,7 @@ function myMap2() {
             bounds = new google.maps.LatLngBounds();
             var marker, i;
             // Get Addres
-            debugger;
+            
             for (i = 0; i < data.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(data[i].lat, data[i].log),
@@ -99,12 +99,12 @@ function myMap2() {
                 //New Marker Click
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        debugger;
+                        
                         var latlng = new google.maps.LatLng(data[i].lat, data[i].log);
                         var geocoder = geocoder = new google.maps.Geocoder();
                         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
-                                debugger;
+                                
                                 if (results[0]) {
                                     //alert("Location: " + results[1].formatted_address);
                                     var address = results[0].formatted_address;
@@ -424,7 +424,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-   debugger;
+   
     var not_coll = $('#not_coll').val();
     var mixed_coll = $('#mixed_coll').val();
     var bif_coll = $('#bif_coll').val();
@@ -1046,7 +1046,7 @@ $(document).ready(function () {
 
 //$(document).ready(function () {
 
-//    debugger;
+//    
 //    /* -------*/
 
 //    $.ajax({
@@ -1201,7 +1201,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    debugger;
+    
 
     $.ajax({
         type: "post",

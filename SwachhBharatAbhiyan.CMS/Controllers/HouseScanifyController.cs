@@ -16,6 +16,7 @@ using SwachBharat.CMS.Dal.DataContexts;
 using System.Globalization;
 using SwachBharat.CMS.Bll.ViewModels.Grid;
 using System.IO.Compression;
+using System.Threading.Tasks;
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
 {
@@ -324,7 +325,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             DateTime fdt;
             DateTime tdt;
-            List<SBAHSHouseDetailsGrid> data = new List<SBAHSHouseDetailsGrid>();
+          Task<List<SBAHSHouseDetailsGrid>> data;
+         //   List<SBAHSHouseDetailsGrid> data = new List<SBAHSHouseDetailsGrid>();
             string strType = string.Empty;
             string strFileDownloadName = string.Empty;
             if(type == 0)
@@ -373,23 +375,23 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
-                data = childRepository.GetHSQRCodeImageByDate(type, UserId,fdt, tdt);
+                data = childRepository.GetHSQRCodeImageByDate(type, UserId, fdt, tdt);
                 string strFileType = string.Empty;
-                if (data != null && data.Count > 0)
+                if (data != null)
                 {
                     using (var compressedFileStream = new MemoryStream())
                     {
                         //Create an archive and store the stream in memory.
                         using (var zipArchive = new ZipArchive(compressedFileStream, ZipArchiveMode.Create, false))
                         {
-                            foreach (var item in data)
+                            foreach (var item in data.Result)
                             {
                                 string strImageTypePart = item.QRCodeImage.Split(',').First();
                                 if (strImageTypePart.ToUpper().Contains("JPEG"))
                                 {
                                     strFileType = "jpeg";
                                 }
-                                else if(strImageTypePart.ToUpper().Contains("BMP"))
+                                else if (strImageTypePart.ToUpper().Contains("BMP"))
                                 {
                                     strFileType = "bmp";
                                 }
@@ -410,7 +412,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                                     strFileType = "jpeg";
                                 }
                                 //Create a zip entry for each attachment
-                                var zipEntry = zipArchive.CreateEntry(string.Format("{0}.{1}",item.ReferanceId, strFileType));
+                                var zipEntry = zipArchive.CreateEntry(string.Format("{0}.{1}", item.ReferanceId, strFileType));
                                 byte[] file = Convert.FromBase64String(item.QRCodeImage.Substring(item.QRCodeImage.LastIndexOf(',') + 1));
                                 //Get the stream of the attachment
                                 using (var originalFileStream = new MemoryStream(file))
@@ -420,7 +422,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                                     originalFileStream.CopyTo(zipEntryStream);
                                 }
                             }
-                            
+
                         }
 
                         return new FileContentResult(compressedFileStream.ToArray(), "application/zip") { FileDownloadName = strFileDownloadName };

@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    debugger;
+    
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
         "order": [[0, "desc"]],

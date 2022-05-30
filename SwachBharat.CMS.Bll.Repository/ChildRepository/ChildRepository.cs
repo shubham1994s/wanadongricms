@@ -397,7 +397,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetHSUserAttenRoute(qrEmpDaId);
         }
-        public List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate)
+        public Task<List<SBAHSHouseDetailsGrid>> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate)
         {
             return screenService.GetHSQRCodeImageByDate(type, UserId, fDate, tDate);
         }

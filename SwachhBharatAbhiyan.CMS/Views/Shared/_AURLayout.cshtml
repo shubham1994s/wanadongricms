@@ -25,6 +25,7 @@
     @*@Styles.Render("~/Content/ThemeCss")*@
     @*@Scripts.Render("~/bundles/modernizr")*@
     @RenderSection("styles", required: false)
+    <link href="~/Content/theme-assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="~/Content/images/img/ictsbm2.png" />
     <link href="~/Content/css/alertify/alertify.core.css" rel="stylesheet" />
     <link href="~/Content/css/alertify/alertify.default.css" rel="stylesheet" />
@@ -282,7 +283,7 @@
         })
         $(document).ready(function () {
 
-            debugger;
+            
             var HSID = $('#HSID').val();
             document.getElementById("HDUserid").innerHTML = HSID.toUpperCase();
 
@@ -306,7 +307,7 @@
 
         function AppList(Id) {
             //alert(Id);
-            debugger;
+            
             if (Id != null) {
                 var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
                 window.location.href = url;
@@ -315,7 +316,7 @@
 
 
         // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
-        debugger;
+        
         var appid = $('#appid').val();
 
 
@@ -326,7 +327,7 @@
     </script>
     <script src="~/Content/theme-assets/js/icons_load.js"></script>
     <script>
-        //debugger;
+        //
         var date = new Date();
         var today = '';
         var day = date.getDate();
