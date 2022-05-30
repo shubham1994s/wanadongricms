@@ -8,6 +8,14 @@ namespace SwachhBharatAbhiyan.CMS
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#else
+            BundleTable.EnableOptimizations = true;
+#endif
+
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                           "~/Scripts/jquery-{version}.js"));
 
@@ -119,7 +127,8 @@ namespace SwachhBharatAbhiyan.CMS
                     "~/Content/theme-assets/css/fontastic.css",
                     "~/Content/theme-assets/css/style.default.css",
                     "~/Content/theme-assets/css/custom.css",
-                    "~/Content/theme-assets/css/MyCustom.css"
+                    "~/Content/theme-assets/css/MyCustom.css",
+                     "~/Content/bootstrap-3.3.6-dist/css/font-awesome.min.css"
                 ));
 
 
@@ -177,6 +186,8 @@ namespace SwachhBharatAbhiyan.CMS
                     "~/Content/css/custom_style.css",
                     "~/Content/css/add_edit.css"
                 ));
+
+           
 
 
         }

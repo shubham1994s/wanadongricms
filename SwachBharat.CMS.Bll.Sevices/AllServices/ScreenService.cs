@@ -20,6 +20,7 @@ using System.Globalization;
 using System.Web;
 using Microsoft.SqlServer.Server;
 using System.Web.UI.WebControls;
+using System.Threading.Tasks;
 
 namespace SwachBharat.CMS.Bll.Services
 {
@@ -2593,6 +2594,8 @@ namespace SwachBharat.CMS.Bll.Services
                         //userMobile = x.mobile,
                         garbageType = x.garbageType,
                         gcType = x.gcType,
+                        BeatId = db.StreetSweepingBeats.Where(s => s.ReferanceId1 == x.ReferanceId || s.ReferanceId2 == x.ReferanceId || s.ReferanceId3 == x.ReferanceId || s.ReferanceId4 == x.ReferanceId || s.ReferanceId5 == x.ReferanceId).Select(a => a.BeatId).FirstOrDefault()
+
                     });
                 }
                 if (!string.IsNullOrEmpty(SearchString))
@@ -4901,17 +4904,21 @@ namespace SwachBharat.CMS.Bll.Services
 
 
         //Added by milind 09-03-2022
-        public List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate)
+        public async Task<List<SBAHSHouseDetailsGrid>> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate)
         {
+            
             List<SBAHSHouseDetailsGrid> data = new List<SBAHSHouseDetailsGrid>();
             try
             {
                 using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                 {
+                    //db.Configuration.ProxyCreationEnabled = false;
                     if (UserId > 0)
                     {
                         if (type == 0)
                         {
+                          //  data = db.HouseMasters.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.QRCodeImage) && a.userId == UserId));
+                         
                             data = db.HouseMasters.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.QRCodeImage) && a.userId == UserId).Select(x => new SBAHSHouseDetailsGrid
                             {
                                 houseId = x.houseId,
@@ -4961,11 +4968,46 @@ namespace SwachBharat.CMS.Bll.Services
                     }
                     else
                     {
+                        //int  skip = 0;
+                        //int  take = 10000;
+                        //  var list = (from usr in db.HouseMasters
+                        //              select usr).OrderBy(i => i.houseId).Skip(skip).Take(take).ToList();
+
+                        //var   userlist = (from i in list
+                        //               select new UserInfo(i, true)).ToList();
+
+
+                       // IQueryable<HouseMaster> query = db.HouseMasters.Where(tt => tt.modified>fDate && tt.modified<tDate).OrderByDescending(tt => tt.houseId);
+
+                        //  var data1 = await  (from p in db.HouseMasters  where p.modified == fDate select p).ToListAsync();
+                        //     data = await  query.ToListAsync();
+
+                      //  var data1 = await Task.Run(() => db.HouseMasters.Where(tt => tt.modified == fDate).ToList());
+
+                        //var data1 = await Task.Run( async() => db.HouseMasters.Where(tt => tt.modified == fDate).ToList());
+
+
+                       // var data1 = await  db.HouseMasters.Where(tt => tt.modified == fDate).ToListAsync();
+
+                        //var tasks = db.HouseMasters.ToListAsync();
+                        //var data1 = await Task.WhenAll(tasks);
+
+                        //data = users.Select(x => new SBAHSHouseDetailsGrid
+                        //{
+                        //    houseId = x.houseId,
+                        //    Name = x.houseOwner,
+                        //    HouseLat = x.houseLat,
+                        //    HouseLong = x.houseLong,
+                        //    QRCodeImage = x.QRCodeImage,
+                        //    ReferanceId = x.ReferanceId
+                        //}).OrderBy(a => a.houseId).ToList();
+
+                        //  List<SBAHSHouseDetailsGrid> ResultValues = query.ToList();
                         if (type == 0)
                         {
                             data = db.HouseMasters.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.QRCodeImage)).Select(x => new SBAHSHouseDetailsGrid
                             {
-                                houseId = x.houseId,
+                                houseId =  x.houseId,
                                 Name = x.houseOwner,
                                 HouseLat = x.houseLat,
                                 HouseLong = x.houseLong,

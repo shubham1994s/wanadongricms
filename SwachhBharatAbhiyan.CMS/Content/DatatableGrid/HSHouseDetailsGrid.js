@@ -1,6 +1,6 @@
 ﻿
 function loadGridHouse() {
-    debugger;
+    
     let appName = document.getElementById("ulb_name").innerHTML;
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({

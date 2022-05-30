@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    debugger;
+    
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
         "order": [[0, "desc"]],
@@ -34,7 +34,7 @@
 function Edit(LWzoneId) {
 
     if (LWzoneId != null) {
-        debugger;
+        
         var url = "/Liquid/LiquidMainMaster/AddZoneDetails?teamId=" + LWzoneId;
         window.location.href = url;
     }

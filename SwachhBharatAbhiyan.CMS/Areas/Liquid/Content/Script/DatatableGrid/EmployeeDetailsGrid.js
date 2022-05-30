@@ -1,13 +1,13 @@
 ﻿
 $(document).ready(function () {
-    debugger;
+    
     Employee();
     // $('#demoGrid').css("display", "block");
     $('#demoGridNonActive').css("display", "none");
     $('#demoGridNonActive_wrapper').css("display", "none");
     $('#btn').hide();
     $('#NotActivebtn').on('click', function (e) {
-        debugger;
+        
         $('#demoGridNonActive').css("display", "block");
         $('#demoGrid').css("display", "none");
         $('#demoGrid_wrapper').css("display", "none");
@@ -23,7 +23,7 @@ function goBack() {
     location.reload();
 }
 function Employee() {
-    debugger;
+    
     $("#demoGrid").DataTable({
         "sDom": "ltipr",
         "order": [[0, "desc"]],
@@ -150,7 +150,7 @@ function Employee() {
 //}
 
 function NotActiveEmployee() {
-    debugger;
+    
     $("#demoGridNonActive").DataTable({
         "sDom": "ltipr",
         "order": [[0, "desc"]],

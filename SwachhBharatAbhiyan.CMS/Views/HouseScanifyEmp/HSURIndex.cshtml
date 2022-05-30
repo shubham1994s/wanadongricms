@@ -193,7 +193,7 @@
     <script src="~/Content/graph-assets/js/custom.js"></script>
     <script src="~/Content/css/datepicker/js/datepicker.js"></script>
     <script>
-        debugger;
+        
         var HSID = $('#HSID').val();
         document.getElementById("HDUserid").innerHTML = HSID.toUpperCase();
 
@@ -210,7 +210,7 @@
         }
         function AppList(Id) {
             //alert(Id);
-            debugger;
+            
             if (Id != null) {
                 var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
                 window.location.href = url;
@@ -282,16 +282,16 @@
     <script type="text/javascript">
         $('input[type=radio][name=radio]').change(function () {
 
-            debugger;
+            
 
             LoadGridC();
         });
 
         function LoadGridC() {
             var RadioValue = $("input[name='radio']:checked").val();
-            debugger;
+            
             if (RadioValue == 0) {
-                debugger;
+                
                 $('#s').val('');
                 LoadAGrid();
                 $('#hchange').text('Active User');
@@ -309,7 +309,7 @@
 
 
         function Search() {
-            debugger;
+            
             var value = ",,," + $("#s").val();
             oTable = $('#demoGrid').DataTable();
             oTable.search(value).draw();
@@ -324,7 +324,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            debugger;
+            
             LoadGridC();
 
         });

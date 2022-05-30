@@ -57,7 +57,7 @@ function myMap2() {
                 center: new google.maps.LatLng(data[0].lat, data[0].log),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
-            debugger;
+            
             var infowindow = new google.maps.InfoWindow();
             bounds = new google.maps.LatLngBounds();
             var marker, i;
@@ -87,12 +87,12 @@ function myMap2() {
                 //New Marker Click
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        debugger;
+                        
                         var latlng = new google.maps.LatLng(data[i].lat, data[i].log);
                         var geocoder = geocoder = new google.maps.Geocoder();
                         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
-                                debugger;
+                                
                                 if (results[0]) {
                                     //alert("Location: " + results[1].formatted_address);
                                     var address = results[0].formatted_address;
@@ -357,7 +357,7 @@ $(document).ready(function () {
             }
             //console.log(ary);
             // console.log(ary2);
-            debugger;
+            
             var chart = new CanvasJS.Chart("chartContainer", {
                 theme: "light1", // "light1", "ligh2", "dark1", "dark2"
                 animationEnabled: true,
@@ -408,7 +408,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    debugger;
+    
    // var not_coll = $('#not_coll').val();
    // var mixed_coll = $('#TotalStreet_Coll').val();
    // var bif_coll = $('#bif_coll').val();
@@ -779,7 +779,7 @@ $(document).ready(function () {
                     lastname_firstchar = lastname_array[1][0];
                 }
 
-                 debugger;
+                 
                 //var fname = name.substring(0, name.indexOf(" "));
                 var fname = name.replace(/ .*/, ' ');
                 // alert(data[i]._Count)

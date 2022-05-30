@@ -87,12 +87,12 @@ function myMap2() {
                 //New Marker Click
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        debugger;
+                        
                         var latlng = new google.maps.LatLng(data[i].lat, data[i].log);
                         var geocoder = geocoder = new google.maps.Geocoder();
                         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                             if (status == google.maps.GeocoderStatus.OK) {
-                                debugger;
+                                
                                 if (results[0]) {
                                     //alert("Location: " + results[1].formatted_address);
                                     var address = results[0].formatted_address;
@@ -408,7 +408,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    debugger;
+    
     var not_coll = $('#not_coll').val();
     var mixed_coll = $('#mixed_coll').val();
     var bif_coll = $('#bif_coll').val();
@@ -521,7 +521,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    debugger;
+    
     $.ajax({
         type: "post",
         url: "/Liquid/LiquidHome/EmployeeTargetCount",
@@ -607,7 +607,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    debugger;
+    
     
 
 
@@ -702,7 +702,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    debugger;
+    
     var dry_count = $('#dry_count').val();
     var wet_count = $('#wet_count').val();
     var tot_dump_null_check = $('#tot_dump_count').val();
@@ -829,7 +829,7 @@ $('#txt_fdate').focus(function () {
 
 // by neha 8 july 2019
 $(document).ready(function () {
-    debugger;
+    
     $.ajax({
         type: "post",
         url: "/Liquid/LiquidHome/EmployeeLiquidCollectionType",

@@ -118,7 +118,7 @@
 
         $(document).ready(function () {
             // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
-            debugger;
+            
             var appid = $('#appid').val();
             $.get("/HouseScanifyEmp/GetURAppNames", null, house);
             function house(data) {
@@ -229,7 +229,7 @@
     </script>
     <script src="~/Content/theme-assets/js/icons_load.js"></script>
     <script>
-        //debugger;
+        //
         var date = new Date();
         var today = '';
         var day = date.getDate();

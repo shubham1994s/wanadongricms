@@ -324,7 +324,7 @@
     <script>
 
         function SearchPin() {
-            //debugger;
+            //
             var from = document.getElementById("frompin").value;
             var to = document.getElementById("topin").value;
             if (from == "" || to == "") {
@@ -339,7 +339,7 @@
         }
 
         function SearchTime() {
-            //debugger;
+            //
             var fromtime = document.getElementById("fromtime").value;
             var totime = document.getElementById("totime").value;
             if (fromtime == "" || totime == "") {
@@ -358,7 +358,7 @@
         }
 
         function Reset() {
-            //debugger;
+            //
             var from = "";
             var to = "";
             document.getElementById("frompin").value = "";
@@ -372,7 +372,7 @@
         var searchData = [];
         var isSearch = 0;
         function Search() {
-            //debugger;
+            //
             var from = document.getElementById("fromtime").value;
             var to = document.getElementById("totime").value;
             if (from == "" || to == "") {
@@ -392,7 +392,7 @@
             var todt = today + " " + to;
             var fromdate = new Date(Date.parse(fromdt));
             var todate = new Date(Date.parse(todt));
-            //debugger;
+            //
             if (fromdate > todate) {
                 $("#err_time").html("To Time should be greater than from time").delay(3000).show().fadeOut('slow');
                 return false;
@@ -423,7 +423,7 @@
         }
 
         function myMap() {
-            debugger;
+            
 
             var from = document.getElementById("frompin").value;
             var to = document.getElementById("topin").value;
@@ -527,7 +527,7 @@
                         animateCircle(poly, 7);
                     });
 
-                    debugger;
+                    
 
                     var infoWindow = new google.maps.InfoWindow();
                     var lat_lng = new Array();
@@ -656,7 +656,7 @@
 
                                 //New MNarker Click
                                 google.maps.event.addListener(marker, "click", function (e) {
-                                    debugger;
+                                    
                                     var latlng = new google.maps.LatLng(data.lat, data.log);
                                     const URL = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + data.lat + "&longitude=" + data.log +"&localityLanguage=en";
 
@@ -671,9 +671,9 @@
 
                                     var geocoder = geocoder = new google.maps.Geocoder();
                                     geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                                        debugger;
+                                        
                                         if (status == google.maps.GeocoderStatus.OK) {
-                                            debugger;
+                                            
                                             if (results[1]) {
                                                 //alert("Location: " + results[1].formatted_address);
                                                 var address = results[1].formatted_address;
@@ -817,7 +817,7 @@
 
                     //let interval = setInterval(function () {
                     //    if (ajaxCount == 0) {
-                    //        // debugger;
+                    //        // 
                     //        if (k < postRoutCordinateArray.length) {
                     //            if (postRoutCordinateArray[k].length > 1) {
 
@@ -1051,7 +1051,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            debugger;
+            
             var x = document.getElementById("username").innerHTML;
             var tem = x.charAt(0).toUpperCase() + x.slice(1);
             document.getElementById("demo").innerHTML = tem;

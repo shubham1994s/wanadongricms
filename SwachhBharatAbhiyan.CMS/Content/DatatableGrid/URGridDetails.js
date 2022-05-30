@@ -1,5 +1,5 @@
 ﻿function LoadAGrid() {
-    debugger;
+    
 
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({
@@ -89,7 +89,7 @@ function myFunction() {
 }
 
 function LoadNGrid() {
-    debugger;
+    
 
     $("#demoGrid").dataTable().fnDestroy();
     $("#demoGrid").DataTable({

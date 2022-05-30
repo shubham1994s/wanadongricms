@@ -22,3 +22,32 @@
     display: block;
     border-radius: 15px
 }
+
+@media (max-width: 575px) {
+    .navbar-brand{margin-right:0px!important}
+    nav.navbar {
+        font-size: 14px;
+    }
+    .nav-item{
+        margin-left:-2% !important;
+    }
+    .nav-link{padding:0px!important;}
+    #URbutton{padding:5px !important}
+    .btn-a {
+        padding-bottom: 5%;
+        padding-right: 5%;
+        padding-top: 5%;
+    }
+    .col-sm-3{margin-bottom:3% !important}
+    .btn-a  a{
+        margin-top: 4% !important;
+    }
+    nav.navbar .menu-btn {
+        margin-right: 5px;
+      
+    }
+    .rbtn{margin-left:2% !important}
+    .check-container {
+        padding-right: 10px !important;
+    }
+}

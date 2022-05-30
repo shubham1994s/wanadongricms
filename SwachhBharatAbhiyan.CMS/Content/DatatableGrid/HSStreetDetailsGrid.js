@@ -1,7 +1,7 @@
 ﻿
 
 function loadGridStreet() {
-debugger;
+
 
     let appName = document.getElementById("ulb_name").innerHTML;
 $("#demoGrid3").dataTable().fnDestroy();
