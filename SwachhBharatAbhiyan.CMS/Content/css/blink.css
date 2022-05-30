@@ -46,4 +46,8 @@
         margin-right: 5px;
       
     }
+    .rbtn{margin-left:2% !important}
+    .check-container {
+        padding-right: 10px !important;
+    }
 }
