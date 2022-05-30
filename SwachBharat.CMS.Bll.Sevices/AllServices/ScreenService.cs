@@ -113,7 +113,7 @@ namespace SwachBharat.CMS.Bll.Services
                         model.WetWeightCount = Convert.ToDouble(houseCount.WetWeightCount);
                         model.TotalGcWeightCount = Convert.ToDouble(houseCount.TotalGcWeightCount);
 
-                       
+
 
 
                         model.TotalDryWeightCount = Convert.ToDouble(houseCount.TotalDryWeightCount);
@@ -4574,6 +4574,33 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+
+
+        public void SaveHSEmployeeQRStatus(int houseId, string QRStatus)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (houseId > 0 && !string.IsNullOrEmpty(QRStatus))
+                    {
+                        var model = db.HouseMasters.Where(x => x.houseId == houseId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.QRStatus = QRStatus;
+                            model.QRStatusDate = DateTime.Now;
+                            db.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
 
 
         public void SaveUREmployeeDetails(UREmployeeDetailsVM data)

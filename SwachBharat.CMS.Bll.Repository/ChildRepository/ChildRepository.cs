@@ -374,6 +374,11 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             screenService.SaveHSEmployeeDetails(employee);
         }
 
+        public void SaveHSEmployeeQRStatus(int houseId, string QRStatus)
+        {
+            screenService.SaveHSEmployeeQRStatus(houseId, QRStatus);
+        }
+
         public void SaveUREmployee(UREmployeeDetailsVM employee)
         {
             screenService.SaveUREmployeeDetails(employee);

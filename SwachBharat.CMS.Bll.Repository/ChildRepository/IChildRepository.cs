@@ -123,7 +123,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         //Added By saurabh (04 June 2019)
         void SaveHSEmployee(HouseScanifyEmployeeDetailsVM employee);
 
-
+        void SaveHSEmployeeQRStatus(int houseId, string QRStatus);
         void SaveUREmployee(UREmployeeDetailsVM employee);
 
         //Added By saurabh (04 June 2019)
