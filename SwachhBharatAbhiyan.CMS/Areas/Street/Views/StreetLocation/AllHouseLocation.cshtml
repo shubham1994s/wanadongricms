@@ -481,7 +481,7 @@
 
         //                var myLatlng = new google.maps.LatLng(data[i].houseLat, data[i].houseLong);
         //                lat_lng.push(myLatlng);
-                        
+
         //                marker = new google.maps.Marker({
         //                    position: myLatlng,
         //                    map: map,
@@ -609,7 +609,7 @@
         //    });
         //}
 
-          //User Wise Location
+        //User Wise Location
         // All User On Map
         function myMap() {
             var RadioValue = $("input[name='radio']:checked").val();
@@ -657,9 +657,9 @@
                     var infowindow = new google.maps.InfoWindow();
                     bounds = new google.maps.LatLngBounds();
 
-                   // var infoWindow = new google.maps.InfoWindow();
+                    // var infoWindow = new google.maps.InfoWindow();
                     var lat_lng = new Array();
-                   // var latlngbounds = new google.maps.LatLngBounds();
+                    // var latlngbounds = new google.maps.LatLngBounds();
                     //var lastmarker = markers.length;
                     var marker, i;
                     // alert(data.length);
@@ -741,7 +741,7 @@
                                     }
                                     poptext = poptext + '</div>';
                                     infowindow.setContent(poptext);
-                                    infowindow.open(map, marker); 
+                                    infowindow.open(map, marker);
                                 }
                             })(marker, i));
                         }
@@ -822,12 +822,29 @@
                     //}
 
 
-                    var perChunk = 3 // items per chunk   
+                    //var perChunk = 3 // items per chunk
+
+                    //var inputArray = data
+
+                    //var coordinates = inputArray.reduce((resultArray, item, index) => {
+                    //    const chunkIndex = Math.floor(index / perChunk)
+
+                    //    if (!resultArray[chunkIndex]) {
+                    //        resultArray[chunkIndex] = [] // start a new chunk
+                    //    }
+
+                    //    resultArray[chunkIndex].push(item)
+
+                    //    return resultArray
+                    //}, [])
+
+
+                    var perChunk = 3 // items per chunk
 
                     var inputArray = data
 
                     var coordinates = inputArray.reduce((resultArray, item, index) => {
-                        const chunkIndex = Math.floor(index / perChunk)
+                        const chunkIndex = item.BeatId;
 
                         if (!resultArray[chunkIndex]) {
                             resultArray[chunkIndex] = [] // start a new chunk
@@ -837,6 +854,10 @@
 
                         return resultArray
                     }, [])
+
+
+
+
 
                     console.log(coordinates);
 
@@ -848,58 +869,62 @@
                     //    arr1.push(myLatlng);
                     //    console.log(arr1)
 
-                       // debugger;
-                        //var mapOptions = {
-                        //    zoom: 5,
-                        //    center: new google.maps.LatLng(coordinates[i][0].houseLat, coordinates[i][0].houseLong),
-                        //    mapTypeId: google.maps.MapTypeId.TERRAIN
-                        //};
+                    // debugger;
+                    //var mapOptions = {
+                    //    zoom: 5,
+                    //    center: new google.maps.LatLng(coordinates[i][0].houseLat, coordinates[i][0].houseLong),
+                    //    mapTypeId: google.maps.MapTypeId.TERRAIN
+                    //};
 
-                        var bounds = new google.maps.LatLngBounds();
-                        var polygons = [];
-                        var arr = new Array();
-                        //var map = new google.maps.Map(document.getElementById('googleMap'),
-                        //    map);
-                
-                   
-                        for (var i in coordinates) {
-                            arr = [];
-                            console.log(arr)
-                            debugger
+                    var bounds = new google.maps.LatLngBounds();
+                    var polygons = [];
+                    var arr = new Array();
+                    //var map = new google.maps.Map(document.getElementById('googleMap'),
+                    //    map);
+
+
+                    for (var i in coordinates) {
+                        console.log(i);
+                        console.log(coordinates);
+                        arr = [];
+                        console.log(arr)
+                        debugger
+                        if (i != 0) {
                             for (var j = 0; j < coordinates[i].length; j++) {
                                 arr.push(new google.maps.LatLng(
                                     parseFloat(coordinates[i][j].houseLat),
                                     parseFloat(coordinates[i][j].houseLong)
                                 ));
-                             
+
                                 bounds.extend(arr[arr.length - 1])
                             }
-                            var color_of_this = "#" + ((1 << 24) * Math.random() | 0).toString(16);
-                            // Construct the polygon.
-                            polygons.push(new google.maps.Polyline({
-                                path: arr,
-                                strokeColor: color_of_this,
-                               // strokeOpacity: 0.8,
-                                strokeWeight: 6,
-                                fillColor: color_of_this/* '#FF0000'*/,
-                                fillOpacity: 0.35
-                            }));
-                            polygons[polygons.length - 1].setMap(map);
-
-                            //var infowindow = new google.maps.InfoWindow({
-                            //    content: "Hello World!"
-                            //});
-                    
-                            google.maps.event.addListener(polygons[polygons.length - 1], 'click', function (event) {
-                                infowindow.open(map);
-                                infowindow.setPosition(event.latLng);
-                            });
-
                         }
-                        map.fitBounds(bounds);
-                   // }
-                   // }
-                
+                        var color_of_this = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+                        // Construct the polygon.
+                        polygons.push(new google.maps.Polyline({
+                            path: arr,
+                            strokeColor: color_of_this,
+                            // strokeOpacity: 0.8,
+                            strokeWeight: 6,
+                            fillColor: color_of_this/* '#FF0000'*/,
+                            fillOpacity: 0.35
+                        }));
+                        polygons[polygons.length - 1].setMap(map);
+
+                        //var infowindow = new google.maps.InfoWindow({
+                        //    content: "Hello World!"
+                        //});
+
+                        google.maps.event.addListener(polygons[polygons.length - 1], 'click', function (event) {
+                            infowindow.open(map);
+                            infowindow.setPosition(event.latLng);
+                        });
+
+                    }
+                    map.fitBounds(bounds);
+                    // }
+                    // }
+
 
 
                 }
@@ -936,7 +961,7 @@
         //            if (data.length == 0)
         //                $('#\\#myModal').modal('show');
         //            console.log(data)
-        //            var perChunk = 3 // items per chunk   
+        //            var perChunk = 3 // items per chunk
 
         //            var inputArray = data
 
@@ -953,15 +978,15 @@
         //            }, [])
 
         //            console.log(coordinates);
-                 
-               
+
+
         //            arr1 = []
         //            debugger
         //            for (i = 0; i < coordinates.length; i++) {
         //                var myLatlng = new google.maps.LatLng(coordinates[i].houseLat, coordinates[i].houseLong);
         //                arr1.push(myLatlng);
         //                console.log(arr1)
-                  
+
         //                debugger;
         //                var mapOptions = {
         //                    zoom: 5,
@@ -975,7 +1000,7 @@
         //                var map = new google.maps.Map(document.getElementById('googleMap'),
         //                    mapOptions);
 
-                       
+
         //                for (var i in coordinates) {
         //                    arr = [];
         //                    console.log(arr)
@@ -1037,29 +1062,29 @@
 </fieldset>
 <script src="~/Content/css/datepicker/js/datepicker.js"></script>
 @*<script>
-    $(document).keydown(function (event) {
-        if (event.keyCode == 123 || event.keyCode === 67 || event.keyCode === 86 || event.keyCode === 85 || event.keyCode === 117 || event.keyCode === 75) {
-            return false;
-        }
-        else if ((event.ctrlKey && event.shiftKey && event.keyCode == 73) || (event.ctrlKey && event.shiftKey && event.keyCode == 74)) {
-            return false;
-        }
-    });
-    document.addEventListener('contextmenu', event => event.preventDefault());
-</script>*@
+        $(document).keydown(function (event) {
+            if (event.keyCode == 123 || event.keyCode === 67 || event.keyCode === 86 || event.keyCode === 85 || event.keyCode === 117 || event.keyCode === 75) {
+                return false;
+            }
+            else if ((event.ctrlKey && event.shiftKey && event.keyCode == 73) || (event.ctrlKey && event.shiftKey && event.keyCode == 74)) {
+                return false;
+            }
+        });
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>*@
 <script>
-        var date = new Date();
+    var date = new Date();
 
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
 
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
 
-       // var today = month+ "/" + day+ "/" + year;
-        var today = day + "/" + month + "/" + year;
-        document.getElementById('txt_fdate').value = today;
+    // var today = month+ "/" + day+ "/" + year;
+    var today = day + "/" + month + "/" + year;
+    document.getElementById('txt_fdate').value = today;
 
 
 
@@ -1068,20 +1093,20 @@
 
 
 <script type="text/javascript">
-  $('.datepicker').datepicker({
-      format: 'dd/mm/yyyy',
-      weekStart: 1,
-      color: 'red',
-      pickTime: false
-  }).on('changeDate', function (e) {
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        weekStart: 1,
+        color: 'red',
+        pickTime: false
+    }).on('changeDate', function (e) {
 
-      $(this).datepicker('hide');
+        $(this).datepicker('hide');
 
-  });
-  //hide  show on hover
-  $('#txt_fdate').focus(function () {
-      $('.dtpk_drpdwn').eq(1).hide();
-  });
+    });
+    //hide  show on hover
+    $('#txt_fdate').focus(function () {
+        $('.dtpk_drpdwn').eq(1).hide();
+    });
 
 
   //$('#filter_house').click(function () {
