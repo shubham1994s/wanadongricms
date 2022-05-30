@@ -35,6 +35,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<int> gcType { get; set; }
 
         public int areaId { get; set; }
+        public int BeatId { get; set; }
+
     }
     public class SBALHouseLocationMapView1
     {
