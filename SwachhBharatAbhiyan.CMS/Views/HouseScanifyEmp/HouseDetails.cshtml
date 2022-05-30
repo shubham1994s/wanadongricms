@@ -6,7 +6,7 @@
 
 @Styles.Render("~/Content/IndexCSS")
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-
+<link href="~/Content/css/blink.css" rel="stylesheet" />
 @Scripts.Render("~/Scripts/IndexScript")
 <style>
 
@@ -78,15 +78,19 @@
         border-radius: 50%;
         background: white;
     }
+
     #demoGrid_filter {
         display: none;
     }
+
     #demoGrid1_filter {
         display: none;
     }
+
     #demoGrid2_filter {
         display: none;
     }
+
     #demoGrid3_filter {
         display: none;
     }
@@ -142,7 +146,7 @@
                         </div>
                     </div>
                 </div>*@
-            <div class="row form" style="text-align:center;display:inline-flex;margin-left:30%;">
+            <div class="row form rbtn" style="text-align:center;display:inline-flex;margin-left:30%;">
                 <label class="check-container">
                     Houses
                     <input type="radio" checked="checked" value="0" name="radio">
@@ -441,7 +445,7 @@
 
     $(document).ready(function () {
 
-        debugger;
+
 
         $.get("/houseScanify/GetAppNames", null, house);
 
@@ -479,7 +483,7 @@
         document.getElementById('sLiquid').value = '';
         document.getElementById('sStreet').value = '';
 
-        debugger;
+
         LoadUserList();
 
     });
@@ -491,9 +495,9 @@
 
     function LoadGrid() {
         var RadioValue = $("input[name='radio']:checked").val();
-        debugger;
+
         if (RadioValue == 0) {
-            debugger;
+
             $("#divDump").hide();
             $("#divLiquid").hide();
             $("#divStreet").hide();
@@ -504,7 +508,7 @@
             }
             else {
 
-                debugger;
+
                 SearchHouse();
             }
         }
@@ -577,7 +581,7 @@
 
     }
     function Filter() {
-        debugger;
+
         var RadioValue = $("input[name='radio']:checked").val();
         if (RadioValue == 0) {
             $("#divDump").hide();
@@ -631,7 +635,7 @@
 
     }
     $(document).ready(function () {
-        debugger;
+
         LoadUserList();
 
     });

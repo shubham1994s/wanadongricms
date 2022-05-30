@@ -236,7 +236,7 @@
     });
     $(document).ready(function () {
         // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
-        debugger;
+        
         var appid = $('#appid').val();
         var Utype = $('#type').val();
         if (Utype == 'A') {
@@ -295,7 +295,7 @@
 
 
         $("#btnSubmit").click(function () {
-            debugger;
+            
             if ($.trim($("#qrEmpName").val()) == '') {
                 //$("#err_name").html("नाव आवश्यक आहे / Name is Required").delay(1500).show().fadeOut('slow');
                 $("#err_name").html("Name is Required").delay(1500).show().fadeOut('slow');
@@ -336,7 +336,7 @@
     });
 
     $("#LoginId").keyup(function () {
-        debugger;
+        
 
         var LoginId = $("#LoginId").val();
         $.ajax({
@@ -366,7 +366,7 @@
     });
     // JavaScript code
     function search_ulb() {
-        debugger;
+        
         let input = document.getElementById('searchbar_ulb').value
         input = input.toLowerCase();
         let x = document.getElementsByClassName('ulbs');

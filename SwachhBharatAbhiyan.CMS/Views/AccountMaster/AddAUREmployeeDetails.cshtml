@@ -467,7 +467,7 @@
     });
 
     $(document).ready(function () {
-        debugger;
+        
         var id = $('#qrEmpId').val();
         if (id > 0) {
             $('#buttonName').text("Save Changes");
@@ -565,7 +565,7 @@
     });
 
     $('#DivisionId').change(function () {
-        debugger;
+        
         var selectedText = $(this).find("option:selected").text();
         var selectedValue = $(this).val();
         if (selectedValue == 0) {
@@ -581,7 +581,7 @@
             datatype: "json",
             traditional: true,
             success: function (data) {
-                debugger;
+                
                 var area;
                 for (var i = 0; i < data.length; i++) {
                     /* area = area + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';*/

@@ -16,7 +16,7 @@
         }
     });
     $("#demoGrid").DataTable({
-        //debugger;
+        //
         "sDom": "ltipr",
         "order": [[ 5, "desc" ]],
         "processing": true, // for show progress bar
@@ -60,13 +60,13 @@
 
 function test(a)
 {
-    debugger;
+    
     window.location.href = "/Street/StreetLocation/viewLocation?teamId=" + a ;
 };
 
 
 function map(a) {
-    debugger;
+    
     window.location.href = "/Street/StreetLocation/viewLocation?teamId=" + a ;
 };
 

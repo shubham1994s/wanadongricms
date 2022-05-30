@@ -59,7 +59,7 @@
 
 function test(a)
 {
-    debugger;
+    
     window.location.href = "/Liquid/LiquidLocation/viewLocation?teamId="+a;
 };
 

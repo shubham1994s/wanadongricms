@@ -56,7 +56,7 @@
     <script>
 
         function myMap() {
-            debugger;
+            
             var myCenter = new google.maps.LatLng(@Model.lat,@Model.log);
             var mapProp = { center: myCenter, zoom: 12, scrollwheel: false, draggable: true, mapTypeId: google.maps.MapTypeId.ROADMAP };
             var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);

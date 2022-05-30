@@ -118,7 +118,7 @@ var date_str = {};
 function user_route(id) {
 
     //console.log(date_str[id]);
-    debugger;
+    
     var objIdle = JSON.stringify(date_str[id]);
     window.localStorage.setItem("mJson", objIdle);
     window.location.href = "/Liquid/LiquidGarbage/IdleTime_Route";

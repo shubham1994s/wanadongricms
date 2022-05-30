@@ -1,7 +1,7 @@
 ﻿//Dump Code Start
 
 function loadGridDump() {
-    debugger;
+    
    
     let appName = document.getElementById("ulb_name").innerHTML;
     $("#demoGrid1").dataTable().fnDestroy();

@@ -342,9 +342,9 @@
      
     </style>
     <script>
-        //debugger;;
+        //;
         $('#ZoneId').change(function () {
-            //debugger;;
+            //;
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
 
@@ -397,7 +397,7 @@
         var totime = "";
 
         function Search() {
-            //debugger;;
+            //;
             var from = document.getElementById("frompin").value;
             var to = document.getElementById("topin").value;
             if (from == "" || to == "") {
@@ -412,7 +412,7 @@
         }
 
         function SearchTime() {
-            //debugger;;
+            //;
             var fromtime = document.getElementById("fromtime").value;
             var totime = document.getElementById("totime").value;
             if (fromtime == "" || totime == "") {
@@ -431,7 +431,7 @@
         }
 
         function AreaSearch() {
-            //debugger;;
+            //;
             //var from = document.getElementById("frompin").value;
             //var to = document.getElementById("topin").value;
             //if (from == "" || to == "") {
@@ -446,7 +446,7 @@
         }
 
         function Reset() {
-            //debugger;;
+            //;
             var from = "";
             var to = "";
             document.getElementById("frompin").value = "";
@@ -473,7 +473,7 @@
 
 
             function CenterControl(controlDiv, map) {
-                //debugger;;
+                //;
                 // Set CSS for the control border.
                 var controlUI = document.createElement('div');
 
@@ -497,7 +497,7 @@
             }
 
             function CenterControlPause(controlDivPause, map) {
-                //debugger;;
+                //;
                 // Set CSS for the control border.
                 var controlUIPause = document.createElement('div');
 
@@ -520,7 +520,7 @@
             }
 
 
-            //debugger;;
+            //;
             var industries = $("#HdnIndustries").val();
             var areaid = $("#AreaId").val();
             var fromtime = $("#fromtime").val()
@@ -537,7 +537,7 @@
                     markers = m;
 
                     if (markers.length == 0) {
-                        //debugger;;
+                        //;
                         var map = new google.maps.Map(document.getElementById('googleMap'), {
                             zoom: 20,
                             center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
@@ -546,7 +546,7 @@
 
                     }
                     else {
-                        //debugger;;
+                        //;
                         var mapOptions = {
                             center: new google.maps.LatLng(markers[0].lat, markers[0].log),
                             zoom: 20,
@@ -571,12 +571,12 @@
                         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDivPause);
 
                         centerControlDiv.addEventListener('click', function () {
-                            //debugger;;
+                            //;
                             animateCircle(poly, 17);
                         });
 
                         centerControlDivPause.addEventListener('click', function () {
-                            //debugger;;
+                            //;
                             animateCircle(poly, 7);
                         });
 
@@ -614,7 +614,7 @@
                                 document.getElementById("date").innerHTML = data.date;
                             }
                             if (data.HouseId != null) {
-                                //debugger;;
+                                //;
                                 var a = i + 1;
                                 if (a == 1) {
                                     temicon = "../Content/images/img/segregationImg/Start-Point.png";
@@ -786,7 +786,7 @@
                             if (data.type == 1) {
 
                                 (function (marker, data) {
-                                    debugger;
+                                    
                                     if (data.HouseOwnerName == null) {
                                         data.HouseOwnerName = 'Not Available';
                                     }
@@ -823,13 +823,13 @@
                                     if (data.HouseId != null) {
                                         //New MNarker Click
                                         //google.maps.event.addListener(marker, "click", function (e) {
-                                        //    debugger;
+                                        //    
                                         //    var latlng = new google.maps.LatLng(data.lat, data.log);
                                         //    var geocoder = geocoder = new google.maps.Geocoder();
                                         //    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                                        //        debugger;
+                                        //        
                                         //        if (status == google.maps.GeocoderStatus.OK) {
-                                        //            debugger;
+                                        //            
                                         //            if (results[1]) {
                                         //                //alert("Location: " + results[1].formatted_address);
                                         //                var HouseAddress = results[1].formatted_address;
@@ -861,13 +861,13 @@
 
                                         //New MNarker Click
                                         //google.maps.event.addListener(marker, "click", function (e) {
-                                        //    debugger;
+                                        //    
                                         //    var latlng = new google.maps.LatLng(data.lat, data.log);
                                         //    var geocoder = geocoder = new google.maps.Geocoder();
                                         //    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                                        //        debugger;
+                                        //        
                                         //        if (status == google.maps.GeocoderStatus.OK) {
-                                        //            debugger;
+                                        //            
                                         //            if (results[1]) {
                                         //                //alert("Location: " + results[1].formatted_address);
                                         //                var DumpAddress = results[1].formatted_address;
@@ -1015,7 +1015,7 @@
                         //Loop and Draw Path Route between the Points on MAP
                         for (var i = 0; i < lat_lng.length; i++) {
                             if ((i + 1) <= lat_lng.length) {
-                                //debugger;;
+                                //;
                                 var src = lat_lng[i];
                                 var des = lat_lng[i + 1];
                                 path.push(src);
@@ -1088,7 +1088,7 @@
         }
 
         $(document).ready(function () {
-            //debugger;;
+            //;
             var u_date = document.getElementById("date").innerHTML;
             document.getElementById("demo2").innerHTML = u_date;
             $(".jquery-date-time-picker").datetimepicker({
@@ -1123,7 +1123,7 @@
     </script>
     <script>
                         //$(document).ready(function () {
-                        //    debugger;
+                        //    
 
                         //    var x = document.getElementById("username").innerHTML;
                         //    var tem = x.charAt(0).toUpperCase() + x.slice(1);

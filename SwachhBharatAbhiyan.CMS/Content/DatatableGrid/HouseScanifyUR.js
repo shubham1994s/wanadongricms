@@ -23,7 +23,7 @@
 
 $(document).ready(function () {
     //getapp();
-    debugger;
+    
     //$.get("/houseScanify/GetAppNames", null, house);
     //function house(data) {
     //    var qqq = $('#appid').val();
@@ -136,7 +136,7 @@ function showInventoriesGrid() {
 }
 
 function Search() {
-    debugger;
+    
     var txt_fdate, txt_tdate, Client, UserId;
     var name = [];
     var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];

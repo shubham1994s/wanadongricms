@@ -17,7 +17,7 @@ var ParentULB = '';
 
 $(document).ready(function () {
     
-    //debugger;
+    //
     var DivisionId = $("#DivisionId").val();
     var DistrictId = $("#DistrictId").val();
     var AppId = $("#AppId").val();
@@ -37,7 +37,7 @@ $(document).ready(function () {
             "datatype": "json"
         },
         "drawCallback": function (settings) {
-            //debugger;
+            //
              TotalProp = 0;
              TotalPropScan = 0;
              TotalSeg = 0;
@@ -134,7 +134,7 @@ function showULBStatus(status) {
     $("#divULBStatus").show();
     $("#spnULBStatus").text(ParentULB + ' ULB Status');
 
-    //debugger;
+    //
     var DivisionId = $("#DivisionId").val();
     var DistrictId = $("#DistrictId").val();
     var AppId = $("#AppId").val();
@@ -351,7 +351,7 @@ function showCharts() {
 
 
     function showDefaultText(chart, yValue, textName,textNumber) {
-        //debugger;
+        //
         var isEmpty = !(yValue > 0);
 
         if (isEmpty) {

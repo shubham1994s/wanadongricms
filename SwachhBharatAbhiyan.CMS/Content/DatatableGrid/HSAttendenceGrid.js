@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    debugger;
+    
     $.get("/houseScanify/GetAppNames", null, house);
 
     function house(data) {
