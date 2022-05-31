@@ -22,7 +22,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         {
         }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -56,8 +55,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
         public virtual DbSet<Daily_Attendance> Daily_Attendance { get; set; }
         public virtual DbSet<MonthlyAttedance> MonthlyAttedances { get; set; }
-        public virtual DbSet<StreetSweepingBeat> StreetSweepingBeats { get; set; }
         public virtual DbSet<HouseMaster> HouseMasters { get; set; }
+        public virtual DbSet<StreetSweepingBeat> StreetSweepingBeats { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
