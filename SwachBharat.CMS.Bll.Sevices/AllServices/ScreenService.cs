@@ -4585,10 +4585,12 @@ namespace SwachBharat.CMS.Bll.Services
                 {
                     if (houseId > 0 && !string.IsNullOrEmpty(QRStatus))
                     {
+                        bool bQRStatus = (QRStatus == "1") ? true : false;
+
                         var model = db.HouseMasters.Where(x => x.houseId == houseId).FirstOrDefault();
                         if (model != null)
                         {
-                            model.QRStatus = QRStatus;
+                            model.QRStatus = bQRStatus;
                             model.QRStatusDate = DateTime.Now;
                             db.SaveChanges();
                         }

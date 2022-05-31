@@ -170,21 +170,30 @@
                 </label>
             </div>
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="controls">
                         <label>From Date</label>
                         <input id="txt_fdate" class="datepicker form-control form-control-sm" type="text" />
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="controls">
                         <label>To Date</label>
                         <input id="txt_tdate" class="datepicker form-control form-control-sm" type="text" />
                     </div>
                 </div>
                 <div class="col-sm-2">
+                    <label>Select Status</label>
+                    <select id="selectQRStatus" class="form-control form-control form-control-sm">
+                        <option value="-1">Select Status</option>
+                        <option value="1">Approve</option>
+                        <option value="0">Reject</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
                     <label>Select Employee</label>
-                    <select id="selectnumber" class="form-control form-control form-control-sm"></select>
+                    <select id="selectnumber" class="form-control form-control form-control-sm">
+                    </select>
                 </div>
                 <div class="col-sm-2">
                     <div class="controls">
@@ -338,8 +347,11 @@
                                 <p> <b id="hide_add">House Id: </b><span id="latlongDataHouse"></span></p>
                                 <p>  <b id="hide_add1">Date And Time: </b><span id="date1House"></span></p>
                                 <p>  <b id="hide_add2">Lat: </b><span id="latHouse"></span> <b id="hide_add3">Long: </b><span id="longHouse"></span></p>
-                                <input type="radio" name="QRStatus" value="Approve" checked> Approve
-                                <input type="radio" name="QRStatus" value="Reject"> Reject
+                                <p>
+                                    <b>Status : </b><input type="radio" name="QRStatus" value="1" checked> Approve
+                                    <input type="radio" name="QRStatus" value="0"> Reject
+                                </p>
+                                
 
                             </div>
                             <div class="col-md-6">
@@ -387,7 +399,8 @@
             datatype: "json",
             traditional: true,
             success: function (data) {
-
+                $('#myModal_Image_House').modal('toggle');
+                LoadGrid();
                 
             }
         });
