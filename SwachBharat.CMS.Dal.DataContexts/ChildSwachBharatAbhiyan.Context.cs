@@ -18,7 +18,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-               : base(SwachBharatAppConnection.GetConnectionString(AppId))
+                : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
 
@@ -633,6 +633,23 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual ObjectResult<SP_StreetSweepList_Result> SP_StreetSweepList()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetSweepList_Result>("SP_StreetSweepList");
+        }
+    
+        public virtual ObjectResult<SP_EmployeeSummary_NEW_Result> SP_EmployeeSummary_NEW(Nullable<System.DateTime> from, Nullable<System.DateTime> to, Nullable<int> userid)
+        {
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("from", from) :
+                new ObjectParameter("from", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("to", to) :
+                new ObjectParameter("to", typeof(System.DateTime));
+    
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeSummary_NEW_Result>("SP_EmployeeSummary_NEW", fromParameter, toParameter, useridParameter);
         }
     }
 }
