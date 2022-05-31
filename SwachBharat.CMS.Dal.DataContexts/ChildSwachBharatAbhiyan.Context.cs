@@ -18,7 +18,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-                : base(SwachBharatAppConnection.GetConnectionString(AppId))
+               : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
 
@@ -579,43 +579,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetSweepingOnMapDetails_Result>("SP_StreetSweepingOnMapDetails", gcDateParameter, userIdParameter, zoneIdParameter, areaIdParameter, wardNoParameter, garbageTypeParameter, filterTypeParameter);
         }
     
-        public virtual ObjectResult<SP_GetHSHouseDetails_Result> SP_GetHSHouseDetails(Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate, Nullable<int> userid, string sortColumn, string sortOrder, Nullable<int> offsetValue, Nullable<int> pagingSize, string searchText)
-        {
-            var fdateParameter = fdate.HasValue ?
-                new ObjectParameter("fdate", fdate) :
-                new ObjectParameter("fdate", typeof(System.DateTime));
-    
-            var tdateParameter = tdate.HasValue ?
-                new ObjectParameter("tdate", tdate) :
-                new ObjectParameter("tdate", typeof(System.DateTime));
-    
-            var useridParameter = userid.HasValue ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(int));
-    
-            var sortColumnParameter = sortColumn != null ?
-                new ObjectParameter("sortColumn", sortColumn) :
-                new ObjectParameter("sortColumn", typeof(string));
-    
-            var sortOrderParameter = sortOrder != null ?
-                new ObjectParameter("sortOrder", sortOrder) :
-                new ObjectParameter("sortOrder", typeof(string));
-    
-            var offsetValueParameter = offsetValue.HasValue ?
-                new ObjectParameter("OffsetValue", offsetValue) :
-                new ObjectParameter("OffsetValue", typeof(int));
-    
-            var pagingSizeParameter = pagingSize.HasValue ?
-                new ObjectParameter("PagingSize", pagingSize) :
-                new ObjectParameter("PagingSize", typeof(int));
-    
-            var searchTextParameter = searchText != null ?
-                new ObjectParameter("SearchText", searchText) :
-                new ObjectParameter("SearchText", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHSHouseDetails_Result>("SP_GetHSHouseDetails", fdateParameter, tdateParameter, useridParameter, sortColumnParameter, sortOrderParameter, offsetValueParameter, pagingSizeParameter, searchTextParameter);
-        }
-    
         public virtual ObjectResult<HouseDetails_Result> HouseDetails()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<HouseDetails_Result>("HouseDetails");
@@ -651,6 +614,47 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("userid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeSummary_NEW_Result>("SP_EmployeeSummary_NEW", fromParameter, toParameter, useridParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetHSHouseDetails_Result> SP_GetHSHouseDetails(Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate, Nullable<int> userid, Nullable<int> qrStatus, string sortColumn, string sortOrder, Nullable<int> offsetValue, Nullable<int> pagingSize, string searchText)
+        {
+            var fdateParameter = fdate.HasValue ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(System.DateTime));
+    
+            var tdateParameter = tdate.HasValue ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(System.DateTime));
+    
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            var qrStatusParameter = qrStatus.HasValue ?
+                new ObjectParameter("qrStatus", qrStatus) :
+                new ObjectParameter("qrStatus", typeof(int));
+    
+            var sortColumnParameter = sortColumn != null ?
+                new ObjectParameter("sortColumn", sortColumn) :
+                new ObjectParameter("sortColumn", typeof(string));
+    
+            var sortOrderParameter = sortOrder != null ?
+                new ObjectParameter("sortOrder", sortOrder) :
+                new ObjectParameter("sortOrder", typeof(string));
+    
+            var offsetValueParameter = offsetValue.HasValue ?
+                new ObjectParameter("OffsetValue", offsetValue) :
+                new ObjectParameter("OffsetValue", typeof(int));
+    
+            var pagingSizeParameter = pagingSize.HasValue ?
+                new ObjectParameter("PagingSize", pagingSize) :
+                new ObjectParameter("PagingSize", typeof(int));
+    
+            var searchTextParameter = searchText != null ?
+                new ObjectParameter("SearchText", searchText) :
+                new ObjectParameter("SearchText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHSHouseDetails_Result>("SP_GetHSHouseDetails", fdateParameter, tdateParameter, useridParameter, qrStatusParameter, sortColumnParameter, sortOrderParameter, offsetValueParameter, pagingSizeParameter, searchTextParameter);
         }
     }
 }

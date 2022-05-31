@@ -5411,7 +5411,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         //}
 
 
-        public IEnumerable<SBAHSHouseDetailsGrid> GetHSHouseDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+        public IEnumerable<SBAHSHouseDetailsGrid> GetHSHouseDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId,int? QrStatus, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
         {
             string strOrderBy = "";
             if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
@@ -5421,13 +5421,14 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
             int pageSize = length != null ? Convert.ToInt32(length) : 0;
             int skip = start != null ? Convert.ToInt32(start) : 0;
-
-            List<SBAHSHouseDetailsGrid> data = null;
+            int iQRStatus = QrStatus ?? -1;
+            iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+            List <SBAHSHouseDetailsGrid> data = null;
 
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
             {
 
-                data = db.SP_GetHSHouseDetails(fdate, tdate, userId, sortColumn, sortColumnDir, skip, pageSize, SearchString).Select(x => new SBAHSHouseDetailsGrid
+                data = db.SP_GetHSHouseDetails(fdate, tdate, userId, iQRStatus, sortColumn, sortColumnDir, skip, pageSize, SearchString).Select(x => new SBAHSHouseDetailsGrid
                 {
                     houseId = x.houseId,
                     Name = x.qrEmpName,
@@ -5436,7 +5437,9 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     QRCodeImage = x.QRCodeImage,
                     ReferanceId = x.ReferanceId,
                     modifiedDate = x.modified.HasValue ? Convert.ToDateTime(x.modified).ToString("dd/MM/yyyy hh:mm tt") : "",
-                    totalRowCount = x.FilterTotalCount.HasValue ? Convert.ToInt32(x.FilterTotalCount) : 0
+                    QRStatusDate = x.QRStatusDate.HasValue ? Convert.ToDateTime(x.QRStatusDate).ToString("dd/MM/yyyy hh:mm tt") : "",
+                    QRStatus = x.QRStatus,
+                    totalRowCount = x.FilterTotalCount.HasValue ? Convert.ToInt32(x.FilterTotalCount) : 0,
                 }).ToList();
 
                 return data;

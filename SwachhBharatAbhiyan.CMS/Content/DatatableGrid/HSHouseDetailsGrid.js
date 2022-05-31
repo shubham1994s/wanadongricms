@@ -41,11 +41,31 @@ function loadGridHouse() {
                         if (full["QRCodeImage"] != null) {
                             return "<div style='cursor:pointer;display:inline-flex;'  onclick=PopImagesHouse(this)><img alt='Photo Not Found'  src='" + data +
                                 "' style='height:35px;width:35px;cursor:pointer;margin-left:0px;'></img><span><ul class='dt_pop'  style='margin:2px -5px -5px -5px; padding:0px;list-style:none;display:none;'><li  class='li_date datediv' >" + full["Name"] + "</li><li  class='li_lat datediv' >" + full["HouseLat"] + "</li></li><li  class='li_long datediv' >" + full["HouseLong"] + "</li><li class='addr-length' style='margin:0px 0px 0px 10px;'>"
-                                + full["ReferanceId"] + "</li><li class='date_time'>" + full["modifiedDate"] + "</li><li style='display:none' class='li_title' >HouseScanify QR Image </li><li class='li_houseId'>" + full["houseId"] + "</li></ul></span></div>";
+                                + full["ReferanceId"] + "</li><li class='date_time'>" + full["modifiedDate"] + "</li><li style='display:none' class='li_title' >HouseScanify QR Image </li><li class='li_houseId'>" + full["houseId"] + "</li><li class='li_QRStatus'>" + full["QRStatus"] + "</li></ul></span></div>";
                         }
                         else {
 
                             return "<img alt='Photo Not Found' onclick='noImageNotification()' src='/Images/default.png' style='height:35px;width:35px;cursor:pointer;'></img>";
+                        }
+                    },
+                },
+                {
+                    "targets": [7],
+                    "visible": true,
+
+                    "render": function (data, type, full, meta) {
+                        if (full["QRStatus"] != null) {
+                            if (full["QRStatus"] == true) {
+                                return "<span>Approved</span>";
+
+                            }
+                            else {
+                                return "<span>Reject</span>";
+                            }
+                        }
+                        else {
+
+                            return "<span>Not Verified</span>";
                         }
                     },
                 }
@@ -60,7 +80,8 @@ function loadGridHouse() {
             { "data": "HouseLat", "name": "HouseLat", "autoWidth": true },
             { "data": "HouseLong", "name": "HouseLong", "autoWidth": true },
             { "data": "QRCodeImage", "name": "QRCodeImage", "autoWidth": true },
-
+            { "data": "QRStatus", "name": "QRStatus", "autoWidth": true },
+            { "data": "QRStatusDate", "name": "QRStatusDate", "autoWidth": true },
         ],
 
       
@@ -105,7 +126,7 @@ function noImageNotification() {
 
 
     function SearchHouse() {
-        var txt_fdate, txt_tdate, Client, UserId;
+        var txt_fdate, txt_tdate, Client, UserId, QRStatus;
         var name = [];
         var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
 
@@ -117,12 +138,14 @@ function noImageNotification() {
         txt_fdate = arr[0];
         txt_tdate = arr[1];
         UserId = $('#selectnumber').val();
+        QRStatus = $('#selectQRStatus').val();
+        //alert(QRStatus);
         Client = " ";
         NesEvent = " ";
         var Product = "";
         var catProduct = "";
-        var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#sHouse").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
-        // alert(value );
+        var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#sHouse").val() + "," + QRStatus;//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+        
         oTable = $('#demoGrid').DataTable();
         oTable.search(value).draw();
         oTable.search("");

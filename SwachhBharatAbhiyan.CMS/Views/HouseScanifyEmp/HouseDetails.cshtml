@@ -187,7 +187,7 @@
                     <select id="selectQRStatus" class="form-control form-control form-control-sm">
                         <option value="-1">Select Status</option>
                         <option value="1">Approve</option>
-                        <option value="0">Reject</option>
+                        <option value="2">Reject</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
@@ -223,6 +223,8 @@
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
+                            <th> QR Status</th>
+                            <th> QR Status Date</th>
                             @*<th> Action</th>*@
                         </tr>
                     </thead>
@@ -418,6 +420,18 @@
         var lat = $(cel).find('.li_lat').text();
         var long = $(cel).find('.li_long').text();
         var houseId = $(cel).find('.li_houseId').text();
+        var QRStatus = $(cel).find('.li_QRStatus').text();
+        if (QRStatus != 'null') {
+            if (QRStatus == 'true') {
+                $("input[name=QRStatus][value=1]").prop('checked', true);
+            }
+            else {
+
+                $("input[name=QRStatus][value=0]").prop('checked', true);
+            }
+
+        }
+        
         $("#hdHouseId").val(houseId);
 
         var ulb = $("#ulb_name").text()
