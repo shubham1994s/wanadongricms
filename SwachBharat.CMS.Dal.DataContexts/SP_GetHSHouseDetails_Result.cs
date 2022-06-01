@@ -18,6 +18,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string houseLat { get; set; }
         public string houseLong { get; set; }
         public string ReferanceId { get; set; }
+        public Nullable<bool> QRStatus { get; set; }
+        public Nullable<System.DateTime> QRStatusDate { get; set; }
         public Nullable<System.DateTime> modified { get; set; }
         public string qrEmpName { get; set; }
         public string QRCodeImage { get; set; }

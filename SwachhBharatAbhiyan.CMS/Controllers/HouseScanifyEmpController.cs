@@ -427,6 +427,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
+        public void SaveQRStatus(int appId,int houseId,string QRStatus)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                childRepository = new ChildRepository(SessionHandler.Current.AppId);
+                childRepository.SaveHSEmployeeQRStatus(houseId, QRStatus);
+            }
+        }
+
         public ActionResult AddUREmployeeDetails(int teamId = -1)
         {
                 
