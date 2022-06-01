@@ -110,6 +110,7 @@ namespace SwachBharat.CMS.Bll.Services
         //Added By Saurabh (04 June 2019)
         void SaveHSEmployeeDetails(HouseScanifyEmployeeDetailsVM employee);
 
+        void SaveHSEmployeeQRStatus(int houseId, string QRStatus);
         void SaveUREmployeeDetails(UREmployeeDetailsVM employee);
 
         //Added By Saurabh (04 June 2019)

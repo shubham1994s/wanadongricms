@@ -17,7 +17,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string modifiedDate { get; set; }
 
         public int totalRowCount { get; set; }
-
-
+        public Nullable<bool> QRStatus { get; set; }
+        public string QRStatusDate { get; set; }
     }
 }
