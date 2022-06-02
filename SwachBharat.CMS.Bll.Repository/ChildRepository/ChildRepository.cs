@@ -379,6 +379,16 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             screenService.SaveHSEmployeeQRStatus(houseId, QRStatus);
         }
 
+        public List<int> GetHSHouseDetailsID(DateTime? fromDate,DateTime? toDate,int userId,string searchString,int QRStatus,string sortColumn,string sortOrder)
+        {
+            return screenService.GetHSHouseDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
+        }
+        public SBAHSHouseDetailsGrid GetHouseDetailsById(int houseId)
+        {
+            return screenService.GetHouseDetailsById(houseId);
+        }
+
+
         public void SaveUREmployee(UREmployeeDetailsVM employee)
         {
             screenService.SaveUREmployeeDetails(employee);

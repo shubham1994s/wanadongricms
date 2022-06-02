@@ -350,7 +350,7 @@
                                 <p>  <b id="hide_add1">Date And Time: </b><span id="date1House"></span></p>
                                 <p>  <b id="hide_add2">Lat: </b><span id="latHouse"></span> <b id="hide_add3">Long: </b><span id="longHouse"></span></p>
                                 <p>
-                                    <b>Status : </b><input type="radio" name="QRStatus" value="1" checked> Approve
+                                    <b>Status : </b><input type="radio" name="QRStatus" value="1"> Approve
                                     <input type="radio" name="QRStatus" value="0"> Reject
                                 </p>
                                 
@@ -364,8 +364,10 @@
                     </center>
 
                     <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" id="btnHousePrv">Previous</button>
                         <button type="button" class="btn btn-primary" id="btnHouseSave">Save</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnHouseNxt">Next</button>
                         <input type="hidden" id="hdHouseId" />
 
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
@@ -390,6 +392,8 @@
 @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 <!-- Dashboard Header Section    -->
 <script type="text/javascript">
+    var curHouseIdIndex = 0;
+
     $("#btnHouseSave").click(function () {
         var QRStatus = $("input[name='QRStatus']:checked").val();
         var houseId = $("#hdHouseId").val();
@@ -401,14 +405,108 @@
             datatype: "json",
             traditional: true,
             success: function (data) {
-                $('#myModal_Image_House').modal('toggle');
-                LoadGrid();
+                //$('#myModal_Image_House').modal('toggle');
+                //LoadGrid();
+                
+            }
+        });
+    }
+    );
+
+    $("#btnHousePrv").click(function () {
+        curHouseIdIndex--;
+        if (curHouseIdIndex < 0) {
+            curHouseIdIndex = arrHouseIDs.length - 1;
+        }
+
+        var houseId = arrHouseIDs[curHouseIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetHouseDetailsById?houseId=" + houseId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1House").text($("#ulb_name").text());
+                    $("#date1House").text(data.modifiedDate);
+                    $("#latlongDataHouse").text(data.ReferanceId);
+                    $("#dateDataHouse").text(data.Name);
+                    $("#imgggHouse").attr('src', data.QRCodeImage);
+
+                    $("#header_dataHouse").html('HouseScanify QR Image');
+                    $("#latHouse").text(data.HouseLat);
+                    $("#longHouse").text(data.HouseLong);
+                    $("#hdHouseId").val(data.houseId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatus][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatus][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatus][value=1]").prop('checked', false);
+                        $("input[name=QRStatus][value=0]").prop('checked', false);
+                    }
+
+                }
+
+            }
+        });
+    }
+    );
+
+
+
+    $("#btnHouseNxt").click(function () {
+        curHouseIdIndex++;
+        if (curHouseIdIndex >= arrHouseIDs.length) {
+            curHouseIdIndex = 0;
+        }
+        
+        var houseId = arrHouseIDs[curHouseIdIndex];
+        
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetHouseDetailsById?houseId=" + houseId ,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1House").text($("#ulb_name").text());
+                    $("#date1House").text(data.modifiedDate);
+                    $("#latlongDataHouse").text(data.ReferanceId);
+                    $("#dateDataHouse").text(data.Name);
+                    $("#imgggHouse").attr('src', data.QRCodeImage);
+                    
+                    $("#header_dataHouse").html('HouseScanify QR Image');
+                    $("#latHouse").text(data.HouseLat);
+                    $("#longHouse").text(data.HouseLong);
+                    $("#hdHouseId").val(data.houseId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatus][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatus][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatus][value=1]").prop('checked', false);
+                        $("input[name=QRStatus][value=0]").prop('checked', false);
+                    }
+
+                }
                 
             }
         });
     }
     );
     function PopImagesHouse(cel) {
+
+        
         //debugger
         $('#myModal_Image_House').modal('toggle');
         var d1 = $(cel).find('.date_time').text();
@@ -421,17 +519,28 @@
         var long = $(cel).find('.li_long').text();
         var houseId = $(cel).find('.li_houseId').text();
         var QRStatus = $(cel).find('.li_QRStatus').text();
+
+        curHouseIdIndex = arrHouseIDs.indexOf(parseInt(houseId));
+        //alert(curHouseIdIndex);
+
         if (QRStatus != 'null') {
             if (QRStatus == 'true') {
                 $("input[name=QRStatus][value=1]").prop('checked', true);
             }
-            else {
+            else if(QRStatus == 'false'){
 
                 $("input[name=QRStatus][value=0]").prop('checked', true);
             }
-
+            else  {
+                $("input[name=QRStatus][value=1]").prop('checked', false);
+                $("input[name=QRStatus][value=0]").prop('checked', false);
+            }
         }
-        
+        else {
+            $("input[name=QRStatus][value=1]").prop('checked', false);
+            $("input[name=QRStatus][value=0]").prop('checked', false);
+        }
+
         $("#hdHouseId").val(houseId);
 
         var ulb = $("#ulb_name").text()
