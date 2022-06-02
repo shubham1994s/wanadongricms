@@ -148,48 +148,75 @@
         var appid = $('#appid').val();
 
 
-        $.get("/houseScanifyEmp/GameAppList", null, house);
-        function house(data) {
-            var res = '';
-            //for (var i = 0; i < data.length; i++) {
-            //    res += "<li class=''><a style='cursor:pointer'class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + "</a></li>";
-            //}
-            var url_string = window.location.href; //window.location.href
-            var url = new URL(url_string);
-            var AppId_New = url.searchParams.get("AppId");
+        //$.get("/houseScanifyEmp/GameAppList", null, house);
+        //function house(data) {
+        //    var res = '';
+        //    //for (var i = 0; i < data.length; i++) {
+        //    //    res += "<li class=''><a style='cursor:pointer'class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + "</a></li>";
+        //    //}
+        //    var url_string = window.location.href; //window.location.href
+        //    var url = new URL(url_string);
+        //    var AppId_New = url.searchParams.get("AppId");
 
 
-            for (var i = 0; i < data.length; i++) {
-                res += "<li class='ulb' ><a style='cursor:pointer;vertical-align: inherit;' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
-                if (data[i].FAQ == 1) {
-                    res += "<i class='fa fa-circle pull-right blink' style='color:#33cc33;font-size:12px;margin: 3% auto;'></i>";
-                } else if (data[i].FAQ == 2) {
-                    res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
-                }
-                //if (AppId_New == data[i].AppId) {
-                //      res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
-                //}
-                res += "</a></li>";
-            }
+        //    for (var i = 0; i < data.length; i++) {
+        //        res += "<li class='ulb' ><a style='cursor:pointer;vertical-align: inherit;' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
+        //        if (data[i].FAQ == 1) {
+        //            res += "<i class='fa fa-circle pull-right blink' style='color:#33cc33;font-size:12px;margin: 3% auto;'></i>";
+        //        } else if (data[i].FAQ == 2) {
+        //            res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+        //        }
+        //        //if (AppId_New == data[i].AppId) {
+        //        //      res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+        //        //}
+        //        res += "</a></li>";
+        //    }
 
            
+        function LoadMenu() {
+
+            $.get("/houseScanifyEmp/GameAppList", null, house);
+            function house(data) {
+                var res = '';
+                //for (var i = 0; i < data.length; i++) {
+                //    res += "<li class=''><a style='cursor:pointer'class='li-hover' onclick='Edit(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + "</a></li>";
+                //}
+                var url_string = window.location.href; //window.location.href
+                var url = new URL(url_string);
+                var AppId_New = url.searchParams.get("AppId");
 
 
+                for (var i = 0; i < data.length; i++) {
+                    res += "<li class='ulb' ><a style='cursor:pointer;vertical-align: inherit;' class='li-hover' onclick='AppList(" + data[i].AppId + ")' id='" + data[i].AppId + "' >" + data[i].AppName + " ";
+                    if (data[i].FAQ == 1) {
+                        res += "<i class='fa fa-circle pull-right blink' style='color:#33cc33;font-size:12px;margin: 3% auto;'></i>";
+                    } else if (data[i].FAQ == 2) {
+                        res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+                    }
+                    //if (AppId_New == data[i].AppId) {
+                    //      res += "<i class='fa fa-circle pull-right' style='color:#fe9428;font-size:12px;margin: 3% auto;'></i>";
+                    //}
+                    res += "</a></li>";
+                }
 
-            $('.list-unstyled').html(res);
-            $('#img_ldr').css("display", "none");
-            $('#' + appid).parents('li').addClass('active');
+                $('.list-unstyled').html(res);
+                $('#img_ldr').css("display", "none");
+                $('#' + appid).parents('li').addClass('active');
 
-            $(".li-hover").hover(function () {
-                $(this).css("color", "#fff");
-            }, function () {
-                $(this).css("color", "#6c757d");
-            });
-            $(".active a").hover(function () {
-                $(this).css("color", "#fff");
-            }, function () {
-                $(this).css("color", "#fff");
-            });
+                $(".li-hover").hover(function () {
+                    $(this).css("color", "#fff");
+                }, function () {
+                    $(this).css("color", "#6c757d");
+                });
+                $(".active a").hover(function () {
+                    $(this).css("color", "#fff");
+                }, function () {
+                    $(this).css("color", "#fff");
+                });
+        }
+
+
+            
 
         }
 
@@ -329,6 +356,7 @@
     <script>
         var idleTime = 0;
         $(document).ready(function () {
+            LoadMenu();
             //Increment the idle time counter every minute.
             var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
 
@@ -354,9 +382,15 @@
         //    window.location.reload();
         //}
 
-        window.setTimeout(function () {
-            window.location.reload();
-        }, 600000);
+        //window.setTimeout(function () {
+        //    window.location.reload();
+        //}, 600000);
+
+        window.setInterval(function () {
+            
+            LoadMenu();
+            
+        }, 60000);
 
     </script>
     <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
