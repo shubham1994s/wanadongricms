@@ -225,6 +225,7 @@
                             <th> Photo</th>
                             <th> QR Status</th>
                             <th> QR Status Date</th>
+                            <th> Re-Scan Status</th>
                             @*<th> Action</th>*@
                         </tr>
                     </thead>
@@ -403,7 +404,21 @@
             success: function (data) {
                 $('#myModal_Image_House').modal('toggle');
                 LoadGrid();
-                
+                //ReLoad();
+                //function ReLoad() {
+                //    $.ajax({
+                //        "url": "/Datable/GetJqGridJson?rn=HSHouseDetails",
+                //        "type": "POST",
+                //        "datatype": "json",
+                //        success: function (response) {
+                //            if (response.error) {
+
+                //            } else {
+                //                demoGrid.ajax.reload();
+                //            }
+                //        }
+                //    });
+                //}
             }
         });
     }
@@ -425,11 +440,18 @@
             if (QRStatus == 'true') {
                 $("input[name=QRStatus][value=1]").prop('checked', true);
             }
-            else {
+            else if (QRStatus == 'false') {
 
                 $("input[name=QRStatus][value=0]").prop('checked', true);
             }
-
+            else {
+                $("input[name=QRStatus][value=1]").prop('checked', false);
+                $("input[name=QRStatus][value=0]").prop('checked', false);
+            }
+        }
+        else {
+            $("input[name=QRStatus][value=1]").prop('checked', false);
+            $("input[name=QRStatus][value=0]").prop('checked', false);
         }
         
         $("#hdHouseId").val(houseId);
