@@ -314,7 +314,7 @@
                                 <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
                                 <p>  <b id="hide_add1">Date And Time: </b><span id="date1"></span></p>
                                 <p>  <b id="hide_add2">Lat: </b><span id="lat"></span> <b id="hide_add3">Long: </b><span id="long"></span></p>
-                                
+
                             </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imggg" alt="Photo Not Found" style="height:400px">
@@ -379,10 +379,26 @@
             </div>
         </div>
     </div>
-
+    <div id="div_ldr" class="loaderStyle">
+        <div style="position: relative; top: 50%; left: 40%;">
+            <img style="height: 200px; width: 200px;" class="" src="~/Content/images/img/loading.gif">
+            <p style="font-size:18px;color:white"><b>Please Wait Downloading.....</b></p>
+        </div>
+    </div>
     <div id="snackbar">Image not uploaded...</div>
 </body>
-
+<style>
+    .loaderStyle {
+        display: none;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(100,100,100,0.75);
+        background-size: cover
+    }
+</style>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -758,7 +774,7 @@
     }
 </script>
 <script type="text/javascript">
-    function DownloadQRCode() {
+    function DownloadQRCode1() {
         var RadioValue = $("input[name='radio']:checked").val();
         var txt_fdate, txt_tdate, Client, UserId;
         //var name = [];
@@ -774,6 +790,68 @@
         window.location.href = "/HouseScanify/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
 
     }
+
+
+    function DownloadQRCode() {
+
+        var RadioValue = $("input[name='radio']:checked").val();
+        var txt_fdate, txt_tdate, Client, UserId;
+        //var name = [];
+        //var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
+
+        //for (var i = 0; i <= arr.length - 1; i++) {
+        //    name = arr[i].split("/");
+        //    arr[i] = name[1] + "/" + name[0] + "/" + name[2];
+        //}
+        UserId = $('#selectnumber').val();
+        txt_fdate = $('#txt_fdate').val();
+        txt_tdate = $('#txt_tdate').val();
+
+        //window.location.href = "/HouseScanify/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
+
+
+        $('#div_ldr').show();
+        $('#btnDownload').prop('disabled', true);
+
+        var urlToSend = "/HouseScanify/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
+        var req = new XMLHttpRequest();
+        req.open("GET", urlToSend, true);
+        req.responseType = "blob";
+        req.onreadystatechange = function (event) {
+
+
+            if (req.readyState === XMLHttpRequest.DONE) {
+                var status = req.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    var blob = req.response;
+
+                    const filenameHeader = req.getResponseHeader("Content-disposition").split(';')[1];
+                    const fileName = filenameHeader.substring(filenameHeader.indexOf("=") + 1);
+
+                    console.log("filename-" + fileName);
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = fileName;
+                    link.click();
+                    $('#div_ldr').hide();
+                    $('#btnDownload').prop('disabled', false);
+
+                } else {
+                    $('#div_ldr').hide();
+                    $('#btnDownload').prop('disabled', false);
+
+                }
+            }
+
+        };
+
+        req.send();
+
+    }
+
+
+
+
     $(document).ready(function () {
 
         LoadUserList();
