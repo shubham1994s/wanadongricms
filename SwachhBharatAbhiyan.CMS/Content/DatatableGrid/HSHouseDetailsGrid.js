@@ -1,4 +1,4 @@
-﻿
+﻿var arrHouseIDs = [];
 function loadGridHouse() {
     
     let appName = document.getElementById("ulb_name").innerHTML;
@@ -125,7 +125,48 @@ function loadGridHouse() {
       
 
     });
-   
+    var table = $('#demoGrid').DataTable();
+
+    $('#demoGrid').on('order.dt', function () {
+
+        var txt_fdate, txt_tdate, UserId, QRStatus, searchString;
+
+        var name = [];
+        var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
+
+        for (var i = 0; i <= arr.length - 1; i++) {
+            name = arr[i].split("/");
+            arr[i] = name[1] + "/" + name[0] + "/" + name[2];
+        }
+
+        txt_fdate = arr[0];
+        txt_tdate = arr[1];
+        UserId = $('#selectnumber').val();
+        QRStatus = $('#selectQRStatus').val();
+        searchString = $("#sHouse").val();
+        // This will show: "Ordering on column 1 (asc)", for example
+        var order = table.order();
+        //console.log(order);
+        var sortColumn = table.settings().init().columns[order[0][0]].name;
+        var sortOrder = order[0][1];
+        //alert(sortColumn);
+        //alert(order[0][1]);
+        //$('#orderInfo').html('Ordering on column ' + order[0][0] + ' (' + order[0][1] + ')');
+
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetHSHouseDetailsID?fdate=" + txt_fdate + "&tdate=" + txt_tdate + "&userId=" + UserId + "&searchString=" + searchString + "&qrStatus=" + QRStatus + "&sortColumn=" + sortColumn + "&sortOrder=" + sortOrder,
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                arrHouseIDs = data;
+                console.log(arrHouseIDs);
+                //var arrIDs = JSON.parse(data);
+                //console.log(arrIDs);
+            }
+        });
+    });
     //SearchHouse();
 }
 
