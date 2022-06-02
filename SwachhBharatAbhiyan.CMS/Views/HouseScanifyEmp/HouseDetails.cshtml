@@ -225,6 +225,7 @@
                             <th> Photo</th>
                             <th> QR Status</th>
                             <th> QR Status Date</th>
+                            <th> Re-Scan Status</th>
                             @*<th> Action</th>*@
                         </tr>
                     </thead>
@@ -559,7 +560,7 @@
 
     }
     function PopImages(cel) {
-        //debugger
+        debugger
         $('#myModal_Image').modal('toggle');
         var d1 = $(cel).find('.date_time').text();
         var addr = $(cel).find('.addr-length').text();
