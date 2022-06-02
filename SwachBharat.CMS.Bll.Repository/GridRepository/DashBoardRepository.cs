@@ -5438,6 +5438,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     ReferanceId = x.ReferanceId,
                     modifiedDate = x.modified.HasValue ? Convert.ToDateTime(x.modified).ToString("dd/MM/yyyy hh:mm tt") : "",
                     QRStatusDate = x.QRStatusDate.HasValue ? Convert.ToDateTime(x.QRStatusDate).ToString("dd/MM/yyyy hh:mm tt") : "",
+                    modifiedDate1 = x.modified,
+                    QRStatusDate1 = x.QRStatusDate,
                     QRStatus = x.QRStatus,
                     totalRowCount = x.FilterTotalCount.HasValue ? Convert.ToInt32(x.FilterTotalCount) : 0,
                 }).ToList();

@@ -4588,13 +4588,24 @@ namespace SwachBharat.CMS.Bll.Services
 
         public void SaveHSEmployeeQRStatus(int houseId, string QRStatus)
         {
+            bool? bQRStatus = null;
             try
             {
                 using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                 {
                     if (houseId > 0 && !string.IsNullOrEmpty(QRStatus))
                     {
-                        bool bQRStatus = (QRStatus == "1") ? true : false;
+                        if (QRStatus == "1")
+                        {
+                            bQRStatus = true;
+                        }else if (QRStatus == "0")
+                        {
+                            bQRStatus = false;
+                        }
+                        else
+                        {
+                            bQRStatus = null;
+                        }
 
                         var model = db.HouseMasters.Where(x => x.houseId == houseId).FirstOrDefault();
                         if (model != null)
@@ -4613,7 +4624,52 @@ namespace SwachBharat.CMS.Bll.Services
         }
 
 
+        public List<int> GetHSHouseDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder)
+        {
+            List<int> lstIDs = new List<int>() {  };
 
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var data = db.SP_GetHSHouseDetailsID(fromDate, toDate, userId, QRStatus, sortColumn, sortOrder, searchString).ToList();
+                    if (data != null && data.Count > 0)
+                    {
+                        foreach (var i in data)
+                        {
+                            lstIDs.Add(i ?? 0);
+                        }
+                    }
+                }
+               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return lstIDs;
+        }
+
+        public SBAHSHouseDetailsGrid GetHouseDetailsById(int houseId)
+        {
+            SBAHSHouseDetailsGrid data = null;
+            using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+            {
+                data = db.SP_GetHSHouseDetailsById(houseId).Select(x => new SBAHSHouseDetailsGrid
+                {
+                    houseId = x.houseId,
+                    Name = x.qrEmpName,
+                    HouseLat = x.houseLat,
+                    HouseLong = x.houseLong,
+                    QRCodeImage = x.QRCodeImage,
+                    ReferanceId = x.ReferanceId,
+                    modifiedDate = x.modified.HasValue ? Convert.ToDateTime(x.modified).ToString("dd/MM/yyyy hh:mm tt") : "",
+                    QRStatusDate = x.QRStatusDate.HasValue ? Convert.ToDateTime(x.QRStatusDate).ToString("dd/MM/yyyy hh:mm tt") : "",
+                    QRStatus = x.QRStatus
+                }).FirstOrDefault();
+            }
+            return data;
+        }
 
         public void SaveUREmployeeDetails(UREmployeeDetailsVM data)
         {
