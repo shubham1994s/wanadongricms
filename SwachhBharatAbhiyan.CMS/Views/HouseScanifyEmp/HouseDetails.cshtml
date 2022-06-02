@@ -313,6 +313,7 @@
                                 <p> <b id="hide_add">House Id: </b><span id="latlongData"></span></p>
                                 <p>  <b id="hide_add1">Date And Time: </b><span id="date1"></span></p>
                                 <p>  <b id="hide_add2">Lat: </b><span id="lat"></span> <b id="hide_add3">Long: </b><span id="long"></span></p>
+                                
                             </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imggg" alt="Photo Not Found" style="height:400px">
@@ -353,7 +354,7 @@
                                     <b>Status : </b><input type="radio" name="QRStatus" value="1"> Approve
                                     <input type="radio" name="QRStatus" value="0"> Reject
                                 </p>
-                                
+                                <p><b><span class="text-success" id="houseSave_pop"></span></b></p>
 
                             </div>
                             <div class="col-md-6">
@@ -407,7 +408,9 @@
             success: function (data) {
                 //$('#myModal_Image_House').modal('toggle');
                 //LoadGrid();
-                
+                alert();
+                $("#houseSave_pop").html("QR Status Saved Successfully...").delay(1500).show().fadeOut('slow');
+
             }
         });
     }
