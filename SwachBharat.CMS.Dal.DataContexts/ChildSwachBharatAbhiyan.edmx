@@ -504,6 +504,26 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.SS_1.4_QUESTI
           <Property Name="name" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.VW_HSGetHouseDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_HSGetHouseDetails">
+          <Key>
+            <PropertyRef Name="houseId" />
+            <PropertyRef Name="BinaryQrCodeImage" />
+          </Key>
+          <Property Name="userId" Type="int" />
+          <Property Name="houseId" Type="int" Nullable="false" />
+          <Property Name="houseLat" Type="nvarchar" MaxLength="500" />
+          <Property Name="houseLong" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReferanceId" Type="nvarchar" MaxLength="350" />
+          <Property Name="QRStatus" Type="bit" />
+          <Property Name="QRStatusDate" Type="datetime" />
+          <Property Name="modified" Type="datetime" />
+          <Property Name="qrEmpName" Type="nvarchar" MaxLength="500" />
+          <Property Name="houseOwner" Type="varchar" MaxLength="200" />
+          <Property Name="BinaryQrCodeImage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FilterTotalCount" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotification' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Vw_MsgNotification">
           <Key>
@@ -623,6 +643,17 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Parameter Name="qrStatus" Type="int" Mode="In" />
           <Parameter Name="sortColumn" Type="varchar" Mode="In" />
           <Parameter Name="sortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="SearchText" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetHSHouseDetailsnew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fdate" Type="datetime" Mode="In" />
+          <Parameter Name="tdate" Type="datetime" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="qrStatus" Type="int" Mode="In" />
+          <Parameter Name="sortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="sortOrder" Type="varchar" Mode="In" />
+          <Parameter Name="OffsetValue" Type="int" Mode="In" />
+          <Parameter Name="PagingSize" Type="int" Mode="In" />
           <Parameter Name="SearchText" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_GetLiveTracking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -798,6 +829,22 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
     [SS_1_4_QUESTION].[Q_NO] AS [Q_NO], 
     [SS_1_4_QUESTION].[NOTE] AS [NOTE]
     FROM [dbo].[SS_1.4_QUESTION] AS [SS_1_4_QUESTION]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_HSGetHouseDetails" EntityType="Self.VW_HSGetHouseDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_HSGetHouseDetails].[userId] AS [userId], 
+    [VW_HSGetHouseDetails].[houseId] AS [houseId], 
+    [VW_HSGetHouseDetails].[houseLat] AS [houseLat], 
+    [VW_HSGetHouseDetails].[houseLong] AS [houseLong], 
+    [VW_HSGetHouseDetails].[ReferanceId] AS [ReferanceId], 
+    [VW_HSGetHouseDetails].[QRStatus] AS [QRStatus], 
+    [VW_HSGetHouseDetails].[QRStatusDate] AS [QRStatusDate], 
+    [VW_HSGetHouseDetails].[modified] AS [modified], 
+    [VW_HSGetHouseDetails].[qrEmpName] AS [qrEmpName], 
+    [VW_HSGetHouseDetails].[houseOwner] AS [houseOwner], 
+    [VW_HSGetHouseDetails].[BinaryQrCodeImage] AS [BinaryQrCodeImage], 
+    [VW_HSGetHouseDetails].[FilterTotalCount] AS [FilterTotalCount]
+    FROM [dbo].[VW_HSGetHouseDetails] AS [VW_HSGetHouseDetails]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Vw_MsgNotification" EntityType="Self.Vw_MsgNotification" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1031,7 +1078,19 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="SearchText" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GetHSHouseDetailsById" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_GetHSHouseDetailsById_Result)">
-            <Parameter Name="houseid" Mode="In" Type="Int32" />
+          <Parameter Name="houseid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="VW_HSGetHouseDetails" EntityType="DevSwachhBharatNagpurModel.VW_HSGetHouseDetails" />
+          <FunctionImport Name="SP_GetHSHouseDetailsnew" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_GetHSHouseDetailsnew_Result)">
+            <Parameter Name="fdate" Mode="In" Type="DateTime" />
+            <Parameter Name="tdate" Mode="In" Type="DateTime" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="qrStatus" Mode="In" Type="Int32" />
+            <Parameter Name="sortColumn" Mode="In" Type="String" />
+            <Parameter Name="sortOrder" Mode="In" Type="String" />
+            <Parameter Name="OffsetValue" Mode="In" Type="Int32" />
+            <Parameter Name="PagingSize" Mode="In" Type="Int32" />
+            <Parameter Name="SearchText" Mode="In" Type="String" />
           </FunctionImport>
          
         </EntityContainer>
@@ -2264,6 +2323,37 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="DateTime" Name="modified" Nullable="true" Precision="23" />
           <Property Type="String" Name="qrEmpName" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="QRCodeImage" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="VW_HSGetHouseDetails">
+          <Key>
+            <PropertyRef Name="houseId" />
+            <PropertyRef Name="BinaryQrCodeImage" />
+          </Key>
+          <Property Name="userId" Type="Int32" />
+          <Property Name="houseId" Type="Int32" Nullable="false" />
+          <Property Name="houseLat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="houseLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReferanceId" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="QRStatus" Type="Boolean" />
+          <Property Name="QRStatusDate" Type="DateTime" Precision="3" />
+          <Property Name="modified" Type="DateTime" Precision="3" />
+          <Property Name="qrEmpName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="houseOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BinaryQrCodeImage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilterTotalCount" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="SP_GetHSHouseDetailsnew_Result">
+          <Property Type="Int32" Name="userId" Nullable="true" />
+          <Property Type="Int32" Name="houseId" Nullable="false" />
+          <Property Type="String" Name="houseLat" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="houseLong" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ReferanceId" Nullable="true" MaxLength="350" />
+          <Property Type="Boolean" Name="QRStatus" Nullable="true" />
+          <Property Type="DateTime" Name="QRStatusDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="modified" Nullable="true" Precision="23" />
+          <Property Type="String" Name="qrEmpName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="BinaryQrCodeImage" Nullable="false" />
+          <Property Type="Int32" Name="FilterTotalCount" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3575,6 +3665,41 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="modified" ColumnName="modified" />
                 <ScalarProperty Name="qrEmpName" ColumnName="qrEmpName" />
                 <ScalarProperty Name="QRCodeImage" ColumnName="QRCodeImage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="VW_HSGetHouseDetails">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.VW_HSGetHouseDetails">
+              <MappingFragment StoreEntitySet="VW_HSGetHouseDetails">
+                <ScalarProperty Name="FilterTotalCount" ColumnName="FilterTotalCount" />
+                <ScalarProperty Name="BinaryQrCodeImage" ColumnName="BinaryQrCodeImage" />
+                <ScalarProperty Name="houseOwner" ColumnName="houseOwner" />
+                <ScalarProperty Name="qrEmpName" ColumnName="qrEmpName" />
+                <ScalarProperty Name="modified" ColumnName="modified" />
+                <ScalarProperty Name="QRStatusDate" ColumnName="QRStatusDate" />
+                <ScalarProperty Name="QRStatus" ColumnName="QRStatus" />
+                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
+                <ScalarProperty Name="houseLong" ColumnName="houseLong" />
+                <ScalarProperty Name="houseLat" ColumnName="houseLat" />
+                <ScalarProperty Name="houseId" ColumnName="houseId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetHSHouseDetailsnew" FunctionName="DevSwachhBharatNagpurModel.Store.SP_GetHSHouseDetailsnew">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.SP_GetHSHouseDetailsnew_Result">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="houseId" ColumnName="houseId" />
+                <ScalarProperty Name="houseLat" ColumnName="houseLat" />
+                <ScalarProperty Name="houseLong" ColumnName="houseLong" />
+                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
+                <ScalarProperty Name="QRStatus" ColumnName="QRStatus" />
+                <ScalarProperty Name="QRStatusDate" ColumnName="QRStatusDate" />
+                <ScalarProperty Name="modified" ColumnName="modified" />
+                <ScalarProperty Name="qrEmpName" ColumnName="qrEmpName" />
+                <ScalarProperty Name="BinaryQrCodeImage" ColumnName="BinaryQrCodeImage" />
+                <ScalarProperty Name="FilterTotalCount" ColumnName="FilterTotalCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

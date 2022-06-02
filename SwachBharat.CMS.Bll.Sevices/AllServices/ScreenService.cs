@@ -5013,13 +5013,13 @@ namespace SwachBharat.CMS.Bll.Services
                         {
                           //  data = db.HouseMasters.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.QRCodeImage) && a.userId == UserId));
                          
-                            data = db.HouseMasters.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.QRCodeImage) && a.userId == UserId).Select(x => new SBAHSHouseDetailsGrid
+                            data = db.VW_HSGetHouseDetails.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.BinaryQrCodeImage) && a.userId == UserId).Select(x => new SBAHSHouseDetailsGrid
                             {
                                 houseId = x.houseId,
                                 Name = x.houseOwner,
                                 HouseLat = x.houseLat,
                                 HouseLong = x.houseLong,
-                                QRCodeImage = x.QRCodeImage,
+                                QRCodeImage = x.BinaryQrCodeImage,
                                 ReferanceId = x.ReferanceId
                             }).OrderBy(a => a.houseId).ToList();
                         }
@@ -5099,13 +5099,13 @@ namespace SwachBharat.CMS.Bll.Services
                         //  List<SBAHSHouseDetailsGrid> ResultValues = query.ToList();
                         if (type == 0)
                         {
-                            data = db.HouseMasters.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.QRCodeImage)).Select(x => new SBAHSHouseDetailsGrid
+                            data = db.VW_HSGetHouseDetails.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.BinaryQrCodeImage)).Select(x => new SBAHSHouseDetailsGrid
                             {
                                 houseId =  x.houseId,
                                 Name = x.houseOwner,
                                 HouseLat = x.houseLat,
                                 HouseLong = x.houseLong,
-                                QRCodeImage = x.QRCodeImage,
+                                QRCodeImage = x.BinaryQrCodeImage,
                                 ReferanceId = x.ReferanceId
                             }).OrderBy(a => a.houseId).ToList();
                         }

@@ -5428,13 +5428,13 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
             {
 
-                data = db.SP_GetHSHouseDetails(fdate, tdate, userId, iQRStatus, sortColumn, sortColumnDir, skip, pageSize, SearchString).Select(x => new SBAHSHouseDetailsGrid
+                data = db.SP_GetHSHouseDetailsnew(fdate, tdate, userId, iQRStatus, sortColumn, sortColumnDir, skip, pageSize, SearchString).Select(x => new SBAHSHouseDetailsGrid
                 {
                     houseId = x.houseId,
                     Name = x.qrEmpName,
                     HouseLat = x.houseLat,
                     HouseLong = x.houseLong,
-                    QRCodeImage = x.QRCodeImage,
+                    QRCodeImage = string.Format(x.BinaryQrCodeImage),
                     ReferanceId = x.ReferanceId,
                     modifiedDate = x.modified.HasValue ? Convert.ToDateTime(x.modified).ToString("dd/MM/yyyy hh:mm tt") : "",
                     QRStatusDate = x.QRStatusDate.HasValue ? Convert.ToDateTime(x.QRStatusDate).ToString("dd/MM/yyyy hh:mm tt") : "",

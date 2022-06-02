@@ -38,6 +38,7 @@
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.MonthlyAttedance" Width="1.5" PointX="18.375" PointY="8.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.HouseMaster" Width="1.5" PointX="9.375" PointY="15.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.StreetSweepingBeat" Width="1.5" PointX="3.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VW_HSGetHouseDetails" Width="1.5" PointX="11.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
