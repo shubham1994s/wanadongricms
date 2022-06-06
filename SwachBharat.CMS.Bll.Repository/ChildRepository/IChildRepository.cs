@@ -123,9 +123,15 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         //Added By saurabh (04 June 2019)
         void SaveHSEmployee(HouseScanifyEmployeeDetailsVM employee);
 
-        void SaveHSEmployeeQRStatus(int houseId, string QRStatus);
+        void SaveHSQRStatusHouse(int houseId, string QRStatus);
+        void SaveQRStatusDump(int dumpId, string QRStatus);
+
         List<int> GetHSHouseDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder);
+        List<int> GetHSDumpDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder);
+
         SBAHSHouseDetailsGrid GetHouseDetailsById(int houseId);
+        SBAHSDumpyardDetailsGrid GetDumpDetailsById(int dumpId);
+
         void SaveUREmployee(UREmployeeDetailsVM employee);
 
         //Added By saurabh (04 June 2019)
