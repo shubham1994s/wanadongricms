@@ -5174,7 +5174,7 @@ namespace SwachBharat.CMS.Bll.Services
         //Added by milind 09-03-2022
         public async Task<List<SBAHSHouseDetailsGrid>> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate)
         {
-
+            
             List<SBAHSHouseDetailsGrid> data = new List<SBAHSHouseDetailsGrid>();
             try
             {
@@ -5186,8 +5186,10 @@ namespace SwachBharat.CMS.Bll.Services
                         if (type == 0)
                         {
                             //  data = db.HouseMasters.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.QRCodeImage) && a.userId == UserId));
-
-                            data = db.VW_HSGetHouseDetails.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.BinaryQrCodeImage) && a.userId == UserId).Select(x => new SBAHSHouseDetailsGrid
+                            IQueryable<VW_HSGetHouseDetails> query = db.VW_HSGetHouseDetails.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.BinaryQrCodeImage) && a.userId == UserId);
+                        
+                            
+                            data = query.Select(x => new SBAHSHouseDetailsGrid
                             {
                                 houseId = x.houseId,
                                 Name = x.houseOwner,
@@ -5271,9 +5273,12 @@ namespace SwachBharat.CMS.Bll.Services
                         //}).OrderBy(a => a.houseId).ToList();
 
                         //  List<SBAHSHouseDetailsGrid> ResultValues = query.ToList();
+
+                        IQueryable<VW_HSGetHouseDetails> query = db.VW_HSGetHouseDetails.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.BinaryQrCodeImage));
+                     
                         if (type == 0)
                         {
-                            data = db.VW_HSGetHouseDetails.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.BinaryQrCodeImage)).Select(x => new SBAHSHouseDetailsGrid
+                            data = query.Select(x => new SBAHSHouseDetailsGrid
                             {
                                 houseId = x.houseId,
                                 Name = x.houseOwner,
@@ -5329,6 +5334,15 @@ namespace SwachBharat.CMS.Bll.Services
                 return data;
             }
             return data;
+        }
+
+
+        public string getbinarytobase64(string plainText)
+        {
+
+            var plainTextBytes = System.Text.Encoding.ASCII.GetBytes(plainText);
+            var base64 = System.Convert.ToBase64String(plainTextBytes);
+            return base64;
         }
 
         #endregion
