@@ -427,14 +427,24 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-        public void SaveQRStatus(int appId,int houseId,string QRStatus)
+        public void SaveQRStatusHouse(int appId,int houseId,string QRStatus)
         {
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
-                childRepository.SaveHSEmployeeQRStatus(houseId, QRStatus);
+                childRepository.SaveHSQRStatusHouse(houseId, QRStatus);
             }
         }
+
+        public void SaveQRStatusDump(int appId, int dumpId, string QRStatus)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                childRepository = new ChildRepository(SessionHandler.Current.AppId);
+                childRepository.SaveQRStatusDump(dumpId, QRStatus);
+            }
+        }
+
         public ActionResult GetHSHouseDetailsID(string fdate, string tdate,int userId,string searchString,int? qrStatus,string sortColumn, string sortOrder)
         {
             List<int> obj = new List<int>();
@@ -471,6 +481,48 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult GetHSDumpDetailsID(string fdate, string tdate, int userId, string searchString, int? qrStatus, string sortColumn, string sortOrder)
+        {
+            List<int> obj = new List<int>();
+            DateTime? fromDate;
+            DateTime? toDate;
+            if (!string.IsNullOrEmpty(fdate))
+            {
+                fromDate = Convert.ToDateTime(fdate + " " + "00:00:00");
+            }
+            else
+            {
+                fromDate = null;
+            }
+
+            if (!string.IsNullOrEmpty(tdate))
+            {
+                toDate = Convert.ToDateTime(tdate + " " + "23:59:59");
+            }
+            else
+            {
+                toDate = null;
+            }
+
+            int iQRStatus = qrStatus ?? -1;
+            iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+            if (SessionHandler.Current.AppId != 0)
+            {
+                childRepository = new ChildRepository(SessionHandler.Current.AppId);
+                //SBALUserLocationMapView obj = new SBALUserLocationMapView();
+
+                obj = childRepository.GetHSDumpDetailsID(fromDate, toDate, userId, searchString, iQRStatus, sortColumn, sortOrder);
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
         public ActionResult GetHouseDetailsById(int houseId)
         {
             SBAHSHouseDetailsGrid obj = new SBAHSHouseDetailsGrid();
@@ -484,6 +536,23 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetDumpDetailsById(int dumpId)
+        {
+            SBAHSDumpyardDetailsGrid obj = new SBAHSDumpyardDetailsGrid();
+            if (SessionHandler.Current.AppId != 0)
+            {
+                childRepository = new ChildRepository(SessionHandler.Current.AppId);
+                //SBALUserLocationMapView obj = new SBALUserLocationMapView();
+
+                obj = childRepository.GetDumpDetailsById(dumpId);
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public ActionResult AddUREmployeeDetails(int teamId = -1)
         {
                 

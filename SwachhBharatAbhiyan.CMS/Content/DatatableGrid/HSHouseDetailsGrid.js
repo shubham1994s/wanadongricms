@@ -1,4 +1,4 @@
-﻿var arrHouseIDs = [];
+﻿
 function loadGridHouse() {
     
     let appName = document.getElementById("ulb_name").innerHTML;
@@ -125,7 +125,7 @@ function loadGridHouse() {
       
 
     });
-    var table = $('#demoGrid').DataTable();
+    var tableHouse = $('#demoGrid').DataTable();
 
     setInterval(function () {
         table.ajax.reload(null, false); // user paging is not reset on reload
@@ -149,9 +149,9 @@ function loadGridHouse() {
         QRStatus = $('#selectQRStatus').val();
         searchString = $("#sHouse").val();
         // This will show: "Ordering on column 1 (asc)", for example
-        var order = table.order();
+        var order = tableHouse.order();
         //console.log(order);
-        var sortColumn = table.settings().init().columns[order[0][0]].name;
+        var sortColumn = tableHouse.settings().init().columns[order[0][0]].name;
         var sortOrder = order[0][1];
         //alert(sortColumn);
         //alert(order[0][1]);
@@ -165,7 +165,7 @@ function loadGridHouse() {
             traditional: true,
             success: function (data) {
                 arrHouseIDs = data;
-                console.log(arrHouseIDs);
+                //console.log(arrHouseIDs);
                 //var arrIDs = JSON.parse(data);
                 //console.log(arrIDs);
             }

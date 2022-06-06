@@ -248,6 +248,8 @@
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
+                            <th> QR Status</th>
+                            <th> QR Status Date</th>
                             @*<th> Action</th>*@
                         </tr>
                     </thead>
@@ -352,8 +354,8 @@
                                 <p>  <b id="hide_add1">Date And Time: </b><span id="date1House"></span></p>
                                 <p>  <b id="hide_add2">Lat: </b><span id="latHouse"></span> <b id="hide_add3">Long: </b><span id="longHouse"></span></p>
                                 <p>
-                                    <b>Status : </b><input type="radio" name="QRStatus" value="1"> Approve
-                                    <input type="radio" name="QRStatus" value="0"> Reject
+                                    <b>Status : </b><input type="radio" name="QRStatusHouse" value="1"> Approve
+                                    <input type="radio" name="QRStatusHouse" value="0"> Reject
                                 </p>
                                 
                                 <div class="text-center pt-1"><button type="button" class="btn btn-success" id="btnHouseSave">Save</button></div>
@@ -379,6 +381,55 @@
             </div>
         </div>
     </div>
+    <div id="myModal_Image_Dump" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="ulb_name1Dump" class="text-center" style="padding-left:12%;width:80%"></h3>
+                </div>
+
+                <div class="modal-body pt-0">
+                    <center>
+
+                        <div class="row">
+                            <div class="col-md-6" style="padding-top:1rem;text-align:left;padding-left:8%">
+                                <h4 id="header_dataDump" class="modal-title" style="padding-bottom:4rem;text-align:left;"></h4>
+                                <p> <b id="hide_date">Employee Name: </b><span id="dateDataDump"></span></p>
+                                <p> <b id="hide_add">Dump Id: </b><span id="latlongDataDump"></span></p>
+                                <p>  <b id="hide_add1">Date And Time: </b><span id="date1Dump"></span></p>
+                                <p>  <b id="hide_add2">Lat: </b><span id="latDump"></span> <b id="hide_add3">Long: </b><span id="longDump"></span></p>
+                                <p>
+                                    <b>Status : </b><input type="radio" name="QRStatusDump" value="1"> Approve
+                                    <input type="radio" name="QRStatusDump" value="0"> Reject
+                                </p>
+                                <p><b><span class="text-success" id="DumpSave_pop"></span></b></p>
+
+                            </div>
+                            <div class="col-md-6">
+                                <img class="img-responsive" id="imgggDump" alt="Photo Not Found" style="height:400px">
+
+                            </div>
+                        </div>
+                    </center>
+
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" id="btnDumpPrv">Previous</button>
+                        <button type="button" class="btn btn-primary" id="btnDumpSave">Save</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnDumpNxt">Next</button>
+                        <input type="hidden" id="hdDumpId" />
+
+                        @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <div id="div_ldr" class="loaderStyle">
         <div style="position: relative; top: 50%; left: 40%;">
             <img style="height: 200px; width: 200px;" class="" src="~/Content/images/img/loading.gif">
@@ -410,15 +461,17 @@
 @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
 <!-- Dashboard Header Section    -->
 <script type="text/javascript">
+    var arrHouseIDs = [];
+    var arrDumpIDs = [];
     var curHouseIdIndex = 0;
-
+    var curDumpIdIndex = 0;
     $("#btnHouseSave").click(function () {
-        var QRStatus = $("input[name='QRStatus']:checked").val();
+        var QRStatus = $("input[name='QRStatusHouse']:checked").val();
         var houseId = $("#hdHouseId").val();
         var AppId = $('#appid').val();
         $.ajax({
             type: "post",
-            url: "/HouseScanifyEmp/SaveQRStatus?appId=" + AppId + "&houseId=" + houseId + "&QRStatus=" + QRStatus,
+            url: "/HouseScanifyEmp/SaveQRStatusHouse?appId=" + AppId + "&houseId=" + houseId + "&QRStatus=" + QRStatus,
             data: { },
             datatype: "json",
             traditional: true,
@@ -432,6 +485,30 @@
         });
     }
     );
+
+    $("#btnDumpSave").click(function () {
+        var QRStatus = $("input[name='QRStatusDump']:checked").val();
+        var dumpId = $("#hdDumpId").val();
+        var AppId = $('#appid').val();
+        $.ajax({
+            type: "post",
+            url: "/HouseScanifyEmp/SaveQRStatusDump?appId=" + AppId + "&dumpId=" + dumpId + "&QRStatus=" + QRStatus,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                //$('#myModal_Image_House').modal('toggle');
+                //LoadGrid();
+
+                $("#DumpSave_pop").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
+
+            }
+        });
+    }
+    );
+
+
+
 
     $("#btnHousePrv").click(function () {
         curHouseIdIndex--;
@@ -460,15 +537,15 @@
                     $("#longHouse").text(data.HouseLong);
                     $("#hdHouseId").val(data.houseId);
                     if (data.QRStatus == true) {
-                        $("input[name=QRStatus][value=1]").prop('checked', true);
+                        $("input[name=QRStatusHouse][value=1]").prop('checked', true);
                     }
                     else if (data.QRStatus == false) {
 
-                        $("input[name=QRStatus][value=0]").prop('checked', true);
+                        $("input[name=QRStatusHouse][value=0]").prop('checked', true);
                     }
                     else {
-                        $("input[name=QRStatus][value=1]").prop('checked', false);
-                        $("input[name=QRStatus][value=0]").prop('checked', false);
+                        $("input[name=QRStatusHouse][value=1]").prop('checked', false);
+                        $("input[name=QRStatusHouse][value=0]").prop('checked', false);
                     }
 
                 }
@@ -478,6 +555,50 @@
     }
     );
 
+    $("#btnDumpPrv").click(function () {
+        curDumpIdIndex--;
+        if (curDumpIdIndex < 0) {
+            curDumpIdIndex = arrDumpIDs.length - 1;
+        }
+
+        var dumpId = arrDumpIDs[curDumpIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetDumpDetailsById?dumpId=" + dumpId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1Dump").text($("#ulb_name").text());
+                    $("#date1Dump").text(data.modifiedDate);
+                    $("#latlongDataDump").text(data.ReferanceId);
+                    $("#dateDataDump").text(data.Name);
+                    $("#imgggDump").attr('src', data.QRCodeImage);
+
+                    $("#header_dataDump").html('HouseScanify QR Image');
+                    $("#latDump").text(data.HouseLat);
+                    $("#longDump").text(data.HouseLong);
+                    $("#hdDumpId").val(data.dumpId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatusDump][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatusDump][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatusDump][value=1]").prop('checked', false);
+                        $("input[name=QRStatusDump][value=0]").prop('checked', false);
+                    }
+
+                }
+
+            }
+        });
+    }
+    );
 
 
     $("#btnHouseNxt").click(function () {
@@ -507,15 +628,15 @@
                     $("#longHouse").text(data.HouseLong);
                     $("#hdHouseId").val(data.houseId);
                     if (data.QRStatus == true) {
-                        $("input[name=QRStatus][value=1]").prop('checked', true);
+                        $("input[name=QRStatusHouse][value=1]").prop('checked', true);
                     }
                     else if (data.QRStatus == false) {
 
-                        $("input[name=QRStatus][value=0]").prop('checked', true);
+                        $("input[name=QRStatusHouse][value=0]").prop('checked', true);
                     }
                     else {
-                        $("input[name=QRStatus][value=1]").prop('checked', false);
-                        $("input[name=QRStatus][value=0]").prop('checked', false);
+                        $("input[name=QRStatusHouse][value=1]").prop('checked', false);
+                        $("input[name=QRStatusHouse][value=0]").prop('checked', false);
                     }
 
                 }
@@ -524,6 +645,57 @@
         });
     }
     );
+
+    $("#btnDumpNxt").click(function () {
+        curDumpIdIndex++;
+        if (curDumpIdIndex >= arrDumpIDs.length) {
+            curDumpIdIndex = 0;
+        }
+
+        var dumpId = arrDumpIDs[curDumpIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetDumpDetailsById?dumpId=" + dumpId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1Dump").text($("#ulb_name").text());
+                    $("#date1Dump").text(data.modifiedDate);
+                    $("#latlongDataDump").text(data.ReferanceId);
+                    $("#dateDataDump").text(data.Name);
+                    $("#imgggDump").attr('src', data.QRCodeImage);
+
+                    $("#header_dataDump").html('HouseScanify QR Image');
+                    $("#latDump").text(data.HouseLat);
+                    $("#longDump").text(data.HouseLong);
+                    $("#hdDumpId").val(data.dumpId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatusDump][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatusDump][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatusDump][value=1]").prop('checked', false);
+                        $("input[name=QRStatusDump][value=0]").prop('checked', false);
+                    }
+
+                }
+
+
+            }
+        });
+    }
+    );
+
+
+
+
+
     function PopImagesHouse(cel) {
 
         
@@ -545,36 +717,93 @@
 
         if (QRStatus != 'null') {
             if (QRStatus == 'true') {
-                $("input[name=QRStatus][value=1]").prop('checked', true);
+                $("input[name=QRStatusHouse][value=1]").prop('checked', true);
             }
             else if(QRStatus == 'false'){
 
-                $("input[name=QRStatus][value=0]").prop('checked', true);
+                $("input[name=QRStatusHouse][value=0]").prop('checked', true);
             }
             else  {
-                $("input[name=QRStatus][value=1]").prop('checked', false);
-                $("input[name=QRStatus][value=0]").prop('checked', false);
+                $("input[name=QRStatusHouse][value=1]").prop('checked', false);
+                $("input[name=QRStatusHouse][value=0]").prop('checked', false);
             }
         }
         else {
-            $("input[name=QRStatus][value=1]").prop('checked', false);
-            $("input[name=QRStatus][value=0]").prop('checked', false);
+            $("input[name=QRStatusHouse][value=1]").prop('checked', false);
+            $("input[name=QRStatusHouse][value=0]").prop('checked', false);
         }
 
         $("#hdHouseId").val(houseId);
 
         var ulb = $("#ulb_name").text()
-        jQuery("#ulb_name1House").text(ulb);
-        jQuery("#date1House").text(d1);
-        jQuery("#latlongDataHouse").text(addr);
-        jQuery("#dateDataHouse").text(date);
-        jQuery("#imgggHouse").attr('src', imgsrc);
+        $("#ulb_name1House").text(ulb);
+        $("#date1House").text(d1);
+        $("#latlongDataHouse").text(addr);
+        $("#dateDataHouse").text(date);
+        $("#imgggHouse").attr('src', imgsrc);
         //jQuery("#latlongData").text(cellValue);
-        jQuery("#header_dataHouse").html(head);
-        jQuery("#latHouse").text(lat);
-        jQuery("#longHouse").text(long);
+        $("#header_dataHouse").html(head);
+        $("#latHouse").text(lat);
+        $("#longHouse").text(long);
 
     }
+
+
+    function PopImagesDump(cel) {
+
+
+        //debugger
+        $('#myModal_Image_Dump').modal('toggle');
+        var d1 = $(cel).find('.date_time').text();
+        var addr = $(cel).find('.addr-length').text();
+        var date = $(cel).find('.li_date').text();
+        var imgsrc = $(cel).find('img').attr('src');
+        var head = $(cel).find('.li_title').text();
+
+        var lat = $(cel).find('.li_lat').text();
+        var long = $(cel).find('.li_long').text();
+        var houseId = $(cel).find('.li_houseId').text();
+        var QRStatus = $(cel).find('.li_QRStatus').text();
+
+        curDumpIdIndex = arrDumpIDs.indexOf(parseInt(houseId));
+        //alert(curHouseIdIndex);
+
+        if (QRStatus != 'null') {
+            if (QRStatus == 'true') {
+                $("input[name=QRStatusDump][value=1]").prop('checked', true);
+            }
+            else if (QRStatus == 'false') {
+
+                $("input[name=QRStatusDump][value=0]").prop('checked', true);
+            }
+            else {
+                $("input[name=QRStatusDump][value=1]").prop('checked', false);
+                $("input[name=QRStatusDump][value=0]").prop('checked', false);
+            }
+        }
+        else {
+            $("input[name=QRStatusDump][value=1]").prop('checked', false);
+            $("input[name=QRStatusDump][value=0]").prop('checked', false);
+        }
+
+        $("#hdHouseId").val(houseId);
+
+        var ulb = $("#ulb_name").text()
+        $("#ulb_name1Dump").text(ulb);
+        $("#date1Dump").text(d1);
+        $("#latlongDataDump").text(addr);
+        $("#dateDataDump").text(date);
+        $("#imgggDump").attr('src', imgsrc);
+        //jQuery("#latlongData").text(cellValue);
+        $("#header_dataDump").html(head);
+        $("#latDump").text(lat);
+        $("#longDump").text(long);
+
+    }
+
+
+
+
     function PopImages(cel) {
         debugger
         $('#myModal_Image').modal('toggle');
