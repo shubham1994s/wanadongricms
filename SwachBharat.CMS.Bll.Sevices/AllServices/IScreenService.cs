@@ -110,9 +110,16 @@ namespace SwachBharat.CMS.Bll.Services
         //Added By Saurabh (04 June 2019)
         void SaveHSEmployeeDetails(HouseScanifyEmployeeDetailsVM employee);
 
-        void SaveHSEmployeeQRStatus(int houseId, string QRStatus);
+        void SaveHSQRStatusHouse(int houseId, string QRStatus);
+        void SaveQRStatusDump(int dumpId, string QRStatus);
+
         List<int> GetHSHouseDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder);
+        List<int> GetHSDumpDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder);
+
         SBAHSHouseDetailsGrid GetHouseDetailsById(int houseId);
+
+        SBAHSDumpyardDetailsGrid GetDumpDetailsById(int dumpId);
+
         void SaveUREmployeeDetails(UREmployeeDetailsVM employee);
 
         //Added By Saurabh (04 June 2019)

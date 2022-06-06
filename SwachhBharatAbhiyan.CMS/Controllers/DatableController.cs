@@ -495,7 +495,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     return gridRepository;
                     break;
                 case "HSDumpyardDetails":
-                    gridRepository = new HSDumpyardDetailsGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    gridRepository = new HSDumpyardDetailsGridRepository(0, searchString, fdate, tdate, userId, appId, param1);
                     return gridRepository;
                     break;
                 case "HSLiquidDetails":

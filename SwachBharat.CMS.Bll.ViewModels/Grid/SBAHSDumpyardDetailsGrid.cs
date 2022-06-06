@@ -15,6 +15,8 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string HouseLong { get; set; }
         public string QRCodeImage { get; set; }
         public string modifiedDate { get; set; }
+        public Nullable<bool> QRStatus { get; set; }
+        public string QRStatusDate { get; set; }
 
     }
 }

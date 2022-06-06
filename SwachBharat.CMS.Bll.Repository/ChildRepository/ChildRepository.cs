@@ -374,20 +374,32 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             screenService.SaveHSEmployeeDetails(employee);
         }
 
-        public void SaveHSEmployeeQRStatus(int houseId, string QRStatus)
+        public void SaveHSQRStatusHouse(int houseId, string QRStatus)
         {
-            screenService.SaveHSEmployeeQRStatus(houseId, QRStatus);
+            screenService.SaveHSQRStatusHouse(houseId, QRStatus);
         }
-
+        public void SaveQRStatusDump(int dumpId, string QRStatus)
+        {
+            screenService.SaveQRStatusDump(dumpId, QRStatus);
+        }
         public List<int> GetHSHouseDetailsID(DateTime? fromDate,DateTime? toDate,int userId,string searchString,int QRStatus,string sortColumn,string sortOrder)
         {
             return screenService.GetHSHouseDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
         }
+
+        public List<int> GetHSDumpDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder)
+        {
+            return screenService.GetHSDumpDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
+        }
+
         public SBAHSHouseDetailsGrid GetHouseDetailsById(int houseId)
         {
             return screenService.GetHouseDetailsById(houseId);
         }
-
+        public SBAHSDumpyardDetailsGrid GetDumpDetailsById(int dumpId)
+        {
+            return screenService.GetDumpDetailsById(dumpId);
+        }
 
         public void SaveUREmployee(UREmployeeDetailsVM employee)
         {
