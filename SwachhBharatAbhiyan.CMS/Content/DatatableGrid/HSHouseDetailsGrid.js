@@ -15,7 +15,7 @@ function loadGridHouse() {
         lbFilter: false,
         //"sDom": "ltipr",
         //"order": [[0, "desc"]],
-        "processing": true, // for show progress bar
+        "processing": false, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
@@ -126,6 +126,10 @@ function loadGridHouse() {
 
     });
     var tableHouse = $('#demoGrid').DataTable();
+
+    setInterval(function () {
+        table.ajax.reload(null, false); // user paging is not reset on reload
+    }, 3000);
 
     $('#demoGrid').on('order.dt', function () {
 

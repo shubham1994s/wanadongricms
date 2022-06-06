@@ -350,7 +350,7 @@
 
                         <div class="row">
                             <div class="col-md-6" style="padding-top:1rem;text-align:left;padding-left:8%">
-                                <h4 id="header_dataHouse" class="modal-title" style="padding-bottom:4rem;text-align:left;"></h4>
+                                <h4 id="header_dataHouse" class="modal-title" style="padding-bottom:2rem;text-align:left;"></h4>
                                 <p> <b id="hide_date">Employee Name: </b><span id="dateDataHouse"></span></p>
                                 <p> <b id="hide_add">House Id: </b><span id="latlongDataHouse"></span></p>
                                 <p>  <b id="hide_add1">Date And Time: </b><span id="date1House"></span></p>
@@ -359,8 +359,9 @@
                                     <b>Status : </b><input type="radio" name="QRStatusHouse" value="1"> Approve
                                     <input type="radio" name="QRStatusHouse" value="0"> Reject
                                 </p>
-                                <p><b><span class="text-success" id="houseSave_pop"></span></b></p>
-
+                                
+                                <div class="text-center pt-1"><button type="button" class="btn btn-success" id="btnHouseSave">Save</button></div>
+                                <p  class="text-center pt-2"><b><span class="text-success" id="houseSave_pop"></span></b></p>
                             </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imgggHouse" alt="Photo Not Found" style="height:400px">
@@ -369,11 +370,10 @@
                         </div>
                     </center>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary" id="btnHousePrv">Previous</button>
-                        <button type="button" class="btn btn-primary" id="btnHouseSave">Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btnHouseNxt">Next</button>
+                    <div class="modal-footer d-flex" style="padding-left: 16%; padding-right: 4%;">
+                        <button type="button" class="btn btn-primary  align-self-cente mr-2" id="btnHousePrv">Previous</button>
+                        <button type="button" class="btn btn-primary align-self-cente" id="btnHouseNxt">Next</button>
+                        <button type="button" class="btn btn-primary  ml-auto" data-dismiss="modal">Close</button>
                         <input type="hidden" id="hdHouseId" />
 
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
