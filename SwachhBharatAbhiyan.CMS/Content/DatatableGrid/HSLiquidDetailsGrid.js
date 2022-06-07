@@ -93,7 +93,11 @@ $("#demoGrid2").dataTable().fnDestroy();
 
 });
     var tableLiquid = $('#demoGrid2').DataTable();
-
+    $("#target2").click(function () {
+        //alert("Handler for .click() called.");
+        var tableLiquid = $('#demoGrid2').DataTable();
+        tableLiquid.ajax.reload(null, false);
+    });
     $('#demoGrid2').on('order.dt', function () {
 
         var txt_fdate, txt_tdate, UserId, QRStatus, searchString;

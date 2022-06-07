@@ -94,6 +94,16 @@
     #demoGrid3_filter {
         display: none;
     }
+    .save {
+        padding: 3px 25px;
+        background: #40a50a !important;
+        border-color: #40a50a !important;
+    }
+    .close1 {
+        padding: 3px 25px !important;
+        border-color: #ec3836 !important;
+        background: #ec3836 !important;
+    }
 </style>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
@@ -362,7 +372,7 @@
                                     <input type="radio" name="QRStatusHouse" value="0"> Reject
                                 </p>
 
-                                <div class="text-center pt-1"><button type="button" class="btn btn-success" id="btnHouseSave">Save</button></div>
+                                <div class="text-center pt-1"><button type="button" class="btn btn-success save" id="btnHouseSave">Save</button></div>
                                 <p class="text-center pt-2"><b><span class="text-success" id="houseSave_pop"></span></b></p>
                             </div>
                             <div class="col-md-6">
@@ -375,7 +385,7 @@
                     <div class="modal-footer d-flex" style="padding-left: 12%; padding-right: 4%;">
                         <button type="button" class="btn btn-primary  align-self-cente mr-5" id="btnHousePrv" style="padding: 3px 15px;">Previous</button>
                         <button type="button" class="btn btn-primary align-self-cente" id="btnHouseNxt" style="padding: 3px 25px;">Next</button>
-                        <button type="button" class="btn btn-primary  ml-auto" data-dismiss="modal" style="padding: 3px 25px; border-color: #ec3836 !important; background: #ec3836 !important;" id="target">Close</button>
+                        <button type="button" class="btn btn-primary  ml-auto close1" data-dismiss="modal" id="target">Close</button>
                         <input type="hidden" id="hdHouseId" />
 
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
@@ -408,9 +418,11 @@
                                     <b>Status : </b><input type="radio" name="QRStatusDump" value="1"> Approve
                                     <input type="radio" name="QRStatusDump" value="0"> Reject
                                 </p>
-                                <p><b><span class="text-success" id="DumpSave_pop"></span></b></p>
+                                <div class="text-center pt-1">
+                                    <button type="button" class="btn btn-primary save" id="btnDumpSave">Save</button></div>
+                                    <p class="text-center pt-2"><b><span class="text-success" id="DumpSave_pop"></span></b></p>
 
-                            </div>
+                                </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imgggDump" alt="Photo Not Found" style="height:400px">
 
@@ -418,11 +430,12 @@
                         </div>
                     </center>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary" id="btnDumpPrv">Previous</button>
-                        <button type="button" class="btn btn-primary" id="btnDumpSave">Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btnDumpNxt">Next</button>
+                    <div class="modal-footer d-flex"  style="padding-left: 12%; padding-right: 4%;">
+                        <button type="button" class="btn btn-primary mr-5" id="btnDumpPrv" style="padding: 3px 15px;">Previous</button>
+
+
+                        <button type="button" class="btn btn-primary" id="btnDumpNxt" style="padding: 3px 25px;">Next</button>
+                        <button type="button" class="btn btn-primary ml-auto close1" data-dismiss="modal" id="target1">Close</button>
                         <input type="hidden" id="hdDumpId" />
 
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
@@ -456,7 +469,8 @@
                                     <b>Status : </b><input type="radio" name="QRStatusLiquid" value="1"> Approve
                                     <input type="radio" name="QRStatusLiquid" value="0"> Reject
                                 </p>
-                                <p><b><span class="text-success" id="LiquidSave_pop"></span></b></p>
+                                <div class="text-center pt-1"><button type="button" class="btn btn-primary save" id="btnLiquidSave">Save</button></div>
+                                <p class="text-center pt-2"><b><span class="text-success" id="LiquidSave_pop"></span></b></p>
 
                             </div>
                             <div class="col-md-6">
@@ -466,11 +480,12 @@
                         </div>
                     </center>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary" id="btnLiquidPrv">Previous</button>
-                        <button type="button" class="btn btn-primary" id="btnLiquidSave">Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btnLiquidNxt">Next</button>
+                    <div class="modal-footer d-flex" style="padding-left: 12%; padding-right: 4%;">
+                        <button type="button" class="btn btn-primary mr-5" id="btnLiquidPrv" style="padding: 3px 15px;">Previous</button>
+
+
+                        <button type="button" class="btn btn-primary" id="btnLiquidNxt"  style="padding: 3px 25px;">Next</button>
+                        <button type="button" class="btn btn-primary ml-auto close1" data-dismiss="modal" id="traget2">Close</button>
                         <input type="hidden" id="hdLiquidId" />
 
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
@@ -504,9 +519,11 @@
                                     <b>Status : </b><input type="radio" name="QRStatusStreet" value="1"> Approve
                                     <input type="radio" name="QRStatusStreet" value="0"> Reject
                                 </p>
-                                <p><b><span class="text-success" id="StreetSave_pop"></span></b></p>
+                                <div class="text-center pt-1">
+                                    <button type="button" class="btn btn-primary save" id="btnStreetSave">Save</button></div>
+                                    <p class="text-center pt-2"><b><span class="text-success" id="StreetSave_pop"></span></b></p>
 
-                            </div>
+                                </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imgggStreet" alt="Photo Not Found" style="height:400px">
 
@@ -514,11 +531,12 @@
                         </div>
                     </center>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary" id="btnStreetPrv">Previous</button>
-                        <button type="button" class="btn btn-primary" id="btnStreetSave">Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btnStreetNxt">Next</button>
+                    <div class="modal-footer d-flex" style="padding-left: 12%; padding-right: 4%;">
+                        <button type="button" class="btn btn-primary mr-5" id="btnStreetPrv" style="padding: 3px 15px;">Previous</button>
+
+
+                        <button type="button" class="btn btn-primary" id="btnStreetNxt" style="padding: 3px 25px;">Next</button>
+                        <button type="button" class="btn btn-primary ml-auto close1" data-dismiss="modal" id="traget3">Close</button>
                         <input type="hidden" id="hdStreetId" />
 
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
@@ -1112,7 +1130,7 @@
             $("input[name=QRStatusDump][value=0]").prop('checked', false);
         }
 
-        $("#hdHouseId").val(houseId);
+        $("#hdDumpId").val(houseId);
 
         var ulb = $("#ulb_name").text()
         $("#ulb_name1Dump").text(ulb);

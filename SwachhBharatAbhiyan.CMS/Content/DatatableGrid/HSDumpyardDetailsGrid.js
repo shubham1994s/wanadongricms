@@ -102,7 +102,11 @@ function loadGridDump() {
 
 
     var tableDump = $('#demoGrid1').DataTable();
-
+    $("#target1").click(function () {
+        //alert("Handler for .click() called.");
+        var tableDump = $('#demoGrid1').DataTable();
+        tableDump.ajax.reload(null, false);
+    });
     $('#demoGrid1').on('order.dt', function () {
 
         var txt_fdate, txt_tdate, UserId, QRStatus, searchString, sortColumn, sortOrder;

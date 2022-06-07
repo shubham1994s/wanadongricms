@@ -100,6 +100,11 @@ $("#demoGrid3").dataTable().fnDestroy();
 
 
     var tableStreet = $('#demoGrid3').DataTable();
+    $("#target2").click(function () {
+        //alert("Handler for .click() called.");
+        var tableStreet = $('#demoGrid3').DataTable();
+        tableStreet.ajax.reload(null, false);
+    });
 
     $('#demoGrid3').on('order.dt', function () {
 
