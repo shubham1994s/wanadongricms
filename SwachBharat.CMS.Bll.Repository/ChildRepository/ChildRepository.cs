@@ -382,6 +382,11 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             screenService.SaveQRStatusDump(dumpId, QRStatus);
         }
+
+        public void SaveQRStatusLiquid(int liquidId, string QRStatus)
+        {
+            screenService.SaveQRStatusLiquid(liquidId, QRStatus);
+        }
         public List<int> GetHSHouseDetailsID(DateTime? fromDate,DateTime? toDate,int userId,string searchString,int QRStatus,string sortColumn,string sortOrder)
         {
             return screenService.GetHSHouseDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
@@ -391,7 +396,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetHSDumpDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
         }
-
+        public List<int> GetHSLiquidDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder)
+        {
+            return screenService.GetHSLiquidDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
+        }
         public SBAHSHouseDetailsGrid GetHouseDetailsById(int houseId)
         {
             return screenService.GetHouseDetailsById(houseId);
@@ -399,6 +407,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         public SBAHSDumpyardDetailsGrid GetDumpDetailsById(int dumpId)
         {
             return screenService.GetDumpDetailsById(dumpId);
+        }
+        public SBAHSLiquidDetailsGrid GetLiquidDetailsById(int liquidId)
+        {
+            return screenService.GetLiquidDetailsById(liquidId);
         }
 
         public void SaveUREmployee(UREmployeeDetailsVM employee)

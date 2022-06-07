@@ -270,6 +270,8 @@
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
+                            <th> QR Status</th>
+                            <th> QR Status Date</th>
                             @*<th> Action</th>*@
                         </tr>
                     </thead>
@@ -429,7 +431,53 @@
         </div>
     </div>
 
+    <div id="myModal_Image_Liquid" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="ulb_name1Liquid" class="text-center" style="padding-left:12%;width:80%"></h3>
+                </div>
+
+                <div class="modal-body pt-0">
+                    <center>
+
+                        <div class="row">
+                            <div class="col-md-6" style="padding-top:1rem;text-align:left;padding-left:8%">
+                                <h4 id="header_dataLiquid" class="modal-title" style="padding-bottom:4rem;text-align:left;"></h4>
+                                <p> <b id="hide_date">Employee Name: </b><span id="dateDataLiquid"></span></p>
+                                <p> <b id="hide_add">Liquid Id: </b><span id="latlongDataLiquid"></span></p>
+                                <p>  <b id="hide_add1">Date And Time: </b><span id="date1Liquid"></span></p>
+                                <p>  <b id="hide_add2">Lat: </b><span id="latLiquid"></span> <b id="hide_add3">Long: </b><span id="longLiquid"></span></p>
+                                <p>
+                                    <b>Status : </b><input type="radio" name="QRStatusLiquid" value="1"> Approve
+                                    <input type="radio" name="QRStatusLiquid" value="0"> Reject
+                                </p>
+                                <p><b><span class="text-success" id="LiquidSave_pop"></span></b></p>
+
+                            </div>
+                            <div class="col-md-6">
+                                <img class="img-responsive" id="imgggLiquid" alt="Photo Not Found" style="height:400px">
+
+                            </div>
+                        </div>
+                    </center>
+
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" id="btnLiquidPrv">Previous</button>
+                        <button type="button" class="btn btn-primary" id="btnLiquidSave">Save</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnLiquidNxt">Next</button>
+                        <input type="hidden" id="hdLiquidId" />
+
+                        @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div id="div_ldr" class="loaderStyle">
         <div style="position: relative; top: 50%; left: 40%;">
             <img style="height: 200px; width: 200px;" class="" src="~/Content/images/img/loading.gif">
@@ -463,8 +511,11 @@
 <script type="text/javascript">
     var arrHouseIDs = [];
     var arrDumpIDs = [];
+    var arrLiquidIDs = [];
     var curHouseIdIndex = 0;
     var curDumpIdIndex = 0;
+    var curLiquidIdIndex = 0;
+
     $("#btnHouseSave").click(function () {
         var QRStatus = $("input[name='QRStatusHouse']:checked").val();
         var houseId = $("#hdHouseId").val();
@@ -507,6 +558,26 @@
     }
     );
 
+    $("#btnLiquidSave").click(function () {
+        var QRStatus = $("input[name='QRStatusLiquid']:checked").val();
+        var liquidId = $("#hdLiquidId").val();
+        var AppId = $('#appid').val();
+        $.ajax({
+            type: "post",
+            url: "/HouseScanifyEmp/SaveQRStatusLiquid?appId=" + AppId + "&liquidId=" + liquidId + "&QRStatus=" + QRStatus,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                //$('#myModal_Image_House').modal('toggle');
+                //LoadGrid();
+
+                $("#liquidIdSave_pop").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
+
+            }
+        });
+    }
+    );
 
 
 
@@ -591,6 +662,51 @@
                     else {
                         $("input[name=QRStatusDump][value=1]").prop('checked', false);
                         $("input[name=QRStatusDump][value=0]").prop('checked', false);
+                    }
+
+                }
+
+            }
+        });
+    }
+    );
+
+    $("#btnLiquidPrv").click(function () {
+        curLiquidIdIndex--;
+        if (curLiquidIdIndex < 0) {
+            curLiquidIdIndex = arrLiquidIDs.length - 1;
+        }
+
+        var liquidId = arrLiquidIDs[curLiquidIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetLiquidDetailsById?liquidId=" + liquidId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1Liquid").text($("#ulb_name").text());
+                    $("#date1Liquid").text(data.modifiedDate);
+                    $("#latlongDataLiquid").text(data.ReferanceId);
+                    $("#dateDataLiquid").text(data.Name);
+                    $("#imgggLiquid").attr('src', data.QRCodeImage);
+
+                    $("#header_dataLiquid").html('HouseScanify QR Image');
+                    $("#latLiquid").text(data.HouseLat);
+                    $("#longLiquid").text(data.HouseLong);
+                    $("#hdLiquidId").val(data.liquidId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatusLiquid][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatusLiquid][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatusLiquid][value=1]").prop('checked', false);
+                        $("input[name=QRStatusLiquid][value=0]").prop('checked', false);
                     }
 
                 }
@@ -692,6 +808,52 @@
     }
     );
 
+    $("#btnLiquidNxt").click(function () {
+        curLiquidIdIndex++;
+        if (curLiquidIdIndex >= arrLiquidIDs.length) {
+            curLiquidIdIndex = 0;
+        }
+
+        var liquidId = arrLiquidIDs[curLiquidIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetLiquidDetailsById?liquidId=" + liquidId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1Liquid").text($("#ulb_name").text());
+                    $("#date1Liquid").text(data.modifiedDate);
+                    $("#latlongDataLiquid").text(data.ReferanceId);
+                    $("#dateDataLiquid").text(data.Name);
+                    $("#imgggLiquid").attr('src', data.QRCodeImage);
+
+                    $("#header_dataLiquid").html('HouseScanify QR Image');
+                    $("#latLiquid").text(data.HouseLat);
+                    $("#longLiquid").text(data.HouseLong);
+                    $("#hdLiquidId").val(data.liquidId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatusLiquid][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatusLiquid][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatusLiquid][value=1]").prop('checked', false);
+                        $("input[name=QRStatusLiquid][value=0]").prop('checked', false);
+                    }
+
+
+                }
+
+
+            }
+        });
+    }
+    );
 
     
 
@@ -800,7 +962,57 @@
 
     }
 
+    function PopImagesLiquid(cel) {
 
+
+        //debugger
+        $('#myModal_Image_Liquid').modal('toggle');
+        var d1 = $(cel).find('.date_time').text();
+        var addr = $(cel).find('.addr-length').text();
+        var date = $(cel).find('.li_date').text();
+        var imgsrc = $(cel).find('img').attr('src');
+        var head = $(cel).find('.li_title').text();
+
+        var lat = $(cel).find('.li_lat').text();
+        var long = $(cel).find('.li_long').text();
+        var houseId = $(cel).find('.li_houseId').text();
+        var QRStatus = $(cel).find('.li_QRStatus').text();
+
+        curLiquidIdIndex = arrLiquidIDs.indexOf(parseInt(houseId));
+        //alert(curHouseIdIndex);
+
+        if (QRStatus != 'null') {
+            if (QRStatus == 'true') {
+                $("input[name=QRStatusLiquid][value=1]").prop('checked', true);
+            }
+            else if (QRStatus == 'false') {
+
+                $("input[name=QRStatusLiquid][value=0]").prop('checked', true);
+            }
+            else {
+                $("input[name=QRStatusLiquid][value=1]").prop('checked', false);
+                $("input[name=QRStatusLiquid][value=0]").prop('checked', false);
+            }
+        }
+        else {
+            $("input[name=QRStatusLiquid][value=1]").prop('checked', false);
+            $("input[name=QRStatusLiquid][value=0]").prop('checked', false);
+        }
+
+        $("#hdLiquidId").val(houseId);
+
+        var ulb = $("#ulb_name").text()
+        $("#ulb_name1Liquid").text(ulb);
+        $("#date1Liquid").text(d1);
+        $("#latlongDataLiquid").text(addr);
+        $("#dateDataLiquid").text(date);
+        $("#imgggLiquid").attr('src', imgsrc);
+        //jQuery("#latlongData").text(cellValue);
+        $("#header_dataLiquid").html(head);
+        $("#latLiquid").text(lat);
+        $("#longLiquid").text(long);
+
+    }
 
 
     function PopImages(cel) {

@@ -612,7 +612,10 @@
         //User Wise Location
         // All User On Map
         function myMap() {
+            debugger;
             var RadioValue = $("input[name='radio']:checked").val();
+            var DLat = $('#deflat').val();
+            var DLong = $('#deflang').val();
             if (RadioValue == 0) {
                 document.getElementById('txt_fdate').value = today;
                 $('#selectnumber').val(-1);
@@ -641,9 +644,10 @@
                         $('#\\#myModal').modal('show');
                     
                     {
+                        debugger;
                         var map = new google.maps.Map(document.getElementById('googleMap'), {
                             zoom: 12,
-                            center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
+                            center: new google.maps.LatLng(DLat, DLong),
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         });
 
@@ -844,6 +848,7 @@
                     var inputArray = data
 
                     var coordinates = inputArray.reduce((resultArray, item, index) => {
+                        debugger;
                         const chunkIndex = item.BeatId;
                   
                         if (!resultArray[chunkIndex]) {
