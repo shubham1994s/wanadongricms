@@ -127,10 +127,20 @@ function loadGridHouse() {
     });
     var tableHouse = $('#demoGrid').DataTable();
 
-    setInterval(function () {
-        table.ajax.reload(null, false); // user paging is not reset on reload
-    }, 3000);
-
+    //setInterval(function () {
+    //    tableHouse.ajax.reload(null, false); // user paging is not reset on reload
+    //}, 300000);
+    //function close() {
+    //    //LoadGrid();
+    //    debugger
+    //    var tableHouse = $('#demoGrid').DataTable();
+    //    tableHouse.ajax.reload(null, false);
+    //}
+    $("#target").click(function () {
+        //alert("Handler for .click() called.");
+        var tableHouse = $('#demoGrid').DataTable();
+        tableHouse.ajax.reload(null, false);
+    });
     $('#demoGrid').on('order.dt', function () {
 
         var txt_fdate, txt_tdate, UserId, QRStatus, searchString;
@@ -172,10 +182,12 @@ function loadGridHouse() {
         });
     });
     //SearchHouse();
+
 }
 
 
  
+
 
 
 
