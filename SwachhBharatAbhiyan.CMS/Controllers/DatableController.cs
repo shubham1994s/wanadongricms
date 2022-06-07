@@ -503,7 +503,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     return gridRepository;
                     break;
                 case "HSStreetDetails":
-                    gridRepository = new HSStreetDetailsGridRepository(0, searchString, fdate, tdate, userId, appId);
+                    gridRepository = new HSStreetDetailsGridRepository(0, searchString, fdate, tdate, userId, appId, param1);
                     return gridRepository;
                     break;
                 case "InfotainmentPlayerDetails":
