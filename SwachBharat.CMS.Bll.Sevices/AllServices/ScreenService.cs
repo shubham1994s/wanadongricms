@@ -4701,6 +4701,45 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+
+        public void SaveQRStatusStreet(int streetId, string QRStatus)
+        {
+            bool? bQRStatus = null;
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (streetId > 0 && !string.IsNullOrEmpty(QRStatus))
+                    {
+                        if (QRStatus == "1")
+                        {
+                            bQRStatus = true;
+                        }
+                        else if (QRStatus == "0")
+                        {
+                            bQRStatus = false;
+                        }
+                        else
+                        {
+                            bQRStatus = null;
+                        }
+
+                        var model = db.StreetSweepingDetails.Where(x => x.SSId == streetId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.QRStatus = bQRStatus;
+                            model.QRStatusDate = DateTime.Now;
+                            db.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<int> GetHSHouseDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder)
         {
             List<int> lstIDs = new List<int>() { };
@@ -4771,7 +4810,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || c.modifiedDate >= fromDate && c.modifiedDate <= toDate)).OrderByDescending(d => d.modifiedDate).ThenByDescending(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || c.modifiedDate >= fromDate && c.modifiedDate <= toDate)).OrderBy(d => d.houseId).ToList();
 
 
                     if (fromDate != null && toDate != null)
@@ -4853,7 +4892,90 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || c.modifiedDate >= fromDate && c.modifiedDate <= toDate)).OrderByDescending(d => d.modifiedDate).ThenByDescending(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || c.modifiedDate >= fromDate && c.modifiedDate <= toDate)).OrderBy(c => c.houseId).ToList();
+
+
+                    if (fromDate != null && toDate != null)
+                    {
+                        if (Convert.ToDateTime(fromDate).ToString("dd/MM/yyyy") == Convert.ToDateTime(DateTime.Now).ToString("dd/MM/yyyy"))
+                        {
+                            model = model.Where(c => (Convert.ToDateTime(c.modifiedDate).ToString("dd/MM/yyyy") == Convert.ToDateTime(fromDate).ToString("dd/MM/yyyy"))).ToList();
+                        }
+                        else
+                        {
+
+                            model = model.Where(c => (c.modifiedDate >= fromDate && c.modifiedDate <= toDate)).ToList();
+                        }
+                    }
+                    if (userId > 0)
+                    {
+                        model = model.Where(c => c.userId == userId).ToList();
+
+                    }
+
+                    if (!string.IsNullOrEmpty(searchString))
+                    {
+                        model = model.Where(c => ((string.IsNullOrEmpty(c.Name) ? " " : c.Name) + " " + (string.IsNullOrEmpty(c.ReferanceId) ? " " : c.ReferanceId)).ToUpper().Contains(searchString.ToUpper())
+                         ).ToList();
+
+                    }
+
+                    lstIDs = model.Select(x => x.houseId).ToList();
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return lstIDs;
+        }
+
+
+        public List<int> GetHSStreetDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder)
+        {
+
+
+            List<int> lstIDs = new List<int>() { };
+            bool? bQRStatus = null;
+            if (QRStatus == 1)
+            {
+                bQRStatus = true;
+            }
+            else if (QRStatus == 2)
+            {
+                bQRStatus = false;
+
+            }
+            else
+            {
+                bQRStatus = null;
+            }
+
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var model = db.StreetSweepingDetails
+                         .GroupJoin(db.QrEmployeeMasters,
+                                      a => a.userId,
+                                      b => b.qrEmpId,
+                                      (a, b) => new { c = a, d = b.DefaultIfEmpty() })
+                           .SelectMany(r => r.d.DefaultIfEmpty(),
+                                       (p, b) => new
+                                       {
+                                           modifiedDate = p.c.lastModifiedDate,
+                                           userId = p.c.userId,
+                                           houseId = p.c.SSId,
+                                           Name = b.qrEmpName,
+                                           HouseLat = p.c.SSLat,
+                                           HouseLong = p.c.SSLong,
+                                           QRCodeImage = string.IsNullOrEmpty(p.c.QRCodeImage) ? "/Images/default_not_upload.png" : p.c.QRCodeImage,
+                                           ReferanceId = p.c.ReferanceId,
+                                           QRStatus = p.c.QRStatus,
+                                           QRStatusDate = p.c.QRStatusDate
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || c.modifiedDate >= fromDate && c.modifiedDate <= toDate)).OrderBy(c => c.houseId).ToList();
 
 
                     if (fromDate != null && toDate != null)
@@ -5004,6 +5126,49 @@ namespace SwachBharat.CMS.Bll.Services
             return data;
         }
 
+        public SBAHSStreetDetailsGrid GetStreetDetailsById(int streetId)
+        {
+            SBAHSStreetDetailsGrid data = null;
+            using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+            {
+                var model = db.StreetSweepingDetails
+                         .GroupJoin(db.QrEmployeeMasters,
+                                      a => a.userId,
+                                      b => b.qrEmpId,
+                                      (a, b) => new { c = a, d = b.DefaultIfEmpty() })
+                           .SelectMany(r => r.d.DefaultIfEmpty(),
+                                       (p, b) => new
+                                       {
+                                           modifiedDate = p.c.lastModifiedDate,
+                                           userId = p.c.userId,
+                                           liquid = p.c.SSId,
+                                           Name = b.qrEmpName,
+                                           HouseLat = p.c.SSLat,
+                                           HouseLong = p.c.SSLong,
+                                           QRCodeImage = string.IsNullOrEmpty(p.c.QRCodeImage) ? "/Images/default_not_upload.png" : p.c.QRCodeImage,
+                                           ReferanceId = p.c.ReferanceId,
+                                           QRStatus = p.c.QRStatus,
+                                           QRStatusDate = p.c.QRStatusDate
+                                       }).Where(a => a.liquid == streetId).FirstOrDefault();
+
+                if (model != null)
+                {
+                    data = new SBAHSStreetDetailsGrid()
+                    {
+                        streetId = model.liquid,
+                        Name = model.Name,
+                        HouseLat = model.HouseLat,
+                        HouseLong = model.HouseLong,
+                        QRCodeImage = model.QRCodeImage,
+                        ReferanceId = model.ReferanceId,
+                        modifiedDate = model.modifiedDate.HasValue ? Convert.ToDateTime(model.modifiedDate).ToString("dd/MM/yyyy hh:mm tt") : "",
+                        QRStatusDate = model.QRStatusDate.HasValue ? Convert.ToDateTime(model.QRStatusDate).ToString("dd/MM/yyyy hh:mm tt") : "",
+                        QRStatus = model.QRStatus
+                    };
+                }
+            }
+            return data;
+        }
 
 
         public void SaveUREmployeeDetails(UREmployeeDetailsVM data)

@@ -28,7 +28,16 @@ $("#demoGrid2").dataTable().fnDestroy();
         "type": "POST",
         "datatype": "json"
     },
+        //"drawCallback": function (settings) {
 
+        //    var api = this.api();
+        //    var rowData = api.rows().data();
+        //    arrLiquidIDs = [];
+        //    for (var i = 0; i < rowData.length; i++) {
+        //        arrLiquidIDs.push(rowData[i]['liquidId']);
+        //    }
+        //    console.log(arrLiquidIDs);
+        //},
     "columnDefs":
         [{
             "targets": [0],

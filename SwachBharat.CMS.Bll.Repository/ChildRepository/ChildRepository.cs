@@ -387,6 +387,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             screenService.SaveQRStatusLiquid(liquidId, QRStatus);
         }
+        public void SaveQRStatusStreet(int streetId, string QRStatus)
+        {
+            screenService.SaveQRStatusStreet(streetId, QRStatus);
+        }
         public List<int> GetHSHouseDetailsID(DateTime? fromDate,DateTime? toDate,int userId,string searchString,int QRStatus,string sortColumn,string sortOrder)
         {
             return screenService.GetHSHouseDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
@@ -400,6 +404,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetHSLiquidDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
         }
+        public List<int> GetHSStreetDetailsID(DateTime? fromDate, DateTime? toDate, int userId, string searchString, int QRStatus, string sortColumn, string sortOrder)
+        {
+            return screenService.GetHSStreetDetailsID(fromDate, toDate, userId, searchString, QRStatus, sortColumn, sortOrder);
+        }
         public SBAHSHouseDetailsGrid GetHouseDetailsById(int houseId)
         {
             return screenService.GetHouseDetailsById(houseId);
@@ -412,7 +420,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetLiquidDetailsById(liquidId);
         }
-
+        public SBAHSStreetDetailsGrid GetStreetDetailsById(int streetId)
+        {
+            return screenService.GetStreetDetailsById(streetId);
+        }
         public void SaveUREmployee(UREmployeeDetailsVM employee)
         {
             screenService.SaveUREmployeeDetails(employee);
