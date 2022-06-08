@@ -94,6 +94,16 @@
     #demoGrid3_filter {
         display: none;
     }
+    .save {
+        padding: 3px 25px;
+        background: #40a50a !important;
+        border-color: #40a50a !important;
+    }
+    .close1 {
+        padding: 3px 25px !important;
+        border-color: #ec3836 !important;
+        background: #ec3836 !important;
+    }
 </style>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
@@ -270,6 +280,8 @@
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
+                            <th> QR Status</th>
+                            <th> QR Status Date</th>
                             @*<th> Action</th>*@
                         </tr>
                     </thead>
@@ -290,6 +302,8 @@
                             <th> Latiude</th>
                             <th> Longitude</th>
                             <th> Photo</th>
+                            <th> QR Status</th>
+                            <th> QR Status Date</th>
                             @*<th> Action</th>*@
                         </tr>
                     </thead>
@@ -348,7 +362,7 @@
 
                         <div class="row">
                             <div class="col-md-6" style="padding-top:1rem;text-align:left;padding-left:8%">
-                                <h4 id="header_dataHouse" class="modal-title" style="padding-bottom:4rem;text-align:left;"></h4>
+                                <h4 id="header_dataHouse" class="modal-title" style="padding-bottom:2rem;text-align:left;"></h4>
                                 <p> <b id="hide_date">Employee Name: </b><span id="dateDataHouse"></span></p>
                                 <p> <b id="hide_add">House Id: </b><span id="latlongDataHouse"></span></p>
                                 <p>  <b id="hide_add1">Date And Time: </b><span id="date1House"></span></p>
@@ -357,8 +371,9 @@
                                     <b>Status : </b><input type="radio" name="QRStatusHouse" value="1"> Approve
                                     <input type="radio" name="QRStatusHouse" value="0"> Reject
                                 </p>
-                                <p><b><span class="text-success" id="houseSave_pop"></span></b></p>
 
+                                <div class="text-center pt-1"><button type="button" class="btn btn-success save" id="btnHouseSave">Save</button></div>
+                                <p class="text-center pt-2"><b><span class="text-success" id="houseSave_pop"></span></b></p>
                             </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imgggHouse" alt="Photo Not Found" style="height:400px">
@@ -367,11 +382,10 @@
                         </div>
                     </center>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary" id="btnHousePrv">Previous</button>
-                        <button type="button" class="btn btn-primary" id="btnHouseSave">Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btnHouseNxt">Next</button>
+                    <div class="modal-footer d-flex" style="padding-left: 12%; padding-right: 4%;">
+                        <button type="button" class="btn btn-primary  align-self-cente mr-5" id="btnHousePrv" style="padding: 3px 15px;">Previous</button>
+                        <button type="button" class="btn btn-primary align-self-cente" id="btnHouseNxt" style="padding: 3px 25px;">Next</button>
+                        <button type="button" class="btn btn-primary  ml-auto close1" data-dismiss="modal" id="target">Close</button>
                         <input type="hidden" id="hdHouseId" />
 
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
@@ -404,9 +418,11 @@
                                     <b>Status : </b><input type="radio" name="QRStatusDump" value="1"> Approve
                                     <input type="radio" name="QRStatusDump" value="0"> Reject
                                 </p>
-                                <p><b><span class="text-success" id="DumpSave_pop"></span></b></p>
+                                <div class="text-center pt-1">
+                                    <button type="button" class="btn btn-primary save" id="btnDumpSave">Save</button></div>
+                                    <p class="text-center pt-2"><b><span class="text-success" id="DumpSave_pop"></span></b></p>
 
-                            </div>
+                                </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imgggDump" alt="Photo Not Found" style="height:400px">
 
@@ -414,11 +430,12 @@
                         </div>
                     </center>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary" id="btnDumpPrv">Previous</button>
-                        <button type="button" class="btn btn-primary" id="btnDumpSave">Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btnDumpNxt">Next</button>
+                    <div class="modal-footer d-flex"  style="padding-left: 12%; padding-right: 4%;">
+                        <button type="button" class="btn btn-primary mr-5" id="btnDumpPrv" style="padding: 3px 15px;">Previous</button>
+
+
+                        <button type="button" class="btn btn-primary" id="btnDumpNxt" style="padding: 3px 25px;">Next</button>
+                        <button type="button" class="btn btn-primary ml-auto close1" data-dismiss="modal" id="target1">Close</button>
                         <input type="hidden" id="hdDumpId" />
 
                         @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
@@ -429,7 +446,106 @@
         </div>
     </div>
 
+    <div id="myModal_Image_Liquid" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="ulb_name1Liquid" class="text-center" style="padding-left:12%;width:80%"></h3>
+                </div>
+
+                <div class="modal-body pt-0">
+                    <center>
+
+                        <div class="row">
+                            <div class="col-md-6" style="padding-top:1rem;text-align:left;padding-left:8%">
+                                <h4 id="header_dataLiquid" class="modal-title" style="padding-bottom:4rem;text-align:left;"></h4>
+                                <p> <b id="hide_date">Employee Name: </b><span id="dateDataLiquid"></span></p>
+                                <p> <b id="hide_add">Liquid Id: </b><span id="latlongDataLiquid"></span></p>
+                                <p>  <b id="hide_add1">Date And Time: </b><span id="date1Liquid"></span></p>
+                                <p>  <b id="hide_add2">Lat: </b><span id="latLiquid"></span> <b id="hide_add3">Long: </b><span id="longLiquid"></span></p>
+                                <p>
+                                    <b>Status : </b><input type="radio" name="QRStatusLiquid" value="1"> Approve
+                                    <input type="radio" name="QRStatusLiquid" value="0"> Reject
+                                </p>
+                                <div class="text-center pt-1"><button type="button" class="btn btn-primary save" id="btnLiquidSave">Save</button></div>
+                                <p class="text-center pt-2"><b><span class="text-success" id="LiquidSave_pop"></span></b></p>
+
+                            </div>
+                            <div class="col-md-6">
+                                <img class="img-responsive" id="imgggLiquid" alt="Photo Not Found" style="height:400px">
+
+                            </div>
+                        </div>
+                    </center>
+
+                    <div class="modal-footer d-flex" style="padding-left: 12%; padding-right: 4%;">
+                        <button type="button" class="btn btn-primary mr-5" id="btnLiquidPrv" style="padding: 3px 15px;">Previous</button>
+
+
+                        <button type="button" class="btn btn-primary" id="btnLiquidNxt"  style="padding: 3px 25px;">Next</button>
+                        <button type="button" class="btn btn-primary ml-auto close1" data-dismiss="modal" id="traget2">Close</button>
+                        <input type="hidden" id="hdLiquidId" />
+
+                        @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal_Image_Street" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="ulb_name1Street" class="text-center" style="padding-left:12%;width:80%"></h3>
+                </div>
+
+                <div class="modal-body pt-0">
+                    <center>
+
+                        <div class="row">
+                            <div class="col-md-6" style="padding-top:1rem;text-align:left;padding-left:8%">
+                                <h4 id="header_dataStreet" class="modal-title" style="padding-bottom:4rem;text-align:left;"></h4>
+                                <p> <b id="hide_date">Employee Name: </b><span id="dateDataStreet"></span></p>
+                                <p> <b id="hide_add">Street Id: </b><span id="latlongDataStreet"></span></p>
+                                <p>  <b id="hide_add1">Date And Time: </b><span id="date1Street"></span></p>
+                                <p>  <b id="hide_add2">Lat: </b><span id="latStreet"></span> <b id="hide_add3">Long: </b><span id="longStreet"></span></p>
+                                <p>
+                                    <b>Status : </b><input type="radio" name="QRStatusStreet" value="1"> Approve
+                                    <input type="radio" name="QRStatusStreet" value="0"> Reject
+                                </p>
+                                <div class="text-center pt-1">
+                                    <button type="button" class="btn btn-primary save" id="btnStreetSave">Save</button></div>
+                                    <p class="text-center pt-2"><b><span class="text-success" id="StreetSave_pop"></span></b></p>
+
+                                </div>
+                            <div class="col-md-6">
+                                <img class="img-responsive" id="imgggStreet" alt="Photo Not Found" style="height:400px">
+
+                            </div>
+                        </div>
+                    </center>
+
+                    <div class="modal-footer d-flex" style="padding-left: 12%; padding-right: 4%;">
+                        <button type="button" class="btn btn-primary mr-5" id="btnStreetPrv" style="padding: 3px 15px;">Previous</button>
+
+
+                        <button type="button" class="btn btn-primary" id="btnStreetNxt" style="padding: 3px 25px;">Next</button>
+                        <button type="button" class="btn btn-primary ml-auto close1" data-dismiss="modal" id="traget3">Close</button>
+                        <input type="hidden" id="hdStreetId" />
+
+                        @*<a href="~/Images/Nagpur/Job/download.pdf" class="btn btn-default" download>Download</a>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div id="div_ldr" class="loaderStyle">
         <div style="position: relative; top: 50%; left: 40%;">
             <img style="height: 200px; width: 200px;" class="" src="~/Content/images/img/loading.gif">
@@ -463,8 +579,12 @@
 <script type="text/javascript">
     var arrHouseIDs = [];
     var arrDumpIDs = [];
+    var arrLiquidIDs = [];
+    var arrStreetIDs = [];
     var curHouseIdIndex = 0;
     var curDumpIdIndex = 0;
+    var curLiquidIdIndex = 0;
+    var curStreetIdIndex = 0;
     $("#btnHouseSave").click(function () {
         var QRStatus = $("input[name='QRStatusHouse']:checked").val();
         var houseId = $("#hdHouseId").val();
@@ -507,7 +627,47 @@
     }
     );
 
+    $("#btnLiquidSave").click(function () {
+        var QRStatus = $("input[name='QRStatusLiquid']:checked").val();
+        var liquidId = $("#hdLiquidId").val();
+        var AppId = $('#appid').val();
+        $.ajax({
+            type: "post",
+            url: "/HouseScanifyEmp/SaveQRStatusLiquid?appId=" + AppId + "&liquidId=" + liquidId + "&QRStatus=" + QRStatus,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                //$('#myModal_Image_House').modal('toggle');
+                //LoadGrid();
 
+                $("#LiquidSave_popStreet").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
+
+            }
+        });
+    }
+    );
+
+    $("#btnStreetSave").click(function () {
+        var QRStatus = $("input[name='QRStatusStreet']:checked").val();
+        var streetId = $("#hdStreetId").val();
+        var AppId = $('#appid').val();
+        $.ajax({
+            type: "post",
+            url: "/HouseScanifyEmp/SaveQRStatusStreet?appId=" + AppId + "&streetId=" + streetId + "&QRStatus=" + QRStatus,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                //$('#myModal_Image_House').modal('toggle');
+                //LoadGrid();
+
+                $("#StreetSave_pop").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
+
+            }
+        });
+    }
+    );
 
 
     $("#btnHousePrv").click(function () {
@@ -591,6 +751,97 @@
                     else {
                         $("input[name=QRStatusDump][value=1]").prop('checked', false);
                         $("input[name=QRStatusDump][value=0]").prop('checked', false);
+                    }
+
+                }
+
+            }
+        });
+    }
+    );
+
+    $("#btnLiquidPrv").click(function () {
+        curLiquidIdIndex--;
+        if (curLiquidIdIndex < 0) {
+            curLiquidIdIndex = arrLiquidIDs.length - 1;
+        }
+
+        var liquidId = arrLiquidIDs[curLiquidIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetLiquidDetailsById?liquidId=" + liquidId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1Liquid").text($("#ulb_name").text());
+                    $("#date1Liquid").text(data.modifiedDate);
+                    $("#latlongDataLiquid").text(data.ReferanceId);
+                    $("#dateDataLiquid").text(data.Name);
+                    $("#imgggLiquid").attr('src', data.QRCodeImage);
+
+                    $("#header_dataLiquid").html('HouseScanify QR Image');
+                    $("#latLiquid").text(data.HouseLat);
+                    $("#longLiquid").text(data.HouseLong);
+                    $("#hdLiquidId").val(data.liquidId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatusLiquid][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatusLiquid][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatusLiquid][value=1]").prop('checked', false);
+                        $("input[name=QRStatusLiquid][value=0]").prop('checked', false);
+                    }
+
+                }
+
+            }
+        });
+    }
+    );
+
+
+    $("#btnStreetPrv").click(function () {
+        curStreetIdIndex--;
+        if (curStreetIdIndex < 0) {
+            curStreetIdIndex = arrStreetIDs.length - 1;
+        }
+
+        var streetId = arrStreetIDs[curStreetIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetStreetDetailsById?streetId=" + streetId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1Street").text($("#ulb_name").text());
+                    $("#date1Street").text(data.modifiedDate);
+                    $("#latlongDataStreet").text(data.ReferanceId);
+                    $("#dateDataStreet").text(data.Name);
+                    $("#imgggStreet").attr('src', data.QRCodeImage);
+
+                    $("#header_dataStreet").html('HouseScanify QR Image');
+                    $("#latStreet").text(data.HouseLat);
+                    $("#longStreet").text(data.HouseLong);
+                    $("#hdStreetId").val(data.streetId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatusStreet][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatusStreet][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatusStreet][value=1]").prop('checked', false);
+                        $("input[name=QRStatusStreet][value=0]").prop('checked', false);
                     }
 
                 }
@@ -692,7 +943,100 @@
     }
     );
 
+    $("#btnLiquidNxt").click(function () {
+        curLiquidIdIndex++;
+        if (curLiquidIdIndex >= arrLiquidIDs.length) {
+            curLiquidIdIndex = 0;
+        }
 
+        var liquidId = arrLiquidIDs[curLiquidIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetLiquidDetailsById?liquidId=" + liquidId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1Liquid").text($("#ulb_name").text());
+                    $("#date1Liquid").text(data.modifiedDate);
+                    $("#latlongDataLiquid").text(data.ReferanceId);
+                    $("#dateDataLiquid").text(data.Name);
+                    $("#imgggLiquid").attr('src', data.QRCodeImage);
+
+                    $("#header_dataLiquid").html('HouseScanify QR Image');
+                    $("#latLiquid").text(data.HouseLat);
+                    $("#longLiquid").text(data.HouseLong);
+                    $("#hdLiquidId").val(data.liquidId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatusLiquid][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatusLiquid][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatusLiquid][value=1]").prop('checked', false);
+                        $("input[name=QRStatusLiquid][value=0]").prop('checked', false);
+                    }
+
+
+                }
+
+
+            }
+        });
+    }
+    );
+
+    $("#btnStreetNxt").click(function () {
+        curStreetIdIndex++;
+        if (curStreetIdIndex >= arrStreetIDs.length) {
+            curStreetIdIndex = 0;
+        }
+
+        var streetId = arrStreetIDs[curStreetIdIndex];
+
+        $.ajax({
+            type: "GET",
+            url: "/HouseScanifyEmp/GetStreetDetailsById?streetId=" + streetId,
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                if (data != null) {
+                    $("#ulb_name1Street").text($("#ulb_name").text());
+                    $("#date1Street").text(data.modifiedDate);
+                    $("#latlongDataStreet").text(data.ReferanceId);
+                    $("#dateDataStreet").text(data.Name);
+                    $("#imgggStreet").attr('src', data.QRCodeImage);
+
+                    $("#header_dataStreet").html('HouseScanify QR Image');
+                    $("#latStreet").text(data.HouseLat);
+                    $("#longStreet").text(data.HouseLong);
+                    $("#hdStreetId").val(data.streetId);
+                    if (data.QRStatus == true) {
+                        $("input[name=QRStatusStreet][value=1]").prop('checked', true);
+                    }
+                    else if (data.QRStatus == false) {
+
+                        $("input[name=QRStatusStreet][value=0]").prop('checked', true);
+                    }
+                    else {
+                        $("input[name=QRStatusStreet][value=1]").prop('checked', false);
+                        $("input[name=QRStatusStreet][value=0]").prop('checked', false);
+                    }
+
+
+
+                }
+
+
+            }
+        });
+    }
+    );
 
 
 
@@ -786,7 +1130,7 @@
             $("input[name=QRStatusDump][value=0]").prop('checked', false);
         }
 
-        $("#hdHouseId").val(houseId);
+        $("#hdDumpId").val(houseId);
 
         var ulb = $("#ulb_name").text()
         $("#ulb_name1Dump").text(ulb);
@@ -801,7 +1145,109 @@
 
     }
 
+    function PopImagesLiquid(cel) {
 
+
+        //debugger
+        $('#myModal_Image_Liquid').modal('toggle');
+        var d1 = $(cel).find('.date_time').text();
+        var addr = $(cel).find('.addr-length').text();
+        var date = $(cel).find('.li_date').text();
+        var imgsrc = $(cel).find('img').attr('src');
+        var head = $(cel).find('.li_title').text();
+
+        var lat = $(cel).find('.li_lat').text();
+        var long = $(cel).find('.li_long').text();
+        var houseId = $(cel).find('.li_houseId').text();
+        var QRStatus = $(cel).find('.li_QRStatus').text();
+
+        curLiquidIdIndex = arrLiquidIDs.indexOf(parseInt(houseId));
+        //alert(curHouseIdIndex);
+
+        if (QRStatus != 'null') {
+            if (QRStatus == 'true') {
+                $("input[name=QRStatusLiquid][value=1]").prop('checked', true);
+            }
+            else if (QRStatus == 'false') {
+
+                $("input[name=QRStatusLiquid][value=0]").prop('checked', true);
+            }
+            else {
+                $("input[name=QRStatusLiquid][value=1]").prop('checked', false);
+                $("input[name=QRStatusLiquid][value=0]").prop('checked', false);
+            }
+        }
+        else {
+            $("input[name=QRStatusLiquid][value=1]").prop('checked', false);
+            $("input[name=QRStatusLiquid][value=0]").prop('checked', false);
+        }
+
+        $("#hdLiquidId").val(houseId);
+
+        var ulb = $("#ulb_name").text()
+        $("#ulb_name1Liquid").text(ulb);
+        $("#date1Liquid").text(d1);
+        $("#latlongDataLiquid").text(addr);
+        $("#dateDataLiquid").text(date);
+        $("#imgggLiquid").attr('src', imgsrc);
+        //jQuery("#latlongData").text(cellValue);
+        $("#header_dataLiquid").html(head);
+        $("#latLiquid").text(lat);
+        $("#longLiquid").text(long);
+
+    }
+
+    function PopImagesStreet(cel) {
+
+
+        //debugger
+        $('#myModal_Image_Street').modal('toggle');
+        var d1 = $(cel).find('.date_time').text();
+        var addr = $(cel).find('.addr-length').text();
+        var date = $(cel).find('.li_date').text();
+        var imgsrc = $(cel).find('img').attr('src');
+        var head = $(cel).find('.li_title').text();
+
+        var lat = $(cel).find('.li_lat').text();
+        var long = $(cel).find('.li_long').text();
+        var houseId = $(cel).find('.li_houseId').text();
+        var QRStatus = $(cel).find('.li_QRStatus').text();
+
+        curStreetIdIndex = arrStreetIDs.indexOf(parseInt(houseId));
+        //alert(curHouseIdIndex);
+
+        if (QRStatus != 'null') {
+            if (QRStatus == 'true') {
+                $("input[name=QRStatusStreet][value=1]").prop('checked', true);
+            }
+            else if (QRStatus == 'false') {
+
+                $("input[name=QRStatusStreet][value=0]").prop('checked', true);
+            }
+            else {
+                $("input[name=QRStatusStreet][value=1]").prop('checked', false);
+                $("input[name=QRStatusStreet][value=0]").prop('checked', false);
+            }
+        }
+        else {
+            $("input[name=QRStatusStreet][value=1]").prop('checked', false);
+            $("input[name=QRStatusStreet][value=0]").prop('checked', false);
+        }
+
+        $("#hdStreetId").val(houseId);
+
+        var ulb = $("#ulb_name").text()
+        $("#ulb_name1Street").text(ulb);
+        $("#date1Street").text(d1);
+        $("#latlongDataStreet").text(addr);
+        $("#dateDataStreet").text(date);
+        $("#imgggStreet").attr('src', imgsrc);
+        //jQuery("#latlongData").text(cellValue);
+        $("#header_dataStreet").html(head);
+        $("#latStreet").text(lat);
+        $("#longStreet").text(long);
+
+    }
 
 
     function PopImages(cel) {

@@ -15,7 +15,7 @@ function loadGridHouse() {
         lbFilter: false,
         //"sDom": "ltipr",
         //"order": [[0, "desc"]],
-        "processing": true, // for show progress bar
+        "processing": false, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
@@ -127,6 +127,20 @@ function loadGridHouse() {
     });
     var tableHouse = $('#demoGrid').DataTable();
 
+    //setInterval(function () {
+    //    tableHouse.ajax.reload(null, false); // user paging is not reset on reload
+    //}, 300000);
+    //function close() {
+    //    //LoadGrid();
+    //    debugger
+    //    var tableHouse = $('#demoGrid').DataTable();
+    //    tableHouse.ajax.reload(null, false);
+    //}
+    $("#target").click(function () {
+        //alert("Handler for .click() called.");
+        var tableHouse = $('#demoGrid').DataTable();
+        tableHouse.ajax.reload(null, false);
+    });
     $('#demoGrid').on('order.dt', function () {
 
         var txt_fdate, txt_tdate, UserId, QRStatus, searchString;
@@ -168,10 +182,12 @@ function loadGridHouse() {
         });
     });
     //SearchHouse();
+
 }
 
 
  
+
 
 
 

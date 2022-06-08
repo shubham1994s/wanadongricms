@@ -926,6 +926,7 @@ $(document).ready(function () {
            },
            axisY: {
                title: "House Collection",
+               includeZero: true,
            },
            axisX: {
                title: "Employee Name",

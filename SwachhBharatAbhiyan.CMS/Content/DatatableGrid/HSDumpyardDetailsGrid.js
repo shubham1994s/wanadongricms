@@ -16,7 +16,9 @@ function loadGridDump() {
         dom: 'lBfrtip',
         lbFilter: false,
         //"sDom": "ltipr",
+        //"aaSorting": [],
         //   "order": [[11, "desc"]],
+        //"order": [],
         "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
@@ -28,7 +30,16 @@ function loadGridDump() {
             "type": "POST",
             "datatype": "json"
         },
+        //"drawCallback": function (settings) {
 
+        //    var api = this.api();
+        //    var rowData = api.rows().data();
+        //    arrDumpIDs = [];
+        //    for (var i = 0; i < rowData.length; i++) {
+        //        arrDumpIDs.push(rowData[i]['dumpId']);
+        //    }
+        //    console.log(arrDumpIDs);
+        //},
         "columnDefs":
             [{
                 "targets": [0],
@@ -91,12 +102,18 @@ function loadGridDump() {
 
 
     var tableDump = $('#demoGrid1').DataTable();
-
+    $("#target1").click(function () {
+        //alert("Handler for .click() called.");
+        var tableDump = $('#demoGrid1').DataTable();
+        tableDump.ajax.reload(null, false);
+    });
     $('#demoGrid1').on('order.dt', function () {
 
-        var txt_fdate, txt_tdate, UserId, QRStatus, searchString;
-
+        var txt_fdate, txt_tdate, UserId, QRStatus, searchString, sortColumn, sortOrder;
+        sortColumn = "";
+        sortOrder = "";
         var name = [];
+
         var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
 
         for (var i = 0; i <= arr.length - 1; i++) {
@@ -112,8 +129,10 @@ function loadGridDump() {
         // This will show: "Ordering on column 1 (asc)", for example
         var order = tableDump.order();
         //console.log(order);
-        var sortColumn = tableDump.settings().init().columns[order[0][0]].name;
-        var sortOrder = order[0][1];
+        if (order.length > 0) {
+            var sortColumn = tableDump.settings().init().columns[order[0][0]].name;
+            var sortOrder = order[0][1];
+        }
         //alert(sortColumn);
         //alert(order[0][1]);
         //$('#orderInfo').html('Ordering on column ' + order[0][0] + ' (' + order[0][1] + ')');
