@@ -738,10 +738,5 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHSHouseDetailsnew_Result>("SP_GetHSHouseDetailsnew", fdateParameter, tdateParameter, useridParameter, qrStatusParameter, sortColumnParameter, sortOrderParameter, offsetValueParameter, pagingSizeParameter, searchTextParameter);
         }
-    
-        public virtual ObjectResult<SP_GetHSDumpYardDetailsnew_Result> SP_GetHSDumpYardDetailsnew()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHSDumpYardDetailsnew_Result>("SP_GetHSDumpYardDetailsnew");
-        }
     }
 }

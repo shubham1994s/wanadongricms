@@ -5718,8 +5718,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                           ReferanceId = p.c.ReferanceId,
                                           QRStatus = p.c.QRStatus,
                                           QRStatusDate = p.c.QRStatusDate
-                                      }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fdate && c.QRStatusDate <= tdate)) || c.modifiedDate >= fdate && c.modifiedDate <= tdate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
-
+                                      }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fdate && c.QRStatusDate <= tdate)) || (bQRStatus == null) && (c.modifiedDate >= fdate && c.modifiedDate <= tdate)) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                //.Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fdate && c.QRStatusDate <= tdate)) || (bQRStatus == null) && (c.modifiedDate >= fdate && c.modifiedDate <= tdate))).OrderBy(d => d.houseId).ToList();
 
                 if (fdate != null && tdate != null)
                 {
