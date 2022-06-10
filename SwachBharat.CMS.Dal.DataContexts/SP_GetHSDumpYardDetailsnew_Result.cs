@@ -10,27 +10,18 @@
 namespace SwachBharat.CMS.Dal.DataContexts
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DumpYardDetail
+    public partial class SP_GetHSDumpYardDetailsnew_Result
     {
+        public Nullable<int> userId { get; set; }
         public int dyId { get; set; }
-        public string dyName { get; set; }
-        public string dyNameMar { get; set; }
         public string dyLat { get; set; }
         public string dyLong { get; set; }
-        public string dyQRCode { get; set; }
-        public Nullable<int> zoneId { get; set; }
-        public Nullable<int> wardId { get; set; }
-        public Nullable<int> areaId { get; set; }
         public string ReferanceId { get; set; }
-        public string dyAddress { get; set; }
-        public Nullable<System.DateTime> lastModifiedDate { get; set; }
-        public Nullable<int> userId { get; set; }
-        public string EmployeeType { get; set; }
-        public string QRCodeImage { get; set; }
         public Nullable<bool> QRStatus { get; set; }
         public Nullable<System.DateTime> QRStatusDate { get; set; }
-        public byte[] BinaryQrCodeImage { get; set; }
+        public Nullable<System.DateTime> lastModifiedDate { get; set; }
+        public string qrEmpName { get; set; }
+        public string BinaryQrCodeImage { get; set; }
     }
 }

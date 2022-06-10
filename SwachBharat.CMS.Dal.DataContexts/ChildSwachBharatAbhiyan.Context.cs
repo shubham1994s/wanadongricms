@@ -22,8 +22,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         {
         }
 
-
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -614,7 +612,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("userid", userid) :
                 new ObjectParameter("userid", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeSummary_NEW_Result>("c", fromParameter, toParameter, useridParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_EmployeeSummary_NEW_Result>("SP_EmployeeSummary_NEW", fromParameter, toParameter, useridParameter);
         }
     
         public virtual ObjectResult<SP_GetHSHouseDetails_Result> SP_GetHSHouseDetails(Nullable<System.DateTime> fdate, Nullable<System.DateTime> tdate, Nullable<int> userid, Nullable<int> qrStatus, string sortColumn, string sortOrder, Nullable<int> offsetValue, Nullable<int> pagingSize, string searchText)
@@ -739,6 +737,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("SearchText", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHSHouseDetailsnew_Result>("SP_GetHSHouseDetailsnew", fdateParameter, tdateParameter, useridParameter, qrStatusParameter, sortColumnParameter, sortOrderParameter, offsetValueParameter, pagingSizeParameter, searchTextParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetHSDumpYardDetailsnew_Result> SP_GetHSDumpYardDetailsnew()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHSDumpYardDetailsnew_Result>("SP_GetHSDumpYardDetailsnew");
         }
     }
 }
