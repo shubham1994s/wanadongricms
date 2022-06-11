@@ -342,6 +342,27 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
            return View(model);
         }
 
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            base.OnException(filterContext);
+
+            var action = filterContext.RequestContext.RouteData.Values["action"] as string;
+            var controller = filterContext.RequestContext.RouteData.Values["controller"] as string;
+
+            if ((filterContext.Exception is HttpAntiForgeryException) &&
+                action == "Login" &&
+                controller == "Account" &&
+                filterContext.RequestContext.HttpContext.User != null &&
+                filterContext.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                filterContext.ExceptionHandled = true;
+
+                // redirect/show error/whatever?
+                filterContext.Result = new RedirectResult("/Account/Login");
+            }
+        }
+
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]

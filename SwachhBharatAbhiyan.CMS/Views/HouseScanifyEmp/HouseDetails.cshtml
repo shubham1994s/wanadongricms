@@ -1462,7 +1462,7 @@
         UserId = $('#selectnumber').val();
         txt_fdate = $('#txt_fdate').val();
         txt_tdate = $('#txt_tdate').val();
-        window.location.href = "/HouseScanify/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
+        window.location.href = "/HouseScanifyEmp/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
 
     }
 
@@ -1488,7 +1488,7 @@
         $('#div_ldr').show();
         $('#btnDownload').prop('disabled', true);
 
-        var urlToSend = "/HouseScanify/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
+        var urlToSend = "/HouseScanifyEmp/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
         var req = new XMLHttpRequest();
         req.open("GET", urlToSend, true);
         req.responseType = "blob";
