@@ -49,6 +49,7 @@
           <Property Name="QRCodeImage" Type="nvarchar(max)" />
           <Property Name="QRStatus" Type="bit" />
           <Property Name="QRStatusDate" Type="datetime" />
+          <Property Name="BinaryQrCodeImage" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="GamePlayerDetails">
           <Key>
@@ -197,6 +198,7 @@
           <Property Name="QRCodeImage" Type="nvarchar(max)" />
           <Property Name="QRStatus" Type="bit" />
           <Property Name="QRStatusDate" Type="datetime" />
+          <Property Name="BinaryQrCodeImage" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -405,6 +407,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.SS_1.4_QUESTI
           <Property Name="QRCodeImage" Type="nvarchar(max)" />
           <Property Name="QRStatus" Type="bit" />
           <Property Name="QRStatusDate" Type="datetime" />
+          <Property Name="BinaryQrCodeImage" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TeritoryMaster">
           <Key>
@@ -2324,6 +2327,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="QRCodeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="QRStatus" Type="Boolean" />
           <Property Name="QRStatusDate" Type="DateTime" Precision="3" />
+          <Property Name="BinaryQrCodeImage" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="LiquidWasteDetail">
           <Key>
@@ -2345,6 +2349,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="QRCodeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="QRStatus" Type="Boolean" />
           <Property Name="QRStatusDate" Type="DateTime" Precision="3" />
+          <Property Name="BinaryQrCodeImage" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="StreetSweepingDetail">
           <Key>
@@ -2366,6 +2371,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="QRCodeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="QRStatus" Type="Boolean" />
           <Property Name="QRStatusDate" Type="DateTime" Precision="3" />
+          <Property Name="BinaryQrCodeImage" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3657,6 +3663,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="DumpYardDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.DumpYardDetail">
               <MappingFragment StoreEntitySet="DumpYardDetails">
+                <ScalarProperty Name="BinaryQrCodeImage" ColumnName="BinaryQrCodeImage" />
                 <ScalarProperty Name="QRStatusDate" ColumnName="QRStatusDate" />
                 <ScalarProperty Name="QRStatus" ColumnName="QRStatus" />
                 <ScalarProperty Name="QRCodeImage" ColumnName="QRCodeImage" />
@@ -3680,6 +3687,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="LiquidWasteDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.LiquidWasteDetail">
               <MappingFragment StoreEntitySet="LiquidWasteDetails">
+                <ScalarProperty Name="BinaryQrCodeImage" ColumnName="BinaryQrCodeImage" />
                 <ScalarProperty Name="QRStatusDate" ColumnName="QRStatusDate" />
                 <ScalarProperty Name="QRStatus" ColumnName="QRStatus" />
                 <ScalarProperty Name="QRCodeImage" ColumnName="QRCodeImage" />
@@ -3702,6 +3710,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="StreetSweepingDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.StreetSweepingDetail">
               <MappingFragment StoreEntitySet="StreetSweepingDetails">
+                <ScalarProperty Name="BinaryQrCodeImage" ColumnName="BinaryQrCodeImage" />
                 <ScalarProperty Name="QRStatusDate" ColumnName="QRStatusDate" />
                 <ScalarProperty Name="QRStatus" ColumnName="QRStatus" />
                 <ScalarProperty Name="QRCodeImage" ColumnName="QRCodeImage" />
