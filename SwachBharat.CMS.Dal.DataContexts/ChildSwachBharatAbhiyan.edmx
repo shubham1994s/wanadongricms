@@ -513,6 +513,25 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.SS_1.4_QUESTI
           <Property Name="name" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.VW_HSGetDumpyardDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_HSGetDumpyardDetails">
+          <Key>
+            <PropertyRef Name="dyId" />
+          </Key>
+          <Property Name="userId" Type="int" />
+          <Property Name="dyId" Type="int" Nullable="false" />
+          <Property Name="dyLat" Type="nvarchar" MaxLength="500" />
+          <Property Name="dyLong" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReferanceId" Type="nvarchar" MaxLength="200" />
+          <Property Name="QRStatus" Type="bit" />
+          <Property Name="QRStatusDate" Type="datetime" />
+          <Property Name="lastModifiedDate" Type="datetime" />
+          <Property Name="qrEmpName" Type="nvarchar" MaxLength="500" />
+          <Property Name="dyName" Type="nvarchar" MaxLength="200" />
+          <Property Name="BinaryQrCodeImage" Type="nvarchar(max)" />
+          <Property Name="FilterTotalCount" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.VW_HSGetHouseDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_HSGetHouseDetails">
           <Key>
@@ -530,6 +549,44 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.VW_HSGetHouse
           <Property Name="qrEmpName" Type="nvarchar" MaxLength="500" />
           <Property Name="houseOwner" Type="varchar" MaxLength="200" />
           <Property Name="BinaryQrCodeImage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FilterTotalCount" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.VW_HSGetLiquidDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_HSGetLiquidDetails">
+          <Key>
+            <PropertyRef Name="LWId" />
+          </Key>
+          <Property Name="userId" Type="int" />
+          <Property Name="LWId" Type="int" Nullable="false" />
+          <Property Name="LWLat" Type="nvarchar" MaxLength="500" />
+          <Property Name="LWLong" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReferanceId" Type="nvarchar" MaxLength="200" />
+          <Property Name="QRStatus" Type="bit" />
+          <Property Name="QRStatusDate" Type="datetime" />
+          <Property Name="lastModifiedDate" Type="datetime" />
+          <Property Name="qrEmpName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LWName" Type="nvarchar" MaxLength="200" />
+          <Property Name="BinaryQrCodeImage" Type="nvarchar(max)" />
+          <Property Name="FilterTotalCount" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.VW_HSGetStreetDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_HSGetStreetDetails">
+          <Key>
+            <PropertyRef Name="SSId" />
+          </Key>
+          <Property Name="userId" Type="int" />
+          <Property Name="SSId" Type="int" Nullable="false" />
+          <Property Name="SSLat" Type="nvarchar" MaxLength="500" />
+          <Property Name="SSLong" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReferanceId" Type="nvarchar" MaxLength="200" />
+          <Property Name="QRStatus" Type="bit" />
+          <Property Name="QRStatusDate" Type="datetime" />
+          <Property Name="lastModifiedDate" Type="datetime" />
+          <Property Name="qrEmpName" Type="nvarchar" MaxLength="500" />
+          <Property Name="SSName" Type="nvarchar" MaxLength="200" />
+          <Property Name="BinaryQrCodeImage" Type="nvarchar(max)" />
           <Property Name="FilterTotalCount" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -839,6 +896,22 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
     [SS_1_4_QUESTION].[NOTE] AS [NOTE]
     FROM [dbo].[SS_1.4_QUESTION] AS [SS_1_4_QUESTION]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VW_HSGetDumpyardDetails" EntityType="Self.VW_HSGetDumpyardDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_HSGetDumpyardDetails].[userId] AS [userId], 
+    [VW_HSGetDumpyardDetails].[dyId] AS [dyId], 
+    [VW_HSGetDumpyardDetails].[dyLat] AS [dyLat], 
+    [VW_HSGetDumpyardDetails].[dyLong] AS [dyLong], 
+    [VW_HSGetDumpyardDetails].[ReferanceId] AS [ReferanceId], 
+    [VW_HSGetDumpyardDetails].[QRStatus] AS [QRStatus], 
+    [VW_HSGetDumpyardDetails].[QRStatusDate] AS [QRStatusDate], 
+    [VW_HSGetDumpyardDetails].[lastModifiedDate] AS [lastModifiedDate], 
+    [VW_HSGetDumpyardDetails].[qrEmpName] AS [qrEmpName], 
+    [VW_HSGetDumpyardDetails].[dyName] AS [dyName], 
+    [VW_HSGetDumpyardDetails].[BinaryQrCodeImage] AS [BinaryQrCodeImage], 
+    [VW_HSGetDumpyardDetails].[FilterTotalCount] AS [FilterTotalCount]
+    FROM [dbo].[VW_HSGetDumpyardDetails] AS [VW_HSGetDumpyardDetails]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_HSGetHouseDetails" EntityType="Self.VW_HSGetHouseDetails" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_HSGetHouseDetails].[userId] AS [userId], 
@@ -854,6 +927,38 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
     [VW_HSGetHouseDetails].[BinaryQrCodeImage] AS [BinaryQrCodeImage], 
     [VW_HSGetHouseDetails].[FilterTotalCount] AS [FilterTotalCount]
     FROM [dbo].[VW_HSGetHouseDetails] AS [VW_HSGetHouseDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_HSGetLiquidDetails" EntityType="Self.VW_HSGetLiquidDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_HSGetLiquidDetails].[userId] AS [userId], 
+    [VW_HSGetLiquidDetails].[LWId] AS [LWId], 
+    [VW_HSGetLiquidDetails].[LWLat] AS [LWLat], 
+    [VW_HSGetLiquidDetails].[LWLong] AS [LWLong], 
+    [VW_HSGetLiquidDetails].[ReferanceId] AS [ReferanceId], 
+    [VW_HSGetLiquidDetails].[QRStatus] AS [QRStatus], 
+    [VW_HSGetLiquidDetails].[QRStatusDate] AS [QRStatusDate], 
+    [VW_HSGetLiquidDetails].[lastModifiedDate] AS [lastModifiedDate], 
+    [VW_HSGetLiquidDetails].[qrEmpName] AS [qrEmpName], 
+    [VW_HSGetLiquidDetails].[LWName] AS [LWName], 
+    [VW_HSGetLiquidDetails].[BinaryQrCodeImage] AS [BinaryQrCodeImage], 
+    [VW_HSGetLiquidDetails].[FilterTotalCount] AS [FilterTotalCount]
+    FROM [dbo].[VW_HSGetLiquidDetails] AS [VW_HSGetLiquidDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_HSGetStreetDetails" EntityType="Self.VW_HSGetStreetDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_HSGetStreetDetails].[userId] AS [userId], 
+    [VW_HSGetStreetDetails].[SSId] AS [SSId], 
+    [VW_HSGetStreetDetails].[SSLat] AS [SSLat], 
+    [VW_HSGetStreetDetails].[SSLong] AS [SSLong], 
+    [VW_HSGetStreetDetails].[ReferanceId] AS [ReferanceId], 
+    [VW_HSGetStreetDetails].[QRStatus] AS [QRStatus], 
+    [VW_HSGetStreetDetails].[QRStatusDate] AS [QRStatusDate], 
+    [VW_HSGetStreetDetails].[lastModifiedDate] AS [lastModifiedDate], 
+    [VW_HSGetStreetDetails].[qrEmpName] AS [qrEmpName], 
+    [VW_HSGetStreetDetails].[SSName] AS [SSName], 
+    [VW_HSGetStreetDetails].[BinaryQrCodeImage] AS [BinaryQrCodeImage], 
+    [VW_HSGetStreetDetails].[FilterTotalCount] AS [FilterTotalCount]
+    FROM [dbo].[VW_HSGetStreetDetails] AS [VW_HSGetStreetDetails]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Vw_MsgNotification" EntityType="Self.Vw_MsgNotification" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1101,6 +1206,9 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="DumpYardDetails" EntityType="DevSwachhBharatNagpurModel.DumpYardDetail" />
           <EntitySet Name="LiquidWasteDetails" EntityType="DevSwachhBharatNagpurModel.LiquidWasteDetail" />
           <EntitySet Name="StreetSweepingDetails" EntityType="DevSwachhBharatNagpurModel.StreetSweepingDetail" />
+          <EntitySet Name="VW_HSGetDumpyardDetails" EntityType="DevSwachhBharatNagpurModel.VW_HSGetDumpyardDetails" />
+          <EntitySet Name="VW_HSGetLiquidDetails" EntityType="DevSwachhBharatNagpurModel.VW_HSGetLiquidDetails" />
+          <EntitySet Name="VW_HSGetStreetDetails" EntityType="DevSwachhBharatNagpurModel.VW_HSGetStreetDetails" />
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -2372,6 +2480,57 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="QRStatus" Type="Boolean" />
           <Property Name="QRStatusDate" Type="DateTime" Precision="3" />
           <Property Name="BinaryQrCodeImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="VW_HSGetDumpyardDetails">
+          <Key>
+            <PropertyRef Name="dyId" />
+          </Key>
+          <Property Name="userId" Type="Int32" />
+          <Property Name="dyId" Type="Int32" Nullable="false" />
+          <Property Name="dyLat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dyLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReferanceId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="QRStatus" Type="Boolean" />
+          <Property Name="QRStatusDate" Type="DateTime" Precision="3" />
+          <Property Name="lastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="qrEmpName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="dyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BinaryQrCodeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilterTotalCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VW_HSGetLiquidDetails">
+          <Key>
+            <PropertyRef Name="LWId" />
+          </Key>
+          <Property Name="userId" Type="Int32" />
+          <Property Name="LWId" Type="Int32" Nullable="false" />
+          <Property Name="LWLat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LWLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReferanceId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="QRStatus" Type="Boolean" />
+          <Property Name="QRStatusDate" Type="DateTime" Precision="3" />
+          <Property Name="lastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="qrEmpName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LWName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BinaryQrCodeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilterTotalCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VW_HSGetStreetDetails">
+          <Key>
+            <PropertyRef Name="SSId" />
+          </Key>
+          <Property Name="userId" Type="Int32" />
+          <Property Name="SSId" Type="Int32" Nullable="false" />
+          <Property Name="SSLat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SSLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReferanceId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="QRStatus" Type="Boolean" />
+          <Property Name="QRStatusDate" Type="DateTime" Precision="3" />
+          <Property Name="lastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="qrEmpName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SSName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BinaryQrCodeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilterTotalCount" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3727,6 +3886,60 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="SSNameMar" ColumnName="SSNameMar" />
                 <ScalarProperty Name="SSName" ColumnName="SSName" />
                 <ScalarProperty Name="SSId" ColumnName="SSId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_HSGetDumpyardDetails">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.VW_HSGetDumpyardDetails">
+              <MappingFragment StoreEntitySet="VW_HSGetDumpyardDetails">
+                <ScalarProperty Name="FilterTotalCount" ColumnName="FilterTotalCount" />
+                <ScalarProperty Name="BinaryQrCodeImage" ColumnName="BinaryQrCodeImage" />
+                <ScalarProperty Name="dyName" ColumnName="dyName" />
+                <ScalarProperty Name="qrEmpName" ColumnName="qrEmpName" />
+                <ScalarProperty Name="lastModifiedDate" ColumnName="lastModifiedDate" />
+                <ScalarProperty Name="QRStatusDate" ColumnName="QRStatusDate" />
+                <ScalarProperty Name="QRStatus" ColumnName="QRStatus" />
+                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
+                <ScalarProperty Name="dyLong" ColumnName="dyLong" />
+                <ScalarProperty Name="dyLat" ColumnName="dyLat" />
+                <ScalarProperty Name="dyId" ColumnName="dyId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_HSGetLiquidDetails">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.VW_HSGetLiquidDetails">
+              <MappingFragment StoreEntitySet="VW_HSGetLiquidDetails">
+                <ScalarProperty Name="FilterTotalCount" ColumnName="FilterTotalCount" />
+                <ScalarProperty Name="BinaryQrCodeImage" ColumnName="BinaryQrCodeImage" />
+                <ScalarProperty Name="LWName" ColumnName="LWName" />
+                <ScalarProperty Name="qrEmpName" ColumnName="qrEmpName" />
+                <ScalarProperty Name="lastModifiedDate" ColumnName="lastModifiedDate" />
+                <ScalarProperty Name="QRStatusDate" ColumnName="QRStatusDate" />
+                <ScalarProperty Name="QRStatus" ColumnName="QRStatus" />
+                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
+                <ScalarProperty Name="LWLong" ColumnName="LWLong" />
+                <ScalarProperty Name="LWLat" ColumnName="LWLat" />
+                <ScalarProperty Name="LWId" ColumnName="LWId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_HSGetStreetDetails">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.VW_HSGetStreetDetails">
+              <MappingFragment StoreEntitySet="VW_HSGetStreetDetails">
+                <ScalarProperty Name="FilterTotalCount" ColumnName="FilterTotalCount" />
+                <ScalarProperty Name="BinaryQrCodeImage" ColumnName="BinaryQrCodeImage" />
+                <ScalarProperty Name="SSName" ColumnName="SSName" />
+                <ScalarProperty Name="qrEmpName" ColumnName="qrEmpName" />
+                <ScalarProperty Name="lastModifiedDate" ColumnName="lastModifiedDate" />
+                <ScalarProperty Name="QRStatusDate" ColumnName="QRStatusDate" />
+                <ScalarProperty Name="QRStatus" ColumnName="QRStatus" />
+                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
+                <ScalarProperty Name="SSLong" ColumnName="SSLong" />
+                <ScalarProperty Name="SSLat" ColumnName="SSLat" />
+                <ScalarProperty Name="SSId" ColumnName="SSId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

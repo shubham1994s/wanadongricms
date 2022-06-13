@@ -1470,7 +1470,7 @@
     function DownloadQRCode() {
 
         var RadioValue = $("input[name='radio']:checked").val();
-        var txt_fdate, txt_tdate, Client, UserId;
+        var txt_fdate, txt_tdate, Client, UserId, QrStatus;
         //var name = [];
         //var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
 
@@ -1481,6 +1481,7 @@
         UserId = $('#selectnumber').val();
         txt_fdate = $('#txt_fdate').val();
         txt_tdate = $('#txt_tdate').val();
+        QrStatus = $('#selectQRStatus').val();
 
         //window.location.href = "/HouseScanify/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
 
@@ -1488,7 +1489,7 @@
         $('#div_ldr').show();
         $('#btnDownload').prop('disabled', true);
 
-        var urlToSend = "/HouseScanifyEmp/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate;
+        var urlToSend = "/HouseScanifyEmp/Export?type=" + RadioValue + "&UserId=" + UserId + "&fdate=" + txt_fdate + "&tdate=" + txt_tdate + "&QrStatus=" + QrStatus;
         var req = new XMLHttpRequest();
         req.open("GET", urlToSend, true);
         req.responseType = "blob";
