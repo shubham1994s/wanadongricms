@@ -4810,7 +4810,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || (bQRStatus == null && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate))) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
 
                     if (fromDate != null && toDate != null)
@@ -4892,7 +4892,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || (bQRStatus == null && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate))) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
 
                     if (fromDate != null && toDate != null)
@@ -4975,7 +4975,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || (bQRStatus == null && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate))) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
 
                     if (fromDate != null && toDate != null)
