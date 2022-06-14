@@ -834,7 +834,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
         //Added by milind 09-03-2022
-        public ActionResult Export(int type, int UserId, string fdate = null, string tdate = null)
+        public ActionResult Export(int type, int UserId, string fdate = null, string tdate = null,string QrStatus=null)
         {
             DateTime fdt;
             DateTime tdt;
@@ -942,7 +942,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 //    }
                 //}
 
-                data = childRepository.GetHSQRCodeImageByDate(type, UserId, fdt, tdt);
+                data = childRepository.GetHSQRCodeImageByDate(type, UserId, fdt, tdt, QrStatus);
                 string strFileType = string.Empty;
                 if (data != null )
                 {
