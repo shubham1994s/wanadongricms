@@ -117,7 +117,7 @@ $("#demoGrid3").dataTable().fnDestroy();
             name = arr[i].split("/");
             arr[i] = name[1] + "/" + name[0] + "/" + name[2];
         }
-
+        debugger;
         txt_fdate = arr[0];
         txt_tdate = arr[1];
         UserId = $('#selectnumber').val();
@@ -187,7 +187,7 @@ function Search() {
 
 
 function SearchStreet() {
-    var txt_fdate, txt_tdate, Client, UserId;
+    var txt_fdate, txt_tdate, Client, UserId, QRStatus;
     var name = [];
     var arr = [$('#txt_fdate').val(), $('#txt_tdate').val()];
 
@@ -199,11 +199,12 @@ function SearchStreet() {
     txt_fdate = arr[0];
     txt_tdate = arr[1];
     UserId = $('#selectnumber').val();
+    QRStatus = $('#selectQRStatus').val();
     Client = " ";
     NesEvent = " ";
     var Product = "";
     var catProduct = "";
-    var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#sStreet").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+    var value = txt_fdate + "," + txt_tdate + "," + UserId + "," + $("#sStreet").val() + "," + QRStatus;//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
     // alert(value );
     oTable = $('#demoGrid3').DataTable();
     oTable.search(value).draw();

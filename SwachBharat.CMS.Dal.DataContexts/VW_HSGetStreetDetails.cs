@@ -12,24 +12,19 @@ namespace SwachBharat.CMS.Dal.DataContexts
     using System;
     using System.Collections.Generic;
     
-    public partial class StreetSweepingDetail
+    public partial class VW_HSGetStreetDetails
     {
+        public Nullable<int> userId { get; set; }
         public int SSId { get; set; }
-        public string SSName { get; set; }
-        public string SSNameMar { get; set; }
         public string SSLat { get; set; }
         public string SSLong { get; set; }
-        public string SSQRCode { get; set; }
-        public Nullable<int> zoneId { get; set; }
-        public Nullable<int> wardId { get; set; }
-        public Nullable<int> areaId { get; set; }
         public string ReferanceId { get; set; }
-        public string SSAddress { get; set; }
-        public Nullable<System.DateTime> lastModifiedDate { get; set; }
-        public Nullable<int> userId { get; set; }
-        public string QRCodeImage { get; set; }
         public Nullable<bool> QRStatus { get; set; }
         public Nullable<System.DateTime> QRStatusDate { get; set; }
-        public byte[] BinaryQrCodeImage { get; set; }
+        public Nullable<System.DateTime> lastModifiedDate { get; set; }
+        public string qrEmpName { get; set; }
+        public string SSName { get; set; }
+        public string BinaryQrCodeImage { get; set; }
+        public Nullable<int> FilterTotalCount { get; set; }
     }
 }

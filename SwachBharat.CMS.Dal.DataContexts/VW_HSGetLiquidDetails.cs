@@ -12,24 +12,19 @@ namespace SwachBharat.CMS.Dal.DataContexts
     using System;
     using System.Collections.Generic;
     
-    public partial class LiquidWasteDetail
+    public partial class VW_HSGetLiquidDetails
     {
+        public Nullable<int> userId { get; set; }
         public int LWId { get; set; }
-        public string LWName { get; set; }
-        public string LWNameMar { get; set; }
         public string LWLat { get; set; }
         public string LWLong { get; set; }
-        public string LWQRCode { get; set; }
-        public Nullable<int> zoneId { get; set; }
-        public Nullable<int> wardId { get; set; }
-        public Nullable<int> areaId { get; set; }
         public string ReferanceId { get; set; }
-        public string LWAddreLW { get; set; }
-        public Nullable<System.DateTime> lastModifiedDate { get; set; }
-        public Nullable<int> userId { get; set; }
-        public string QRCodeImage { get; set; }
         public Nullable<bool> QRStatus { get; set; }
         public Nullable<System.DateTime> QRStatusDate { get; set; }
-        public byte[] BinaryQrCodeImage { get; set; }
+        public Nullable<System.DateTime> lastModifiedDate { get; set; }
+        public string qrEmpName { get; set; }
+        public string LWName { get; set; }
+        public string BinaryQrCodeImage { get; set; }
+        public Nullable<int> FilterTotalCount { get; set; }
     }
 }
