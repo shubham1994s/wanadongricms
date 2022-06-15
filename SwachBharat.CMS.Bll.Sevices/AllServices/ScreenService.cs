@@ -4810,7 +4810,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || (bQRStatus == null && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate))) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
 
                     if (fromDate != null && toDate != null)
@@ -4892,7 +4892,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || (bQRStatus == null && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate))) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
 
                     if (fromDate != null && toDate != null)
@@ -4975,7 +4975,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && ((bQRStatus != null && (c.QRStatusDate >= fromDate && c.QRStatusDate <= toDate)) || (bQRStatus == null && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate))) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
 
                     if (fromDate != null && toDate != null)
@@ -5061,7 +5061,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(a => a.dumpId == dumpId && a.HouseLat!=null && a.HouseLong!=null).FirstOrDefault();
+                                       }).Where(a => a.dumpId == dumpId && a.HouseLat != null && a.HouseLong != null).FirstOrDefault();
 
                 if (model != null)
                 {
@@ -5504,7 +5504,7 @@ namespace SwachBharat.CMS.Bll.Services
 
 
         //Added by milind 09-03-2022
-        public async Task<List<SBAHSHouseDetailsGrid>> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate,string QrStatus)
+        public async Task<List<SBAHSHouseDetailsGrid>> GetHSQRCodeImageByDate1(int type, int UserId, DateTime fDate, DateTime tDate, string QrStatus)
         {
             bool? bQRStatus = null;
             if (QrStatus == "1")
@@ -5543,7 +5543,7 @@ namespace SwachBharat.CMS.Bll.Services
                             }
                             else if (QrStatus == "1" || QrStatus == "2")
                             {
-                                IQueryable<VW_HSGetHouseDetails> query = db.VW_HSGetHouseDetails.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.BinaryQrCodeImage) && a.userId == UserId && a.QRStatus== bQRStatus);
+                                IQueryable<VW_HSGetHouseDetails> query = db.VW_HSGetHouseDetails.Where(a => a.modified > fDate && a.modified < tDate && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && !string.IsNullOrEmpty(a.BinaryQrCodeImage) && a.userId == UserId && a.QRStatus == bQRStatus);
                                 data = query.Select(x => new SBAHSHouseDetailsGrid
                                 {
                                     houseId = x.houseId,
@@ -5587,7 +5587,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 }).OrderBy(a => a.houseId).ToList();
                             }
 
-                           
+
                         }
                         else if (type == 2)
                         {
@@ -5620,7 +5620,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 }).OrderBy(a => a.houseId).ToList();
                             }
 
-                          
+
                         }
                         else if (type == 3)
                         {
@@ -5652,7 +5652,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 }).OrderBy(a => a.houseId).ToList();
                             }
 
-                           
+
                         }
                     }
                     else
@@ -5693,7 +5693,7 @@ namespace SwachBharat.CMS.Bll.Services
 
                         //  List<SBAHSHouseDetailsGrid> ResultValues = query.ToList();
 
-                     
+
                         if (type == 0)
                         {
 
@@ -5724,7 +5724,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 }).OrderBy(a => a.houseId).ToList();
                             }
 
-                         
+
                         }
                         else if (type == 1)
                         {
@@ -5757,7 +5757,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 }).OrderBy(a => a.houseId).ToList();
                             }
 
-                           
+
                         }
                         else if (type == 2)
                         {
@@ -5790,7 +5790,7 @@ namespace SwachBharat.CMS.Bll.Services
                                 }).OrderBy(a => a.houseId).ToList();
                             }
 
-                           
+
                         }
                         else if (type == 3)
                         {
@@ -5824,7 +5824,7 @@ namespace SwachBharat.CMS.Bll.Services
 
                             }
 
-                           
+
                         }
 
 
@@ -5838,6 +5838,91 @@ namespace SwachBharat.CMS.Bll.Services
             return data;
         }
 
+        public List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate, string QrStatus)
+        {
+
+            bool? bQRStatus = null;
+            if (QrStatus == "1")
+            {
+                bQRStatus = true;
+            }
+            else if (QrStatus == "2")
+            {
+                bQRStatus = false;
+
+            }
+            else
+            {
+                bQRStatus = null;
+            }
+            List<SBAHSHouseDetailsGrid> data = new List<SBAHSHouseDetailsGrid>();
+
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (type == 0)
+                    {
+                        data = db.HouseMasters.Where(a => ((bQRStatus != null && a.QRStatus == bQRStatus) || bQRStatus == null) && (a.modified >= fDate && a.modified <= tDate) && !string.IsNullOrEmpty(a.houseLat) && !string.IsNullOrEmpty(a.houseLong) && ((UserId > 0 && a.userId == UserId) || UserId <= 0) && (a.BinaryQrCodeImage != null)).Select(x => new SBAHSHouseDetailsGrid
+                        {
+                            houseId = x.houseId,
+                            Name = x.houseOwner,
+                            HouseLat = x.houseLat,
+                            HouseLong = x.houseLong,
+                            //QRCodeImage = x.QRCodeImage,
+                            BinaryQrCodeImage = x.BinaryQrCodeImage,
+                            ReferanceId = x.ReferanceId
+                        }).OrderBy(a => a.houseId).ToList();
+                    }
+                    else if(type == 1)
+                    {
+                        data = db.DumpYardDetails.Where(a => ((bQRStatus != null && a.QRStatus == bQRStatus) || bQRStatus == null) && (a.lastModifiedDate >= fDate && a.lastModifiedDate <= tDate) && !string.IsNullOrEmpty(a.dyLat) && !string.IsNullOrEmpty(a.dyLong) && ((UserId > 0 && a.userId == UserId) || UserId <= 0) && (a.BinaryQrCodeImage != null)).Select(x => new SBAHSHouseDetailsGrid
+                        {
+                            houseId = x.dyId,
+                            Name = x.dyName,
+                            HouseLat = x.dyLat,
+                            HouseLong = x.dyLong,
+                            //QRCodeImage = x.QRCodeImage,
+                            BinaryQrCodeImage = x.BinaryQrCodeImage,
+                            ReferanceId = x.ReferanceId
+                        }).OrderBy(a => a.houseId).ToList();
+
+                    }
+                    else if(type == 2)
+                    {
+                        data = db.LiquidWasteDetails.Where(a => ((bQRStatus != null && a.QRStatus == bQRStatus) || bQRStatus == null) && (a.lastModifiedDate >= fDate && a.lastModifiedDate <= tDate) && !string.IsNullOrEmpty(a.LWLat) && !string.IsNullOrEmpty(a.LWLong) && ((UserId > 0 && a.userId == UserId) || UserId <= 0) && (a.BinaryQrCodeImage != null)).Select(x => new SBAHSHouseDetailsGrid
+                        {
+                            houseId = x.LWId,
+                            Name = x.LWName,
+                            HouseLat = x.LWLat,
+                            HouseLong = x.LWLong,
+                            //QRCodeImage = x.QRCodeImage,
+                            BinaryQrCodeImage = x.BinaryQrCodeImage,
+                            ReferanceId = x.ReferanceId
+                        }).OrderBy(a => a.houseId).ToList();
+                    }
+                    else if(type == 3)
+                    {
+                        data = db.StreetSweepingDetails.Where(a => ((bQRStatus != null && a.QRStatus == bQRStatus) || bQRStatus == null) && (a.lastModifiedDate >= fDate && a.lastModifiedDate <= tDate) && !string.IsNullOrEmpty(a.SSLat) && !string.IsNullOrEmpty(a.SSLong) && ((UserId > 0 && a.userId == UserId) || UserId <= 0) && (a.BinaryQrCodeImage != null)).Select(x => new SBAHSHouseDetailsGrid
+                        {
+                            houseId = x.SSId,
+                            Name = x.SSName,
+                            HouseLat = x.SSLat,
+                            HouseLong = x.SSLong,
+                            //QRCodeImage = x.QRCodeImage,
+                            BinaryQrCodeImage = x.BinaryQrCodeImage,
+                            ReferanceId = x.ReferanceId
+                        }).OrderBy(a => a.houseId).ToList();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return data;
+            }
+            return data;
+        }
 
         public string getbinarytobase64(string plainText)
         {
