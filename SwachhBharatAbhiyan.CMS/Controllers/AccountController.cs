@@ -444,6 +444,17 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    var DefaultConnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+                    SqlConnection cn = new SqlConnection(DefaultConnection);
+                    //Update Password For Waste
+                    SqlCommand cmd = new SqlCommand("Update AspNetUsers Set PasswordString='" + model.Password + "' , EmailConfirmed="+ 1 + " Where UserName='" + model.Email + "'", cn);
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                    cn.Close();
+
+
                     TempData["shortMessage"] = "ULB Create Successfully";
                     return RedirectToAction("Register", "Account");
                 }

@@ -5423,6 +5423,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             int skip = start != null ? Convert.ToInt32(start) : 0;
             int iQRStatus = QrStatus ?? -1;
             iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+            iQRStatus = iQRStatus == 3 ? 3 : iQRStatus;
             List <SBAHSHouseDetailsGrid> data = null;
 
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
@@ -5672,14 +5673,19 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
         public IEnumerable<SBAHSDumpyardDetailsGrid> GetHSDumpyardDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, int? QrStatus)
         {
-            bool? bQRStatus = null;
+            int? bQRStatus = null;
             if (QrStatus == 1)
             {
-                bQRStatus = true;
+                bQRStatus = 1;
             }
             else if (QrStatus ==2)
             {
-                bQRStatus = false;
+                bQRStatus = 0;
+
+            }
+            else if (QrStatus == 3)
+            {
+                bQRStatus = 3;
 
             }
             else
@@ -5718,7 +5724,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                           ReferanceId = p.c.ReferanceId,
                                           QRStatus = p.c.QRStatus,
                                           QRStatusDate = p.c.QRStatusDate
-                                      }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fdate && c.modifiedDate <= tdate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                      }).Where(c => ((bQRStatus == 1 && c.QRStatus == true) || (bQRStatus == 0 && c.QRStatus == false)  || bQRStatus == 3 && c.QRStatus == null && c.QRStatusDate == null || bQRStatus == null) && (c.modifiedDate >= fdate && c.modifiedDate <= tdate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
                 if (fdate != null && tdate != null)
                 {
@@ -5761,14 +5767,19 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         }
         public IEnumerable<SBAHSLiquidDetailsGrid> GetHSLiquidDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, int? QrStatus)
         {
-            bool? bQRStatus = null;
+            int? bQRStatus = null;
             if (QrStatus == 1)
             {
-                bQRStatus = true;
+                bQRStatus = 1;
             }
             else if (QrStatus == 2)
             {
-                bQRStatus = false;
+                bQRStatus = 0;
+
+            }
+            else if (QrStatus == 3)
+            {
+                bQRStatus = 3;
 
             }
             else
@@ -5807,7 +5818,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                           ReferanceId = p.c.ReferanceId,
                                           QRStatus = p.c.QRStatus,
                                           QRStatusDate = p.c.QRStatusDate
-                                      }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fdate && c.modifiedDate <= tdate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                      }).Where(c => ((bQRStatus == 1 && c.QRStatus == true) || (bQRStatus == 0 && c.QRStatus == false) || bQRStatus == 3 && c.QRStatus == null && c.QRStatusDate == null || bQRStatus == null) && (c.modifiedDate >= fdate && c.modifiedDate <= tdate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
 
                 if (fdate != null && tdate != null)
@@ -5852,14 +5863,19 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
         }
         public IEnumerable<SBAHSStreetDetailsGrid> GetHSStreetDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, int appId, int? QrStatus)
         {
-            bool? bQRStatus = null;
+            int? bQRStatus = null;
             if (QrStatus == 1)
             {
-                bQRStatus = true;
+                bQRStatus = 1;
             }
             else if (QrStatus == 2)
             {
-                bQRStatus = false;
+                bQRStatus = 0;
+
+            }
+            else if (QrStatus == 3)
+            {
+                bQRStatus = 3;
 
             }
             else
@@ -5898,7 +5914,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                           ReferanceId = p.c.ReferanceId,
                                           QRStatus = p.c.QRStatus,
                                           QRStatusDate = p.c.QRStatusDate
-                                      }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fdate && c.modifiedDate <= tdate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                      }).Where(c => ((bQRStatus == 1 && c.QRStatus == true) || (bQRStatus == 0 && c.QRStatus == false) || bQRStatus == 3 && c.QRStatus == null && c.QRStatusDate == null || bQRStatus == null) && (c.modifiedDate >= fdate && c.modifiedDate <= tdate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
 
                 if (fdate != null && tdate != null)
