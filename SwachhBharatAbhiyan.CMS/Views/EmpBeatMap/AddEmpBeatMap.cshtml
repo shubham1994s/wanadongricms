@@ -56,7 +56,7 @@
     <br />
     <div class="container">
         <div class="row">
-            <div class="col-sm-3" id="divUserList" style="display:none">
+            <div class="col-sm-3">
 
                 <input type="hidden" value="@ViewBag.lat" id="deflat" />
                 <input type="hidden" value="@ViewBag.lang" id="deflang" />
@@ -66,13 +66,16 @@
                 @*<label>तारीख निवडा / Select Date</label>*@
 
                 @*<label>कर्मचारी निवडा / Select Employee</label>*@
-                <label>Select Employee</label>
-                <select id="selectEmp" class="form-control minimal-form  RequiredInput validate[required] RequiredInput"></select>
-            </div>
-            <div  class="col-sm-3">
+                <div id="divUserList" style="display:none">
+                    <label>Select Employee</label>
+                    <select id="selectEmp" class="form-control minimal-form  RequiredInput validate[required] RequiredInput"></select>
+                </div>
                 <div id="divUserName" style="display:none">
                     <label>Employee Name :</label><b><span id="spnUserName"></span></b>
                 </div>
+            </div>
+            <div  class="col-sm-3">
+                
                 <div>
                     <button type="button" class="btn btn-primary save" id="btnEMPSave">Save</button>
                 </div>
