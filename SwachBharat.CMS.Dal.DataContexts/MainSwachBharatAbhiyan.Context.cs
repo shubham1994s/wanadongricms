@@ -31,7 +31,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<country_states> country_states { get; set; }
         public virtual DbSet<state_districts> state_districts { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
@@ -49,6 +48,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<AEmployeeMaster> AEmployeeMasters { get; set; }
         public virtual DbSet<tehsil> tehsils { get; set; }
         public virtual DbSet<AppDetail> AppDetails { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     
         public virtual int SP_Admin_table()
         {
