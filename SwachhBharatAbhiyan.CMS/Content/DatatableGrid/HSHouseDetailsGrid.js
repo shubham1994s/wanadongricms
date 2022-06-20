@@ -15,12 +15,12 @@ function loadGridHouse() {
         lbFilter: false,
         //"sDom": "ltipr",
         //"order": [[0, "desc"]],
-        "processing": false, // for show progress bar
+        "processing": true, // for show progress bar
         "serverSide": true, // for process server side
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
         "pageLength": 10,
-
+        "pagingType": "input",
         "ajax": {
             "url": "/Datable/GetJqGridJson?rn=HSHouseDetails",
             "type": "POST",
@@ -126,7 +126,7 @@ function loadGridHouse() {
 
     });
     var tableHouse = $('#demoGrid').DataTable();
-
+   
     //setInterval(function () {
     //    tableHouse.ajax.reload(null, false); // user paging is not reset on reload
     //}, 300000);
@@ -141,6 +141,9 @@ function loadGridHouse() {
         var tableHouse = $('#demoGrid').DataTable();
         tableHouse.ajax.reload(null, false);
     });
+
+
+
     $('#demoGrid').on('order.dt', function () {
 
         var txt_fdate, txt_tdate, UserId, QRStatus, searchString;
@@ -185,8 +188,6 @@ function loadGridHouse() {
 
 }
 
-
- 
 
 
 
