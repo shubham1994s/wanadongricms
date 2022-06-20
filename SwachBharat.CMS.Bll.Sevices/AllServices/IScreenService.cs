@@ -44,6 +44,10 @@ namespace SwachBharat.CMS.Bll.Services
         SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId);
         SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType);
         HouseDetailsVM SaveHouseDetails(HouseDetailsVM data);
+
+        void SaveEmpBeatMap(EmpBeatMapVM data);
+        EmpBeatMapVM GetEmpBeatMap(int ebmId);
+        List<SelectListItem> ListUserBeatMap(string Emptype);
          void DeletHouseDetails(int teamId);
 
         SBALUserLocationMapView GetLocationDetails(int teamId,string Emptype);

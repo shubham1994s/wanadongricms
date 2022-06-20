@@ -74,6 +74,7 @@
     <Compile Include="ChildModel\Model\ComplaintVM.cs" />
     <Compile Include="ChildModel\Model\DashBoardVM.cs" />
     <Compile Include="ChildModel\Model\DumpYardDetailsVM.cs" />
+    <Compile Include="ChildModel\Model\EmpBeatMapVM.cs" />
     <Compile Include="ChildModel\Model\EmployeeDetailsVM.cs" />
     <Compile Include="ChildModel\Model\EmployeeHouseCollectionTime.cs" />
     <Compile Include="ChildModel\Model\EmployeeHouseCollectionType.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Grid\SBAAdminCountGrid.cs" />
     <Compile Include="Grid\SBAAttendenceSettingsGridRow.cs" />
     <Compile Include="Grid\SBADumpYardDetailsGridRow.cs" />
+    <Compile Include="Grid\SBAEmpBeatMapGridRow.cs" />
     <Compile Include="Grid\SBAEmplyeeIdelGrid.cs" />
     <Compile Include="Grid\SBAEmpolyeeSummaryGrid.cs" />
     <Compile Include="Grid\SBAGarbageCountDetails.cs" />

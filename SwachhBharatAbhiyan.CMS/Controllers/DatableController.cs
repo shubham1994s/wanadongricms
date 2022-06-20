@@ -289,6 +289,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new HouseDetailsGridRepository(0, searchString, appId);
                     return gridRepository;
                     break;
+                case "EmpBeatMap":
+                    gridRepository = new EmpBeatMapsGridRepository(0, searchString, appId);
+                    return gridRepository;
+                    break;
                 case "GarbageHouse":
                     gridRepository = new HGarbageCotectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
                     return gridRepository;

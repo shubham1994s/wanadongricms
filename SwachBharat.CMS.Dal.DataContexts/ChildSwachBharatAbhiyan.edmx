@@ -51,6 +51,15 @@
           <Property Name="QRStatusDate" Type="datetime" />
           <Property Name="BinaryQrCodeImage" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="EmpBeatMap">
+          <Key>
+            <PropertyRef Name="ebmId" />
+          </Key>
+          <Property Name="ebmId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="ebmLatLong" Type="nvarchar(max)" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="GamePlayerDetails">
           <Key>
             <PropertyRef Name="ID" />
@@ -808,6 +817,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
         <EntityContainer Name="DevSwachhBharatNagpurModelStoreContainer">
           <EntitySet Name="Daily_Attendance" EntityType="Self.Daily_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DumpYardDetails" EntityType="Self.DumpYardDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpBeatMap" EntityType="Self.EmpBeatMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GamePlayerDetails" EntityType="Self.GamePlayerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GarbageCollectionDetails" EntityType="Self.GarbageCollectionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GarbagePointDetails" EntityType="Self.GarbagePointDetails" Schema="dbo" store:Type="Tables" />
@@ -1209,6 +1219,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="VW_HSGetDumpyardDetails" EntityType="DevSwachhBharatNagpurModel.VW_HSGetDumpyardDetails" />
           <EntitySet Name="VW_HSGetLiquidDetails" EntityType="DevSwachhBharatNagpurModel.VW_HSGetLiquidDetails" />
           <EntitySet Name="VW_HSGetStreetDetails" EntityType="DevSwachhBharatNagpurModel.VW_HSGetStreetDetails" />
+          <EntitySet Name="EmpBeatMaps" EntityType="DevSwachhBharatNagpurModel.EmpBeatMap" />
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -2531,6 +2542,15 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="SSName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="BinaryQrCodeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FilterTotalCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="EmpBeatMap">
+          <Key>
+            <PropertyRef Name="ebmId" />
+          </Key>
+          <Property Name="ebmId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="ebmLatLong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3940,6 +3960,16 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="SSLat" ColumnName="SSLat" />
                 <ScalarProperty Name="SSId" ColumnName="SSId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpBeatMaps">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.EmpBeatMap">
+              <MappingFragment StoreEntitySet="EmpBeatMap">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ebmLatLong" ColumnName="ebmLatLong" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="ebmId" ColumnName="ebmId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -161,6 +161,19 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             HouseDetailsVM dd =screenService.SaveHouseDetails(data);
             return dd;
         }
+        public void SaveEmpBeatMap(EmpBeatMapVM data)
+        {
+            screenService.SaveEmpBeatMap(data);
+        }
+        public EmpBeatMapVM GetEmpBeatMap(int ebmId)
+        {
+            return screenService.GetEmpBeatMap(ebmId);
+        }
+
+        public List<SelectListItem> ListUserBeatMap(string Emptype)
+        {
+            return screenService.ListUserBeatMap(Emptype);
+        }
         public void DeletHouse(int teamId)
         {
             screenService.DeletHouseDetails(teamId);

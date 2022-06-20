@@ -860,6 +860,108 @@ namespace SwachBharat.CMS.Bll.Services
                 return null;
             }
         }
+
+        public void SaveEmpBeatMap(EmpBeatMapVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.ebmId > 0)
+                    {
+                        var model = db.EmpBeatMaps.Where(x => x.ebmId == data.ebmId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.userId = data.userId;
+                            model.Type = data.Type;
+                            model.ebmLatLong = ConvertLatLongToString(data.ebmLatLong);
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = fillEmpBeatMap(data);
+                        db.EmpBeatMaps.Add(type);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        public EmpBeatMapVM GetEmpBeatMap(int ebmId)
+        {
+            EmpBeatMapVM empBeatMap = new EmpBeatMapVM();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (ebmId > 0)
+                    {
+                        var model = db.EmpBeatMaps.Where(x => x.ebmId == ebmId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            empBeatMap = fillEmpBeatMapVM(model);
+                        }
+                        else
+                        {
+                            empBeatMap.ebmId = -1;
+                            empBeatMap.userId = -1;
+                        }
+                    }
+                    else
+                    {
+                        empBeatMap.ebmId = -1;
+                        empBeatMap.userId = -1;
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return empBeatMap;
+            }
+
+            return empBeatMap;
+        }
+        public string ConvertLatLongToString(List<coordinates> lstCord)
+        {
+            
+            List<string> lstLatLong = new List<string>();
+            foreach(var s in lstCord)
+            {
+                lstLatLong.Add(s.lat + ","+ s.lng);
+            }
+            return string.Join(";", lstLatLong);
+        }
+
+
+        public List<coordinates> ConvertStringToLatLong(string strCord)
+        {
+            List<coordinates> lstCord = new List<coordinates>();
+           string[] lstLatLong = strCord.Split(';');
+            if(lstLatLong.Length > 0)
+            {
+                for(var i = 0; i < lstLatLong.Length; i++)
+                {
+                    coordinates cord = new coordinates();
+                    string[] strLatLong = lstLatLong[i].Split(',');
+                    if (strLatLong.Length == 2)
+                    {
+                        cord.lat = Convert.ToDouble(strLatLong[0]);
+                        cord.lng = Convert.ToDouble(strLatLong[1]);
+                    }
+                    lstCord.Add(cord);
+                }
+
+            }
+            return lstCord;
+        }
         public void DeletHouseDetails(int teamId)
         {
             try
@@ -3104,6 +3206,26 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
 
+        private EmpBeatMap fillEmpBeatMap(EmpBeatMapVM data)
+        {
+            EmpBeatMap model = new EmpBeatMap();
+            model.userId = data.userId;
+            model.Type = data.Type;
+            model.ebmLatLong = ConvertLatLongToString(data.ebmLatLong);
+
+            return model;
+        }
+        private EmpBeatMapVM fillEmpBeatMapVM(EmpBeatMap data)
+        {
+            EmpBeatMapVM model = new EmpBeatMapVM();
+            model.ebmId = data.ebmId;
+            model.userId = data.userId;
+            model.Type = data.Type;
+            model.userName = db.UserMasters.Where(x => x.userId == data.userId).Select(x =>x.userName).FirstOrDefault();
+            model.ebmLatLong = ConvertStringToLatLong(data.ebmLatLong);
+
+            return model;
+        }
         private HouseMaster FillHouseDetailsDataModel(HouseDetailsVM data)
         {
             HouseMaster model = new HouseMaster();
@@ -3402,6 +3524,28 @@ namespace SwachBharat.CMS.Bll.Services
 
             return user;
         }
+
+        public List<SelectListItem> ListUserBeatMap(string Emptype)
+        {
+            var user = new List<SelectListItem>();
+            SelectListItem itemAdd = new SelectListItem() { Text = "--Select Employee--", Value = "0" };
+
+            try
+            {
+                user = db.UserMasters.Where(c => c.isActive == true && c.EmployeeType == Emptype).Where(c => !db.EmpBeatMaps.Any(d => d.userId == c.userId))
+                    .Select(x => new SelectListItem
+                    {
+                        Text = x.userName,
+                        Value = x.userId.ToString()
+                    }).OrderBy(t => t.Text).ToList();
+
+            }
+            catch (Exception ex) { throw ex; }
+
+            return user;
+        }
+
+
         public List<SelectListItem> LoadListWardNo(Int32 ZoneId)
         {
             var WardNo = new List<SelectListItem>();

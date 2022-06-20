@@ -61,6 +61,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<VW_HSGetDumpyardDetails> VW_HSGetDumpyardDetails { get; set; }
         public virtual DbSet<VW_HSGetLiquidDetails> VW_HSGetLiquidDetails { get; set; }
         public virtual DbSet<VW_HSGetStreetDetails> VW_HSGetStreetDetails { get; set; }
+        public virtual DbSet<EmpBeatMap> EmpBeatMaps { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
