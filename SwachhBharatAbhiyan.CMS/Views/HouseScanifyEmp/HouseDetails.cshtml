@@ -7,9 +7,35 @@
 @Styles.Render("~/Content/IndexCSS")
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 <link href="~/Content/css/blink.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
 @Scripts.Render("~/Scripts/IndexScript")
 <style>
-
+    .paginate_button:hover {
+      
+        border: 1px solid #0973cb !important;
+      color:#fff;
+      
+        background: #189cdf !important;
+    }
+    .dataTables_length select {
+        padding: 2px 1.8rem 1px 8px !important
+    }
+    .paginate_input {
+        width: 10%;
+        text-align: center;
+    }
+    /*   .paginate_button {
+        padding: 4px 12px;
+       
+    }*/
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+        cursor: default;
+        color: #666 !important;
+        border: 1px solid transparent !important;
+        background: transparent !important;
+        box-shadow: none;
+        /*  padding:1%*/
+    }
     /* The container */
     .check-container {
         display: block;
@@ -94,11 +120,13 @@
     #demoGrid3_filter {
         display: none;
     }
+
     .save {
         padding: 3px 25px;
         background: #40a50a !important;
         border-color: #40a50a !important;
     }
+
     .close1 {
         padding: 3px 25px !important;
         border-color: #ec3836 !important;
@@ -113,6 +141,7 @@
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.12.1/pagination/input.js"></script>
 <script src="~/Content/DatatableGrid/HSHouseDetailsGrid.js"></script>
 <script src="~/Content/DatatableGrid/HSDumpyardDetailsGrid.js"></script>
 <script src="~/Content/DatatableGrid/HSLiquidDetailsGrid.js"></script>
@@ -198,6 +227,7 @@
                         <option value="-1">Select Status</option>
                         <option value="1">Approve</option>
                         <option value="2">Reject</option>
+                        <option value="3">Not Verified</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
@@ -419,10 +449,11 @@
                                     <input type="radio" name="QRStatusDump" value="0"> Reject
                                 </p>
                                 <div class="text-center pt-1">
-                                    <button type="button" class="btn btn-primary save" id="btnDumpSave">Save</button></div>
-                                    <p class="text-center pt-2"><b><span class="text-success" id="DumpSave_pop"></span></b></p>
-
+                                    <button type="button" class="btn btn-primary save" id="btnDumpSave">Save</button>
                                 </div>
+                                <p class="text-center pt-2"><b><span class="text-success" id="DumpSave_pop"></span></b></p>
+
+                            </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imgggDump" alt="Photo Not Found" style="height:400px">
 
@@ -430,7 +461,7 @@
                         </div>
                     </center>
 
-                    <div class="modal-footer d-flex"  style="padding-left: 12%; padding-right: 4%;">
+                    <div class="modal-footer d-flex" style="padding-left: 12%; padding-right: 4%;">
                         <button type="button" class="btn btn-primary mr-5" id="btnDumpPrv" style="padding: 3px 15px;">Previous</button>
 
 
@@ -484,7 +515,7 @@
                         <button type="button" class="btn btn-primary mr-5" id="btnLiquidPrv" style="padding: 3px 15px;">Previous</button>
 
 
-                        <button type="button" class="btn btn-primary" id="btnLiquidNxt"  style="padding: 3px 25px;">Next</button>
+                        <button type="button" class="btn btn-primary" id="btnLiquidNxt" style="padding: 3px 25px;">Next</button>
                         <button type="button" class="btn btn-primary ml-auto close1" data-dismiss="modal" id="traget2">Close</button>
                         <input type="hidden" id="hdLiquidId" />
 
@@ -520,10 +551,11 @@
                                     <input type="radio" name="QRStatusStreet" value="0"> Reject
                                 </p>
                                 <div class="text-center pt-1">
-                                    <button type="button" class="btn btn-primary save" id="btnStreetSave">Save</button></div>
-                                    <p class="text-center pt-2"><b><span class="text-success" id="StreetSave_pop"></span></b></p>
-
+                                    <button type="button" class="btn btn-primary save" id="btnStreetSave">Save</button>
                                 </div>
+                                <p class="text-center pt-2"><b><span class="text-success" id="StreetSave_pop"></span></b></p>
+
+                            </div>
                             <div class="col-md-6">
                                 <img class="img-responsive" id="imgggStreet" alt="Photo Not Found" style="height:400px">
 
@@ -592,13 +624,13 @@
         $.ajax({
             type: "post",
             url: "/HouseScanifyEmp/SaveQRStatusHouse?appId=" + AppId + "&houseId=" + houseId + "&QRStatus=" + QRStatus,
-            data: { },
+            data: {},
             datatype: "json",
             traditional: true,
             success: function (data) {
                 //$('#myModal_Image_House').modal('toggle');
                 //LoadGrid();
-               
+
                 $("#houseSave_pop").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
 
             }
@@ -857,12 +889,12 @@
         if (curHouseIdIndex >= arrHouseIDs.length) {
             curHouseIdIndex = 0;
         }
-        
+
         var houseId = arrHouseIDs[curHouseIdIndex];
-        
+
         $.ajax({
             type: "GET",
-            url: "/HouseScanifyEmp/GetHouseDetailsById?houseId=" + houseId ,
+            url: "/HouseScanifyEmp/GetHouseDetailsById?houseId=" + houseId,
             data: {},
             datatype: "json",
             traditional: true,
@@ -873,7 +905,7 @@
                     $("#latlongDataHouse").text(data.ReferanceId);
                     $("#dateDataHouse").text(data.Name);
                     $("#imgggHouse").attr('src', data.QRCodeImage);
-                    
+
                     $("#header_dataHouse").html('HouseScanify QR Image');
                     $("#latHouse").text(data.HouseLat);
                     $("#longHouse").text(data.HouseLong);
@@ -891,7 +923,7 @@
                     }
 
                 }
-                
+
             }
         });
     }
@@ -1042,7 +1074,7 @@
 
     function PopImagesHouse(cel) {
 
-        
+
         //debugger
         $('#myModal_Image_House').modal('toggle');
         var d1 = $(cel).find('.date_time').text();
@@ -1063,11 +1095,11 @@
             if (QRStatus == 'true') {
                 $("input[name=QRStatusHouse][value=1]").prop('checked', true);
             }
-            else if(QRStatus == 'false'){
+            else if (QRStatus == 'false') {
 
                 $("input[name=QRStatusHouse][value=0]").prop('checked', true);
             }
-            else  {
+            else {
                 $("input[name=QRStatusHouse][value=1]").prop('checked', false);
                 $("input[name=QRStatusHouse][value=0]").prop('checked', false);
             }

@@ -16,7 +16,8 @@ using SwachBharat.CMS.Bll.ViewModels;
 using System.Web.Security;
 using SwachBharat.CMS.Bll.ViewModels.MainModel;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
-
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
 {
@@ -411,6 +412,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if(TempData["shortMessage"] != null)
+            {
+                ViewBag.Message = TempData["shortMessage"].ToString();
+            }
+            else
+            {
+                ViewBag.Message = "";
+            }
+           
             return View();
         }
 
@@ -428,14 +438,25 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    var DefaultConnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+                    SqlConnection cn = new SqlConnection(DefaultConnection);
+                    //Update Password For Waste
+                    SqlCommand cmd = new SqlCommand("Update AspNetUsers Set PasswordString='" + model.Password + "' , EmailConfirmed="+ 1 + " Where UserName='" + model.Email + "'", cn);
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                    cn.Close();
+
+
+                    TempData["shortMessage"] = "ULB Create Successfully";
+                    return RedirectToAction("Register", "Account");
                 }
                 AddErrors(result);
             }
@@ -474,7 +495,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -483,10 +504,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                var url = string.Format(callbackUrl);
+                return Redirect(url);
+               
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -506,7 +531,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
+            //var code = "123456";
             return code == null ? View("Error") : View();
+            //return View();
         }
 
         //
@@ -520,7 +547,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+           // model.Code = "123456";
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
@@ -529,6 +557,25 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
+                var DefaultConnection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+                SqlConnection cn = new SqlConnection(DefaultConnection);
+                //Update Password For Waste
+                SqlCommand cmd = new SqlCommand("Update AspNetUsers Set PasswordString='" + model.Password + "' Where Id='" + user.Id + "'", cn);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                cn.Close();
+                //Update Password For Liquid
+                SqlCommand cmdl = new SqlCommand("Update AD_USER_MST_LIQUID Set ADUM_PASSWORD ='" + model.Password + "' where APP_ID = (select Appid From UserInApps where userid='" + user.Id + "')", cn);
+                cn.Open();
+                cmdl.ExecuteNonQuery();
+                cn.Close();
+                //Update Password For Street
+                SqlCommand cmds = new SqlCommand("Update AD_USER_MST_STREET Set ADUM_PASSWORD ='" + model.Password + "' where APP_ID = (select Appid From UserInApps where userid='" + user.Id + "')", cn);
+                cn.Open();
+                cmds.ExecuteNonQuery();
+                cn.Close();
+
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);

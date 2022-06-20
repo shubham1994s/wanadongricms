@@ -326,11 +326,11 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             {
 
                 var W = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
-                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive , Today_Waste_Status = b.Today_Waste_Status })
+                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive , Today_Waste_Status = b.Today_Waste_Status,Url=b.baseImageUrlCMS })
                     .Join(db.UserInApps, c => c.AppId, d => d.AppId,
                     (c, d) => new { c, d })
                     .Join(db.AspNetUsers, e => e.d.UserId, f => f.Id,
-                    (e, f) => new MenuItem { M_ID = 1, M_P_ID = 1, ActionName = "Login", ControllerName = "Account", LinkText = e.c.AppName, Today_Waste_Status = e.c.Today_Waste_Status, returnUrl = f.UserName, Type = "W", isActive = e.c.IsActive }).Where(x => x.isActive == true).ToList();
+                    (e, f) => new MenuItem { M_ID = 1, M_P_ID = 1, ActionName = "Login", ControllerName = "Account", LinkText = e.c.AppName, Today_Waste_Status = e.c.Today_Waste_Status, returnUrl = f.UserName, Type = "W", isActive = e.c.IsActive, Url=e.c.Url }).Where(x => x.isActive == true).ToList();
 
                 if (W != null && W.Count > 0)
                 {
@@ -338,9 +338,9 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                 }
 
                 var L = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
-                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive, Today_Liquid_Status = b.Today_Liquid_Status })
+                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive, Today_Liquid_Status = b.Today_Liquid_Status, Url = b.baseImageUrlCMS })
                     .Join(db.AD_USER_MST_LIQUID, c => c.AppId, d => d.APP_ID,
-                    (c, d) => new MenuItem { M_ID = 1, M_P_ID = 2, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, Today_Liquid_Status = c.Today_Liquid_Status, returnUrl = d.ADUM_LOGIN_ID, Type = "L", isActive = c.IsActive }).Where(x => x.isActive == true).ToList();
+                    (c, d) => new MenuItem { M_ID = 1, M_P_ID = 2, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, Today_Liquid_Status = c.Today_Liquid_Status, returnUrl = d.ADUM_LOGIN_ID, Type = "L", isActive = c.IsActive, Url = c.Url }).Where(x => x.isActive == true).ToList();
 
                 if (L != null && L.Count > 0)
                 {
@@ -348,9 +348,9 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                 }
 
                 var S = db.AppConnections.Join(db.AppDetails, a => a.AppId, b => b.AppId,
-                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive, Today_Street_Status = b.Today_Street_Status })
+                    (a, b) => new { AppId = a.AppId, AppName = b.AppName, IsActive = b.IsActive, Today_Street_Status = b.Today_Street_Status, Url = b.baseImageUrlCMS })
                     .Join(db.AD_USER_MST_STREET, c => c.AppId, d => d.APP_ID,
-                    (c, d) => new MenuItem { M_ID = 1, M_P_ID = 3, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, Today_Street_Status = c.Today_Street_Status, returnUrl = d.ADUM_LOGIN_ID, Type = "S", isActive = c.IsActive }).Where(x => x.isActive == true).ToList();
+                    (c, d) => new MenuItem { M_ID = 1, M_P_ID = 3, ActionName = "Login", ControllerName = "Account", LinkText = c.AppName, Today_Street_Status = c.Today_Street_Status, returnUrl = d.ADUM_LOGIN_ID, Type = "S", isActive = c.IsActive, Url = c.Url }).Where(x => x.isActive == true).ToList();
 
                 if (S != null && S.Count > 0)
                 {

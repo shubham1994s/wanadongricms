@@ -101,7 +101,7 @@
                                             <li class="">
                                                 @*@Html.ActionLink(@firstItem.LinkText, @firstItem.ActionName, new { area = "", controller = @firstItem.ControllerName, returnUrl = @firstItem.returnUrl, Type = @firstItem.Type, FAQ = @firstItem.FAQ })*@
 
-                                                <a target="_blank" href="/?returnUrl=@firstItem.returnUrl&Type=@firstItem.Type">
+                                                <a target="_blank" href="@firstItem.Url?returnUrl=@firstItem.returnUrl&Type=@firstItem.Type">
                                                     @firstItem.LinkText
                                                     @if (@firstItem.Today_Waste_Status == true && @firstItem.Type == "W")
                                                     {
