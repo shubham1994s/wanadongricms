@@ -929,6 +929,48 @@ namespace SwachBharat.CMS.Bll.Services
 
             return empBeatMap;
         }
+
+        public bool IsPointInPolygon(int ebmId, coordinates p)
+        {
+            bool inside = false;
+            EmpBeatMapVM empBeatMap = new EmpBeatMapVM();
+            empBeatMap = GetEmpBeatMap(ebmId);
+            List<coordinates> poly = new List<coordinates>();
+            if (empBeatMap.ebmId > 0)
+            {
+                poly = empBeatMap.ebmLatLong;
+                double minX = poly[0].lat ?? 0;
+                double maxX = poly[0].lat ?? 0;
+                double minY = poly[0].lng ?? 0;
+                double maxY = poly[0].lng ?? 0;
+
+                for (int i = 1; i < poly.Count; i++)
+                {
+                    coordinates q = poly[i];
+                    minX = Math.Min(q.lat ?? 0, minX);
+                    maxX = Math.Max(q.lat ?? 0, maxX);
+                    minY = Math.Min(q.lng ?? 0, minY);
+                    maxY = Math.Max(q.lng ?? 0, maxY);
+                }
+
+
+                if (p.lat < minX || p.lat > maxX || p.lng < minY || p.lng > maxY)
+                {
+                    return false;
+                }
+                for (int i = 0, j = poly.Count - 1; i < poly.Count; j = i++)
+                {
+                    if ((poly[i].lng > p.lng) != (poly[j].lng > p.lng) &&
+                         p.lat < (poly[j].lat - poly[i].lat) * (p.lng - poly[i].lng) / (poly[j].lng - poly[i].lng) + poly[i].lat)
+                    {
+                        inside = !inside;
+                    }
+                }
+                return inside;
+
+            }
+            return inside;
+        }
         public string ConvertLatLongToString(List<coordinates> lstCord)
         {
             

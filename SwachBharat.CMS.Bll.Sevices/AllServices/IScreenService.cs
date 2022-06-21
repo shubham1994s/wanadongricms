@@ -48,6 +48,7 @@ namespace SwachBharat.CMS.Bll.Services
         void SaveEmpBeatMap(EmpBeatMapVM data);
         EmpBeatMapVM GetEmpBeatMap(int ebmId);
         List<SelectListItem> ListUserBeatMap(string Emptype);
+        bool IsPointInPolygon(int ebmId, coordinates p);
          void DeletHouseDetails(int teamId);
 
         SBALUserLocationMapView GetLocationDetails(int teamId,string Emptype);

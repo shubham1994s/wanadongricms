@@ -199,18 +199,18 @@
 
 
             }
-            //google.maps.event.addListener(map, 'click', function (event) {
-            //    placeMarker(event.latLng);
-            //    console.log(event.latLng.toUrlValue(5));
-            //});
+            google.maps.event.addListener(map, 'click', function (event) {
+                placeMarker(event.latLng);
+                console.log(event.latLng.toUrlValue(5));
+            });
 
-            //function placeMarker(location) {
-            //    var marker = new google.maps.Marker({
-            //        position: location,
-            //        map: map
-            //    });
-
-            //}
+            function placeMarker(location) {
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+                IsPointInPolygon(location);
+            }
 
             var drawingManager = new google.maps.drawing.DrawingManager({
                 drawingMode: google.maps.drawing.OverlayType.MARKER,
@@ -430,6 +430,40 @@
             });
         }
         );
+
+        function IsPointInPolygon(location) {
+
+            var EBMObj = new Object();
+            var obj = new Object();
+            var CordArry = [];
+            obj.lat = location.lat();
+            obj.lng = location.lng();
+            CordArry.push(obj);
+            EBMObj.userId = parseInt($('#hduserId').val());
+            EBMObj.ebmLatLong = CordArry;
+            EBMObj.Type = 'W';
+            EBMObj.ebmId = parseInt($('#hdebmId').val());
+            var data = JSON.stringify({ 'EBMObj': EBMObj });
+
+            $.ajax({
+                type: "post",
+                url: "/EmpBeatMap/IsPointInPolygon",
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                //traditional: true,
+                success: function (data) {
+                    //$('#myModal_Image_House').modal('toggle');
+                    //LoadGrid();
+
+                    //$("#DumpSave_pop").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
+                    alert(data);
+                }
+            });
+
+
+        }
+
 
         $("#btnEMPShow").click(function () {
 

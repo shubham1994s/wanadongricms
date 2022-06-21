@@ -174,6 +174,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.ListUserBeatMap(Emptype);
         }
+        public bool IsPointInPolygon(int ebmId, coordinates p)
+        {
+            return screenService.IsPointInPolygon(ebmId, p);
+        }
         public void DeletHouse(int teamId)
         {
             screenService.DeletHouseDetails(teamId);
