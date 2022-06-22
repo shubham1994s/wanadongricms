@@ -225,8 +225,12 @@ namespace SwachBharat.CMS.Bll.Services
                     else
                     {
                         var area = FillAreaDataModel(data);
-                        db.TeritoryMasters.Add(area);
-                        db.SaveChanges();
+                        if(area.Area != null && area.wardId != null)
+                        {
+                            db.TeritoryMasters.Add(area);
+                            db.SaveChanges();
+                        }
+                       
                     }
                 }
             }
@@ -3181,11 +3185,20 @@ namespace SwachBharat.CMS.Bll.Services
         #region DataModel
         private TeritoryMaster FillAreaDataModel(AreaVM data)
         {
+
             TeritoryMaster model = new TeritoryMaster();
-            model.Id = data.Id;
-            model.Area = data.Name;
-            model.AreaMar = data.NameMar;
-            model.wardId = data.wardId;
+
+            var modelt = db.TeritoryMasters.Where(x => x.Area == data.Name).FirstOrDefault();
+
+            if (modelt == null)
+            {
+                model.Id = data.Id;
+                model.Area = data.Name;
+                model.AreaMar = data.NameMar;
+                model.wardId = data.wardId;
+
+                return model;
+            }
 
             return model;
         }

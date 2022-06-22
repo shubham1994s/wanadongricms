@@ -86,9 +86,10 @@
                 <div class="form-group1" style="padding-top:3%">
                     <button type="submit" name="submit" class="btn" id="btnSubmit" onclick="return Validate()">
                         <span class="glyphicon glyphicon-saved"></span>
-                        <span id="buttonName">Save</span>
+                        <span id="buttonName" onclick="disableButton(this)">Save</span>
 
                     </button>
+                    @*<input type='submit' value='Save' class="btn" id='btnSubmit'/>*@
                 </div>
             </div>
         </div>
@@ -100,22 +101,25 @@
     $(document).ready(function () {
         var id = $('#Id').val();
         if (id > 0) {
-            $('#buttonName').text("Save Changes");
+            $('#btnSubmit').val("Save Changes");
             //$('.title_change').text("क्षेत्र तपशील सादर बदला / Edit Area Details");
             $('.title_change').text("Edit Area Details");
         } else {
-            $('#buttonName').text("Save");
+            $('#btnSubmit').val("Save");
             //$('.title_change').text(" क्षेत्र तपशील सादर करा / Add Area Details ");
             $('.title_change').text("Add Area Details ");
         }
     });
     $("#btnSubmit").click(function () {
         //alert("aa");
+       
+
         if ($.trim($("#Name").val()) == '') {
             //$("#err_name").html("नाव आवश्यक आहे / Name is Required").delay(1500).show().fadeOut('slow');
             $("#err_name").html("Name is Required").delay(1500).show().fadeOut('slow');
             $('#Name').focus();
             return false;
+            document.getElementById("btnSubmit").disabled = false;
         }
         //if ($.trim($("#NameMar").val()) == '') {
         //    $("#err_name_mar").html("नाव मराठी आवश्यक आहे / Name Marathi is Required").delay(1500).show().fadeOut('slow');
@@ -127,8 +131,11 @@
             $("#err_ward").html("Ward / Prabhag is Required").delay(1500).show().fadeOut('slow');
             $('#wardId').focus();
             return false;
+            document.getElementById("btnSubmit").disabled = false;
         }
+      
         return true;
+    /*    $(this).prop('disabled', true);*/
     });
 
     $("#b").click(function () {
@@ -136,4 +143,10 @@
         alert("ss");
     }
     )
+
+    function disableButton(btn) {
+        //debugger;
+    document.getElementById(btn.id).disabled = true;
+    //alert("Button has been disabled.");
+    }
 </script>
