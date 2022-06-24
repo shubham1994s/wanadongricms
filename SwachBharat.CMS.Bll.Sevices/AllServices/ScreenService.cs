@@ -225,8 +225,12 @@ namespace SwachBharat.CMS.Bll.Services
                     else
                     {
                         var area = FillAreaDataModel(data);
-                        db.TeritoryMasters.Add(area);
-                        db.SaveChanges();
+                        if(area.Area != null && area.wardId != null)
+                        {
+                            db.TeritoryMasters.Add(area);
+                            db.SaveChanges();
+                        }
+                       
                     }
                 }
             }
@@ -889,7 +893,7 @@ namespace SwachBharat.CMS.Bll.Services
             }
             catch (Exception ex)
             {
-                
+
             }
         }
 
@@ -929,13 +933,55 @@ namespace SwachBharat.CMS.Bll.Services
 
             return empBeatMap;
         }
+
+        public bool IsPointInPolygon(int ebmId, coordinates p)
+        {
+            bool inside = false;
+            EmpBeatMapVM empBeatMap = new EmpBeatMapVM();
+            empBeatMap = GetEmpBeatMap(ebmId);
+            List<coordinates> poly = new List<coordinates>();
+            if (empBeatMap.ebmId > 0)
+            {
+                poly = empBeatMap.ebmLatLong;
+                double minX = poly[0].lat ?? 0;
+                double maxX = poly[0].lat ?? 0;
+                double minY = poly[0].lng ?? 0;
+                double maxY = poly[0].lng ?? 0;
+
+                for (int i = 1; i < poly.Count; i++)
+                {
+                    coordinates q = poly[i];
+                    minX = Math.Min(q.lat ?? 0, minX);
+                    maxX = Math.Max(q.lat ?? 0, maxX);
+                    minY = Math.Min(q.lng ?? 0, minY);
+                    maxY = Math.Max(q.lng ?? 0, maxY);
+                }
+
+
+                if (p.lat < minX || p.lat > maxX || p.lng < minY || p.lng > maxY)
+                {
+                    return false;
+                }
+                for (int i = 0, j = poly.Count - 1; i < poly.Count; j = i++)
+                {
+                    if ((poly[i].lng > p.lng) != (poly[j].lng > p.lng) &&
+                         p.lat < (poly[j].lat - poly[i].lat) * (p.lng - poly[i].lng) / (poly[j].lng - poly[i].lng) + poly[i].lat)
+                    {
+                        inside = !inside;
+                    }
+                }
+                return inside;
+
+            }
+            return inside;
+        }
         public string ConvertLatLongToString(List<coordinates> lstCord)
         {
-            
+
             List<string> lstLatLong = new List<string>();
-            foreach(var s in lstCord)
+            foreach (var s in lstCord)
             {
-                lstLatLong.Add(s.lat + ","+ s.lng);
+                lstLatLong.Add(s.lat + "," + s.lng);
             }
             return string.Join(";", lstLatLong);
         }
@@ -944,10 +990,10 @@ namespace SwachBharat.CMS.Bll.Services
         public List<coordinates> ConvertStringToLatLong(string strCord)
         {
             List<coordinates> lstCord = new List<coordinates>();
-           string[] lstLatLong = strCord.Split(';');
-            if(lstLatLong.Length > 0)
+            string[] lstLatLong = strCord.Split(';');
+            if (lstLatLong.Length > 0)
             {
-                for(var i = 0; i < lstLatLong.Length; i++)
+                for (var i = 0; i < lstLatLong.Length; i++)
                 {
                     coordinates cord = new coordinates();
                     string[] strLatLong = lstLatLong[i].Split(',');
@@ -3139,11 +3185,20 @@ namespace SwachBharat.CMS.Bll.Services
         #region DataModel
         private TeritoryMaster FillAreaDataModel(AreaVM data)
         {
+
             TeritoryMaster model = new TeritoryMaster();
-            model.Id = data.Id;
-            model.Area = data.Name;
-            model.AreaMar = data.NameMar;
-            model.wardId = data.wardId;
+
+            var modelt = db.TeritoryMasters.Where(x => x.Area == data.Name).FirstOrDefault();
+
+            if (modelt == null)
+            {
+                model.Id = data.Id;
+                model.Area = data.Name;
+                model.AreaMar = data.NameMar;
+                model.wardId = data.wardId;
+
+                return model;
+            }
 
             return model;
         }
@@ -3221,7 +3276,7 @@ namespace SwachBharat.CMS.Bll.Services
             model.ebmId = data.ebmId;
             model.userId = data.userId;
             model.Type = data.Type;
-            model.userName = db.UserMasters.Where(x => x.userId == data.userId).Select(x =>x.userName).FirstOrDefault();
+            model.userName = db.UserMasters.Where(x => x.userId == data.userId).Select(x => x.userName).FirstOrDefault();
             model.ebmLatLong = ConvertStringToLatLong(data.ebmLatLong);
 
             return model;
@@ -4956,6 +5011,10 @@ namespace SwachBharat.CMS.Bll.Services
                                            QRStatusDate = p.c.QRStatusDate
                                        }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
+                    if (QRStatus == 3)
+                    {
+                        model = model.Where(c => (c.QRStatus == null)).ToList();
+                    }
 
                     if (fromDate != null && toDate != null)
                     {
@@ -5038,6 +5097,11 @@ namespace SwachBharat.CMS.Bll.Services
                                            QRStatusDate = p.c.QRStatusDate
                                        }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
+                    if (QRStatus == 3)
+                    {
+                        model = model.Where(c => (c.QRStatus == null)).ToList();
+                    }
+
 
                     if (fromDate != null && toDate != null)
                     {
@@ -5119,8 +5183,12 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null ) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
+                    if (QRStatus == 3)
+                    {
+                        model = model.Where(c => (c.QRStatus == null)).ToList();
+                    }
 
                     if (fromDate != null && toDate != null)
                     {
@@ -6018,7 +6086,7 @@ namespace SwachBharat.CMS.Bll.Services
                             ReferanceId = x.ReferanceId
                         }).OrderBy(a => a.houseId).ToList();
                     }
-                    else if(type == 1)
+                    else if (type == 1)
                     {
                         data = db.DumpYardDetails.Where(a => ((bQRStatus != null && a.QRStatus == bQRStatus) || bQRStatus == null) && (a.lastModifiedDate >= fDate && a.lastModifiedDate <= tDate) && !string.IsNullOrEmpty(a.dyLat) && !string.IsNullOrEmpty(a.dyLong) && ((UserId > 0 && a.userId == UserId) || UserId <= 0) && (a.BinaryQrCodeImage != null)).Select(x => new SBAHSHouseDetailsGrid
                         {
@@ -6032,7 +6100,7 @@ namespace SwachBharat.CMS.Bll.Services
                         }).OrderBy(a => a.houseId).ToList();
 
                     }
-                    else if(type == 2)
+                    else if (type == 2)
                     {
                         data = db.LiquidWasteDetails.Where(a => ((bQRStatus != null && a.QRStatus == bQRStatus) || bQRStatus == null) && (a.lastModifiedDate >= fDate && a.lastModifiedDate <= tDate) && !string.IsNullOrEmpty(a.LWLat) && !string.IsNullOrEmpty(a.LWLong) && ((UserId > 0 && a.userId == UserId) || UserId <= 0) && (a.BinaryQrCodeImage != null)).Select(x => new SBAHSHouseDetailsGrid
                         {
@@ -6045,7 +6113,7 @@ namespace SwachBharat.CMS.Bll.Services
                             ReferanceId = x.ReferanceId
                         }).OrderBy(a => a.houseId).ToList();
                     }
-                    else if(type == 3)
+                    else if (type == 3)
                     {
                         data = db.StreetSweepingDetails.Where(a => ((bQRStatus != null && a.QRStatus == bQRStatus) || bQRStatus == null) && (a.lastModifiedDate >= fDate && a.lastModifiedDate <= tDate) && !string.IsNullOrEmpty(a.SSLat) && !string.IsNullOrEmpty(a.SSLong) && ((UserId > 0 && a.userId == UserId) || UserId <= 0) && (a.BinaryQrCodeImage != null)).Select(x => new SBAHSHouseDetailsGrid
                         {
