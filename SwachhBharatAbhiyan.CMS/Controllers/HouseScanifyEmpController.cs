@@ -523,7 +523,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
             int iQRStatus = qrStatus ?? -1;
-            iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+           // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
@@ -560,7 +560,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
             int iQRStatus = qrStatus ?? -1;
-            iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+           // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
@@ -596,7 +596,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
             int iQRStatus = qrStatus ?? -1;
-            iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+           // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
