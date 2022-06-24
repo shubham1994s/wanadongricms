@@ -363,7 +363,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect("/Account/Login");
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult CheckAreaDetails(AreaVM obj)
         {
             if (SessionHandler.Current.AppId != 0)
