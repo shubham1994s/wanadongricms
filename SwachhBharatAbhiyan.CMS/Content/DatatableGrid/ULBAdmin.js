@@ -323,7 +323,7 @@ function showCharts() {
                     top: 5,
                     //right: 1,
                     //bottom: 2,
-                    //left: 2
+                    left: 18
                 },
                 fontSize: 14,
                 fontWeight: "normal",
