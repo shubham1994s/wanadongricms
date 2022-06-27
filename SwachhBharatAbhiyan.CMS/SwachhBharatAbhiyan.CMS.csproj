@@ -2683,6 +2683,7 @@
     <Content Include="Areas\Street\Views\StreetSweeping\StreetBeatIndex.cshtml" />
     <Content Include="Areas\Street\Views\StreetSweeping\AddStreetBeat.cshtml" />
     <Content Include="ApplicationInsights.config" />
+    <Content Include="Areas\Street\Views\StreetReport\StreetSweepingReport.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
