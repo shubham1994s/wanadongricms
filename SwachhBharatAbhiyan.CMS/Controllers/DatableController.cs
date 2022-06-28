@@ -91,7 +91,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             int product = 0, category = 0;
             //string[] arr = new string[6];
 
-            if (searchString != "" && searchString != null)
+            if (searchString != "" && searchString != null )
             {
                 Session["Search"] = searchString;
                 Session["rn"] = RepositoryName;
@@ -199,6 +199,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 }
               
             }
+
+            else if(RepositoryName== "StreetGarbage" && searchString == "" )
+            {
+                fdate = fdate;
+                tdate = tdate;
+                userId =userId;
+              
+
+            }
             else {
 
                 string dt = DateTime.Now.ToString("MM/dd/yyyy");
@@ -206,6 +215,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 tdate = Convert.ToDateTime(dt + " " + "23:59:59");
 
             }
+            
             //var appId = ((SessionHandler)Session["clsSession"]).AppId;
             var appId = SessionHandler.Current.AppId;
             switch (RepositoryName)
@@ -375,6 +385,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
                 case "StreetSweep":
                     gridRepository = new StreetSweepGrid(0, searchString, appId);
+                    return gridRepository;
+                    break;
+
+                case "StreetSweepBeatMap":
+                    gridRepository = new StreetSweepBeatPointGrid(0,  fdate,  tdate,userId, searchString, appId);
                     return gridRepository;
                     break;
 
