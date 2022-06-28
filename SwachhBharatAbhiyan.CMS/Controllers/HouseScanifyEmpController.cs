@@ -163,6 +163,12 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 // redirect/show error/whatever?
                 filterContext.Result = new RedirectResult("/HouseScanifyEmp/login");
             }
+            else
+            {
+                filterContext.ExceptionHandled = true;
+                // redirect/show error/whatever?
+                filterContext.Result = new RedirectResult("/HouseScanifyEmp/login");
+            }
         }
 
         public ActionResult GetURAppNames()
@@ -1010,6 +1016,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             Session["__MySession__"] = null; //it's my session variable
             Session.Clear();
             Session.Abandon();
+            Server.ClearError();
             FormsAuthentication.SignOut(); 
             return RedirectToAction("Login", "HouseScanifyEmp");
         }
