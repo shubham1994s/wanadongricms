@@ -30,7 +30,7 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
                 Redirect("/Account/Login");
         }
         // GET: Street/StreetGarbage
-        public ActionResult StreetGarbageIndex(int userId)
+        public ActionResult StreetGarbageIndex()
         {
 
             if (SessionHandler.Current.AppId != 0)

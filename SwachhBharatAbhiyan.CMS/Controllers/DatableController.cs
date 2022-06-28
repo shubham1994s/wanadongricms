@@ -200,7 +200,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
               
             }
 
-            else if(RepositoryName== "StreetGarbage" && searchString == "" )
+            else if(RepositoryName== "StreetGarbageBeat" && searchString == "" )
             {
                 fdate = fdate;
                 tdate = tdate;
@@ -319,6 +319,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
                 case "StreetGarbage":
                     gridRepository = new SSCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
+                    return gridRepository;
+                    break;
+
+                case "StreetGarbageBeat":
+                    gridRepository = new SSCollectionGridRepositoryBeat(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
                     return gridRepository;
                     break;
                 case "Attendence":
