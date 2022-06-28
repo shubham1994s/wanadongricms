@@ -555,6 +555,19 @@ namespace SwachhBharatAbhiyan.CMS
 
                         // param[1] = new ReportParameter("clientid", _userInfo.ClientID.ToString());
                     }
+                   else if (ReportName == "Street Sweeping Report")
+                    {
+                        ReportParameter[] param = new ReportParameter[6];
+                        param[0] = new ReportParameter("appid", AppID);
+                        param[1] = new ReportParameter("from", FromDate);
+                        param[2] = new ReportParameter("to", ToDate);
+                        param[3] = new ReportParameter("userid", UserId);
+                        param[4] = new ReportParameter("DBName", DB_Name);
+                        param[5] = new ReportParameter("DBSource", DB_Source);
+                        rptViewer.ServerReport.SetParameters(param);
+
+                        // param[1] = new ReportParameter("clientid", _userInfo.ClientID.ToString());
+                    }
                     rptViewer.ServerReport.Refresh();
 
 

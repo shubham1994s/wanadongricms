@@ -72,6 +72,24 @@
             //$('.title_change').text(" झोन तपशील सादर करा / Add Zone Details ");
             $('.title_change').text("Add Zone Details ");
         }
+
+        $("#SSname").keyup(function () {
+            debugger;
+
+            var Name = $("#SSname").val();
+            $.ajax({
+                url: "/MainMaster/CheckZoneName?Name=" + Name,
+                type: "POST",
+                data: { Name: Name }
+            })
+                .done(function (msg) {
+                    if (msg == 1) {
+                        $('#err_name').text('Name already exists!');
+                    } else {
+                        $('#err_name').text('');
+                    }
+                });
+        });
     });
    
     $("#btnSubmit").click(function () {
