@@ -33,6 +33,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
 
         VehicleTypeVM GetVehicleType(int teamId);
+        VehicleRegVM GetVehicleReg(int teamId);
+
+        void SaveVehicleReg(VehicleRegVM type);
         void DeletVehicleType(int teamId);
         void SaveVehicleType(VehicleTypeVM type);
 
@@ -57,7 +60,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         EmpBeatMapVM GetEmpBeatMap(int ebmId);
         List<SelectListItem> ListUserBeatMap(string Emptype);
         bool IsPointInPolygon(int ebmId,coordinates p);
-         void DeletHouse(int teamId);
+
+        void DeletHouse(int teamId);
 
 
         SBALUserLocationMapView GetLocation(int teamId,string Emptype);
@@ -72,7 +76,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SBALUserLocationMapView> GetHouseAttenRoute(int id,int areaid);
         List<SBALUserLocationMapView> GetLiquidAttenRoute(int id, int areaid);
         List<SBALUserLocationMapView> GetStreetAttenRoute(int id, int areaid);
-        
+        EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid, int polyId);
+        HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid,int polyId);
+
         GarbagePointDetailsVM GetGarbagePointById(int teamId);
         GarbagePointDetailsVM SaveGarbagePoint(GarbagePointDetailsVM data);
         void DeletGarbagePoint(int teamId);
@@ -208,6 +214,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SelectListItem> LoadListWardNo(int ZoneId);
 
         List<SelectListItem> LoadListArea(int WardNo);
+
+        List<SelectListItem> ListBeatMapArea(int daId,int areaid);
 
         //InfotainmentDetailsVW GetInfotainmentDetailsById(int ID);
         //void SaveGameDetails(InfotainmentDetailsVW data);

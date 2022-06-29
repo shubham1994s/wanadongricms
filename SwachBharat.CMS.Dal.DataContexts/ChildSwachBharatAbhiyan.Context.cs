@@ -18,9 +18,10 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-     : base(SwachBharatAppConnection.GetConnectionString(AppId))
+         : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -62,6 +63,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<VW_HSGetLiquidDetails> VW_HSGetLiquidDetails { get; set; }
         public virtual DbSet<VW_HSGetStreetDetails> VW_HSGetStreetDetails { get; set; }
         public virtual DbSet<EmpBeatMap> EmpBeatMaps { get; set; }
+        public virtual DbSet<Vehical_QR_Master> Vehical_QR_Master { get; set; }
+        public virtual DbSet<VehicleRegistration> VehicleRegistrations { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
@@ -758,6 +761,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("tdate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Spbeatmapstatus_Result>("Spbeatmapstatus", useridParameter, fdateParameter, tdateParameter);
+        }
+    
+        public virtual ObjectResult<GetVehicleDetails_Result> GetVehicleDetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetVehicleDetails_Result>("GetVehicleDetails");
         }
     }
 }
