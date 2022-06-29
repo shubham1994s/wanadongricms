@@ -1791,6 +1791,7 @@
     <Content Include="Content\DatatableGrid\TalukaGrid.js" />
     <Content Include="Content\DatatableGrid\ULBAdmin.js" />
     <Content Include="Content\DatatableGrid\URGridDetails.js" />
+    <Content Include="Content\DatatableGrid\VehicleRegGrid.js" />
     <Content Include="Content\DatatableGrid\VehicleTypeGrid.js" />
     <Content Include="Content\DatatableGrid\WardNumberGrid.js" />
     <Content Include="Content\DatatableGrid\WM_WasteDetailsGrid.js" />
@@ -3170,6 +3171,9 @@
     <Content Include="Views\EmpBeatMap\MenuIndex.cshtml" />
     <Content Include="Views\EmpBeatMap\AddEmpBeatMap.cshtml" />
     <Content Include="Views\EmpBeatMap\Index.cshtml" />
+    <Content Include="Views\MainMaster\VehicleRegIndex.cshtml" />
+    <Content Include="Views\MainMaster\MenuVehicleRegIndex.cshtml" />
+    <Content Include="Views\MainMaster\AddVehicleRegDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
