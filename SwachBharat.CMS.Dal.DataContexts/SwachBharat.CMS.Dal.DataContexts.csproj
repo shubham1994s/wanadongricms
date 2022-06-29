@@ -454,6 +454,12 @@
     <Compile Include="UserMaster.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
+    <Compile Include="VehicalRegDetails_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vehical_QR_Master.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="VehicleType.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>

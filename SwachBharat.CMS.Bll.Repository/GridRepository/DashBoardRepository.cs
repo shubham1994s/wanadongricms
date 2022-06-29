@@ -607,7 +607,46 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
+        public IEnumerable<SBAVehicalRegDetailsGridRow> GetVehicalRegDetailsData(long wildcard, string SearchString, int appId)
+        {
+            DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+            var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
 
+            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.VehicalQRCode + "/";
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.VehicalRegDetails().Select(x => new SBAVehicalRegDetailsGridRow
+                {
+                    vqrId = x.vqrId,
+                    Vehical_Type = x.VType,
+                    QRCode = ThumbnaiUrlCMS + x.Images.Trim(),
+                    ReferanceId = x.ReferanceId,
+                    Vehical_NO = x.VehicalNumber
+                }).ToList();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+              
+                    var model = data.Where(c => (
+                                        (string.IsNullOrEmpty(c.Vehical_Type) ? " " : c.Vehical_Type) + " " +
+                                        (string.IsNullOrEmpty(c.Vehical_NO) ? " " : c.Vehical_NO) + " " +
+                                        (string.IsNullOrEmpty(c.ReferanceId) ? " " : c.ReferanceId) + " " +
+                                        (string.IsNullOrEmpty(c.QRCode) ? " " : c.QRCode)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+
+
+                    data = model.ToList();
+                }
+                else if (appDetails.APIHit == null)
+                {
+                    data = data.ToList();
+                }
+                else
+                {
+                    data = data.Where(c => c.vqrId <= appDetails.APIHit).ToList();
+                }
+
+                return data.OrderByDescending(c => c.vqrId);
+            }
+        }
         public IEnumerable<SBAEmpBeatMapGridRow> EmpBeatMapsData(long wildcard, string SearchString, int appId)
         {
 

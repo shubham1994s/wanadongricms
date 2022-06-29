@@ -51,5 +51,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.MainModel
 
         public string YoccFeddbackLink { get; set; }
         public string YoccDndLink { get; set; }
+
+        public string VehicalQRCode { get; set; }
     }
 }

@@ -11,6 +11,8 @@ using System.Web.Mvc;
 using SwachBharat.CMS.Dal.DataContexts;
 using SwachhBharatAbhiyan.CMS.Models;
 using SwachBharat.CMS.Bll.ViewModels.Grid;
+using System.Net;
+using System.IO;
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
 {
@@ -327,6 +329,104 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
 
 
+        }
+
+        public ActionResult VehicalRegistrationIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                Session["AppName"] = SessionHandler.Current.AppName;
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult MenuVehicalRegistrationIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult AddVehicalRegDetails(int teamId = -2)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                VehicalRegDetailsVM house = childRepository.GetVehicalRegById(teamId);
+
+
+                return View(house);
+
+
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        [HttpPost]
+        public ActionResult AddVehicalRegDetails(VehicalRegDetailsVM house)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                int teamId = house.vqrId;
+                var AppDetails = mainRepository.GetApplicationDetails(SessionHandler.Current.AppId);
+                var VehicalReg = childRepository.GetVehicalRegById(teamId);
+                if (VehicalReg.vehicalQRCode == "/Images/QRcode.png" || VehicalReg.vehicalQRCode == "/Images/default_not_upload.png")
+                {
+                    VehicalReg.vehicalQRCode = null;
+                }
+                if (VehicalReg.vehicalQRCode == null)
+                {
+                    var guid = Guid.NewGuid().ToString().Split('-');
+                    string image_Guid = DateTime.Now.ToString("MMddyyyymmss") + "_" + guid[1] + ".jpg";
+
+                    //Converting  Url to image 
+                    // var url = string.Format("http://api.qrserver.com/v1/create-qr-code/?data="+ house.ReferanceId);
+                    var url = string.Format("https://chart.googleapis.com/chart?cht=qr&chl=" + VehicalReg.ReferanceId + "&chs=160x160&chld=L|0");
+                    WebResponse response = default(WebResponse);
+                    Stream remoteStream = default(Stream);
+                    StreamReader readStream = default(StreamReader);
+                    WebRequest request = WebRequest.Create(url);
+                    response = request.GetResponse();
+                    remoteStream = response.GetResponseStream();
+                    readStream = new StreamReader(remoteStream);
+                    //Creating Path to save image in folder
+                    System.Drawing.Image img = System.Drawing.Image.FromStream(remoteStream);
+                    string imgpath = Path.Combine(Server.MapPath(AppDetails.basePath + AppDetails.VehicalQRCode), image_Guid);
+                    var exists = System.IO.Directory.Exists(Server.MapPath(AppDetails.basePath + AppDetails.VehicalQRCode));
+                    if (!exists)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath(AppDetails.basePath + AppDetails.VehicalQRCode));
+                    }
+                    img.Save(imgpath);
+                    response.Close();
+                    remoteStream.Close();
+                    readStream.Close();
+                    house.vehicalQRCode = image_Guid;
+                }
+                else
+                {
+
+                    string bb = VehicalReg.vehicalQRCode;
+                    var ii = bb.Split('/');
+                    if (ii.Length == 6)
+                    {
+                        VehicalReg.vehicalQRCode = ii[6];
+                    }
+                    if (ii.Length > 6)
+                    {
+                        VehicalReg.vehicalQRCode = ii[6];
+                        house.vehicalQRCode = VehicalReg.vehicalQRCode;
+                    }
+                }
+                VehicalRegDetailsVM vehicalDetails = childRepository.SaveVehicalReg(house);
+                return Redirect("VehicalRegistrationIndex");
+            }
+            else
+                return Redirect("/Account/Login");
         }
 
         #endregion

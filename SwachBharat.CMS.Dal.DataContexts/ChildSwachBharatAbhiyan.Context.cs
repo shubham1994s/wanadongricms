@@ -22,6 +22,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         {
         }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -36,7 +37,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<WM_Garbage_Details> WM_Garbage_Details { get; set; }
         public virtual DbSet<WM_Garbage_Summary> WM_Garbage_Summary { get; set; }
         public virtual DbSet<ZoneMaster> ZoneMasters { get; set; }
-        public virtual DbSet<VehicleType> VehicleTypes { get; set; }
         public virtual DbSet<TeritoryMaster> TeritoryMasters { get; set; }
         public virtual DbSet<WardNumber> WardNumbers { get; set; }
         public virtual DbSet<SauchalayAddress> SauchalayAddresses { get; set; }
@@ -62,6 +62,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<VW_HSGetLiquidDetails> VW_HSGetLiquidDetails { get; set; }
         public virtual DbSet<VW_HSGetStreetDetails> VW_HSGetStreetDetails { get; set; }
         public virtual DbSet<EmpBeatMap> EmpBeatMaps { get; set; }
+        public virtual DbSet<VehicleType> VehicleTypes { get; set; }
+        public virtual DbSet<Vehical_QR_Master> Vehical_QR_Master { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
@@ -758,6 +760,11 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("tdate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Spbeatmapstatus_Result>("Spbeatmapstatus", useridParameter, fdateParameter, tdateParameter);
+        }
+    
+        public virtual ObjectResult<VehicalRegDetails_Result> VehicalRegDetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VehicalRegDetails_Result>("VehicalRegDetails");
         }
     }
 }
