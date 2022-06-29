@@ -43,6 +43,8 @@
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VW_HSGetLiquidDetails" Width="1.5" PointX="15.375" PointY="18.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VW_HSGetStreetDetails" Width="1.5" PointX="17.375" PointY="18.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.EmpBeatMap" Width="1.5" PointX="19.375" PointY="18.75" />
+        <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.Vehical_QR_Master" Width="1.5" PointX="20.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VehicleRegistration" Width="1.5" PointX="20.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

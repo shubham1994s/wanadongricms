@@ -33,6 +33,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
 
         VehicleTypeVM GetVehicleType(int teamId);
+        VehicleRegVM GetVehicleReg(int teamId);
+
+        void SaveVehicleReg(VehicleRegVM type);
         void DeletVehicleType(int teamId);
         void SaveVehicleType(VehicleTypeVM type);
 

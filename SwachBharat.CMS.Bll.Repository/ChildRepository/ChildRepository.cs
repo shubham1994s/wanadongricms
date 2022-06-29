@@ -87,6 +87,18 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetVehicleTypeDetails(teamId);
         }
+        public VehicleRegVM GetVehicleReg(int teamId)
+        {
+            return screenService.GetVehicleDetails(teamId);
+        }
+        public void SaveVehicleReg(VehicleRegVM type)
+        {
+            if (type.vehicleId <= 0)
+            {
+                type.vehicleId = 0;
+            }
+            screenService.SaveVehicleRegDetails(type);
+        }
         public void DeletVehicleType(int teamId)
         {
             screenService.DeletVehicleTypeDetails(teamId);

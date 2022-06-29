@@ -399,6 +399,90 @@ namespace SwachBharat.CMS.Bll.Services
         }
         #endregion
 
+        #region Vehicl Registration
+        public VehicleRegVM GetVehicleDetails(int teamId)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var Details = db.VehicleRegistrations.Where(x => x.vehicleId == teamId).FirstOrDefault();
+                    if (Details != null)
+                    {
+                        VehicleRegVM vechile = FillVehicleTegViewModel(Details);
+                        vechile.AreaList = ListArea();
+                        vechile.VehicleList = ListVehicle();
+                        return vechile;
+                    }
+                    else
+                    {
+                        VehicleRegVM vechile = new VehicleRegVM();
+                        vechile.AreaList = ListArea();
+                        vechile.VehicleList = ListVehicle();
+                        return vechile;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void SaveVehicleRegDetails(VehicleRegVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.vehicleId > 0)
+                    {
+                        var model = db.VehicleRegistrations.Where(x => x.vehicleId == data.vehicleId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.vehicleId = data.vehicleId;
+                            model.vehicleType = data.vehicleType;
+                            model.vehicleNo = data.vehicleNumber;
+                            model.areaId = data.AreaId;
+                            model.isActive = data.isActive;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = FillVehicleRegDataModel(data);
+                        db.VehicleRegistrations.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private VehicleRegistration FillVehicleRegDataModel(VehicleRegVM data)
+        {
+            VehicleRegistration model = new VehicleRegistration();
+            model.vehicleId = data.vehicleId;
+            model.vehicleType = data.vehicleType;
+            model.vehicleNo = data.vehicleNumber;
+            model.areaId = data.AreaId;
+            model.isActive = data.isActive;
+            return model;
+        }
+        private VehicleRegVM FillVehicleTegViewModel(VehicleRegistration data)
+        {
+            VehicleRegVM model = new VehicleRegVM();
+            model.vehicleId = data.vehicleId;
+            model.vehicleNumber = data.vehicleNo;
+            model.vehicleType = data.vehicleType;
+            model.AreaId = data.areaId;
+            model.isActive = data.isActive;
+            return model;
+        }
+        #endregion
         #region Ward Number
         public WardNumberVM GetWardNumberDetails(int teamId, string name)
         {
