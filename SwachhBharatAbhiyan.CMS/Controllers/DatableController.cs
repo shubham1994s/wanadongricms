@@ -91,7 +91,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             int product = 0, category = 0;
             //string[] arr = new string[6];
 
-            if (searchString != "" && searchString != null)
+            if (searchString != "" && searchString != null )
             {
                 Session["Search"] = searchString;
                 Session["rn"] = RepositoryName;
@@ -199,6 +199,15 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 }
               
             }
+
+            else if(RepositoryName== "StreetGarbageBeat" && searchString == "" )
+            {
+                fdate = fdate;
+                tdate = tdate;
+                userId =userId;
+              
+
+            }
             else {
 
                 string dt = DateTime.Now.ToString("MM/dd/yyyy");
@@ -206,6 +215,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 tdate = Convert.ToDateTime(dt + " " + "23:59:59");
 
             }
+            
             //var appId = ((SessionHandler)Session["clsSession"]).AppId;
             var appId = SessionHandler.Current.AppId;
             switch (RepositoryName)
@@ -311,6 +321,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new SSCollectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
                     return gridRepository;
                     break;
+
+                case "StreetGarbageBeat":
+                    gridRepository = new SSCollectionGridRepositoryBeat(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
+                    return gridRepository;
+                    break;
                 case "Attendence":
                     gridRepository = new AttendeceGridRepository(0, searchString, fdate, tdate, userId, appId,null);
                     return gridRepository;
@@ -375,6 +390,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
                 case "StreetSweep":
                     gridRepository = new StreetSweepGrid(0, searchString, appId);
+                    return gridRepository;
+                    break;
+
+                case "StreetSweepBeatMap":
+                    gridRepository = new StreetSweepBeatPointGrid(0,  fdate,  tdate,userId, searchString, appId);
                     return gridRepository;
                     break;
 

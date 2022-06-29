@@ -408,6 +408,27 @@ namespace SwachhBharatAbhiyan.CMS.Areas.Street.Controllers
 
         }
 
+        [HttpPost]
+        public string CheckAreaName(string Name)
+        {
+            int Appid = SessionHandler.Current.AppId;
+            using (DevChildSwachhBharatNagpurEntities db = new DevChildSwachhBharatNagpurEntities(Appid))
+            {
+                //check if any of the UserName matches the UserName specified in the Parameter using the ANY extension method.  
+
+                var isrecord = db.TeritoryMasters.Where(x => x.Area == Name).FirstOrDefault();
+                if (isrecord != null)
+                {
+                    return "1";
+                }
+                else
+                {
+                    return "0";
+                }
+
+            }
+        }
+
 
         [HttpPost]
         public ActionResult AddAreaDetails(AreaVM area)

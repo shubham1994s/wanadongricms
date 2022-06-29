@@ -123,6 +123,24 @@
             //$('.title_change').text(" वार्ड तपशील सादर करा / Add Ward Details ");
             $('.title_change').text("Add Ward / Prabhag Details ");
         }
+
+        $("#WardNo").keyup(function () {
+            debugger;
+
+            var Name = $("#WardNo").val();
+            $.ajax({
+                url: "/MainMaster/CheckWardName?Name=" + Name,
+                type: "POST",
+                data: { Name: Name }
+            })
+                .done(function (msg) {
+                    if (msg == 1) {
+                        $('#err_ward').text('Name already exists!');
+                    } else {
+                        $('#err_ward').text('');
+                    }
+                });
+        });
     });
     $("#btnSubmit").click(function () {
         //alert("aa");

@@ -145,6 +145,31 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            base.OnException(filterContext);
+
+            var action = filterContext.RequestContext.RouteData.Values["action"] as string;
+            var controller = filterContext.RequestContext.RouteData.Values["controller"] as string;
+
+            if ((filterContext.Exception is HttpAntiForgeryException) &&
+                action == "LogOff" &&
+                controller == "HouseScanifyEmp" &&
+                filterContext.RequestContext.HttpContext.User != null &&
+                filterContext.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                filterContext.ExceptionHandled = true;
+
+                // redirect/show error/whatever?
+                filterContext.Result = new RedirectResult("/HouseScanifyEmp/login");
+            }
+            else
+            {
+                filterContext.ExceptionHandled = true;
+                // redirect/show error/whatever?
+                filterContext.Result = new RedirectResult("/HouseScanifyEmp/login");
+            }
+        }
 
         public ActionResult GetURAppNames()
         {
@@ -991,6 +1016,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             Session["__MySession__"] = null; //it's my session variable
             Session.Clear();
             Session.Abandon();
+            Server.ClearError();
             FormsAuthentication.SignOut(); 
             return RedirectToAction("Login", "HouseScanifyEmp");
         }

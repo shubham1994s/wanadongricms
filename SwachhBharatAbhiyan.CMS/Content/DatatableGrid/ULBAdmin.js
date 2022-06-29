@@ -196,6 +196,12 @@ function showCharts() {
                 horizontalAlign: "center",
                 //Uncomment properties below to see how they behave
                 //fontColor: "red",
+                padding: {
+                    top: 5,
+                    //right: 1,
+                    //bottom: 2,
+                    //left: 2
+                },
                 fontSize: 14,
                 fontWeight: "normal",
                 fontFamily: "arial"
@@ -249,9 +255,15 @@ function showCharts() {
                 horizontalAlign: "center",
                 //Uncomment properties below to see how they behave
                 //fontColor: "red",
+                padding: {
+                    top: 5,
+                    //right: 1,
+                    //bottom: 2,
+                    //left: 2
+                },
                 fontSize: 14,
                 fontWeight: "normal",
-                fontFamily: "arial"
+                fontFamily: "arial",
             }
         ],
         toolTip: {
@@ -307,6 +319,12 @@ function showCharts() {
                 horizontalAlign: "left",
                 //Uncomment properties below to see how they behave
                 //fontColor: "red",
+                padding: {
+                    top: 5,
+                    //right: 1,
+                    //bottom: 2,
+                    left: 18
+                },
                 fontSize: 14,
                 fontWeight: "normal",
                 fontFamily: "arial"

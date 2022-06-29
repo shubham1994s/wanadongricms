@@ -108,6 +108,24 @@
             //$('.title_change').text(" क्षेत्र तपशील सादर करा / Add Area Details ");
             $('.title_change').text("Add Area Details ");
         }
+
+        $("#SSName").keyup(function () {
+            debugger;
+
+            var Name = $("#SSName").val();
+            $.ajax({
+                url: "/StreetMainMaster/CheckAreaName?Name=" + Name,
+                type: "POST",
+                data: { Name: Name }
+            })
+                .done(function (msg) {
+                    if (msg == 1) {
+                        $('#err_name').text('Name already exists!');
+                    } else {
+                        $('#err_name').text('');
+                    }
+                });
+        });
     });
     $("#btnSubmit").click(function () {
         //alert("aa");
