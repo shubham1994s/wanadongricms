@@ -28,6 +28,10 @@ namespace SwachBharat.CMS.Bll.Services
 
 
         VehicleTypeVM GetVehicleTypeDetails(int teamId);
+
+        VehicleRegVM GetVehicleDetails(int teamId);
+
+        void SaveVehicleRegDetails(VehicleRegVM type);
         void DeletVehicleTypeDetails(int teamId);
         void SaveVehicleTypeDetails(VehicleTypeVM type);
 
@@ -67,6 +71,8 @@ namespace SwachBharat.CMS.Bll.Services
         List<SBALUserLocationMapView> GetLiquidAttenRoute(int userId, int areaid);
         List<SBALUserLocationMapView> GetStreetAttenRoute(int userId, int areaid);
 
+        EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid,int polyId);
+        HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid, int polyId);
         GarbagePointDetailsVM GetGarbagePointDetails(int teamId);
         GarbagePointDetailsVM SaveGarbagePointDetails(GarbagePointDetailsVM data);
         void DeletGarbagePointDetails(int teamId);
@@ -191,6 +197,7 @@ namespace SwachBharat.CMS.Bll.Services
         void EditOnePointSeven(List<OnePoint7QuestionVM> OnePoint7QuestionVM);
         List<SelectListItem> LoadListWardNo(int ZoneId);
         List<SelectListItem> LoadListArea(int WardNo);
+        List<SelectListItem> ListBeatMapArea(int daId, int areaid);
         //InfotainmentDetailsVW GetInfotainmentDetailsById(int ID);
         //void SaveGameDetails(InfotainmentDetailsVW data);
 

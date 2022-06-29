@@ -179,6 +179,9 @@
     <Compile Include="GetAttendenceDetailsTotal_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetVehicleDetails_Result.cs">
+      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
     <Compile Include="GramCleaningComplient.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>

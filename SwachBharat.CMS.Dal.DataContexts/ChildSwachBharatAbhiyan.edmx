@@ -472,6 +472,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.SS_1.4_QUESTI
           <Property Name="description" Type="nvarchar" MaxLength="300" />
           <Property Name="descriptionMar" Type="nvarchar" MaxLength="300" />
           <Property Name="isActive" Type="bit" />
+          <Property Name="RegNo" Type="nvarchar" MaxLength="300" />
+          <Property Name="VechileNo" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="WardNumber">
           <Key>
@@ -657,6 +659,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Parameter Name="year" Type="int" Mode="In" />
           <Parameter Name="month" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetVehicleDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="HouseDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="HouseDetails_ReferanceId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ReferanceId" Type="nvarchar" Mode="In" />
