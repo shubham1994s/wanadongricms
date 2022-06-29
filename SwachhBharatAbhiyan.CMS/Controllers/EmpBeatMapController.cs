@@ -117,19 +117,19 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-        [HttpPost]
-        public JsonResult IsPointInPolygon(EmpBeatMapVM EBMObj)
-        {
-            bool isInside = false;
-            if (SessionHandler.Current.AppId != 0)
-            {
-                // return PartialView("AreaMaster");
-                isInside = childRepository.IsPointInPolygon(EBMObj.ebmId, EBMObj.ebmLatLong[0]);
-                return Json(isInside, JsonRequestBehavior.AllowGet);
-            }
-            else
-                return Json(false, JsonRequestBehavior.AllowGet);
+        //[HttpPost]
+        //public JsonResult IsPointInPolygon(EmpBeatMapVM EBMObj)
+        //{
+        //    bool isInside = false;
+        //    if (SessionHandler.Current.AppId != 0)
+        //    {
+        //        // return PartialView("AreaMaster");
+        //        isInside = childRepository.IsPointInPolygon(EBMObj.ebmId, EBMObj.ebmLatLong[0]);
+        //        return Json(isInside, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //        return Json(false, JsonRequestBehavior.AllowGet);
 
-        }
+        //}
     }
 }

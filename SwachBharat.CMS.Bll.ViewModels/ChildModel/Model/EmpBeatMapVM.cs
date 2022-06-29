@@ -12,12 +12,25 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public int? userId { get; set; }
 
         public string userName { get; set; }
-        public List<coordinates> ebmLatLong { get; set; }
+        public List<List<coordinates>> ebmLatLong { get; set; }
         public string Type { get; set; }
     }
     public class coordinates
     {
         public double? lat { get; set; }
         public double? lng { get; set; }
+    }
+
+    public class EmpBeatMapCountVM
+    {
+        public List<coordinates> poly { get; set; }
+        public int innerCount { get; set; }
+        public int outerCount { get; set; }
+
+    }
+    public class HouseAttenRouteVM
+    {
+        public List<coordinates> poly { get; set; }
+        public List<SBALUserLocationMapView> lstUserLocation { get; set; }
     }
 }
