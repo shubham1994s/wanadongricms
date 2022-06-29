@@ -178,6 +178,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.IsPointInPolygon(ebmId, p);
         }
+        
         public void DeletHouse(int teamId)
         {
             screenService.DeletHouseDetails(teamId);
@@ -229,7 +230,15 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetStreetAttenRoute(daId, areaid);
         }
-
+        
+        public EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid, int polyId)
+        {
+            return screenService.GetbeatMapCount(daId, areaid, polyId);
+        }
+        public HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid,int polyId)
+        {
+            return screenService.GetBeatHouseAttenRoute(daId, areaid, polyId);
+        }
         public GarbagePointDetailsVM GetGarbagePointById(int teamId)
         {
             return screenService.GetGarbagePointDetails(teamId);
@@ -584,6 +593,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         public List<SelectListItem> LoadListArea(int WardNo)
         {
             return screenService.LoadListArea(WardNo);
+        }
+        public List<SelectListItem> ListBeatMapArea(int daId,int areaid)
+        {
+            return screenService.ListBeatMapArea(daId,areaid);
         }
 
         //public InfotainmentDetailsVW GetInfotainmentDetailsById(int ID)

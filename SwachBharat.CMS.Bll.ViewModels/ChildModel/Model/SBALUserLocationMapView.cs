@@ -57,10 +57,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
 
         public string SerielNo { get; set; }
 
-      
-
-
-
+        public bool IsIn { get; set; }
 
     }     
 }

@@ -930,6 +930,43 @@ namespace SwachBharat.CMS.Bll.Services
             return empBeatMap;
         }
 
+        public EmpBeatMapVM GetEmpBeatMapByUserId(int userId)
+        {
+            EmpBeatMapVM empBeatMap = new EmpBeatMapVM();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (userId > 0)
+                    {
+                        var model = db.EmpBeatMaps.Where(x => x.userId == userId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            empBeatMap = fillEmpBeatMapVM(model);
+                        }
+                        else
+                        {
+                            empBeatMap.ebmId = -1;
+                            empBeatMap.userId = -1;
+                        }
+                    }
+                    else
+                    {
+                        empBeatMap.ebmId = -1;
+                        empBeatMap.userId = -1;
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return empBeatMap;
+            }
+
+            return empBeatMap;
+        }
+
         public bool IsPointInPolygon(int ebmId, coordinates p)
         {
             bool inside = false;
@@ -938,7 +975,7 @@ namespace SwachBharat.CMS.Bll.Services
             List<coordinates> poly = new List<coordinates>();
             if (empBeatMap.ebmId > 0)
             {
-                poly = empBeatMap.ebmLatLong;
+                poly = empBeatMap.ebmLatLong[0];
                 double minX = poly[0].lat ?? 0;
                 double maxX = poly[0].lat ?? 0;
                 double minY = poly[0].lng ?? 0;
@@ -971,36 +1008,88 @@ namespace SwachBharat.CMS.Bll.Services
             }
             return inside;
         }
-        public string ConvertLatLongToString(List<coordinates> lstCord)
-        {
 
-            List<string> lstLatLong = new List<string>();
-            foreach (var s in lstCord)
+        public bool IsPointInPolygon(List<coordinates> poly, coordinates p)
+        {
+            bool inside = false;
+            
+            if (poly != null && poly.Count > 0)
             {
-                lstLatLong.Add(s.lat + "," + s.lng);
+                double minX = poly[0].lat ?? 0;
+                double maxX = poly[0].lat ?? 0;
+                double minY = poly[0].lng ?? 0;
+                double maxY = poly[0].lng ?? 0;
+
+                for (int i = 1; i < poly.Count; i++)
+                {
+                    coordinates q = poly[i];
+                    minX = Math.Min(q.lat ?? 0, minX);
+                    maxX = Math.Max(q.lat ?? 0, maxX);
+                    minY = Math.Min(q.lng ?? 0, minY);
+                    maxY = Math.Max(q.lng ?? 0, maxY);
+                }
+
+
+                if (p.lat < minX || p.lat > maxX || p.lng < minY || p.lng > maxY)
+                {
+                    return false;
+                }
+                for (int i = 0, j = poly.Count - 1; i < poly.Count; j = i++)
+                {
+                    if ((poly[i].lng > p.lng) != (poly[j].lng > p.lng) &&
+                         p.lat < (poly[j].lat - poly[i].lat) * (p.lng - poly[i].lng) / (poly[j].lng - poly[i].lng) + poly[i].lat)
+                    {
+                        inside = !inside;
+                    }
+                }
+                return inside;
+
             }
-            return string.Join(";", lstLatLong);
+            return inside;
+        }
+
+        public string ConvertLatLongToString(List<List<coordinates>> lstCord)
+        {
+            List<string> lstPoly = new List<string>();
+            foreach (var p in lstCord)
+            {
+                List<string> lstLatLong = new List<string>();
+                foreach (var s in p)
+                {
+                    lstLatLong.Add(s.lat + "," + s.lng);
+                }
+                lstPoly.Add(string.Join(";", lstLatLong));
+            }
+            return string.Join(":", lstPoly);
         }
 
 
-        public List<coordinates> ConvertStringToLatLong(string strCord)
+        public List<List<coordinates>> ConvertStringToLatLong(string strCord)
         {
-            List<coordinates> lstCord = new List<coordinates>();
-            string[] lstLatLong = strCord.Split(';');
-            if (lstLatLong.Length > 0)
-            {
-                for (var i = 0; i < lstLatLong.Length; i++)
+            List<List<coordinates>> lstCord = new List<List<coordinates>>();
+            string[] lstPoly = strCord.Split(':');
+            if (lstPoly.Length > 0) {
+                for (var i = 0; i < lstPoly.Length; i++)
                 {
-                    coordinates cord = new coordinates();
-                    string[] strLatLong = lstLatLong[i].Split(',');
-                    if (strLatLong.Length == 2)
+                    List<coordinates> poly = new List<coordinates>();
+                    string[] lstLatLong = lstPoly[i].Split(';');
+                    if (lstLatLong.Length > 0)
                     {
-                        cord.lat = Convert.ToDouble(strLatLong[0]);
-                        cord.lng = Convert.ToDouble(strLatLong[1]);
-                    }
-                    lstCord.Add(cord);
-                }
+                        for (var j = 0; j < lstLatLong.Length; j++)
+                        {
+                            coordinates cord = new coordinates();
+                            string[] strLatLong = lstLatLong[j].Split(',');
+                            if (strLatLong.Length == 2)
+                            {
+                                cord.lat = Convert.ToDouble(strLatLong[0]);
+                                cord.lng = Convert.ToDouble(strLatLong[1]);
+                            }
+                            poly.Add(cord);
+                        }
 
+                    }
+                    lstCord.Add(poly);
+                }
             }
             return lstCord;
         }
@@ -2221,6 +2310,365 @@ namespace SwachBharat.CMS.Bll.Services
             return userLocation;
         }
 
+        public List<SelectListItem> ListBeatMapArea(int daId,int areaid)
+        {
+            List<SelectListItem> Area = new List<SelectListItem>();
+            List<List<coordinates>> lstPoly = new List<List<coordinates>>();
+
+            var att = db.Daily_Attendance.Where(c => c.daID == daId).FirstOrDefault();
+            if(att != null)
+            {
+                var userName = db.UserMasters.Where(c => c.userId == att.userId).FirstOrDefault();
+                EmpBeatMapVM ebm = GetEmpBeatMapByUserId(userName.userId);
+                lstPoly = ebm.ebmLatLong;
+                if(lstPoly != null && lstPoly.Count > 0)
+                {
+                    for (var i = 0; i < lstPoly.Count; i++)
+                    {
+                        SelectListItem item = new SelectListItem();
+                        item.Text = "Area-" + (i + 1).ToString();
+                        item.Value = i.ToString();
+                        Area.Add(item);
+                    }
+
+                }
+            }
+            return Area;
+        }
+
+        public HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid,int polyId)
+        {
+            HouseAttenRouteVM houseAtten = new HouseAttenRouteVM();
+            List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
+            List<List<coordinates>> lstPoly = new List<List<coordinates>>();
+            List<coordinates> poly = new List<coordinates>();
+            DateTime newdate = DateTime.Now.Date;
+            var datt = newdate;
+            var att = db.Daily_Attendance.Where(c => c.daID == daId).FirstOrDefault();
+
+            var useridnew = db.Daily_Attendance.Where(c => c.userId == att.userId && c.daDate == att.daDate).FirstOrDefault();
+            string Time = useridnew.startTime;
+            //string Time = att.startTime;
+            DateTime date = DateTime.Parse(Time, System.Globalization.CultureInfo.CurrentCulture);
+            string t = date.ToString("hh:mm:ss tt");
+            string dt = Convert.ToDateTime(att.daDate).ToString("MM/dd/yyyy");
+            DateTime? fdate = Convert.ToDateTime(dt + " " + t);
+            DateTime? edate;
+            if (att.endTime == "" | att.endTime == null)
+            {
+                edate = DateTime.Now;
+            }
+            else
+            {
+                string Time2 = att.endTime;
+                DateTime date2 = DateTime.Parse(Time2, System.Globalization.CultureInfo.CurrentCulture);
+                string t2 = date2.ToString("hh:mm:ss tt");
+                string dt2 = Convert.ToDateTime(att.daEndDate).ToString("MM/dd/yyyy");
+                edate = Convert.ToDateTime(dt2 + " " + t2);
+            }
+            var userName = db.UserMasters.Where(c => c.userId == att.userId).FirstOrDefault();
+            EmpBeatMapVM ebm = GetEmpBeatMapByUserId(userName.userId);
+            lstPoly = ebm.ebmLatLong;
+            if (lstPoly != null && lstPoly.Count > polyId)
+            {
+                poly = lstPoly[polyId];
+            }
+                
+            var data = db.Locations.Where(c => c.userId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == 1).OrderByDescending(a => a.datetime).ToList();
+
+            foreach (var x in data)
+            {
+                if (x.type == 1)
+                {
+                    
+                    var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & (c.houseId != null || c.dyId != null)) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcId).ToList();//.ToList();
+
+
+                    foreach (var d in gcd)
+                    {
+                        //DateTime dt = DateTime.Parse(x.gcDate == null ? DateTime.Now.ToString() : x.gcDate.ToString());
+                        string dat = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy");
+                        string tim = Convert.ToDateTime(d.gcDate).ToString("hh:mm tt");
+                        coordinates p = new coordinates()
+                        {
+                            lat = Convert.ToDouble(d.Lat),
+                            lng = Convert.ToDouble(d.Long)
+                        };
+                        if (d.houseId != null)
+                        {
+                            if (areaid != 0)
+                            {
+                                var house = db.HouseMasters.Where(c => c.houseId == d.houseId & c.AreaId == areaid).FirstOrDefault();
+                                if (house != null)
+                                {
+                                    userLocation.Add(new SBALUserLocationMapView()
+                                    {
+                                        userId = userName.userId,
+                                        userName = userName.userName,
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("HH:mm"),
+                                        date = dat,
+                                        time = tim,
+                                        lat = d.Lat,
+                                        log = d.Long,
+                                        address = x.address,
+                                        vehcileNumber = att.vehicleNumber,
+                                        userMobile = userName.userMobileNumber,
+                                        type = Convert.ToInt32(x.type),
+                                        HouseId = house.ReferanceId,
+                                        HouseAddress = (house.houseAddress == null ? "" : house.houseAddress.Replace("Unnamed Road, ", "")),
+                                        HouseOwnerName = house.houseOwner,
+                                        OwnerMobileNo = house.houseOwnerMobile,
+                                        WasteType = d.garbageType.ToString(),
+                                        gpBeforImage = d.gpBeforImage,
+                                        gpAfterImage = d.gpAfterImage,
+                                        ZoneList = ListZone(),
+                                        IsIn = IsPointInPolygon(poly, p)
+
+                                    });
+                                }
+
+                            }
+                            else
+                            {
+                                var house = db.HouseMasters.Where(c => c.houseId == d.houseId).FirstOrDefault();
+                                userLocation.Add(new SBALUserLocationMapView()
+                                {
+                                    userId = userName.userId,
+                                    userName = userName.userName,
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("HH:mm"),
+                                    date = dat,
+                                    time = tim,
+                                    lat = d.Lat,
+                                    log = d.Long,
+                                    address = x.address,
+                                    vehcileNumber = att.vehicleNumber,
+                                    userMobile = userName.userMobileNumber,
+                                    type = Convert.ToInt32(x.type),
+                                    HouseId = house.ReferanceId,
+                                    HouseAddress = (house.houseAddress == null ? "" : house.houseAddress.Replace("Unnamed Road, ", "")),
+                                    HouseOwnerName = house.houseOwner,
+                                    OwnerMobileNo = house.houseOwnerMobile,
+                                    WasteType = d.garbageType.ToString(),
+                                    gpBeforImage = d.gpBeforImage,
+                                    gpAfterImage = d.gpAfterImage,
+                                    ZoneList = ListZone(),
+                                    IsIn = IsPointInPolygon(poly, p)
+                                });
+                            }
+
+
+                        }
+                        if (d.dyId != null)
+                        {
+                            if (areaid != 0)
+                            {
+                                var dump = db.DumpYardDetails.Where(c => c.dyId == d.dyId & c.areaId == areaid).FirstOrDefault();
+                                if (dump != null)
+                                {
+                                    userLocation.Add(new SBALUserLocationMapView()
+                                    {
+                                        userId = userName.userId,
+                                        userName = userName.userName,
+                                        datetime = Convert.ToDateTime(d.gcDate).ToString("HH:mm"),
+                                        date = dat,
+                                        time = tim,
+                                        lat = d.Lat,
+                                        log = d.Long,
+                                        address = x.address,
+                                        vehcileNumber = att.vehicleNumber,
+                                        userMobile = userName.userMobileNumber,
+                                        type = Convert.ToInt32(x.type),
+                                        DyId = dump.ReferanceId,
+                                        DumpAddress = (dump.dyAddress == null ? "" : dump.dyAddress.Replace("Unnamed Road, ", "")),
+                                        DumpYardName = dump.dyName,
+                                        OwnerMobileNo = dump.dyNameMar,
+                                        WasteType = d.garbageType.ToString(),
+                                        gpBeforImage = d.gpBeforImage,
+                                        gpAfterImage = d.gpAfterImage,
+                                        DryWaste = d.totalDryWeight.ToString(),
+                                        WetWaste = d.totalWetWeight.ToString(),
+                                        TotWaste = d.totalGcWeight.ToString(),
+                                        ZoneList = ListZone(),
+                                        IsIn = IsPointInPolygon(poly, p)
+
+                                    });
+                                }
+
+                            }
+                            else
+                            {
+                                var dump = db.DumpYardDetails.Where(c => c.dyId == d.dyId).FirstOrDefault();
+                                userLocation.Add(new SBALUserLocationMapView()
+                                {
+                                    userId = userName.userId,
+                                    userName = userName.userName,
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("HH:mm"),
+                                    date = dat,
+                                    time = tim,
+                                    lat = d.Lat,
+                                    log = d.Long,
+                                    address = x.address,
+                                    vehcileNumber = att.vehicleNumber,
+                                    userMobile = userName.userMobileNumber,
+                                    type = Convert.ToInt32(x.type),
+                                    DyId = dump.ReferanceId,
+                                    DumpAddress = (dump.dyAddress == null ? "" : dump.dyAddress.Replace("Unnamed Road, ", "")),
+                                    DumpYardName = dump.dyName,
+                                    OwnerMobileNo = dump.dyNameMar,
+                                    WasteType = d.garbageType.ToString(),
+                                    gpBeforImage = d.gpBeforImage,
+                                    gpAfterImage = d.gpAfterImage,
+                                    DryWaste = d.totalDryWeight.ToString(),
+                                    WetWaste = d.totalWetWeight.ToString(),
+                                    TotWaste = d.totalGcWeight.ToString(),
+                                    ZoneList = ListZone(),
+                                    IsIn = IsPointInPolygon(poly, p)
+
+                                });
+                            }
+
+
+                        }
+
+
+
+
+
+
+
+                    }
+                    break;
+                }
+
+            }
+
+
+            houseAtten.poly = poly;
+            houseAtten.lstUserLocation = userLocation;
+
+            return houseAtten;
+        }
+
+
+        public EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid,int polyId)
+        {
+            EmpBeatMapCountVM ebmCount = new EmpBeatMapCountVM();
+            List<coordinates> houseCord = new List<coordinates>();
+            List<List<coordinates>> lstPoly = new List<List<coordinates>>();
+
+            List<coordinates> poly = new List<coordinates>();
+            List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
+            int innerCount = 0;
+            int outerCount = 0;
+            DateTime newdate = DateTime.Now.Date;
+            var datt = newdate;
+            var att = db.Daily_Attendance.Where(c => c.daID == daId).FirstOrDefault();
+
+            var useridnew = db.Daily_Attendance.Where(c => c.userId == att.userId && c.daDate == att.daDate).FirstOrDefault();
+            string Time = useridnew.startTime;
+            //string Time = att.startTime;
+            DateTime date = DateTime.Parse(Time, System.Globalization.CultureInfo.CurrentCulture);
+            string t = date.ToString("hh:mm:ss tt");
+            string dt = Convert.ToDateTime(att.daDate).ToString("MM/dd/yyyy");
+            DateTime? fdate = Convert.ToDateTime(dt + " " + t);
+            DateTime? edate;
+            if (att.endTime == "" | att.endTime == null)
+            {
+                edate = DateTime.Now;
+            }
+            else
+            {
+                string Time2 = att.endTime;
+                DateTime date2 = DateTime.Parse(Time2, System.Globalization.CultureInfo.CurrentCulture);
+                string t2 = date2.ToString("hh:mm:ss tt");
+                string dt2 = Convert.ToDateTime(att.daEndDate).ToString("MM/dd/yyyy");
+                edate = Convert.ToDateTime(dt2 + " " + t2);
+            }
+            var userName = db.UserMasters.Where(c => c.userId == att.userId).FirstOrDefault();
+            EmpBeatMapVM ebm = GetEmpBeatMapByUserId(userName.userId);
+            lstPoly = ebm.ebmLatLong;
+            if (lstPoly != null && lstPoly.Count > polyId)
+            {
+                poly = lstPoly[polyId];
+                if (poly != null && poly.Count > 0)
+                {
+                    var data = db.Locations.Where(c => c.userId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == 1).OrderByDescending(a => a.datetime).ToList();
+
+                    foreach (var x in data)
+                    {
+                        if (x.type == 1)
+                        {
+
+                            var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & (c.houseId != null || c.dyId != null)) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcId).ToList();//.ToList();
+
+
+                            foreach (var d in gcd)
+                            {
+                                //DateTime dt = DateTime.Parse(x.gcDate == null ? DateTime.Now.ToString() : x.gcDate.ToString());
+                                string dat = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy");
+                                string tim = Convert.ToDateTime(d.gcDate).ToString("hh:mm tt");
+                                if (d.houseId != null)
+                                {
+                                    if (areaid != 0)
+                                    {
+                                        var house = db.HouseMasters.Where(c => c.houseId == d.houseId & c.AreaId == areaid).FirstOrDefault();
+                                        if (house != null)
+                                        {
+                                            coordinates p = new coordinates()
+                                            {
+                                                lat = Convert.ToDouble(d.Lat),
+                                                lng = Convert.ToDouble(d.Long)
+                                            };
+                                            if (IsPointInPolygon(poly, p))
+                                            {
+                                                innerCount++;
+                                            }
+                                            else
+                                            {
+                                                outerCount++;
+                                            }
+
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        var house = db.HouseMasters.Where(c => c.houseId == d.houseId).FirstOrDefault();
+                                        if (house != null)
+                                        {
+                                            coordinates p = new coordinates()
+                                            {
+                                                lat = Convert.ToDouble(d.Lat),
+                                                lng = Convert.ToDouble(d.Long)
+                                            };
+                                            if (IsPointInPolygon(poly, p))
+                                            {
+                                                innerCount++;
+                                            }
+                                            else
+                                            {
+                                                outerCount++;
+                                            }
+                                        }
+
+                                    }
+
+
+                                }
+
+
+                            }
+                        }
+                        break;
+                    }
+
+                }
+            }
+            ebmCount.poly = poly;
+            ebmCount.innerCount = innerCount;
+            ebmCount.outerCount = outerCount;
+            return ebmCount;
+        }
         public List<SBALUserLocationMapView> GetLiquidAttenRoute(int daId, int areaid)
         {
             List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
