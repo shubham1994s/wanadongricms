@@ -105,21 +105,24 @@
             //$('.title_change').text(" वाहन तपशील सादर करा / Add Vehicle Details ");
             $('.title_change').text("Add Vehicle Details ");
         }
+
+     
     });
     $("#btnSubmit").click(function () {
         //alert("aa");
-        if ($.trim($("#vehicleNumber").val()) == '') {
-            //$("#err_description").html("वाहन आवश्यक आहे / Vehicle is Required").delay(1500).show().fadeOut('slow');
-            $("#err_vnumber").html("Vehicle No is Required").delay(1500).show().fadeOut('slow');
-            $('#vehicleNumber').focus();
-            return false;
-        }
         if ($.trim($("#vehicleType").val()) == '0') {
             //$("#err_description").html("वाहन आवश्यक आहे / Vehicle is Required").delay(1500).show().fadeOut('slow');
             $("#err_vtype").html("Vehicle Type is Required").delay(1500).show().fadeOut('slow');
             $('#vehicleType').focus();
             return false;
         }
+        if ($.trim($("#vehicleNumber").val()) == '') {
+            //$("#err_description").html("वाहन आवश्यक आहे / Vehicle is Required").delay(1500).show().fadeOut('slow');
+            $("#err_vnumber").html("Vehicle No is Required").delay(1500).show().fadeOut('slow');
+            $('#vehicleNumber').focus();
+            return false;
+        }
+     
         if ($.trim($("#AreaId").val()) == '0') {
             //$("#err_description").html("वाहन आवश्यक आहे / Vehicle is Required").delay(1500).show().fadeOut('slow');
             $("#err_varea").html("Area is Required").delay(1500).show().fadeOut('slow');

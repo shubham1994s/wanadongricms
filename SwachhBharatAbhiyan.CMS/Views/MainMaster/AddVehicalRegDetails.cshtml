@@ -363,7 +363,13 @@
 
     $(document).ready(function () {
   
-
+        $("#Vehican_No").keyup(function () {
+            debugger;
+            str = $("#Vehican_No").val();
+            var pattern = /[A-Z][A-Z]\/[0-9][0-9]\/[A-Z][A-Z]\/[0-9][0-9][0-9][0-9]$/i;
+            var result = str.match(pattern);
+            console.log(result);
+        }
 
         $('#trash_badge').click(function () {
             $("#FileUpload_Preview").html("");
@@ -405,6 +411,19 @@
             $("#err_vnumber").html("Vehicle No is Required").delay(1500).show().fadeOut('slow');
             $('#Vehican_No').focus();
             return false;
+        }
+        else if ($.trim($("#Vehican_No").val()) != '') {
+            debugger;
+            str = $("#Vehican_No").val();
+            var pattern = /[A-Z][A-Z][0-9][0-9][A-Z][A-Z][0-9][0-9][0-9][0-9]$/i;
+            var result = str.match(pattern);
+            console.log(result);
+            if (result == null) {
+                $("#err_vnumber").html("Incorrect Vehical Number").delay(1500).show().fadeOut('slow');
+                $('#Vehican_No').focus();
+                return false;
+            }
+           
         }
         if ($.trim($("#Vehical_Type").val()) == '0') {
             //$("#err_description").html("वाहन आवश्यक आहे / Vehicle is Required").delay(1500).show().fadeOut('slow');
