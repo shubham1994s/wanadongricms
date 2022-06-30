@@ -91,6 +91,7 @@
     <Compile Include="ChildRepository\IChildRepository.cs" />
     <Compile Include="GridRepository\DashBoardRepository.cs" />
     <Compile Include="GridRepository\Grid\AdminCountGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\AppAreaMapsGridRepository.cs" />
     <Compile Include="GridRepository\Grid\AreaGridRepository.cs" />
     <Compile Include="GridRepository\Grid\AttendeceGridRepository.cs" />
     <Compile Include="GridRepository\Grid\AttendenceSettingsGridRepository.cs" />

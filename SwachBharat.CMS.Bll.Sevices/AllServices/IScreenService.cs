@@ -47,7 +47,10 @@ namespace SwachBharat.CMS.Bll.Services
 
         void SaveEmpBeatMap(EmpBeatMapVM data);
         EmpBeatMapVM GetEmpBeatMap(int ebmId);
+        AppAreaMapVM GetAppAreaMap(int AppId);
         List<SelectListItem> ListUserBeatMap(string Emptype);
+        List<SelectListItem> ListAppMap();
+
         bool IsPointInPolygon(int ebmId, coordinates p);
          void DeletHouseDetails(int teamId);
 

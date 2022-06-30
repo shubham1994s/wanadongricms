@@ -934,6 +934,43 @@ namespace SwachBharat.CMS.Bll.Services
             return empBeatMap;
         }
 
+
+
+        public AppAreaMapVM GetAppAreaMap(int AppId)
+        {
+            AppAreaMapVM appAreaMap = new AppAreaMapVM();
+            try
+            {
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    if (AppId > 0)
+                    {
+                        var model = db.AppDetails.Where(x => x.AppId == AppId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            appAreaMap = fillAppAreaMapVM(model);
+                        }
+                        else
+                        {
+                            appAreaMap.AppId = -1;
+                        }
+                    }
+                    else
+                    {
+                        appAreaMap.AppId = -1;
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return appAreaMap;
+            }
+
+            return appAreaMap;
+        }
+
         public EmpBeatMapVM GetEmpBeatMapByUserId(int userId)
         {
             EmpBeatMapVM empBeatMap = new EmpBeatMapVM();
@@ -3729,6 +3766,18 @@ namespace SwachBharat.CMS.Bll.Services
 
             return model;
         }
+
+        private AppAreaMapVM fillAppAreaMapVM(AppDetail data)
+        {
+            AppAreaMapVM model = new AppAreaMapVM();
+            model.AppId = data.AppId;
+            model.AppName = data.AppName;
+            model.AppLat = data.Latitude;
+            model.AppLong = data.Logitude;
+            //model.AppAreaLatLong = ConvertStringToLatLong(data.ap);
+
+            return model;
+        }
         private HouseMaster FillHouseDetailsDataModel(HouseDetailsVM data)
         {
             HouseMaster model = new HouseMaster();
@@ -4048,6 +4097,26 @@ namespace SwachBharat.CMS.Bll.Services
             return user;
         }
 
+        public List<SelectListItem> ListAppMap()
+        {
+            var apps = new List<SelectListItem>();
+
+            try
+            {
+                using (var dbMain = new DevSwachhBharatMainEntities())
+                {
+                    apps = dbMain.AppDetails.Where(a => a.IsActive == true).Select(x => new SelectListItem
+                    {
+                        Value = x.AppId.ToString(),
+                        Text = x.AppName
+                    }).OrderBy(t => t.Text).ToList();
+                }
+                   
+            }
+            catch (Exception ex) { return apps; }
+
+            return apps;
+        }
 
         public List<SelectListItem> LoadListWardNo(Int32 ZoneId)
         {

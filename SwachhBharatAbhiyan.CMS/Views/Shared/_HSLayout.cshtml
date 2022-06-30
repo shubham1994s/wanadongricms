@@ -81,6 +81,8 @@
                 <!-- Sidebar Header-->
                 <ul style=" padding: 1PX; margin-bottom: 1PX;">
                     <li id='URbutton' class='py-2 px-4'><a href='HSURIndex' class="btn btn-primary" style="color:#fff !important;font-weight:600">User Right</a></li>
+                    <li id='btnAppArea' class='py-2 px-4'><a href='HSAppArea' class="btn btn-primary" style="color:#fff !important;font-weight:600">App Area</a></li>
+
                 </ul>
                 <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" class="search">
                 <ul class="list-unstyled" style="max-height:700px;overflow-y:auto">
@@ -121,7 +123,7 @@
         
         var HSID = $('#HSID').val();
         document.getElementById("HDUserid").innerHTML = HSID.toUpperCase();
-
+        
         var Utypes = $('#UType').val();
         if (Utypes == 'A') {
             //$('#URbutton').show();

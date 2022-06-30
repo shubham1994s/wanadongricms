@@ -632,6 +632,26 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
+        public IEnumerable<SBAAppAreaMapGridRow> AppAreaMapsData(long wildcard, string SearchString, int appId)
+        {
+
+            using(var dbMain = new DevSwachhBharatMainEntities())
+            {
+                var data = dbMain.AppDetails.Where(a => a.IsActive == true).Select(x => new SBAAppAreaMapGridRow
+                {
+                    AppId = x.AppId,
+                    AppName =  x.AppName
+                }).ToList();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                   data = data.Where(c => ((string.IsNullOrEmpty(c.AppId.ToString()) ? " " : c.AppId.ToString()) + " " +
+                                             (string.IsNullOrEmpty(c.AppName) ? " " : c.AppName)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                }
+
+                return data;
+            }
+            
+        }
 
 
         public IEnumerable<SBAEmployeeDetailsGridRow> GetEmployeeDetailsData(long wildcard, string SearchString, int appId, string isActive, string emptype)

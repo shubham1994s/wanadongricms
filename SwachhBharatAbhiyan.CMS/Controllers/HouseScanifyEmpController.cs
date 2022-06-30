@@ -82,7 +82,41 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect("/Account/Login");
         }
 
+        public ActionResult HSAppArea()
+        {
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return View();
+            
+        }
+        public ActionResult HSAppAreaIndex()
+        {
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return View();
 
+        }
+
+        public ActionResult AddAppAreaMap(int AppId = -1)
+        {
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            AppAreaMapVM appAreaMap = childRepository.GetAppAreaMap(AppId);
+            return View(appAreaMap);
+
+        }
+
+        public ActionResult ListAppMap()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                List<SelectListItem> lstApps = childRepository.ListAppMap();
+                return Json(lstApps, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+
+        }
         public ActionResult URIndex()
         {
             int appid = 1;

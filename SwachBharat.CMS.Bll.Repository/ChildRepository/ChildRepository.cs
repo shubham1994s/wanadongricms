@@ -169,10 +169,18 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetEmpBeatMap(ebmId);
         }
-
+        public AppAreaMapVM GetAppAreaMap(int AppId)
+        {
+            return screenService.GetAppAreaMap(AppId);
+        }
         public List<SelectListItem> ListUserBeatMap(string Emptype)
         {
             return screenService.ListUserBeatMap(Emptype);
+        }
+
+        public List<SelectListItem> ListAppMap()
+        {
+            return screenService.ListAppMap();
         }
         public bool IsPointInPolygon(int ebmId, coordinates p)
         {

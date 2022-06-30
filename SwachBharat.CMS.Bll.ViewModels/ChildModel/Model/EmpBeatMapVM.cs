@@ -15,6 +15,16 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public List<List<coordinates>> ebmLatLong { get; set; }
         public string Type { get; set; }
     }
+
+    public class AppAreaMapVM
+    {
+        public int AppId { get; set; }
+        public string AppName { get; set; }
+        public string AppLat { get; set; }
+        public string AppLong { get; set; }
+        public List<coordinates> AppAreaLatLong { get; set; }
+
+    }
     public class coordinates
     {
         public double? lat { get; set; }

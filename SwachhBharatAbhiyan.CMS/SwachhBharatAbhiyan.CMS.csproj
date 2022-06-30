@@ -1744,6 +1744,7 @@
     <Content Include="Content\Datatable-assets\js\jquery.min.js" />
     <Content Include="Content\Datatable-assets\js\responsive.bootstrap4.min.js" />
     <Content Include="Content\DatatableGrid\AdminCount.js" />
+    <Content Include="Content\DatatableGrid\AppAreaMapGrid.js" />
     <Content Include="Content\DatatableGrid\AriaGrid.js" />
     <Content Include="Content\DatatableGrid\AttendenceBeatMapGrid.js" />
     <Content Include="Content\DatatableGrid\AttendenceDetailGrid.js" />
@@ -3179,6 +3180,9 @@
     <Content Include="Views\AttendenceBeatMap\Index.cshtml" />
     <Content Include="Views\AttendenceBeatMap\UserRoute.cshtml" />
     <Content Include="Views\AttendenceBeatMap\HouseRoute.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSAppAreaIndex.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSAppArea.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\AddAppAreaMap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
