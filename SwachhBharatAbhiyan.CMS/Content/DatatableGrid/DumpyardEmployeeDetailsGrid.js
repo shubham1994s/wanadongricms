@@ -1,12 +1,12 @@
-﻿
+﻿var myBoolean = 'True'; // (string)
 $(document).ready(function () {
-
+    debugger;
     Employee();
     // $('#demoGrid').css("display", "block");
     $('#demoGridNonActive').css("display", "none");
     $('#demoGridNonActive_wrapper').css("display", "none");
     $('#btn').hide();
-    var myBoolean = 'false'; // (string)
+   
    
     $('#NotActivebtn').on('click', function (e) {
         debugger;
@@ -193,7 +193,7 @@ function Delete(Id) {
 
 function Search() {
     debugger;
-    if (!myBoolean) {
+    if (myBoolean=== "True") {
         var value = ",,," + $("#s").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
         // alert(value );
         oTable = $('#demoGrid').DataTable();
