@@ -6,7 +6,8 @@ $(document).ready(function () {
     $('#demoGridNonActive').css("display", "none");
     $('#demoGridNonActive_wrapper').css("display", "none");
     $('#btn').hide();
-    let myVariable = 'True';
+    var myBoolean = 'false'; // (string)
+   
     $('#NotActivebtn').on('click', function (e) {
         debugger;
         $('#demoGridNonActive').css("display", "block");
@@ -16,7 +17,7 @@ $(document).ready(function () {
         $('#btn').show();
         NotActiveEmployee();
         e.preventDefault();
-         myVariable = 'False';
+        myBoolean = myBoolean !== 'false'; //false (boolean)
     });
 
 });
@@ -177,22 +178,8 @@ function Delete(Id) {
 };
 
 
-function Search() {
-   
-        var value = ",,," + $("#s").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
-        // alert(value );
-        oTable = $('#demoGrid').DataTable();
-        //  oTable = $('#demoGridNonActive').DataTable();
-        oTable.search(value).draw();
-        oTable.search("");
-        document.getElementById('USER_ID_FK').value = -1;
-   
-}
-
-
 //function Search() {
-//    debugger;
-//    if (myVariable == 'True') {
+   
 //        var value = ",,," + $("#s").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
 //        // alert(value );
 //        oTable = $('#demoGrid').DataTable();
@@ -200,14 +187,28 @@ function Search() {
 //        oTable.search(value).draw();
 //        oTable.search("");
 //        document.getElementById('USER_ID_FK').value = -1;
-//    }
-//    else {
-//        var value = ",,," + $("#s").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
-//        // alert(value );
-//        oTable = $('#demoGridNonActive').DataTable();
-//        oTable.search(value).draw();
-//        oTable.search("");
-//        document.getElementById('USER_ID_FK').value = -1;
-
-//    }
+   
 //}
+
+
+function Search() {
+    debugger;
+    if (!myBoolean) {
+        var value = ",,," + $("#s").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+        // alert(value );
+        oTable = $('#demoGrid').DataTable();
+        //  oTable = $('#demoGridNonActive').DataTable();
+        oTable.search(value).draw();
+        oTable.search("");
+        document.getElementById('USER_ID_FK').value = -1;
+    }
+    else {
+        var value = ",,," + $("#s").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+        // alert(value );
+        oTable = $('#demoGridNonActive').DataTable();
+        oTable.search(value).draw();
+        oTable.search("");
+        document.getElementById('USER_ID_FK').value = -1;
+
+    }
+}
