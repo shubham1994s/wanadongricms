@@ -471,7 +471,7 @@
         $('form').each(function () { this.reset() });
 
 
-        $('#ZoneId').keyup(function () {
+        $('#ZoneId').change(function () {
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
 
@@ -495,7 +495,7 @@
 
         });
 
-        $('#WardNo').keyup(function () {
+        $('#WardNo').change(function () {
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
 

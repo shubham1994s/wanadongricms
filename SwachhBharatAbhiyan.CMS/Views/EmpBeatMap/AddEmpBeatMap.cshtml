@@ -99,15 +99,45 @@
             <div class="col-sm-2"></div>
         </div>
     </div>
-    @*<style>
+    <style>
 
         button[title="Stop drawing"] {
-            content: url(https://cdn4.iconfinder.com/data/icons/whsr-january-flaticon-set/128/compass.png) !important;
+           /* content: url(https://cdn4.iconfinder.com/data/icons/whsr-january-flaticon-set/128/compass.png) !important;*/
             height: 40px;
             width: 40px;
-            cursor: pointer;
+           /* cursor: pointer;*/
+            box-shadow: rgb(0 0 0) 0px 1px 4px -1px !important;
+            text-align:center !important;
         }
-    </style>*@
+            button[title="Stop drawing"] span div {
+                width: 24px !important;
+                height: 21px !important;
+            }
+                button[title="Stop drawing"] span div img {
+                    top: -86px !important;
+                    width: 23px !important;
+                    height: 212px !important;
+                }
+        button[title="Draw a shape"] {
+            /* content: url(https://cdn4.iconfinder.com/data/icons/whsr-january-flaticon-set/128/compass.png) !important;*/
+            height: 40px;
+            width: 40px;
+            /* cursor: pointer;*/
+            box-shadow: rgb(0 0 0) 0px 1px 4px -1px !important;
+            text-align: center !important;
+        }
+
+            button[title="Draw a shape"] span div {
+                width: 24px !important;
+                height: 21px !important;
+            }
+
+                button[title="Draw a shape"] span div img {
+                    top: -74px !important;
+                    width: 23px !important;
+                    height: 225px !important;
+                }
+    </style>
     <script>
         $(document).ready(function () {
             $.ajax({
