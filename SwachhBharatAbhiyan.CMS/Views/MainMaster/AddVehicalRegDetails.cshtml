@@ -77,7 +77,7 @@
                             @*@Html.Label("घर क्रमांक / House Number")*@
                             @Html.Label("Vehical Number")
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.TextBoxFor(model => model.Vehican_No, new { @class = "form-control", style = "font-family:Arial, FontAwesome" })
+                            @Html.TextBoxFor(model => model.Vehican_No, new { @class = "form-control",@placeholder="MH40AB1010", style = "font-family:Arial, FontAwesome" })
                             @Html.ValidationMessageFor(model => model.Vehican_No, "", new { @class = "text-danger" })
                             <span class="text-danger" id="err_vnumber"></span>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -360,16 +360,15 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function () {
+        $('#Vehican_No').keyup(function () {
+            $(this).val($(this).val().toUpperCase());
+        });
+    });
 
     $(document).ready(function () {
   
-        $("#Vehican_No").keyup(function () {
-            debugger;
-            str = $("#Vehican_No").val();
-            var pattern = /[A-Z][A-Z]\/[0-9][0-9]\/[A-Z][A-Z]\/[0-9][0-9][0-9][0-9]$/i;
-            var result = str.match(pattern);
-            console.log(result);
-        }
+     
 
         $('#trash_badge').click(function () {
             $("#FileUpload_Preview").html("");
