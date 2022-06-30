@@ -607,7 +607,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect("/Account/Login");
         }
         #endregion
-
+        
         #region Ward Number
         [HttpGet]
         public ActionResult WardIndex()
