@@ -80,6 +80,7 @@
                             @Html.TextBoxFor(model => model.Vehican_No, new { @class = "form-control",@placeholder="MH40AB1010", style = "font-family:Arial, FontAwesome" })
                             @Html.ValidationMessageFor(model => model.Vehican_No, "", new { @class = "text-danger" })
                             <span class="text-danger" id="err_vnumber"></span>
+                            <span class="text-success" id="cor_vnumber"></span>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span class="help-block with-errors"></span>
                         </div>
@@ -363,6 +364,21 @@
     $(document).ready(function () {
         $('#Vehican_No').keyup(function () {
             $(this).val($(this).val().toUpperCase());
+
+            str = $("#Vehican_No").val();
+            var pattern = /[A-Z][A-Z][0-9][0-9][A-Z][A-Z][0-9][0-9][0-9][0-9]$/i;
+            var result = str.match(pattern);
+            console.log(result);
+            if (result == null) {
+                $("#err_vnumber").html("Incorrect Vehical Number").delay(1500).show().fadeOut('slow');
+                $('#Vehican_No').focus();
+                return false;
+            }
+            else {
+                $("#cor_vnumber").html("Correct Vehical Number").delay(1500).show().fadeOut('slow');
+                $('#Vehican_No').focus();
+                return true;
+            }
         });
     });
 
