@@ -33,6 +33,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
 
         VehicleTypeVM GetVehicleType(int teamId);
+        VehicleRegVM GetVehicleReg(int teamId);
+
+        void SaveVehicleReg(VehicleRegVM type);
         void DeletVehicleType(int teamId);
         void SaveVehicleType(VehicleTypeVM type);
 
@@ -47,11 +50,13 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
 
         HouseDetailsVM GetHouseById(int teamId);
+        VehicalRegDetailsVM GetVehicalRegById(int teamId);
 
         SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId);
 
         SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType);
         HouseDetailsVM SaveHouse(HouseDetailsVM data);
+        VehicalRegDetailsVM SaveVehicalReg(VehicalRegDetailsVM data);
 
         void SaveEmpBeatMap(EmpBeatMapVM data);
         EmpBeatMapVM GetEmpBeatMap(int ebmId);

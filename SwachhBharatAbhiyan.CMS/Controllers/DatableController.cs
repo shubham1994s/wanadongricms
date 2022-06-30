@@ -247,6 +247,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new EmployeeGridRepository(0, searchString, appId, "1", "S");
                     return gridRepository;
                     break;
+                case "ActiveDumpyardEmployee":
+                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "1", "D");
+                    return gridRepository;
+                    break;
 
                 case "NotActiveEmployee":
                     gridRepository = new EmployeeGridRepository(0, searchString, appId, "0","");
@@ -259,6 +263,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     break;
                 case "NotActiveStreetEmployee":
                     gridRepository = new EmployeeGridRepository(0, searchString, appId, "0", "S");
+                    return gridRepository;
+                    break;
+                case "NotActiveDumpyardEmployee":
+                    gridRepository = new EmployeeGridRepository(0, searchString, appId, "0", "D");
                     return gridRepository;
                     break;
 
@@ -290,13 +298,20 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new VehicleTypeGridRepository(0, searchString, appId);
                     return gridRepository;
                     break;
-
+                case "VehicleRegDetail":
+                    gridRepository = new VehicleRegGridRepository(0, searchString, appId);
+                    return gridRepository;
+                    break;
                 case "PointDetail":
                     gridRepository = new GarbagePointGridRepository(0, searchString, appId);
                     return gridRepository;
                     break;
                 case "HouseDetail":
                     gridRepository = new HouseDetailsGridRepository(0, searchString, appId);
+                    return gridRepository;
+                    break;
+                case "VehicalRegDetail":
+                    gridRepository = new VehicalRegDetailsGridRepository(0, searchString, appId);
                     return gridRepository;
                     break;
                 case "EmpBeatMap":

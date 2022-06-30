@@ -324,6 +324,7 @@
     <Compile Include="Controllers\ComplaintController.cs" />
     <Compile Include="Controllers\DatableController.cs" />
     <Compile Include="Controllers\DumpYardController.cs" />
+    <Compile Include="Controllers\DumpyardEmployeeController.cs" />
     <Compile Include="Controllers\EmpBeatMapController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\GarbageCollectionController.cs" />
@@ -1753,6 +1754,7 @@
     <Content Include="Content\DatatableGrid\Complaint.js" />
     <Content Include="Content\DatatableGrid\District.js" />
     <Content Include="Content\DatatableGrid\DumpYardDetailGrid.js" />
+    <Content Include="Content\DatatableGrid\DumpyardEmployeeDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\DumpYardGrid.js" />
     <Content Include="Content\DatatableGrid\EmpBeatMapGrid.js" />
     <Content Include="Content\DatatableGrid\EmployeeDetailsGrid.js" />
@@ -1794,6 +1796,7 @@
     <Content Include="Content\DatatableGrid\TalukaGrid.js" />
     <Content Include="Content\DatatableGrid\ULBAdmin.js" />
     <Content Include="Content\DatatableGrid\URGridDetails.js" />
+    <Content Include="Content\DatatableGrid\VehicalRegDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\VehicleTypeGrid.js" />
     <Content Include="Content\DatatableGrid\WardNumberGrid.js" />
     <Content Include="Content\DatatableGrid\WM_WasteDetailsGrid.js" />
@@ -3176,13 +3179,17 @@
     <Content Include="Views\EmpBeatMap\MenuIndex.cshtml" />
     <Content Include="Views\EmpBeatMap\AddEmpBeatMap.cshtml" />
     <Content Include="Views\EmpBeatMap\Index.cshtml" />
-    <Content Include="Views\AttendenceBeatMap\MenuIndex.cshtml" />
-    <Content Include="Views\AttendenceBeatMap\Index.cshtml" />
-    <Content Include="Views\AttendenceBeatMap\UserRoute.cshtml" />
-    <Content Include="Views\AttendenceBeatMap\HouseRoute.cshtml" />
-    <Content Include="Views\HouseScanifyEmp\HSAppAreaIndex.cshtml" />
-    <Content Include="Views\HouseScanifyEmp\HSAppArea.cshtml" />
-    <Content Include="Views\HouseScanifyEmp\AddAppAreaMap.cshtml" />
+    <Content Include="Views\MainMaster\MenuVehicalRegistrationIndex.cshtml" />
+    <Content Include="Views\MainMaster\VehicalRegistrationIndex.cshtml" />
+    <Content Include="Views\MainMaster\AddVehicalRegDetails.cshtml" />
+    <Content Include="Views\MainMaster\AddVehicleRegDetails.cshtml" />
+    <Content Include="Views\MainMaster\MenuVehicleRegIndex.cshtml" />
+    <Content Include="Views\MainMaster\VehicleRegIndex.cshtml" />
+    <Content Include="Views\DumpyardEmployee\AddEmployeeDetails.cshtml" />
+    <Content Include="Views\DumpyardEmployee\MenuIndex.cshtml" />
+    <Content Include="Views\DumpyardEmployee\EmployeeSummaryIndex.cshtml" />
+    <Content Include="Views\DumpyardEmployee\Index.cshtml" />
+    <Content Include="Views\DumpyardEmployee\MenuEmployeeSummaryIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

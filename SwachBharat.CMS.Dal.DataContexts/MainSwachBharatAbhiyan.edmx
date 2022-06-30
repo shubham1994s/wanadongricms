@@ -155,6 +155,7 @@
           <Property Name="ulb_property" Type="int" />
           <Property Name="Add_Ulb_Property" Type="int" />
           <Property Name="Status" Type="bit" />
+          <Property Name="VehicalQRCode" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -534,7 +535,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="CheckAppDs" EntityType="DevSwachhBharatMainModel.CheckAppD" />
           <EntitySet Name="AEmployeeMasters" EntityType="DevSwachhBharatMainModel.AEmployeeMaster" />
           <EntitySet Name="tehsils" EntityType="DevSwachhBharatMainModel.tehsil" />
-          <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
           <FunctionImport Name="SP_ULBADMINSTATUS" ReturnType="Collection(DevSwachhBharatMainModel.SP_ULBADMINSTATUS_Result)">
             <Parameter Name="DivisionIdIn" Mode="In" Type="Int32" />
             <Parameter Name="DistrictIdIn" Mode="In" Type="Int32" />
@@ -556,6 +556,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
         </EntityContainer>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -754,73 +755,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="district" Type="Int32" />
           <Property Name="IsCheked" Type="Boolean" />
         </EntityType>
-        <EntityType Name="AppDetail">
-          <Key>
-            <PropertyRef Name="AppId" />
-          </Key>
-          <Property Name="AppId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AppName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AppName_mar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="Int32" />
-          <Property Name="Tehsil" Type="Int32" />
-          <Property Name="District" Type="Int32" />
-          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Android_GCM_pushNotification_Key" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="IsProduction" Type="Boolean" />
-          <Property Name="baseImageUrlCMS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="baseImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="AboutThumbnailURL" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="AboutAppynity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AboutTeamDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactUsTeamMember" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HomeSplash" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FAQ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactUs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="basePath" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="yoccContact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Latitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Logitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserProfile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Collection" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="HouseQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
-          <Property Name="PointQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
-          <Property Name="HousePDF" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-          <Property Name="PointPDF" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
-          <Property Name="Grampanchayat_Pro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AppVersion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ForceUpdate" Type="Boolean" />
-          <Property Name="APIHit" Type="Int32" />
-          <Property Name="NewFeatures" Type="Boolean" />
-          <Property Name="ReportEnable" Type="Boolean" />
-          <Property Name="DumpYardQRCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="DumpYardPDF" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="GramPanchyatAppID" Type="Int32" />
-          <Property Name="YoccClientID" Type="Int32" />
-          <Property Name="YoccFeddbackLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="YoccDndLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="LanguageId" Type="Int32" />
-          <Property Name="MsgForBroadcast" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="MsgForNotSpecified" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="MsgForMixed" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="MsgForNotReceived" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="MsgForSegregated" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="IsScanNear" Type="Boolean" />
-          <Property Name="LiquidQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StreetQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CommercialQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
-          <Property Name="CTPTQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SWMQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Today_Waste_Status" Type="Boolean" />
-          <Property Name="Today_Liquid_Status" Type="Boolean" />
-          <Property Name="Today_Street_Status" Type="Boolean" />
-          <Property Name="ulb_property" Type="Int32" />
-          <Property Name="Add_Ulb_Property" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
-        </EntityType>
         <ComplexType Name="SP_ULBADMINSTATUS_Result">
           <Property Type="Int32" Name="AppId" Nullable="false" />
           <Property Type="String" Name="appName" Nullable="true" MaxLength="100" />
@@ -891,6 +825,74 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AppDetail">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AppName_mar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="Tehsil" Type="Int32" />
+          <Property Name="District" Type="Int32" />
+          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Android_GCM_pushNotification_Key" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsProduction" Type="Boolean" />
+          <Property Name="baseImageUrlCMS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="baseImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AboutThumbnailURL" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AboutAppynity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AboutTeamDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactUsTeamMember" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HomeSplash" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FAQ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactUs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="basePath" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="yoccContact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Logitude" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserProfile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Collection" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="HouseQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="PointQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="HousePDF" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="PointPDF" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Grampanchayat_Pro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AppVersion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ForceUpdate" Type="Boolean" />
+          <Property Name="APIHit" Type="Int32" />
+          <Property Name="NewFeatures" Type="Boolean" />
+          <Property Name="ReportEnable" Type="Boolean" />
+          <Property Name="DumpYardQRCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DumpYardPDF" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GramPanchyatAppID" Type="Int32" />
+          <Property Name="YoccClientID" Type="Int32" />
+          <Property Name="YoccFeddbackLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="YoccDndLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="LanguageId" Type="Int32" />
+          <Property Name="MsgForBroadcast" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MsgForNotSpecified" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MsgForMixed" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MsgForNotReceived" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MsgForSegregated" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsScanNear" Type="Boolean" />
+          <Property Name="LiquidQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StreetQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CommercialQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="CTPTQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SWMQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Today_Waste_Status" Type="Boolean" />
+          <Property Name="Today_Liquid_Status" Type="Boolean" />
+          <Property Name="Today_Street_Status" Type="Boolean" />
+          <Property Name="ulb_property" Type="Int32" />
+          <Property Name="Add_Ulb_Property" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="VehicalQRCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1188,9 +1190,59 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_ULBADMINSTATUS" FunctionName="DevSwachhBharatMainModel.Store.SP_ULBADMINSTATUS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_ULBADMINSTATUS_Result">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="appName" ColumnName="appName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ULBADMIN" FunctionName="DevSwachhBharatMainModel.Store.SP_ULBADMIN">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_ULBADMIN_Result">
+                <ScalarProperty Name="ParentULB" ColumnName="ParentULB" />
+                <ScalarProperty Name="ULBName" ColumnName="ULBName" />
+                <ScalarProperty Name="ULBId" ColumnName="ULBId" />
+                <ScalarProperty Name="TotalHouse" ColumnName="TotalHouse" />
+                <ScalarProperty Name="TotalHouseScan" ColumnName="TotalHouseScan" />
+                <ScalarProperty Name="TotalSeg" ColumnName="TotalSeg" />
+                <ScalarProperty Name="TotalMix" ColumnName="TotalMix" />
+                <ScalarProperty Name="TotalNotReceived" ColumnName="TotalNotReceived" />
+                <ScalarProperty Name="ULBCount" ColumnName="ULBCount" />
+                <ScalarProperty Name="TotalActiveEmp" ColumnName="TotalActiveEmp" />
+                <ScalarProperty Name="TotalOnDutyEmp" ColumnName="TotalOnDutyEmp" />
+                <ScalarProperty Name="TotalOffDutyEmp" ColumnName="TotalOffDutyEmp" />
+                <ScalarProperty Name="InprogressULB" ColumnName="InprogressULB" />
+                <ScalarProperty Name="CompleteULB" ColumnName="CompleteULB" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="PasswordString" ColumnName="PasswordString" />
+                <ScalarProperty Name="Loginuser" ColumnName="Loginuser" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AppDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.AppDetail">
               <MappingFragment StoreEntitySet="AppDetails">
+                <ScalarProperty Name="VehicalQRCode" ColumnName="VehicalQRCode" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Add_Ulb_Property" ColumnName="Add_Ulb_Property" />
                 <ScalarProperty Name="ulb_property" ColumnName="ulb_property" />
@@ -1253,55 +1305,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
                 <ScalarProperty Name="AppName_mar" ColumnName="AppName_mar" />
                 <ScalarProperty Name="AppName" ColumnName="AppName" />
                 <ScalarProperty Name="AppId" ColumnName="AppId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_ULBADMINSTATUS" FunctionName="DevSwachhBharatMainModel.Store.SP_ULBADMINSTATUS">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_ULBADMINSTATUS_Result">
-                <ScalarProperty Name="AppId" ColumnName="AppId" />
-                <ScalarProperty Name="appName" ColumnName="appName" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_ULBADMIN" FunctionName="DevSwachhBharatMainModel.Store.SP_ULBADMIN">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DevSwachhBharatMainModel.SP_ULBADMIN_Result">
-                <ScalarProperty Name="ParentULB" ColumnName="ParentULB" />
-                <ScalarProperty Name="ULBName" ColumnName="ULBName" />
-                <ScalarProperty Name="ULBId" ColumnName="ULBId" />
-                <ScalarProperty Name="TotalHouse" ColumnName="TotalHouse" />
-                <ScalarProperty Name="TotalHouseScan" ColumnName="TotalHouseScan" />
-                <ScalarProperty Name="TotalSeg" ColumnName="TotalSeg" />
-                <ScalarProperty Name="TotalMix" ColumnName="TotalMix" />
-                <ScalarProperty Name="TotalNotReceived" ColumnName="TotalNotReceived" />
-                <ScalarProperty Name="ULBCount" ColumnName="ULBCount" />
-                <ScalarProperty Name="TotalActiveEmp" ColumnName="TotalActiveEmp" />
-                <ScalarProperty Name="TotalOnDutyEmp" ColumnName="TotalOnDutyEmp" />
-                <ScalarProperty Name="TotalOffDutyEmp" ColumnName="TotalOffDutyEmp" />
-                <ScalarProperty Name="InprogressULB" ColumnName="InprogressULB" />
-                <ScalarProperty Name="CompleteULB" ColumnName="CompleteULB" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="PasswordString" ColumnName="PasswordString" />
-                <ScalarProperty Name="Loginuser" ColumnName="Loginuser" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

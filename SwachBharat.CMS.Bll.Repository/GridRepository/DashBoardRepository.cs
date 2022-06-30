@@ -417,6 +417,50 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
 
         }
+
+        public IEnumerable<SBAVehicleRegGridRow> GetVehicleRegData(long wildcard, string SearchString, int appId)
+        {
+            List<SBAVehicleRegGridRow> obj = new List<SBAVehicleRegGridRow>();
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+
+                var data = db.GetVehicleDetails().Select(x => new SBAVehicleRegGridRow
+                {
+                    Id = x.vehicleId,
+                    VehileType = x.vehicleType.ToString(),
+                    VehileNumber = x.vehicleNo,
+                    Area = x.area.ToString(),
+                    isActive = x.isActive.ToString()
+
+                }).ToList();
+                //  var result = data.SkipWhile(element => element.cId != element.reNewId); 
+
+                foreach (var item in data)
+                {
+                    if (item.VehileType == null || item.VehileType == "")
+                        item.VehileType = "";
+                    if (item.VehileNumber == null || item.VehileNumber == "")
+                        item.VehileNumber = "";
+                    if (item.Area == null || item.Area == "")
+                        item.Area = "";
+                    if (item.isActive == "True")
+                        item.isActive = "Active";
+                    else item.isActive = "Not Active";
+                }
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    var model = data.Where(c => ((string.IsNullOrEmpty(c.VehileType) ? " " : c.VehileType) + " " +
+                                                            (string.IsNullOrEmpty(c.VehileNumber) ? " " : c.VehileNumber) + " " +
+                                                            (string.IsNullOrEmpty(c.Area) ? " " : c.Area) + " " +
+                                                            (string.IsNullOrEmpty(c.isActive) ? " " : c.isActive)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                    data = model.ToList();
+                }
+                return data.OrderByDescending(c => c.Id);
+
+            }
+
+
+        }
         public IEnumerable<SBAWardNumberGridRow> GetWardNoData(long wildcard, string SearchString, int appId)
         {
             using (var db = new DevChildSwachhBharatNagpurEntities(appId))
@@ -607,7 +651,46 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
+        public IEnumerable<SBAVehicalRegDetailsGridRow> GetVehicalRegDetailsData(long wildcard, string SearchString, int appId)
+        {
+            DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+            var appDetails = dbMain.AppDetails.Where(x => x.AppId == appId).FirstOrDefault();
 
+            string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.VehicalQRCode + "/";
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.VehicalRegDetails().Select(x => new SBAVehicalRegDetailsGridRow
+                {
+                    vqrId = x.vqrId,
+                    Vehical_Type = x.VType,
+                    QRCode = ThumbnaiUrlCMS + x.Images.Trim(),
+                    ReferanceId = x.ReferanceId,
+                    Vehical_NO = x.VehicalNumber
+                }).ToList();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+              
+                    var model = data.Where(c => (
+                                        (string.IsNullOrEmpty(c.Vehical_Type) ? " " : c.Vehical_Type) + " " +
+                                        (string.IsNullOrEmpty(c.Vehical_NO) ? " " : c.Vehical_NO) + " " +
+                                        (string.IsNullOrEmpty(c.ReferanceId) ? " " : c.ReferanceId) + " " +
+                                        (string.IsNullOrEmpty(c.QRCode) ? " " : c.QRCode)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+
+
+                    data = model.ToList();
+                }
+                else if (appDetails.APIHit == null)
+                {
+                    data = data.ToList();
+                }
+                else
+                {
+                    data = data.Where(c => c.vqrId <= appDetails.APIHit).ToList();
+                }
+
+                return data.OrderByDescending(c => c.vqrId);
+            }
+        }
         public IEnumerable<SBAEmpBeatMapGridRow> EmpBeatMapsData(long wildcard, string SearchString, int appId)
         {
 
@@ -964,6 +1047,80 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 }
             }
 
+            else if (isActive == "1" && emptype == "D")
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+
+                    var data = db.UserMasters.Select(x => new SBAEmployeeDetailsGridRow
+                    {
+                        userId = x.userId,
+                        userAddress = x.userAddress,
+                        userLoginId = x.userLoginId,
+                        userMobileNumber = x.userMobileNumber,
+                        userName = x.userName,
+                        userNameMar = x.userNameMar,
+                        userProfileImage = x.userProfileImage,
+                        userEmployeeNo = x.userEmployeeNo,
+                        isActive = x.isActive.ToString(),
+                        bloodGroup = x.bloodGroup,
+                        gcTarget = x.gcTarget,
+                        EmployeeType = x.EmployeeType
+
+
+                    }).Where(x => x.isActive == "True" && x.EmployeeType == "D").ToList();
+                    foreach (var item in data)
+                    {
+                        item.isActive = checkNull(item.isActive);
+                        if (item.bloodGroup == "0")
+                        {
+                            item.bloodGroup = "";
+                        }
+                        if (item.isActive == "True")
+                        {
+
+                            item.isActive = "Active";
+                        }
+                        else { item.isActive = "Not Active"; }
+                        item.userNameMar = checkNull(item.userNameMar);
+                        item.bloodGroup = checkNull(item.bloodGroup);
+                        if (item.userAddress == null && item.userAddress == "")
+                            item.userAddress = "";
+                        if (item.userMobileNumber == null && item.userMobileNumber == "")
+                            item.userMobileNumber = "";
+                        if (item.userName == null && item.userName == "")
+                            item.userName = "";
+                        if (item.userNameMar == null && item.userNameMar == "")
+                            item.userNameMar = "";
+                        if (item.userEmployeeNo == null && item.userEmployeeNo == "")
+                            item.userEmployeeNo = "";
+
+                        if (item.userProfileImage == null || item.userProfileImage == "")
+                        { item.userProfileImage = "/Images/default_not_upload.png"; }
+                        else
+                        {
+                            item.userProfileImage = ThumbnaiUrlCMS + item.userProfileImage.Trim();
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.userMobileNumber) ? " " : c.userMobileNumber) + " " +
+                                             (string.IsNullOrEmpty(c.userNameMar) ? " " : c.userNameMar) + " " +
+                                             (string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
+                                             (string.IsNullOrEmpty(c.bloodGroup) ? " " : c.bloodGroup) + " " +
+                                             (string.IsNullOrEmpty(c.userAddress) ? " " : c.userAddress) + " " +
+                                                 (string.IsNullOrEmpty(c.EmployeeType) ? " " : c.EmployeeType) + " " +
+                                             (string.IsNullOrEmpty(c.userEmployeeNo) ? " " : c.userEmployeeNo)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                        data = model.ToList();
+
+                    }
+                    return data.OrderByDescending(c => c.userId);
+
+                }
+            }
+
             else if (isActive == "0" && emptype == "L")
             {
                 using (var db = new DevChildSwachhBharatNagpurEntities(appId))
@@ -1111,6 +1268,79 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 }
             }
 
+            else if (isActive == "0" && emptype == "D")
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+
+                    var data = db.UserMasters.Select(x => new SBAEmployeeDetailsGridRow
+                    {
+                        userId = x.userId,
+                        userAddress = x.userAddress,
+                        userLoginId = x.userLoginId,
+                        userMobileNumber = x.userMobileNumber,
+                        userName = x.userName,
+                        userNameMar = x.userNameMar,
+                        userProfileImage = x.userProfileImage,
+                        userEmployeeNo = x.userEmployeeNo,
+                        isActive = x.isActive.ToString(),
+                        bloodGroup = x.bloodGroup,
+                        gcTarget = x.gcTarget,
+                        EmployeeType = x.EmployeeType
+
+
+                    }).Where(x => x.isActive == "False" && x.EmployeeType == "D").ToList();
+                    foreach (var item in data)
+                    {
+                        item.isActive = checkNull(item.isActive);
+                        if (item.bloodGroup == "0")
+                        {
+                            item.bloodGroup = "";
+                        }
+                        if (item.isActive == "True")
+                        {
+
+                            item.isActive = "Active";
+                        }
+                        else { item.isActive = "Not Active"; }
+                        item.userNameMar = checkNull(item.userNameMar);
+                        item.bloodGroup = checkNull(item.bloodGroup);
+                        if (item.userAddress == null && item.userAddress == "")
+                            item.userAddress = "";
+                        if (item.userMobileNumber == null && item.userMobileNumber == "")
+                            item.userMobileNumber = "";
+                        if (item.userName == null && item.userName == "")
+                            item.userName = "";
+                        if (item.userNameMar == null && item.userNameMar == "")
+                            item.userNameMar = "";
+                        if (item.userEmployeeNo == null && item.userEmployeeNo == "")
+                            item.userEmployeeNo = "";
+
+                        if (item.userProfileImage == null || item.userProfileImage == "")
+                        { item.userProfileImage = "/Images/default_not_upload.png"; }
+                        else
+                        {
+                            item.userProfileImage = ThumbnaiUrlCMS + item.userProfileImage.Trim();
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.userMobileNumber) ? " " : c.userMobileNumber) + " " +
+                                             (string.IsNullOrEmpty(c.userNameMar) ? " " : c.userNameMar) + " " +
+                                             (string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
+                                             (string.IsNullOrEmpty(c.bloodGroup) ? " " : c.bloodGroup) + " " +
+                                             (string.IsNullOrEmpty(c.userAddress) ? " " : c.userAddress) + " " +
+                                                 (string.IsNullOrEmpty(c.EmployeeType) ? " " : c.EmployeeType) + " " +
+                                             (string.IsNullOrEmpty(c.userEmployeeNo) ? " " : c.userEmployeeNo)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                        data = model.ToList();
+
+                    }
+                    return data.OrderByDescending(c => c.userId);
+
+                }
+            }
             else if (emptype == "")
             {
                 using (var db = new DevChildSwachhBharatNagpurEntities(appId))
@@ -1332,6 +1562,81 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 }
             }
+
+            else if (emptype == "D")
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+                {
+
+                    var data = db.UserMasters.Select(x => new SBAEmployeeDetailsGridRow
+                    {
+                        userId = x.userId,
+                        userAddress = x.userAddress,
+                        userLoginId = x.userLoginId,
+                        userMobileNumber = x.userMobileNumber,
+                        userName = x.userName,
+                        userNameMar = x.userNameMar,
+                        userProfileImage = x.userProfileImage,
+                        userEmployeeNo = x.userEmployeeNo,
+                        isActive = x.isActive.ToString(),
+                        bloodGroup = x.bloodGroup,
+                        gcTarget = x.gcTarget,
+                        EmployeeType = x.EmployeeType
+
+
+                    }).Where(x => x.EmployeeType == "D").ToList();
+                    foreach (var item in data)
+                    {
+                        item.isActive = checkNull(item.isActive);
+                        if (item.bloodGroup == "0")
+                        {
+                            item.bloodGroup = "";
+                        }
+                        if (item.isActive == "True")
+                        {
+
+                            item.isActive = "Active";
+                        }
+                        else { item.isActive = "Not Active"; }
+                        item.userNameMar = checkNull(item.userNameMar);
+                        item.bloodGroup = checkNull(item.bloodGroup);
+                        if (item.userAddress == null && item.userAddress == "")
+                            item.userAddress = "";
+                        if (item.userMobileNumber == null && item.userMobileNumber == "")
+                            item.userMobileNumber = "";
+                        if (item.userName == null && item.userName == "")
+                            item.userName = "";
+                        if (item.userNameMar == null && item.userNameMar == "")
+                            item.userNameMar = "";
+                        if (item.userEmployeeNo == null && item.userEmployeeNo == "")
+                            item.userEmployeeNo = "";
+
+                        if (item.userProfileImage == null || item.userProfileImage == "")
+                        { item.userProfileImage = "/Images/default_not_upload.png"; }
+                        else
+                        {
+                            item.userProfileImage = ThumbnaiUrlCMS + item.userProfileImage.Trim();
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(SearchString))
+                    {
+
+                        var model = data.Where(c => ((string.IsNullOrEmpty(c.userMobileNumber) ? " " : c.userMobileNumber) + " " +
+                                             (string.IsNullOrEmpty(c.userNameMar) ? " " : c.userNameMar) + " " +
+                                             (string.IsNullOrEmpty(c.userName) ? " " : c.userName) + " " +
+                                             (string.IsNullOrEmpty(c.bloodGroup) ? " " : c.bloodGroup) + " " +
+                                             (string.IsNullOrEmpty(c.userAddress) ? " " : c.userAddress) + " " +
+                                                 (string.IsNullOrEmpty(c.EmployeeType) ? " " : c.EmployeeType) + " " +
+                                             (string.IsNullOrEmpty(c.userEmployeeNo) ? " " : c.userEmployeeNo)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                        data = model.ToList();
+
+                    }
+                    return data.OrderByDescending(c => c.userId);
+
+                }
+            }
+
             else
             {
                 using (var db = new DevChildSwachhBharatNagpurEntities(appId))
