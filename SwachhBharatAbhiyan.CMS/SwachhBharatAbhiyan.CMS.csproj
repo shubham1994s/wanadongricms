@@ -3179,6 +3179,9 @@
     <Content Include="Views\MainMaster\MenuVehicalRegistrationIndex.cshtml" />
     <Content Include="Views\MainMaster\VehicalRegistrationIndex.cshtml" />
     <Content Include="Views\MainMaster\AddVehicalRegDetails.cshtml" />
+    <Content Include="Views\MainMaster\AddVehicleRegDetails.cshtml" />
+    <Content Include="Views\MainMaster\MenuVehicleRegIndex.cshtml" />
+    <Content Include="Views\MainMaster\VehicleRegIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

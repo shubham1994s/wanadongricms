@@ -147,6 +147,7 @@
     <Compile Include="GridRepository\Grid\ULBAdminStatusGridRepository.cs" />
     <Compile Include="GridRepository\Grid\URAttendanceGridRepository.cs" />
     <Compile Include="GridRepository\Grid\VehicalRegDetailsGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\VehicleRegGridRepository.cs" />
     <Compile Include="GridRepository\Grid\VehicleTypeGridRepository.cs" />
     <Compile Include="GridRepository\Grid\StateGridRepository.cs" />
     <Compile Include="GridRepository\Grid\TalukaGridRepository.cs" />

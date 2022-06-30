@@ -102,6 +102,7 @@
     <Compile Include="ChildModel\Model\UREmployeeDetailsVM.cs" />
     <Compile Include="ChildModel\Model\UserMasterVM.cs" />
     <Compile Include="ChildModel\Model\VehicalRegDetailsVM.cs" />
+    <Compile Include="ChildModel\Model\VehicleRegVM.cs" />
     <Compile Include="ChildModel\Model\VehicleTypeVM.cs" />
     <Compile Include="ChildModel\Model\WardNumberVM.cs" />
     <Compile Include="ChildModel\Model\WasteDetailsVM.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Grid\SBAStreeSweepDetailsGridRow.cs" />
     <Compile Include="Grid\SBAStreetSweepBeatDetailsGridRow.cs" />
     <Compile Include="Grid\SBAVehicalRegDetailsGridRow.cs" />
+    <Compile Include="Grid\SBAVehicleRegGridRow.cs" />
     <Compile Include="Grid\SBAVehicleTypeGridRow.cs" />
     <Compile Include="Grid\GPBussniessDetailsGridRow.cs" />
     <Compile Include="Grid\SBAWardNumberGridRow.cs" />

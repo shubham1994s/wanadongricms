@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="00a410a197d54ea48e9573e29a38d1eb" Name="Diagram1" ZoomLevel="86" ShowGrid="false" SnapToGrid="true">
+      <Diagram DiagramId="00a410a197d54ea48e9573e29a38d1eb" Name="Diagram1" ZoomLevel="66" ShowGrid="false" SnapToGrid="true">
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.GarbagePointDetail" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.Qr_Employee_Daily_Attendance" Width="1.5" PointX="12.375" PointY="13.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.GamePlayerDetail" Width="1.5" PointX="14.375" PointY="6.75" />
@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.WM_Garbage_Details" Width="1.5" PointX="15.375" PointY="3.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.WM_Garbage_Summary" Width="1.5" PointX="7.375" PointY="15.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.ZoneMaster" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VehicleType" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.TeritoryMaster" Width="1.5" PointX="12.375" PointY="10.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.WardNumber" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.SauchalayAddress" Width="1.5" PointX="9.375" PointY="11.75" />
@@ -42,8 +43,8 @@
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VW_HSGetLiquidDetails" Width="1.5" PointX="15.375" PointY="18.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VW_HSGetStreetDetails" Width="1.5" PointX="17.375" PointY="18.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.EmpBeatMap" Width="1.5" PointX="19.375" PointY="18.75" />
-        <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VehicleType" Width="1.5" PointX="3.375" PointY="4.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.Vehical_QR_Master" Width="1.5" PointX="20.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.VehicleRegistration" Width="1.5" PointX="20.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
