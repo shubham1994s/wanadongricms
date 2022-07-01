@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SwachBharat.CMS.Dal.DataContexts;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
-
+using System.Web.Mvc;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
@@ -49,6 +49,10 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         //IEnumerable<VMApplication> GetAppId();
         //bool AddApptoUser(string UserId, int AppId, int SubscriptionId);
         AppDetailsVM GetApplicationDetails(int AppId);
+
+        AppAreaMapVM GetAppAreaMap(int AppId);
+        List<SelectListItem> ListAppMap();
+        void SaveAppAreaMap(AppAreaMapVM AppAreaObj);
         int GetUserAppId(string UserId);
 
         int GetUserAppIdL(string UserId);

@@ -3190,6 +3190,13 @@
     <Content Include="Views\DumpyardEmployee\EmployeeSummaryIndex.cshtml" />
     <Content Include="Views\DumpyardEmployee\Index.cshtml" />
     <Content Include="Views\DumpyardEmployee\MenuEmployeeSummaryIndex.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\AddAppAreaMap.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSAppArea.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSAppAreaIndex.cshtml" />
+    <Content Include="Views\AttendenceBeatMap\HouseRoute.cshtml" />
+    <Content Include="Views\AttendenceBeatMap\Index.cshtml" />
+    <Content Include="Views\AttendenceBeatMap\MenuIndex.cshtml" />
+    <Content Include="Views\AttendenceBeatMap\UserRoute.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

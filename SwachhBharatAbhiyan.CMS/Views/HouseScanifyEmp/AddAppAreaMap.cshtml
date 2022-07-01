@@ -66,7 +66,7 @@
                 @*<label>तारीख निवडा / Select Date</label>*@
 
                 @*<label>कर्मचारी निवडा / Select Employee</label>*@
-                <div id="divUserList" style="display:none">
+                <div id="divAppList" style="display:none">
                     <label>Select App Name</label>
                     <select id="selectApp" class="form-control minimal-form  RequiredInput validate[required] RequiredInput"></select>
                 </div>
@@ -77,7 +77,7 @@
             <div class="col-sm-3">
 
                 <div>
-                    <button type="button" class="btn btn-primary save" id="btnEMPSave">Save</button>
+                    <button type="button" class="btn btn-primary save" id="btnAppMapSave">Save</button>
                 </div>
             </div>
 
@@ -98,15 +98,48 @@
             <div class="col-sm-2"></div>
         </div>
     </div>
-    @*<style>
+    <style>
 
-            button[title="Stop drawing"] {
-                content: url(https://cdn4.iconfinder.com/data/icons/whsr-january-flaticon-set/128/compass.png) !important;
-                height: 40px;
-                width: 40px;
-                cursor: pointer;
+        button[title="Stop drawing"] {
+            /* content: url(https://cdn4.iconfinder.com/data/icons/whsr-january-flaticon-set/128/compass.png) !important;*/
+            height: 40px;
+            width: 40px;
+            /* cursor: pointer;*/
+            box-shadow: rgb(0 0 0) 0px 1px 4px -1px !important;
+            text-align: center !important;
+        }
+
+            button[title="Stop drawing"] span div {
+                width: 24px !important;
+                height: 21px !important;
             }
-        </style>*@
+
+                button[title="Stop drawing"] span div img {
+                    top: -86px !important;
+                    width: 23px !important;
+                    height: 212px !important;
+                }
+
+        button[title="Draw a shape"] {
+            /* content: url(https://cdn4.iconfinder.com/data/icons/whsr-january-flaticon-set/128/compass.png) !important;*/
+            height: 40px;
+            width: 40px;
+            /* cursor: pointer;*/
+            box-shadow: rgb(0 0 0) 0px 1px 4px -1px !important;
+            text-align: center !important;
+        }
+
+            button[title="Draw a shape"] span div {
+                width: 24px !important;
+                height: 21px !important;
+            }
+
+                button[title="Draw a shape"] span div img {
+                    top: -74px !important;
+                    width: 23px !important;
+                    height: 225px !important;
+                }
+    </style>
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -130,13 +163,41 @@
         $('#selectApp').on('change', function () {
 
             $('#hdAppId').val((this.value));
+            $('#hdAppName').val(($(this).find("option:selected").text()));
+            var AppId = $('#hdAppId').val();
+            $.ajax({
+                type: "get",
+                url: "/HouseScanifyEmp/GetAppLatLong?AppId=" + AppId,
+                contentType: 'application/json;',
+                dataType: 'json',
+                //traditional: true,
+                success: function (data) {
+                    $("#deflat").val(data.lat);
+                    $("#deflang").val(data.lng);
+                    runMaps();
+                }
+            });
+
+
         });
         //User Wise Location
         // All User On Map
 
     </script>
     <script type="text/javascript">
+        var loadMap = function () {
 
+            if ($("#hdAppId").val() == '-1') {
+                $("#divAppList").show();
+                $("#divAppName").hide();
+            }
+            else {
+                $("#divAppList").hide();
+                $("#divAppName").show();
+                $("#spnAppName").text($("#hdAppName").val());
+            }
+            runMaps();
+        };
         var polyArr = [];
         var selectedShape;
         var arrCoordinate = [];
@@ -146,27 +207,20 @@
         var runMaps = function () {
 
              map = new google.maps.Map(document.getElementById('googleMap'), {
-                zoom: 16,
+                zoom: 14,
                 center: new google.maps.LatLng($('#deflat').val(), $('#deflang').val()),
                 mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-            if ($("#hdebmId").val() == '-1') {
-                $("#divUserList").show();
-                $("#divUserName").hide();
-            }
-            else {
-
-                $("#divUserList").hide();
-                $("#divUserName").show();
-                $("#spnUserName").text($("#hduserName").val());
-                arrCoordinate = @Html.Raw(Json.Encode(@Model.ebmLatLong));
+             });
+            arrCoordinate = @Html.Raw(Json.Encode(@Model.AppAreaLatLong));
+            
+            if(arrCoordinate.length > 0) {
 
 
-                map = new google.maps.Map(document.getElementById('googleMap'), {
-                    zoom: 16,
-                    center: new google.maps.LatLng(arrCoordinate[0].lat, arrCoordinate[0].lng),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                });
+                //map = new google.maps.Map(document.getElementById('googleMap'), {
+                //    zoom: 16,
+                //    center: new google.maps.LatLng(arrCoordinate[0].lat, arrCoordinate[0].lng),
+                //    mapTypeId: google.maps.MapTypeId.ROADMAP
+                //});
 
 
 
@@ -176,7 +230,7 @@
                     draggable: true,
                     editable: true,
                     fillColor: '#ffff00',
-                    fillOpacity: 0.2,
+                    fillOpacity: 0.1,
                 });
 
 
@@ -202,39 +256,6 @@
                 });
                 google.maps.event.addListener(polyOld, 'dragend', function () {
 
-                    //$.confirm('Are you sure you want change position of Polygon ?', {
-                    //    em: 'Emphasized Text',
-                    //    title: 'Change Polygon!',
-                    //    callEvent: function () {
-                    //        polyArr = [];
-                    //        polyArr.push(polyOld);
-                    //    },
-                    //    cancelEvent: function () {
-                    //        polyOld.setMap(null);
-                    //        console.log('dragend');
-                    //        //polyOld = polyDragStart;
-                    //        polyOld.setPaths(polyDragStartCords);
-                    //        //var poligonCoords = [];
-                    //        console.log('dragend');
-                    //        //poligonCoords = getCoords(polyDragStart[0]);
-                    //        //polyOld = new google.maps.Polygon({
-                    //        //    paths: polyDragStartCords,
-                    //        //    clickable: true,
-                    //        //    draggable: true,
-                    //        //    editable: true,
-                    //        //    fillColor: '#ffff00',
-                    //        //    fillOpacity: 0.2,
-                    //        //});
-                    //        //console.log(pathArrTemp);
-                    //        //polyOld.setMap(null);
-                    //        polyOld.setMap(map);
-                    //        polyArr = [];
-                    //        polyArr.push(polyOld);
-                    //    },
-                    //    cancelButton: 'No!'
-                    //});
-
-
 
                     if (confirm('Are you sure you want change position of Polygon ?')) {
                         polyArr = [];
@@ -245,25 +266,11 @@
                         //polyOld = polyDragStart;
                         polyOld.setPaths(polyDragStartCords);
                         //var poligonCoords = [];
-                        console.log('dragend');
-                        //poligonCoords = getCoords(polyDragStart[0]);
-                        //polyOld = new google.maps.Polygon({
-                        //    paths: polyDragStartCords,
-                        //    clickable: true,
-                        //    draggable: true,
-                        //    editable: true,
-                        //    fillColor: '#ffff00',
-                        //    fillOpacity: 0.2,
-                        //});
-                        //console.log(pathArrTemp);
-                        //polyOld.setMap(null);
                         polyOld.setMap(map);
                         polyArr = [];
                         polyArr.push(polyOld);
-                        //polyOld.setMap(map);
-                        //console.log(polyDragStart.length);
+                        addListenersOnPolygon2(polyOld);
 
-                        //polyDragStart[0].setMap(map);
                     }
 
 
@@ -277,7 +284,30 @@
                 });
 
 
+            }
 
+
+            var addListenersOnPolygon2 = function (poly) {
+                google.maps.event.addListener(poly.getPath(), 'insert_at', function () {
+                    console.log('insert_at');
+
+
+                    polyArr = [];
+                    polyArr.push(poly);
+
+                });
+                google.maps.event.addListener(poly.getPath(), 'remove_at', function () {
+                    console.log('remove_at');
+                    polyArr = [];
+                    polyArr.push(poly);
+
+                });
+                google.maps.event.addListener(poly.getPath(), 'set_at', function () {
+                    console.log('set_at');
+                    polyArr = [];
+                    polyArr.push(poly);
+
+                });
 
 
             }
@@ -340,7 +370,7 @@
                     draggable: true,
                     editable: true,
                     fillColor: '#ffff00',
-                    fillOpacity: 0.2,
+                    fillOpacity: 0.1,
 
                 },
                 //rectangleOptions: {
@@ -456,7 +486,7 @@
                         event.setMap(map);
                         polyArr = [];
                         polyArr.push(event);
-
+                        addListenersOnPolygon2(event);
                     }
 
                 });
@@ -469,12 +499,12 @@
 
             google.maps.event.addListener(drawingManager, 'overlaycomplete', function (event) {
                 console.log('complete');
-                polyArr = [];
-                polyArr.push(event.overlay);
-                if (event.type !== google.maps.drawing.OverlayType.MARKER) {
+                
+                if ((event.type == google.maps.drawing.OverlayType.POLYGON) && (event.overlay.getPath().getLength() > 1)) {
                     drawingManager.setDrawingMode(null);
                     //Write code to select the newly selected object.
-
+                    polyArr = [];
+                    polyArr.push(event.overlay);
                     var newShape = event.overlay;
                     newShape.type = event.type;
                     google.maps.event.addListener(newShape, 'click', function () {
@@ -506,18 +536,18 @@
 
 
 
-        $("#btnEMPSave").click(function () {
+        $("#btnAppMapSave").click(function () {
             if (polyArr.length != 1) {
-                $("#BeatMaap_pop").html("Please Create polygon...").delay(2000).show().fadeOut('slow');
+                $("#BeatMaap_pop").html("Please Create Area...").delay(2000).show().fadeOut('slow');
                 return false;
             }
-            if ($('#hduserId').val() == '-1') {
-                $("#BeatMaap_pop").html("Please Select User...").delay(2000).show().fadeOut('slow');
+            if ($('#hdAppId').val() == '-1') {
+                $("#BeatMaap_pop").html("Please Select App Name...").delay(2000).show().fadeOut('slow');
                 return false;
             }
             var poly = polyArr[0];
             var vertices = poly.getPath();
-            var EBMObj = new Object();
+            var AppAreaObj = new Object();
             var CordArry = [];
             for (let i = 0; i < vertices.getLength(); i++) {
                 var xy = vertices.getAt(i);
@@ -527,16 +557,17 @@
                 CordArry.push(obj);
             }
 
-            EBMObj.userId = parseInt($('#hduserId').val());
-            EBMObj.ebmLatLong = CordArry;
-            EBMObj.Type = 'W';
-            EBMObj.ebmId = parseInt($('#hdebmId').val());
-            var data = JSON.stringify({ 'EBMObj': EBMObj });
+            AppAreaObj.AppId = parseInt($('#hdAppId').val());
+            AppAreaObj.AppName = $('#hdAppName').val();
+            AppAreaObj.AppAreaLatLong = CordArry;
+            AppAreaObj.AppLat = $('#deflat').val();
+            AppAreaObj.AppLong = $('#deflang').val();
+            var data = JSON.stringify({ 'AppAreaObj': AppAreaObj });
 
 
             $.ajax({
                 type: "post",
-                url: "/EmpBeatMap/SaveEmpBeatMap",
+                url: "/HouseScanifyEmp/SaveAppAreaMap",
                 data: data,
                 contentType: 'application/json;',
                 dataType: 'json',
@@ -546,7 +577,7 @@
                     //LoadGrid();
 
                     //$("#DumpSave_pop").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
-                    location.href = 'Index';
+                    location.href = 'HSAppAreaIndex';
                 }
             });
         }
@@ -622,7 +653,7 @@
     </script>
     @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@
     <script async
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&libraries=drawing&callback=runMaps">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&libraries=drawing&callback=loadMap">
     </script>
     @*Paid API*@
     @*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnR8YLcfpwSLWXGO6JR3wFPY133r086DI&callback=myMap" type="text/javascript"></script>*@

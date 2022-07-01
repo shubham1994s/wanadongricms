@@ -720,7 +720,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
             using(var dbMain = new DevSwachhBharatMainEntities())
             {
-                var data = dbMain.AppDetails.Where(a => a.IsActive == true).Select(x => new SBAAppAreaMapGridRow
+                var data = dbMain.AppDetails.Where(a => a.IsActive == true && a.AppAreaLatLong != null && a.AppAreaLatLong != "").Select(x => new SBAAppAreaMapGridRow
                 {
                     AppId = x.AppId,
                     AppName =  x.AppName
