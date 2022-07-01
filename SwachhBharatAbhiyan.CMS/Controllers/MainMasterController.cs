@@ -11,6 +11,12 @@ using System.Web.Mvc;
 using SwachBharat.CMS.Dal.DataContexts;
 using SwachhBharatAbhiyan.CMS.Models;
 using SwachBharat.CMS.Bll.ViewModels.Grid;
+using System.Net;
+using System.IO;
+using System.Text.RegularExpressions;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
 {
@@ -329,6 +335,104 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         }
 
+        public ActionResult VehicalRegistrationIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                Session["AppName"] = SessionHandler.Current.AppName;
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+        public ActionResult MenuVehicalRegistrationIndex()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                return View();
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        public ActionResult AddVehicalRegDetails(int teamId = -2)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                VehicalRegDetailsVM house = childRepository.GetVehicalRegById(teamId);
+
+
+                return View(house);
+
+
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+        [HttpPost]
+        public ActionResult AddVehicalRegDetails(VehicalRegDetailsVM house)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+                int teamId = house.vqrId;
+                var AppDetails = mainRepository.GetApplicationDetails(SessionHandler.Current.AppId);
+                var VehicalReg = childRepository.GetVehicalRegById(teamId);
+                if (VehicalReg.vehicalQRCode == "/Images/QRcode.png" || VehicalReg.vehicalQRCode == "/Images/default_not_upload.png")
+                {
+                    VehicalReg.vehicalQRCode = null;
+                }
+                if (VehicalReg.vehicalQRCode == null)
+                {
+                    var guid = Guid.NewGuid().ToString().Split('-');
+                    string image_Guid = DateTime.Now.ToString("MMddyyyymmss") + "_" + guid[1] + ".jpg";
+
+                    //Converting  Url to image 
+                    // var url = string.Format("http://api.qrserver.com/v1/create-qr-code/?data="+ house.ReferanceId);
+                    var url = string.Format("https://chart.googleapis.com/chart?cht=qr&chl=" + VehicalReg.ReferanceId + "&chs=160x160&chld=L|0");
+                    WebResponse response = default(WebResponse);
+                    Stream remoteStream = default(Stream);
+                    StreamReader readStream = default(StreamReader);
+                    WebRequest request = WebRequest.Create(url);
+                    response = request.GetResponse();
+                    remoteStream = response.GetResponseStream();
+                    readStream = new StreamReader(remoteStream);
+                    //Creating Path to save image in folder
+                    System.Drawing.Image img = System.Drawing.Image.FromStream(remoteStream);
+                    string imgpath = Path.Combine(Server.MapPath(AppDetails.basePath + AppDetails.VehicalQRCode), image_Guid);
+                    var exists = System.IO.Directory.Exists(Server.MapPath(AppDetails.basePath + AppDetails.VehicalQRCode));
+                    if (!exists)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath(AppDetails.basePath + AppDetails.VehicalQRCode));
+                    }
+                    img.Save(imgpath);
+                    response.Close();
+                    remoteStream.Close();
+                    readStream.Close();
+                    house.vehicalQRCode = image_Guid;
+                }
+                else
+                {
+
+                    string bb = VehicalReg.vehicalQRCode;
+                    var ii = bb.Split('/');
+                    if (ii.Length == 6)
+                    {
+                        VehicalReg.vehicalQRCode = ii[6];
+                    }
+                    if (ii.Length > 6)
+                    {
+                        VehicalReg.vehicalQRCode = ii[6];
+                        house.vehicalQRCode = VehicalReg.vehicalQRCode;
+                    }
+                }
+                VehicalRegDetailsVM vehicalDetails = childRepository.SaveVehicalReg(house);
+                return Redirect("VehicalRegistrationIndex");
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
         #endregion
 
         #region Vehicle Registration
@@ -507,7 +611,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect("/Account/Login");
         }
         #endregion
-
+        
         #region Ward Number
         [HttpGet]
         public ActionResult WardIndex()
@@ -783,6 +887,112 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
 
         #endregion
+
+        public ActionResult Export(int id)
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+
+                var AppDetails = mainRepository.GetApplicationDetails(SessionHandler.Current.AppId);
+                string Filename = "", owner = "";
+
+                var details = childRepository.GetVehicalRegById(id);
+                string cdatetime = DateTime.Now.ToString("_ddmmyyyyhhmmss");
+
+                if (details.Vehican_No != null)
+                {
+                    Filename = Regex.Replace(details.Vehican_No, @"\s+", "") + cdatetime + ".pdf";
+                    owner = details.Vehican_No;
+                }
+                else
+                {
+                    Filename = Regex.Replace(details.vqrId.ToString(), @"\s+", "") + cdatetime + ".pdf";
+                    owner = "_ _ _ _ _ _ _ _ _ _ _ _";
+
+                }
+                string GridHtml = "";
+                //string src = AppDetails.baseImageUrlCMS + "/Content/images/img/app_icon_cms.png";
+                //string GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;margin-top: 8px;font-size:22px;background: #abd037;'> O </div> <div style='background: #abd037;;font-weight: bold;font-size: 18px;'> " + AppDetails.AppName + "</div><div style='font-size: 15px;background: #abd037;'> House Id: " + details.ReferanceId + " </div><div style='height:10px;background: #abd037;'></div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:250px;height:250px;' src='" + details.houseQRCode + "'/> </div></div>";
+
+
+                if (SessionHandler.Current.AppId == 3068) // For Nagpur ULB
+                {
+                    string src = AppDetails.baseImageUrlCMS + "/Content/images/icons/Nagpur_logo.png";
+                    //For Satana Only
+                    GridHtml = "<div style='width:100%;height: 100%;text-align: center;background: #fff;border : 2px solid black;'><div style='text-align:center;padding-top: 5px;background: #abd037;'> <img style='width:250px;height:86px;' src='" + src + "'/> </div> <div style='font-size: 14px;background: #abd037;'><b> Vehical QR Id: " + details.ReferanceId + "</b> </div> <div style='height:10px;background: #fff;'></div><div style='background: #fff;'> <img style='width:245px;height:245px;' src='" + details.vehicalQRCode + "'/></div></div>";
+                }
+                else
+                {
+                    //string slogan = AppDetails.baseImageUrlCMS + "/Content/images/icons/slogan.png";
+                    //string topimg = AppDetails.baseImageUrlCMS + "/content/images/icons/top_outdoor.png";
+                    //string leftbottomimg = AppDetails.baseImageUrlCMS + "/Content/images/icons/left_outdoor.png";
+                    //string dry_wet_new = AppDetails.baseImageUrlCMS + "/Content/images/icons/Khapa/dry&wet.png";
+
+                    string top_img_new = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/Top_image.png";
+                    string slogan_new = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/slogan.png";
+                    string round = AppDetails.baseImageUrlCMS + AppDetails.basePath + "Content/icons/round.png";
+
+                    //string top_img_new = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/Top_image.png";
+                    //string slogan_new = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/slogan.png";
+                    //string round = "http://localhost:34557/" + AppDetails.basePath + "Content/icons/round.png";
+
+                    GridHtml = "<div style='width:100%;height: 100%;background:#ffffff;border : 2px solid #4fa30a;'><div style='float:left;width:7%;padding-top:110px;padding-left:8px;'><img src='" + round + "' style = 'width:20px;height:20px;margin-left:5px;'/></div><div style='float:left;width:58%;padding-left:16px;padding-top:7px;'><img src='" + details.vehicalQRCode + "' style = 'width:20px;height:20px;'/></div><div style='float:left;width:83%;padding-left:5px;padding-top:10px;padding-bottom:6px;'><div style='padding-left:5px;'><img style='width:150px;height:95px;' src='" + top_img_new + "'/></div><div style='text-align: center;font-weight: 900;padding-bottom:3px;'>&nbsp;&nbsp;&nbsp;<span style='color:#000000;text-align: center;font-size: 16px'>Vehical QR Id</span><br/><span style='color:#000000;text-align: center;font-size: 21px'>" + details.ReferanceId + "</span></div><div style='padding-left:5px;'><img src='" + slogan_new + "' style='width: 150px; height:49px;'/><br/><div style='float:right;'><b style='font-size:9px;'>" + details.SerielNo + "</b></div></div></div><div style='float:left;width:3%;padding-top:110px;padding-left:22px;text-align:center;'><img src='" + round + "' style = 'width:20px;height:20px;'/></div></div>";
+                }
+
+
+                using (MemoryStream stream = new System.IO.MemoryStream())
+                {
+                    StringReader sr = new StringReader(GridHtml);
+
+                    if (SessionHandler.Current.AppId == 3068)
+                    {
+                        var pgSize = new iTextSharp.text.Rectangle(216, 288);
+                        Document pdfDoc = new Document(pgSize, 1f, 1f, 1f, 1f);
+                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                        pdfDoc.Open();
+                        var content = writer.DirectContent;
+                        var pageBorderRect = new Rectangle(pdfDoc.PageSize);
+
+                        pageBorderRect.Left += pdfDoc.LeftMargin;
+                        pageBorderRect.Right -= pdfDoc.RightMargin;
+                        pageBorderRect.Top -= pdfDoc.TopMargin;
+                        pageBorderRect.Bottom += pdfDoc.BottomMargin;
+
+                        content.SetColorStroke(BaseColor.BLACK);
+                        content.SetLineWidth(5);
+                        content.Rectangle(pageBorderRect.Left, pageBorderRect.Bottom, pageBorderRect.Width, pageBorderRect.Height);
+                        content.Stroke();
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                        pdfDoc.Close();
+                    }
+                    else
+                    {
+                        var pgSize = new iTextSharp.text.Rectangle(324, 180);
+                        Document pdfDoc = new Document(pgSize, 1f, 1f, 1f, 1f);
+                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                        pdfDoc.Open();
+                        var content = writer.DirectContent;
+                        var pageBorderRect = new Rectangle(pdfDoc.PageSize);
+
+                        pageBorderRect.Left += pdfDoc.LeftMargin;
+                        pageBorderRect.Right -= pdfDoc.RightMargin;
+                        pageBorderRect.Top -= pdfDoc.TopMargin;
+                        pageBorderRect.Bottom += pdfDoc.BottomMargin;
+
+                        content.SetColorStroke(BaseColor.BLACK);
+                        content.SetLineWidth(5);
+                        content.Rectangle(pageBorderRect.Left, pageBorderRect.Bottom, pageBorderRect.Width, pageBorderRect.Height);
+                        content.Stroke();
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                        pdfDoc.Close();
+                    }
+
+                    return File(stream.ToArray(), "application/pdf", Filename);
+                }
+            }
+            else
+                return Redirect("/Account/Login");
+        }
 
     }
 }

@@ -154,6 +154,12 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetHouseDetails(teamId);
         }
 
+        public VehicalRegDetailsVM GetVehicalRegById(int teamId)
+        {
+            return screenService.GetVehicalRegDetails(teamId);
+        }
+        
+
         public SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId)
         {
             return screenService.GetHouseByIdforMap(teamId, daId);
@@ -171,6 +177,15 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
                 data.houseId = 0;
             }
             HouseDetailsVM dd =screenService.SaveHouseDetails(data);
+            return dd;
+        }
+        public VehicalRegDetailsVM SaveVehicalReg(VehicalRegDetailsVM data)
+        {
+            if (data.vqrId <= 0)
+            {
+                data.vqrId = 0;
+            }
+            VehicalRegDetailsVM dd = screenService.SaveVehicalRegDetails(data);
             return dd;
         }
         public void SaveEmpBeatMap(EmpBeatMapVM data)

@@ -325,6 +325,8 @@ namespace SwachBharat.CMS.Bll.Services
         #endregion
 
         #region Vehicle
+
+
         public VehicleTypeVM GetVehicleTypeDetails(int teamId)
         {
             try
@@ -735,6 +737,101 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public VehicalRegDetailsVM GetVehicalRegDetails(int teamId)
+        {
+            try
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.VehicalQRCode + "/";
+                VehicalRegDetailsVM vehicalReg = new VehicalRegDetailsVM();
+
+                var Details = db.Vehical_QR_Master.Where(x => x.vqrId == teamId).FirstOrDefault();
+                if (Details != null)
+                {
+                    vehicalReg = FillVehicalRegDetailsViewModel(Details);
+                    if (vehicalReg.vehicalQRCode != null && vehicalReg.vehicalQRCode != "")
+                    {
+                        HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(ThumbnaiUrlCMS + vehicalReg.vehicalQRCode.Trim());
+                        HttpWebResponse httpRes = null;
+                        try
+                        {
+                            httpRes = (HttpWebResponse)httpReq.GetResponse(); // Error 404 right here,
+                            if (httpRes.StatusCode == HttpStatusCode.NotFound)
+                            {
+                                vehicalReg.vehicalQRCode = "/Images/default_not_upload.png";
+                            }
+                            else
+                            {
+                                vehicalReg.vehicalQRCode = ThumbnaiUrlCMS + vehicalReg.vehicalQRCode.Trim();
+
+                                int n = teamId;
+                                double refer1 = Convert.ToDouble((n + 1));
+                                double xyz = refer1 / 100;
+
+                                string s = xyz.ToString("0.00", CultureInfo.InvariantCulture);
+                                string[] parts = s.Split('.');
+                                int i1 = int.Parse(parts[0]);
+                                int i2 = int.Parse(parts[1]);
+
+                                if (i2 == 0)
+                                {
+                                    //i1 = i1 + 1;
+                                    s = "V" + i1.ToString();
+                                }
+                                else
+                                {
+                                    s = "V" + (i1 + 1);
+                                }
+
+                                vehicalReg.SerielNo = s;
+                            }
+                        }
+                        catch (Exception e) { vehicalReg.vehicalQRCode = "/Images/default_not_upload.png"; }
+
+                    }
+                    else
+                    {
+                        vehicalReg.vehicalQRCode = "/Images/default_not_upload.png";
+                    }
+
+                    vehicalReg.VehicleList = VehicleList();
+                    return vehicalReg;
+                }
+                else if (teamId == -2)
+                {
+                    var id = db.Vehical_QR_Master.OrderByDescending(x => x.vqrId).Select(x => x.vqrId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "VQR" + (number + id + 1);
+                    vehicalReg.ReferanceId = refer;
+                    vehicalReg.vehicalQRCode = "/Images/QRcode.png";
+                    //house.WardList = ListWardNo();
+                    //house.AreaList = ListArea();
+                    vehicalReg.VehicleList = VehicleList();
+
+                    vehicalReg.vqrId = 0;
+                    return vehicalReg;
+                }
+                else
+                {
+                    var id = db.Vehical_QR_Master.OrderByDescending(x => x.vqrId).Select(x => x.vqrId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "VQR" + (number + id + 1);
+                    vehicalReg.ReferanceId = refer;
+                    vehicalReg.vehicalQRCode = "/Images/QRcode.png";
+
+                    vehicalReg.VehicleList = VehicleList();
+                    vehicalReg.vqrId = id;
+                    return vehicalReg;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public SBALUserLocationMapView GetHouseByIdforMap(int teamId, int daId)
         {
             try
@@ -949,6 +1046,46 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public VehicalRegDetailsVM SaveVehicalRegDetails(VehicalRegDetailsVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.vqrId > 0)
+                    {
+                        var model = db.Vehical_QR_Master.Where(x => x.vqrId == data.vqrId).FirstOrDefault();
+                        if (model != null)
+                        {
+                           
+                            model.VehicalNumber = data.Vehican_No;
+                            model.VehicalQRCode = data.vehicalQRCode;
+                            model.lastModifiedEntry = DateTime.Now;
+                            model.VehicalType = data.Vehical_Type;
+                          
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        //var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
+                        //int number = 1000;
+                        //string refer = "SBA" + (number + id + 1);
+                        // data.ReferanceId = refer;
+                        var type = FillVehicalRegDetailsDataModel(data);
+                        db.Vehical_QR_Master.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+                var vqrid = db.Vehical_QR_Master.OrderByDescending(x => x.vqrId).Select(x => x.vqrId).FirstOrDefault();
+                VehicalRegDetailsVM vv = GetVehicalRegDetails(vqrid);
+                return vv;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public void SaveEmpBeatMap(EmpBeatMapVM data)
         {
             try
@@ -3843,6 +3980,19 @@ namespace SwachBharat.CMS.Bll.Services
             // model.userId = data.userId;
             return model;
         }
+
+        private Vehical_QR_Master FillVehicalRegDetailsDataModel(VehicalRegDetailsVM data)
+        {
+            Vehical_QR_Master model = new Vehical_QR_Master();
+            model.vqrId = data.vqrId;
+            model.VehicalNumber = data.Vehican_No;
+            model.VehicalQRCode = data.vehicalQRCode;
+            model.ReferanceId = data.ReferanceId;
+            model.modified = DateTime.Now;
+            model.VehicalType = data.Vehical_Type;
+          
+            return model;
+        }
         private GarbagePointDetail FillGarbagePointDetailsDataModel(GarbagePointDetailsVM data)
         {
             GarbagePointDetail model = new GarbagePointDetail();
@@ -4092,6 +4242,27 @@ namespace SwachBharat.CMS.Bll.Services
 
             return Zone;
         }
+
+        public List<SelectListItem> VehicleList()
+        {
+            var Vehical = new List<SelectListItem>();
+            SelectListItem itemAdd = new SelectListItem() { Text = "--Select Vehical--", Value = "0" };
+
+            try
+            {
+                Vehical = db.VehicleTypes.ToList()
+                    .Select(x => new SelectListItem
+                    {
+                        Text = x.description,
+                        Value = x.description
+                    }).OrderBy(t => t.Text).ToList();
+
+                Vehical.Insert(0, itemAdd);
+            }
+            catch (Exception ex) { throw ex; }
+
+            return Vehical;
+        }
         public List<SelectListItem> ListUser(string Emptype)
         {
             var user = new List<SelectListItem>();
@@ -4332,7 +4503,19 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
 
+        private VehicalRegDetailsVM FillVehicalRegDetailsViewModel(Vehical_QR_Master data)
+        {
 
+            VehicalRegDetailsVM model = new VehicalRegDetailsVM();
+            model.vqrId = data.vqrId;
+            model.Vehican_No = data.VehicalNumber;
+            model.vehicalQRCode = data.VehicalQRCode;
+            model.ReferanceId = data.ReferanceId;
+            model.Vehical_Type = data.VehicalType;
+            
+
+            return model;
+        }
         private SBALUserLocationMapView FillHouseDetailsViewModelforMap(HouseMaster data)
         {
 

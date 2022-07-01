@@ -482,8 +482,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.SS_1.4_QUESTI
           <Property Name="description" Type="nvarchar" MaxLength="300" />
           <Property Name="descriptionMar" Type="nvarchar" MaxLength="300" />
           <Property Name="isActive" Type="bit" />
-          <Property Name="RegNo" Type="nvarchar" MaxLength="300" />
-          <Property Name="VechileNo" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="WardNumber">
           <Key>
@@ -847,6 +845,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Parameter Name="tdate" Type="date" Mode="In" />
         </Function>
         <Function Name="StreetCurrentAllUserLocationTest1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VehicalRegDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DevSwachhBharatNagpurModelStoreContainer">
           <EntitySet Name="Daily_Attendance" EntityType="Self.Daily_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DumpYardDetails" EntityType="Self.DumpYardDetails" Schema="dbo" store:Type="Tables" />
@@ -1263,6 +1262,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="Vehical_QR_Master" EntityType="DevSwachhBharatNagpurModel.Vehical_QR_Master" />
           <EntitySet Name="VehicleRegistrations" EntityType="DevSwachhBharatNagpurModel.VehicleRegistration" />
           <FunctionImport Name="GetVehicleDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.GetVehicleDetails_Result)" />
+          <FunctionImport Name="VehicalRegDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.VehicalRegDetails_Result)" />
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -1658,8 +1658,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="descriptionMar" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Boolean" />
-          <Property Name="RegNo" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="VechileNo" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TeritoryMaster">
           <Key>
@@ -2640,6 +2638,15 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="String" Name="area" Nullable="false" MaxLength="250" />
           <Property Type="Boolean" Name="isActive" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="VehicalRegDetails_Result">
+          <Property Type="Int32" Name="vqrId" Nullable="false" />
+          <Property Type="String" Name="VehicalNumber" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="modified" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReferanceId" Nullable="true" MaxLength="350" />
+          <Property Type="String" Name="Property_Type" Nullable="true" />
+          <Property Type="String" Name="VType" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Images" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2971,8 +2978,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="VehicleTypes">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.VehicleType">
               <MappingFragment StoreEntitySet="VehicleType">
-                <ScalarProperty Name="VechileNo" ColumnName="VechileNo" />
-                <ScalarProperty Name="RegNo" ColumnName="RegNo" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="descriptionMar" ColumnName="descriptionMar" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -4113,6 +4118,19 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
                 <ScalarProperty Name="vehicleNo" ColumnName="vehicleNo" />
                 <ScalarProperty Name="area" ColumnName="area" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VehicalRegDetails" FunctionName="DevSwachhBharatNagpurModel.Store.VehicalRegDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.VehicalRegDetails_Result">
+                <ScalarProperty Name="vqrId" ColumnName="vqrId" />
+                <ScalarProperty Name="VehicalNumber" ColumnName="VehicalNumber" />
+                <ScalarProperty Name="modified" ColumnName="modified" />
+                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
+                <ScalarProperty Name="Property_Type" ColumnName="Property_Type" />
+                <ScalarProperty Name="VType" ColumnName="VType" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

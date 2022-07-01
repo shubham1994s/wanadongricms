@@ -10,13 +10,15 @@
 namespace SwachBharat.CMS.Dal.DataContexts
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class VehicleType
+    public partial class VehicalRegDetails_Result
     {
-        public int vtId { get; set; }
-        public string description { get; set; }
-        public string descriptionMar { get; set; }
-        public Nullable<bool> isActive { get; set; }
+        public int vqrId { get; set; }
+        public string VehicalNumber { get; set; }
+        public Nullable<System.DateTime> modified { get; set; }
+        public string ReferanceId { get; set; }
+        public string Property_Type { get; set; }
+        public string VType { get; set; }
+        public string Images { get; set; }
     }
 }
