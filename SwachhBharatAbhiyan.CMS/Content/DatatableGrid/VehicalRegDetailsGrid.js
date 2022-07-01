@@ -32,7 +32,8 @@
             { "data": "Vehical_Type", "name": "Vehical_Type", "autoWidth": false },
             {
                 "data": "QRCode", "name": "QRCode", "render": function (data, type, full, meta) {
-                    return "<img src=\"" + data + "\" height=\"50\"/><span><input class=\"btn btn-link\" type=\"button\" onclick='SaveQRCode(" + full["vqrId"] + ")'  value=\"Send Link\"/></span>";
+                   // return "<img src=\"" + data + "\" height=\"50\"/><span><input class=\"btn btn-link\" type=\"button\" onclick='SaveQRCode(" + full["vqrId"] + ")'  value=\"Send Link\"/></span>";
+                    return "<img src=\"" + data + "\" height=\"50\" style=\"margin-left:30%;\"/>";
                 }
             },
             { "render": function (data, type, full, meta) { return '<input  class="btn btn-link" type="button" onclick="DownloadQRCode(' + full["vqrId"] + ')" value="Download" />'; } },
@@ -47,7 +48,7 @@
 });
 
 function DownloadQRCode(Id) {
-    window.location.href = "/HouseMaster/Export?Id=" + Id;
+    window.location.href = "/MainMaster/Export?Id=" + Id;
 };
 
 function Edit(Id) {
