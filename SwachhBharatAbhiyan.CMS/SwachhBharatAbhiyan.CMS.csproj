@@ -3176,6 +3176,10 @@
     <Content Include="Views\EmpBeatMap\MenuIndex.cshtml" />
     <Content Include="Views\EmpBeatMap\AddEmpBeatMap.cshtml" />
     <Content Include="Views\EmpBeatMap\Index.cshtml" />
+    <Content Include="Views\AttendenceBeatMap\HouseRoute.cshtml" />
+    <Content Include="Views\AttendenceBeatMap\Index.cshtml" />
+    <Content Include="Views\AttendenceBeatMap\MenuIndex.cshtml" />
+    <Content Include="Views\AttendenceBeatMap\UserRoute.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
