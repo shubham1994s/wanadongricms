@@ -22,6 +22,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string AppName { get; set; }
         public string AppLat { get; set; }
         public string AppLong { get; set; }
+        public Nullable<bool> IsAreaActive { get; set; }
         public List<coordinates> AppAreaLatLong { get; set; }
 
     }

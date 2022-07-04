@@ -720,10 +720,11 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
             using(var dbMain = new DevSwachhBharatMainEntities())
             {
-                var data = dbMain.AppDetails.Where(a => a.IsActive == true && a.AppAreaLatLong != null && a.AppAreaLatLong != "").Select(x => new SBAAppAreaMapGridRow
+                var data = dbMain.AppDetails.Where(a => a.IsActive == true && a.AppAreaLatLong != null && a.AppAreaLatLong != "" && a.IsAreaActive == true).Select(x => new SBAAppAreaMapGridRow
                 {
                     AppId = x.AppId,
-                    AppName =  x.AppName
+                    AppName =  x.AppName,
+                    AreaStatus = x.IsAreaActive
                 }).ToList();
                 if (!string.IsNullOrEmpty(SearchString))
                 {
@@ -734,6 +735,29 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 return data;
             }
             
+        }
+
+
+        public IEnumerable<SBAAppAreaMapGridRow> AppAreaMapsInActiveData(long wildcard, string SearchString, int appId)
+        {
+
+            using (var dbMain = new DevSwachhBharatMainEntities())
+            {
+                var data = dbMain.AppDetails.Where(a => a.IsActive == true && a.AppAreaLatLong != null && a.AppAreaLatLong != "" && a.IsAreaActive == false).Select(x => new SBAAppAreaMapGridRow
+                {
+                    AppId = x.AppId,
+                    AppName = x.AppName,
+                    AreaStatus = x.IsAreaActive
+                }).ToList();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    data = data.Where(c => ((string.IsNullOrEmpty(c.AppId.ToString()) ? " " : c.AppId.ToString()) + " " +
+                                              (string.IsNullOrEmpty(c.AppName) ? " " : c.AppName)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+                }
+
+                return data;
+            }
+
         }
 
 

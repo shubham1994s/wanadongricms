@@ -322,6 +322,10 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     gridRepository = new AppAreaMapsGridRepository(0, searchString, appId);
                     return gridRepository;
                     break;
+                case "AppAreaMapInActive":
+                    gridRepository = new AppAreaMapsInActiveGridRepository(0, searchString, appId);
+                    return gridRepository;
+                    break;
                 case "GarbageHouse":
                     gridRepository = new HGarbageCotectionGridRepository(0, searchString, fdate, tdate, userId, appId, param1, param2, param3);
                     return gridRepository;

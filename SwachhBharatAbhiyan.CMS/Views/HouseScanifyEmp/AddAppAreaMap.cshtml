@@ -75,6 +75,10 @@
                 </div>
             </div>
             <div class="col-sm-3">
+                <div class="form-group" style="margin-top:10px">
+                    <label>Is Area Active </label>
+                    @Html.CheckBox("IsAreaActive")
+                </div>
 
                 <div>
                     <button type="button" class="btn btn-primary save" id="btnAppMapSave">Save</button>
@@ -548,6 +552,7 @@
             var poly = polyArr[0];
             var vertices = poly.getPath();
             var AppAreaObj = new Object();
+            var AppName = $('#hdAppName').val();
             var CordArry = [];
             for (let i = 0; i < vertices.getLength(); i++) {
                 var xy = vertices.getAt(i);
@@ -562,24 +567,30 @@
             AppAreaObj.AppAreaLatLong = CordArry;
             AppAreaObj.AppLat = $('#deflat').val();
             AppAreaObj.AppLong = $('#deflang').val();
+            AppAreaObj.IsAreaActive = $('#IsAreaActive').is(':checked')
             var data = JSON.stringify({ 'AppAreaObj': AppAreaObj });
+            if (confirm('Creating a Map Area For ' + $('#hdAppName').val() + '. Are you sure to create this Map Area ?')) {
+                $.ajax({
+                    type: "post",
+                    url: "/HouseScanifyEmp/SaveAppAreaMap",
+                    data: data,
+                    contentType: 'application/json;',
+                    dataType: 'json',
+                    //traditional: true,
+                    success: function (data) {
+                        //$('#myModal_Image_House').modal('toggle');
+                        //LoadGrid();
+                        alert("Map Area For " + AppName + " Created Successfully...");
+                        //$("#DumpSave_pop").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
+                        location.href = 'HSAppAreaIndex';
+                    }
+                });
+            }
+            else {
+                return false;
+            }
 
-
-            $.ajax({
-                type: "post",
-                url: "/HouseScanifyEmp/SaveAppAreaMap",
-                data: data,
-                contentType: 'application/json;',
-                dataType: 'json',
-                //traditional: true,
-                success: function (data) {
-                    //$('#myModal_Image_House').modal('toggle');
-                    //LoadGrid();
-
-                    //$("#DumpSave_pop").html("QR Status Saved Successfully...").delay(2000).show().fadeOut('slow');
-                    location.href = 'HSAppAreaIndex';
-                }
-            });
+            
         }
         );
 

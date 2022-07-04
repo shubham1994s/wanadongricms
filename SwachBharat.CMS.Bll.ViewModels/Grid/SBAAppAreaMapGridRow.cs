@@ -10,5 +10,6 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Grid
     {
         public int AppId { get; set; }
         public string AppName { get; set; }
+        public Nullable<bool> AreaStatus { get; set; }
     }
 }

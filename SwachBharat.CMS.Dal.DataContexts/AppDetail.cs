@@ -78,5 +78,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<bool> Status { get; set; }
         public string VehicalQRCode { get; set; }
         public string AppAreaLatLong { get; set; }
+        public Nullable<bool> IsAreaActive { get; set; }
     }
 }
