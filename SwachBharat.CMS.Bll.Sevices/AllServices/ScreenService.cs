@@ -3652,7 +3652,7 @@ namespace SwachBharat.CMS.Bll.Services
                     //}
 
 
-                    var data = db.SP_HouseScanify_Count().First();
+                    var data = db.SP_HouseScanify_Count(AppID).First();
 
                     //var date = DateTime.Today;
                     //var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
@@ -6241,7 +6241,7 @@ namespace SwachBharat.CMS.Bll.Services
                     DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
                     var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
 
-                    var data = db.SP_HouseScanifyDetails().First();
+                    var data = db.SP_HouseScanifyDetails(AppID).First();
 
 
                     if (data != null)
@@ -6292,7 +6292,7 @@ namespace SwachBharat.CMS.Bll.Services
                     DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
                     var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
 
-                    var data = db.SP_HouseScanifyDetails().First();
+                    var data = db.SP_HouseScanifyDetails(AppID).First();
 
 
                     if (data != null)
