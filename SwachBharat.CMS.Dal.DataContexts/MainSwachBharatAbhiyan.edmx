@@ -157,6 +157,7 @@
           <Property Name="Status" Type="bit" />
           <Property Name="VehicalQRCode" Type="nvarchar" MaxLength="250" />
           <Property Name="AppAreaLatLong" Type="nvarchar(max)" />
+          <Property Name="IsAreaActive" Type="bit" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -894,6 +895,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="Status" Type="Boolean" />
           <Property Name="VehicalQRCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="AppAreaLatLong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsAreaActive" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1244,6 +1246,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySetMapping Name="AppDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.AppDetail">
               <MappingFragment StoreEntitySet="AppDetails">
+                <ScalarProperty Name="IsAreaActive" ColumnName="IsAreaActive" />
                 <ScalarProperty Name="AppAreaLatLong" ColumnName="AppAreaLatLong" />
                 <ScalarProperty Name="VehicalQRCode" ColumnName="VehicalQRCode" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

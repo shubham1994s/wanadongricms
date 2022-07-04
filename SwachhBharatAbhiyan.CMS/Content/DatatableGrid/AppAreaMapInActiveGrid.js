@@ -1,7 +1,7 @@
-﻿function loadGridActive() {
-    $("#demoGrid").dataTable().fnDestroy();
+﻿function loadGridInActive() {
+    $("#demoGridInActive").dataTable().fnDestroy();
 
-    $("#demoGrid").DataTable({
+    $("#demoGridInActive").DataTable({
         "sDom": "ltipr",
         "order": [[0, "desc"]],
         "processing": true, // for show progress bar
@@ -14,7 +14,7 @@
         },
 
         "ajax": {
-            "url": "/Datable/GetJqGridJson?rn=AppAreaMap",
+            "url": "/Datable/GetJqGridJson?rn=AppAreaMapInActive",
             "type": "POST",
             "datatype": "json"
         },
@@ -69,10 +69,10 @@ function Edit(Id) {
     }
 };
 
-function SearchActive() {
-    var value = ",,," + $("#sActive").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+function SearchInActive() {
+    var value = ",,," + $("#sInActive").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
     // alert(value );
-    oTable = $('#demoGrid').DataTable();
+    oTable = $('#demoGridInActive').DataTable();
     oTable.search(value).draw();
     oTable.search("");
     document.getElementById('USER_ID_FK').value = -1;

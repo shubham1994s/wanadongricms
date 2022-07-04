@@ -1746,6 +1746,7 @@
     <Content Include="Content\Datatable-assets\js\responsive.bootstrap4.min.js" />
     <Content Include="Content\DatatableGrid\AdminCount.js" />
     <Content Include="Content\DatatableGrid\AppAreaMapGrid.js" />
+    <Content Include="Content\DatatableGrid\AppAreaMapInActiveGrid.js" />
     <Content Include="Content\DatatableGrid\AriaGrid.js" />
     <Content Include="Content\DatatableGrid\AttendenceBeatMapGrid.js" />
     <Content Include="Content\DatatableGrid\AttendenceDetailGrid.js" />

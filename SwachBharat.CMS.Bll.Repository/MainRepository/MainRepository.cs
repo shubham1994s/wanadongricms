@@ -403,11 +403,14 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                         else
                         {
                             appAreaMap.AppId = -1;
+                            appAreaMap.IsAreaActive = false;
                         }
                     }
                     else
                     {
                         appAreaMap.AppId = -1;
+                        appAreaMap.IsAreaActive = false;
+
                     }
 
                 }
@@ -430,6 +433,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                     if(model != null)
                     {
                         model.AppAreaLatLong = ConvertLatLongToString1(AppAreaObj.AppAreaLatLong);
+                        model.IsAreaActive = AppAreaObj.IsAreaActive;
                         db.SaveChanges();
                     }
                 }
@@ -447,6 +451,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             model.AppName = data.AppName;
             model.AppLat = data.Latitude;
             model.AppLong = data.Logitude;
+            model.IsAreaActive = data.IsAreaActive;
             model.AppAreaLatLong = ConvertStringToLatLong1(data.AppAreaLatLong);
 
             return model;
