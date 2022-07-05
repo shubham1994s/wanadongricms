@@ -48,6 +48,7 @@ namespace SwachBharat.CMS.Bll.Services
         VehicalRegDetailsVM GetVehicalRegDetails(int teamId);
         SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId);
         SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType);
+        SBALUserLocationMapView GetDumpByIdforMap(int teamId, int daId,string EmpType);
         HouseDetailsVM SaveHouseDetails(HouseDetailsVM data);
         VehicalRegDetailsVM SaveVehicalRegDetails(VehicalRegDetailsVM data);
 
