@@ -261,7 +261,12 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetStreetAttenRoute(daId, areaid);
         }
-        
+
+        public List<SBALUserLocationMapView> GetDumpAttenRoute(int daId)
+        {
+            return screenService.GetDumpAttenRoute(daId);
+        }
+
         public EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid, int polyId)
         {
             return screenService.GetbeatMapCount(daId, areaid, polyId);

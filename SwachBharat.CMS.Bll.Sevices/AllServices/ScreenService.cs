@@ -2683,6 +2683,98 @@ namespace SwachBharat.CMS.Bll.Services
             return userLocation;
         }
 
+        public List<SBALUserLocationMapView> GetDumpAttenRoute(int daId)
+        {
+            List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
+            DateTime newdate = DateTime.Now.Date;
+            var datt = newdate;
+            var att = db.Daily_Attendance.Where(c => c.daID == daId).FirstOrDefault();
+
+            var useridnew = db.Daily_Attendance.Where(c => c.userId == att.userId && c.daDate == att.daDate).FirstOrDefault();
+            string Time = useridnew.startTime;
+            //string Time = att.startTime;
+            DateTime date = DateTime.Parse(Time, System.Globalization.CultureInfo.CurrentCulture);
+            string t = date.ToString("hh:mm:ss tt");
+            string dt = Convert.ToDateTime(att.daDate).ToString("MM/dd/yyyy");
+            DateTime? fdate = Convert.ToDateTime(dt + " " + t);
+            DateTime? edate;
+            if (att.endTime == "" | att.endTime == null)
+            {
+                edate = DateTime.Now;
+            }
+            else
+            {
+                string Time2 = att.endTime;
+                DateTime date2 = DateTime.Parse(Time2, System.Globalization.CultureInfo.CurrentCulture);
+                string t2 = date2.ToString("hh:mm:ss tt");
+                string dt2 = Convert.ToDateTime(att.daEndDate).ToString("MM/dd/yyyy");
+                edate = Convert.ToDateTime(dt2 + " " + t2);
+            }
+            var data = db.Locations.Where(c => c.userId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == 1).OrderByDescending(a => a.datetime).ToList();
+
+            foreach (var x in data)
+            {
+                if (x.type == 1)
+                {
+
+                    // string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    //string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    var userName = db.UserMasters.Where(c => c.userId == att.userId).FirstOrDefault();
+                    //var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & c.houseId != null) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).FirstOrDefault();
+
+                    //var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & c.houseId != null) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcDate).ToList();//.ToList();
+
+                    var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & (c.vqrid != null || c.dyId != null)) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcId).ToList();//.ToList();
+
+
+                    foreach (var d in gcd)
+                    {
+                        //DateTime dt = DateTime.Parse(x.gcDate == null ? DateTime.Now.ToString() : x.gcDate.ToString());
+                        string dat = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy");
+                        string tim = Convert.ToDateTime(d.gcDate).ToString("hh:mm tt");
+                        if (d.vqrid != null)
+                        {
+                           
+                                var house = db.Vehical_QR_Master.Where(c => c.vqrId == d.vqrid).FirstOrDefault();
+                                userLocation.Add(new SBALUserLocationMapView()
+                                {
+                                    userId = userName.userId,
+                                    userName = userName.userName,
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("HH:mm"),
+                                    date = dat,
+                                    time = tim,
+                                    lat = d.Lat,
+                                    log = d.Long,
+                                    address = x.address,
+                                    vehcileNumber = att.vehicleNumber,
+                                    userMobile = userName.userMobileNumber,
+                                    type = Convert.ToInt32(x.type),
+                                    HouseId = house.ReferanceId,
+                                    HouseOwnerName = house.VehicalNumber,
+                                    WasteType = d.garbageType.ToString(),
+                                    gpBeforImage = d.gpBeforImage,
+                                    gpAfterImage = d.gpAfterImage,
+                                    ZoneList = ListZone(),
+
+                                });
+                            
+
+
+                        }
+                     
+
+                    }
+                    break;
+                }
+
+            }
+
+
+
+
+            return userLocation;
+        }
+
         public List<SelectListItem> ListBeatMapArea(int daId, int areaid)
         {
             List<SelectListItem> Area = new List<SelectListItem>();

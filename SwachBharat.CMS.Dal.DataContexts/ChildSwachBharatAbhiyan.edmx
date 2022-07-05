@@ -111,6 +111,7 @@
           <Property Name="SSId" Type="int" />
           <Property Name="AreaId" Type="int" />
           <Property Name="gpBeforImageTime" Type="datetime" />
+          <Property Name="vqrid" Type="int" />
         </EntityType>
         <EntityType Name="GarbagePointDetails">
           <Key>
@@ -1200,7 +1201,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
             <Parameter Name="FilterType" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Vw_MsgNotification" EntityType="DevSwachhBharatNagpurModel.Vw_MsgNotification" />
-          <EntitySet Name="GarbageCollectionDetails" EntityType="DevSwachhBharatNagpurModel.GarbageCollectionDetail" />
           <EntitySet Name="Daily_Attendance" EntityType="DevSwachhBharatNagpurModel.Daily_Attendance" />
           <EntitySet Name="MonthlyAttedances" EntityType="DevSwachhBharatNagpurModel.MonthlyAttedance" />
           <FunctionImport Name="HouseDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.HouseDetails_Result)" />
@@ -1266,11 +1266,12 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <FunctionImport Name="GetVehicleDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.GetVehicleDetails_Result)" />
           <FunctionImport Name="VehicalRegDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.VehicalRegDetails_Result)" />
           <FunctionImport Name="SP_HouseScanify_Count" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_HouseScanify_Count_Result)">
-            <Parameter Name="Appid" Mode="In" Type="Int32" />
+          <Parameter Name="Appid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_HouseScanifyDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_HouseScanifyDetails_Result)">
-            <Parameter Name="Appid" Mode="In" Type="Int32" />
+          <Parameter Name="Appid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="GarbageCollectionDetails" EntityType="DevSwachhBharatNagpurModel.GarbageCollectionDetail" />
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -2175,45 +2176,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="isActive" Type="Boolean" />
           <Property Name="gcTarget" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="GarbageCollectionDetail">
-          <Key>
-            <PropertyRef Name="gcId" />
-          </Key>
-          <Property Name="gcId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="houseId" Type="Int32" />
-          <Property Name="gpId" Type="Int32" />
-          <Property Name="gcDate" Type="DateTime" Precision="3" />
-          <Property Name="Lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="gcImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="gcQRcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="gpBeforImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="gpAfterImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="gcType" Type="Int32" />
-          <Property Name="vehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="locAddresss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="garbageType" Type="Int32" />
-          <Property Name="modified" Type="DateTime" Precision="3" />
-          <Property Name="dyId" Type="Int32" />
-          <Property Name="totalGcWeight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="totalDryWeight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="totalWetWeight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Distance" Type="Double" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="RFIDTagId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="RFIDReaderId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="SourceId" Type="Int32" />
-          <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="WasteType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="LWId" Type="Int32" />
-          <Property Name="SSId" Type="Int32" />
-          <Property Name="AreaId" Type="Int32" />
-          <Property Name="gpBeforImageTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="Daily_Attendance">
           <Key>
             <PropertyRef Name="daID" />
@@ -2655,6 +2617,46 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="Int32" Name="TotalStreetUpdated" Nullable="true" />
           <Property Type="Int32" Name="TotalStreetUpdated_CurrentDay" Nullable="true" />
         </ComplexType>
+        <EntityType Name="GarbageCollectionDetail">
+          <Key>
+            <PropertyRef Name="gcId" />
+          </Key>
+          <Property Name="gcId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="houseId" Type="Int32" />
+          <Property Name="gpId" Type="Int32" />
+          <Property Name="gcDate" Type="DateTime" Precision="3" />
+          <Property Name="Lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="gcImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gcQRcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gpBeforImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gpAfterImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gcType" Type="Int32" />
+          <Property Name="vehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="locAddresss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="garbageType" Type="Int32" />
+          <Property Name="modified" Type="DateTime" Precision="3" />
+          <Property Name="dyId" Type="Int32" />
+          <Property Name="totalGcWeight" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="totalDryWeight" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="totalWetWeight" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Distance" Type="Double" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="RFIDTagId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RFIDReaderId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SourceId" Type="Int32" />
+          <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="WasteType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LWId" Type="Int32" />
+          <Property Name="SSId" Type="Int32" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="gpBeforImageTime" Type="DateTime" Precision="3" />
+          <Property Name="vqrid" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3595,46 +3597,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GarbageCollectionDetails">
-            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.GarbageCollectionDetail">
-              <MappingFragment StoreEntitySet="GarbageCollectionDetails">
-                <ScalarProperty Name="gpBeforImageTime" ColumnName="gpBeforImageTime" />
-                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
-                <ScalarProperty Name="SSId" ColumnName="SSId" />
-                <ScalarProperty Name="LWId" ColumnName="LWId" />
-                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
-                <ScalarProperty Name="WasteType" ColumnName="WasteType" />
-                <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
-                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
-                <ScalarProperty Name="RFIDReaderId" ColumnName="RFIDReaderId" />
-                <ScalarProperty Name="RFIDTagId" ColumnName="RFIDTagId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Distance" ColumnName="Distance" />
-                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
-                <ScalarProperty Name="totalWetWeight" ColumnName="totalWetWeight" />
-                <ScalarProperty Name="totalDryWeight" ColumnName="totalDryWeight" />
-                <ScalarProperty Name="totalGcWeight" ColumnName="totalGcWeight" />
-                <ScalarProperty Name="dyId" ColumnName="dyId" />
-                <ScalarProperty Name="modified" ColumnName="modified" />
-                <ScalarProperty Name="garbageType" ColumnName="garbageType" />
-                <ScalarProperty Name="locAddresss" ColumnName="locAddresss" />
-                <ScalarProperty Name="note" ColumnName="note" />
-                <ScalarProperty Name="vehicleNumber" ColumnName="vehicleNumber" />
-                <ScalarProperty Name="gcType" ColumnName="gcType" />
-                <ScalarProperty Name="gpAfterImage" ColumnName="gpAfterImage" />
-                <ScalarProperty Name="gpBeforImage" ColumnName="gpBeforImage" />
-                <ScalarProperty Name="gcQRcode" ColumnName="gcQRcode" />
-                <ScalarProperty Name="gcImage" ColumnName="gcImage" />
-                <ScalarProperty Name="Long" ColumnName="Long" />
-                <ScalarProperty Name="Lat" ColumnName="Lat" />
-                <ScalarProperty Name="gcDate" ColumnName="gcDate" />
-                <ScalarProperty Name="gpId" ColumnName="gpId" />
-                <ScalarProperty Name="houseId" ColumnName="houseId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="gcId" ColumnName="gcId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Daily_Attendance">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.Daily_Attendance">
               <MappingFragment StoreEntitySet="Daily_Attendance">
@@ -4142,6 +4104,47 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="GarbageCollectionDetails">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.GarbageCollectionDetail">
+              <MappingFragment StoreEntitySet="GarbageCollectionDetails">
+                <ScalarProperty Name="vqrid" ColumnName="vqrid" />
+                <ScalarProperty Name="gpBeforImageTime" ColumnName="gpBeforImageTime" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="SSId" ColumnName="SSId" />
+                <ScalarProperty Name="LWId" ColumnName="LWId" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="WasteType" ColumnName="WasteType" />
+                <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="RFIDReaderId" ColumnName="RFIDReaderId" />
+                <ScalarProperty Name="RFIDTagId" ColumnName="RFIDTagId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
+                <ScalarProperty Name="totalWetWeight" ColumnName="totalWetWeight" />
+                <ScalarProperty Name="totalDryWeight" ColumnName="totalDryWeight" />
+                <ScalarProperty Name="totalGcWeight" ColumnName="totalGcWeight" />
+                <ScalarProperty Name="dyId" ColumnName="dyId" />
+                <ScalarProperty Name="modified" ColumnName="modified" />
+                <ScalarProperty Name="garbageType" ColumnName="garbageType" />
+                <ScalarProperty Name="locAddresss" ColumnName="locAddresss" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="vehicleNumber" ColumnName="vehicleNumber" />
+                <ScalarProperty Name="gcType" ColumnName="gcType" />
+                <ScalarProperty Name="gpAfterImage" ColumnName="gpAfterImage" />
+                <ScalarProperty Name="gpBeforImage" ColumnName="gpBeforImage" />
+                <ScalarProperty Name="gcQRcode" ColumnName="gcQRcode" />
+                <ScalarProperty Name="gcImage" ColumnName="gcImage" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="gcDate" ColumnName="gcDate" />
+                <ScalarProperty Name="gpId" ColumnName="gpId" />
+                <ScalarProperty Name="houseId" ColumnName="houseId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="gcId" ColumnName="gcId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
          
         </EntityContainerMapping>
       </Mapping>

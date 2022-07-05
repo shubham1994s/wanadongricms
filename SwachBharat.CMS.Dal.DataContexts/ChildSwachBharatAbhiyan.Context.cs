@@ -17,8 +17,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
     
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
-        public DevChildSwachhBharatNagpurEntities()
-            : base("name=DevChildSwachhBharatNagpurEntities")
+        public DevChildSwachhBharatNagpurEntities(int AppId)
+    : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
     
@@ -49,7 +49,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<Vw_MsgNotification> Vw_MsgNotification { get; set; }
-        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
         public virtual DbSet<Daily_Attendance> Daily_Attendance { get; set; }
         public virtual DbSet<MonthlyAttedance> MonthlyAttedances { get; set; }
         public virtual DbSet<StreetSweepingBeat> StreetSweepingBeats { get; set; }
@@ -64,6 +63,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<EmpBeatMap> EmpBeatMaps { get; set; }
         public virtual DbSet<Vehical_QR_Master> Vehical_QR_Master { get; set; }
         public virtual DbSet<VehicleRegistration> VehicleRegistrations { get; set; }
+        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
