@@ -161,7 +161,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             EmployeeVM _EmployeeVM = new EmployeeVM();
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                var appUser = (db.AD_USER_MST_LIQUID.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD).SingleOrDefault());
+                var appUser = (db.AD_USER_MST_LIQUID.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD && x.APP_ID != 3109).SingleOrDefault());
                 if (appUser != null)
                 {
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
@@ -186,7 +186,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             EmployeeVM _EmployeeVM = new EmployeeVM();
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                var appUser = (db.AD_USER_MST_STREET.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD).SingleOrDefault());
+                var appUser = (db.AD_USER_MST_STREET.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD && x.APP_ID!=3109).SingleOrDefault());
                 if (appUser != null)
                 {
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
