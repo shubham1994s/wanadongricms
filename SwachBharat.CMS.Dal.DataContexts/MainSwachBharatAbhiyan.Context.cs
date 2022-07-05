@@ -47,8 +47,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<CheckAppD> CheckAppDs { get; set; }
         public virtual DbSet<AEmployeeMaster> AEmployeeMasters { get; set; }
         public virtual DbSet<tehsil> tehsils { get; set; }
-        public virtual DbSet<AppDetail> AppDetails { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<AppDetail> AppDetails { get; set; }
     
         public virtual int SP_Admin_table()
         {

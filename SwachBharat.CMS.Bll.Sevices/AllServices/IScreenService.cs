@@ -45,13 +45,17 @@ namespace SwachBharat.CMS.Bll.Services
         void DeletWardNumberDetails(int teamId);
 
         HouseDetailsVM GetHouseDetails(int teamId);
+        VehicalRegDetailsVM GetVehicalRegDetails(int teamId);
         SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId);
         SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType);
+        SBALUserLocationMapView GetDumpByIdforMap(int teamId, int daId,string EmpType);
         HouseDetailsVM SaveHouseDetails(HouseDetailsVM data);
+        VehicalRegDetailsVM SaveVehicalRegDetails(VehicalRegDetailsVM data);
 
         void SaveEmpBeatMap(EmpBeatMapVM data);
         EmpBeatMapVM GetEmpBeatMap(int ebmId);
         List<SelectListItem> ListUserBeatMap(string Emptype);
+
         bool IsPointInPolygon(int ebmId, coordinates p);
          void DeletHouseDetails(int teamId);
 

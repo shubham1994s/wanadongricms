@@ -8,6 +8,7 @@
         "filter": true, // this is for disable filter (search box)
         "orderMulti": false, // for disable multiple column at once
         "pageLength": 10,
+        "pagingType": "input",
         "oLanguage": {
             "sInfo": "Showing _START_ to _END_ ",// text you want show for info section
         },

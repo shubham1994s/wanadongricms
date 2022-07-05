@@ -977,6 +977,7 @@ public int GetUserAppId(string UserId)
             model.YoccDndLink = data.YoccDndLink;
             model.LiquidQRCode = data.LiquidQRCode;
             model.StreetQRCode = data.StreetQRCode;
+            model.VehicalQRCode = data.VehicalQRCode;
             return model;
 
         }

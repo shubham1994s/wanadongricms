@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SwachBharat.CMS.Dal.DataContexts;
+using System.Web.Mvc;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
@@ -360,6 +361,138 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             }
 
             return menuList.Where(a => !(a.LinkText.ToUpper().Contains("THANE"))).ToList();
+        }
+
+
+        public List<SelectListItem> ListAppMap()
+        {
+            var apps = new List<SelectListItem>();
+
+            try
+            {
+                using (var dbMain = new DevSwachhBharatMainEntities())
+                {
+                    apps = dbMain.AppDetails.Where(a => a.IsActive == true && (a.AppAreaLatLong == null || a.AppAreaLatLong == "")).Select(x => new SelectListItem
+                    {
+                        Value = x.AppId.ToString(),
+                        Text = x.AppName
+                    }).OrderBy(t => t.Text).ToList();
+                }
+
+            }
+            catch (Exception ex) { return apps; }
+
+            return apps;
+        }
+
+        public AppAreaMapVM GetAppAreaMap(int AppId)
+        {
+            AppAreaMapVM appAreaMap = new AppAreaMapVM();
+            appAreaMap.AppAreaLatLong = new List<coordinates>();
+            try
+            {
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    if (AppId > 0)
+                    {
+                        var model = db.AppDetails.Where(x => x.AppId == AppId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            appAreaMap = fillAppAreaMapVM(model);
+                        }
+                        else
+                        {
+                            appAreaMap.AppId = -1;
+                            appAreaMap.IsAreaActive = false;
+                        }
+                    }
+                    else
+                    {
+                        appAreaMap.AppId = -1;
+                        appAreaMap.IsAreaActive = false;
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return appAreaMap;
+            }
+
+            return appAreaMap;
+        }
+
+        public void SaveAppAreaMap(AppAreaMapVM AppAreaObj)
+        {
+            try
+            {
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    var model = db.AppDetails.Where(a => a.AppId == AppAreaObj.AppId).FirstOrDefault();
+                    if(model != null)
+                    {
+                        model.AppAreaLatLong = ConvertLatLongToString1(AppAreaObj.AppAreaLatLong);
+                        model.IsAreaActive = AppAreaObj.IsAreaActive;
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+        private AppAreaMapVM fillAppAreaMapVM(AppDetail data)
+        {
+            AppAreaMapVM model = new AppAreaMapVM();
+            model.AppId = data.AppId;
+            model.AppName = data.AppName;
+            model.AppLat = data.Latitude;
+            model.AppLong = data.Logitude;
+            model.IsAreaActive = data.IsAreaActive;
+            model.AppAreaLatLong = ConvertStringToLatLong1(data.AppAreaLatLong);
+
+            return model;
+        }
+
+        public string ConvertLatLongToString1(List<coordinates> lstCord)
+        {
+
+                List<string> lstLatLong = new List<string>();
+                foreach (var s in lstCord)
+                {
+                    lstLatLong.Add(s.lat + "," + s.lng);
+                }
+                return string.Join(";", lstLatLong);
+            
+        }
+
+        public List<coordinates> ConvertStringToLatLong1(string strCord)
+        {
+
+            List<coordinates> poly = new List<coordinates>();
+            if (!string.IsNullOrEmpty(strCord))
+            {
+                string[] lstLatLong = strCord.Split(';');
+                if (lstLatLong.Length > 0)
+                {
+                    for (var j = 0; j < lstLatLong.Length; j++)
+                    {
+                        coordinates cord = new coordinates();
+                        string[] strLatLong = lstLatLong[j].Split(',');
+                        if (strLatLong.Length == 2)
+                        {
+                            cord.lat = Convert.ToDouble(strLatLong[0]);
+                            cord.lng = Convert.ToDouble(strLatLong[1]);
+                        }
+                        poly.Add(cord);
+                    }
+
+                }
+            }
+            return poly;
         }
 
         public class Division

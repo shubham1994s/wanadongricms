@@ -50,7 +50,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
         [AllowAnonymous]
         public ActionResult login()
-        
+
         {
             return View();
         }
@@ -82,6 +82,95 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect("/Account/Login");
         }
 
+        public ActionResult HSAppArea()
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                return View();
+
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
+
+        }
+        public ActionResult HSAppAreaIndex()
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                return View();
+            }
+            else
+            {
+
+                return Redirect("/Account/Login");
+            }
+        }
+
+        public ActionResult AddAppAreaMap(int AppId = -1)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                mainRepository = new MainRepository();
+                AppAreaMapVM appAreaMap = mainRepository.GetAppAreaMap(AppId);
+                return View(appAreaMap);
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+
+            }
+        }
+
+        public ActionResult ListAppMap()
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                mainRepository = new MainRepository();
+                List<SelectListItem> lstApps = mainRepository.ListAppMap();
+                return Json(lstApps, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+
+                return Redirect("/Account/Login");
+            }
+        }
+        public ActionResult GetAppLatLong(int AppId = -1)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                mainRepository = new MainRepository();
+                AppAreaMapVM App = mainRepository.GetAppAreaMap(AppId);
+                return Json(new { lat = App.AppLat, lng = App.AppLong }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
+        }
+
+        public ActionResult SaveAppAreaMap(AppAreaMapVM AppAreaObj)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                mainRepository = new MainRepository();
+                mainRepository.SaveAppAreaMap(AppAreaObj);
+                return Json(new { data = "Beat Map Saved Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
+
+        }
 
         public ActionResult URIndex()
         {
@@ -89,7 +178,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             ViewBag.AppId = appid;
             return View();
 
-          
+
         }
 
         public ActionResult HSURIndex()
@@ -104,7 +193,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
         public ActionResult MenuURIndex()
-        {        
+        {
             return View();
         }
         public ActionResult HouseDetails()
@@ -127,7 +216,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             Result.ADUM_LOGIN_ID = model.Email;
             Result.ADUM_PASSWORD = model.Password;
             Result = mainRepository.LoginUR(Result);
-            if (Result.status== "Success")
+            if (Result.status == "Success")
             {
                 Session["utype"] = Result.ADUM_DESIGNATION;
                 Session["Id"] = Result.ADUM_LOGIN_ID;
@@ -183,7 +272,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 var utype = (string)Session["utype"];
                 var LoginId = (string)Session["Id"];
                 var Password = (string)Session["Pwd"];
-                appName = mainRepository.GetURAppName(utype,LoginId,Password);
+                appName = mainRepository.GetURAppName(utype, LoginId, Password);
                 foreach (var x in appName)
                 {
                     var appId = x.AppId;
@@ -222,19 +311,19 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [HttpPost]
         public string IsLoginIdExists(string LoginId)
         {
-           
+
             mainRepository = new MainRepository();
             var isrecord = mainRepository.GetLoginid(LoginId);
 
             return isrecord;
 
-            
+
         }
 
         [HttpPost]
         public string IsLIdEOnHSAndUM(string LoginId)
         {
-           
+
             int AppID = SessionHandler.Current.AppId;
             childRepository = new ChildRepository(AppID);
             var isrecord = childRepository.GetLoginidData(LoginId);
@@ -363,7 +452,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 var Password = (string)Session["Pwd"];
 
                 house = mainRepository.GetAppList(utype, LoginId, Password);
-               
+
 
                 return Json(house, JsonRequestBehavior.AllowGet);
             }
@@ -452,7 +541,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-        public void SaveQRStatusHouse(int appId,int houseId,string QRStatus)
+        public void SaveQRStatusHouse(int appId, int houseId, string QRStatus)
         {
             if (SessionHandler.Current.AppId != 0)
             {
@@ -487,7 +576,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
         }
 
-        public ActionResult GetHSHouseDetailsID(string fdate, string tdate,int userId,string searchString,int? qrStatus,string sortColumn, string sortOrder)
+        public ActionResult GetHSHouseDetailsID(string fdate, string tdate, int userId, string searchString, int? qrStatus, string sortColumn, string sortOrder)
         {
             List<int> obj = new List<int>();
             DateTime? fromDate;
@@ -516,9 +605,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
                 //SBALUserLocationMapView obj = new SBALUserLocationMapView();
-                
+
                 obj = childRepository.GetHSHouseDetailsID(fromDate, toDate, userId, searchString, iQRStatus, sortColumn, sortOrder);
-                
+
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
@@ -548,7 +637,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
             int iQRStatus = qrStatus ?? -1;
-           // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+            // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
@@ -585,7 +674,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
             int iQRStatus = qrStatus ?? -1;
-           // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+            // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
@@ -621,7 +710,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
             int iQRStatus = qrStatus ?? -1;
-           // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
+            // iQRStatus = iQRStatus == 2 ? 0 : iQRStatus;
             if (SessionHandler.Current.AppId != 0)
             {
                 childRepository = new ChildRepository(SessionHandler.Current.AppId);
@@ -695,23 +784,23 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         public ActionResult AddUREmployeeDetails(int teamId = -1)
         {
-                
-                mainRepository = new MainRepository();
-                childRepository = new ChildRepository(1);
-                UREmployeeDetailsVM house = childRepository.GetUREmployeeById(teamId);
+
+            mainRepository = new MainRepository();
+            childRepository = new ChildRepository(1);
+            UREmployeeDetailsVM house = childRepository.GetUREmployeeById(teamId);
             ViewBag.EmpId = teamId;
-            return View(house);              
+            return View(house);
         }
 
         [HttpPost]
         public ActionResult AddUREmployeeDetails(UREmployeeDetailsVM emp)
         {
-           
-                mainRepository = new MainRepository();
-                childRepository = new ChildRepository(1);
-                childRepository.SaveUREmployee(emp);
-                return Redirect("URIndex");
-           
+
+            mainRepository = new MainRepository();
+            childRepository = new ChildRepository(1);
+            childRepository.SaveUREmployee(emp);
+            return Redirect("URIndex");
+
         }
 
 
@@ -859,7 +948,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
         //Added by milind 09-03-2022
-        public ActionResult Export(int type, int UserId, string fdate = null, string tdate = null,string QrStatus=null)
+        public ActionResult Export(int type, int UserId, string fdate = null, string tdate = null, string QrStatus = null)
         {
             DateTime fdt;
             DateTime tdt;
@@ -969,7 +1058,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
                 data = childRepository.GetHSQRCodeImageByDate(type, UserId, fdt, tdt, QrStatus);
                 string strFileType = string.Empty;
-                if (data != null )
+                if (data != null)
                 {
                     using (var compressedFileStream = new MemoryStream())
                     {
@@ -979,7 +1068,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                             foreach (var item in data)
                             {
                                 strFileType = "jpeg";
-                                
+
                                 //Create a zip entry for each attachment
                                 var zipEntry = zipArchive.CreateEntry(string.Format("{0}.{1}", item.ReferanceId, strFileType));
                                 byte[] file = item.BinaryQrCodeImage;
@@ -1017,12 +1106,12 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             Session.Clear();
             Session.Abandon();
             Server.ClearError();
-            FormsAuthentication.SignOut(); 
+            FormsAuthentication.SignOut();
             return RedirectToAction("Login", "HouseScanifyEmp");
         }
 
 
-      
+
 
     }
 }

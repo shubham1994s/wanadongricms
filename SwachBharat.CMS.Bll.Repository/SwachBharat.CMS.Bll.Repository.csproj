@@ -91,6 +91,8 @@
     <Compile Include="ChildRepository\IChildRepository.cs" />
     <Compile Include="GridRepository\DashBoardRepository.cs" />
     <Compile Include="GridRepository\Grid\AdminCountGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\AppAreaMapsGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\AppAreaMapsInActiveGridRepository.cs" />
     <Compile Include="GridRepository\Grid\AreaGridRepository.cs" />
     <Compile Include="GridRepository\Grid\AttendeceGridRepository.cs" />
     <Compile Include="GridRepository\Grid\AttendenceSettingsGridRepository.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="GridRepository\Grid\ULBAdminGridRepository.cs" />
     <Compile Include="GridRepository\Grid\ULBAdminStatusGridRepository.cs" />
     <Compile Include="GridRepository\Grid\URAttendanceGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\VehicalRegDetailsGridRepository.cs" />
     <Compile Include="GridRepository\Grid\VehicleRegGridRepository.cs" />
     <Compile Include="GridRepository\Grid\VehicleTypeGridRepository.cs" />
     <Compile Include="GridRepository\Grid\StateGridRepository.cs" />

@@ -225,12 +225,12 @@ namespace SwachBharat.CMS.Bll.Services
                     else
                     {
                         var area = FillAreaDataModel(data);
-                        if(area.Area != null && area.wardId != null)
+                        if (area.Area != null && area.wardId != null)
                         {
                             db.TeritoryMasters.Add(area);
                             db.SaveChanges();
                         }
-                       
+
                     }
                 }
             }
@@ -325,6 +325,8 @@ namespace SwachBharat.CMS.Bll.Services
         #endregion
 
         #region Vehicle
+
+
         public VehicleTypeVM GetVehicleTypeDetails(int teamId)
         {
             try
@@ -735,6 +737,101 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public VehicalRegDetailsVM GetVehicalRegDetails(int teamId)
+        {
+            try
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.VehicalQRCode + "/";
+                VehicalRegDetailsVM vehicalReg = new VehicalRegDetailsVM();
+
+                var Details = db.Vehical_QR_Master.Where(x => x.vqrId == teamId).FirstOrDefault();
+                if (Details != null)
+                {
+                    vehicalReg = FillVehicalRegDetailsViewModel(Details);
+                    if (vehicalReg.vehicalQRCode != null && vehicalReg.vehicalQRCode != "")
+                    {
+                        HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(ThumbnaiUrlCMS + vehicalReg.vehicalQRCode.Trim());
+                        HttpWebResponse httpRes = null;
+                        try
+                        {
+                            httpRes = (HttpWebResponse)httpReq.GetResponse(); // Error 404 right here,
+                            if (httpRes.StatusCode == HttpStatusCode.NotFound)
+                            {
+                                vehicalReg.vehicalQRCode = "/Images/default_not_upload.png";
+                            }
+                            else
+                            {
+                                vehicalReg.vehicalQRCode = ThumbnaiUrlCMS + vehicalReg.vehicalQRCode.Trim();
+
+                                int n = teamId;
+                                double refer1 = Convert.ToDouble((n + 1));
+                                double xyz = refer1 / 100;
+
+                                string s = xyz.ToString("0.00", CultureInfo.InvariantCulture);
+                                string[] parts = s.Split('.');
+                                int i1 = int.Parse(parts[0]);
+                                int i2 = int.Parse(parts[1]);
+
+                                if (i2 == 0)
+                                {
+                                    //i1 = i1 + 1;
+                                    s = "V" + i1.ToString();
+                                }
+                                else
+                                {
+                                    s = "V" + (i1 + 1);
+                                }
+
+                                vehicalReg.SerielNo = s;
+                            }
+                        }
+                        catch (Exception e) { vehicalReg.vehicalQRCode = "/Images/default_not_upload.png"; }
+
+                    }
+                    else
+                    {
+                        vehicalReg.vehicalQRCode = "/Images/default_not_upload.png";
+                    }
+
+                    vehicalReg.VehicleList = VehicleList();
+                    return vehicalReg;
+                }
+                else if (teamId == -2)
+                {
+                    var id = db.Vehical_QR_Master.OrderByDescending(x => x.vqrId).Select(x => x.vqrId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "VQR" + (number + id + 1);
+                    vehicalReg.ReferanceId = refer;
+                    vehicalReg.vehicalQRCode = "/Images/QRcode.png";
+                    //house.WardList = ListWardNo();
+                    //house.AreaList = ListArea();
+                    vehicalReg.VehicleList = VehicleList();
+
+                    vehicalReg.vqrId = 0;
+                    return vehicalReg;
+                }
+                else
+                {
+                    var id = db.Vehical_QR_Master.OrderByDescending(x => x.vqrId).Select(x => x.vqrId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "VQR" + (number + id + 1);
+                    vehicalReg.ReferanceId = refer;
+                    vehicalReg.vehicalQRCode = "/Images/QRcode.png";
+
+                    vehicalReg.VehicleList = VehicleList();
+                    vehicalReg.vqrId = id;
+                    return vehicalReg;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public SBALUserLocationMapView GetHouseByIdforMap(int teamId, int daId)
         {
             try
@@ -891,6 +988,84 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+        public SBALUserLocationMapView GetDumpByIdforMap(int teamId, int daId, string EmpType)
+        {
+            try
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.HouseQRCode + "/";
+                SBALUserLocationMapView house = new SBALUserLocationMapView();
+
+                var Details = db.HouseMasters.Where(x => x.houseId == teamId).FirstOrDefault();
+                if (Details != null)
+                {
+
+                    house = FillHouseDetailsViewModelforMap(Details);
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId & x.EmployeeType == EmpType).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId & x.EmployeeType == EmpType).FirstOrDefault();
+                    house.userName = user.userName;
+                    if (house.houseQRCode != null && house.houseQRCode != "")
+                    {
+                        HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(ThumbnaiUrlCMS + house.houseQRCode.Trim());
+                        HttpWebResponse httpRes = null;
+                        try
+                        {
+                            httpRes = (HttpWebResponse)httpReq.GetResponse(); // Error 404 right here,
+                            if (httpRes.StatusCode == HttpStatusCode.NotFound)
+                            {
+                                house.houseQRCode = "/Images/default_not_upload.png";
+                            }
+                            else
+                            {
+                                house.houseQRCode = ThumbnaiUrlCMS + house.houseQRCode.Trim();
+                            }
+                        }
+                        catch (Exception e) { house.houseQRCode = "/Images/default_not_upload.png"; }
+
+                    }
+                    else
+                    {
+                        house.houseQRCode = "/Images/default_not_upload.png";
+                    }
+
+                    house.WardList = LoadListWardNo(Convert.ToInt32(house.ZoneId)); //ListWardNo();
+                    house.AreaList = LoadListArea(Convert.ToInt32(house.WardNo)); //ListArea();
+                    house.ZoneList = ListZone();
+                    return house;
+                }
+
+
+                else
+                {
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId).FirstOrDefault();
+                    house.userName = user.userName;
+
+                    var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "HPSBA" + (number + id + 1);
+                    house.ReferanceId = refer;
+                    house.houseQRCode = "/Images/QRcode.png";
+                    house.WardList = ListWardNo();
+                    house.AreaList = ListArea();
+                    house.ZoneList = ListZone();
+                    house.houseId = id;
+                    return house;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public HouseDetailsVM SaveHouseDetails(HouseDetailsVM data)
         {
             try
@@ -949,6 +1124,46 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public VehicalRegDetailsVM SaveVehicalRegDetails(VehicalRegDetailsVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.vqrId > 0)
+                    {
+                        var model = db.Vehical_QR_Master.Where(x => x.vqrId == data.vqrId).FirstOrDefault();
+                        if (model != null)
+                        {
+
+                            model.VehicalNumber = data.Vehican_No;
+                            model.VehicalQRCode = data.vehicalQRCode;
+                            model.lastModifiedEntry = DateTime.Now;
+                            model.VehicalType = data.Vehical_Type;
+
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        //var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
+                        //int number = 1000;
+                        //string refer = "SBA" + (number + id + 1);
+                        // data.ReferanceId = refer;
+                        var type = FillVehicalRegDetailsDataModel(data);
+                        db.Vehical_QR_Master.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+                var vqrid = db.Vehical_QR_Master.OrderByDescending(x => x.vqrId).Select(x => x.vqrId).FirstOrDefault();
+                VehicalRegDetailsVM vv = GetVehicalRegDetails(vqrid);
+                return vv;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public void SaveEmpBeatMap(EmpBeatMapVM data)
         {
             try
@@ -1017,6 +1232,9 @@ namespace SwachBharat.CMS.Bll.Services
 
             return empBeatMap;
         }
+
+
+
 
         public EmpBeatMapVM GetEmpBeatMapByUserId(int userId)
         {
@@ -1100,7 +1318,7 @@ namespace SwachBharat.CMS.Bll.Services
         public bool IsPointInPolygon(List<coordinates> poly, coordinates p)
         {
             bool inside = false;
-            
+
             if (poly != null && poly.Count > 0)
             {
                 double minX = poly[0].lat ?? 0;
@@ -1156,7 +1374,8 @@ namespace SwachBharat.CMS.Bll.Services
         {
             List<List<coordinates>> lstCord = new List<List<coordinates>>();
             string[] lstPoly = strCord.Split(':');
-            if (lstPoly.Length > 0) {
+            if (lstPoly.Length > 0)
+            {
                 for (var i = 0; i < lstPoly.Length; i++)
                 {
                     List<coordinates> poly = new List<coordinates>();
@@ -1181,6 +1400,33 @@ namespace SwachBharat.CMS.Bll.Services
             }
             return lstCord;
         }
+
+        public List<coordinates> ConvertStringToLatLong1(string strCord)
+        {
+
+            List<coordinates> poly = new List<coordinates>();
+            if (!string.IsNullOrEmpty(strCord))
+            {
+                string[] lstLatLong = strCord.Split(';');
+                if (lstLatLong.Length > 0)
+                {
+                    for (var j = 0; j < lstLatLong.Length; j++)
+                    {
+                        coordinates cord = new coordinates();
+                        string[] strLatLong = lstLatLong[j].Split(',');
+                        if (strLatLong.Length == 2)
+                        {
+                            cord.lat = Convert.ToDouble(strLatLong[0]);
+                            cord.lng = Convert.ToDouble(strLatLong[1]);
+                        }
+                        poly.Add(cord);
+                    }
+
+                }
+            }
+            return poly;
+        }
+
         public void DeletHouseDetails(int teamId)
         {
             try
@@ -1603,6 +1849,45 @@ namespace SwachBharat.CMS.Bll.Services
                             //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                             var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
+                            var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
+                            loc.userName = user.userName;
+                            loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
+                            loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
+                            loc.address = checkNull(Details.address).Replace("Unnamed Road, ", "");
+                            loc.lat = Details.lat;
+                            loc.log = Details.@long;
+                            loc.UserList = ListUser(Emptype);
+                            loc.userMobile = user.userMobileNumber;
+                            loc.type = Convert.ToInt32(user.Type);
+                            try { loc.vehcileNumber = atten.vehicleNumber; } catch { loc.vehcileNumber = ""; }
+
+                            return loc;
+                        }
+                        else
+                        {
+                            return new SBALUserLocationMapView();
+                        }
+
+                    }
+                }
+                else if (Emptype == "D")
+                {
+                    using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                    {
+                        //var Details = db.Locations.Where(c => c.EmployeeType == null).FirstOrDefault();
+                        var Details = db.Locations.FirstOrDefault();
+
+                        if (teamId > 0)
+                        {
+                            //Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == null).FirstOrDefault();
+                            Details = db.Locations.Where(c => c.locId == teamId).FirstOrDefault();
+                        }
+                        if (Details != null)
+                        {
+                            //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
+                            SBALUserLocationMapView loc = new SBALUserLocationMapView();
+                            //var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
                             var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
                             loc.userName = user.userName;
                             loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
@@ -2398,18 +2683,18 @@ namespace SwachBharat.CMS.Bll.Services
             return userLocation;
         }
 
-        public List<SelectListItem> ListBeatMapArea(int daId,int areaid)
+        public List<SelectListItem> ListBeatMapArea(int daId, int areaid)
         {
             List<SelectListItem> Area = new List<SelectListItem>();
             List<List<coordinates>> lstPoly = new List<List<coordinates>>();
 
             var att = db.Daily_Attendance.Where(c => c.daID == daId).FirstOrDefault();
-            if(att != null)
+            if (att != null)
             {
                 var userName = db.UserMasters.Where(c => c.userId == att.userId).FirstOrDefault();
                 EmpBeatMapVM ebm = GetEmpBeatMapByUserId(userName.userId);
                 lstPoly = ebm.ebmLatLong;
-                if(lstPoly != null && lstPoly.Count > 0)
+                if (lstPoly != null && lstPoly.Count > 0)
                 {
                     for (var i = 0; i < lstPoly.Count; i++)
                     {
@@ -2424,7 +2709,7 @@ namespace SwachBharat.CMS.Bll.Services
             return Area;
         }
 
-        public HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid,int polyId)
+        public HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid, int polyId)
         {
             HouseAttenRouteVM houseAtten = new HouseAttenRouteVM();
             List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
@@ -2461,14 +2746,14 @@ namespace SwachBharat.CMS.Bll.Services
             {
                 poly = lstPoly[polyId];
             }
-                
+
             var data = db.Locations.Where(c => c.userId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == 1).OrderByDescending(a => a.datetime).ToList();
 
             foreach (var x in data)
             {
                 if (x.type == 1)
                 {
-                    
+
                     var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & (c.houseId != null || c.dyId != null)) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcId).ToList();//.ToList();
 
 
@@ -2638,7 +2923,7 @@ namespace SwachBharat.CMS.Bll.Services
         }
 
 
-        public EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid,int polyId)
+        public EmpBeatMapCountVM GetbeatMapCount(int daId, int areaid, int polyId)
         {
             EmpBeatMapCountVM ebmCount = new EmpBeatMapCountVM();
             List<coordinates> houseCord = new List<coordinates>();
@@ -3484,7 +3769,7 @@ namespace SwachBharat.CMS.Bll.Services
                     //}
 
 
-                    var data = db.SP_HouseScanify_Count().First();
+                    var data = db.SP_HouseScanify_Count(AppID).First();
 
                     //var date = DateTime.Today;
                     //var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
@@ -3813,6 +4098,18 @@ namespace SwachBharat.CMS.Bll.Services
 
             return model;
         }
+
+        private AppAreaMapVM fillAppAreaMapVM(AppDetail data)
+        {
+            AppAreaMapVM model = new AppAreaMapVM();
+            model.AppId = data.AppId;
+            model.AppName = data.AppName;
+            model.AppLat = data.Latitude;
+            model.AppLong = data.Logitude;
+            model.AppAreaLatLong = ConvertStringToLatLong1(data.AppAreaLatLong);
+
+            return model;
+        }
         private HouseMaster FillHouseDetailsDataModel(HouseDetailsVM data)
         {
             HouseMaster model = new HouseMaster();
@@ -3841,6 +4138,19 @@ namespace SwachBharat.CMS.Bll.Services
             //    model.WasteType = data.WasteType;
             //}
             // model.userId = data.userId;
+            return model;
+        }
+
+        private Vehical_QR_Master FillVehicalRegDetailsDataModel(VehicalRegDetailsVM data)
+        {
+            Vehical_QR_Master model = new Vehical_QR_Master();
+            model.vqrId = data.vqrId;
+            model.VehicalNumber = data.Vehican_No;
+            model.VehicalQRCode = data.vehicalQRCode;
+            model.ReferanceId = data.ReferanceId;
+            model.modified = DateTime.Now;
+            model.VehicalType = data.Vehical_Type;
+
             return model;
         }
         private GarbagePointDetail FillGarbagePointDetailsDataModel(GarbagePointDetailsVM data)
@@ -4092,6 +4402,27 @@ namespace SwachBharat.CMS.Bll.Services
 
             return Zone;
         }
+
+        public List<SelectListItem> VehicleList()
+        {
+            var Vehical = new List<SelectListItem>();
+            SelectListItem itemAdd = new SelectListItem() { Text = "--Select Vehical--", Value = "0" };
+
+            try
+            {
+                Vehical = db.VehicleTypes.ToList()
+                    .Select(x => new SelectListItem
+                    {
+                        Text = x.description,
+                        Value = x.description
+                    }).OrderBy(t => t.Text).ToList();
+
+                Vehical.Insert(0, itemAdd);
+            }
+            catch (Exception ex) { throw ex; }
+
+            return Vehical;
+        }
         public List<SelectListItem> ListUser(string Emptype)
         {
             var user = new List<SelectListItem>();
@@ -4332,7 +4663,19 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
 
+        private VehicalRegDetailsVM FillVehicalRegDetailsViewModel(Vehical_QR_Master data)
+        {
 
+            VehicalRegDetailsVM model = new VehicalRegDetailsVM();
+            model.vqrId = data.vqrId;
+            model.Vehican_No = data.VehicalNumber;
+            model.vehicalQRCode = data.VehicalQRCode;
+            model.ReferanceId = data.ReferanceId;
+            model.Vehical_Type = data.VehicalType;
+
+
+            return model;
+        }
         private SBALUserLocationMapView FillHouseDetailsViewModelforMap(HouseMaster data)
         {
 
@@ -5715,7 +6058,7 @@ namespace SwachBharat.CMS.Bll.Services
                                            ReferanceId = p.c.ReferanceId,
                                            QRStatus = p.c.QRStatus,
                                            QRStatusDate = p.c.QRStatusDate
-                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null ) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
+                                       }).Where(c => ((bQRStatus != null && c.QRStatus == bQRStatus) || bQRStatus == null) && (c.modifiedDate >= fromDate && c.modifiedDate <= toDate) && c.HouseLat != null && c.HouseLong != null).OrderBy(c => c.houseId).ToList();
 
                     if (QRStatus == 3)
                     {
@@ -6015,7 +6358,7 @@ namespace SwachBharat.CMS.Bll.Services
                     DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
                     var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
 
-                    var data = db.SP_HouseScanifyDetails().First();
+                    var data = db.SP_HouseScanifyDetails(AppID).First();
 
 
                     if (data != null)
@@ -6066,7 +6409,7 @@ namespace SwachBharat.CMS.Bll.Services
                     DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
                     var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
 
-                    var data = db.SP_HouseScanifyDetails().First();
+                    var data = db.SP_HouseScanifyDetails(AppID).First();
 
 
                     if (data != null)

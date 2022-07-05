@@ -4,12 +4,15 @@ $(document).ready(function () {
     Employee();
     // $('#demoGrid').css("display", "block");
     $('#demoGridNonActive').css("display", "none");
+    $('#ser').css("display", "none");
     $('#demoGridNonActive_wrapper').css("display", "none");
     $('#btn').hide();
     $('#NotActivebtn').on('click', function (e) {
         
         $('#demoGridNonActive').css("display", "block");
+        $('#ser').css("display", "inline-flex");
         $('#demoGrid').css("display", "none");
+        $('#1st').css("display", "none");
         $('#demoGrid_wrapper').css("display", "none");
         $('#change').text('Non Active Employee');
         $('#btn').show();
@@ -243,5 +246,16 @@ function Search() {
     oTable = $('#demoGrid').DataTable();
     oTable.search(value).draw();
     oTable.search("");
-    document.getElementById('USER_ID_FK').value = -1;
+   /* document.getElementById('USER_ID_FK').value = -1;*/
 }
+
+
+function Sea() {
+    var value = ",,," + $("#a").val();//txt_fdate + "," + txt_tdate + "," + UserId + "," + Client + "," + NesEvent + "," + Product + "," + catProduct + "," + 1;
+    // alert(value );
+    oTable = $('#demoGridNonActive').DataTable();
+    oTable.search(value).draw();
+    oTable.search("");
+   /*document.getElementById('USER_ID_FK').value = -1;*/
+}
+
