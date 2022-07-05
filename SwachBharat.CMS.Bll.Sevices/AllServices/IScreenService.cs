@@ -69,6 +69,7 @@ namespace SwachBharat.CMS.Bll.Services
 
         //Added By Saurabh(11 July 2019)
         List<SBALUserLocationMapView> GetHouseAttenRoute(int userId,int areaid);
+        List<SBALUserLocationMapView> GetDumpAttenRoute(int userId);
 
         List<SBALUserLocationMapView> GetLiquidAttenRoute(int userId, int areaid);
         List<SBALUserLocationMapView> GetStreetAttenRoute(int userId, int areaid);
