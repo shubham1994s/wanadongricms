@@ -988,6 +988,84 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+        public SBALUserLocationMapView GetDumpByIdforMap(int teamId, int daId, string EmpType)
+        {
+            try
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.HouseQRCode + "/";
+                SBALUserLocationMapView house = new SBALUserLocationMapView();
+
+                var Details = db.HouseMasters.Where(x => x.houseId == teamId).FirstOrDefault();
+                if (Details != null)
+                {
+
+                    house = FillHouseDetailsViewModelforMap(Details);
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId & x.EmployeeType == EmpType).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId & x.EmployeeType == EmpType).FirstOrDefault();
+                    house.userName = user.userName;
+                    if (house.houseQRCode != null && house.houseQRCode != "")
+                    {
+                        HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(ThumbnaiUrlCMS + house.houseQRCode.Trim());
+                        HttpWebResponse httpRes = null;
+                        try
+                        {
+                            httpRes = (HttpWebResponse)httpReq.GetResponse(); // Error 404 right here,
+                            if (httpRes.StatusCode == HttpStatusCode.NotFound)
+                            {
+                                house.houseQRCode = "/Images/default_not_upload.png";
+                            }
+                            else
+                            {
+                                house.houseQRCode = ThumbnaiUrlCMS + house.houseQRCode.Trim();
+                            }
+                        }
+                        catch (Exception e) { house.houseQRCode = "/Images/default_not_upload.png"; }
+
+                    }
+                    else
+                    {
+                        house.houseQRCode = "/Images/default_not_upload.png";
+                    }
+
+                    house.WardList = LoadListWardNo(Convert.ToInt32(house.ZoneId)); //ListWardNo();
+                    house.AreaList = LoadListArea(Convert.ToInt32(house.WardNo)); //ListArea();
+                    house.ZoneList = ListZone();
+                    return house;
+                }
+
+
+                else
+                {
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId).FirstOrDefault();
+                    house.userName = user.userName;
+
+                    var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "HPSBA" + (number + id + 1);
+                    house.ReferanceId = refer;
+                    house.houseQRCode = "/Images/QRcode.png";
+                    house.WardList = ListWardNo();
+                    house.AreaList = ListArea();
+                    house.ZoneList = ListZone();
+                    house.houseId = id;
+                    return house;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public HouseDetailsVM SaveHouseDetails(HouseDetailsVM data)
         {
             try
@@ -1771,6 +1849,45 @@ namespace SwachBharat.CMS.Bll.Services
                             //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == Emptype).FirstOrDefault();
                             var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
                             SBALUserLocationMapView loc = new SBALUserLocationMapView();
+                            var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
+                            loc.userName = user.userName;
+                            loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
+                            loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
+                            loc.address = checkNull(Details.address).Replace("Unnamed Road, ", "");
+                            loc.lat = Details.lat;
+                            loc.log = Details.@long;
+                            loc.UserList = ListUser(Emptype);
+                            loc.userMobile = user.userMobileNumber;
+                            loc.type = Convert.ToInt32(user.Type);
+                            try { loc.vehcileNumber = atten.vehicleNumber; } catch { loc.vehcileNumber = ""; }
+
+                            return loc;
+                        }
+                        else
+                        {
+                            return new SBALUserLocationMapView();
+                        }
+
+                    }
+                }
+                else if (Emptype == "D")
+                {
+                    using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                    {
+                        //var Details = db.Locations.Where(c => c.EmployeeType == null).FirstOrDefault();
+                        var Details = db.Locations.FirstOrDefault();
+
+                        if (teamId > 0)
+                        {
+                            //Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == null).FirstOrDefault();
+                            Details = db.Locations.Where(c => c.locId == teamId).FirstOrDefault();
+                        }
+                        if (Details != null)
+                        {
+                            //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
+                            SBALUserLocationMapView loc = new SBALUserLocationMapView();
+                            //var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
                             var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
                             loc.userName = user.userName;
                             loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");

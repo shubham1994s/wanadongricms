@@ -53,7 +53,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         VehicalRegDetailsVM GetVehicalRegById(int teamId);
 
         SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId);
-
+        SBALUserLocationMapView GetDumpByIdforMap(int teamId, int daId, string EmpType);
         SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType);
         HouseDetailsVM SaveHouse(HouseDetailsVM data);
         VehicalRegDetailsVM SaveVehicalReg(VehicalRegDetailsVM data);
