@@ -89,7 +89,7 @@ namespace SwachBharat.CMS.Bll.Services
 
                     var date = DateTime.Today;
                     var Newdate = DateTime.Now.ToString("yyyy-MM-dd");
-                    var houseCount = db.SP_TotalHouseCollection_Count(date, AppID).FirstOrDefault();
+                    var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
                     if (data != null)
                     {
 
@@ -8340,7 +8340,7 @@ namespace SwachBharat.CMS.Bll.Services
                     var data = db.SP_LiquidDashboard_Details().First();
 
                     var date = DateTime.Today;
-                    var houseCount = db.SP_TotalHouseCollection_Count(date, AppID).FirstOrDefault();
+                    var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
                     if (data != null)
                     {
 
@@ -8408,7 +8408,7 @@ namespace SwachBharat.CMS.Bll.Services
                     var data = db.SP_StreetDashboard_Details().First();
 
                     var date = DateTime.Today;
-                    var houseCount = db.SP_TotalHouseCollection_Count(date, AppID).FirstOrDefault();
+                    var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
                     if (data != null)
                     {
 
