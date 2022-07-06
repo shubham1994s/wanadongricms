@@ -163,14 +163,14 @@
             </a>
         </li>*@
 
-                    <li class="ctpt_reg" hidden="hidden">
+                    <li class="ctpt_reg"  style="display:none;">
                         <a href="#exampledropdownDropdownCTPT" aria-expanded="false" data-toggle="collapse">
                             <i class="ctpt"> </i>
                             CT / PT
                         </a>
                         <ul id="exampledropdownDropdownCTPT" class="collapse list-unstyled ">
                             <li><a href="/Sauchalay/SauchalayMenuIndex">CTPT Details</a></li>
-                            <li id="ctpt_onmap" style="display:none;"><a href="/Sauchalay/MenuCtptMap">CTPT On Map </a></li>
+                            <li id="ctpt_onmap"><a href="/Sauchalay/MenuCtptMap">CTPT On Map </a></li>
                         </ul>
                     </li>
 
@@ -209,7 +209,7 @@
                             <li><a href="/DumpyardEmployee/MenuIndex">Dumpyard Employee Registration  </a></li>
                             <li><a href="/MainMaster/MenuVehicalRegistrationIndex">Vehical Registration  </a></li>
                             <li id="EBMR" style="display:none;"><a href="/EmpBeatMap/MenuIndex">Employee Beat Map Registration  </a></li>
-                            <li class="ctpt_reg" hidden="hidden"><a href="/Sauchalay/SauchalayRegistrationMenuIndex">CT / PT Registration  </a></li>
+                            <li class="ctpt_reg"  style="display:none;"><a href="/Sauchalay/SauchalayRegistrationMenuIndex">CT / PT Registration  </a></li>
                         </ul>
                     <li>
 
@@ -660,6 +660,12 @@
                 $(".ss2020").css("display", "block");
                 $("#Month_Att").css("display", "block");
                 $("#Month_Att_BI").css("display", "block");
+
+
+            }
+            if ($("#asdf").text() == "appynittywaste@ulb.com!") {
+                
+                $(".ctpt_reg").css("display", "block");
 
 
             }
