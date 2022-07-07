@@ -7570,7 +7570,7 @@ namespace SwachBharat.CMS.Bll.Services
                     }
                     return data;
                 }
-                else if (teamId == -2)
+                else if (teamId == -2 && AppID != 3086)
                 {
                     var id = db.SauchalayAddresses.OrderByDescending(x => x.SauchalayID).Select(x => x.SauchalayID).FirstOrDefault();
                     if (id == null)
@@ -7595,8 +7595,39 @@ namespace SwachBharat.CMS.Bll.Services
                     }
                     return data;
                 }
+
+
+                else if (teamId == -2  && AppID== 3086)
+                {
+                    var id = db.SauchalayAddresses.OrderByDescending(x => x.SauchalayID).Select(x => x.SauchalayID).FirstOrDefault();
+                    if (id == null)
+                    {
+                        string appName = (appDetails.AppName).Split(' ').First();
+                        string name = "DMS" + '-' + ("0" + 1);
+                        data.SauchalayID = name;
+                        data.Image = "/Images/add_image_square.png";
+                        data.QrImage = "/Images/add_image_square.png";
+                        data.Id = 0;
+                    }
+                    else
+                    {
+                        var sId = id.Split('-').Last();
+                        string appName = (appDetails.AppName).Split(' ').First();
+      
+                        string name = Convert.ToInt32(sId) < 9 ? "DMS" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMS" + '-' + ((Convert.ToInt32(sId)) + (1));
+                        data.SauchalayID = name;
+                        data.Id = 0;
+                        data.Image = "/Images/add_image_square.png";
+                        data.QrImage = "/Images/add_image_square.png";
+
+                    }
+                    return data;
+                }
                 else
                 {
+
+                    if(AppID != 3086)
+                    { 
                     var id = db.SauchalayAddresses.OrderByDescending(x => x.SauchalayID).Select(x => x.SauchalayID).FirstOrDefault();
 
                     if (id == null)
@@ -7612,6 +7643,28 @@ namespace SwachBharat.CMS.Bll.Services
                         string appName = (appDetails.AppName).Split(' ').First();
                         string name = Convert.ToInt32(sId) < 9 ? appName + '_' + 'S' + '_' + ("0" + (Convert.ToInt32(sId) + 1)) : appName + '_' + 'S' + '_' + ((Convert.ToInt32(sId)) + (1));
                         data.Id = Convert.ToInt32(sId);
+                    }
+                    }
+
+                    if (AppID == 3086)
+                    {
+                        var id = db.SauchalayAddresses.OrderByDescending(x => x.SauchalayID).Select(x => x.SauchalayID).FirstOrDefault();
+
+                        if (id == null)
+                        {
+                            string appName = (appDetails.AppName).Split(' ').First();
+                            string name = "DMS" + '-' + ("0" + 1);
+                            data.SauchalayID = name;
+                            data.Id = 0;
+                        }
+                        else
+                        {
+                            var sId = id.Split('-').Last();
+                            string appName = (appDetails.AppName).Split(' ').First();
+                            string name = Convert.ToInt32(sId) < 9 ? "DMS" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMS" + '-' + ((Convert.ToInt32(sId)) + (1));
+                            data.SauchalayID = name;
+                            data.Id = Convert.ToInt32(sId);
+                        }
                     }
                     return data;
                 }
