@@ -54,6 +54,10 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         List<SelectListItem> ListAppMap();
         List<SelectListItem> ListAllApp();
         void SaveAppAreaMap(AppAreaMapVM AppAreaObj);
+
+        void SaveAttendance(HSUR_Daily_AttendanceVM _hsuserinfo);
+
+       
         int GetUserAppId(string UserId);
 
         int GetUserAppIdL(string UserId);
@@ -76,6 +80,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         EmployeeVM LoginMaster(EmployeeVM _userinfo);
 
         EmployeeVM LoginUR(EmployeeVM _userinfo);
+
+      
         List<MenuItem> GetMenus();
         List<MenuItemULB> GetULBMenus(string loginId);
 

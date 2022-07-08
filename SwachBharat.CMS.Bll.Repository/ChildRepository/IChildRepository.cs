@@ -54,7 +54,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         VehicalRegDetailsVM GetVehicalRegById(int teamId);
 
         SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId);
-
+        SBALUserLocationMapView GetDumpByIdforMap(int teamId, int daId, string EmpType);
         SBALUserLocationMapView GetLiquidByIdforMap(int teamId, int daId,string EmpType);
         HouseDetailsVM SaveHouse(HouseDetailsVM data);
         VehicalRegDetailsVM SaveVehicalReg(VehicalRegDetailsVM data);
@@ -79,6 +79,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SBALUserLocationMapView> GetHouseAttenRoute(int id,int areaid);
         List<SBALUserLocationMapView> GetLiquidAttenRoute(int id, int areaid);
         List<SBALUserLocationMapView> GetStreetAttenRoute(int id, int areaid);
+        List<SBALUserLocationMapView> GetDumpAttenRoute(int id);
         EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid, int polyId);
         HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid,int polyId);
 

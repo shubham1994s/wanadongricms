@@ -170,7 +170,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetLiquidByIdforMap(teamId, daId, EmpType);
         }
-
+        public SBALUserLocationMapView GetDumpByIdforMap(int teamId, int daId, string EmpType)
+        {
+            return screenService.GetDumpByIdforMap(teamId, daId, EmpType);
+        }
         public HouseDetailsVM SaveHouse(HouseDetailsVM data)
         {
             if (data.houseId <= 0)
@@ -259,7 +262,12 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetStreetAttenRoute(daId, areaid);
         }
-        
+
+        public List<SBALUserLocationMapView> GetDumpAttenRoute(int daId)
+        {
+            return screenService.GetDumpAttenRoute(daId);
+        }
+
         public EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid, int polyId)
         {
             return screenService.GetbeatMapCount(daId, areaid, polyId);

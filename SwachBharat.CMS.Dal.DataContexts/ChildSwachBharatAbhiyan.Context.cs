@@ -18,7 +18,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
     public partial class DevChildSwachhBharatNagpurEntities : DbContext
     {
         public DevChildSwachhBharatNagpurEntities(int AppId)
-                 : base(SwachBharatAppConnection.GetConnectionString(AppId))
+     : base(SwachBharatAppConnection.GetConnectionString(AppId))
         {
         }
 
@@ -40,7 +40,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<VehicleType> VehicleTypes { get; set; }
         public virtual DbSet<TeritoryMaster> TeritoryMasters { get; set; }
         public virtual DbSet<WardNumber> WardNumbers { get; set; }
-        public virtual DbSet<SauchalayAddress> SauchalayAddresses { get; set; }
         public virtual DbSet<QrEmployeeMaster> QrEmployeeMasters { get; set; }
         public virtual DbSet<SS_1_4_ANSWER> SS_1_4_ANSWER { get; set; }
         public virtual DbSet<SS_1_4_QUESTION> SS_1_4_QUESTION { get; set; }
@@ -50,7 +49,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<Vw_MsgNotification> Vw_MsgNotification { get; set; }
-        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
         public virtual DbSet<Daily_Attendance> Daily_Attendance { get; set; }
         public virtual DbSet<MonthlyAttedance> MonthlyAttedances { get; set; }
         public virtual DbSet<StreetSweepingBeat> StreetSweepingBeats { get; set; }
@@ -65,6 +63,8 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual DbSet<EmpBeatMap> EmpBeatMaps { get; set; }
         public virtual DbSet<Vehical_QR_Master> Vehical_QR_Master { get; set; }
         public virtual DbSet<VehicleRegistration> VehicleRegistrations { get; set; }
+        public virtual DbSet<GarbageCollectionDetail> GarbageCollectionDetails { get; set; }
+        public virtual DbSet<SauchalayAddress> SauchalayAddresses { get; set; }
     
         public virtual ObjectResult<GetAttendenceDetailsTotal_Result> GetAttendenceDetailsTotal(Nullable<int> userId, Nullable<int> year, Nullable<int> month)
         {
@@ -445,11 +445,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_StreetDashboard_Details_Result>("SP_StreetDashboard_Details");
         }
     
-        public virtual ObjectResult<SP_HouseScanifyDetails_Result> SP_HouseScanifyDetails()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_HouseScanifyDetails_Result>("SP_HouseScanifyDetails");
-        }
-    
         public virtual ObjectResult<StreetCurrentAllUserLocationTest1_Result> StreetCurrentAllUserLocationTest1()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StreetCurrentAllUserLocationTest1_Result>("StreetCurrentAllUserLocationTest1");
@@ -470,15 +465,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("userid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_HouseScanify_Result>("SP_HouseScanify", fdateParameter, tdateParameter, useridParameter);
-        }
-    
-        public virtual ObjectResult<SP_TotalHouseCollection_Count_Result> SP_TotalHouseCollection_Count(Nullable<System.DateTime> gcdate)
-        {
-            var gcdateParameter = gcdate.HasValue ?
-                new ObjectParameter("gcdate", gcdate) :
-                new ObjectParameter("gcdate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TotalHouseCollection_Count_Result>("SP_TotalHouseCollection_Count", gcdateParameter);
         }
     
         public virtual ObjectResult<SP_HouseOnMapDetails_Result> SP_HouseOnMapDetails(Nullable<System.DateTime> gcDate, Nullable<int> userId, Nullable<int> zoneId, Nullable<int> areaId, Nullable<int> wardNo, Nullable<int> garbageType, Nullable<int> filterType)
@@ -512,11 +498,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
                 new ObjectParameter("FilterType", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_HouseOnMapDetails_Result>("SP_HouseOnMapDetails", gcDateParameter, userIdParameter, zoneIdParameter, areaIdParameter, wardNoParameter, garbageTypeParameter, filterTypeParameter);
-        }
-    
-        public virtual ObjectResult<SP_HouseScanify_Count_Result> SP_HouseScanify_Count()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_HouseScanify_Count_Result>("SP_HouseScanify_Count");
         }
     
         public virtual ObjectResult<SP_LiquidWasteOnMapDetails_Result> SP_LiquidWasteOnMapDetails(Nullable<System.DateTime> gcDate, Nullable<int> userId, Nullable<int> zoneId, Nullable<int> areaId, Nullable<int> wardNo, Nullable<int> garbageType, Nullable<int> filterType)
@@ -771,6 +752,33 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public virtual ObjectResult<VehicalRegDetails_Result> VehicalRegDetails()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VehicalRegDetails_Result>("VehicalRegDetails");
+        }
+    
+        public virtual ObjectResult<SP_HouseScanify_Count_Result> SP_HouseScanify_Count(Nullable<int> appid)
+        {
+            var appidParameter = appid.HasValue ?
+                new ObjectParameter("Appid", appid) :
+                new ObjectParameter("Appid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_HouseScanify_Count_Result>("SP_HouseScanify_Count", appidParameter);
+        }
+    
+        public virtual ObjectResult<SP_HouseScanifyDetails_Result> SP_HouseScanifyDetails(Nullable<int> appid)
+        {
+            var appidParameter = appid.HasValue ?
+                new ObjectParameter("Appid", appid) :
+                new ObjectParameter("Appid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_HouseScanifyDetails_Result>("SP_HouseScanifyDetails", appidParameter);
+        }
+    
+        public virtual ObjectResult<SP_TotalHouseCollection_Count_Result> SP_TotalHouseCollection_Count(Nullable<System.DateTime> gcdate)
+        {
+            var gcdateParameter = gcdate.HasValue ?
+                new ObjectParameter("gcdate", gcdate) :
+                new ObjectParameter("gcdate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TotalHouseCollection_Count_Result>("SP_TotalHouseCollection_Count", gcdateParameter);
         }
     }
 }

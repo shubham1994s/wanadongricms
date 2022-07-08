@@ -798,7 +798,7 @@ namespace SwachBharat.CMS.Bll.Services
 public int GetUserAppId(string UserId)
         {
             int AppId = 0;
-            AppId = dbMain.UserInApps.Where(x => x.UserId == UserId).Select(x => x.AppId).FirstOrDefault();
+            AppId = dbMain.UserInApps.Where(x => x.UserId == UserId && x.AppId!=3109).Select(x => x.AppId).FirstOrDefault();
 
             return AppId;
         }

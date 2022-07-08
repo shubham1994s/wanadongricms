@@ -330,6 +330,7 @@
     <Compile Include="Controllers\AttendenceController.cs" />
     <Compile Include="Controllers\ComplaintController.cs" />
     <Compile Include="Controllers\DatableController.cs" />
+    <Compile Include="Controllers\DumpPlantProcessController.cs" />
     <Compile Include="Controllers\DumpYardController.cs" />
     <Compile Include="Controllers\DumpyardEmployeeController.cs" />
     <Compile Include="Controllers\EmpBeatMapController.cs" />
@@ -1761,6 +1762,7 @@
     <Content Include="Content\DatatableGrid\AURGridDetails.js" />
     <Content Include="Content\DatatableGrid\Complaint.js" />
     <Content Include="Content\DatatableGrid\District.js" />
+    <Content Include="Content\DatatableGrid\DumpPlantAttendenceGrid.js" />
     <Content Include="Content\DatatableGrid\DumpYardDetailGrid.js" />
     <Content Include="Content\DatatableGrid\DumpyardEmployeeDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\DumpYardGrid.js" />
@@ -3205,6 +3207,10 @@
     <Content Include="Views\AttendenceBeatMap\Index.cshtml" />
     <Content Include="Views\AttendenceBeatMap\MenuIndex.cshtml" />
     <Content Include="Views\AttendenceBeatMap\UserRoute.cshtml" />
+    <Content Include="Views\DumpPlantProcess\MenuIndex.cshtml" />
+    <Content Include="Views\DumpPlantProcess\Index.cshtml" />
+    <Content Include="Views\DumpPlantProcess\DumpUserRoute.cshtml" />
+    <Content Include="Views\DumpPlantProcess\DumpRoute.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSHousesListDownload.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

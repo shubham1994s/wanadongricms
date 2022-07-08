@@ -989,6 +989,84 @@ namespace SwachBharat.CMS.Bll.Services
                 throw;
             }
         }
+        public SBALUserLocationMapView GetDumpByIdforMap(int teamId, int daId, string EmpType)
+        {
+            try
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.HouseQRCode + "/";
+                SBALUserLocationMapView house = new SBALUserLocationMapView();
+
+                var Details = db.HouseMasters.Where(x => x.houseId == teamId).FirstOrDefault();
+                if (Details != null)
+                {
+
+                    house = FillHouseDetailsViewModelforMap(Details);
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId & x.EmployeeType == EmpType).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId & x.EmployeeType == EmpType).FirstOrDefault();
+                    house.userName = user.userName;
+                    if (house.houseQRCode != null && house.houseQRCode != "")
+                    {
+                        HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(ThumbnaiUrlCMS + house.houseQRCode.Trim());
+                        HttpWebResponse httpRes = null;
+                        try
+                        {
+                            httpRes = (HttpWebResponse)httpReq.GetResponse(); // Error 404 right here,
+                            if (httpRes.StatusCode == HttpStatusCode.NotFound)
+                            {
+                                house.houseQRCode = "/Images/default_not_upload.png";
+                            }
+                            else
+                            {
+                                house.houseQRCode = ThumbnaiUrlCMS + house.houseQRCode.Trim();
+                            }
+                        }
+                        catch (Exception e) { house.houseQRCode = "/Images/default_not_upload.png"; }
+
+                    }
+                    else
+                    {
+                        house.houseQRCode = "/Images/default_not_upload.png";
+                    }
+
+                    house.WardList = LoadListWardNo(Convert.ToInt32(house.ZoneId)); //ListWardNo();
+                    house.AreaList = LoadListArea(Convert.ToInt32(house.WardNo)); //ListArea();
+                    house.ZoneList = ListZone();
+                    return house;
+                }
+
+
+                else
+                {
+                    Daily_Attendance Daily_Attendanceuser = new Daily_Attendance();
+                    Daily_Attendanceuser = db.Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                    UserMaster user = new UserMaster();
+                    user = db.UserMasters.Where(x => x.userId == Daily_Attendanceuser.userId).FirstOrDefault();
+                    house.userName = user.userName;
+
+                    var id = db.HouseMasters.OrderByDescending(x => x.houseId).Select(x => x.houseId).FirstOrDefault();
+                    int number = 1000;
+                    string refer = "HPSBA" + (number + id + 1);
+                    house.ReferanceId = refer;
+                    house.houseQRCode = "/Images/QRcode.png";
+                    house.WardList = ListWardNo();
+                    house.AreaList = ListArea();
+                    house.ZoneList = ListZone();
+                    house.houseId = id;
+                    return house;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public HouseDetailsVM SaveHouseDetails(HouseDetailsVM data)
         {
             try
@@ -1793,6 +1871,45 @@ namespace SwachBharat.CMS.Bll.Services
 
                     }
                 }
+                else if (Emptype == "D")
+                {
+                    using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                    {
+                        //var Details = db.Locations.Where(c => c.EmployeeType == null).FirstOrDefault();
+                        var Details = db.Locations.FirstOrDefault();
+
+                        if (teamId > 0)
+                        {
+                            //Details = db.Locations.Where(c => c.locId == teamId && c.EmployeeType == null).FirstOrDefault();
+                            Details = db.Locations.Where(c => c.locId == teamId).FirstOrDefault();
+                        }
+                        if (Details != null)
+                        {
+                            //var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                            var atten = db.Daily_Attendance.Where(c => c.daDate == EntityFunctions.TruncateTime(Details.datetime) && c.userId == Details.userId).FirstOrDefault();
+                            SBALUserLocationMapView loc = new SBALUserLocationMapView();
+                            //var user = db.UserMasters.Where(c => c.userId == Details.userId && c.EmployeeType == null).FirstOrDefault();
+                            var user = db.UserMasters.Where(c => c.userId == Details.userId).FirstOrDefault();
+                            loc.userName = user.userName;
+                            loc.date = Convert.ToDateTime(Details.datetime).ToString("dd/MM/yyyy");
+                            loc.time = Convert.ToDateTime(Details.datetime).ToString("hh:mm tt");
+                            loc.address = checkNull(Details.address).Replace("Unnamed Road, ", "");
+                            loc.lat = Details.lat;
+                            loc.log = Details.@long;
+                            loc.UserList = ListUser(Emptype);
+                            loc.userMobile = user.userMobileNumber;
+                            loc.type = Convert.ToInt32(user.Type);
+                            try { loc.vehcileNumber = atten.vehicleNumber; } catch { loc.vehcileNumber = ""; }
+
+                            return loc;
+                        }
+                        else
+                        {
+                            return new SBALUserLocationMapView();
+                        }
+
+                    }
+                }
                 else
                 {
                     using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
@@ -2554,6 +2671,98 @@ namespace SwachBharat.CMS.Bll.Services
 
 
 
+
+                    }
+                    break;
+                }
+
+            }
+
+
+
+
+            return userLocation;
+        }
+
+        public List<SBALUserLocationMapView> GetDumpAttenRoute(int daId)
+        {
+            List<SBALUserLocationMapView> userLocation = new List<SBALUserLocationMapView>();
+            DateTime newdate = DateTime.Now.Date;
+            var datt = newdate;
+            var att = db.Daily_Attendance.Where(c => c.daID == daId).FirstOrDefault();
+
+            var useridnew = db.Daily_Attendance.Where(c => c.userId == att.userId && c.daDate == att.daDate).FirstOrDefault();
+            string Time = useridnew.startTime;
+            //string Time = att.startTime;
+            DateTime date = DateTime.Parse(Time, System.Globalization.CultureInfo.CurrentCulture);
+            string t = date.ToString("hh:mm:ss tt");
+            string dt = Convert.ToDateTime(att.daDate).ToString("MM/dd/yyyy");
+            DateTime? fdate = Convert.ToDateTime(dt + " " + t);
+            DateTime? edate;
+            if (att.endTime == "" | att.endTime == null)
+            {
+                edate = DateTime.Now;
+            }
+            else
+            {
+                string Time2 = att.endTime;
+                DateTime date2 = DateTime.Parse(Time2, System.Globalization.CultureInfo.CurrentCulture);
+                string t2 = date2.ToString("hh:mm:ss tt");
+                string dt2 = Convert.ToDateTime(att.daEndDate).ToString("MM/dd/yyyy");
+                edate = Convert.ToDateTime(dt2 + " " + t2);
+            }
+            var data = db.Locations.Where(c => c.userId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == 1).OrderByDescending(a => a.datetime).ToList();
+
+            foreach (var x in data)
+            {
+                if (x.type == 1)
+                {
+
+                    // string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                    //string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                    var userName = db.UserMasters.Where(c => c.userId == att.userId).FirstOrDefault();
+                    //var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & c.houseId != null) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).FirstOrDefault();
+
+                    //var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & c.houseId != null) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcDate).ToList();//.ToList();
+
+                    var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & (c.vqrid != null || c.dyId != null)) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcId).ToList();//.ToList();
+
+
+                    foreach (var d in gcd)
+                    {
+                        //DateTime dt = DateTime.Parse(x.gcDate == null ? DateTime.Now.ToString() : x.gcDate.ToString());
+                        string dat = Convert.ToDateTime(d.gcDate).ToString("dd/MM/yyyy");
+                        string tim = Convert.ToDateTime(d.gcDate).ToString("hh:mm tt");
+                        if (d.vqrid != null)
+                        {
+                           
+                                var house = db.Vehical_QR_Master.Where(c => c.vqrId == d.vqrid).FirstOrDefault();
+                                userLocation.Add(new SBALUserLocationMapView()
+                                {
+                                    userId = userName.userId,
+                                    userName = userName.userName,
+                                    datetime = Convert.ToDateTime(d.gcDate).ToString("HH:mm"),
+                                    date = dat,
+                                    time = tim,
+                                    lat = d.Lat,
+                                    log = d.Long,
+                                    address = x.address,
+                                    vehcileNumber = att.vehicleNumber,
+                                    userMobile = userName.userMobileNumber,
+                                    type = Convert.ToInt32(x.type),
+                                    HouseId = house.ReferanceId,
+                                    HouseOwnerName = house.VehicalNumber,
+                                    WasteType = d.garbageType.ToString(),
+                                    gpBeforImage = d.gpBeforImage,
+                                    gpAfterImage = d.gpAfterImage,
+                                    ZoneList = ListZone(),
+
+                                });
+                            
+
+
+                        }
+                     
 
                     }
                     break;
@@ -3653,7 +3862,7 @@ namespace SwachBharat.CMS.Bll.Services
                     //}
 
 
-                    var data = db.SP_HouseScanify_Count().First();
+                    var data = db.SP_HouseScanify_Count(AppID).First();
 
                     //var date = DateTime.Today;
                     //var houseCount = db.SP_TotalHouseCollection_Count(date).FirstOrDefault();
@@ -6242,7 +6451,7 @@ namespace SwachBharat.CMS.Bll.Services
                     DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
                     var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
 
-                    var data = db.SP_HouseScanifyDetails().First();
+                    var data = db.SP_HouseScanifyDetails(AppID).First();
 
 
                     if (data != null)
@@ -6293,7 +6502,7 @@ namespace SwachBharat.CMS.Bll.Services
                     DevSwachhBharatMainEntities dbm = new DevSwachhBharatMainEntities();
                     var appdetails = dbm.AppDetails.Where(c => c.AppId == AppID).FirstOrDefault();
 
-                    var data = db.SP_HouseScanifyDetails().First();
+                    var data = db.SP_HouseScanifyDetails(AppID).First();
 
 
                     if (data != null)
@@ -7402,7 +7611,7 @@ namespace SwachBharat.CMS.Bll.Services
                     }
                     return data;
                 }
-                else if (teamId == -2)
+                else if (teamId == -2 && AppID != 3086)
                 {
                     var id = db.SauchalayAddresses.OrderByDescending(x => x.SauchalayID).Select(x => x.SauchalayID).FirstOrDefault();
                     if (id == null)
@@ -7427,8 +7636,39 @@ namespace SwachBharat.CMS.Bll.Services
                     }
                     return data;
                 }
+
+
+                else if (teamId == -2  && AppID== 3086)
+                {
+                    var id = db.SauchalayAddresses.OrderByDescending(x => x.SauchalayID).Select(x => x.SauchalayID).FirstOrDefault();
+                    if (id == null)
+                    {
+                        string appName = (appDetails.AppName).Split(' ').First();
+                        string name = "DMC" + '-' + ("0" + 1);
+                        data.SauchalayID = name;
+                        data.Image = "/Images/add_image_square.png";
+                        data.QrImage = "/Images/add_image_square.png";
+                        data.Id = 0;
+                    }
+                    else
+                    {
+                        var sId = id.Split('-').Last();
+                        string appName = (appDetails.AppName).Split(' ').First();
+      
+                        string name = Convert.ToInt32(sId) < 9 ? "DMC" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMC" + '-' + ((Convert.ToInt32(sId)) + (1));
+                        data.SauchalayID = name;
+                        data.Id = 0;
+                        data.Image = "/Images/add_image_square.png";
+                        data.QrImage = "/Images/add_image_square.png";
+
+                    }
+                    return data;
+                }
                 else
                 {
+
+                    if(AppID != 3086)
+                    { 
                     var id = db.SauchalayAddresses.OrderByDescending(x => x.SauchalayID).Select(x => x.SauchalayID).FirstOrDefault();
 
                     if (id == null)
@@ -7444,6 +7684,28 @@ namespace SwachBharat.CMS.Bll.Services
                         string appName = (appDetails.AppName).Split(' ').First();
                         string name = Convert.ToInt32(sId) < 9 ? appName + '_' + 'S' + '_' + ("0" + (Convert.ToInt32(sId) + 1)) : appName + '_' + 'S' + '_' + ((Convert.ToInt32(sId)) + (1));
                         data.Id = Convert.ToInt32(sId);
+                    }
+                    }
+
+                    if (AppID == 3086)
+                    {
+                        var id = db.SauchalayAddresses.OrderByDescending(x => x.SauchalayID).Select(x => x.SauchalayID).FirstOrDefault();
+
+                        if (id == null)
+                        {
+                            string appName = (appDetails.AppName).Split(' ').First();
+                            string name = "DMC" + '-' + ("0" + 1);
+                            data.SauchalayID = name;
+                            data.Id = 0;
+                        }
+                        else
+                        {
+                            var sId = id.Split('-').Last();
+                            string appName = (appDetails.AppName).Split(' ').First();
+                            string name = Convert.ToInt32(sId) < 9 ? "DMC" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMC" + '-' + ((Convert.ToInt32(sId)) + (1));
+                            data.SauchalayID = name;
+                            data.Id = Convert.ToInt32(sId);
+                        }
                     }
                     return data;
                 }
