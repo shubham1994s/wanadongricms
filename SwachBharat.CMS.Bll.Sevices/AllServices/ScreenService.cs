@@ -7603,7 +7603,7 @@ namespace SwachBharat.CMS.Bll.Services
                     if (id == null)
                     {
                         string appName = (appDetails.AppName).Split(' ').First();
-                        string name = "DMS" + '-' + ("0" + 1);
+                        string name = "DMC" + '-' + ("0" + 1);
                         data.SauchalayID = name;
                         data.Image = "/Images/add_image_square.png";
                         data.QrImage = "/Images/add_image_square.png";
@@ -7614,7 +7614,7 @@ namespace SwachBharat.CMS.Bll.Services
                         var sId = id.Split('-').Last();
                         string appName = (appDetails.AppName).Split(' ').First();
       
-                        string name = Convert.ToInt32(sId) < 9 ? "DMS" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMS" + '-' + ((Convert.ToInt32(sId)) + (1));
+                        string name = Convert.ToInt32(sId) < 9 ? "DMC" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMC" + '-' + ((Convert.ToInt32(sId)) + (1));
                         data.SauchalayID = name;
                         data.Id = 0;
                         data.Image = "/Images/add_image_square.png";
@@ -7653,7 +7653,7 @@ namespace SwachBharat.CMS.Bll.Services
                         if (id == null)
                         {
                             string appName = (appDetails.AppName).Split(' ').First();
-                            string name = "DMS" + '-' + ("0" + 1);
+                            string name = "DMC" + '-' + ("0" + 1);
                             data.SauchalayID = name;
                             data.Id = 0;
                         }
@@ -7661,7 +7661,7 @@ namespace SwachBharat.CMS.Bll.Services
                         {
                             var sId = id.Split('-').Last();
                             string appName = (appDetails.AppName).Split(' ').First();
-                            string name = Convert.ToInt32(sId) < 9 ? "DMS" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMS" + '-' + ((Convert.ToInt32(sId)) + (1));
+                            string name = Convert.ToInt32(sId) < 9 ? "DMC" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMC" + '-' + ((Convert.ToInt32(sId)) + (1));
                             data.SauchalayID = name;
                             data.Id = Convert.ToInt32(sId);
                         }
