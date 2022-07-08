@@ -86,7 +86,7 @@
                 <!-- Sidebar Header-->
                 <ul style=" padding: 1PX; margin-bottom: 1PX;">
                     <li id='URbutton' class='py-2 px-4'><a href='HSURIndex' class="btn btn-primary" style="color: #fff !important; font-weight: 600">User Right</a></li>
-                    <li id='Attendance' class='py-2 px-4'><a href='HSURAttendance' class="btn btn-primary" style="color:#fff !important;font-weight:600">User Attendance</a></li>
+                    @*<li id='Attendance' class='py-2 px-4'><a href='HSURAttendance' class="btn btn-primary" style="color:#fff !important;font-weight:600">User Attendance</a></li>*@
                     <li id='btnAppArea' class='py-2 px-4'><a href='HSAppArea' class="btn btn-primary" style="color:#fff !important;font-weight:600">Map Area Beat</a></li>
                 </ul>
                 <input id="searchbar" onkeyup="search_ulbname()" type="text" name="search" placeholder="Search ULB Name" class="search">
@@ -203,14 +203,14 @@
         if (Utypes == 'A') {
             //$('#URbutton').show();
             document.getElementById("URbutton").style.display = "block";
-            document.getElementById("Attendance").style.display = "block";
+          /*  document.getElementById("Attendance").style.display = "block";*/
             document.getElementById("btnAppArea").style.display = "block";
             document.getElementById("HSType").innerHTML = "(ADMIN)";
         }
         else {
             // $('#URbutton').hide();
             document.getElementById("URbutton").style.display = "none";
-            document.getElementById("Attendance").style.display = "none";
+         /*   document.getElementById("Attendance").style.display = "none";*/
             document.getElementById("btnAppArea").style.display = "none";
             document.getElementById("HSType").innerHTML = "(SUB-ADMIN)";
         }
