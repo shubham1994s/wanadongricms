@@ -11,7 +11,9 @@
         success: function (data) {
             district = '<option value="-1">Select Employee</option>';
             for (var i = 0; i < data.length; i++) {
-                district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                if (data[i].Value != 0) {
+                    district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                }
             }
             //district = district + '</select>';
             $('#selectnumber').html(district);
@@ -128,7 +130,7 @@ function LoadAGridM() {
     var UserId = $('#selectnumber').val();
     $.ajax({
         type: "post",
-        url: "/HouseScanifyEmp/HSEmployeeList?rn=P",
+        url: "/HouseScanifyEmp/HSEmployeeList?rn=M",
         data: { userId: UserId },
         datatype: "json",
         traditional: true,

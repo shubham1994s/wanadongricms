@@ -6139,6 +6139,12 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 //    data = model.ToList();
                 //}
+                if (userId > 0)
+                {
+                    var model = data.Where(x => x.EmpId == userId).ToList();
+
+                    data = model.ToList();
+                }
                 return data;
 
             }
