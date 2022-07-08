@@ -1292,9 +1292,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     worksheet.Cells[1, 1].Style.Font.Size = 16;
                     worksheet.Cells["A3:AN3"].Style.Font.Bold = true;
                     worksheet.Cells["A3:AN3"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                    worksheet.Cells["A3:AN3"].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#b2f7c1"));
+                    worksheet.Cells["A3:AN3"].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#d4d6d5"));
                     #region ColumnResize
-                    for (int c = 1; c < dt.Columns.Count +1; c++)
+                    for (int c = 0; c < dt.Columns.Count; c++)
                     {
                         worksheet.Column(c + 1).AutoFit();
                     }
