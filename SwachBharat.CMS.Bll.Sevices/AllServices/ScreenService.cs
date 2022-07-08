@@ -21,6 +21,7 @@ using System.Web;
 using Microsoft.SqlServer.Server;
 using System.Web.UI.WebControls;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace SwachBharat.CMS.Bll.Services
 {
@@ -7017,6 +7018,46 @@ namespace SwachBharat.CMS.Bll.Services
             return data;
         }
 
+        public DataTable getHousesList()
+        {
+            var data = new DataTable();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var conn = db.Database.Connection;
+                    var connectionState = conn.State;
+                    try
+                    {
+                        if (connectionState != ConnectionState.Open) conn.Open();
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId ORDER BY H.houseId asc";
+                            cmd.CommandType = CommandType.Text;
+                            using (var reader = cmd.ExecuteReader())
+                            {
+                                data.Load(reader);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // error handling
+                        return data; 
+                    }
+                    finally
+                    {
+                        if (connectionState != ConnectionState.Closed) conn.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return data;
+            }
+            return data;
+        }
+
         public List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate, string QrStatus)
         {
 
@@ -7603,7 +7644,7 @@ namespace SwachBharat.CMS.Bll.Services
                     if (id == null)
                     {
                         string appName = (appDetails.AppName).Split(' ').First();
-                        string name = "DMS" + '-' + ("0" + 1);
+                        string name = "DMC" + '-' + ("0" + 1);
                         data.SauchalayID = name;
                         data.Image = "/Images/add_image_square.png";
                         data.QrImage = "/Images/add_image_square.png";
@@ -7614,7 +7655,7 @@ namespace SwachBharat.CMS.Bll.Services
                         var sId = id.Split('-').Last();
                         string appName = (appDetails.AppName).Split(' ').First();
       
-                        string name = Convert.ToInt32(sId) < 9 ? "DMS" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMS" + '-' + ((Convert.ToInt32(sId)) + (1));
+                        string name = Convert.ToInt32(sId) < 9 ? "DMC" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMC" + '-' + ((Convert.ToInt32(sId)) + (1));
                         data.SauchalayID = name;
                         data.Id = 0;
                         data.Image = "/Images/add_image_square.png";
@@ -7653,7 +7694,7 @@ namespace SwachBharat.CMS.Bll.Services
                         if (id == null)
                         {
                             string appName = (appDetails.AppName).Split(' ').First();
-                            string name = "DMS" + '-' + ("0" + 1);
+                            string name = "DMC" + '-' + ("0" + 1);
                             data.SauchalayID = name;
                             data.Id = 0;
                         }
@@ -7661,7 +7702,7 @@ namespace SwachBharat.CMS.Bll.Services
                         {
                             var sId = id.Split('-').Last();
                             string appName = (appDetails.AppName).Split(' ').First();
-                            string name = Convert.ToInt32(sId) < 9 ? "DMS" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMS" + '-' + ((Convert.ToInt32(sId)) + (1));
+                            string name = Convert.ToInt32(sId) < 9 ? "DMC" + '-' + ("0" + (Convert.ToInt32(sId) + 1)) : "DMC" + '-' + ((Convert.ToInt32(sId)) + (1));
                             data.SauchalayID = name;
                             data.Id = Convert.ToInt32(sId);
                         }
