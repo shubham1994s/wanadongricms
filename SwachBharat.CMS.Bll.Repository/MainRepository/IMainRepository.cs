@@ -52,6 +52,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         AppAreaMapVM GetAppAreaMap(int AppId);
         List<SelectListItem> ListAppMap();
+        List<SelectListItem> ListAllApp();
         void SaveAppAreaMap(AppAreaMapVM AppAreaObj);
 
         void SaveAttendance(HSUR_Daily_AttendanceVM _hsuserinfo);
