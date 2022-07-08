@@ -114,6 +114,7 @@
     <Compile Include="Grid\ComplaintGrid.cs" />
     <Compile Include="Grid\ContactUsMemberGridRow.cs" />
     <Compile Include="Grid\GPLeagueGridRow.cs" />
+    <Compile Include="Grid\HSUREmployeeAttendanceDetails.cs" />
     <Compile Include="Grid\InfotainmentDetailsGridRow.cs" />
     <Compile Include="Grid\InfotainmentPlayerDetailsGridRow.cs" />
     <Compile Include="Grid\OnePointfourGridRow.cs" />

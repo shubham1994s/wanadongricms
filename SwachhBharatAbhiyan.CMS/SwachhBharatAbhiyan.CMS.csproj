@@ -1771,6 +1771,7 @@
     <Content Include="Content\DatatableGrid\HSHouseDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\HSLiquidDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\HSStreetDetailsGrid.js" />
+    <Content Include="Content\DatatableGrid\HSURAttendanceGrid.js" />
     <Content Include="Content\DatatableGrid\IdelGrid.js" />
     <Content Include="Content\DatatableGrid\InfotainmentGrid.js" />
     <Content Include="Content\DatatableGrid\InfotainmentResult.js" />
@@ -3204,6 +3205,7 @@
     <Content Include="Views\DumpPlantProcess\Index.cshtml" />
     <Content Include="Views\DumpPlantProcess\DumpUserRoute.cshtml" />
     <Content Include="Views\DumpPlantProcess\DumpRoute.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSURAttendance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

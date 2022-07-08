@@ -191,6 +191,17 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
 
         }
+        public ActionResult HSURAttendance()
+        {
+            int appid = 1;
+            ViewBag.AppId = appid;
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            return View();
+
+
+        }
+        
 
         public ActionResult MenuURIndex()
         {
@@ -225,8 +236,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 HSUR_Daily_AttendanceVM Daily_Attendance = new HSUR_Daily_AttendanceVM();
                 Daily_Attendance.LOGIN_ID = model.Email;
                 Daily_Attendance.EmpId = Result.ADUM_USER_CODE;
-                //Daily_Attendance = mainRepository.SaveAttendance(Daily_Attendance);
-                mainRepository.SaveAttendance(Daily_Attendance);
+                Daily_Attendance.EmployeeType = Result.ADUM_DESIGNATION;
+
+                if(Daily_Attendance.EmployeeType != "A")
+                {
+                    mainRepository.SaveAttendance(Daily_Attendance);
+                }
+               
+               
 
                 Session["utype"] = Result.ADUM_DESIGNATION;
                 Session["Id"] = Result.ADUM_LOGIN_ID;
@@ -503,6 +520,18 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             else
                 return Redirect("/Account/Login");
         }
+
+        public ActionResult HSEmployeeList(string rn)
+        {
+            
+                //UREmployeeDetails obj = new UREmployeeDetails();
+                List<EmployeeMaster> obj = new List<EmployeeMaster>();
+                obj = mainRepository.GetEmployeeList(-1, rn);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+
+          
+        }
+
         public ActionResult UserListByAppId(int AppId)
         {
             //AddSession(UserId, UserRole, UserEmail, UserName);

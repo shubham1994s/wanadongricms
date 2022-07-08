@@ -538,6 +538,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                     return gridRepository;
                     break;
 
+                case "HSURAttendance":
+                    gridRepository = new HSURAttendanceGridRepository(0, searchString, fdate, tdate, userId, clientId, appId, sortColumn, sortColumnDir, draw, length, start);
+                    return gridRepository;
+                    break;
+
                 case "AURAttendance":
                     gridRepository = new AURIndexGridRepository(0, searchString, fdate, tdate, userId, clientId, appId, sortColumn, sortColumnDir, draw, length, start);
                     return gridRepository;

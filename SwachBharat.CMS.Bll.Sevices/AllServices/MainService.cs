@@ -11,6 +11,7 @@ using SwachBharat.CMS.Dal.DataContexts;
 using System.Web.Mvc;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using System.Web.UI.WebControls;
+using SwachBharat.CMS.Bll.ViewModels.Grid;
 
 namespace SwachBharat.CMS.Bll.Services
 {
@@ -1309,6 +1310,31 @@ public int GetUserAppId(string UserId)
             }
             return appList.OrderBy(x => x.AppName).ToList();
         }
+
+        public List<EmployeeMaster> GetEmployeeDetails(int teamId, string Emptype)
+        {
+            
+           // List<EmployeeMaster> EmpList = new List<EmployeeMaster>();
+
+            var EmpList = new List<EmployeeMaster>();
+            try
+            {
+                EmployeeMaster itemAdd = new EmployeeMaster() { Text = "--Select Employee--", Value = "0" };
+                EmpList = dbMain.EmployeeMasters.ToList()
+                    .Select(x => new EmployeeMaster
+                    {
+                        Text = x.EmpName,
+                        Value = x.EmpId.ToString(),
+                        isActive = x.isActive
+                    }).Where(x => x.isActive == true).OrderBy(x => x.Text).ToList();
+                EmpList.Insert(0, itemAdd);
+
+            }
+            catch (Exception ex) { throw ex; }
+            return EmpList;
+        }
+
+       
         public InfotainmentDetailsVW GetInfotainmentDetailsById(int ID)
         {
             try

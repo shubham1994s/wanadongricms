@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
+namespace SwachBharat.CMS.Bll.ViewModels.Grid
 {
-   public class HSUR_Daily_AttendanceVM : BaseVM
+   public class HSUREmployeeAttendanceDetails
     {
         public string LOGIN_ID { get; set; }
         public int EmpId { get; set; }
@@ -14,14 +14,18 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string EmpName { get; set; }
 
         public string EmployeeType { get; set; }
-        public string daDate { get; set; }
+        public string startDate { get; set; }
+        public string EndDate { get; set; }
+
+        public Nullable<System.DateTime> daDate { get; set; }
+        public Nullable<System.DateTime> daEndDate { get; set; }
 
         public string ipaddress { get; set; }
 
         public string logindevice { get; set; }
         public Nullable<bool> isActive { get; set; }
         public int daID { get; set; }
-        public string daEndDate { get; set; }
+    
         public string startLat { get; set; }
         public string startLong { get; set; }
         public string endLat { get; set; }
@@ -29,5 +33,6 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string startTime { get; set; }
         public string endTime { get; set; }
         public string type { get; set; }
+        public object UserList { get; set; }
     }
 }

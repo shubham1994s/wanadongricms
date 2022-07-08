@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SwachBharat.CMS.Dal.DataContexts;
 using System.Web.Mvc;
+using SwachBharat.CMS.Bll.ViewModels.Grid;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
@@ -271,7 +272,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                 {
                     if (data.LOGIN_ID != null)
                     {
-                        var model = db.EmployeeMasters.Where(x => x.LoginId == data.LOGIN_ID).FirstOrDefault();
+                        var model = db.EmployeeMasters.Where(x => x.LoginId == data.LOGIN_ID ).FirstOrDefault();
                         var model1 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId).FirstOrDefault();
                         if (model1 != null)
                         {
@@ -524,6 +525,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             model.userId = data.EmpId;
             model.startTime = DateTime.Now.ToString("hh:mm:ss tt");
             model.daDate = DateTime.Now;
+            model.EmployeeType = data.EmployeeType;
 
 
             string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
@@ -991,6 +993,12 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         {
             return mainService.GetAppList(utype, LoginId, Password);
         }
+
+        public List<EmployeeMaster> GetEmployeeList(int teamId, string Emptype)
+        {
+            return mainService.GetEmployeeDetails(teamId, Emptype);
+        }
+
         public InfotainmentDetailsVW GetInfotainmentDetailsById(int ID)
         {
             return mainService.GetInfotainmentDetailsById(ID);

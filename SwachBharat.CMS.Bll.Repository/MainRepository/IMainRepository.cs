@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using SwachBharat.CMS.Dal.DataContexts;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using System.Web.Mvc;
+using SwachBharat.CMS.Bll.ViewModels.Grid;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
@@ -68,6 +69,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
        // Added By Saurabh ( 27 May 2019)
         List<AppDetail> GetAppName();
         List<AppDetail> GetAppList(string utype, string LoginId, string Password);
+
+        List<EmployeeMaster> GetEmployeeList(int teamId, string Emptype);
 
         List<AppDetail> GetURAppName(string utype, string LoginId, string Password);
 
