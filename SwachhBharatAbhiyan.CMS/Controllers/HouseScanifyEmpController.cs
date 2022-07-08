@@ -216,8 +216,18 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             Result.ADUM_LOGIN_ID = model.Email;
             Result.ADUM_PASSWORD = model.Password;
             Result = mainRepository.LoginUR(Result);
+
+            //HSUR_Daily_AttendanceVM Daily_Attendance = new HSUR_Daily_AttendanceVM();
+            //Daily_Attendance = mainRepository.SaveDailyAttendance(Result);
+
             if (Result.status == "Success")
             {
+                HSUR_Daily_AttendanceVM Daily_Attendance = new HSUR_Daily_AttendanceVM();
+                Daily_Attendance.LOGIN_ID = model.Email;
+                Daily_Attendance.EmpId = Result.ADUM_USER_CODE;
+                //Daily_Attendance = mainRepository.SaveAttendance(Daily_Attendance);
+                mainRepository.SaveAttendance(Daily_Attendance);
+
                 Session["utype"] = Result.ADUM_DESIGNATION;
                 Session["Id"] = Result.ADUM_LOGIN_ID;
                 Session["Pwd"] = Result.ADUM_PASSWORD;

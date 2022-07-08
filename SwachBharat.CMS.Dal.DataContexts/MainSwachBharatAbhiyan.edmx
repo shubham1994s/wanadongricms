@@ -298,6 +298,26 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="DeviceId" Type="nvarchar" MaxLength="500" />
           <Property Name="Created" Type="datetime" />
         </EntityType>
+        <EntityType Name="HSUR_Daily_Attendance">
+          <Key>
+            <PropertyRef Name="daID" />
+          </Key>
+          <Property Name="daID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="startLat" Type="nvarchar" MaxLength="500" />
+          <Property Name="startLong" Type="nvarchar" MaxLength="500" />
+          <Property Name="endLat" Type="nchar" MaxLength="10" />
+          <Property Name="endLong" Type="nchar" MaxLength="10" />
+          <Property Name="startTime" Type="nvarchar" MaxLength="200" />
+          <Property Name="endTime" Type="nvarchar" MaxLength="200" />
+          <Property Name="daDate" Type="date" />
+          <Property Name="daEndDate" Type="date" />
+          <Property Name="batteryStatus" Type="varchar" MaxLength="20" />
+          <Property Name="OutbatteryStatus" Type="varchar" MaxLength="20" />
+          <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
+          <Property Name="ip_address" Type="nvarchar(max)" />
+          <Property Name="login_device" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Sauchalay_feedback">
           <Key>
             <PropertyRef Name="SauchalayFeedback_ID" />
@@ -412,6 +432,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="GameDetails" EntityType="Self.GameDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GameMaster" EntityType="Self.GameMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GamePlayerDetails" EntityType="Self.GamePlayerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HSUR_Daily_Attendance" EntityType="Self.HSUR_Daily_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sauchalay_feedback" EntityType="Self.Sauchalay_feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="state_districts" EntityType="Self.state_districts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
@@ -559,6 +580,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
+          <EntitySet Name="HSUR_Daily_Attendance" EntityType="DevSwachhBharatMainModel.HSUR_Daily_Attendance" />
         </EntityContainer>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -896,6 +918,26 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="VehicalQRCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="AppAreaLatLong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsAreaActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="HSUR_Daily_Attendance">
+          <Key>
+            <PropertyRef Name="daID" />
+          </Key>
+          <Property Name="daID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="startLat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="startLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="endLat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="endLong" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="startTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="endTime" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="daDate" Type="DateTime" Precision="0" />
+          <Property Name="daEndDate" Type="DateTime" Precision="0" />
+          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ip_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="login_device" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1311,6 +1353,27 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
                 <ScalarProperty Name="AppName_mar" ColumnName="AppName_mar" />
                 <ScalarProperty Name="AppName" ColumnName="AppName" />
                 <ScalarProperty Name="AppId" ColumnName="AppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HSUR_Daily_Attendance">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.HSUR_Daily_Attendance">
+              <MappingFragment StoreEntitySet="HSUR_Daily_Attendance">
+                <ScalarProperty Name="login_device" ColumnName="login_device" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
+                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
+                <ScalarProperty Name="daEndDate" ColumnName="daEndDate" />
+                <ScalarProperty Name="daDate" ColumnName="daDate" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endLong" ColumnName="endLong" />
+                <ScalarProperty Name="endLat" ColumnName="endLat" />
+                <ScalarProperty Name="startLong" ColumnName="startLong" />
+                <ScalarProperty Name="startLat" ColumnName="startLat" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="daID" ColumnName="daID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
