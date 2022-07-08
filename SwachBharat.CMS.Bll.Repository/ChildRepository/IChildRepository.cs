@@ -11,6 +11,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Data;
 
 namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 {
@@ -78,6 +79,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SBALUserLocationMapView> GetHouseAttenRoute(int id,int areaid);
         List<SBALUserLocationMapView> GetLiquidAttenRoute(int id, int areaid);
         List<SBALUserLocationMapView> GetStreetAttenRoute(int id, int areaid);
+        List<SBALUserLocationMapView> GetDumpAttenRoute(int id);
         EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid, int polyId);
         HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid,int polyId);
 
@@ -165,6 +167,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
 
         List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate,string QrStatus);
+
+        DataTable getHousesList();
         #endregion
 
         //Added By saurabh (04 June 2019)

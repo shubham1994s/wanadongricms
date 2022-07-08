@@ -85,6 +85,7 @@
     <Compile Include="ChildModel\Model\GarbagePointDetailsVM.cs" />
     <Compile Include="ChildModel\Model\GetEmpWiseHouseScan.cs" />
     <Compile Include="ChildModel\Model\HouseScanifyEmployeeDetailsVM.cs" />
+    <Compile Include="ChildModel\Model\HSUR_Daily_AttendanceVM.cs" />
     <Compile Include="ChildModel\Model\InfotainmentDetailsVW.cs" />
     <Compile Include="ChildModel\Model\LiquidWasteVM.cs" />
     <Compile Include="ChildModel\Model\LocationVM.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Grid\ComplaintGrid.cs" />
     <Compile Include="Grid\ContactUsMemberGridRow.cs" />
     <Compile Include="Grid\GPLeagueGridRow.cs" />
+    <Compile Include="Grid\HSUREmployeeAttendanceDetails.cs" />
     <Compile Include="Grid\InfotainmentDetailsGridRow.cs" />
     <Compile Include="Grid\InfotainmentPlayerDetailsGridRow.cs" />
     <Compile Include="Grid\OnePointfourGridRow.cs" />

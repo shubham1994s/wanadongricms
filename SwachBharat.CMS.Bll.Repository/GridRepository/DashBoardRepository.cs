@@ -721,6 +721,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             using(var dbMain = new DevSwachhBharatMainEntities())
             {
                 var data = dbMain.AppDetails.Where(a => a.IsActive == true && a.AppAreaLatLong != null && a.AppAreaLatLong != "" && a.IsAreaActive == true).Select(x => new SBAAppAreaMapGridRow
+
+             
                 {
                     AppId = x.AppId,
                     AppName =  x.AppName,
@@ -743,7 +745,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
             using (var dbMain = new DevSwachhBharatMainEntities())
             {
-                var data = dbMain.AppDetails.Where(a => a.IsActive == true && a.AppAreaLatLong != null && a.AppAreaLatLong != "" && a.IsAreaActive == false).Select(x => new SBAAppAreaMapGridRow
+                 var data = dbMain.AppDetails.Where(a => a.IsActive == true && a.AppAreaLatLong != null && a.AppAreaLatLong != "" && a.IsAreaActive == false).Select(x => new SBAAppAreaMapGridRow
+               
                 {
                     AppId = x.AppId,
                     AppName = x.AppName,
@@ -6030,7 +6033,118 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
         }
 
+        public IEnumerable<HSUREmployeeAttendanceDetails> GetHSURAttendanceDetails(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
+        {
+            //string strOrderBy = "";
+            //if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
+            //{
+            //    strOrderBy = sortColumn + " " + sortColumnDir;
+            //}
 
+            //int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            //int skip = start != null ? Convert.ToInt32(start) : 0;
+
+            List<HSUREmployeeAttendanceDetails> data = null;
+
+            using (var db = new DevSwachhBharatMainEntities())
+            {
+                if (ClientId == "M")
+                {
+                    data = db.HSUR_Daily_Attendance.Select(x => new HSUREmployeeAttendanceDetails
+                    {
+                        EmpId = (int)x.userId,
+                        EmpName = db.EmployeeMasters.Where(c => c.EmpId == x.userId).FirstOrDefault().EmpName,
+                        StartTime = (x.startTime).ToString(),
+                        endTime = x.endTime,
+                        startLat = x.startLat,
+                        startLong = x.startLong,
+                        endLat = x.endLat,
+                        endLong = x.endLong,
+                        daDate = x.daDate,
+                        daEndDate = x.daEndDate,
+                        startDate = x.daDate.ToString(),
+                        EndDate = x.daEndDate.ToString(),
+                        EmployeeType = x.EmployeeType,
+                        ipaddress = x.ip_address,
+                        logindevice = x.login_device,
+                        isActive = db.EmployeeMasters.Where(c => c.EmpId == x.userId).FirstOrDefault().isActive,
+
+                    }).Where(x => x.ipaddress == null && x.startLat != null ).ToList();
+
+
+
+                    if (Convert.ToDateTime(fdate).ToString("dd/MM/yyyy") == Convert.ToDateTime(DateTime.Now).ToString("dd/MM/yyyy"))
+                    {
+                        data = data.Where(x => (x.daDate == fdate || x.daEndDate == fdate || x.endTime == "")).ToList();
+
+                    }
+                    else
+                    {
+                        //CultureInfo provider = CultureInfo.InvariantCulture;
+                        //DateTime dateTime15;
+                        //DateTime.TryParseExact(fdate, "MM-dd-yyyy", provider, DateTimeStyles.None, out dateTime15);
+                        data = data.Where(c => (c.daDate >= fdate && c.daDate <= tdate) || (c.daDate >= fdate && c.daDate <= tdate)).ToList();
+                    }
+                }
+                else
+                {
+                    data = db.HSUR_Daily_Attendance.Select(x => new HSUREmployeeAttendanceDetails
+                    {
+                        EmpId = (int)x.userId,
+                        EmpName = db.EmployeeMasters.Where(c => c.EmpId == x.userId).FirstOrDefault().EmpName,
+                        StartTime = (x.startTime).ToString(),
+                        endTime = x.endTime,
+                        startLat = x.startLat,
+                        startLong = x.startLong,
+                        endLat = x.endLat,
+                        endLong = x.endLong,
+                        daDate = x.daDate,
+                        daEndDate = x.daEndDate,
+                        startDate = x.daDate.ToString(),
+                        EndDate = x.daEndDate.ToString(),
+                        EmployeeType = x.EmployeeType,
+                        ipaddress = x.ip_address,
+                        logindevice = x.login_device,
+                        isActive = db.EmployeeMasters.Where(c => c.EmpId == x.userId).FirstOrDefault().isActive,
+
+                    }).Where(x => x.ipaddress != null && x.startLat == null ).ToList();
+
+                    if (Convert.ToDateTime(fdate).ToString("dd/MM/yyyy") == Convert.ToDateTime(DateTime.Now).ToString("dd/MM/yyyy"))
+                    {
+                        data = data.Where(x => (x.daDate == fdate || x.daEndDate == fdate || x.endTime == "")).ToList();
+
+                    }
+                    else
+                    {
+                        //CultureInfo provider = CultureInfo.InvariantCulture;
+                        //DateTime dateTime15;
+                        //DateTime.TryParseExact(fdate, "MM-dd-yyyy", provider, DateTimeStyles.None, out dateTime15);
+                        data = data.Where(c => (c.daDate >= fdate && c.daDate <= tdate) || (c.daDate >= fdate && c.daDate <= tdate)).ToList();
+                    }
+                }
+
+
+                //if (!string.IsNullOrEmpty(SearchString))
+                //{
+                //    data = data.Where(x => ((string.IsNullOrEmpty(x.EmpName) ? " " : x.EmpName) + " " + (string.IsNullOrEmpty(x.type) ? " " : x.type)).ToUpper().Contains(SearchString.ToUpper())
+                //     ).ToList();
+
+                //}
+
+                //if (!string.IsNullOrEmpty(SearchString))
+                //{
+                //    var model = data.Where(x =>  x.startDate.Contains(SearchString) || x.endTime.Contains(SearchString) || x.startLat.Contains(SearchString) || x.endLat.Contains(SearchString) || x.StartTime.Contains(SearchString) || x.EmpName.Contains(SearchString) 
+
+                //    ||  x.startDate.ToLower().Contains(SearchString) || x.endTime.ToLower().Contains(SearchString) || x.startLat.ToLower().Contains(SearchString) || x.endLat.ToLower().Contains(SearchString) || x.StartTime.ToLower().Contains(SearchString) || x.EmpName.ToLower().Contains(SearchString)).ToList();
+
+                //    data = model.ToList();
+                //}
+                return data;
+
+            }
+
+
+        }
         public IEnumerable<UREmployeeDetails> GetAURDetailsData(long wildcard, string SearchString, DateTime? fdate, DateTime? tdate, int userId, string ClientId, int appId, string sortColumn = "", string sortColumnDir = "", string draw = "", string length = "", string start = "")
         {
             string strOrderBy = "";

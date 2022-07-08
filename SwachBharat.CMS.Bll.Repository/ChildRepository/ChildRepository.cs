@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SwachBharat.CMS.Bll.ViewModels.SS2020Reports;
 using System.Web.Mvc;
+using System.Data;
 
 namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 {
@@ -261,7 +262,12 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetStreetAttenRoute(daId, areaid);
         }
-        
+
+        public List<SBALUserLocationMapView> GetDumpAttenRoute(int daId)
+        {
+            return screenService.GetDumpAttenRoute(daId);
+        }
+
         public EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid, int polyId)
         {
             return screenService.GetbeatMapCount(daId, areaid, polyId);
@@ -503,6 +509,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         public List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId)
         {
             return screenService.GetHSUserAttenRoute(qrEmpDaId);
+        }
+        public DataTable getHousesList()
+        {
+            return screenService.getHousesList();
         }
         public List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate,string QrStatus)
         {

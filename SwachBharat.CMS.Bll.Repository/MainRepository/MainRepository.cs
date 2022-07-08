@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SwachBharat.CMS.Dal.DataContexts;
 using System.Web.Mvc;
+using SwachBharat.CMS.Bll.ViewModels.Grid;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
@@ -162,7 +163,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             EmployeeVM _EmployeeVM = new EmployeeVM();
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                var appUser = (db.AD_USER_MST_LIQUID.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD).SingleOrDefault());
+                var appUser = (db.AD_USER_MST_LIQUID.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD && x.APP_ID != 3109).SingleOrDefault());
                 if (appUser != null)
                 {
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
@@ -187,7 +188,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             EmployeeVM _EmployeeVM = new EmployeeVM();
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                var appUser = (db.AD_USER_MST_STREET.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD).SingleOrDefault());
+                var appUser = (db.AD_USER_MST_STREET.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD && x.APP_ID!=3109).SingleOrDefault());
                 if (appUser != null)
                 {
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
@@ -239,11 +240,14 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         public EmployeeVM LoginUR(EmployeeVM _userinfo)
         {
             EmployeeVM _EmployeeVM = new EmployeeVM();
+           
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
                 var appUser = (db.EmployeeMasters.Where(x => x.LoginId == _userinfo.ADUM_LOGIN_ID && x.Password == _userinfo.ADUM_PASSWORD && x.isActive == true).SingleOrDefault());
                 if (appUser != null)
                 {
+                  
+
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.LoginId;
                     _EmployeeVM.ADUM_PASSWORD = appUser.Password;
                     _EmployeeVM.ADUM_DESIGNATION = appUser.type;
@@ -257,6 +261,42 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                     _EmployeeVM.status = "Failure";
                     return _EmployeeVM;
                 }
+            }
+        }
+
+        public void SaveAttendance(HSUR_Daily_AttendanceVM data)
+        {
+            try
+            {
+                using (var db = new DevSwachhBharatMainEntities())
+                {
+                    if (data.LOGIN_ID != null)
+                    {
+                        var model = db.EmployeeMasters.Where(x => x.LoginId == data.LOGIN_ID ).FirstOrDefault();
+                        var model1 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId).FirstOrDefault();
+                        if (model1 != null)
+                        {
+                            var type = FillHSURDailyAttendance(data);
+
+
+                            db.HSUR_Daily_Attendance.Add(type);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            var type = FillHSURDailyAttendance(data);
+
+
+                            db.HSUR_Daily_Attendance.Add(type);
+                            db.SaveChanges();
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw;
             }
         }
 
@@ -373,6 +413,29 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                 using (var dbMain = new DevSwachhBharatMainEntities())
                 {
                     apps = dbMain.AppDetails.Where(a => a.IsActive == true && (a.AppAreaLatLong == null || a.AppAreaLatLong == "")).Select(x => new SelectListItem
+                 
+                    {
+                        Value = x.AppId.ToString(),
+                        Text = x.AppName
+                    }).OrderBy(t => t.Text).ToList();
+                }
+
+            }
+            catch (Exception ex) { return apps; }
+
+            return apps;
+        }
+
+
+        public List<SelectListItem> ListAllApp()
+        {
+            var apps = new List<SelectListItem>();
+
+            try
+            {
+                using (var dbMain = new DevSwachhBharatMainEntities())
+                {
+                    apps = dbMain.AppDetails.Where(a => a.IsActive == true).Select(x => new SelectListItem
                     {
                         Value = x.AppId.ToString(),
                         Text = x.AppName
@@ -444,6 +507,9 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
             }
         }
+
+       
+       
         private AppAreaMapVM fillAppAreaMapVM(AppDetail data)
         {
             AppAreaMapVM model = new AppAreaMapVM();
@@ -456,7 +522,46 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
             return model;
         }
+        //public HSUR_Daily_AttendanceVM FillHSURDailyAttendance(HSUR_Daily_Attendance data)
+        //{
+        //    HSUR_Daily_AttendanceVM model = new HSUR_Daily_AttendanceVM();
+        //    model.EmpId = (int)data.userId;
+        //    model.StartTime = DateTime.Now.ToString("hh:mm:ss tt");
+        //    model.daDate = DateTime.Now.ToString();
 
+
+        //    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+        //    if (string.IsNullOrEmpty(ip))
+        //    {
+        //        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+        //    }
+        //    //return ip;
+        //    model.ipaddress = ip;
+        //    model.logindevice = "PC";
+
+        //    return model;
+        //}
+
+        private HSUR_Daily_Attendance FillHSURDailyAttendance(HSUR_Daily_AttendanceVM data)
+        {
+            HSUR_Daily_Attendance model = new HSUR_Daily_Attendance();
+            model.userId = data.EmpId;
+            model.startTime = DateTime.Now.ToString("hh:mm:ss tt");
+            model.daDate = DateTime.Now;
+            model.EmployeeType = data.EmployeeType;
+
+
+            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (string.IsNullOrEmpty(ip))
+            {
+                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            }
+            //return ip;
+            model.ip_address = ip;
+            model.login_device = "PC";
+
+            return model;
+        }
         public string ConvertLatLongToString1(List<coordinates> lstCord)
         {
 
@@ -911,6 +1016,12 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         {
             return mainService.GetAppList(utype, LoginId, Password);
         }
+
+        public List<EmployeeMaster> GetEmployeeList(int teamId, string Emptype)
+        {
+            return mainService.GetEmployeeDetails(teamId, Emptype);
+        }
+
         public InfotainmentDetailsVW GetInfotainmentDetailsById(int ID)
         {
             return mainService.GetInfotainmentDetailsById(ID);

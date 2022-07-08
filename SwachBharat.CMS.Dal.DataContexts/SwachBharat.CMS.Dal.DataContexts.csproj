@@ -162,7 +162,7 @@
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="GamePlayerDetail.cs">
-      <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+      <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="Game_AnswerType.cs">
       <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
@@ -208,6 +208,9 @@
     </Compile>
     <Compile Include="HouseMaster.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HSUR_Daily_Attendance.cs">
+      <DependentUpon>MainSwachBharatAbhiyan.tt</DependentUpon>
     </Compile>
     <Compile Include="LiquidCurrentAllUserLocationTest1_Result.cs">
       <DependentUpon>ChildSwachBharatAbhiyan.tt</DependentUpon>

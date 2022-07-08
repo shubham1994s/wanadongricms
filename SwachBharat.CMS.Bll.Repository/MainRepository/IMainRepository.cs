@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using SwachBharat.CMS.Dal.DataContexts;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using System.Web.Mvc;
+using SwachBharat.CMS.Bll.ViewModels.Grid;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
@@ -52,7 +53,12 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         AppAreaMapVM GetAppAreaMap(int AppId);
         List<SelectListItem> ListAppMap();
+        List<SelectListItem> ListAllApp();
         void SaveAppAreaMap(AppAreaMapVM AppAreaObj);
+
+        void SaveAttendance(HSUR_Daily_AttendanceVM _hsuserinfo);
+
+       
         int GetUserAppId(string UserId);
 
         int GetUserAppIdL(string UserId);
@@ -65,6 +71,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         List<AppDetail> GetAppName();
         List<AppDetail> GetAppList(string utype, string LoginId, string Password);
 
+        List<EmployeeMaster> GetEmployeeList(int teamId, string Emptype);
+
         List<AppDetail> GetURAppName(string utype, string LoginId, string Password);
 
         string GetLoginid(string utype);
@@ -75,6 +83,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         EmployeeVM LoginMaster(EmployeeVM _userinfo);
 
         EmployeeVM LoginUR(EmployeeVM _userinfo);
+
+      
         List<MenuItem> GetMenus();
         List<MenuItemULB> GetULBMenus(string loginId);
 
