@@ -385,6 +385,28 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             return apps;
         }
 
+
+        public List<SelectListItem> ListAllApp()
+        {
+            var apps = new List<SelectListItem>();
+
+            try
+            {
+                using (var dbMain = new DevSwachhBharatMainEntities())
+                {
+                    apps = dbMain.AppDetails.Where(a => a.IsActive == true).Select(x => new SelectListItem
+                    {
+                        Value = x.AppId.ToString(),
+                        Text = x.AppName
+                    }).OrderBy(t => t.Text).ToList();
+                }
+
+            }
+            catch (Exception ex) { return apps; }
+
+            return apps;
+        }
+
         public AppAreaMapVM GetAppAreaMap(int AppId)
         {
             AppAreaMapVM appAreaMap = new AppAreaMapVM();

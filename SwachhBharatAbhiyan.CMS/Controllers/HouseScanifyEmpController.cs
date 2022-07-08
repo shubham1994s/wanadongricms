@@ -19,6 +19,12 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.Data;
+using System.Text;
+using OfficeOpenXml;
+using OfficeOpenXml.Table;
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
 {
@@ -97,6 +103,21 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
 
         }
+        public ActionResult HSHousesListDownload()
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                return View();
+
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
+
+        }
         public ActionResult HSAppAreaIndex()
         {
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
@@ -143,6 +164,24 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect("/Account/Login");
             }
         }
+
+        public ActionResult ListAllApp()
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                mainRepository = new MainRepository();
+                List<SelectListItem> lstApps = mainRepository.ListAllApp();
+                return Json(lstApps, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+
+                return Redirect("/Account/Login");
+            }
+        }
+
+
+
         public ActionResult GetAppLatLong(int AppId = -1)
         {
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
@@ -1109,9 +1148,307 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "HouseScanifyEmp");
         }
+        public ActionResult ExportHouseListPDF(int appId,string appName)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                childRepository = new ChildRepository(appId);
+                var dt = childRepository.getHousesList();
+                byte[] filecontent = exportpdf(dt, appName);
+                //byte[] filecontent = genPDF(dt,appName);
+
+                string filename = appName + "_Houses_List_PDF_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".pdf";
+                return File(filecontent, "application/pdf", filename);
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
+
+        }
+
+
+        public ActionResult ExportHouseListExcel(int appId, string appName)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                childRepository = new ChildRepository(appId);
+                var dt = childRepository.getHousesList();
+                byte[] filecontent = ExcelExport(dt, appName);
+                //byte[] filecontent = genPDF(dt,appName);
+
+                string filename = appName + "_Houses_List_Excel_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".xlsx";
+                return File(filecontent, "application/octet-stream", filename);
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
+
+        }
+
+        //public byte[] ExcelExport(DataTable dt,string appName)
+        //{
+        //    byte[] result;
+
+
+        //        using (var excelPackage = new ExcelPackage())
+        //        {
+        //        var worksheet = excelPackage.Workbook.Worksheets.Add("Export");
+        //        if (dt != null && dt.Rows.Count > 0)
+        //        {
+        //            #region HeaderBuilder
+        //            for (int c = 0; c < dt.Columns.Count; c++)
+        //            {
+        //                worksheet.Cells[1, c + 1].Value = dt.Columns[c].ColumnName;
+        //                #region Style
+        //                worksheet.Cells[1, c + 1].Style.Font.Bold = true;
+        //                worksheet.Cells[1, c + 1].Style.Font.Size = 12;
+        //                worksheet.Cells[1, c + 1].Style.Font.Name = "Tahoma";
+        //                worksheet.Cells[1, c + 1].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+        //                worksheet.Cells[1, c + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#13A38D"));
+        //                worksheet.Cells[1, c + 1].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFF"));
+        //                worksheet.Cells[1, c + 1].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+        //                worksheet.Cells[1, c + 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+        //                worksheet.Cells[1, c + 1].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+        //                worksheet.Cells[1, c + 1].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+        //                worksheet.Cells[1, c + 1].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+        //                worksheet.Cells[1, c + 1].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+        //                worksheet.Cells[1, c + 1].Style.Border.Left.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#DDD"));
+        //                worksheet.Cells[1, c + 1].Style.Border.Top.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#DDD"));
+        //                worksheet.Cells[1, c + 1].Style.Border.Right.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#DDD"));
+        //                worksheet.Cells[1, c + 1].Style.Border.Bottom.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#DDD"));
+        //                #endregion
+        //            }
+        //            #endregion
+        //            #region ContentBuilder
+        //            for (int r = 0; r < dt.Rows.Count; r++)
+        //            {
+        //                for (int c = 0; c < dt.Columns.Count; c++)
+        //                {
+        //                    worksheet.Cells[r + 2, c + 1].Value = dt.Rows[r][c];
+        //                    #region Style
+        //                    worksheet.Cells[r + 2, c + 1].Style.Font.Bold = false;
+        //                    worksheet.Cells[r + 2, c + 1].Style.Font.Size = 12;
+        //                    worksheet.Cells[r + 2, c + 1].Style.Font.Name = "Tahoma";
+        //                    worksheet.Cells[r + 2, c + 1].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+        //                    worksheet.Cells[r + 2, c + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#FFF"));
+        //                    worksheet.Cells[r + 2, c + 1].Style.Font.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#444"));
+        //                    worksheet.Cells[r + 2, c + 1].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+        //                    worksheet.Cells[r + 2, c + 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+
+        //                    worksheet.Cells[r + 2, c + 1].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+        //                    worksheet.Cells[r + 2, c + 1].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+        //                    worksheet.Cells[r + 2, c + 1].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+        //                    worksheet.Cells[r + 2, c + 1].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+        //                    worksheet.Cells[r + 2, c + 1].Style.Border.Left.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#DDD"));
+        //                    worksheet.Cells[r + 2, c + 1].Style.Border.Top.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#DDD"));
+        //                    worksheet.Cells[r + 2, c + 1].Style.Border.Right.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#DDD"));
+        //                    worksheet.Cells[r + 2, c + 1].Style.Border.Bottom.Color.SetColor(System.Drawing.ColorTranslator.FromHtml("#DDD"));
+        //                    #endregion
+        //                }
+        //            }
+        //            #endregion
+        //            #region ColumnResize
+        //            for (int c = 0; c < dt.Columns.Count; c++)
+        //            {
+        //                worksheet.Column(c + 1).AutoFit();
+        //            }
+        //            #endregion
+
+        //        }
+        //        result = excelPackage.GetAsByteArray();
+
+        //        }
+
+
+        //    return result;
+        //}
+
+        public byte[] ExcelExport(DataTable dt, string appName)
+        {
+            byte[] result;
+
+
+            using (var excelPackage = new ExcelPackage())
+            {
+                var worksheet = excelPackage.Workbook.Worksheets.Add("Export");
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    worksheet.Cells["A3"].LoadFromDataTable(dt, true, TableStyles.None);
+                    worksheet.Cells[1, 1, 1, 10].Merge = true;
+                    worksheet.Cells[1, 1].Value = "Houses List for ULB Name: " + appName + "   Date : " + DateTime.Now.ToString("yyyy-MMM-dd");
+                    worksheet.Cells[1, 1].Style.Font.Bold = true;
+                    worksheet.Cells[1, 1].Style.Font.Size = 16;
+                    worksheet.Cells["A3:AN3"].Style.Font.Bold = true;
+                    worksheet.Cells["A3:AN3"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    worksheet.Cells["A3:AN3"].Style.Fill.BackgroundColor.SetColor(System.Drawing.ColorTranslator.FromHtml("#b2f7c1"));
+                    #region ColumnResize
+                    for (int c = 1; c < dt.Columns.Count +1; c++)
+                    {
+                        worksheet.Column(c + 1).AutoFit();
+                    }
+                    #endregion
+
+                }
+                result = excelPackage.GetAsByteArray();
+
+            }
+
+
+            return result;
+        }
 
 
 
 
+        private byte[] exportpdf(DataTable dtEmployee, string appName)
+        {
+
+            // creating document object  
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            //iTextSharp.text.Rectangle rec = new iTextSharp.text.Rectangle(PageSize.A4);
+            iTextSharp.text.Rectangle rec = new iTextSharp.text.Rectangle(1500, 1500);
+            //rec.BackgroundColor = new BaseColor(System.Drawing.Color.Olive);
+            Document doc = new Document(rec);
+            //doc.SetPageSize(iTextSharp.text.PageSize.A4);
+            doc.SetPageSize(rec);
+
+            PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+            doc.Open();
+
+            //Creating paragraph for header  
+            BaseFont bfntHead = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            iTextSharp.text.Font fntHead = new iTextSharp.text.Font(bfntHead, 20, 1, iTextSharp.text.BaseColor.BLUE);
+            Paragraph prgHeading = new Paragraph();
+            prgHeading.Alignment = Element.ALIGN_LEFT;
+            prgHeading.Add(new Chunk("Houses List for ULB Name: " + appName + "   Date : " + DateTime.Now.ToString("yyyy-MMM-dd"), fntHead));
+            doc.Add(prgHeading);
+
+            //Adding paragraph for report generated by  
+            Paragraph prgGeneratedBY = new Paragraph();
+            BaseFont btnAuthor = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            iTextSharp.text.Font fntAuthor = new iTextSharp.text.Font(btnAuthor, 8, 2, iTextSharp.text.BaseColor.BLUE);
+            prgGeneratedBY.Alignment = Element.ALIGN_RIGHT;
+            //prgGeneratedBY.Add(new Chunk("Report Generated by : ASPArticles", fntAuthor));  
+            //prgGeneratedBY.Add(new Chunk("\nGenerated Date : " + DateTime.Now.ToShortDateString(), fntAuthor));  
+            doc.Add(prgGeneratedBY);
+
+            //Adding a line  
+            Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, iTextSharp.text.BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+            doc.Add(p);
+
+            //Adding line break  
+            doc.Add(new Chunk("\n", fntHead));
+
+            //Adding  PdfPTable  
+            PdfPTable table = new PdfPTable(dtEmployee.Columns.Count);
+            table.WidthPercentage = 100;
+            int[] firstTablecellwidth = { 8, 18, 6, 6, 8, 6, 6, 18, 8, 8, 8 };
+            table.SetWidths(firstTablecellwidth);
+            
+            for (int i = 0; i < dtEmployee.Columns.Count; i++)
+            {
+                string cellText = Server.HtmlDecode(dtEmployee.Columns[i].ColumnName);
+                PdfPCell cell = new PdfPCell();
+                cell.Phrase = new Phrase(cellText, new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 10, 1, new BaseColor(System.Drawing.ColorTranslator.FromHtml("#000000"))));
+                cell.BackgroundColor = new BaseColor(System.Drawing.ColorTranslator.FromHtml("#C8C8C8"));
+                //cell.Phrase = new Phrase(cellText, new Font(Font.FontFamily.TIMES_ROMAN, 10, 1, new BaseColor(grdStudent.HeaderStyle.ForeColor)));  
+                //cell.BackgroundColor = new BaseColor(grdStudent.HeaderStyle.BackColor);  
+                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell.PaddingBottom = 5;
+                cell.NoWrap = false;
+                table.AddCell(cell);
+            }
+
+            //writing table Data  
+            for (int i = 0; i < dtEmployee.Rows.Count; i++)
+            {
+                for (int j = 0; j < dtEmployee.Columns.Count; j++)
+                {
+                    table.AddCell(dtEmployee.Rows[i][j].ToString());
+                }
+            }
+
+            doc.Add(table);
+            doc.Close();
+
+            byte[] result = ms.ToArray();
+            return result;
+
+        }
+
+
+
+
+
+        private byte[] genPDF(DataTable dt, string appName)
+        {
+            byte[] result;
+            //Dummy data for Invoice (Bill).
+
+            StringBuilder sb = new StringBuilder();
+
+            //Generate Invoice (Bill) Header.
+            sb.Append("<table width='100%' cellspacing='0' cellpadding='2'>");
+            sb.Append("<tr><td align='center' style='background-color: #18B5F0' colspan = '2'><b>Houses List</b></td></tr>");
+            sb.Append("<tr><td colspan = '2'></td></tr>");
+            sb.Append("<tr><td><b>ULB Name: </b>");
+            sb.Append(appName);
+            sb.Append("</td><td align = 'right'><b>Date: </b>");
+            sb.Append(DateTime.Now.ToString("yyyy-MMM-dd"));
+            sb.Append(" </td></tr>");
+            sb.Append("</table>");
+            sb.Append("<br />");
+
+            //Generate Invoice (Bill) Items Grid.
+            sb.Append("<table style='width:100%;height:100%;border:1px solid;border-collapse:collapse;'>");
+            sb.Append("<tr>");
+            foreach (DataColumn column in dt.Columns)
+            {
+                sb.Append("<th style = 'background-color: #D20B0C;color:#ffffff'>");
+                sb.Append(column.ColumnName);
+                sb.Append("</th>");
+            }
+            sb.Append("</tr>");
+            foreach (DataRow row in dt.Rows)
+            {
+                sb.Append("<tr>");
+                foreach (DataColumn column in dt.Columns)
+                {
+                    sb.Append("<td>");
+                    sb.Append(row[column]);
+                    sb.Append("</td>");
+                }
+                sb.Append("</tr>");
+            }
+            
+            sb.Append("</table>");
+            using (var ms = new MemoryStream())
+            {
+
+                //Create an iTextSharp Document which is an abstraction of a PDF but **NOT** a PDF
+                using (var doc = new Document(new Rectangle(200, 200)))
+                {
+
+                    //Create a writer that's bound to our PDF abstraction and our stream
+                    using (var writer = PdfWriter.GetInstance(doc, ms))
+                    {
+                        doc.Open();
+                        using (var srHtml = new StringReader(sb.ToString()))
+                        {
+
+                            //Parse the HTML
+                            iTextSharp.tool.xml.XMLWorkerHelper.GetInstance().ParseXHtml(writer, doc, srHtml);
+                        }
+
+                        doc.Close();
+                    }
+                }
+                result = ms.ToArray();
+            }
+
+            return result;
+        }
     }
 }

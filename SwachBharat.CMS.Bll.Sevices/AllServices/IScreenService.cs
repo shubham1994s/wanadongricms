@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Data;
 
 namespace SwachBharat.CMS.Bll.Services
 {
@@ -148,6 +149,8 @@ namespace SwachBharat.CMS.Bll.Services
 
         HSDashBoardVM GetURDashBoardDetails();
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
+
+        DataTable getHousesList();
         List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate,string QrStatus);
         //Added By Saurabh (06 June 2019)
         List<SBALHouseLocationMapView> GetAllHouseLocation(string date, int userid, int areaid, int wardNo, string SearchString, int? GarbageType, int FilterType,string Emptype);

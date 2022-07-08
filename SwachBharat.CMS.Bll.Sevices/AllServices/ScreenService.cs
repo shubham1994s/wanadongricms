@@ -21,6 +21,7 @@ using System.Web;
 using Microsoft.SqlServer.Server;
 using System.Web.UI.WebControls;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace SwachBharat.CMS.Bll.Services
 {
@@ -6798,6 +6799,46 @@ namespace SwachBharat.CMS.Bll.Services
                         }
 
 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return data;
+            }
+            return data;
+        }
+
+        public DataTable getHousesList()
+        {
+            var data = new DataTable();
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var conn = db.Database.Connection;
+                    var connectionState = conn.State;
+                    try
+                    {
+                        if (connectionState != ConnectionState.Open) conn.Open();
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId ORDER BY H.houseId asc";
+                            cmd.CommandType = CommandType.Text;
+                            using (var reader = cmd.ExecuteReader())
+                            {
+                                data.Load(reader);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // error handling
+                        return data; 
+                    }
+                    finally
+                    {
+                        if (connectionState != ConnectionState.Closed) conn.Close();
                     }
                 }
             }

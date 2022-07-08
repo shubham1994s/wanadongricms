@@ -11,6 +11,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Data;
 
 namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 {
@@ -165,6 +166,8 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
 
         List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate,string QrStatus);
+
+        DataTable getHousesList();
         #endregion
 
         //Added By saurabh (04 June 2019)
