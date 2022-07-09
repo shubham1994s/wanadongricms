@@ -841,6 +841,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
         <Function Name="SP_StreetSweepList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_TotalHouseCollection_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="gcdate" Type="date" Mode="In" />
+          <Parameter Name="AppId" Type="int" Mode="In" />
         </Function>
         <Function Name="Spbeatmapstatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
@@ -1249,14 +1250,15 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <FunctionImport Name="SP_HouseScanify_Count" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_HouseScanify_Count_Result)">
           <Parameter Name="Appid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SP_HouseScanifyDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_HouseScanifyDetails_Result)">
-          <Parameter Name="Appid" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="GarbageCollectionDetails" EntityType="DevSwachhBharatNagpurModel.GarbageCollectionDetail" />
-          <FunctionImport Name="SP_TotalHouseCollection_Count" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_TotalHouseCollection_Count_Result)">
-          <Parameter Name="gcdate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="SauchalayAddresses" EntityType="DevSwachhBharatNagpurModel.SauchalayAddress" />
+          <FunctionImport Name="SP_TotalHouseCollection_Count" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_TotalHouseCollection_Count_Result)">
+            <Parameter Name="gcdate" Mode="In" Type="DateTime" />
+            <Parameter Name="AppId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_HouseScanifyDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_HouseScanifyDetails_Result)">
+            <Parameter Name="Appid" Mode="In" Type="Int32" />
+          </FunctionImport>
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -2537,23 +2539,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="Int32" Name="TotalStreetLatLongCount" Nullable="true" />
           <Property Type="Int32" Name="TotalDumpYardLatLongCount" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="SP_HouseScanifyDetails_Result">
-          <Property Type="Int32" Name="TotalHouse" Nullable="true" />
-          <Property Type="Int32" Name="TotalHouseUpdated" Nullable="true" />
-          <Property Type="Int32" Name="TotalHouseUpdated_CurrentDay" Nullable="true" />
-          <Property Type="Int32" Name="TotalPoint" Nullable="true" />
-          <Property Type="Int32" Name="TotalPointUpdated" Nullable="true" />
-          <Property Type="Int32" Name="TotalPointUpdated_CurrentDay" Nullable="true" />
-          <Property Type="Int32" Name="TotalDump" Nullable="true" />
-          <Property Type="Int32" Name="TotalDumpUpdated" Nullable="true" />
-          <Property Type="Int32" Name="TotalDumpUpdated_CurrentDay" Nullable="true" />
-          <Property Type="Int32" Name="TotalLiquid" Nullable="true" />
-          <Property Type="Int32" Name="TotalLiquidUpdated" Nullable="true" />
-          <Property Type="Int32" Name="TotalLiquidUpdated_CurrentDay" Nullable="true" />
-          <Property Type="Int32" Name="TotalStreet" Nullable="true" />
-          <Property Type="Int32" Name="TotalStreetUpdated" Nullable="true" />
-          <Property Type="Int32" Name="TotalStreetUpdated_CurrentDay" Nullable="true" />
-        </ComplexType>
         <EntityType Name="GarbageCollectionDetail">
           <Key>
             <PropertyRef Name="gcId" />
@@ -2594,6 +2579,21 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="gpBeforImageTime" Type="DateTime" Precision="3" />
           <Property Name="vqrid" Type="Int32" />
         </EntityType>
+        <EntityType Name="SauchalayAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SauchalayID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="QrImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
         <ComplexType Name="SP_TotalHouseCollection_Count_Result">
           <Property Type="Int32" Name="TotalHouseCount" Nullable="true" />
           <Property Type="Int32" Name="MixedCount" Nullable="true" />
@@ -2627,21 +2627,23 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="Int32" Name="TotalHousePropertyCount" Nullable="true" />
           <Property Type="Int32" Name="TotalDumpPropertyCount" Nullable="true" />
         </ComplexType>
-        <EntityType Name="SauchalayAddress">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SauchalayID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="Lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="QrImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
+        <ComplexType Name="SP_HouseScanifyDetails_Result">
+          <Property Type="Int32" Name="TotalHouse" Nullable="true" />
+          <Property Type="Int32" Name="TotalHouseUpdated" Nullable="true" />
+          <Property Type="Int32" Name="TotalHouseUpdated_CurrentDay" Nullable="true" />
+          <Property Type="Int32" Name="TotalPoint" Nullable="true" />
+          <Property Type="Int32" Name="TotalPointUpdated" Nullable="true" />
+          <Property Type="Int32" Name="TotalPointUpdated_CurrentDay" Nullable="true" />
+          <Property Type="Int32" Name="TotalDump" Nullable="true" />
+          <Property Type="Int32" Name="TotalDumpUpdated" Nullable="true" />
+          <Property Type="Int32" Name="TotalDumpUpdated_CurrentDay" Nullable="true" />
+          <Property Type="Int32" Name="TotalLiquid" Nullable="true" />
+          <Property Type="Int32" Name="TotalLiquidUpdated" Nullable="true" />
+          <Property Type="Int32" Name="TotalLiquidUpdated_CurrentDay" Nullable="true" />
+          <Property Type="Int32" Name="TotalStreet" Nullable="true" />
+          <Property Type="Int32" Name="TotalStreetUpdated" Nullable="true" />
+          <Property Type="Int32" Name="TotalStreetUpdated_CurrentDay" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4015,27 +4017,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_HouseScanifyDetails" FunctionName="DevSwachhBharatNagpurModel.Store.SP_HouseScanifyDetails">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.SP_HouseScanifyDetails_Result">
-                <ScalarProperty Name="TotalHouse" ColumnName="TotalHouse" />
-                <ScalarProperty Name="TotalHouseUpdated" ColumnName="TotalHouseUpdated" />
-                <ScalarProperty Name="TotalHouseUpdated_CurrentDay" ColumnName="TotalHouseUpdated_CurrentDay" />
-                <ScalarProperty Name="TotalPoint" ColumnName="TotalPoint" />
-                <ScalarProperty Name="TotalPointUpdated" ColumnName="TotalPointUpdated" />
-                <ScalarProperty Name="TotalPointUpdated_CurrentDay" ColumnName="TotalPointUpdated_CurrentDay" />
-                <ScalarProperty Name="TotalDump" ColumnName="TotalDump" />
-                <ScalarProperty Name="TotalDumpUpdated" ColumnName="TotalDumpUpdated" />
-                <ScalarProperty Name="TotalDumpUpdated_CurrentDay" ColumnName="TotalDumpUpdated_CurrentDay" />
-                <ScalarProperty Name="TotalLiquid" ColumnName="TotalLiquid" />
-                <ScalarProperty Name="TotalLiquidUpdated" ColumnName="TotalLiquidUpdated" />
-                <ScalarProperty Name="TotalLiquidUpdated_CurrentDay" ColumnName="TotalLiquidUpdated_CurrentDay" />
-                <ScalarProperty Name="TotalStreet" ColumnName="TotalStreet" />
-                <ScalarProperty Name="TotalStreetUpdated" ColumnName="TotalStreetUpdated" />
-                <ScalarProperty Name="TotalStreetUpdated_CurrentDay" ColumnName="TotalStreetUpdated_CurrentDay" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="GarbageCollectionDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.GarbageCollectionDetail">
               <MappingFragment StoreEntitySet="GarbageCollectionDetails">
@@ -4077,6 +4058,22 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SauchalayAddresses">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.SauchalayAddress">
+              <MappingFragment StoreEntitySet="SauchalayAddress">
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="QrImageUrl" ColumnName="QrImageUrl" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SauchalayID" ColumnName="SauchalayID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_TotalHouseCollection_Count" FunctionName="DevSwachhBharatNagpurModel.Store.SP_TotalHouseCollection_Count">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.SP_TotalHouseCollection_Count_Result">
@@ -4114,22 +4111,27 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="SauchalayAddresses">
-            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.SauchalayAddress">
-              <MappingFragment StoreEntitySet="SauchalayAddress">
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="QrImageUrl" ColumnName="QrImageUrl" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Long" ColumnName="Long" />
-                <ScalarProperty Name="Lat" ColumnName="Lat" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="SauchalayID" ColumnName="SauchalayID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_HouseScanifyDetails" FunctionName="DevSwachhBharatNagpurModel.Store.SP_HouseScanifyDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DevSwachhBharatNagpurModel.SP_HouseScanifyDetails_Result">
+                <ScalarProperty Name="TotalHouse" ColumnName="TotalHouse" />
+                <ScalarProperty Name="TotalHouseUpdated" ColumnName="TotalHouseUpdated" />
+                <ScalarProperty Name="TotalHouseUpdated_CurrentDay" ColumnName="TotalHouseUpdated_CurrentDay" />
+                <ScalarProperty Name="TotalPoint" ColumnName="TotalPoint" />
+                <ScalarProperty Name="TotalPointUpdated" ColumnName="TotalPointUpdated" />
+                <ScalarProperty Name="TotalPointUpdated_CurrentDay" ColumnName="TotalPointUpdated_CurrentDay" />
+                <ScalarProperty Name="TotalDump" ColumnName="TotalDump" />
+                <ScalarProperty Name="TotalDumpUpdated" ColumnName="TotalDumpUpdated" />
+                <ScalarProperty Name="TotalDumpUpdated_CurrentDay" ColumnName="TotalDumpUpdated_CurrentDay" />
+                <ScalarProperty Name="TotalLiquid" ColumnName="TotalLiquid" />
+                <ScalarProperty Name="TotalLiquidUpdated" ColumnName="TotalLiquidUpdated" />
+                <ScalarProperty Name="TotalLiquidUpdated_CurrentDay" ColumnName="TotalLiquidUpdated_CurrentDay" />
+                <ScalarProperty Name="TotalStreet" ColumnName="TotalStreet" />
+                <ScalarProperty Name="TotalStreetUpdated" ColumnName="TotalStreetUpdated" />
+                <ScalarProperty Name="TotalStreetUpdated_CurrentDay" ColumnName="TotalStreetUpdated_CurrentDay" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
          
         </EntityContainerMapping>
       </Mapping>
