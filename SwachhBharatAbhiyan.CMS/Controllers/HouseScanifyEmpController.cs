@@ -1012,6 +1012,8 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
             {
                 ViewBag.daId = daId;
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
                 mainRepository = new MainRepository();
                 SBAHSUREmpLocationMapView obj = new SBAHSUREmpLocationMapView();
                 obj = mainRepository.GetEmpByIdforMap(-1,daId);
