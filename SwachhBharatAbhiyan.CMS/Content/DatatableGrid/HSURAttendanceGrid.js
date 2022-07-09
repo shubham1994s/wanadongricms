@@ -239,7 +239,7 @@ function LoadAGridM() {
 }
 
 function user_route(id) {
-    window.location.href = "/HouseScanifyEmp/AddUREmployeeDetails?EmpId=" + id;
+    window.location.href = "/HouseScanifyEmp/HSUREMPRoute?daId=" + id;
 };
 //////////////////////////////////////////////////////////////////////////////
 function showInventoriesGrid() {

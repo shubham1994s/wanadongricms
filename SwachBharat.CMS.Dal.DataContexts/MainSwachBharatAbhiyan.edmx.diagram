@@ -30,6 +30,7 @@
         <AssociationConnector Association="DevSwachhBharatMainModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <EntityTypeShape EntityType="DevSwachhBharatMainModel.AppDetail" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="DevSwachhBharatMainModel.HSUR_Daily_Attendance" Width="1.5" PointX="14.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DevSwachhBharatMainModel.UR_Location" Width="1.5" PointX="15.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
