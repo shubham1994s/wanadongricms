@@ -163,7 +163,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             EmployeeVM _EmployeeVM = new EmployeeVM();
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                var appUser = (db.AD_USER_MST_LIQUID.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD && x.APP_ID != 3109).SingleOrDefault());
+                var appUser = (db.AD_USER_MST_LIQUID.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD && x.APP_ID != 3109 && x.APP_ID != 3088 && x.APP_ID != 3108 && x.APP_ID != 3111 && x.APP_ID != 3068).SingleOrDefault());
                 if (appUser != null)
                 {
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
@@ -188,7 +188,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             EmployeeVM _EmployeeVM = new EmployeeVM();
             using (DevSwachhBharatMainEntities db = new DevSwachhBharatMainEntities())
             {
-                var appUser = (db.AD_USER_MST_STREET.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD && x.APP_ID!=3109).SingleOrDefault());
+                var appUser = (db.AD_USER_MST_STREET.Where(x => x.ADUM_LOGIN_ID == _userinfo.ADUM_LOGIN_ID && x.ADUM_PASSWORD == _userinfo.ADUM_PASSWORD && x.APP_ID != 3109 && x.APP_ID != 3088 && x.APP_ID != 3108 && x.APP_ID != 3111 && x.APP_ID != 3068).SingleOrDefault());
                 if (appUser != null)
                 {
                     _EmployeeVM.ADUM_LOGIN_ID = appUser.ADUM_LOGIN_ID;
@@ -556,8 +556,10 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             {
                 ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
             }
+
+         
             //return ip;
-            model.ip_address = ip;
+            model.ip_address = data.ipaddress;
             model.login_device = "PC";
 
             return model;

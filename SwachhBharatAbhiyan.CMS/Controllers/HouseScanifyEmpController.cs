@@ -275,6 +275,17 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [AllowAnonymous]
         public ActionResult login(LoginViewModel model, string returnUrl)
         {
+            //------------Get Ip Start---------------------
+
+            // Getting host name
+            string host = Dns.GetHostName();
+
+            // Getting ip address using host name
+            IPHostEntry ip = Dns.GetHostEntry(host);
+            string hname = ip.HostName.ToString();
+            string ipAdd = (ip.AddressList[1].ToString());
+            //------------Get Ip End---------------------
+
             EmployeeVM Result = new EmployeeVM();
             Result.ADUM_LOGIN_ID = model.Email;
             Result.ADUM_PASSWORD = model.Password;
@@ -289,8 +300,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 Daily_Attendance.LOGIN_ID = model.Email;
                 Daily_Attendance.EmpId = Result.ADUM_USER_CODE;
                 Daily_Attendance.EmployeeType = Result.ADUM_DESIGNATION;
+                Daily_Attendance.ipaddress = ipAdd;
 
-                if(Daily_Attendance.EmployeeType != "A")
+                if (Daily_Attendance.EmployeeType != "A")
                 {
                     mainRepository.SaveAttendance(Daily_Attendance);
                 }
