@@ -6052,6 +6052,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 {
                     data = db.HSUR_Daily_Attendance.Select(x => new HSUREmployeeAttendanceDetails
                     {
+                        daID = x.daID,
                         EmpId = (int)x.userId,
                         EmpName = db.EmployeeMasters.Where(c => c.EmpId == x.userId).FirstOrDefault().EmpName,
                         StartTime = (x.startTime).ToString(),

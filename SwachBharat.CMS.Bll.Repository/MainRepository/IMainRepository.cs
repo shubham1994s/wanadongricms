@@ -65,6 +65,10 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
         int GetUserAppIdSS(string UserId);
         string GetDatabaseFromAppID(int AppId);
+
+        SBAHSUREmpLocationMapView GetEmpByIdforMap(int teamId, int daId);
+
+        List<SBAHSUREmpLocationMapView> GetHSUserAttenRoute(int id);
         string GetDataSourceFromAppID(int AppId);
 
        // Added By Saurabh ( 27 May 2019)

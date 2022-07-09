@@ -1008,6 +1008,39 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 return Redirect("/Account/Login");
 
         }
+
+        public ActionResult HSUREMPRoute(int daId)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                ViewBag.daId = daId;
+                mainRepository = new MainRepository();
+                SBAHSUREmpLocationMapView obj = new SBAHSUREmpLocationMapView();
+                obj = mainrepository.GetEmpByIdforMap(-1,daId);
+                return View(obj);
+            }
+            else
+            {
+                return Redirect("/HouseScanifyEmp/Login");
+            }
+
+        }
+
+        public ActionResult HSURRouteData(int daId)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                List<SBAHSUREmpLocationMapView> obj = new List<SBAHSUREmpLocationMapView>();
+                obj = mainrepository.GetHSUserAttenRoute(daId);
+                // return Json(obj);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Redirect("/HouseScanifyEmp/Login");
+            }
+
+        }
         private void AddSession(int AppID)
         {
             try

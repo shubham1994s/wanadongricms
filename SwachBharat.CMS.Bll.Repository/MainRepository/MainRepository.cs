@@ -158,6 +158,16 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
         {
             return mainService.GetUserAppIdSS(UserId);
         }
+
+        public SBAHSUREmpLocationMapView GetEmpByIdforMap(int teamId, int daId)
+        {
+            return mainService.GetEmpByIdforMap(teamId, daId);
+        }
+
+        public List<SBAHSUREmpLocationMapView> GetHSUserAttenRoute(int daId)
+        {
+            return mainService.GetHSUserAttenRoute(daId);
+        }
         public EmployeeVM Login(EmployeeVM _userinfo)
         {
             EmployeeVM _EmployeeVM = new EmployeeVM();
