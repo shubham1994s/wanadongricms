@@ -32,11 +32,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
     {
         // GET: HouseScanifyEmp
         IChildRepository childRepository;
-        IMainRepository mainRepository;
+       // IMainRepository mainRepository;
 
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-        private IMainRepository mainrepository;
+        private IMainRepository mainRepository;
 
         public ActionResult MenuIndex()
         {
@@ -1016,7 +1014,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 ViewBag.daId = daId;
                 mainRepository = new MainRepository();
                 SBAHSUREmpLocationMapView obj = new SBAHSUREmpLocationMapView();
-                obj = mainrepository.GetEmpByIdforMap(-1,daId);
+                obj = mainRepository.GetEmpByIdforMap(-1,daId);
                 return View(obj);
             }
             else
@@ -1031,7 +1029,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
             {
                 List<SBAHSUREmpLocationMapView> obj = new List<SBAHSUREmpLocationMapView>();
-                obj = mainrepository.GetHSUserAttenRoute(daId);
+                obj = mainRepository.GetHSUserAttenRoute(daId);
                 // return Json(obj);
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
