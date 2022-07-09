@@ -556,8 +556,10 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             {
                 ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
             }
+
+         
             //return ip;
-            model.ip_address = ip;
+            model.ip_address = data.ipaddress;
             model.login_device = "PC";
 
             return model;
