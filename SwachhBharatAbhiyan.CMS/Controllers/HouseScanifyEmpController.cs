@@ -222,22 +222,35 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         public ActionResult HSURIndex()
         {
-            int appid = 1;
-            ViewBag.AppId = appid;
-            ViewBag.UType = Session["utype"];
-            ViewBag.HSuserid = Session["Id"];
-            return View();
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                int appid = 1;
+                ViewBag.AppId = appid;
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                return View();
+            }
+            else
+            {
+                return Redirect("/HouseScanifyEmp/Login");
+            }
 
 
         }
         public ActionResult HSURAttendance()
         {
-            int appid = 1;
-            ViewBag.AppId = appid;
-            ViewBag.UType = Session["utype"];
-            ViewBag.HSuserid = Session["Id"];
-            return View();
-
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                int appid = 1;
+                ViewBag.AppId = appid;
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                return View();
+            }
+            else 
+            {
+                return Redirect("/HouseScanifyEmp/Login");
+            }
 
         }
         

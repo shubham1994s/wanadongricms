@@ -354,6 +354,20 @@
             var RadioValue = $("input[name='radio']:checked").val();
 
             if (RadioValue == 0) {
+                var date = new Date();
+
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+
+                if (month < 10) month = "0" + month;
+                if (day < 10) day = "0" + day;
+
+                var today = day + "/" + month + "/" + year;
+
+                document.getElementById('txt_fdate').value = today;
+                document.getElementById('txt_tdate').value = today;
+
                 $("#divPC").hide();
                 $("#divMobile").show();
                 $('#s').val('');
@@ -362,6 +376,19 @@
 
             }
             else if (RadioValue == 1) {
+                var date = new Date();
+
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear();
+
+                if (month < 10) month = "0" + month;
+                if (day < 10) day = "0" + day;
+
+                var today = day + "/" + month + "/" + year;
+
+                document.getElementById('txt_fdate').value = today;
+                document.getElementById('txt_tdate').value = today;
                 $("#divPC").show();
                 $("#divMobile").hide();
                 $('#s').val('');
