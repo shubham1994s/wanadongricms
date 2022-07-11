@@ -1240,7 +1240,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         {
             ViewBag.UType = Session["utype"];
             ViewBag.HSuserid = Session["Id"];
-            if (ViewBag.UType != "A")
+            if (ViewBag.UType == "SA")
             {
                 HSUR_Daily_AttendanceVM Daily_Attendance = new HSUR_Daily_AttendanceVM();
                 Daily_Attendance.LOGIN_ID = ViewBag.HSuserid;
