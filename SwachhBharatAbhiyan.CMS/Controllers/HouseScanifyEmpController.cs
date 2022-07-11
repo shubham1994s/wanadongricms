@@ -1238,6 +1238,17 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            ViewBag.UType = Session["utype"];
+            ViewBag.HSuserid = Session["Id"];
+            if (ViewBag.UType != "A")
+            {
+                HSUR_Daily_AttendanceVM Daily_Attendance = new HSUR_Daily_AttendanceVM();
+                Daily_Attendance.LOGIN_ID = ViewBag.HSuserid;
+                Daily_Attendance.EmployeeType = ViewBag.UType;
+                Daily_Attendance.logoff = "LogOut";
+
+                mainRepository.SaveAttendance(Daily_Attendance);
+            }
             Session["__MySession__"] = null; //it's my session variable
             Session.Clear();
             Session.Abandon();
