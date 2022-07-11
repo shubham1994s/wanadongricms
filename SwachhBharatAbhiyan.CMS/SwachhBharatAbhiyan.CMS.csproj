@@ -3214,6 +3214,7 @@
     <Content Include="Views\DumpPlantProcess\DumpRoute.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSURAttendance.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSHousesListDownload.cshtml" />
+    <Content Include="Views\HouseScanifyEmp\HSUREMPRoute.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -32,11 +32,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
     {
         // GET: HouseScanifyEmp
         IChildRepository childRepository;
-        IMainRepository mainRepository;
+       // IMainRepository mainRepository;
 
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-        private IMainRepository mainrepository;
+        private IMainRepository mainRepository;
 
         public ActionResult MenuIndex()
         {
@@ -222,22 +220,35 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         public ActionResult HSURIndex()
         {
-            int appid = 1;
-            ViewBag.AppId = appid;
-            ViewBag.UType = Session["utype"];
-            ViewBag.HSuserid = Session["Id"];
-            return View();
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                int appid = 1;
+                ViewBag.AppId = appid;
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                return View();
+            }
+            else
+            {
+                return Redirect("/HouseScanifyEmp/Login");
+            }
 
 
         }
         public ActionResult HSURAttendance()
         {
-            int appid = 1;
-            ViewBag.AppId = appid;
-            ViewBag.UType = Session["utype"];
-            ViewBag.HSuserid = Session["Id"];
-            return View();
-
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                int appid = 1;
+                ViewBag.AppId = appid;
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                return View();
+            }
+            else 
+            {
+                return Redirect("/HouseScanifyEmp/Login");
+            }
 
         }
         
@@ -262,6 +273,17 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [AllowAnonymous]
         public ActionResult login(LoginViewModel model, string returnUrl)
         {
+            //------------Get Ip Start---------------------
+
+            // Getting host name
+            string host = Dns.GetHostName();
+
+            // Getting ip address using host name
+            IPHostEntry ip = Dns.GetHostEntry(host);
+            string hname = ip.HostName.ToString();
+            string ipAdd = (ip.AddressList[1].ToString());
+            //------------Get Ip End---------------------
+
             EmployeeVM Result = new EmployeeVM();
             Result.ADUM_LOGIN_ID = model.Email;
             Result.ADUM_PASSWORD = model.Password;
@@ -276,6 +298,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 Daily_Attendance.LOGIN_ID = model.Email;
                 Daily_Attendance.EmpId = Result.ADUM_USER_CODE;
                 Daily_Attendance.EmployeeType = Result.ADUM_DESIGNATION;
+                Daily_Attendance.ipaddress = ipAdd;
 
                 if(Daily_Attendance.EmployeeType != "A")
                 {
@@ -981,6 +1004,41 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             }
             else
                 return Redirect("/Account/Login");
+
+        }
+
+        public ActionResult HSUREMPRoute(int daId)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                ViewBag.daId = daId;
+                ViewBag.UType = Session["utype"];
+                ViewBag.HSuserid = Session["Id"];
+                mainRepository = new MainRepository();
+                SBAHSUREmpLocationMapView obj = new SBAHSUREmpLocationMapView();
+                obj = mainRepository.GetEmpByIdforMap(-1,daId);
+                return View(obj);
+            }
+            else
+            {
+                return Redirect("/HouseScanifyEmp/Login");
+            }
+
+        }
+
+        public ActionResult HSURRouteData(int daId)
+        {
+            if (Session["utype"] != null && Session["utype"].ToString() == "A")
+            {
+                List<SBAHSUREmpLocationMapView> obj = new List<SBAHSUREmpLocationMapView>();
+                obj = mainRepository.GetHSUserAttenRoute(daId);
+                // return Json(obj);
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Redirect("/HouseScanifyEmp/Login");
+            }
 
         }
         private void AddSession(int AppID)

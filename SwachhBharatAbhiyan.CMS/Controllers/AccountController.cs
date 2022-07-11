@@ -362,6 +362,13 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 // redirect/show error/whatever?
                 filterContext.Result = new RedirectResult("/Account/Login");
             }
+            else
+            {
+                filterContext.ExceptionHandled = true;
+
+                // redirect/show error/whatever?
+                filterContext.Result = new RedirectResult("/Account/Login");
+            }
         }
 
         //

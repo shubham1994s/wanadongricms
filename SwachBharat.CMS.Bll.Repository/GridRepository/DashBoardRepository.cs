@@ -6052,6 +6052,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 {
                     data = db.HSUR_Daily_Attendance.Select(x => new HSUREmployeeAttendanceDetails
                     {
+                        daID = x.daID,
                         EmpId = (int)x.userId,
                         EmpName = db.EmployeeMasters.Where(c => c.EmpId == x.userId).FirstOrDefault().EmpName,
                         StartTime = (x.startTime).ToString(),
@@ -6139,6 +6140,12 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                 //    data = model.ToList();
                 //}
+                if (userId > 0)
+                {
+                    var model = data.Where(x => x.EmpId == userId).ToList();
+
+                    data = model.ToList();
+                }
                 return data;
 
             }

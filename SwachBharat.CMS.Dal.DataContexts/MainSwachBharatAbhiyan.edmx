@@ -364,6 +364,24 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="district" Type="int" />
           <Property Name="IsCheked" Type="bit" />
         </EntityType>
+        <EntityType Name="UR_Location">
+          <Key>
+            <PropertyRef Name="locId" />
+          </Key>
+          <Property Name="locId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empId" Type="int" />
+          <Property Name="datetime" Type="datetime" />
+          <Property Name="lat" Type="nvarchar" MaxLength="500" />
+          <Property Name="long" Type="nvarchar" MaxLength="500" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="area" Type="nvarchar" MaxLength="500" />
+          <Property Name="type" Type="int" />
+          <Property Name="batteryStatus" Type="varchar" MaxLength="20" />
+          <Property Name="Distnace" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="IsOffline" Type="bit" />
+          <Property Name="ReferanceID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="UserInApps">
           <Key>
             <PropertyRef Name="UserInAppsID" />
@@ -437,6 +455,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="state_districts" EntityType="Self.state_districts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tehsil" EntityType="Self.tehsil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UR_Location" EntityType="Self.UR_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInApps" EntityType="Self.UserInApps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CheckAppD" EntityType="Self.CheckAppD" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -581,6 +600,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           </AssociationSet>
           <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
           <EntitySet Name="HSUR_Daily_Attendance" EntityType="DevSwachhBharatMainModel.HSUR_Daily_Attendance" />
+          <EntitySet Name="UR_Location" EntityType="DevSwachhBharatMainModel.UR_Location" />
         </EntityContainer>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -938,6 +958,24 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ip_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="login_device" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UR_Location">
+          <Key>
+            <PropertyRef Name="locId" />
+          </Key>
+          <Property Name="locId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empId" Type="Int32" />
+          <Property Name="datetime" Type="DateTime" Precision="3" />
+          <Property Name="lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Distnace" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IsOffline" Type="Boolean" />
+          <Property Name="ReferanceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1374,6 +1412,25 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
                 <ScalarProperty Name="startLat" ColumnName="startLat" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="daID" ColumnName="daID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UR_Location">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.UR_Location">
+              <MappingFragment StoreEntitySet="UR_Location">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ReferanceID" ColumnName="ReferanceID" />
+                <ScalarProperty Name="IsOffline" ColumnName="IsOffline" />
+                <ScalarProperty Name="Distnace" ColumnName="Distnace" />
+                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="long" ColumnName="long" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="locId" ColumnName="locId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -799,7 +799,7 @@ namespace SwachBharat.CMS.Bll.Services
 public int GetUserAppId(string UserId)
         {
             int AppId = 0;
-            AppId = dbMain.UserInApps.Where(x => x.UserId == UserId && x.AppId!=3109).Select(x => x.AppId).FirstOrDefault();
+            AppId = dbMain.UserInApps.Where(x => x.UserId == UserId && x.AppId!=3109 && x.AppId!=3088 && x.AppId!=3108 && x.AppId != 3111 && x.AppId != 3068).Select(x => x.AppId).FirstOrDefault();
 
             return AppId;
         }
@@ -824,6 +824,105 @@ public int GetUserAppId(string UserId)
             return AppId;
         }
 
+        public SBAHSUREmpLocationMapView GetEmpByIdforMap(int teamId, int daId)
+        {
+            try
+            {
+
+
+
+                SBAHSUREmpLocationMapView house = new SBAHSUREmpLocationMapView();
+
+                HSUR_Daily_Attendance Daily_Attendanceuser = new HSUR_Daily_Attendance();
+                Daily_Attendanceuser = dbMain.HSUR_Daily_Attendance.Where(x => x.daID == daId).FirstOrDefault();
+                EmployeeMaster user = new EmployeeMaster();
+                user = dbMain.EmployeeMasters.Where(x => x.EmpId == Daily_Attendanceuser.userId).FirstOrDefault();
+                house.userName = user.EmpName;
+
+                return house;
+
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<SBAHSUREmpLocationMapView> GetHSUserAttenRoute(int daId)
+        {
+            List<SBAHSUREmpLocationMapView> userLocation = new List<SBAHSUREmpLocationMapView>();
+            DateTime newdate = DateTime.Now.Date;
+            var datt = newdate;
+            var att = dbMain.HSUR_Daily_Attendance.Where(c => c.daID == daId).FirstOrDefault();
+
+            var useridnew = dbMain.HSUR_Daily_Attendance.Where(c => c.userId == att.userId && c.daDate == att.daDate).FirstOrDefault();
+
+
+            string Time = useridnew.startTime;
+            DateTime date = DateTime.Parse(Time, System.Globalization.CultureInfo.CurrentCulture);
+            string t = date.ToString("hh:mm:ss tt");
+            string dt = Convert.ToDateTime(att.daDate).ToString("MM/dd/yyyy");
+            DateTime? fdate = Convert.ToDateTime(dt + " " + t);
+            DateTime? edate;
+            if (att.endTime == "" | att.endTime == null)
+            {
+                edate = DateTime.Now;
+            }
+            else
+            {
+                string Time2 = att.endTime;
+                DateTime date2 = DateTime.Parse(Time2, System.Globalization.CultureInfo.CurrentCulture);
+                string t2 = date2.ToString("hh:mm:ss tt");
+                string dt2 = Convert.ToDateTime(att.daEndDate).ToString("MM/dd/yyyy");
+                edate = Convert.ToDateTime(dt2 + " " + t2);
+            }
+            var data = dbMain.UR_Location.Where(c => c.empId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == null).ToList();
+
+
+            foreach (var x in data)
+            {
+
+                string dat = Convert.ToDateTime(x.datetime).ToString("dd/MM/yyyy");
+                string tim = Convert.ToDateTime(x.datetime).ToString("hh:mm tt");
+                var userName = dbMain.EmployeeMasters.Where(c => c.EmpId == att.userId).FirstOrDefault();
+
+                userLocation.Add(new SBAHSUREmpLocationMapView()
+                {
+                    userId = userName.EmpId,
+                    userName = userName.EmpName,
+                    datetime = Convert.ToDateTime(x.datetime).ToString("HH:mm"),
+                    date = dat,
+                    time = tim,
+                    lat = x.lat,
+                    log = x.@long,
+                    address = x.address,
+                    userMobile = userName.EmpMobileNumber,
+                    // type = Convert.ToInt32(x.type),
+
+                });
+
+            }
+
+            return userLocation;
+        }
+
+        private object checkNull(string address)
+        {
+            string result = "";
+            if (address == null || address == "")
+            {
+                result = "";
+                return result;
+            }
+            else
+            {
+                result = address;
+                return result;
+            }
+        }
+
+      
         public List<AppDetail> GetAppName()
         {
             List<AppDetail> appNames = new List<AppDetail>();

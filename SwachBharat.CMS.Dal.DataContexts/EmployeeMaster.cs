@@ -23,7 +23,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string EmpAddress { get; set; }
         public string type { get; set; }
         public Nullable<bool> isActive { get; set; }
-        public bool IsActive { get; set; }
         public string isActiveULB { get; set; }
         public Nullable<System.DateTime> lastModifyDateEntry { get; set; }
         public string Text { get; set; }
