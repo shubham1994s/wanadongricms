@@ -26,6 +26,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string ipaddress { get; set; }
 
         public string logindevice { get; set; }
+        public string HostName { get; set; }
         public Nullable<bool> isActive { get; set; }
         public int daID { get; set; }
     

@@ -118,6 +118,7 @@
                     }
                 }
             },
+            { "data": "HostName", "name": "HostName", "autoWidth": true },
             //{
             //    "render": function (data, type, full, meta) {
 

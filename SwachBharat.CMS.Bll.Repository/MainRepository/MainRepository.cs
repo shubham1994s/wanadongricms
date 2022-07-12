@@ -584,6 +584,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
          
             //return ip;
             model.ip_address = data.ipaddress;
+            model.HostName = data.HostName;
             model.login_device = "PC";
 
             return model;
