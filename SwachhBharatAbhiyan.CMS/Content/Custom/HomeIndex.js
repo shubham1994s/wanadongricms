@@ -1111,17 +1111,17 @@ $(document).ready(function () {
                             type: "stackedColumn",
                             showInLegend: true,
                             legendText: "Inner Count",
-                            toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+                            toolTipContent: "InTime:{intime} <br>Inner Count:{y} ",
                             color: "#388e3c",
                             dataPoints: inner
                         },
                         {
-                            //indexLabel: "#total",
-                            //indexLabelPlacement: "outside",
+                            indexLabel: "#total",
+                            indexLabelPlacement: "outside",
                             type: "stackedColumn",
                             showInLegend: true,
                             legendText: "Outer Count",
-                            toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+                            toolTipContent: "InTime:{intime} <br>Outer Count:{y} ",
                             color: "#f44336",
                             dataPoints: outer
                         }
