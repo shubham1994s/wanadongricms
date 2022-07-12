@@ -17,6 +17,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string daDate { get; set; }
 
         public string ipaddress { get; set; }
+        public string HostName { get; set; }
 
         public string logindevice { get; set; }
         public Nullable<bool> isActive { get; set; }

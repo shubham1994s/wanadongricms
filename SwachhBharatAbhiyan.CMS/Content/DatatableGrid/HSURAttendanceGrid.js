@@ -49,12 +49,29 @@
 
         "columns": [
             { "data": "EmpId", "name": "EmpId", "autoWidth": true },
+         
             { "data": "EmpName", "name": "EmpName", "autoWidth": true },
-
-            { "data": "startDate", "name": "startDate", "autoWidth": true },
-            { "data": "StartTime", "name": "StartTime", "autoWidth": true },
-            { "data": "EndDate", "name": "EndDate", "autoWidth": true },
-            { "data": "endTime", "name": "endTime", "autoWidth": true },
+            //{ "data": "startDate", "name": "startDate", "autoWidth": true },
+            //{ "data": "StartTime", "name": "StartTime", "autoWidth": true },
+            {
+                "data": "startDate", "render": function (data, type, full, meta) {
+                    var SDT = full.startDate + ' ' + full.StartTime;
+                    return SDT;
+                }
+            },
+            //{ "data": "EndDate", "name": "EndDate", "autoWidth": true },
+            //{ "data": "endTime", "name": "endTime", "autoWidth": true },
+            {
+                "data": "EndDate", "render": function (data, type, full, meta) {
+                    if (full["EndDate"] == null || full["EndDate"] == "") {
+                        return '';
+                    }
+                    else {
+                      
+                        return full.EndDate + ' ' + full.endTime;
+                    }
+                }
+            },
             {
                 "data": "EmployeeType", "render": function (data, type, full, meta) {
                     if (full["EmployeeType"] == 'A') {
@@ -101,6 +118,7 @@
                     }
                 }
             },
+            { "data": "HostName", "name": "HostName", "autoWidth": true },
             //{
             //    "render": function (data, type, full, meta) {
 
@@ -178,14 +196,29 @@ function LoadAGridM() {
         "columns": [
             { "data": "EmpId", "name": "EmpId", "autoWidth": true },
             { "data": "EmpName", "name": "EmpName", "autoWidth": true },
-            { "data": "startDate", "name": "startDate", "autoWidth": true },
-            { "data": "StartTime", "name": "StartTime", "autoWidth": true },
-            { "data": "EndDate", "name": "EndDate", "autoWidth": true },
-            { "data": "endTime", "name": "endTime", "autoWidth": true },
-            { "data": "startLat", "name": "endstartLatTime", "autoWidth": true },
-            { "data": "startLong", "name": "startLong", "autoWidth": true },
-            { "data": "endLat", "name": "endLat", "autoWidth": true },
-            { "data": "endLong", "name": "endLong", "autoWidth": true },
+            //{ "data": "startDate", "name": "startDate", "autoWidth": true },
+            //{ "data": "StartTime", "name": "StartTime", "autoWidth": true },
+            {
+                "data": "creator", "render": function (data, type, full, meta) {
+                    return full.startDate + ' ' + full.StartTime;
+                }
+            },
+            //{ "data": "EndDate", "name": "EndDate", "autoWidth": true },
+            //{ "data": "endTime", "name": "endTime", "autoWidth": true },
+            {
+                "data": "creator", "render": function (data, type, full, meta) {
+                    if (full["EndDate"] != "" || full["EndDate"] != null) {
+                        return full.EndDate + ' ' + full.endTime;
+                    }
+                    else {
+                        return ' ';
+                    }
+                }
+            },
+            //{ "data": "startLat", "name": "endstartLatTime", "autoWidth": true },
+            //{ "data": "startLong", "name": "startLong", "autoWidth": true },
+            //{ "data": "endLat", "name": "endLat", "autoWidth": true },
+            //{ "data": "endLong", "name": "endLong", "autoWidth": true },
 
             {
                 "data": "EmployeeType", "render": function (data, type, full, meta) {

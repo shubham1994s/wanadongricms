@@ -16,6 +16,9 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string EmployeeType { get; set; }
         public string startDate { get; set; }
         public string EndDate { get; set; }
+        public string startDateTime { get; set; }
+        public string EndDateTime { get; set; }
+
 
         public Nullable<System.DateTime> daDate { get; set; }
         public Nullable<System.DateTime> daEndDate { get; set; }
@@ -23,6 +26,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.Grid
         public string ipaddress { get; set; }
 
         public string logindevice { get; set; }
+        public string HostName { get; set; }
         public Nullable<bool> isActive { get; set; }
         public int daID { get; set; }
     

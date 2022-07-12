@@ -299,6 +299,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 Daily_Attendance.EmpId = Result.ADUM_USER_CODE;
                 Daily_Attendance.EmployeeType = Result.ADUM_DESIGNATION;
                 Daily_Attendance.ipaddress = ipAdd;
+                Daily_Attendance.HostName = hname;
 
                 if(Daily_Attendance.EmployeeType != "A")
                 {

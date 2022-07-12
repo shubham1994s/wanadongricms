@@ -6106,6 +6106,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         EmployeeType = x.EmployeeType,
                         ipaddress = x.ip_address,
                         logindevice = x.login_device,
+                        HostName = x.HostName,
                         isActive = db.EmployeeMasters.Where(c => c.EmpId == x.userId).FirstOrDefault().isActive,
 
                     }).Where(x => x.ipaddress != null && x.startLat == null ).ToList();
