@@ -49,10 +49,12 @@
 
         "columns": [
             { "data": "EmpId", "name": "EmpId", "autoWidth": true },
-            { "data": "startDate", "name": "startDate", "autoWidth": true },
-            { "data": "StartTime", "name": "StartTime", "autoWidth": true },
             { "data": "EmpName", "name": "EmpName", "autoWidth": true },
 
+            { "data": "startDate", "name": "startDate", "autoWidth": true },
+            { "data": "StartTime", "name": "StartTime", "autoWidth": true },
+            { "data": "EndDate", "name": "EndDate", "autoWidth": true },
+            { "data": "endTime", "name": "endTime", "autoWidth": true },
             {
                 "data": "EmployeeType", "render": function (data, type, full, meta) {
                     if (full["EmployeeType"] == 'A') {
