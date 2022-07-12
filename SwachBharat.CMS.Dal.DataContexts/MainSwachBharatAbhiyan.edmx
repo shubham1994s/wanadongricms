@@ -317,6 +317,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
           <Property Name="ip_address" Type="nvarchar(max)" />
           <Property Name="login_device" Type="nvarchar(max)" />
+          <Property Name="HostName" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -599,8 +600,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
-          <EntitySet Name="HSUR_Daily_Attendance" EntityType="DevSwachhBharatMainModel.HSUR_Daily_Attendance" />
           <EntitySet Name="UR_Location" EntityType="DevSwachhBharatMainModel.UR_Location" />
+          <EntitySet Name="HSUR_Daily_Attendance" EntityType="DevSwachhBharatMainModel.HSUR_Daily_Attendance" />
         </EntityContainer>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -939,6 +940,24 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="AppAreaLatLong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsAreaActive" Type="Boolean" />
         </EntityType>
+        <EntityType Name="UR_Location">
+          <Key>
+            <PropertyRef Name="locId" />
+          </Key>
+          <Property Name="locId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empId" Type="Int32" />
+          <Property Name="datetime" Type="DateTime" Precision="3" />
+          <Property Name="lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Distnace" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="IsOffline" Type="Boolean" />
+          <Property Name="ReferanceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="HSUR_Daily_Attendance">
           <Key>
             <PropertyRef Name="daID" />
@@ -958,24 +977,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ip_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="login_device" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="UR_Location">
-          <Key>
-            <PropertyRef Name="locId" />
-          </Key>
-          <Property Name="locId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="empId" Type="Int32" />
-          <Property Name="datetime" Type="DateTime" Precision="3" />
-          <Property Name="lat" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="long" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="area" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="type" Type="Int32" />
-          <Property Name="batteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Distnace" Type="Decimal" Precision="6" Scale="2" />
-          <Property Name="IsOffline" Type="Boolean" />
-          <Property Name="ReferanceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="HostName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1394,27 +1396,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HSUR_Daily_Attendance">
-            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.HSUR_Daily_Attendance">
-              <MappingFragment StoreEntitySet="HSUR_Daily_Attendance">
-                <ScalarProperty Name="login_device" ColumnName="login_device" />
-                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
-                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
-                <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
-                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
-                <ScalarProperty Name="daEndDate" ColumnName="daEndDate" />
-                <ScalarProperty Name="daDate" ColumnName="daDate" />
-                <ScalarProperty Name="endTime" ColumnName="endTime" />
-                <ScalarProperty Name="startTime" ColumnName="startTime" />
-                <ScalarProperty Name="endLong" ColumnName="endLong" />
-                <ScalarProperty Name="endLat" ColumnName="endLat" />
-                <ScalarProperty Name="startLong" ColumnName="startLong" />
-                <ScalarProperty Name="startLat" ColumnName="startLat" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="daID" ColumnName="daID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UR_Location">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.UR_Location">
               <MappingFragment StoreEntitySet="UR_Location">
@@ -1431,6 +1412,28 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
                 <ScalarProperty Name="datetime" ColumnName="datetime" />
                 <ScalarProperty Name="empId" ColumnName="empId" />
                 <ScalarProperty Name="locId" ColumnName="locId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HSUR_Daily_Attendance">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.HSUR_Daily_Attendance">
+              <MappingFragment StoreEntitySet="HSUR_Daily_Attendance">
+                <ScalarProperty Name="HostName" ColumnName="HostName" />
+                <ScalarProperty Name="login_device" ColumnName="login_device" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
+                <ScalarProperty Name="batteryStatus" ColumnName="batteryStatus" />
+                <ScalarProperty Name="daEndDate" ColumnName="daEndDate" />
+                <ScalarProperty Name="daDate" ColumnName="daDate" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endLong" ColumnName="endLong" />
+                <ScalarProperty Name="endLat" ColumnName="endLat" />
+                <ScalarProperty Name="startLong" ColumnName="startLong" />
+                <ScalarProperty Name="startLat" ColumnName="startLat" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="daID" ColumnName="daID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
