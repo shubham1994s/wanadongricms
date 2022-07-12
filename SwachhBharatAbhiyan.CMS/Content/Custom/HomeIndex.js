@@ -1044,6 +1044,118 @@ $(document).ready(function () {
 
 });
 
+$(document).ready(function () {
+    $.ajax({
+        type: "post",
+        url: "/Home/EmployeeHouseCollectionInnerOuter",
+        //data: { userId: UserId, },
+        datatype: "json",
+        traditional: true,
+        success: function (data) {
+            console.log(data);
+            var inner = [];
+            var outer = [];
+            
+            for (var i = 0; i < data.length; i++) {
+                // alert(data[i].inTime);
+                var name = data[i].userName;
+                name = name.trim();
+                var lastname_array = name.split(' ');
+                var lastname_firstchar;
+                if (lastname_array.length == 1) {
+                    //if condition lastname_array[1] == undefined
+                    lastname_firstchar = ""
+                } else {
+                    lastname_firstchar = lastname_array[1][0];
+                }
+
+                var userName = lastname_array[0] + lastname_firstchar;
+                //var fname = name.substring(0, name.indexOf(" "));
+                var fname = name.replace(/ .*/, ' ');
+                // alert(data[i]._Count)
+                inner.push({ y: data[i].InnerCount, label: fname + lastname_firstchar, color: '#388e3c', intime: data[i].inTime });
+                outer.push({ y: data[i].OuterCount, label: fname + lastname_firstchar, color: '#f44336', intime: data[i].inTime });
+                
+            }
+
+            var chart = new CanvasJS.Chart("chartContainerTarget3",
+                {
+                    //title: {
+                    //    text: "Grouped Stacked Chart"
+                    //},
+                    theme: "theme3",
+                    // interval :1,
+                    axisY: {
+                        labelFontSize: 10,
+                        labelFontColor: "dimGrey",
+                        interval: 1
+                    },
+                    axisX: {
+                        labelAngle: -10,
+                        labelFontSize: 10,
+                        interval: 1
+                    },
+                    axisY: {
+                        title: "House Collection",
+                        includeZero: true,
+                    },
+                    axisX: {
+                        title: "Employee Name",
+                    },
+                    data: [
+
+                        {
+                            //indexLabel: "#total",
+                            //indexLabelPlacement: "outside",
+                            //indexLabelPlacement: "outside",
+                            type: "stackedColumn",
+                            showInLegend: true,
+                            legendText: "Inner Count",
+                            toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+                            color: "#388e3c",
+                            dataPoints: inner
+                        },
+                        {
+                            //indexLabel: "#total",
+                            //indexLabelPlacement: "outside",
+                            type: "stackedColumn",
+                            showInLegend: true,
+                            legendText: "Outer Count",
+                            toolTipContent: "InTime:{intime} <br>{label}:{y} ",
+                            color: "#f44336",
+                            dataPoints: outer
+                        }
+
+                    ]
+                });
+            showDefaultText(chart, "No Data Available");
+            chart.render();
+            function showDefaultText(chart, text) {
+                var isEmpty = !(chart.options.data[0].dataPoints && chart.options.data[0].dataPoints.length > 0);
+
+                if (!chart.options.subtitles)
+                    (chart.options.subtitles = []);
+
+                if (isEmpty)
+                    chart.options.subtitles.push({
+                        text: text,
+                        verticalAlign: 'center',
+                    });
+                else
+                    (chart.options.subtitles = []);
+            }
+        }
+    });
+    //chart.render();
+
+
+});
+
+
+
+
+
+
 
 //$(document).ready(function () {
 

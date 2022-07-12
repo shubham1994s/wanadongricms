@@ -142,6 +142,22 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             else
                 return Redirect("/Account/Login");
         }
+
+        public ActionResult EmployeeHouseCollectionInnerOuter()
+        {
+            if (SessionHandler.Current.AppId != 0)
+            {
+
+                IEnumerable<EmployeeHouseCollectionInnerOuter> obj;
+
+                obj = childRepository.getEmployeeHouseCollectionInnerOuter();
+                return Json(obj, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Redirect("/Account/Login");
+        }
+
+
         public ActionResult EmployeeHouseCollectionTime()
         {
             if (SessionHandler.Current.AppId != 0)
