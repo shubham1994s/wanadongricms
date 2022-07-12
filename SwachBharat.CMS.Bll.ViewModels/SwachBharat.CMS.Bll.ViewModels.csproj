@@ -76,6 +76,7 @@
     <Compile Include="ChildModel\Model\DumpYardDetailsVM.cs" />
     <Compile Include="ChildModel\Model\EmpBeatMapVM.cs" />
     <Compile Include="ChildModel\Model\EmployeeDetailsVM.cs" />
+    <Compile Include="ChildModel\Model\EmployeeHouseCollectionInnerOuter.cs" />
     <Compile Include="ChildModel\Model\EmployeeHouseCollectionTime.cs" />
     <Compile Include="ChildModel\Model\EmployeeHouseCollectionType.cs" />
     <Compile Include="ChildModel\Model\EmployeeLiquidCollectionType.cs" />

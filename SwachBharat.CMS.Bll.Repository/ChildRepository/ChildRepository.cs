@@ -272,6 +272,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetbeatMapCount(daId, areaid, polyId);
         }
+        public List<EmployeeHouseCollectionInnerOuter> getEmployeeHouseCollectionInnerOuter()
+        {
+            return screenService.getEmployeeHouseCollectionInnerOuter();
+        }
         public HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid,int polyId)
         {
             return screenService.GetBeatHouseAttenRoute(daId, areaid, polyId);

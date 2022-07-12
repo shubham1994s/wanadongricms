@@ -81,6 +81,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         List<SBALUserLocationMapView> GetStreetAttenRoute(int id, int areaid);
         List<SBALUserLocationMapView> GetDumpAttenRoute(int id);
         EmpBeatMapCountVM GetbeatMapCount(int daId,int areaid, int polyId);
+        List<EmployeeHouseCollectionInnerOuter> getEmployeeHouseCollectionInnerOuter();
         HouseAttenRouteVM GetBeatHouseAttenRoute(int daId, int areaid,int polyId);
 
         GarbagePointDetailsVM GetGarbagePointById(int teamId);
