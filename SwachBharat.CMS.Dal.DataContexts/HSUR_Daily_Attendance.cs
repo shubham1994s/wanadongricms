@@ -29,5 +29,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public string EmployeeType { get; set; }
         public string ip_address { get; set; }
         public string login_device { get; set; }
+        public string HostName { get; set; }
     }
 }

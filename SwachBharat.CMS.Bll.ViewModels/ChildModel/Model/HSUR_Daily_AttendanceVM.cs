@@ -29,5 +29,7 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public string startTime { get; set; }
         public string endTime { get; set; }
         public string type { get; set; }
+
+        public string logoff { get; set; }
     }
 }

@@ -283,13 +283,27 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                     if (data.LOGIN_ID != null)
                     {
                         var model = db.EmployeeMasters.Where(x => x.LoginId == data.LOGIN_ID ).FirstOrDefault();
-                        var model1 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId).FirstOrDefault();
-                        if (model1 != null)
+                        var model1 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId && c.endTime == null && c.daEndDate == null && c.login_device == "PC").FirstOrDefault();
+                        var model2 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId).FirstOrDefault();
+                        if (model1 != null && data.logoff == null)
                         {
+                            //model1.daID = data.daID;
+                            model1.endTime = DateTime.Now.ToString("hh:mm:ss tt");
+                            model1.daEndDate = DateTime.Now;
+                            db.SaveChanges();
+                            
+                          
                             var type = FillHSURDailyAttendance(data);
 
-
                             db.HSUR_Daily_Attendance.Add(type);
+                            db.SaveChanges();
+                            
+                           
+                        }
+                        else if(model2.userId != null && data.logoff != null)
+                        {
+                            model1.endTime = DateTime.Now.ToString("hh:mm:ss tt");
+                            model1.daEndDate = DateTime.Now;
                             db.SaveChanges();
                         }
                         else
