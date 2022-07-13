@@ -349,10 +349,11 @@
     <script type="text/javascript">
         $('input[type=radio][name=radio]').change(function () {
 
-
-
             LoadGridC();
         });
+
+        var CheckMobile = '0';
+        var CheckPC = '0';
 
         function LoadGridC() {
             debugger;
@@ -375,9 +376,15 @@
 
                 $("#divPC").hide();
                 $("#divMobile").show();
-                $('#s').val('');
-                LoadAGridM();
-                $('#hchange').text('Mobile User');
+
+                if (CheckMobile == '0') {
+                    LoadAGridM();
+                    CheckMobile = '1';
+                    $('#s').val('');
+                    $('#hchange').text('Mobile User');
+                }
+
+              
 
             }
             else if (RadioValue == 1) {
@@ -396,9 +403,14 @@
                 document.getElementById('txt_tdate').value = today;
                 $("#divPC").show();
                 $("#divMobile").hide();
-                $('#s').val('');
-                LoadAGridP();
-                $('#hchange').text('PC User');
+                if (CheckPC == '0') {
+                    LoadAGridP();
+                    CheckPC = '1';
+                    $('#s').val('');
+                    $('#hchange').text('PC User');
+                }
+
+              
 
             }
 
