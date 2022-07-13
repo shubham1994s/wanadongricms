@@ -1017,7 +1017,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 ViewBag.HSuserid = Session["Id"];
                 mainRepository = new MainRepository();
                 SBAHSUREmpLocationMapView obj = new SBAHSUREmpLocationMapView();
-                obj = mainRepository.GetEmpByIdforMap(-1,daId);
+                obj = mainRepository.GetEmpByIdforMap(-1, daId);
                 return View(obj);
             }
             else
@@ -1027,6 +1027,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         }
 
+
+
+        
         public ActionResult HSURRouteData(int daId)
         {
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
@@ -1257,13 +1260,29 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "HouseScanifyEmp");
         }
-        public ActionResult ExportHouseListPDF(int appId,string appName)
+        public ActionResult ExportHouseListPDF(int appId,string appName, int option)
         {
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
             {
+                string strOption = string.Empty;
+                if(option == 1)
+                {
+                    strOption = "Houses with Lat/Long no data entry";
+                }
+                else if(option == 2)
+                {
+                    strOption = "Houses with data entry";
+
+                }
+                else
+                {
+                    strOption = "All Houses";
+
+                }
+
                 childRepository = new ChildRepository(appId);
-                var dt = childRepository.getHousesList();
-                byte[] filecontent = exportpdf(dt, appName);
+                var dt = childRepository.getHousesList(option);
+                byte[] filecontent = exportpdf(dt, appName, strOption);
                 //byte[] filecontent = genPDF(dt,appName);
 
                 string filename = appName + "_Houses_List_PDF_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".pdf";
@@ -1277,13 +1296,28 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-        public ActionResult ExportHouseListExcel(int appId, string appName)
+        public ActionResult ExportHouseListExcel(int appId, string appName, int option)
         {
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
             {
+                string strOption = string.Empty;
+                if (option == 1)
+                {
+                    strOption = "Houses with Lat/Long no data entry";
+                }
+                else if (option == 2)
+                {
+                    strOption = "Houses with data entry";
+
+                }
+                else
+                {
+                    strOption = "All Houses";
+
+                }
                 childRepository = new ChildRepository(appId);
-                var dt = childRepository.getHousesList();
-                byte[] filecontent = ExcelExport(dt, appName);
+                var dt = childRepository.getHousesList(option);
+                byte[] filecontent = ExcelExport(dt, appName, strOption);
                 //byte[] filecontent = genPDF(dt,appName);
 
                 string filename = appName + "_Houses_List_Excel_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".xlsx";
@@ -1374,7 +1408,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         //    return result;
         //}
 
-        public byte[] ExcelExport(DataTable dt, string appName)
+        public byte[] ExcelExport(DataTable dt, string appName,string option)
         {
             byte[] result;
 
@@ -1386,7 +1420,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 {
                     worksheet.Cells["A3"].LoadFromDataTable(dt, true, TableStyles.None);
                     worksheet.Cells[1, 1, 1, 10].Merge = true;
-                    worksheet.Cells[1, 1].Value = "Houses List for ULB Name: " + appName + "   Date : " + DateTime.Now.ToString("yyyy-MMM-dd");
+                    worksheet.Cells[1, 1].Value = option + " for ULB Name: " + appName + "   Date : " + DateTime.Now.ToString("yyyy-MMM-dd");
                     worksheet.Cells[1, 1].Style.Font.Bold = true;
                     worksheet.Cells[1, 1].Style.Font.Size = 16;
                     worksheet.Cells["A3:AN3"].Style.Font.Bold = true;
@@ -1411,7 +1445,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
 
 
-        private byte[] exportpdf(DataTable dtEmployee, string appName)
+        private byte[] exportpdf(DataTable dtEmployee, string appName, string option)
         {
 
             // creating document object  
@@ -1431,7 +1465,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             iTextSharp.text.Font fntHead = new iTextSharp.text.Font(bfntHead, 20, 1, iTextSharp.text.BaseColor.BLUE);
             Paragraph prgHeading = new Paragraph();
             prgHeading.Alignment = Element.ALIGN_LEFT;
-            prgHeading.Add(new Chunk("Houses List for ULB Name: " + appName + "   Date : " + DateTime.Now.ToString("yyyy-MMM-dd"), fntHead));
+            prgHeading.Add(new Chunk(option + " for ULB Name: " + appName + "   Date : " + DateTime.Now.ToString("yyyy-MMM-dd"), fntHead));
             doc.Add(prgHeading);
 
             //Adding paragraph for report generated by  

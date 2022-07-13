@@ -22,19 +22,59 @@
     <link href="~/Content/css/blink.css" rel="stylesheet" />
     <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
     <style>
-                .search {
-                    width: 85%;
-                    margin-left: 7%;
-                    border-radius: 10px;
-                    border: 1px solid #bbb7b7;
-                    text-align: center;
-                }
-          /*  .nav-item{}*/
-                /* Blink for Webkit and others
+        .search {
+            width: 85%;
+            margin-left: 7%;
+            border-radius: 10px;
+            border: 1px solid #bbb7b7;
+            text-align: center;
+        }
+        /*  .nav-item{}*/
+        /* Blink for Webkit and others
         (Chrome, Safari, Firefox, IE, ...)
         */
 
     </style>
+    <script>
+        var idleTime = 0;
+        $(document).ready(function () {
+            LoadMenu();
+            //Increment the idle time counter every minute.
+            var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+            //Zero the idle timer on mouse movement.
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+            });
+            $(this).keypress(function (e) {
+                idleTime = 0;
+            });
+        });
+
+        function timerIncrement() {
+            idleTime = idleTime + 1;
+            if (idleTime > 120) { // 15 minutes
+                // window.location = "/Account/login"
+                alert('Session TimeOut');
+                document.getElementById('logoutForm').submit()
+            }
+        }
+        //var idleIntervalr = setInterval(timerIncrementr, 6000); // 1 minute
+        //function timerIncrementr() {
+        //    window.location.reload();
+        //}
+
+        //window.setTimeout(function () {
+        //    window.location.reload();
+        //}, 600000);
+
+        window.setInterval(function () {
+
+            LoadMenu();
+
+        }, 60000);
+
+    </script>
 </head>
 
 <body>
@@ -114,23 +154,23 @@
             </div>
         </div>
     </div>
-     
 
-    @*@Scripts.Render("~/Scripts/ThemeScripts")*@
+
+    
     <script>
 
 
         debugger;
 
-        
+
         var HSID = $('#HSID').val();
         document.getElementById("HDUserid").innerHTML = HSID.toUpperCase();
-        
+
         var Utypes = $('#UType').val();
         if (Utypes == 'A') {
             //$('#URbutton').show();
             document.getElementById("URbutton").style.display = "block";
-         /*   document.getElementById("Attendance").style.display = "block";*/
+            /*   document.getElementById("Attendance").style.display = "block";*/
             document.getElementById("btnAppArea").style.display = "block";
             document.getElementById("HSType").innerHTML = "(ADMIN)";
 
@@ -138,13 +178,13 @@
         else {
             // $('#URbutton').hide();
             document.getElementById("URbutton").style.display = "none";
-         /*   document.getElementById("Attendance").style.display = "none";*/
+            /*   document.getElementById("Attendance").style.display = "none";*/
             document.getElementById("btnAppArea").style.display = "none";
             document.getElementById("HSType").innerHTML = "(SUB-ADMIN)";
         }
         function AppList(Id) {
             //alert(Id);
-            
+
             if (Id != null) {
                 var url = "/HouseScanifyEmp/HSUserList?AppId=" + Id;
                 window.location.href = url;
@@ -153,7 +193,7 @@
 
 
         // var ulb_menu=JSON.parse(window.localStorage.getItem("ulb_menu"));
-        
+
         var appid = $('#appid').val();
 
 
@@ -181,7 +221,7 @@
         //        res += "</a></li>";
         //    }
 
-           
+
         function LoadMenu() {
 
             $.get("/houseScanifyEmp/GameAppList", null, house);
@@ -222,10 +262,10 @@
                 }, function () {
                     $(this).css("color", "#fff");
                 });
-        }
+            }
 
 
-            
+
 
         }
 
@@ -299,16 +339,16 @@
     <script type="text/javascript">
         $('input[type=radio][name=radio]').change(function () {
 
-            
+
 
             LoadGridC();
         });
 
         function LoadGridC() {
             var RadioValue = $("input[name='radio']:checked").val();
-            
+
             if (RadioValue == 0) {
-                
+
                 $('#s').val('');
                 LoadAGrid();
                 $('#hchange').text('Active User');
@@ -326,7 +366,7 @@
 
 
         function Search() {
-            
+
             var value = ",,," + $("#s").val();
             oTable = $('#demoGrid').DataTable();
             oTable.search(value).draw();
@@ -341,7 +381,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            
+
             LoadGridC();
 
         });
@@ -362,46 +402,7 @@
         }
     </script>
 
-    <script>
-        var idleTime = 0;
-        $(document).ready(function () {
-            LoadMenu();
-            //Increment the idle time counter every minute.
-            var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
-
-            //Zero the idle timer on mouse movement.
-            $(this).mousemove(function (e) {
-                idleTime = 0;
-            });
-            $(this).keypress(function (e) {
-                idleTime = 0;
-            });
-        });
-
-        function timerIncrement() {
-            idleTime = idleTime + 1;
-            if (idleTime > 120) { // 15 minutes
-                // window.location = "/Account/login"
-                alert('Session TimeOut');
-                document.getElementById('logoutForm').submit()
-            }
-        }
-        //var idleIntervalr = setInterval(timerIncrementr, 6000); // 1 minute
-        //function timerIncrementr() {
-        //    window.location.reload();
-        //}
-
-        //window.setTimeout(function () {
-        //    window.location.reload();
-        //}, 600000);
-
-        window.setInterval(function () {
-            
-            LoadMenu();
-            
-        }, 60000);
-
-    </script>
+  
     <script src="~/Content/DatatableGrid/URGridDetails.js"></script>
     @*@RenderSection("scripts", required: false)*@
 </body>

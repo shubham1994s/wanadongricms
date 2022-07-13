@@ -169,7 +169,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type,int UserId, DateTime fDate, DateTime tDate,string QrStatus);
 
-        DataTable getHousesList();
+        DataTable getHousesList(int option);
         #endregion
 
         //Added By saurabh (04 June 2019)
