@@ -12,9 +12,9 @@
         <h2 class="no-margin-bottom">Download Houses List</h2>
     </div>
 </header>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
+<div class="container mt-2">
+    <div class="row mt-4">
+        <div class="col-sm-3 mx-5">
             <input type="hidden" value="-1" id="hdAppId" />
             <input type="hidden" value="" id="hdAppName" />
             <div id="divAppList">
@@ -23,31 +23,37 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <label class="check-container">
-                All Houses
+            <div class="check-container">
                 <input type="radio" checked="checked" value="0" name="rdDownloadOption">
                 <span class="checkmark"></span>
-            </label>
-            <label class="check-container">
-                Houses with Lat/Long no data entry
+                All Houses
+
+            </div>
+            <div class="check-container">
                 <input type="radio" value="1" name="rdDownloadOption">
                 <span class="checkmark"></span>
-            </label>
-            <label class="check-container">
-                Houses with data entry
+                Houses with Lat/Long no data entry
+
+            </div>
+            <div class="check-container">
                 <input type="radio" value="2" name="rdDownloadOption">
                 <span class="checkmark"></span>
-            </label>
+                Houses with data entry
 
-            
-        </div>
-        <div class="col-sm-3">
-            <div>
-                <button type="button" class="btn btn-primary save" id="btnDownloadPDF" style="margin-top:25px">Download PDF</button>
             </div>
+
+
+        </div>
+      
+    </div>
+    <div class="row">
+        <div class="col-sm-3 mx-5"></div>
+        <div class="col-md-6">
             <div>
+                <button type="button" class="btn btn-primary save mr-5" id="btnDownloadPDF" style="margin-top:25px">Download PDF</button>
                 <button type="button" class="btn btn-primary save" id="btnDownloadExcel" style="margin-top:25px">Download EXCEL</button>
             </div>
+           
         </div>
     </div>
     <div>
