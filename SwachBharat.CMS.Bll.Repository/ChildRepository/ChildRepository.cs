@@ -514,9 +514,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetHSUserAttenRoute(qrEmpDaId);
         }
-        public DataTable getHousesList()
+        public DataTable getHousesList(int option)
         {
-            return screenService.getHousesList();
+            return screenService.getHousesList(option);
         }
         public List<SBAHSHouseDetailsGrid> GetHSQRCodeImageByDate(int type, int UserId, DateTime fDate, DateTime tDate,string QrStatus)
         {
