@@ -1045,7 +1045,8 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $.ajax({
+
+  $.ajax({
         type: "post",
         url: "/Home/EmployeeHouseCollectionInnerOuter",
         //data: { userId: UserId, },
@@ -1146,7 +1147,7 @@ $(document).ready(function () {
             }
         }
     });
-    //chart.render();
+   // chart.render();
 
 
 });
