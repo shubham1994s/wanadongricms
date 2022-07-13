@@ -12,9 +12,9 @@
         <h2 class="no-margin-bottom">Download Houses List</h2>
     </div>
 </header>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
+<div class="container mt-2">
+    <div class="row mt-4">
+        <div class="col-sm-3 mx-5">
             <input type="hidden" value="-1" id="hdAppId" />
             <input type="hidden" value="" id="hdAppName" />
             <div id="divAppList">
@@ -22,15 +22,38 @@
                 <select id="selectApp" class="form-control minimal-form  RequiredInput validate[required] RequiredInput"></select>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div>
-                <button type="button" class="btn btn-primary save" id="btnDownloadPDF" style="margin-top:25px">Download PDF</button>
+        <div class="col-sm-6">
+            <div class="check-container">
+                <input type="radio" checked="checked" value="0" name="rdDownloadOption">
+                <span class="checkmark"></span>
+                All Houses
+
             </div>
+            <div class="check-container">
+                <input type="radio" value="1" name="rdDownloadOption">
+                <span class="checkmark"></span>
+                Houses with Lat/Long no data entry
+
+            </div>
+            <div class="check-container">
+                <input type="radio" value="2" name="rdDownloadOption">
+                <span class="checkmark"></span>
+                Houses with data entry
+
+            </div>
+
+
         </div>
-        <div class="col-sm-3">
+      
+    </div>
+    <div class="row">
+        <div class="col-sm-3 mx-5"></div>
+        <div class="col-md-6">
             <div>
+                <button type="button" class="btn btn-primary save mr-5" id="btnDownloadPDF" style="margin-top:25px">Download PDF</button>
                 <button type="button" class="btn btn-primary save" id="btnDownloadExcel" style="margin-top:25px">Download EXCEL</button>
             </div>
+           
         </div>
     </div>
     <div>
@@ -69,8 +92,8 @@
             $("#BeatMaap_pop").html("Please Select App Name...").delay(2000).show().fadeOut('slow');
             return false;
         }
-
-        window.location.href = "/HouseScanifyEmp/ExportHouseListPDF?appId=" + $('#hdAppId').val() + "&appName=" + $('#hdAppName').val();
+        var rdDownloadOption = $("input[name='rdDownloadOption']:checked").val();
+        window.location.href = "/HouseScanifyEmp/ExportHouseListPDF?appId=" + $('#hdAppId').val() + "&appName=" + $('#hdAppName').val() + "&option=" + rdDownloadOption;
     });
 
     $("#btnDownloadExcel").click(function () {
@@ -79,7 +102,7 @@
             $("#BeatMaap_pop").html("Please Select App Name...").delay(2000).show().fadeOut('slow');
             return false;
         }
-
-        window.location.href = "/HouseScanifyEmp/ExportHouseListExcel?appId=" + $('#hdAppId').val() + "&appName=" + $('#hdAppName').val();
+        var rdDownloadOption = $("input[name='rdDownloadOption']:checked").val();
+        window.location.href = "/HouseScanifyEmp/ExportHouseListExcel?appId=" + $('#hdAppId').val() + "&appName=" + $('#hdAppName').val() + "&option=" + rdDownloadOption;
     });
 </script>

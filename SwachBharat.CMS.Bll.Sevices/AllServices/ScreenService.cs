@@ -7130,8 +7130,23 @@ namespace SwachBharat.CMS.Bll.Services
             return data;
         }
 
-        public DataTable getHousesList()
+        public DataTable getHousesList(int option)
         {
+            string query = string.Empty;
+            if(option == 1)
+            {
+                query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId where H.houseLat is not null AND H.houseLat <> '' AND H.houseLong is not null AND H.houseLong <> '' AND (H.houseOwner is null OR H.houseOwner = '') order BY H.houseId asc";
+            }
+            else if(option == 2)
+            {
+                query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId where H.houseOwner is not null AND H.houseOwner <> '' order BY H.houseId asc";
+
+            }
+            else
+            {
+                query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId ORDER BY H.houseId asc";
+
+            }
             var data = new DataTable();
             try
             {
@@ -7144,7 +7159,7 @@ namespace SwachBharat.CMS.Bll.Services
                         if (connectionState != ConnectionState.Open) conn.Open();
                         using (var cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId ORDER BY H.houseId asc";
+                            cmd.CommandText = query; 
                             cmd.CommandType = CommandType.Text;
                             using (var reader = cmd.ExecuteReader())
                             {
