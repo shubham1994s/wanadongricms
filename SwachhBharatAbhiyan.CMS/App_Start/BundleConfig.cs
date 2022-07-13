@@ -122,17 +122,7 @@ namespace SwachhBharatAbhiyan.CMS
 
                ));
 
-            bundles.Add(new ScriptBundle("~/Scripts/ThemeScriptsUR").Include(
-           "~/Content/theme-assets/vendor/jquery/jquery.min.js",
-            "~/Content/theme-assets/vendor/popper.js/umd/popper.min.js",
-             "~/Content/theme-assets/vendor/bootstrap/js/bootstrap.min.js",
-             "~/Content/theme-assets/vendor/jquery.cookie/jquery.cookie.js",
-           "~/Content/theme-assets/vendor/chart.js/Chart.min.js",
-              "~/Content/theme-assets/vendor/jquery-validation/jquery.validate.min.js",
-           "~/Content/theme-assets/js/front.js",
-            "~/Content/theme-assets/js/MyCustom.js"
-
-           ));
+         
 
 
             bundles.Add(new StyleBundle("~/Content/ThemeCss").Include(
