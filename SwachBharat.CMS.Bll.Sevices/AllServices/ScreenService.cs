@@ -1169,13 +1169,13 @@ namespace SwachBharat.CMS.Bll.Services
         public List<EmployeeHouseCollectionInnerOuter> getEmployeeHouseCollectionInnerOuter()
         {
             List<EmployeeHouseCollectionInnerOuter> obj = new List<EmployeeHouseCollectionInnerOuter>();
-            int innerCount;
+            int innerCount=0;
             using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
             {
                 var data = db.SP_EmployeeHouseCollectionCount().ToList();
                 foreach (var x in data) 
                 {
-                    innerCount = getInnerCountByUserId(x.userId,x.TodayDate);
+                   innerCount = getInnerCountByUserId(x.userId,x.TodayDate);
                     obj.Add(new EmployeeHouseCollectionInnerOuter()
                     {
                         userId = x.userId,
@@ -1201,77 +1201,80 @@ namespace SwachBharat.CMS.Bll.Services
 
             using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
             {
-                var att = db.Daily_Attendance.Where(a => a.userId == userId && a.daDate == todayDate).FirstOrDefault();
-                if (att != null)
+                //  var att = db.Daily_Attendance.Where(a => a.userId == userId && a.daDate == todayDate).FirstOrDefault();
+                //if (att != null)
+                // {
+                //      DateTime date = DateTime.Parse(att.startTime, System.Globalization.CultureInfo.CurrentCulture);
+                //      string t = date.ToString("hh:mm:ss tt");
+                //      string dt = Convert.ToDateTime(att.daDate).ToString("MM/dd/yyyy");
+                //      fdate = Convert.ToDateTime(dt + " " + t);
+
+                //      if (att.endTime == "" | att.endTime == null)
+                //      {
+                //          edate = DateTime.Now;
+                //      }
+                //      else
+                //      {
+                //          string Time2 = att.endTime;
+                //          DateTime date2 = DateTime.Parse(Time2, System.Globalization.CultureInfo.CurrentCulture);
+                //          string t2 = date2.ToString("hh:mm:ss tt");
+                //          string dt2 = Convert.ToDateTime(att.daEndDate).ToString("MM/dd/yyyy");
+                //          edate = Convert.ToDateTime(dt2 + " " + t2);
+                //      }
+
+                EmpBeatMapVM ebm = GetEmpBeatMapByUserId(userId);
+                lstPoly = ebm.ebmLatLong;
+
+                // var data = db.Locations.Where(c => c.userId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == 1).OrderByDescending(a => a.datetime).ToList();
+
+                //foreach (var x in data)
+                //{
+                //    if (x.type == 1)
+                //    {
+
+                var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == userId & (c.houseId != null || c.dyId != null)) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(todayDate)).OrderBy(c => c.gcId).ToList();//.ToList();
+
+                if (lstPoly != null && lstPoly.Count > 0)
                 {
-                    DateTime date = DateTime.Parse(att.startTime, System.Globalization.CultureInfo.CurrentCulture);
-                    string t = date.ToString("hh:mm:ss tt");
-                    string dt = Convert.ToDateTime(att.daDate).ToString("MM/dd/yyyy");
-                    fdate = Convert.ToDateTime(dt + " " + t);
-
-                    if (att.endTime == "" | att.endTime == null)
+                    foreach (var d in gcd)
                     {
-                        edate = DateTime.Now;
-                    }
-                    else
-                    {
-                        string Time2 = att.endTime;
-                        DateTime date2 = DateTime.Parse(Time2, System.Globalization.CultureInfo.CurrentCulture);
-                        string t2 = date2.ToString("hh:mm:ss tt");
-                        string dt2 = Convert.ToDateTime(att.daEndDate).ToString("MM/dd/yyyy");
-                        edate = Convert.ToDateTime(dt2 + " " + t2);
-                    }
-
-                    EmpBeatMapVM ebm = GetEmpBeatMapByUserId(userId);
-                    lstPoly = ebm.ebmLatLong;
-
-                    var data = db.Locations.Where(c => c.userId == att.userId & c.datetime >= fdate & c.datetime <= edate & c.type == 1).OrderByDescending(a => a.datetime).ToList();
-
-                    foreach (var x in data)
-                    {
-                        if (x.type == 1)
+                        if (d.houseId != null)
                         {
 
-                            var gcd = db.GarbageCollectionDetails.Where(c => (c.userId == x.userId & (c.houseId != null || c.dyId != null)) & EntityFunctions.TruncateTime(c.gcDate) == EntityFunctions.TruncateTime(x.datetime)).OrderBy(c => c.gcId).ToList();//.ToList();
-
-
-                            foreach (var d in gcd)
+                            var house = db.HouseMasters.Where(c => c.houseId == d.houseId).FirstOrDefault();
+                            if (house != null)
                             {
-                                if (d.houseId != null)
+                                coordinates p = new coordinates()
                                 {
-
-                                    var house = db.HouseMasters.Where(c => c.houseId == d.houseId).FirstOrDefault();
-                                    if (house != null)
+                                    lat = Convert.ToDouble(d.Lat),
+                                    lng = Convert.ToDouble(d.Long)
+                                };
+                                if (lstPoly != null && lstPoly.Count > 0)
+                                {
+                                    foreach (var poly in lstPoly)
                                     {
-                                        coordinates p = new coordinates()
+                                        if (IsPointInPolygon(poly, p))
                                         {
-                                            lat = Convert.ToDouble(d.Lat),
-                                            lng = Convert.ToDouble(d.Long)
-                                        };
-                                        if (lstPoly != null && lstPoly.Count > 0)
-                                        {
-                                            foreach (var poly in lstPoly)
-                                            {
-                                                if (IsPointInPolygon(poly, p))
-                                                {
-                                                    innerCount++;
-                                                }
-                                            }
+                                            innerCount++;
                                         }
                                     }
-
                                 }
-
                             }
+
                         }
-                        break;
+
                     }
 
-
-
                 }
+                     //   }
+                      //  break;
+                   // }
 
-            }
+
+
+             //  }
+
+           }
             return innerCount;
         }
         public void SaveEmpBeatMap(EmpBeatMapVM data)
