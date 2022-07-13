@@ -1017,7 +1017,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
                 ViewBag.HSuserid = Session["Id"];
                 mainRepository = new MainRepository();
                 SBAHSUREmpLocationMapView obj = new SBAHSUREmpLocationMapView();
-                obj = mainRepository.GetEmpByIdforMap(-1,daId);
+                obj = mainRepository.GetEmpByIdforMap(-1, daId);
                 return View(obj);
             }
             else
@@ -1027,6 +1027,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
         }
 
+
+
+        
         public ActionResult HSURRouteData(int daId)
         {
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
