@@ -1096,7 +1096,7 @@ $(document).ready(function () {
                         interval: 1
                     },
                     axisY: {
-                        title: "House Collection",
+                        title: "House Count",
                         includeZero: true,
                     },
                     axisX: {
