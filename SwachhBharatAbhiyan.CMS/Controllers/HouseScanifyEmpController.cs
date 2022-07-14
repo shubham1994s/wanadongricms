@@ -1260,32 +1260,54 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "HouseScanifyEmp");
         }
-        public ActionResult ExportHouseListPDF(int appId,string appName, int option)
+        public ActionResult ExportHouseListPDF(int appId,string appName, int option, int type)
         {
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
             {
                 string strOption = string.Empty;
-                if(option == 1)
+                string strType = string.Empty;
+                if (type == 1)
                 {
-                    strOption = "Houses with Lat/Long no data entry";
+                    strType = "Street";
                 }
-                else if(option == 2)
+                else if (type == 2)
                 {
-                    strOption = "Houses with data entry";
+                    strType = "Liquid";
+
+                }
+                else if (type == 3)
+                {
+                    strType = "Dumpyard";
 
                 }
                 else
                 {
-                    strOption = "All Houses";
+                    strType = "Houses";
 
                 }
 
+                if (option == 1)
+                {
+                    strOption = strType + " with Lat/Long no data entry";
+                }
+                else if (option == 2)
+                {
+                    strOption = strType + " with data entry";
+
+                }
+                else
+                {
+                    strOption = "All " + strType;
+
+                }
+
+
                 childRepository = new ChildRepository(appId);
-                var dt = childRepository.getHousesList(option);
-                byte[] filecontent = exportpdf(dt, appName, strOption);
+                var dt = childRepository.getHousesList(option,type);
+                byte[] filecontent = exportpdf(dt, appName, strOption, type);
                 //byte[] filecontent = genPDF(dt,appName);
 
-                string filename = appName + "_Houses_List_PDF_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".pdf";
+                string filename = appName + "_" + strType + "_List_PDF_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".pdf";
                 return File(filecontent, "application/pdf", filename);
             }
             else
@@ -1296,31 +1318,55 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-        public ActionResult ExportHouseListExcel(int appId, string appName, int option)
+        public ActionResult ExportHouseListExcel(int appId, string appName, int option, int type)
         {
             if (Session["utype"] != null && Session["utype"].ToString() == "A")
             {
                 string strOption = string.Empty;
-                if (option == 1)
+                string strType = string.Empty;
+                if (type == 1)
                 {
-                    strOption = "Houses with Lat/Long no data entry";
+                    strType = "Street";
                 }
-                else if (option == 2)
+                else if (type == 2)
                 {
-                    strOption = "Houses with data entry";
+                    strType = "Liquid";
+
+                }
+                else if (type == 3)
+                {
+                    strType = "Dumpyard";
 
                 }
                 else
                 {
-                    strOption = "All Houses";
+                    strType = "Houses";
 
                 }
+
+                if (option == 1)
+                {
+                    strOption = strType + " with Lat/Long no data entry";
+                }
+                else if (option == 2)
+                {
+                    strOption = strType + " with data entry";
+
+                }
+                else
+                {
+                    strOption = "All " + strType;
+
+                }
+
+
+                
                 childRepository = new ChildRepository(appId);
-                var dt = childRepository.getHousesList(option);
+                var dt = childRepository.getHousesList(option,type);
                 byte[] filecontent = ExcelExport(dt, appName, strOption);
                 //byte[] filecontent = genPDF(dt,appName);
 
-                string filename = appName + "_Houses_List_Excel_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".xlsx";
+                string filename = appName + "_" + strType + "_List_Excel_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".xlsx";
                 return File(filecontent, "application/octet-stream", filename);
             }
             else
@@ -1445,7 +1491,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
 
 
 
-        private byte[] exportpdf(DataTable dtEmployee, string appName, string option)
+        private byte[] exportpdf(DataTable dtEmployee, string appName, string option, int type)
         {
 
             // creating document object  
@@ -1487,7 +1533,25 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             //Adding  PdfPTable  
             PdfPTable table = new PdfPTable(dtEmployee.Columns.Count);
             table.WidthPercentage = 100;
+            //int[] firstTablecellwidth = { 8, 18, 6, 6, 8, 6, 6, 18, 8, 8, 8 };
             int[] firstTablecellwidth = { 8, 18, 6, 6, 8, 6, 6, 18, 8, 8, 8 };
+            if (type == 1)
+            {
+                firstTablecellwidth = new int[] { 10, 20, 20, 7, 7, 10, 16, 10};
+            }
+            else if(type == 2)
+            {
+                firstTablecellwidth = new int[] { 10, 20, 20, 7, 7, 10, 16, 10 }; 
+            }
+            else if(type == 3)
+            {
+                firstTablecellwidth = new int[] { 10, 20, 20, 7, 7, 10, 16, 10 };
+            }
+            else
+            {
+                firstTablecellwidth = new int[] { 8, 18, 6, 6, 8, 6, 6, 18, 8, 8, 8 };
+            }
+
             table.SetWidths(firstTablecellwidth);
             
             for (int i = 0; i < dtEmployee.Columns.Count; i++)
