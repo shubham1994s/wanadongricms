@@ -1416,7 +1416,7 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
             using (var excelPackage = new ExcelPackage())
             {
                 var worksheet = excelPackage.Workbook.Worksheets.Add("Export");
-                if (dt != null && dt.Rows.Count > 0)
+                if (dt != null )
                 {
                     worksheet.Cells["A3"].LoadFromDataTable(dt, true, TableStyles.None);
                     worksheet.Cells[1, 1, 1, 10].Merge = true;
