@@ -1039,14 +1039,7 @@ $(document).ready(function () {
             }
         }
     });
-    chart.render();
-
-
-});
-
-$(document).ready(function () {
-
-  $.ajax({
+    $.ajax({
         type: "post",
         url: "/Home/EmployeeHouseCollectionInnerOuter",
         //data: { userId: UserId, },
@@ -1056,7 +1049,7 @@ $(document).ready(function () {
             console.log(data);
             var inner = [];
             var outer = [];
-            
+
             for (var i = 0; i < data.length; i++) {
                 // alert(data[i].inTime);
                 var name = data[i].userName;
@@ -1076,7 +1069,7 @@ $(document).ready(function () {
                 // alert(data[i]._Count)
                 inner.push({ y: data[i].InnerCount, label: fname + lastname_firstchar, color: '#388e3c', intime: data[i].inTime });
                 outer.push({ y: data[i].OuterCount, label: fname + lastname_firstchar, color: '#f44336', intime: data[i].inTime });
-                
+
             }
 
             var chart = new CanvasJS.Chart("chartContainerTarget3",
@@ -1147,10 +1140,11 @@ $(document).ready(function () {
             }
         }
     });
-   // chart.render();
+    chart.render();
 
 
 });
+
 
 
 
