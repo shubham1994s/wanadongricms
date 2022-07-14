@@ -7134,23 +7134,83 @@ namespace SwachBharat.CMS.Bll.Services
             return data;
         }
 
-        public DataTable getHousesList(int option)
+        public DataTable getHousesList(int option, int type)
         {
             string query = string.Empty;
-            if(option == 1)
-            {
-                query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId where H.houseLat is not null AND H.houseLat <> '' AND H.houseLong is not null AND H.houseLong <> '' AND (H.houseOwner is null OR H.houseOwner = '') order BY H.houseId asc";
-            }
-            else if(option == 2)
-            {
-                query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId where H.houseOwner is not null AND H.houseOwner <> '' order BY H.houseId asc";
 
+            if(type == 1)
+            {
+                if (option == 1)
+                {
+                    query = "select ReferanceId StreetId, SSName StreetName,SSAddress StreetAddress,SSLat,SSLong,W.WardNo,T.Area, z.name ZoneName from StreetSweepingDetails S left join TeritoryMaster T on S.areaId = T.Id left join WardNumber W on S.wardId = W.Id left join ZoneMaster Z on S.zoneId = Z.zoneId where S.SSLat is not null AND S.SSLat <> '' AND S.SSLong is not null AND S.SSLong <> '' AND (S.SSName is null OR S.SSName = '') ORDER BY S.SSId asc";
+                }
+                else if (option == 2)
+                {
+                    query = "select ReferanceId StreetId, SSName StreetName,SSAddress StreetAddress,SSLat,SSLong,W.WardNo,T.Area, z.name ZoneName from StreetSweepingDetails S left join TeritoryMaster T on S.areaId = T.Id left join WardNumber W on S.wardId = W.Id left join ZoneMaster Z on S.zoneId = Z.zoneId where S.SSName is not null AND S.SSName <> '' ORDER BY S.SSId asc";
+
+                }
+                else
+                {
+                    query = "select ReferanceId StreetId, SSName StreetName,SSAddress StreetAddress,SSLat,SSLong,W.WardNo,T.Area, z.name ZoneName from StreetSweepingDetails S left join TeritoryMaster T on S.areaId = T.Id left join WardNumber W on S.wardId = W.Id left join ZoneMaster Z on S.zoneId = Z.zoneId ORDER BY S.SSId asc";
+
+                }
+
+            }
+            else if(type == 2)
+            {
+                if (option == 1)
+                {
+                    query = "select ReferanceId LiquidId,LWName LiquidName,LWAddreLW LiquidAddress,LWLat,LWLong, W.WardNo,T.Area, z.name ZoneName from LiquidWasteDetails L left join TeritoryMaster T on L.areaId = T.Id left join WardNumber W on L.wardId = W.Id left join ZoneMaster Z on L.zoneId = Z.zoneId where L.LWLat is not null AND L.LWLat <> '' AND L.LWLong is not null AND L.LWLong <> '' AND (L.LWName is null OR L.LWName = '') ORDER BY L.LWId asc";
+                }
+                else if (option == 2)
+                {
+                    query = "select ReferanceId LiquidId,LWName LiquidName,LWAddreLW LiquidAddress,LWLat,LWLong, W.WardNo,T.Area, z.name ZoneName from LiquidWasteDetails L left join TeritoryMaster T on L.areaId = T.Id left join WardNumber W on L.wardId = W.Id left join ZoneMaster Z on L.zoneId = Z.zoneId where L.LWName is not null AND L.LWName <> '' ORDER BY L.LWId asc";
+
+                }
+                else
+                {
+                    query = "select ReferanceId LiquidId,LWName LiquidName,LWAddreLW LiquidAddress,LWLat,LWLong, W.WardNo,T.Area, z.name ZoneName from LiquidWasteDetails L left join TeritoryMaster T on L.areaId = T.Id left join WardNumber W on L.wardId = W.Id left join ZoneMaster Z on L.zoneId = Z.zoneId ORDER BY L.LWId asc";
+
+                }
+            }
+            else if(type == 3)
+            {
+                if (option == 1)
+                {
+                    query = "select ReferanceId DumpId, dyName DumpName,dyAddress DumpAddress, dyLat,dyLong, W.WardNo,T.Area, z.name ZoneName  from DumpYardDetails D left join TeritoryMaster T on D.areaId = T.Id left join WardNumber W on D.wardId = W.Id left join ZoneMaster Z on D.zoneId = Z.zoneId where D.dyLat is not null AND D.dyLat <> '' AND D.dyLong is not null AND D.dyLong <> '' AND (D.dyName is null OR D.dyName = '') ORDER BY D.dyId asc";
+                }
+                else if (option == 2)
+                {
+                    query = "select ReferanceId DumpId, dyName DumpName,dyAddress DumpAddress, dyLat,dyLong, W.WardNo,T.Area, z.name ZoneName  from DumpYardDetails D left join TeritoryMaster T on D.areaId = T.Id left join WardNumber W on D.wardId = W.Id left join ZoneMaster Z on D.zoneId = Z.zoneId where D.dyName is not null AND D.dyName <> '' ORDER BY D.dyId asc";
+
+                }
+                else
+                {
+                    query = "select ReferanceId DumpId, dyName DumpName,dyAddress DumpAddress, dyLat,dyLong, W.WardNo,T.Area, z.name ZoneName  from DumpYardDetails D left join TeritoryMaster T on D.areaId = T.Id left join WardNumber W on D.wardId = W.Id left join ZoneMaster Z on D.zoneId = Z.zoneId ORDER BY D.dyId asc";
+
+                }
             }
             else
             {
-                query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId ORDER BY H.houseId asc";
+                if (option == 1)
+                {
+                    query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId where H.houseLat is not null AND H.houseLat <> '' AND H.houseLong is not null AND H.houseLong <> '' AND (H.houseOwner is null OR H.houseOwner = '') order BY H.houseId asc";
+                }
+                else if (option == 2)
+                {
+                    query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId where H.houseOwner is not null AND H.houseOwner <> '' order BY H.houseId asc";
 
+                }
+                else
+                {
+                    query = "select ReferanceId HouseId, houseOwner,OccupancyStatus OwnerType, Property_Type,houseOwnerMobile,houseLat,houseLong,houseAddress,W.WardNo,T.Area, z.name ZoneName from HouseMaster H left join TeritoryMaster T on H.AreaId = T.Id left join WardNumber W on W.Id = H.WardNo left join ZoneMaster Z on z.zoneId = h.ZoneId ORDER BY H.houseId asc";
+
+                }
             }
+            
+
+
+
             var data = new DataTable();
             try
             {
