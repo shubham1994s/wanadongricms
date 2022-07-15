@@ -41,32 +41,39 @@
                 "targets": [0],
                 "visible": false,
                 "searchable": false
-            }, {
-                "targets": [6],
-                "visible": false,
-                "searchable": false
-            }, {
-                "targets": [7],
-                "visible": false,
-                "searchable": false
-            }, {
-                "targets": [8],
+            },
+            {
+            "targets": [3],
+            "visible": false,
+            "searchable": false
+            },
+            {
+                "targets": [5],
                 "visible": false,
                 "searchable": false
             },
             {
+                "targets": [7],
+                "visible": false,
+                "searchable": false
+            },
+            {
+            "targets": [8],
+            "visible": false,
+            "searchable": false
+            }, {
                 "targets": [9],
                 "visible": false,
                 "searchable": false
             },
             {
                 "targets": [10],
-                "orderable": false
-            },
-            {
-                "targets": [12],
                 "visible": false,
                 "searchable": false
+            },
+            {
+                "targets": [11],
+                "orderable": false
             },
             {
                 "targets": [13],
@@ -81,6 +88,11 @@
             {
                 "targets": [15],
                 "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [16],
+                "visible": false,
                 "searchable": false,
                 "type": "date-eu"
             }
@@ -90,10 +102,28 @@
         "columns": [
             { "data": "daID", "name": "daID", "autoWidth": true },
             { "data": "userName", "name": "userName", "autoWidth": true },
-            { "data": "daDate", "name": "daDate", "autoWidth": true },
+           // { "data": "daDate", "name": "daDate", "autoWidth": true },
+            {
+                "data": "daDate", "render": function (data, type, full, meta) {
+                    var SDT = full.daDate + ' ' + full.startTime;
+                    return SDT;
+                }
+            },
             { "data": "startTime", "name": "startTime", "autoWidth": true },
-            { "data": "daEndDate", "name": "daEndDate", "autoWidth": true },
+            //{ "data": "daEndDate", "name": "daEndDate", "autoWidth": true },
+            {
+                "data": "daEndDate", "render": function (data, type, full, meta) {
+                    if (full["daEndDate"] == null || full["daEndDate"] == "") {
+                        return '';
+                    }
+                    else {
+
+                        return full.daEndDate + ' ' + full.endTime;
+                    }
+                }
+            },
             { "data": "endTime", "name": "endTime", "autoWidth": true },
+            { "data": "ReferanceId", "name": "ReferanceId", "autoWidth": true },
             { "data": "startLat", "name": "endstartLatTime", "autoWidth": true },
             { "data": "startLong", "name": "startLong", "autoWidth": true },
             { "data": "endLat", "name": "endLat", "autoWidth": true },

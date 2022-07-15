@@ -1767,6 +1767,7 @@
     <Content Include="Content\DatatableGrid\DumpYardDetailGrid.js" />
     <Content Include="Content\DatatableGrid\DumpyardEmployeeDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\DumpYardGrid.js" />
+    <Content Include="Content\DatatableGrid\DumpYardSupervisorDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\EmpBeatMapGrid.js" />
     <Content Include="Content\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\EmployeeSummaryGrid.js" />
@@ -3217,6 +3218,8 @@
     <Content Include="Views\HouseScanifyEmp\HSURAttendance.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSHousesListDownload.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSUREMPRoute.cshtml" />
+    <Content Include="Views\DumpPlantProcess\MenuDumpYardIndex.cshtml" />
+    <Content Include="Views\DumpPlantProcess\DumpYardIndex.cshtml" />
     <Content Include="Views\EmpShift\MenuIndex.cshtml" />
     <Content Include="Views\EmpShift\Index.cshtml" />
     <Content Include="Views\EmpShift\AddEmpShiftDetails.cshtml" />

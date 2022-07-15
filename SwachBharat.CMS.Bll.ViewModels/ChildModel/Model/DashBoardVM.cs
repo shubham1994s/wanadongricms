@@ -37,6 +37,13 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
         public Nullable<double> DryWeightCount { get; set; }
         public Nullable<double> WetWeightCount { get; set; }
 
+        public Nullable<double> SV_TotalGcWeightCount { get; set; }
+        public Nullable<double> SV_TotalDryWeightCount { get; set; }
+        public Nullable<double> SV_TotalWetWeightCount { get; set; }
+        public Nullable<double> SV_GcWeightCount { get; set; }
+        public Nullable<double> SV_DryWeightCount { get; set; }
+        public Nullable<double> SV_WetWeightCount { get; set; }
+
         public Nullable<int> NotSpecified { get; set; }
 
         public Nullable<int> TotalDryWaste { get; set; }
