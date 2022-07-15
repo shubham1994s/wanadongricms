@@ -335,6 +335,7 @@
     <Compile Include="Controllers\DumpyardEmployeeController.cs" />
     <Compile Include="Controllers\EmpBeatMapController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmpShiftController.cs" />
     <Compile Include="Controllers\GarbageCollectionController.cs" />
     <Compile Include="Controllers\GarbagePointController.cs" />
     <Compile Include="Controllers\GridController.cs" />
@@ -1769,6 +1770,7 @@
     <Content Include="Content\DatatableGrid\EmpBeatMapGrid.js" />
     <Content Include="Content\DatatableGrid\EmployeeDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\EmployeeSummaryGrid.js" />
+    <Content Include="Content\DatatableGrid\EmpShiftDetailsGrid.js" />
     <Content Include="Content\DatatableGrid\GarbageCountGrid.js" />
     <Content Include="Content\DatatableGrid\GarbagePointGrid.js" />
     <Content Include="Content\DatatableGrid\HouseScanify.js" />
@@ -3215,6 +3217,9 @@
     <Content Include="Views\HouseScanifyEmp\HSURAttendance.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSHousesListDownload.cshtml" />
     <Content Include="Views\HouseScanifyEmp\HSUREMPRoute.cshtml" />
+    <Content Include="Views\EmpShift\MenuIndex.cshtml" />
+    <Content Include="Views\EmpShift\Index.cshtml" />
+    <Content Include="Views\EmpShift\AddEmpShiftDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

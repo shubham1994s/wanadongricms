@@ -1599,6 +1599,33 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public EmpShiftVM GetEmpShiftById(int teamId)
+        {
+            try
+            {
+                EmpShiftVM type = new EmpShiftVM();
+                
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    var Details = db.EmpShifts.Where(x => x.shiftId == teamId).FirstOrDefault();
+                    if (Details != null)
+                    {
+                        type = FillEmpShiftViewModel(Details);
+                        
+                        return type;
+                    }
+                    else
+                    {
+                        type.shiftId = -1;
+                        return type;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
 
@@ -1695,6 +1722,37 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public void SaveEmpShift(EmpShiftVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.shiftId > 0)
+                    {
+                        var model = db.EmpShifts.Where(x => x.shiftId == data.shiftId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            model.shiftName = data.shiftName;
+                            model.shiftStart = data.shiftStart;
+                            model.shiftEnd = data.shiftEnd;
+                            //model.EmployeeType = Emptype;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = FillEmpShiftDataModel(data);
+                        db.EmpShifts.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public void SaveAttendenceSettingsDetail(SBAAttendenceSettingsGridRow data)
         {
@@ -4394,6 +4452,14 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
 
+        private EmpShift FillEmpShiftDataModel(EmpShiftVM data)
+        {
+            EmpShift model = new EmpShift();
+            model.shiftName = data.shiftName;
+            model.shiftStart = data.shiftStart;
+            model.shiftEnd = data.shiftEnd;
+            return model;
+        }
         // Added By Saurabh
 
         private DumpYardDetail FillDumpYardDetailsDataModel(DumpYardDetailsVM data, string Emptype)
@@ -4963,6 +5029,16 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
 
+
+        private EmpShiftVM FillEmpShiftViewModel(EmpShift data)
+        {
+            EmpShiftVM model = new EmpShiftVM();
+            model.shiftId = data.shiftId;
+            model.shiftName = data.shiftName;
+            model.shiftStart = data.shiftStart;
+            model.shiftEnd = data.shiftEnd;
+            return model;
+        }
         //private EmployeeDetailsVM FillLiquidEmployeeViewModel(UserMaster_Liquid data)
         //{
         //    EmployeeDetailsVM model = new EmployeeDetailsVM();
@@ -8789,6 +8865,24 @@ namespace SwachBharat.CMS.Bll.Services
             {
 
                 var isrecord1 = db.QrEmployeeMasters.Where(x => x.qrEmpName == userName && x.isActive == true).FirstOrDefault();
+                if (isrecord1 == null)
+                {
+                    return "0";
+                }
+                else
+                {
+                    return "1";
+                }
+            }
+
+        }
+        public string CheckShiftName(string shiftName)
+        {
+
+            using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+            {
+
+                var isrecord1 = db.EmpShifts.Where(x => x.shiftName == shiftName).FirstOrDefault();
                 if (isrecord1 == null)
                 {
                     return "0";

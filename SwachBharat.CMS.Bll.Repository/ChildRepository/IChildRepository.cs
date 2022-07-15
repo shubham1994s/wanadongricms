@@ -89,6 +89,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         void DeletGarbagePoint(int teamId);
 
         EmployeeDetailsVM GetEmployeeById(int teamId);
+        EmpShiftVM GetEmpShiftById(int teamId);
 
         //EmployeeDetailsVM GetLiquidEmployeeById(int teamId);
 
@@ -96,6 +97,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         void DeleteEmployee(int teamId);
         void SaveEmployee(EmployeeDetailsVM employee,string Emptype);
 
+        void SaveEmpShift(EmpShiftVM empShift);
         void SaveAttendenceSettingsDetail(SBAAttendenceSettingsGridRow atten);
 
         ComplaintVM GetComplaint(int teamId);
@@ -164,6 +166,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         string GetLoginidData(string utype);
         string GetUserName(string uname);
+        string CheckShiftName(string shiftName);
         string GetHSUserName(string uname);
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
 

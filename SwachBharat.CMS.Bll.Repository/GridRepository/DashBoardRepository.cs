@@ -715,6 +715,32 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
             }
         }
 
+
+        public IEnumerable<SBAEmpShiftGridRow> EmpShiftData(long wildcard, string SearchString, int appId)
+        {
+
+            using (var db = new DevChildSwachhBharatNagpurEntities(appId))
+            {
+                var data = db.EmpShifts.Select(x => new SBAEmpShiftGridRow
+                {
+                    shiftId = x.shiftId,
+                    shiftName = x.shiftName,
+                    shiftStart = x.shiftStart,
+                    shiftEnd = x.shiftEnd
+                }).ToList();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    var model = data.Where(c => (
+                                        (string.IsNullOrEmpty(c.shiftName) ? " " : c.shiftName)).ToUpper().Contains(SearchString.ToUpper())).ToList();
+
+                    data = model.ToList();
+                }
+
+                return data.OrderByDescending(c => c.shiftId);
+            }
+        }
+
+
         public IEnumerable<SBAAppAreaMapGridRow> AppAreaMapsData(long wildcard, string SearchString, int appId)
         {
 

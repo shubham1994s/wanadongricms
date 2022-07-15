@@ -27,6 +27,7 @@
           <Property Name="totalKm" Type="int" />
           <Property Name="OutbatteryStatus" Type="varchar" MaxLength="20" />
           <Property Name="EmployeeType" Type="varchar" MaxLength="10" />
+          <Property Name="dyid" Type="int" />
         </EntityType>
         <EntityType Name="DumpYardDetails">
           <Key>
@@ -59,6 +60,15 @@
           <Property Name="userId" Type="int" />
           <Property Name="ebmLatLong" Type="nvarchar(max)" />
           <Property Name="Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmpShift">
+          <Key>
+            <PropertyRef Name="shiftId" />
+          </Key>
+          <Property Name="shiftId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shiftName" Type="nvarchar" MaxLength="50" />
+          <Property Name="shiftStart" Type="nvarchar" MaxLength="50" />
+          <Property Name="shiftEnd" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="GamePlayerDetails">
           <Key>
@@ -855,6 +865,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySet Name="Daily_Attendance" EntityType="Self.Daily_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DumpYardDetails" EntityType="Self.DumpYardDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpBeatMap" EntityType="Self.EmpBeatMap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpShift" EntityType="Self.EmpShift" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GamePlayerDetails" EntityType="Self.GamePlayerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GarbageCollectionDetails" EntityType="Self.GarbageCollectionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GarbagePointDetails" EntityType="Self.GarbagePointDetails" Schema="dbo" store:Type="Tables" />
@@ -1261,6 +1272,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Parameter Name="Appid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_EmployeeHouseCollectionCount" ReturnType="Collection(DevSwachhBharatNagpurModel.SP_EmployeeHouseCollectionCount_Result)" />
+          <EntitySet Name="EmpShifts" EntityType="DevSwachhBharatNagpurModel.EmpShift" />
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -2139,6 +2151,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="totalKm" Type="Int32" />
           <Property Name="OutbatteryStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="EmployeeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="dyid" Type="Int32" />
         </EntityType>
         <EntityType Name="MonthlyAttedance">
           <Key>
@@ -2654,6 +2667,15 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="String" Name="inTime" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="TotHouseCount" Nullable="true" />
         </ComplexType>
+        <EntityType Name="EmpShift">
+          <Key>
+            <PropertyRef Name="shiftId" />
+          </Key>
+          <Property Name="shiftId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shiftName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shiftStart" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shiftEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3544,6 +3566,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <EntitySetMapping Name="Daily_Attendance">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.Daily_Attendance">
               <MappingFragment StoreEntitySet="Daily_Attendance">
+                <ScalarProperty Name="dyid" ColumnName="dyid" />
                 <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
                 <ScalarProperty Name="OutbatteryStatus" ColumnName="OutbatteryStatus" />
                 <ScalarProperty Name="totalKm" ColumnName="totalKm" />
@@ -4154,6 +4177,16 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="EmpShifts">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.EmpShift">
+              <MappingFragment StoreEntitySet="EmpShift">
+                <ScalarProperty Name="shiftEnd" ColumnName="shiftEnd" />
+                <ScalarProperty Name="shiftStart" ColumnName="shiftStart" />
+                <ScalarProperty Name="shiftName" ColumnName="shiftName" />
+                <ScalarProperty Name="shiftId" ColumnName="shiftId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
          
         </EntityContainerMapping>
       </Mapping>

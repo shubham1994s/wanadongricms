@@ -304,6 +304,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
            return screenService.GetEmployeeDetails(teamId);
         }
 
+        public EmpShiftVM GetEmpShiftById(int teamId)
+        {
+            return screenService.GetEmpShiftById(teamId);
+        }
         //public EmployeeDetailsVM GetLiquidEmployeeById(int teamId)
         //{
         //    return screenService.GetLiquidEmployeeDetails(teamId);
@@ -325,6 +329,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             screenService.SaveEmployeeDetails(employee, Emptype);
         }
 
+        public void SaveEmpShift(EmpShiftVM empShift)
+        {
+            screenService.SaveEmpShift(empShift);
+        }
       public  void SaveAttendenceSettingsDetail(SBAAttendenceSettingsGridRow atten)
         {
             screenService.SaveAttendenceSettingsDetail(atten);
@@ -745,6 +753,10 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         public string GetUserName(string userName)
         {
             return screenService.GetUserName(userName);
+        }
+        public string CheckShiftName(string shiftName)
+        {
+            return screenService.CheckShiftName(shiftName);
         }
         public string GetHSUserName(string userName)
         {

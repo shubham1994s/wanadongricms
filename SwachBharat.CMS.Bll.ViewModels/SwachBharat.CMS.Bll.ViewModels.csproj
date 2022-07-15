@@ -82,6 +82,7 @@
     <Compile Include="ChildModel\Model\EmployeeLiquidCollectionType.cs" />
     <Compile Include="ChildModel\Model\EmployeeStreetCollectionType.cs" />
     <Compile Include="ChildModel\Model\EmployeeVM.cs" />
+    <Compile Include="ChildModel\Model\EmpShiftVM.cs" />
     <Compile Include="ChildModel\Model\GarbageCollectionVM.cs" />
     <Compile Include="ChildModel\Model\GarbagePointDetailsVM.cs" />
     <Compile Include="ChildModel\Model\GetEmpWiseHouseScan.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Grid\SBAEmpBeatMapGridRow.cs" />
     <Compile Include="Grid\SBAEmplyeeIdelGrid.cs" />
     <Compile Include="Grid\SBAEmpolyeeSummaryGrid.cs" />
+    <Compile Include="Grid\SBAEmpShiftGridRow.cs" />
     <Compile Include="Grid\SBAGarbageCountDetails.cs" />
     <Compile Include="Grid\SBAGarbagePointDetailsGridRow.cs" />
     <Compile Include="Grid\SBAHouseScanifyDetailsGridRow.cs" />
