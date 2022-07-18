@@ -586,9 +586,12 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             if(ip.Length == 0)
             {
                 ip = "0.0.0.0";
+                
+            }
+            if(hostname.Length == 0)
+            {
                 hostname = "Mobile Browser";
             }
-
 
          
             //return ip;
