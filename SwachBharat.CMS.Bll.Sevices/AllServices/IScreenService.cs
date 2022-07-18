@@ -83,13 +83,14 @@ namespace SwachBharat.CMS.Bll.Services
         void DeletGarbagePointDetails(int teamId);
 
         EmployeeDetailsVM GetEmployeeDetails(int teamId);
+        EmpShiftVM GetEmpShiftById(int teamId);
 
-      
+
 
         SBAAttendenceSettingsGridRow GetAttendenceEmployeeById(int teamId);
         void DeleteEmployeeDetails(int teamId);
         void SaveEmployeeDetails(EmployeeDetailsVM employee,string Emptype);
-
+        void SaveEmpShift(EmpShiftVM empShift);
         void SaveAttendenceSettingsDetail(SBAAttendenceSettingsGridRow atten);
         ComplaintVM GetCompalint(int teamId);
         void SaveComplaintStatus(ComplaintVM employee);
@@ -239,6 +240,7 @@ namespace SwachBharat.CMS.Bll.Services
         string GetLoginidData(string LoginId);
         string GetUserName(string userName);
         string GetHSUserName(string userName);
+        string CheckShiftName(string shiftName);
         StreetSweepVM GetBeatDetails(int teamId);
         StreetSweepVM SaveStreetBeatDetails(StreetSweepVM data);
 

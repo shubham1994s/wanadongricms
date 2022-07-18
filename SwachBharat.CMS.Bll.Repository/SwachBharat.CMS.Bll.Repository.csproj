@@ -105,6 +105,7 @@
     <Compile Include="GridRepository\Grid\EmloyeeGridRepository.cs" />
     <Compile Include="GridRepository\Grid\EmpBeatMapsGridRepository.cs" />
     <Compile Include="GridRepository\Grid\EmpolyeeSummaryGridRepository.cs" />
+    <Compile Include="GridRepository\Grid\EmpShiftGridRepository.cs" />
     <Compile Include="GridRepository\Grid\GarbageCountGridRepository.cs" />
     <Compile Include="GridRepository\Grid\HGarbageCotectionGridRepository.cs" />
     <Compile Include="GridRepository\Grid\GarbagePointGridRepository.cs" />
