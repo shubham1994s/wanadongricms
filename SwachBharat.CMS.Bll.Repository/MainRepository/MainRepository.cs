@@ -583,13 +583,26 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
                 hostname = System.Net.Dns.GetHostEntry(ip).HostName;
             }
+            if(ip.Length == 0)
+            {
+                ip = "0.0.0.0";
+                hostname = "Mobile Browser";
+            }
 
 
          
             //return ip;
             model.ip_address = ip;
             model.HostName = hostname;
-            model.login_device = "PC";
+            if (ip.Length == 0)
+            {
+                model.login_device = "Mobile";
+            }
+            else
+            {
+                model.login_device = "PC";
+            }
+              
 
             return model;
         }
