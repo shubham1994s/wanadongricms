@@ -54,7 +54,7 @@
             //{ "data": "startDate", "name": "startDate", "autoWidth": true },
             //{ "data": "StartTime", "name": "StartTime", "autoWidth": true },
             {
-                "data": "startDate", "render": function (data, type, full, meta) {
+                "data": "startDate", "name": "startDate", "render": function (data, type, full, meta) {
                     var SDT = full.startDate + ' ' + full.StartTime;
                     return SDT;
                 }
@@ -62,7 +62,7 @@
             //{ "data": "EndDate", "name": "EndDate", "autoWidth": true },
             //{ "data": "endTime", "name": "endTime", "autoWidth": true },
             {
-                "data": "EndDate", "render": function (data, type, full, meta) {
+                "data": "EndDate", "name": "EndDate", "render": function (data, type, full, meta) {
                     if (full["EndDate"] == null || full["EndDate"] == "") {
                         return '';
                     }
@@ -73,7 +73,7 @@
                 }
             },
             {
-                "data": "EmployeeType", "render": function (data, type, full, meta) {
+                "data": "EmployeeType", "name": "EmployeeType", "render": function (data, type, full, meta) {
                     if (full["EmployeeType"] == 'A') {
                         return 'Admin';
                     }
@@ -88,7 +88,7 @@
             },
 
             {
-                "data": "isActive", "render": function (data, type, full, meta) {
+                "data": "isActive", "name": "isActive", "render": function (data, type, full, meta) {
                     if (full["isActive"] == '1') {
                         return 'Active';
                     }
@@ -104,7 +104,7 @@
             },
             { "data": "ipaddress", "name": "ipaddress", "autoWidth": true },
             {
-                "data": "type", "render": function (data, type, full, meta) {
+                "data": "type", "name": "type", "render": function (data, type, full, meta) {
                     if (full["logindevice"] == '' || full["logindevice"] == null) {
                         return 'Mobile';
                     }
@@ -199,14 +199,14 @@ function LoadAGridM() {
             //{ "data": "startDate", "name": "startDate", "autoWidth": true },
             //{ "data": "StartTime", "name": "StartTime", "autoWidth": true },
             {
-                "data": "creator", "render": function (data, type, full, meta) {
+                "data": "creator", "name": "startDate", "render": function (data, type, full, meta) {
                     return full.startDate + ' ' + full.StartTime;
                 }
             },
             //{ "data": "EndDate", "name": "EndDate", "autoWidth": true },
             //{ "data": "endTime", "name": "endTime", "autoWidth": true },
             {
-                "data": "creator", "render": function (data, type, full, meta) {
+                "data": "creator", "name": "EndDate", "render": function (data, type, full, meta) {
                     if (full["EndDate"] != "" || full["EndDate"] != null) {
                         return full.EndDate + ' ' + full.endTime;
                     }
@@ -221,7 +221,7 @@ function LoadAGridM() {
             //{ "data": "endLong", "name": "endLong", "autoWidth": true },
 
             {
-                "data": "EmployeeType", "render": function (data, type, full, meta) {
+                "data": "EmployeeType", "name": "EmployeeType", "render": function (data, type, full, meta) {
                     if (full["EmployeeType"] == 'A') {
                         return 'Admin';
                     }
@@ -236,7 +236,7 @@ function LoadAGridM() {
             },
 
             {
-                "data": "isActive", "render": function (data, type, full, meta) {
+                "data": "isActive", "name": "isActive",  "render": function (data, type, full, meta) {
                     if (full["isActive"] == '1') {
                         return 'Active';
                     }
@@ -251,7 +251,7 @@ function LoadAGridM() {
                 }
             },
             {
-                "data": "type", "render": function (data, type, full, meta) {
+                "data": "type", "name": "type","render": function (data, type, full, meta) {
                     if (full["logindevice"] == '' || full["logindevice"] == null) {
                         return 'Mobile';
                     }
