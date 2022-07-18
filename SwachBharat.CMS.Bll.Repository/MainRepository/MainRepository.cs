@@ -602,7 +602,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             //return ip;
             model.ip_address = ip;
             model.HostName = hostname;
-            if (ip.Length == 0)
+            if (ip == "0.0.0.0")
             {
                 model.login_device = "Mobile";
             }
