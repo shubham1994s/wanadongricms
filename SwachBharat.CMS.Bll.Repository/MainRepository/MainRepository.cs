@@ -10,12 +10,16 @@ using System.Threading.Tasks;
 using SwachBharat.CMS.Dal.DataContexts;
 using System.Web.Mvc;
 using SwachBharat.CMS.Bll.ViewModels.Grid;
+using System.Web;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
     public class MainRepository : IMainRepository
     {
         MainService mainService;
+
+        public object Request { get; private set; }
+
         public MainRepository()
         {
             mainService = new MainService();
@@ -573,44 +577,34 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             model.startTime = DateTime.Now.ToString("hh:mm:ss tt");
             model.daDate = DateTime.Now;
             model.EmployeeType = data.EmployeeType;
+            var ip = "0.0.0.0";
+            var hostname = "Mobile Browser";
 
-
-            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            string hostname = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            if (string.IsNullOrEmpty(ip))
+            HttpContext context = HttpContext.Current;
+            if (!context.Request.Browser.IsMobileDevice)
             {
-                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
 
-                hostname = System.Net.Dns.GetHostEntry(ip).HostName;
+                 ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                 hostname = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (string.IsNullOrEmpty(ip))
+                {
+                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+
+                    hostname = System.Net.Dns.GetHostEntry(ip).HostName;
+                }
+
             }
-            else
-            {
-                ip = "0.0.0.0";
-                hostname = "Mobile Browser";
-            }
-            //if(ip.Length == 0)
-            //{
-            //    ip = "0.0.0.0";
-                
-            //}
-            //if(hostname.Length == 0)
-            //{
-            //    hostname = "Mobile Browser";
-            //}
+          
+
+          
+
+
 
          
             //return ip;
             model.ip_address = ip;
             model.HostName = hostname;
-            if (ip == "0.0.0.0")
-            {
-                model.login_device = "Mobile";
-            }
-            else
-            {
-                model.login_device = "PC";
-            }
-              
+            model.login_device = "PC";
 
             return model;
         }
