@@ -576,15 +576,19 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
 
 
             string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            string hostname = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             if (string.IsNullOrEmpty(ip))
             {
                 ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+
+                hostname = System.Net.Dns.GetHostEntry(ip).HostName;
             }
+
 
          
             //return ip;
-            model.ip_address = data.ipaddress;
-            model.HostName = data.HostName;
+            model.ip_address = ip;
+            model.HostName = hostname;
             model.login_device = "PC";
 
             return model;
