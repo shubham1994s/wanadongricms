@@ -300,7 +300,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                             
                            
                         }
-                        else if(model2.userId != null && data.logoff != null)
+                        else if(model2 != null && data.logoff != null)
                         {
                             model1.endTime = DateTime.Now.ToString("hh:mm:ss tt");
                             model1.daEndDate = DateTime.Now;
