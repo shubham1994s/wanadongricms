@@ -1633,16 +1633,19 @@ namespace SwachBharat.CMS.Bll.Services
         {
             List<int> shiftIds = new List<int>();
             string strShiftIds = string.Empty;
-            foreach (var shift in shiftList)
+            if (shiftList != null)
             {
-                if(shift.IsChecked == true)
+                foreach (var shift in shiftList)
                 {
-                    if(shift.shiftId != 0)
+                    if (shift.IsChecked == true)
                     {
-                        shiftIds.Add(shift.shiftId);
+                        if (shift.shiftId != 0)
+                        {
+                            shiftIds.Add(shift.shiftId);
+                        }
                     }
-                }
 
+                }
             }
             if (shiftIds.Count > 0)
             {
