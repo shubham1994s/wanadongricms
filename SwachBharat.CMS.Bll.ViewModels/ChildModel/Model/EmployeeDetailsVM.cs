@@ -29,5 +29,13 @@ namespace SwachBharat.CMS.Bll.ViewModels.ChildModel.Model
 
         public string EmployeeType { get; set; }
         public string LoginId { get; set; }
+        public List<Shift> Shifts { get; set; }
+    }
+
+    public class Shift
+    {
+        public int shiftId { get; set; }
+        public string shiftName { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

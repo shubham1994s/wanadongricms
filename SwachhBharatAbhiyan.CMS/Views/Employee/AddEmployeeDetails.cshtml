@@ -75,7 +75,7 @@
                     @*@Html.Label("नाव / Name")*@
                     @Html.Label("Name")
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(model => model.userName, new {  @class = "form-control", style = "font-family:Arial, FontAwesome", required = "required" })
+                    @Html.TextBoxFor(model => model.userName, new { @class = "form-control", style = "font-family:Arial, FontAwesome", required = "required" })
                     @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
                     <span class="text-danger" id="err_name"></span>
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -229,6 +229,20 @@
 
             <div class="col-md-6">
 
+                @{
+                    if (Model.Shifts.Count > 0)
+                    {
+                        <label>Select Shifts :</label><br />
+                    }
+                    for (int i = 0; i < Model.Shifts.Count; i++)
+                    {
+                        @Html.CheckBoxFor(m => m.Shifts[i].IsChecked)
+                        @Html.LabelFor(m => m.Shifts[i].IsChecked, Model.Shifts[i].shiftName)
+                        @Html.HiddenFor(m => m.Shifts[i].shiftId)
+                        @Html.HiddenFor(m => m.Shifts[i].shiftName)
+                        <br />
+                    }
+                }
             </div>
         </div>
         <div class="row">
@@ -424,7 +438,7 @@
             return false;
         }
 
-        if ($.trim($("#gcTarget").val()) == '' || $.trim($("#gcTarget").val()) == '0' ) {
+        if ($.trim($("#gcTarget").val()) == '' || $.trim($("#gcTarget").val()) == '0') {
             //$("#err_mobile").html("मोबाइल नंबर आवश्यक आहे / Mobile Number is Required").delay(1500).show().fadeOut('slow');
             $("#err_target").html("Target is Required but not '0' value ").delay(1500).show().fadeOut('slow');
             $('#gcTarget').focus();
@@ -441,7 +455,7 @@
     else {
 
         $("#userLoginId").keyup(function () {
-            
+
 
             var LoginId = $("#userLoginId").val();
             $.ajax({
@@ -459,7 +473,7 @@
         });
 
         $("#userName").keyup(function () {
-            
+
 
             var userName = $("#userName").val();
             $.ajax({
@@ -476,5 +490,5 @@
                 });
         });
     }
-    
+
 </script>

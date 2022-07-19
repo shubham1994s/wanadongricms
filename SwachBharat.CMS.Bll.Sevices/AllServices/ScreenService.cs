@@ -1173,13 +1173,13 @@ namespace SwachBharat.CMS.Bll.Services
         public List<EmployeeHouseCollectionInnerOuter> getEmployeeHouseCollectionInnerOuter()
         {
             List<EmployeeHouseCollectionInnerOuter> obj = new List<EmployeeHouseCollectionInnerOuter>();
-            int innerCount=0;
+            int innerCount = 0;
             using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
             {
                 var data = db.SP_EmployeeHouseCollectionCount().ToList();
-                foreach (var x in data) 
+                foreach (var x in data)
                 {
-                   innerCount = getInnerCountByUserId(x.userId,x.TodayDate);
+                    innerCount = getInnerCountByUserId(x.userId, x.TodayDate);
                     obj.Add(new EmployeeHouseCollectionInnerOuter()
                     {
                         userId = x.userId,
@@ -1190,7 +1190,7 @@ namespace SwachBharat.CMS.Bll.Services
                         OuterCount = x.TotHouseCount - innerCount,
                         ToDate = x.TodayDate.ToString()
                     });
-                
+
                 }
             }
             return obj.OrderBy(c => c.userName).ToList();
@@ -1270,15 +1270,15 @@ namespace SwachBharat.CMS.Bll.Services
                     }
 
                 }
-                     //   }
-                      //  break;
-                   // }
+                //   }
+                //  break;
+                // }
 
 
 
-             //  }
+                //  }
 
-           }
+            }
             return innerCount;
         }
         public void SaveEmpBeatMap(EmpBeatMapVM data)
@@ -1588,11 +1588,13 @@ namespace SwachBharat.CMS.Bll.Services
                         {
                             type.userProfileImage = "/Images/default_not_upload.png";
                         }
+                        type.Shifts = GetEmpShifts(teamId);
                         return type;
                     }
                     else
                     {
                         type.userProfileImage = "/Images/add_image_square.png";
+                        type.Shifts = GetEmpShifts(teamId);
                         return type;
                     }
                 }
@@ -1603,19 +1605,65 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public List<Shift> GetEmpShifts(int teamId)
+        {
+            List<int> ShiftIds = new List<int>();
+            List<Shift> ShiftList = new List<Shift>();
+            using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+            {
+                var Emp = db.UserMasters.Where(a => a.userId == teamId).FirstOrDefault();
+                if (Emp != null && !string.IsNullOrEmpty(Emp.shiftIds))
+                {
+                    ShiftIds = Emp.shiftIds.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+
+                }
+                ShiftList = db.EmpShifts.ToList().Select(x => new Shift
+                {
+                    shiftId= x.shiftId,
+                    shiftName = x.shiftName + " (From : " + x.shiftStart + " To : " + x.shiftEnd + ")",
+                    IsChecked = ShiftIds.Contains(x.shiftId)
+
+                }).ToList();
+            }
+
+            return ShiftList;
+        }
+
+        public string GetEmpShiftIds(List<Shift> shiftList)
+        {
+            List<int> shiftIds = new List<int>();
+            string strShiftIds = string.Empty;
+            foreach (var shift in shiftList)
+            {
+                if(shift.IsChecked == true)
+                {
+                    if(shift.shiftId != 0)
+                    {
+                        shiftIds.Add(shift.shiftId);
+                    }
+                }
+
+            }
+            if (shiftIds.Count > 0)
+            {
+                strShiftIds = string.Join(",", shiftIds);
+            }
+            return strShiftIds;
+        }
+
         public EmpShiftVM GetEmpShiftById(int teamId)
         {
             try
             {
                 EmpShiftVM type = new EmpShiftVM();
-                
+
                 using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
                 {
                     var Details = db.EmpShifts.Where(x => x.shiftId == teamId).FirstOrDefault();
                     if (Details != null)
                     {
                         type = FillEmpShiftViewModel(Details);
-                        
+
                         return type;
                     }
                     else
@@ -1708,6 +1756,7 @@ namespace SwachBharat.CMS.Bll.Services
                             model.isActive = data.isActive;
                             model.bloodGroup = data.bloodGroup;
                             model.gcTarget = data.gcTarget;
+                            model.shiftIds = GetEmpShiftIds(data.Shifts);
                             //model.EmployeeType = Emptype;
                             db.SaveChanges();
                         }
@@ -1715,6 +1764,7 @@ namespace SwachBharat.CMS.Bll.Services
                     else
                     {
                         var type = FillEmployeeDataModel(data, Emptype);
+                        type.shiftIds = GetEmpShiftIds(data.Shifts);
                         db.UserMasters.Add(type);
                         db.SaveChanges();
                     }
@@ -7214,7 +7264,7 @@ namespace SwachBharat.CMS.Bll.Services
         {
             string query = string.Empty;
 
-            if(type == 1)
+            if (type == 1)
             {
                 if (option == 1)
                 {
@@ -7232,7 +7282,7 @@ namespace SwachBharat.CMS.Bll.Services
                 }
 
             }
-            else if(type == 2)
+            else if (type == 2)
             {
                 if (option == 1)
                 {
@@ -7249,7 +7299,7 @@ namespace SwachBharat.CMS.Bll.Services
 
                 }
             }
-            else if(type == 3)
+            else if (type == 3)
             {
                 if (option == 1)
                 {
@@ -7283,7 +7333,7 @@ namespace SwachBharat.CMS.Bll.Services
 
                 }
             }
-            
+
 
 
 
@@ -7299,7 +7349,7 @@ namespace SwachBharat.CMS.Bll.Services
                         if (connectionState != ConnectionState.Open) conn.Open();
                         using (var cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText = query; 
+                            cmd.CommandText = query;
                             cmd.CommandType = CommandType.Text;
                             using (var reader = cmd.ExecuteReader())
                             {
