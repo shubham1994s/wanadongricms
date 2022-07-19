@@ -10,12 +10,16 @@ using System.Threading.Tasks;
 using SwachBharat.CMS.Dal.DataContexts;
 using System.Web.Mvc;
 using SwachBharat.CMS.Bll.ViewModels.Grid;
+using System.Web;
 
 namespace SwachBharat.CMS.Bll.Repository.MainRepository
 {
     public class MainRepository : IMainRepository
     {
         MainService mainService;
+
+        public object Request { get; private set; }
+
         public MainRepository()
         {
             mainService = new MainService();
@@ -283,8 +287,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                     if (data.LOGIN_ID != null)
                     {
                         var model = db.EmployeeMasters.Where(x => x.LoginId == data.LOGIN_ID ).FirstOrDefault();
-                        var model1 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId && c.endTime == null && c.daEndDate == null && c.login_device == "PC").FirstOrDefault();
-                        var model2 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId).FirstOrDefault();
+                        var model1 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId && c.endTime == null && c.daEndDate == null && (c.login_device == "PC" || c.login_device == "MB")).FirstOrDefault();
+                        var model2 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId && (c.login_device == "PC" || c.login_device == "MB")).FirstOrDefault();
                         if (model1 != null && data.logoff == null)
                         {
                             //model1.daID = data.daID;
@@ -300,7 +304,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                             
                            
                         }
-                        else if(model2.userId != null && data.logoff != null)
+                        else if(model2 != null && data.logoff != null)
                         {
                             model1.endTime = DateTime.Now.ToString("hh:mm:ss tt");
                             model1.daEndDate = DateTime.Now;
@@ -573,19 +577,31 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             model.startTime = DateTime.Now.ToString("hh:mm:ss tt");
             model.daDate = DateTime.Now;
             model.EmployeeType = data.EmployeeType;
+            var ip = "0.0.0.0";
+            var hostname = "Mobile";
+            model.login_device = "MB";
 
-
-            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            if (string.IsNullOrEmpty(ip))
+            HttpContext context = HttpContext.Current;
+            if (!context.Request.Browser.IsMobileDevice)
             {
-                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-            }
 
+                 ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                 hostname = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (string.IsNullOrEmpty(ip))
+                {
+                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+
+                    hostname = System.Net.Dns.GetHostEntry(ip).HostName;
+                }
+
+                model.login_device = "PC";
+            }
+          
          
             //return ip;
-            model.ip_address = data.ipaddress;
-            model.HostName = data.HostName;
-            model.login_device = "PC";
+            model.ip_address = ip;
+            model.HostName = hostname;
+           
 
             return model;
         }

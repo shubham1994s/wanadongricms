@@ -2890,6 +2890,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                                      t1.batteryStatus,
                                      t1.Lat,
                                      t1.Long,
+                                     t1.vqrid,
                                      t2.userName,
                                      t3.ReferanceId,
                                      t3.dyName,
@@ -2918,7 +2919,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                             dyIdfk = x.dyId,
                             userId = x.userId,
                             gcDate = x.gcDate,
-                            VehicleNumber = checkNull(x.vehicleNumber),
+                            //VehicleNumber = checkNull(x.vehicleNumber),
+                            VehicleNumber = db.Vehical_QR_Master.Where(c => c.vqrId == x.vqrid).FirstOrDefault().VehicalNumber,
                             totalGcWeight = (x.totalDryWeight + x.totalWetWeight),
                             totalDryWeight = x.totalDryWeight,
                             totalWetWeight = x.totalWetWeight,
@@ -3338,7 +3340,12 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                 foreach (var x in data)
                 {
                     int a = Convert.ToInt32(x.vtId.Trim());
+
                     string vt = "";
+                    if(a == 0)
+                    {
+                        a = 1;
+                    }
                     try { vt = db.VehicleTypes.Where(c => c.vtId == a).FirstOrDefault().description; }
                     catch { vt = ""; }
                     ///x.daDate = checkNull(x.daDate.tp);
