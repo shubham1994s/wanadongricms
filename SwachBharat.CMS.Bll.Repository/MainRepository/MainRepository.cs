@@ -578,7 +578,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             model.daDate = DateTime.Now;
             model.EmployeeType = data.EmployeeType;
             var ip = "0.0.0.0";
-            var hostname = "Mobile Browser";
+            var hostname = "Mobile";
+            model.login_device = "Mobile Browser";
 
             HttpContext context = HttpContext.Current;
             if (!context.Request.Browser.IsMobileDevice)
@@ -593,18 +594,14 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                     hostname = System.Net.Dns.GetHostEntry(ip).HostName;
                 }
 
+                model.login_device = "PC";
             }
           
-
-          
-
-
-
          
             //return ip;
             model.ip_address = ip;
             model.HostName = hostname;
-            model.login_device = "PC";
+           
 
             return model;
         }
