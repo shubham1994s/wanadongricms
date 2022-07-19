@@ -105,8 +105,8 @@
             { "data": "ipaddress", "name": "ipaddress", "autoWidth": true },
             {
                 "data": "type", "name": "type", "render": function (data, type, full, meta) {
-                    if (full["logindevice"] == '' || full["logindevice"] == null) {
-                        return 'Mobile';
+                    if (full["logindevice"] == 'MB') {
+                        return 'Mobile Browser';
                     }
 
                     if (full["logindevice"] == 'PC') {

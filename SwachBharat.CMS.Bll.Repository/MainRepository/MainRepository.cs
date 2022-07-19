@@ -287,8 +287,8 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
                     if (data.LOGIN_ID != null)
                     {
                         var model = db.EmployeeMasters.Where(x => x.LoginId == data.LOGIN_ID ).FirstOrDefault();
-                        var model1 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId && c.endTime == null && c.daEndDate == null && c.login_device == "PC").FirstOrDefault();
-                        var model2 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId).FirstOrDefault();
+                        var model1 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId && c.endTime == null && c.daEndDate == null && (c.login_device == "PC" || c.login_device == "MB")).FirstOrDefault();
+                        var model2 = db.HSUR_Daily_Attendance.Where(c => c.userId == model.EmpId && (c.login_device == "PC" || c.login_device == "MB")).FirstOrDefault();
                         if (model1 != null && data.logoff == null)
                         {
                             //model1.daID = data.daID;
@@ -579,7 +579,7 @@ namespace SwachBharat.CMS.Bll.Repository.MainRepository
             model.EmployeeType = data.EmployeeType;
             var ip = "0.0.0.0";
             var hostname = "Mobile";
-            model.login_device = "Mobile Browser";
+            model.login_device = "MB";
 
             HttpContext context = HttpContext.Current;
             if (!context.Request.Browser.IsMobileDevice)
