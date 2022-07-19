@@ -240,7 +240,7 @@ namespace SwachBharat.CMS.Bll.Services
         string GetLoginidData(string LoginId);
         string GetUserName(string userName);
         string GetHSUserName(string userName);
-        string CheckShiftName(string shiftName);
+        List<string> CheckShiftName();
         StreetSweepVM GetBeatDetails(int teamId);
         StreetSweepVM SaveStreetBeatDetails(StreetSweepVM data);
 

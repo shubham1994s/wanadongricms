@@ -8933,23 +8933,16 @@ namespace SwachBharat.CMS.Bll.Services
             }
 
         }
-        public string CheckShiftName(string shiftName)
+        public List<string> CheckShiftName()
         {
-
+            List<string> lstShifts = new List<string>();
             using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
             {
 
-                var isrecord1 = db.EmpShifts.Where(x => x.shiftName == shiftName).FirstOrDefault();
-                if (isrecord1 == null)
-                {
-                    return "0";
-                }
-                else
-                {
-                    return "1";
-                }
+                 lstShifts = db.EmpShifts.Select(x => x.shiftName).ToList();
+                
             }
-
+            return lstShifts;
         }
     }
 }

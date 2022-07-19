@@ -166,7 +166,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
         string GetLoginidData(string utype);
         string GetUserName(string uname);
-        string CheckShiftName(string shiftName);
+        List<string> CheckShiftName();
         string GetHSUserName(string uname);
         List<SBALHSUserLocationMapView> GetHSUserAttenRoute(int qrEmpDaId);
 
