@@ -27,7 +27,6 @@
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.UserMaster_Liquid" Width="1.5" PointX="18.375" PointY="8.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.UserMaster_Street" Width="1.5" PointX="11.375" PointY="18.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.Location" Width="1.5" PointX="7.375" PointY="5.75" />
-        <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.UserMaster" Width="1.5" PointX="9.375" PointY="5.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.Vw_MsgNotification" Width="1.5" PointX="0.75" PointY="18.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.MonthlyAttedance" Width="1.5" PointX="18.375" PointY="8.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.HouseMaster" Width="1.5" PointX="9.375" PointY="15.75" />
@@ -46,6 +45,7 @@
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.SauchalayAddress" Width="1.5" PointX="7.375" PointY="11.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.Daily_Attendance" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.EmpShift" Width="1.5" PointX="9.375" PointY="11.75" />
+        <EntityTypeShape EntityType="DevSwachhBharatNagpurModel.UserMaster" Width="1.5" PointX="21.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

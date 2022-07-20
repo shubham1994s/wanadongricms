@@ -39,13 +39,32 @@
         <div class="row">
 
 
+            <!--<div class="col-md-4">
+        <div class="form-group">-->
+            @*@Html.Label("नाव / Name")*@
+            <!--@Html.Label("Shift Name")
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(model => model.shiftName, new { @class = "form-control", style = "font-family:Arial, FontAwesome", required = "required" })
+            @Html.ValidationMessageFor(model => model.shiftName, "", new { @class = "text-danger" })
+            <span class="text-danger" id="err_name"></span>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <span class="help-block with-errors"></span>
+        </div>
+    </div>-->
             <div class="col-md-4">
                 <div class="form-group">
                     @*@Html.Label("नाव / Name")*@
                     @Html.Label("Shift Name")
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(model => model.shiftName, new { @class = "form-control", style = "font-family:Arial, FontAwesome", required = "required" })
-                    @Html.ValidationMessageFor(model => model.shiftName, "", new { @class = "text-danger" })
+                    @{ var RlistItems = new List<SelectListItem>();
+
+                        RlistItems.Add(new SelectListItem { Text = "Select Shift Name", Value = "0" });
+                        RlistItems.Add(new SelectListItem { Text = "Morning", Value = "Morning" });
+                        RlistItems.Add(new SelectListItem { Text = "Afternoon", Value = "Afternoon" });
+                        RlistItems.Add(new SelectListItem { Text = "Evening", Value = "Evening" });
+                        RlistItems.Add(new SelectListItem { Text = "Night", Value = "Night" });
+                    }
+                    @Html.DropDownListFor(model => model.shiftName, RlistItems, new { style = "font-family:Arial, FontAwesome", required = "required", @class = "form-control RequiredInput validate[required] RequiredInput" })
+
                     <span class="text-danger" id="err_name"></span>
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span class="help-block with-errors"></span>
@@ -103,19 +122,52 @@
 
         $(".jquery-date-time-picker").datetimepicker({
             datepicker: false,
-            format: 'H:i',
+            //format: 'H:i',
+            ampm: true, // FOR AM/PM FORMAT
+            format: 'g:i A',
             step: 15
         }).keypress(function (event) { event.preventDefault(); });
 
-        var shiftId = $("#shiftId").val();
-        if (shiftId > 0) {
-            $("#shiftName").attr('readOnly', 'true');
-        }
+        //var shiftId = $("#shiftId").val();
+        //if (shiftId > 0) {
+        //    $("#shiftName").attr('readOnly', 'true');
+        //}
+
+
+        $.ajax({
+            type: "post",
+            url: "/EmpShift/CheckShiftName",
+            data: {},
+            datatype: "json",
+            traditional: true,
+            success: function (data) {
+                var shifts = data;
+                var shiftId = $("#shiftId").val();
+                var shiftName = $("#shiftName").val();
+                if (shiftId > 0) {
+                    $("select#shiftName option[value!='" + shiftName + "']").hide();
+                    $("select#shiftName option[value='" + shiftName + "']").show();
+
+                } else {
+                    if (shifts.length > 0) {
+                        for (var i = 0; i < shifts.length; i++) {
+
+                            $("select#shiftName option[value='" + shifts[i] + "']").hide();
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+
+
     });
 </script>
 <script type="text/javascript">
     $("#btnSubmit").click(function () {
-        if ($.trim($("#shiftName").val()) == '') {
+        if ($.trim($("#shiftName").val()) == '0') {
             //$("#err_name").html("नाव आवश्यक आहे / Name is Required").delay(1500).show().fadeOut('slow');
             $("#err_name").html("Shift Name is Required").delay(1500).show().fadeOut('slow');
             $('#shiftName').focus();
@@ -134,24 +186,24 @@
             return false;
         }
     });
-    $("#shiftName").blur(function () {
-        var shiftId = $("#shiftId").val();
-        if (!(shiftId > 0)) {
-            var shiftName = $("#shiftName").val();
-            $.ajax({
-                url: "/EmpShift/CheckShiftName?shiftName=" + shiftName,
-                type: "POST",
-                data: { shiftName: shiftName }
-            })
-                .done(function (msg) {
-                    if (msg == 1) {
-                        $('#err_name').text('This Shift Name Is Already Exist!').delay(2000).show().fadeOut('slow');
-                        $("#shiftName").val('');
-                    } else {
-                        $('#err_name').text('');
-                    }
-                });
-        }
+    //$("#shiftName").blur(function () {
+    //    var shiftId = $("#shiftId").val();
+    //    if (!(shiftId > 0)) {
+    //        var shiftName = $("#shiftName").val();
+    //        $.ajax({
+    //            url: "/EmpShift/CheckShiftName?shiftName=" + shiftName,
+    //            type: "POST",
+    //            data: { shiftName: shiftName }
+    //        })
+    //            .done(function (msg) {
+    //                if (msg == 1) {
+    //                    $('#err_name').text('This Shift Name Is Already Exist!').delay(2000).show().fadeOut('slow');
+    //                    $("#shiftName").val('');
+    //                } else {
+    //                    $('#err_name').text('');
+    //                }
+    //            });
+    //    }
 
-    });
+    //});
 </script>

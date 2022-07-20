@@ -754,9 +754,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
         {
             return screenService.GetUserName(userName);
         }
-        public string CheckShiftName(string shiftName)
+        public List<string> CheckShiftName()
         {
-            return screenService.CheckShiftName(shiftName);
+            return screenService.CheckShiftName();
         }
         public string GetHSUserName(string userName)
         {

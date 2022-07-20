@@ -71,14 +71,14 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
         [HttpPost]
-        public string CheckShiftName(string shiftName)
+        public ActionResult CheckShiftName()
         {
-
+            List<string> lstShifts = new List<string>();
             int AppID = SessionHandler.Current.AppId;
             childRepository = new ChildRepository(AppID);
-            var isrecord = childRepository.CheckShiftName(shiftName);
+            lstShifts = childRepository.CheckShiftName();
 
-            return isrecord;
+            return Json(lstShifts, JsonRequestBehavior.AllowGet);
 
 
         }
