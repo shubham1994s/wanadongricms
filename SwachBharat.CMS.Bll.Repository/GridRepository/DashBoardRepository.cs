@@ -3372,6 +3372,8 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     string displayTime = Convert.ToDateTime(x.daDate).ToString("yyyy/MM/dd", CultureInfo.InvariantCulture);
                     string time = Convert.ToDateTime(x.startTime).ToString("HH:mm:ss");
 
+                    if(Emptype == "D")
+                    {
                     obj.Add(new SBAAttendenceGrid()
                     {
                         daID = x.daID,
@@ -3391,6 +3393,30 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                         CompareDate = x.daDate,
                         daDateTIme = (displayTime + " " + time)
                     });
+                    }
+
+                    else
+                    {
+                        obj.Add(new SBAAttendenceGrid()
+                        {
+                            daID = x.daID,
+                            userId = Convert.ToInt32(x.userId),
+                            userName = db.UserMasters.Where(c => c.userId == x.userId).FirstOrDefault().userName,
+                            daDate = Convert.ToDateTime(x.daDate).ToString("dd/MM/yyyy"),
+                            daEndDate = endate,
+                            startTime = x.startTime,
+                            endTime = x.endTime,
+                            startLat = x.startLat,
+                            startLong = x.startLong,
+                            endLat = x.startLong,
+                            endLong = x.endLong,
+                            vtId = vt,
+                            vehicleNumber = x.vehicleNumber,
+                            CompareDate = x.daDate,
+                            daDateTIme = (displayTime + " " + time)
+                        });
+
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(SearchString))
