@@ -3374,25 +3374,25 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                     if(Emptype == "D")
                     {
-                    obj.Add(new SBAAttendenceGrid()
-                    {
-                        daID = x.daID,
-                        userId = Convert.ToInt32(x.userId),
-                        userName = db.UserMasters.Where(c => c.userId == x.userId).FirstOrDefault().userName,
-                        ReferanceId = db.DumpYardDetails.Where(c => c.dyId == x.dyid).FirstOrDefault().ReferanceId,
-                        daDate = Convert.ToDateTime(x.daDate).ToString("dd/MM/yyyy"),
-                        daEndDate = endate,
-                        startTime = x.startTime,
-                        endTime = x.endTime,
-                        startLat = x.startLat,
-                        startLong = x.startLong,
-                        endLat = x.startLong,
-                        endLong = x.endLong,
-                        vtId = vt,
-                        vehicleNumber = x.vehicleNumber,
-                        CompareDate = x.daDate,
-                        daDateTIme = (displayTime + " " + time)
-                    });
+                        obj.Add(new SBAAttendenceGrid()
+                        {
+                            daID = x.daID,
+                            userId = Convert.ToInt32(x.userId),
+                            userName = db.UserMasters.Where(c => c.userId == x.userId).FirstOrDefault().userName,
+                            ReferanceId = db.DumpYardDetails.Where(c => c.dyId == x.dyid).FirstOrDefault().ReferanceId,
+                            daDate = Convert.ToDateTime(x.daDate).ToString("dd/MM/yyyy"),
+                            daEndDate = endate,
+                            startTime = x.startTime,
+                            endTime = x.endTime,
+                            startLat = x.startLat,
+                            startLong = x.startLong,
+                            endLat = x.startLong,
+                            endLong = x.endLong,
+                            vtId = vt,
+                            vehicleNumber = x.vehicleNumber,
+                            CompareDate = x.daDate,
+                            daDateTIme = (displayTime + " " + time)
+                        });
                     }
 
                     else
