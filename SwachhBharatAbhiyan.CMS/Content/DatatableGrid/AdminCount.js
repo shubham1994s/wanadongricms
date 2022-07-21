@@ -98,9 +98,6 @@
             { "data": "TotalStreetCount", "name": "TotalStreetCount", "autoWidth": false },
 
 
-
-
-
         ]
     });
 
