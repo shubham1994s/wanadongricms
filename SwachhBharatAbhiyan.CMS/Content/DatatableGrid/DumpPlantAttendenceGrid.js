@@ -104,7 +104,7 @@
             { "data": "userName", "name": "userName", "autoWidth": true },
            // { "data": "daDate", "name": "daDate", "autoWidth": true },
             {
-                "data": "daDate", "render": function (data, type, full, meta) {
+                "data": "daDate", "name": "daDate", "render": function (data, type, full, meta) {
                     var SDT = full.daDate + ' ' + full.startTime;
                     return SDT;
                 }
@@ -112,7 +112,7 @@
             { "data": "startTime", "name": "startTime", "autoWidth": true },
             //{ "data": "daEndDate", "name": "daEndDate", "autoWidth": true },
             {
-                "data": "daEndDate", "render": function (data, type, full, meta) {
+                "data": "daEndDate", "name": "daEndDate", "render": function (data, type, full, meta) {
                     if (full["daEndDate"] == null || full["daEndDate"] == "") {
                         return '';
                     }
