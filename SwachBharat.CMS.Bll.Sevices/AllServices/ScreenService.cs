@@ -548,6 +548,66 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public void SaveMasterQRDetails(MasterQRDetailsVM data)
+        {
+            try
+            {
+                using (var db = new DevChildSwachhBharatNagpurEntities(AppID))
+                {
+                    if (data.masterId > 0)
+                    {
+                        var model = db.MasterQRs.Where(x => x.MasterId == data.masterId).FirstOrDefault();
+                        if (model != null)
+                        {
+
+                            model.MasterId = data.masterId;
+                            model.ReferanceId = data.ReferanceId;
+                            model.ISActive = data.isActive;
+                            string state1 = "";
+                            foreach (var s in data.CheckHlist)
+                            {
+                                if (s.IsCheked == true)
+                                {
+
+                                    state1 += s.ReferanceId + ",";
+
+                                }
+                            }
+                            model.QRList = state1;
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        var type = FillMasterQRDataModel(data);
+
+                        //arr[CheckAppD] myArray = data.CheckAppDs.ToArray();
+
+                        string state1 = "";
+                        foreach (var s in data.CheckHlist)
+                        {
+                            if (s.IsCheked == true)
+                            {
+
+                                state1 += s.ReferanceId + ",";
+
+                            }
+                        }
+
+                        type.QRList = state1;
+
+                        db.MasterQRs.Add(type);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
         public void LiquidSaveWardNumberDetails(WardNumberVM data)
         {
             try
@@ -742,6 +802,76 @@ namespace SwachBharat.CMS.Bll.Services
             }
         }
 
+        public MasterQRDetailsVM GetMasterQRDetails(int teamId)
+        {
+            try
+            {
+                DevSwachhBharatMainEntities dbMain = new DevSwachhBharatMainEntities();
+                var appDetails = dbMain.AppDetails.Where(x => x.AppId == AppID).FirstOrDefault();
+
+
+                string ThumbnaiUrlCMS = appDetails.baseImageUrlCMS + appDetails.basePath + appDetails.UserProfile + "/";
+
+                MasterQRDetailsVM master = new MasterQRDetailsVM();
+
+
+                var Details = db.MasterQRs.Where(x => x.MasterId == teamId).FirstOrDefault();
+                if (Details != null)
+                    {
+                    master = FillMasterQRDetailsViewModel(Details);
+
+
+                    // master.CheckAppDs = (List<HouseMaster>)db.HouseMasters.Where(x => x.ReferanceId != null).Select(x => new { x.ReferanceId, x.houseId });
+                    master.CheckHlist = db.HouseLists.Where(x => x.IsActive == true).OrderBy(x => x.ReferanceId).ToList<HouseList>();
+                    if (master.QRList != null)
+                        {
+                            string s = master.QRList;
+                            string[] values = s.Split(',');
+                          
+                        for (int i = 0; i < values.Length; i++)
+                            {
+                            char[] MyChar = { 'H', 'P', 'S', 'B', 'A' };
+                            values[i] = values[i].Trim(MyChar);
+                           
+
+                            int u = 0;
+                                if (values[i] != "")
+                                {
+                                    u = Convert.ToInt32(values[i]);
+                                    int number = 1000;
+                                    u = u - number;
+                            }
+                                string state1 = "";
+                                foreach (var v in master.CheckHlist)
+                                {
+                                    if (v.HouseId == u)
+                                    {
+
+                                        v.IsCheked = true;
+
+                                    }
+                                }
+                            }
+
+                        }
+                    master.HouseList = ListHouse();
+                    return master;
+                    }
+                    else
+                    {
+
+                    master.CheckHlist = db.HouseLists.Where(x => x.IsActive == true).OrderBy(x => x.HouseId).ToList<HouseList>();
+                    // master.CheckAppDs = (List<HouseMaster>)db.HouseMasters.Where(x => x.ReferanceId != null).Select(x => new { x.ReferanceId, x.houseId });
+                    master.HouseList = ListHouse();
+                    return master;
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public VehicalRegDetailsVM GetVehicalRegDetails(int teamId)
         {
             try
@@ -4379,7 +4509,14 @@ namespace SwachBharat.CMS.Bll.Services
             return model;
         }
 
-
+        private MasterQR FillMasterQRDataModel(MasterQRDetailsVM data)
+        {
+            MasterQR model = new MasterQR();
+            model.MasterId = data.masterId;
+            model.ReferanceId = data.ReferanceId;
+            model.ISActive = data.isActive;
+            return model;
+        }
         private WardNumber LiquidFillWardDataModel(WardNumberVM data)
         {
             WardNumber model = new WardNumber();
@@ -4731,6 +4868,27 @@ namespace SwachBharat.CMS.Bll.Services
             return Zone;
         }
 
+        public List<SelectListItem> ListHouse()
+        {
+            var House = new List<SelectListItem>();
+            SelectListItem itemAdd = new SelectListItem() { Text = "--Select HouseId--", Value = "0" };
+
+            try
+            {
+                House = db.HouseLists.ToList()
+                    .Select(x => new SelectListItem
+                    {
+                        Text = x.ReferanceId,
+                        Value = x.ReferanceId.ToString()
+                    }).OrderBy(t => t.Text).ToList();
+
+                House.Insert(0, itemAdd);
+            }
+            catch (Exception ex) { throw ex; }
+
+            return House;
+        }
+
         public List<SelectListItem> VehicleList()
         {
             var Vehical = new List<SelectListItem>();
@@ -4987,6 +5145,19 @@ namespace SwachBharat.CMS.Bll.Services
 
 
             }
+
+            return model;
+        }
+
+        private MasterQRDetailsVM FillMasterQRDetailsViewModel(MasterQR data)
+        {
+
+            MasterQRDetailsVM model = new MasterQRDetailsVM();
+            model.masterId = data.MasterId;
+            model.ReferanceId = data.ReferanceId;
+            model.QRList = data.QRList;
+            model.isActive = data.ISActive;
+           
 
             return model;
         }
