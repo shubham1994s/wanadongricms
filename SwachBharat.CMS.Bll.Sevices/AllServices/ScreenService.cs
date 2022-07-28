@@ -880,7 +880,7 @@ namespace SwachBharat.CMS.Bll.Services
                     if(areaid == null)
                     {
                         var AreaId = 0;
-                        master.CheckHlist = db.HouseLists.Where(x => x.IsActive == true & (x.AreaId != null || x.AreaId > 0)).OrderBy(x => x.HouseId).ToList<HouseList>();
+                        master.CheckHlist = db.HouseLists.Where(x => x.IsActive == true &  x.AreaId > 0).OrderBy(x => x.HouseId).ToList<HouseList>();
                         // master.CheckAppDs = (List<HouseMaster>)db.HouseMasters.Where(x => x.ReferanceId != null).Select(x => new { x.ReferanceId, x.houseId });
                         master.HouseList = ListHouse(teamId, houseId);
                         return master;
