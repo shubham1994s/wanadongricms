@@ -53,7 +53,7 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
 
 
         HouseDetailsVM GetHouseById(int teamId);
-        MasterQRDetailsVM GetMasterQRById(int teamId);
+        MasterQRDetailsVM GetMasterQRById(int teamId , string houseId);
         VehicalRegDetailsVM GetVehicalRegById(int teamId);
 
         SBALUserLocationMapView GetHouseByIdforMap(int teamId,int daId);

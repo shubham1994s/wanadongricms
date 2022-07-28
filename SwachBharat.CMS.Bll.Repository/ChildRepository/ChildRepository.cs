@@ -159,9 +159,9 @@ namespace SwachBharat.CMS.Bll.Repository.ChildRepository
             return screenService.GetHouseDetails(teamId);
         }
 
-        public MasterQRDetailsVM GetMasterQRById(int teamId)
+        public MasterQRDetailsVM GetMasterQRById(int teamId , string houseId)
         {
-            return screenService.GetMasterQRDetails(teamId);
+            return screenService.GetMasterQRDetails(teamId , houseId);
         }
 
         public VehicalRegDetailsVM GetVehicalRegById(int teamId)

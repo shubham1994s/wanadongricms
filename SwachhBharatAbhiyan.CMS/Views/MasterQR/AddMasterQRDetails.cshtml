@@ -135,7 +135,7 @@
 
                                             @Html.CheckBoxFor(x => x.CheckHlist[i].IsCheked, new { @class = "custom-checkbox individual" })
                                             <label>@Model.CheckHlist[i].ReferanceId</label>
-                                            @Html.HiddenFor(x => x.CheckHlist[i].HouseId)
+                                            @Html.HiddenFor(x => x.CheckHlist[i].ReferanceId)
                                             @Html.HiddenFor(x => x.CheckHlist[i].ReferanceId)
                                         </td>
                                     }
@@ -144,7 +144,7 @@
                                         <td class="ulbs">
                                             @Html.CheckBoxFor(x => x.CheckHlist[i].IsCheked, new { @class = "custom-checkbox individual" })
                                             <label>@Model.CheckHlist[i].ReferanceId</label>
-                                            @Html.HiddenFor(x => x.CheckHlist[i].HouseId)
+                                            @Html.HiddenFor(x => x.CheckHlist[i].ReferanceId)
                                             @Html.HiddenFor(x => x.CheckHlist[i].ReferanceId)
                                         </td>
                                     }
@@ -237,6 +237,33 @@
             }
         }
     }
+
+    //$(document).ready(function () {
+    //    debugger;
+    //    $("#ReferanceId").change(function () {url.action('MasterQR', 'AddMasterQRDetails')})
+    //})
+
+    //function reload(id) {
+    //    debugger;
+    //    $.ajax({
+    //        url: "/MasterQR/AddMasterQRDetails?",
+    //        data: { id: id }
+    //    }).done(function () {
+    //        alert('Added');
+    //    });
+    //}
+
+    $('#ReferanceId').change(function () {
+        debugger;
+        var sel = $(this).val();
+        $.ajax({
+            url: "/MasterQR/AddMasterQRDetails?",
+            data: { houseId: sel }
+        }).done(function () {
+            alert('Added');
+        });
+
+    });
 </script>
 <script>
     document.getElementById("ownerName").addEventListener("input", forceLower);
