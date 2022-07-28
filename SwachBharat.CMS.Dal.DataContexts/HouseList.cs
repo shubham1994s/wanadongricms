@@ -19,5 +19,6 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public bool IsCheked { get; set; }
         public Nullable<int> HouseId { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> AreaId { get; set; }
     }
 }
