@@ -66,11 +66,11 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         }
 
 
-        public ActionResult AddMasterQRDetails(int teamId = -2)
+        public ActionResult AddMasterQRDetails(int teamId = -2 , string houseId = "")
         {
             if (SessionHandler.Current.AppId != 0)
             {
-                MasterQRDetailsVM house = childRepository.GetMasterQRById(teamId);
+                MasterQRDetailsVM house = childRepository.GetMasterQRById(teamId , houseId);
 
 
                 return View(house);
