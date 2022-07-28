@@ -820,9 +820,10 @@ namespace SwachBharat.CMS.Bll.Services
                     {
                     master = FillMasterQRDetailsViewModel(Details);
 
+                    var areaid = db.HouseLists.Where(x => x.ReferanceId == master.ReferanceId).FirstOrDefault();
 
                     // master.CheckAppDs = (List<HouseMaster>)db.HouseMasters.Where(x => x.ReferanceId != null).Select(x => new { x.ReferanceId, x.houseId });
-                    master.CheckHlist = db.HouseLists.Where(x => x.IsActive == true).OrderBy(x => x.ReferanceId).ToList<HouseList>();
+                    master.CheckHlist = db.HouseLists.Where(x => x.IsActive == true & x.AreaId == areaid.AreaId).OrderBy(x => x.ReferanceId).ToList<HouseList>();
                     if (master.QRList != null)
                         {
                             string s = master.QRList;
@@ -854,15 +855,15 @@ namespace SwachBharat.CMS.Bll.Services
                             }
 
                         }
-                    master.HouseList = ListHouse();
+                    master.HouseList = ListHouse(teamId);
                     return master;
                     }
                     else
                     {
 
-                    master.CheckHlist = db.HouseLists.Where(x => x.IsActive == true).OrderBy(x => x.HouseId).ToList<HouseList>();
+                    master.CheckHlist = db.HouseLists.Where(x => x.IsActive == true & x.AreaId > 0).OrderBy(x => x.HouseId).ToList<HouseList>();
                     // master.CheckAppDs = (List<HouseMaster>)db.HouseMasters.Where(x => x.ReferanceId != null).Select(x => new { x.ReferanceId, x.houseId });
-                    master.HouseList = ListHouse();
+                    master.HouseList = ListHouse(teamId);
                     return master;
                     }
                 
@@ -4868,21 +4869,36 @@ namespace SwachBharat.CMS.Bll.Services
             return Zone;
         }
 
-        public List<SelectListItem> ListHouse()
+        public List<SelectListItem> ListHouse( int teamId)
         {
             var House = new List<SelectListItem>();
             SelectListItem itemAdd = new SelectListItem() { Text = "--Select HouseId--", Value = "0" };
 
             try
             {
-                House = db.HouseLists.ToList()
-                    .Select(x => new SelectListItem
-                    {
-                        Text = x.ReferanceId,
-                        Value = x.ReferanceId.ToString()
-                    }).OrderBy(t => t.Text).ToList();
+                if(teamId > 0)
+                {
+                    House = db.HouseLists.Where(x=> x.AreaId > 0).ToList()
+                       .Select(x => new SelectListItem
+                       {
+                           Text = x.ReferanceId,
+                           Value = x.ReferanceId.ToString()
+                       }).OrderBy(t => t.Text).ToList();
 
-                House.Insert(0, itemAdd);
+                            House.Insert(0, itemAdd);
+                }
+                else
+                {
+                    House = db.HouseLists.Where(p => db.MasterQRs.All(x => x.ReferanceId != p.ReferanceId & p.AreaId > 0)).ToList()
+                       .Select(x => new SelectListItem
+                       {
+                           Text = x.ReferanceId,
+                           Value = x.ReferanceId.ToString()
+                       }).OrderBy(t => t.Text).ToList();
+
+                            House.Insert(0, itemAdd);
+                }
+           
             }
             catch (Exception ex) { throw ex; }
 

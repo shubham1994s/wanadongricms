@@ -180,6 +180,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.HouseList' do
           <Property Name="IsCheked" Type="bit" Nullable="false" />
           <Property Name="HouseId" Type="int" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="AreaId" Type="int" />
         </EntityType>
         <EntityType Name="HouseMaster">
           <Key>
@@ -924,7 +925,8 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
     [HouseList].[ReferanceId] AS [ReferanceId], 
     [HouseList].[IsCheked] AS [IsCheked], 
     [HouseList].[HouseId] AS [HouseId], 
-    [HouseList].[IsActive] AS [IsActive]
+    [HouseList].[IsActive] AS [IsActive], 
+    [HouseList].[AreaId] AS [AreaId]
     FROM [dbo].[HouseList] AS [HouseList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="MonthlyAttedance" EntityType="Self.MonthlyAttedance" store:Type="Tables" store:Schema="dbo">
@@ -1307,9 +1309,9 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           </FunctionImport>
           <EntitySet Name="EmpShifts" EntityType="DevSwachhBharatNagpurModel.EmpShift" />
           <EntitySet Name="UserMasters" EntityType="DevSwachhBharatNagpurModel.UserMaster" />
-          <EntitySet Name="HouseLists" EntityType="DevSwachhBharatNagpurModel.HouseList" />
           <EntitySet Name="MasterQRs" EntityType="DevSwachhBharatNagpurModel.MasterQR" />
           <FunctionImport Name="MasterQRDetails" ReturnType="Collection(DevSwachhBharatNagpurModel.MasterQRDetails_Result)" />
+          <EntitySet Name="HouseLists" EntityType="DevSwachhBharatNagpurModel.HouseList" />
          
         </EntityContainer>
         <ComplexType Name="CurrentAllUserLocation_Result">
@@ -2720,17 +2722,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Name="imoNo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="shiftIds" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="HouseList">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="IsCheked" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ReferanceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsCheked" Type="Boolean" Nullable="false" />
-          <Property Name="HouseId" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
         <EntityType Name="MasterQR">
           <Key>
             <PropertyRef Name="MasterId" />
@@ -2747,6 +2738,18 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
           <Property Type="Int64" Name="TotalCount" Nullable="true" />
           <Property Type="Boolean" Name="ISActive" Nullable="true" />
         </ComplexType>
+        <EntityType Name="HouseList">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IsCheked" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReferanceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsCheked" Type="Boolean" Nullable="false" />
+          <Property Name="HouseId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="AreaId" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4265,17 +4268,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="HouseLists">
-            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.HouseList">
-              <MappingFragment StoreEntitySet="HouseList">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="HouseId" ColumnName="HouseId" />
-                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
-                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MasterQRs">
             <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.MasterQR">
               <MappingFragment StoreEntitySet="MasterQR">
@@ -4297,6 +4289,18 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatNagpur.dbo.Vw_MsgNotific
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="HouseLists">
+            <EntityTypeMapping TypeName="DevSwachhBharatNagpurModel.HouseList">
+              <MappingFragment StoreEntitySet="HouseList">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="HouseId" ColumnName="HouseId" />
+                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
+                <ScalarProperty Name="ReferanceId" ColumnName="ReferanceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
          
         </EntityContainerMapping>
       </Mapping>
