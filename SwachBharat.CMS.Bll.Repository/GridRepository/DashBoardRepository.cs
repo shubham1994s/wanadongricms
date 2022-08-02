@@ -6378,7 +6378,7 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
 
                     data = model.ToList();
                 }
-                return data;
+                return data.OrderByDescending(c=>c.daID);
 
             }
 
