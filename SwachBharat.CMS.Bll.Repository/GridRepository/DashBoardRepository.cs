@@ -5550,7 +5550,11 @@ namespace SwachBharat.CMS.Bll.Repository.GridRepository
                     var b = x.endDate == null ? Convert.ToDateTime(cDate).ToString("MM/dd/yyyy") : Convert.ToDateTime(x.endDate).ToString("MM/dd/yyyy");
 
                     string Time1 = (x.startTime).ToString();
+                    DateTime d = DateTime.Parse(Time1);
+                    Time1 = d.ToString("HH:mm");
                     string Time2 = ((x.endTime == "" ? displayTime : x.endTime).ToString());
+                    DateTime d2 = DateTime.Parse(Time2);
+                    Time2 = d2.ToString("HH:mm");
 
                     DateTime startDate = Convert.ToDateTime(a + " " + Time1);
                     DateTime endDate = Convert.ToDateTime(b + " " + Time2);
