@@ -25,6 +25,7 @@ namespace SwachBharat.CMS.Dal.DataContexts
         public Nullable<bool> isActive { get; set; }
         public string isActiveULB { get; set; }
         public Nullable<System.DateTime> lastModifyDateEntry { get; set; }
+
         public string Text { get; set; }
         public string Value { get; set; }
     }

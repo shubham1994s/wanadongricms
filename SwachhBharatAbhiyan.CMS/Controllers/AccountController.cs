@@ -18,6 +18,7 @@ using SwachBharat.CMS.Bll.ViewModels.MainModel;
 using SwachBharat.CMS.Bll.ViewModels.ChildModel.Model;
 using System.Configuration;
 using System.Data.SqlClient;
+using SwachBharat.CMS.Dal.DataContexts;
 
 namespace SwachhBharatAbhiyan.CMS.Controllers
 {
@@ -70,6 +71,9 @@ namespace SwachhBharatAbhiyan.CMS.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login(string returnUrl, string Type=null)
         {
+            DevSwachhBharatMainEntities dbmain = new DevSwachhBharatMainEntities();
+            var apikey = dbmain.GoogleAPIDetails.Select(a => a.GoogleAPI).FirstOrDefault();
+            Session["apikey"] = apikey;
             if (returnUrl !=null)
             {
                 if (Type == "W")

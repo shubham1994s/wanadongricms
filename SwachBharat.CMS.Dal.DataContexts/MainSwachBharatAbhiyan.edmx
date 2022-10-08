@@ -144,20 +144,29 @@
           <Property Name="MsgForNotReceived" Type="nvarchar" MaxLength="1000" />
           <Property Name="MsgForSegregated" Type="nvarchar" MaxLength="1000" />
           <Property Name="IsScanNear" Type="bit" />
-          <Property Name="LiquidQRCode" Type="varchar" MaxLength="100" />
-          <Property Name="StreetQRCode" Type="varchar" MaxLength="100" />
-          <Property Name="CommercialQRCode" Type="nvarchar" MaxLength="220" />
+          <Property Name="LiquidQRCode" Type="varchar" MaxLength="50" />
+          <Property Name="StreetQRCode" Type="varchar" MaxLength="50" />
+          <Property Name="CommercialQRCode" Type="nvarchar" MaxLength="100" />
           <Property Name="CTPTQRCode" Type="nvarchar" MaxLength="100" />
           <Property Name="SWMQRCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="ulb_property" Type="int" />
+          <Property Name="Add_Ulb_Property" Type="int" />
           <Property Name="Today_Waste_Status" Type="bit" />
           <Property Name="Today_Liquid_Status" Type="bit" />
           <Property Name="Today_Street_Status" Type="bit" />
-          <Property Name="ulb_property" Type="int" />
-          <Property Name="Add_Ulb_Property" Type="int" />
           <Property Name="Status" Type="bit" />
           <Property Name="VehicalQRCode" Type="nvarchar" MaxLength="250" />
           <Property Name="AppAreaLatLong" Type="nvarchar(max)" />
           <Property Name="IsAreaActive" Type="bit" />
+          <Property Name="Today_HouseScanCount" Type="int" />
+          <Property Name="Today_LiquidScanCount" Type="int" />
+          <Property Name="Today_StreetScanCount" Type="int" />
+          <Property Name="Total_HouseCount" Type="int" />
+          <Property Name="Total_LiquidCount" Type="int" />
+          <Property Name="Total_StreetCount" Type="int" />
+          <Property Name="Today_DumpScanCount" Type="int" />
+          <Property Name="Total_DumpCount" Type="int" />
+          <Property Name="AppLink" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -204,12 +213,9 @@
           <Property Name="Loginuser" Type="nvarchar" MaxLength="256" />
           <Property Name="PasswordString" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CheckAppD">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="IsCheked" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="App_Name" Type="varchar" MaxLength="100" />
@@ -298,6 +304,13 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="DeviceId" Type="nvarchar" MaxLength="500" />
           <Property Name="Created" Type="datetime" />
         </EntityType>
+        <EntityType Name="GoogleAPIDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="GoogleAPI" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="HSUR_Daily_Attendance">
           <Key>
             <PropertyRef Name="daID" />
@@ -363,7 +376,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="longitude" Type="nvarchar" MaxLength="20" />
           <Property Name="state" Type="int" />
           <Property Name="district" Type="int" />
-          <Property Name="IsCheked" Type="bit" />
         </EntityType>
         <EntityType Name="UR_Location">
           <Key>
@@ -444,6 +456,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CheckAppD" EntityType="Self.CheckAppD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="country_states" EntityType="Self.country_states" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeMaster" EntityType="Self.EmployeeMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Game_AnswerType" EntityType="Self.Game_AnswerType" Schema="dbo" store:Type="Tables" />
@@ -451,6 +464,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="GameDetails" EntityType="Self.GameDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GameMaster" EntityType="Self.GameMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GamePlayerDetails" EntityType="Self.GamePlayerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoogleAPIDetails" EntityType="Self.GoogleAPIDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HSUR_Daily_Attendance" EntityType="Self.HSUR_Daily_Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sauchalay_feedback" EntityType="Self.Sauchalay_feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="state_districts" EntityType="Self.state_districts" Schema="dbo" store:Type="Tables" />
@@ -458,15 +472,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="tehsil" EntityType="Self.tehsil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UR_Location" EntityType="Self.UR_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInApps" EntityType="Self.UserInApps" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CheckAppD" EntityType="Self.CheckAppD" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CheckAppD].[Id] AS [Id], 
-    [CheckAppD].[App_Name] AS [App_Name], 
-    [CheckAppD].[IsCheked] AS [IsCheked], 
-    [CheckAppD].[AppId] AS [AppId], 
-    [CheckAppD].[IsActive] AS [IsActive]
-    FROM [dbo].[CheckAppD] AS [CheckAppD]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -575,9 +580,7 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="AD_USER_MST_STREET" EntityType="DevSwachhBharatMainModel.AD_USER_MST_STREET" />
           <FunctionImport Name="SP_Admin2" ReturnType="Collection(DevSwachhBharatMainModel.SP_Admin2_Result)" />
           <EntitySet Name="EmployeeMasters" EntityType="DevSwachhBharatMainModel.EmployeeMaster" />
-          <EntitySet Name="CheckAppDs" EntityType="DevSwachhBharatMainModel.CheckAppD" />
           <EntitySet Name="AEmployeeMasters" EntityType="DevSwachhBharatMainModel.AEmployeeMaster" />
-          <EntitySet Name="tehsils" EntityType="DevSwachhBharatMainModel.tehsil" />
           <FunctionImport Name="SP_ULBADMINSTATUS" ReturnType="Collection(DevSwachhBharatMainModel.SP_ULBADMINSTATUS_Result)">
             <Parameter Name="DivisionIdIn" Mode="In" Type="Int32" />
             <Parameter Name="DistrictIdIn" Mode="In" Type="Int32" />
@@ -602,6 +605,9 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySet Name="AppDetails" EntityType="DevSwachhBharatMainModel.AppDetail" />
           <EntitySet Name="UR_Location" EntityType="DevSwachhBharatMainModel.UR_Location" />
           <EntitySet Name="HSUR_Daily_Attendance" EntityType="DevSwachhBharatMainModel.HSUR_Daily_Attendance" />
+          <EntitySet Name="GoogleAPIDetails" EntityType="DevSwachhBharatMainModel.GoogleAPIDetail" />
+          <EntitySet Name="tehsils" EntityType="DevSwachhBharatMainModel.tehsil" />
+          <EntitySet Name="CheckAppDs" EntityType="DevSwachhBharatMainModel.CheckAppD" />
         </EntityContainer>
         <EntityType Name="Sauchalay_feedback">
           <Key>
@@ -757,17 +763,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="isActiveULB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="lastModifyDateEntry" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="CheckAppD">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="IsCheked" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="App_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsCheked" Type="Boolean" Nullable="false" />
-          <Property Name="AppId" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
         <EntityType Name="AEmployeeMaster">
           <Key>
             <PropertyRef Name="EmpId" />
@@ -786,19 +781,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="DistictId" Type="Int32" />
           <Property Name="isActiveULB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="lastModifyDateEntry" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tehsil">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="name_mar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="state" Type="Int32" />
-          <Property Name="district" Type="Int32" />
-          <Property Name="IsCheked" Type="Boolean" />
         </EntityType>
         <ComplexType Name="SP_ULBADMINSTATUS_Result">
           <Property Type="Int32" Name="AppId" Nullable="false" />
@@ -925,9 +907,9 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="MsgForNotReceived" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="MsgForSegregated" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="IsScanNear" Type="Boolean" />
-          <Property Name="LiquidQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StreetQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CommercialQRCode" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+          <Property Name="LiquidQRCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StreetQRCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CommercialQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CTPTQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SWMQRCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Today_Waste_Status" Type="Boolean" />
@@ -939,6 +921,15 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="VehicalQRCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="AppAreaLatLong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsAreaActive" Type="Boolean" />
+          <Property Name="Today_HouseScanCount" Type="Int32" />
+          <Property Name="Today_LiquidScanCount" Type="Int32" />
+          <Property Name="Today_StreetScanCount" Type="Int32" />
+          <Property Name="Total_HouseCount" Type="Int32" />
+          <Property Name="Total_LiquidCount" Type="Int32" />
+          <Property Name="Total_StreetCount" Type="Int32" />
+          <Property Name="Today_DumpScanCount" Type="Int32" />
+          <Property Name="Total_DumpCount" Type="Int32" />
+          <Property Name="AppLink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UR_Location">
           <Key>
@@ -978,6 +969,35 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <Property Name="ip_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="login_device" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HostName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GoogleAPIDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="GoogleAPI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tehsil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="name_mar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="district" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CheckAppD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="App_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsCheked" Type="Boolean" Nullable="false" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1231,17 +1251,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CheckAppDs">
-            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.CheckAppD">
-              <MappingFragment StoreEntitySet="CheckAppD">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="AppId" ColumnName="AppId" />
-                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
-                <ScalarProperty Name="App_Name" ColumnName="App_Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AEmployeeMasters">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.AEmployeeMaster">
               <MappingFragment StoreEntitySet="AEmployeeMaster">
@@ -1259,20 +1268,6 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
                 <ScalarProperty Name="EmpNameMar" ColumnName="EmpNameMar" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tehsils">
-            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.tehsil">
-              <MappingFragment StoreEntitySet="tehsil">
-                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
-                <ScalarProperty Name="district" ColumnName="district" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="name_mar" ColumnName="name_mar" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1328,6 +1323,15 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
           <EntitySetMapping Name="AppDetails">
             <EntityTypeMapping TypeName="DevSwachhBharatMainModel.AppDetail">
               <MappingFragment StoreEntitySet="AppDetails">
+                <ScalarProperty Name="AppLink" ColumnName="AppLink" />
+                <ScalarProperty Name="Total_DumpCount" ColumnName="Total_DumpCount" />
+                <ScalarProperty Name="Today_DumpScanCount" ColumnName="Today_DumpScanCount" />
+                <ScalarProperty Name="Total_StreetCount" ColumnName="Total_StreetCount" />
+                <ScalarProperty Name="Total_LiquidCount" ColumnName="Total_LiquidCount" />
+                <ScalarProperty Name="Total_HouseCount" ColumnName="Total_HouseCount" />
+                <ScalarProperty Name="Today_StreetScanCount" ColumnName="Today_StreetScanCount" />
+                <ScalarProperty Name="Today_LiquidScanCount" ColumnName="Today_LiquidScanCount" />
+                <ScalarProperty Name="Today_HouseScanCount" ColumnName="Today_HouseScanCount" />
                 <ScalarProperty Name="IsAreaActive" ColumnName="IsAreaActive" />
                 <ScalarProperty Name="AppAreaLatLong" ColumnName="AppAreaLatLong" />
                 <ScalarProperty Name="VehicalQRCode" ColumnName="VehicalQRCode" />
@@ -1434,6 +1438,38 @@ warning 6002: The table/view 'LIVEAdvanceDevSwachhBharatMain.dbo.CheckAppD' does
                 <ScalarProperty Name="startLat" ColumnName="startLat" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="daID" ColumnName="daID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoogleAPIDetails">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.GoogleAPIDetail">
+              <MappingFragment StoreEntitySet="GoogleAPIDetails">
+                <ScalarProperty Name="GoogleAPI" ColumnName="GoogleAPI" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tehsils">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.tehsil">
+              <MappingFragment StoreEntitySet="tehsil">
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="name_mar" ColumnName="name_mar" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CheckAppDs">
+            <EntityTypeMapping TypeName="DevSwachhBharatMainModel.CheckAppD">
+              <MappingFragment StoreEntitySet="CheckAppD">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="IsCheked" ColumnName="IsCheked" />
+                <ScalarProperty Name="App_Name" ColumnName="App_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
